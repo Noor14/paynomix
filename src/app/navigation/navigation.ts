@@ -1,26 +1,82 @@
 import { FuseNavigation } from '@fuse/types';
 
 export const navigation: FuseNavigation[] = [
-    {
-        id       : 'applications',
-        title    : 'Applications',
-        translate: 'NAV.APPLICATIONS',
-        type     : 'group',
-        children : [
+            {
+                id       : 'dashboard',
+                title    : 'Dashboard',
+                type     : 'item',
+                icon     : 'bar_chart',
+                url      : '/sample'
+            },
             {
                 id       : 'sample',
-                title    : 'Sample',
-                translate: 'NAV.SAMPLE.TITLE',
+                title    : 'User Managment',
+                type     : 'collapsable',
+                icon     : 'supervised_user_circle',
+                children : [
+                    {
+                        id       : 'sample',
+                        title    : 'Users',
+                        type     : 'item',
+                        icon     : 'person_outline',
+                        url      : '/users'
+                    }
+               ]
+            },
+            {
+                id       : 'sample',
+                title    : 'Merchants',
                 type     : 'item',
-                icon     : 'email',
-                url      : '/sample',
-                badge    : {
-                    title    : '25',
-                    translate: 'NAV.SAMPLE.BADGE',
-                    bg       : '#F44336',
-                    fg       : '#FFFFFF'
-                }
+                icon     : 'people',
+                url      : '/sampldde'
+            },
+            {
+                id       : 'sample',
+                title    : 'Partners',
+                type     : 'item',
+                icon     : 'attachment',
+                url      : '/samplsde'
+            },
+            {
+                id       : 'sample',
+                title    : 'Resellers',
+                type     : 'item',
+                icon     : 'euro_symbol',
+                url      : '/sampldse'
+            },
+            {
+                id       : 'sample',
+                title    : 'Pricing Plan',
+                type     : 'item',
+                icon     : 'event_note',
+                url      : '/samplde'
+            },
+            {
+                id       : 'sample',
+                title    : 'Transaction',
+                type     : 'item',
+                icon     : 'attach_money',
+                url      : '/samples'
+            },
+            {
+                id       : 'sample',
+                title    : 'Funding Manager',
+                type     : 'item',
+                icon     : 'account_balance',
+                url      : '/samples'
+            },
+            {
+                id       : 'sample',
+                title    : 'Settings',
+                type     : 'item',
+                icon     : 'settings',
+                url      : '/samples'
+            },
+            {
+                id       : 'sample',
+                title    : 'Make a Sale',
+                type     : 'item',
+                icon     : 'account_balance_wallet',
+                url      : '/samples'
             }
-        ]
-    }
 ];

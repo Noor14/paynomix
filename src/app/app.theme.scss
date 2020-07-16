@@ -16,7 +16,7 @@ $fuse-black: (
 );
 
 $fuse-navy: (
-    50: #ECECEE,
+    50: #FDFCFC,
     100: #C5C6CB,
     200: #9EA1A9,
     300: #7D818C,
@@ -31,6 +31,7 @@ $fuse-navy: (
     A400: #5C616F,
     A700: #2D323E,
     contrast: (
+        10: $dark-primary-text,
         50: $dark-primary-text,
         100: $dark-primary-text,
         200: $dark-primary-text,
