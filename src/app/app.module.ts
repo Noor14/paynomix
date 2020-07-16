@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,15 +16,7 @@ import { fuseConfig } from 'app/fuse-config';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/sample/sample.module';
 import { AppRoutingModule } from './app-routing.module';
-
-const appRoutes: Routes = [
-    {
-        path      : '**',
-        redirectTo: 'sample'
-    }
-];
 
 @NgModule({
     declarations: [
@@ -35,8 +26,6 @@ const appRoutes: Routes = [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        RouterModule.forRoot(appRoutes),
-
         TranslateModule.forRoot(),
         AppRoutingModule,
         // Material moment date module
@@ -54,8 +43,7 @@ const appRoutes: Routes = [
         FuseThemeOptionsModule,
 
         // App modules
-        LayoutModule,
-        SampleModule
+        LayoutModule
     ],
     bootstrap   : [
         AppComponent
