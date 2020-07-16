@@ -24,8 +24,8 @@ export const fuseConfig: FuseConfig = {
             variant            : 'vertical-style-1'
         },
         toolbar  : {
-            customBackgroundColor: false,
-            background           : 'fuse-white-500',
+            customBackgroundColor: true,
+            background           : 'fuse-navy-50',
             hidden               : false,
             position             : 'below-static'
         },
