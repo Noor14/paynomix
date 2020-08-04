@@ -2,7 +2,7 @@
 
     <div fxFlex fxFill fxLayout="row" fxLayoutAlign="end center">
 
-        <!-- <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
 
             <button mat-icon-button class="navbar-toggle-button"
                     *ngIf="!hiddenNavbar && !rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
@@ -11,7 +11,7 @@
 
             <div class="toolbar-separator" *ngIf="!hiddenNavbar && !rightNavbar" fxHide.gt-md></div>
 
-            <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNavbar">
+            <!-- <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNavbar">
                 <div class="logo ml-16">
                     <img class="logo-icon" src="assets/images/logos/fuse.svg">
                 </div>
@@ -19,9 +19,9 @@
 
             <div class="px-8 px-md-16">
                 <fuse-shortcuts [navigation]="navigation"></fuse-shortcuts>
-            </div>
+            </div> -->
 
-        </div> -->
+        </div>
 
         <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
@@ -57,9 +57,9 @@
 
             <fuse-search-bar (input)="search($event)"></fuse-search-bar>
 
-            <!-- <div class="toolbar-separator"></div>
-
-            <button mat-button fxHide fxShow.gt-xs
+            <!-- <div class="toolbar-separator"></div> 
+                
+                <button mat-button fxHide fxShow.gt-xs
                     class="language-button"
                     [matMenuTriggerFor]="languageMenu">
                 <div fxLayout="row" fxLayoutAlign="center center">
