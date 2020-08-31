@@ -44,21 +44,18 @@ vertical-layout-1 {
                     -webkit-overflow-scrolling: touch;
 
                     // Content component
-                    main{
-                        height: 100%;
-                        margin: 15px;
-                        background-color: #fff;
-                        content {
+                     content {
+                            margin: 15px;
+                            padding: 15px;
+                            background-color: #fff;
                             &.inner-scroll {
                                 flex: 1 1 0%;
                                 min-height: 0;
-    
                                 > *:not(router-outlet) {
                                     flex: 1 1 0%;
                                 }
                             }
                         }
-                    }
                     
                 }
             }

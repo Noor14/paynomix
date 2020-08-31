@@ -6,21 +6,21 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Dashboard',
                 type     : 'item',
                 icon     : 'bar_chart',
-                url      : '/sample'
+                url      : '/pages/dashboard'
             },
             {
                 id       : 'partner',
                 title    : 'Partners',
                 type     : 'item',
                 icon     : 'local_parking',
-                url      : '/samplsde'
+                url      : '/pages/partner-list'
             },
             {
                 id       : 'reseller',
                 title    : 'Resellers',
                 type     : 'item',
                 icon     : 'device_hub',
-                url      : '/sampldse'
+                url      : '/pages/reseller-list'
             },
                {
                 id       : 'merchant',
@@ -64,7 +64,7 @@ export const navigation: FuseNavigation[] = [
                 icon     : 'supervised_user_circle',
                 children : [
                     {
-                        id       : 'sample',
+                        id       : 'user',
                         title    : 'Users',
                         type     : 'item',
                         icon     : 'person_outline',
