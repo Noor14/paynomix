@@ -13,14 +13,14 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Partners',
                 type     : 'item',
                 icon     : 'local_parking',
-                url      : '/pages/partner-list'
+                url      : '/pages/partner/partner-list'
             },
             {
                 id       : 'reseller',
                 title    : 'Resellers',
                 type     : 'item',
                 icon     : 'device_hub',
-                url      : '/pages/reseller-list'
+                url      : '/pages/reseller/reseller-list'
             },
                {
                 id       : 'merchant',
@@ -77,7 +77,7 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Settings',
                 type     : 'item',
                 icon     : 'settings',
-                url      : '/samples'
+                url      : '/pages/settings'
             }
             
 ];
