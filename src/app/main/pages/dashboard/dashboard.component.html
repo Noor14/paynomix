@@ -1,121 +1,175 @@
 <section class="dashboard w-100-p">
+
     <section fxLayout="row" fxLayoutALign="space-between center">
         <h2>Dashboard</h2>
-    </section>
-
-    <section class="transactionGrid">
-        <div fxLayout="column" fxLayoutAlign="start"
-        fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
-
-            <!-- Widget 1 -->
-            <div class="widget mr-20" fxFlex="100" fxFlex.gt-sm="33">
-
-                <div class="fuse-card auto-width mb-32">
-
-                    <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
-
-                        <div class="pr-16">
-                            <div class="h3 secondary-text">Total Transactions</div>
-                            <div class="font-size-54 font-weight-300 line-height-1 mt-8">
-                                {{widgets.widget2.conversion.value}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="h-80 w-100-p">
-                        <canvas baseChart
-                                [datasets]="widgets.widget2.datasets"
-                                [labels]="widgets.widget2.labels"
-                                [colors]="widgets.widget2.colors"
-                                [options]="widgets.widget2.options"
-                                [chartType]="widgets.widget2.chartType">
-                        </canvas>
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- / Widget 1 -->
-
-            <!-- Widget 2 -->
-            <div class="widget ml-20 mr-20" fxFlex="100" fxFlex.gt-sm="34">
-
-                <div class="fuse-card auto-width mb-32" >
-
-                    <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
-
-                        <div class="pr-16">
-                            <div class="h3 secondary-text">Successful Transactions</div>
-                            <div class="font-size-54 font-weight-300 line-height-1 mt-8">
-                                {{widgets.widget3.impressions.value}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="h-80 w-100-p">
-                        <canvas baseChart
-                                [datasets]="widgets.widget3.datasets"
-                                [labels]="widgets.widget3.labels"
-                                [colors]="widgets.widget3.colors"
-                                [options]="widgets.widget3.options"
-                                [chartType]="widgets.widget3.chartType">
-                        </canvas>
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- / Widget 2 -->
-
-            <!-- Widget 3 -->
-            <div class="widget ml-20" fxFlex="100" fxFlex.gt-sm="33">
-
-                <div class="fuse-card auto-width">
-
-                    <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
-
-                        <div class="pr-16">
-                            <div class="h3 secondary-text">Avg. Transactions</div>
-                            <div class="font-size-54 font-weight-300 line-height-1 mt-8">
-                                {{widgets.widget4.visits.value}}
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="h-80 w-100-p">
-                        <canvas baseChart
-                                [datasets]="widgets.widget4.datasets"
-                                [labels]="widgets.widget4.labels"
-                                [colors]="widgets.widget4.colors"
-                                [options]="widgets.widget4.options"
-                                [chartType]="widgets.widget4.chartType">
-                        </canvas>
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- / Widget 3 -->
-
+        <div class="range">
+            <!-- <mat-date-range-input >
+                <input matStartDate placeholder="Start date">
+                <input matEndDate placeholder="End date">
+            </mat-date-range-input>
+              
+            <mat-date-range-picker #picker></mat-date-range-picker> -->
         </div>
     </section>
 
-    <section class="transactionHistory">
-        <div class="fuse-card auto-width">
-            <div class="p-24">
-                <h2>Transaction History</h2>
-            </div>
-            <div class="h-368 pb-16">
-                <canvas baseChart
-                        [datasets]="widgets.widget5.datasets['today']"
-                        [labels]="widgets.widget5.labels"
-                        [colors]="widgets.widget5.colors"
-                        [options]="widgets.widget5.options"
-                        [chartType]="widgets.widget5.chartType">
-                </canvas>
+    <section class="transactionGrid" fxLayout="column" fxLayoutAlign="start"
+    fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+
+        <!-- Widget 1 -->
+        <div class="widget mr-20" fxFlex="100" fxFlex.gt-sm="33">
+
+            <div class="fuse-card auto-width mb-32">
+
+                <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+
+                    <div class="pr-16">
+                        <div class="h3 secondary-text">Total Transactions</div>
+                        <div class="font-size-40 font-weight-300 line-height-1 mt-8">
+                            {{widgets.widget2.conversion.value}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="h-80 w-100-p">
+                    <canvas baseChart
+                            [datasets]="widgets.widget2.datasets"
+                            [labels]="widgets.widget2.labels"
+                            [colors]="widgets.widget2.colors"
+                            [options]="widgets.widget2.options"
+                            [chartType]="widgets.widget2.chartType">
+                    </canvas>
+                </div>
+
             </div>
 
         </div>
+        <!-- / Widget 1 -->
+
+        <!-- Widget 2 -->
+        <div class="widget ml-20 mr-20" fxFlex="100" fxFlex.gt-sm="34">
+
+            <div class="fuse-card auto-width mb-32" >
+
+                <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+
+                    <div class="pr-16">
+                        <div class="h3 secondary-text">Successful Transactions</div>
+                        <div class="font-size-40 font-weight-300 line-height-1 mt-8">
+                            {{widgets.widget3.impressions.value}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="h-80 w-100-p">
+                    <canvas baseChart
+                            [datasets]="widgets.widget3.datasets"
+                            [labels]="widgets.widget3.labels"
+                            [colors]="widgets.widget3.colors"
+                            [options]="widgets.widget3.options"
+                            [chartType]="widgets.widget3.chartType">
+                    </canvas>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- / Widget 2 -->
+
+        <!-- Widget 3 -->
+        <div class="widget ml-20" fxFlex="100" fxFlex.gt-sm="33">
+
+            <div class="fuse-card auto-width mb-32">
+
+                <div class="p-16 pb-0" fxLayout="row wrap" fxLayoutAlign="start end">
+
+                    <div class="pr-16">
+                        <div class="h3 secondary-text">Avg. Transactions</div>
+                        <div class="font-size-40 font-weight-300 line-height-1 mt-8">
+                            {{widgets.widget4.visits.value}}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="h-80 w-100-p">
+                    <canvas baseChart
+                            [datasets]="widgets.widget4.datasets"
+                            [labels]="widgets.widget4.labels"
+                            [colors]="widgets.widget4.colors"
+                            [options]="widgets.widget4.options"
+                            [chartType]="widgets.widget4.chartType">
+                    </canvas>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- / Widget 3 -->
+
+    </section>
+
+    <section class="transactionHistory fuse-card auto-width mb-32">
+        <div class="p-24">
+            <h2>Transaction History</h2>
+        </div>
+        <div class="h-368 pb-16">
+            <canvas baseChart
+                    [datasets]="widgets.widget5.datasets['today']"
+                    [labels]="widgets.widget5.labels"
+                    [colors]="widgets.widget5.colors"
+                    [options]="widgets.widget5.options"
+                    [chartType]="widgets.widget5.chartType">
+            </canvas>
+        </div>
+
+    </section>
+
+    <section class="latestTransaction fuse-card auto-width">
+        <div class="p-20"
+        fxLayout="row" fxLayoutAlign="space-between center">
+            <h2 class="m-0">Last 10 Transactions</h2>
+            <button mat-raised-button color="accent">View All Transactions</button>
+        </div>
+
+            <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
+          
+              <!-- ID Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+              </ng-container>
+          
+              <!-- Progress Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Position </th>
+                <td mat-cell *matCellDef="let row"> {{row.position}}%</td>
+              </ng-container>
+          
+              <!-- Name Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
+                <td mat-cell *matCellDef="let row"> {{row.weight}} </td>
+              </ng-container>
+          
+              <!-- Color Column -->
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+                <td mat-cell *matCellDef="let row"> {{row.symbol}} </td>
+              </ng-container>
+
+               <!-- view Column -->
+               <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let row"> 
+                    <button mat-raised-button color="accent">View</button>
+                </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+              </tr>
+            </table>
+          
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </section>
 </section>

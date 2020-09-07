@@ -9,7 +9,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { ChartsModule } from 'ng2-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FuseSharedModule } from '@fuse/shared.module';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -21,6 +26,12 @@ import { FuseSharedModule } from '@fuse/shared.module';
     PagesRoutingModule,
     LayoutModule,
     FuseSharedModule,
+    MatButtonModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatIconModule,
     ChartsModule,
     NgxChartsModule,
