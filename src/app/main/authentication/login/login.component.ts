@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
+import { environment } from '../../../../environments/environment';
+import { validateAllFormFields } from 'constants/globalFunctions';
 
 @Component({
     selector     : 'login',
@@ -11,12 +13,12 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class LoginComponent implements OnInit
 {
-    loginForm: FormGroup;
+    public appInfo = environment;
+    public loginForm: FormGroup;
 
     /**
      * Constructor
      *
-     * @param {FuseConfigService} _fuseConfigService
      * @param {FormBuilder} _formBuilder
      */
     constructor(
@@ -36,8 +38,16 @@ export class LoginComponent implements OnInit
     ngOnInit(): void
     {
         this.loginForm = this._formBuilder.group({
-            email   : ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required]
+            Username    : ['', [Validators.required, Validators.email]],
+            Password: ['', Validators.required]
         });
+    }
+
+    login(): void{
+        if(this.loginForm.valid){
+
+        }else{
+            validateAllFormFields(this.loginForm)
+        }
     }
 }

@@ -1,4 +1,6 @@
 export const environment = {
     production: false,
-    hmr       : true
+    mentom: false,
+    paynomix : false,
+    hmr: true
 };

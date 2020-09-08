@@ -4,7 +4,12 @@
 
 export const environment = {
     production: false,
-    hmr       : false
+    hmr: false,
+    mentom: false,
+    paynomix: false,
+    apiURL: 'http://api.paynomix.com/api/',
+    title: 'Paynomix',
+    assetPathName: 'paynomix'
 };
 
 /*
