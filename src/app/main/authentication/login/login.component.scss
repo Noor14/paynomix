@@ -9,13 +9,6 @@ login {
     background-size: cover;
     .login {
         .login-form-wrapper {
-            flex: 1 0 auto;
-            padding: 32px;
-
-            @include media-breakpoint('xs') {
-                padding: 16px;
-            }
-
             .login-form {
                 background-color: #FFFFFF;
                 width: 384px;
