@@ -5,10 +5,7 @@
         <div class="login-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
 
             <div class="logo">
-                <img *ngIf="appInfo?.mentom; else icon" src="assets/images/{{appInfo?.assetPathName}}-logos/loginIcon.png">
-                <ng-template #icon>
-                    <img src="assets/images/{{appInfo?.assetPathName}}-logos/logo.png">
-                </ng-template>
+                <img src="assets/images/{{appInfo?.assetPathName}}-logos/logo.svg">
             </div>
 
             <div class="title">SIGN IN</div>
@@ -18,25 +15,25 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="email">
+                    <input matInput formControlName="Username">
                     <mat-icon matSuffix class="secondary-text">mail</mat-icon>
-                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                    <mat-error *ngIf="loginForm.get('Username').hasError('required')">
                         Email is required
                     </mat-error>
                     <mat-error
-                        *ngIf="!loginForm.get('email').hasError('required') &&
-                                loginForm.get('email').hasError('email')">
+                        *ngIf="!loginForm.get('Username').hasError('required') &&
+                                loginForm.get('Username').hasError('Username')">
                         Please enter a valid email address
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" formControlName="password">
+                    <input matInput type="password" formControlName="Password">
                     <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
-                    <!-- <mat-error>
+                    <mat-error *ngIf="loginForm.get('Password').hasError('required')">
                         Password is required
-                    </mat-error> -->
+                    </mat-error>
                 </mat-form-field>
 
                 <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
