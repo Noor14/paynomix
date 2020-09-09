@@ -4,11 +4,12 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-partner-list',
-  templateUrl: './partner-list.component.html',
-  styleUrls: ['./partner-list.component.scss']
+  selector: 'app-pricing-plan-list',
+  templateUrl: './pricing-plan-list.component.html',
+  styleUrls: ['./pricing-plan-list.component.scss']
 })
-export class PartnerListComponent implements OnInit {
+export class PricingPlanListComponent implements OnInit {
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   public displayedColumns = ['position', 'name', 'weight', 'symbol', 'action'];

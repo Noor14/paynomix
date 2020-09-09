@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ResellerRoutingModule } from './reseller-routing.module';
-import { ResellerListComponent } from './reseller-list/reseller-list.component';
+import { MerchantRoutingModule } from './merchant-routing.module';
+import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -12,12 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
-  declarations: [
-    ResellerListComponent
-  ],
+  declarations: [MerchantListComponent],
   imports: [
     CommonModule,
-    ResellerRoutingModule,
+    MerchantRoutingModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
@@ -26,4 +24,4 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule
   ]
 })
-export class ResellerModule { }
+export class MerchantModule { }

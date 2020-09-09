@@ -10,11 +10,11 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DashboardComponent implements OnInit {
 
+  public widgets: any;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public widgets: any;
-  displayedColumns = ['position', 'name', 'weight', 'symbol', 'action'];
-  dataSource = new MatTableDataSource<any>(
+  public displayedColumns = ['position', 'name', 'weight', 'symbol', 'action'];
+  public dataSource = new MatTableDataSource<any>(
     [
       {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
       {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   constructor(
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.widgets = {

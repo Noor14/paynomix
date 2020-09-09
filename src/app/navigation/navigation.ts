@@ -27,14 +27,14 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Merchants',
                 type     : 'item',
                 icon     : 'home',
-                url      : '/sampldde'
+                url      : '/pages/merchant/merchant-list'
             },
             {
                 id       : 'pricing',
                 title    : 'Pricing Plan',
                 type     : 'item',
                 icon     : 'event_note',
-                url      : '/samplde'
+                url      : '/pages/pricing-plan/pricing-plan-list'
             },
             {
                 id       : 'sale',

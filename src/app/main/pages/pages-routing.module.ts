@@ -9,14 +9,15 @@ const routes: Routes = [
     path: '',
     component: PagesComponent,
     children: [
-    {path: 'dashboard', component: DashboardComponent},
+    { path: 'dashboard', component: DashboardComponent },
     { path: 'partner', loadChildren: () => import('./partner/partner.module').then(m => m.PartnerModule)},
     { path: 'reseller', loadChildren: () => import('./reseller/reseller.module').then(m => m.ResellerModule)},
-    {path: 'settings', component: SettingsComponent},
+    { path: 'merchant', loadChildren: () => import('./merchant/merchant.module').then(m => m.MerchantModule)},
+    { path: 'pricing-plan', loadChildren: () => import('./pricing-plan/pricing-plan.module').then(m => m.PricingPlanModule)},
+    { path: 'settings', component: SettingsComponent },
     { path: '**', redirectTo: 'dashboard' }
   ]
   },
-
 ];
 
 
