@@ -15,7 +15,7 @@ const routes: Routes = [
     component: ResellerCreateComponent
   },
   {
-    path: 'reseller-edit',
+    path: 'reseller-edit/:id',
     component: ResellerEditComponent
   },
 ];

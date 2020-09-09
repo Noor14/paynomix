@@ -15,7 +15,7 @@ const routes: Routes = [
     component: PricingPlanCreateComponent
   },
   {
-    path: 'pricing-plan-edit',
+    path: 'pricing-plan-edit/:id',
     component: PricingPlanEditComponent
   }
 ];

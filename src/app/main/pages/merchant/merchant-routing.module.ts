@@ -15,7 +15,7 @@ const routes: Routes = [
     component: MerchantCreateComponent
   },
   {
-      path: 'merchant-edit',
+      path: 'merchant-edit/:id',
       component: MerchantEditComponent
   },
 ];

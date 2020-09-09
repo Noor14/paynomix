@@ -15,7 +15,7 @@ const routes: Routes = [
     component: PartnerCreateComponent
   },
   {
-    path: 'partner-edit',
+    path: 'partner-edit/:id',
     component: PartnerEditComponent
   }
 ];
