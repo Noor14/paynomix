@@ -9,10 +9,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatIconModule } from '@angular/material/icon';
+import { MerchantCreateComponent } from './merchant-create/merchant-create.component';
+import { MerchantEditComponent } from './merchant-edit/merchant-edit.component';
 
 
 @NgModule({
-  declarations: [MerchantListComponent],
+  declarations: [MerchantListComponent, MerchantCreateComponent, MerchantEditComponent],
   imports: [
     CommonModule,
     MerchantRoutingModule,

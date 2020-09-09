@@ -1,12 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PartnerListComponent } from './partner-list/partner-list.component';
+import { PartnerCreateComponent } from './partner-create/partner-create.component';
+import { PartnerEditComponent } from './partner-edit/partner-edit.component';
 
 
 const routes: Routes = [
   {
     path: 'partner-list',
     component: PartnerListComponent
+  },
+  {
+    path: 'partner-create',
+    component: PartnerCreateComponent
+  },
+  {
+    path: 'partner-edit',
+    component: PartnerEditComponent
   }
 ];
 

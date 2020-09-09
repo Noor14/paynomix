@@ -9,10 +9,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatIconModule } from '@angular/material/icon';
+import { PartnerEditComponent } from './partner-edit/partner-edit.component';
+import { PartnerCreateComponent } from './partner-create/partner-create.component';
 
 
 @NgModule({
-  declarations: [PartnerListComponent],
+  declarations: [PartnerListComponent, PartnerEditComponent, PartnerCreateComponent],
   imports: [
     CommonModule,
     PartnerRoutingModule,

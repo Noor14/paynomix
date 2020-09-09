@@ -9,10 +9,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatIconModule } from '@angular/material/icon';
+import { PricingPlanCreateComponent } from './pricing-plan-create/pricing-plan-create.component';
+import { PricingPlanEditComponent } from './pricing-plan-edit/pricing-plan-edit.component';
 
 
 @NgModule({
-  declarations: [PricingPlanListComponent],
+  declarations: [PricingPlanListComponent, PricingPlanCreateComponent, PricingPlanEditComponent],
   imports: [
     CommonModule,
     PricingPlanRoutingModule,
