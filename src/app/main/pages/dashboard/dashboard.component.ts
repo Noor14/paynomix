@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -61,8 +62,8 @@ export class DashboardComponent implements OnInit {
           labels    : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           colors    : [
               {
-                  borderColor    : '#42a5f5',
-                  backgroundColor: '#42a5f5'
+                  borderColor    : environment.themeColor,
+                  backgroundColor: environment.themeColor
               }
           ],
           options   : {
@@ -113,7 +114,7 @@ export class DashboardComponent implements OnInit {
           labels     : ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6', 'Jan 7', 'Jan 8', 'Jan 9', 'Jan 10', 'Jan 11', 'Jan 12', 'Jan 13', 'Jan 14', 'Jan 15'],
           colors     : [
               {
-                  borderColor: '#5c84f1'
+                  borderColor: environment.themeColor
               }
           ],
           options    : {
@@ -174,8 +175,8 @@ export class DashboardComponent implements OnInit {
           labels   : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
           colors   : [
               {
-                  borderColor    : '#f44336',
-                  backgroundColor: '#f44336'
+                  borderColor    : environment.themeColor,
+                  backgroundColor: environment.themeColor
               }
           ],
           options  : {
@@ -243,18 +244,18 @@ export class DashboardComponent implements OnInit {
           labels   : ['12am', '2am', '4am', '6am', '8am', '10am', '12pm', '2pm', '4pm', '6pm', '8pm', '10pm'],
           colors   : [
               {
-                  borderColor              : '#3949ab',
-                  backgroundColor          : '#3949ab',
-                  pointBackgroundColor     : '#3949ab',
-                  pointHoverBackgroundColor: '#3949ab',
+                  borderColor              : environment.themeColor,
+                  backgroundColor          : environment.themeColor,
+                  pointBackgroundColor     : environment.themeColor,
+                  pointHoverBackgroundColor: environment.themeColor,
                   pointBorderColor         : '#ffffff',
                   pointHoverBorderColor    : '#ffffff'
               },
               {
-                  borderColor              : 'rgba(30, 136, 229, 0.87)',
-                  backgroundColor          : 'rgba(30, 136, 229, 0.87)',
-                  pointBackgroundColor     : 'rgba(30, 136, 229, 0.87)',
-                  pointHoverBackgroundColor: 'rgba(30, 136, 229, 0.87)',
+                  borderColor              : environment.themeTransparentColor,
+                  backgroundColor          : environment.themeTransparentColor,
+                  pointBackgroundColor     : environment.themeTransparentColor,
+                  pointHoverBackgroundColor: environment.themeTransparentColor,
                   pointBorderColor         : '#ffffff',
                   pointHoverBorderColor    : '#ffffff'
               }

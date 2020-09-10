@@ -14,6 +14,7 @@ import { FuseTranslationLoaderService } from '@fuse/services/translation-loader.
 import { navigation } from 'app/navigation/navigation';
 import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/tr';
+import { environment } from 'environments/environment';
 
 @Component({
     selector   : 'app',
@@ -61,16 +62,16 @@ export class AppComponent implements OnInit, OnDestroy
         this._fuseNavigationService.setCurrentNavigation('main');
 
         // Add languages
-        this._translateService.addLangs(['en', 'tr']);
+        // this._translateService.addLangs(['en', 'tr']);
 
         // Set the default language
-        this._translateService.setDefaultLang('en');
+        // this._translateService.setDefaultLang('en');
 
         // Set the navigation translations
-        this._fuseTranslationLoaderService.loadTranslations(navigationEnglish, navigationTurkish);
+        // this._fuseTranslationLoaderService.loadTranslations(navigationEnglish, navigationTurkish);
 
         // Use a language
-        this._translateService.use('en');
+        // this._translateService.use('en');
 
         /**
          * ----------------------------------------------------------------------------------------------------
@@ -124,13 +125,16 @@ export class AppComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
+
         // Subscribe to config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((config) => {
 
                 this.fuseConfig = config;
-
+                if(environment.mentom){
+                this.fuseConfig.colorTheme = "theme-mentom";
+                }
                 // Boxed
                 if ( this.fuseConfig.layout.width === 'boxed' )
                 {
