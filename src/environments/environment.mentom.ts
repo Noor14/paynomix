@@ -6,6 +6,7 @@ export const environment = {
     apiURL: 'https://dashboard.mentom.com/api//api/',
     title: 'Mentom Payment',
     assetPathName: 'mentom',
+    themeName: 'theme-mentom',
     themeColor: '#c41230',
     themeTransparentColor: '#c41230b3',
 };

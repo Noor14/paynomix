@@ -6,6 +6,7 @@ export const environment = {
     apiURL: 'http://api.paynomix.com/api/',
     title: 'Paynomix',
     assetPathName: 'paynomix',
+    themeName: 'theme-default',
     themeColor: '#f4511e',
     themeTransparentColor: '#f4511e99',
 };

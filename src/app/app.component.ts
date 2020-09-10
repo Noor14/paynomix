@@ -132,9 +132,7 @@ export class AppComponent implements OnInit, OnDestroy
             .subscribe((config) => {
 
                 this.fuseConfig = config;
-                if(environment.mentom){
-                this.fuseConfig.colorTheme = "theme-mentom";
-                }
+                this.fuseConfig.colorTheme = environment.themeName;
                 // Boxed
                 if ( this.fuseConfig.layout.width === 'boxed' )
                 {
