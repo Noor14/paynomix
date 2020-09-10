@@ -48,6 +48,8 @@ vertical-layout-1 {
                             margin: 15px;
                             padding: 15px;
                             background-color: #fff;
+                            box-shadow: 0px 0px 3px 3px #ecececc9;
+                            border-radius: 2px;
                             &.inner-scroll {
                                 flex: 1 1 0%;
                                 min-height: 0;
