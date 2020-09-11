@@ -6,4 +6,8 @@
 
 app-pages{
     width: 100%;
+    .outer-layer{
+        border: 1px solid #eee;
+        border-radius: 3px;
+    }
 }

@@ -17,8 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     DashboardComponent,
-    PagesComponent,
-    SettingsComponent
+    PagesComponent
   ],
   imports: [
     CommonModule,

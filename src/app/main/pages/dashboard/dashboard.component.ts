@@ -46,7 +46,6 @@ export class DashboardComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.widgets = {
-    
       widget2: {
           conversion: {
               value   : 492,
@@ -314,7 +313,6 @@ export class DashboardComponent implements OnInit {
               }
           }
       }
-  
   };
   }
 

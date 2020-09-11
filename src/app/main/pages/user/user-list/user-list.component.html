@@ -1,15 +1,15 @@
-<section class="partnerList w-100-p">
+<section class="userList w-100-p">
     <section fxLayout="row" fxLayoutALign="space-between center">
-        <h2>Partners</h2>
+        <h2>Users</h2>
         <div class="searchBox">
           
         </div>
     </section>
     <hr />
     <div class="my-20" fxLayout="row" fxLayoutAlign="end">
-        <button mat-raised-button color="accent" [routerLink]="'/pages/partner/partner-create'">
+        <button mat-raised-button color="accent" [routerLink]="'/pages/reseller/reseller-create'">
             <mat-icon>add</mat-icon>
-            ADD NEW PARTNER
+            ADD NEW USER
         </button>
     </div>
 
@@ -50,7 +50,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;">
         </tr>
-    </table>
+      </table>
     
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </section>

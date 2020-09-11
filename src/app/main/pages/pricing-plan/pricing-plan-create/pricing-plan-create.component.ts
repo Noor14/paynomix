@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-pricing-plan-create',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PricingPlanCreateComponent implements OnInit {
 
-  constructor() { }
+  public form: FormGroup;
 
-  ngOnInit() {
+    /**
+     * Constructor
+     *
+     * @param {FormBuilder} _formBuilder
+     */
+    constructor(
+      private _formBuilder: FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+     this.form = this._formBuilder.group({
+      firstName : ['', Validators.required],
+      lastName  : ['', Validators.required],
+  });
   }
 
 }

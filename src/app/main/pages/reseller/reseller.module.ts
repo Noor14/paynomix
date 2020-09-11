@@ -11,6 +11,9 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { ResellerCreateComponent } from './reseller-create/reseller-create.component';
 import { ResellerEditComponent } from './reseller-edit/reseller-edit.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { ResellerEditComponent } from './reseller-edit/reseller-edit.component';
     MatPaginatorModule,
     MatButtonModule,
     FuseSharedModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
   ]
 })
 export class ResellerModule { }

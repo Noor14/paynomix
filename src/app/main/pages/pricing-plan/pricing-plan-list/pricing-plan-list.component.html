@@ -1,5 +1,5 @@
 <section class="pricingPlanList w-100-p">
-    <section fxLayout="row" fxLayoutALign="space-between center">
+    <section fxLayout="row" fxLayoutALign="space-between center" [routerLink]="'/pages/pricing-plan/pricing-plan-create'">
         <h2>Pricing Plan</h2>
         <div class="searchBox">
           
@@ -7,12 +7,13 @@
     </section>
     <hr />
     <div class="my-20" fxLayout="row" fxLayoutAlign="end">
-        <button mat-raised-button color="accent">
+        <button mat-raised-button color="accent" [routerLink]="'/pages/pricing-plan/pricing-plan-create'">
             <mat-icon>add</mat-icon>
-            ADD NEW PRICING PLAN</button>
+            ADD NEW PRICING PLAN
+        </button>
     </div>
 
-    <table mat-table [dataSource]="dataSource" matSort class="w-100-p table">
+    <table mat-table [dataSource]="dataSource" matSort class="w-100-p mat-card">
       
         <!-- ID Column -->
         <ng-container matColumnDef="name">

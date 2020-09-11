@@ -122,7 +122,12 @@ $mentom-theme: mat-light-theme($mentom-theme-primary-palette, $mentom-theme-acce
 // Add ".theme-yellow-light" class to the body to activate this theme.
 // Class name must start with "theme-" !!!
 body.theme-mentom {
-
+    h2{
+        color: #c41230;
+    }
+    hr{
+        border: 1px solid #c41230;
+    }
     // Generate the Angular Material theme
     @include angular-material-theme($mentom-theme);
 
@@ -157,6 +162,12 @@ $theme: mat-light-theme($default-primary-palette, $default-accent-palette, $defa
 // Class name must start with "theme-" !!!
 body.theme-default {
 
+    h2{
+        color: #f4511e;
+    }
+    hr{
+        border: 1px solid #f4511e;
+    }
     // Create an Angular Material theme from the $theme map
     @include angular-material-theme($theme);
 
