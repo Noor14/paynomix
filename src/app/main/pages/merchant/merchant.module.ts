@@ -11,10 +11,15 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MerchantCreateComponent } from './merchant-create/merchant-create.component';
 import { MerchantEditComponent } from './merchant-edit/merchant-edit.component';
+import { MerchantInfoComponent } from './tabs/merchant-info/merchant-info.component';
+import { BusinessDetailComponent } from './tabs/business-detail/business-detail.component';
+import { OwnerDetailComponent } from './tabs/owner-detail/owner-detail.component';
+import { BankAccountComponent } from './tabs/bank-account/bank-account.component';
+import { AllGetherInfoComponent } from './tabs/all-gether-info/all-gether-info.component';
 
 
 @NgModule({
-  declarations: [MerchantListComponent, MerchantCreateComponent, MerchantEditComponent],
+  declarations: [MerchantListComponent, MerchantCreateComponent, MerchantEditComponent, MerchantInfoComponent, BusinessDetailComponent, OwnerDetailComponent, BankAccountComponent, AllGetherInfoComponent],
   imports: [
     CommonModule,
     MerchantRoutingModule,
