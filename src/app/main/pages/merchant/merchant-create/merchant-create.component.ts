@@ -8,14 +8,10 @@ import { FormGroup } from '@angular/forms';
 })
 export class MerchantCreateComponent implements OnInit {
 
-  public merchantInfoForm: FormGroup;
-  public businessDetailForm: FormGroup;
-  public merchantDetail: any = {};
 
-  constructor(private readonly _cdref: ChangeDetectorRef) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this._cdref.detectChanges();
   }
 
 }

@@ -1,0 +1,21 @@
+<section class="merchantForm">
+    <div class="outer-layer mt-20">
+        <mat-horizontal-stepper [linear]="true" #stepper>
+            <mat-step label="Merchant Info" [stepControl]="merchantInfoForm">
+                <app-merchant-info [merchantInfo]="merchantDetail" (stepOne)="merchantInfoForm = $event"></app-merchant-info>
+            </mat-step>
+            <mat-step label="Business Detail" [stepControl]="businessDetailForm">
+                <app-business-detail [businessDetail]="merchantDetail" (stepTwo)="businessDetailForm = $event"></app-business-detail>
+            </mat-step>
+          <!-- <mat-step label="Owner's Detail">
+                <app-owner-detail [ownerDetail]="merchantDetail"></app-owner-detail>
+            </mat-step>
+            <mat-step label="Bank Account">
+                <app-bank-account [bankAccount]="merchantDetail"></app-bank-account>
+            </mat-step> -->
+            <mat-step label="Done">
+                <app-all-gether-info [allInfo]="stepper"></app-all-gether-info>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+</section>

@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MerchantEditComponent implements OnInit {
 
+  public merchantDetail: any = {};
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

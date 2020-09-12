@@ -14,9 +14,10 @@ import { PartnerCreateComponent } from './partner-create/partner-create.componen
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { PartnerFormComponent } from './partner-form/partner-form.component';
 
 @NgModule({
-  declarations: [PartnerListComponent, PartnerEditComponent, PartnerCreateComponent],
+  declarations: [PartnerListComponent, PartnerEditComponent, PartnerCreateComponent, PartnerFormComponent],
   imports: [
     CommonModule,
     PartnerRoutingModule,

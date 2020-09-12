@@ -14,13 +14,15 @@ import { ResellerEditComponent } from './reseller-edit/reseller-edit.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ResellerFormComponent } from './reseller-form/reseller-form.component';
 
 
 @NgModule({
   declarations: [
     ResellerListComponent,
     ResellerCreateComponent,
-    ResellerEditComponent
+    ResellerEditComponent,
+    ResellerFormComponent
   ],
   imports: [
     CommonModule,

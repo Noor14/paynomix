@@ -14,10 +14,11 @@ import { PricingPlanEditComponent } from './pricing-plan-edit/pricing-plan-edit.
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { PricingPlanFormComponent } from './pricing-plan-form/pricing-plan-form.component';
 
 
 @NgModule({
-  declarations: [PricingPlanListComponent, PricingPlanCreateComponent, PricingPlanEditComponent],
+  declarations: [PricingPlanListComponent, PricingPlanCreateComponent, PricingPlanEditComponent, PricingPlanFormComponent],
   imports: [
     CommonModule,
     PricingPlanRoutingModule,
