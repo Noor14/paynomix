@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-all-gether-info',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllGetherInfoComponent implements OnInit {
 
+  @Input() allInfo: any;
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

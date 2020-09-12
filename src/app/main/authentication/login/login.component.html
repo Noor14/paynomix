@@ -22,7 +22,7 @@
                     </mat-error>
                     <mat-error
                         *ngIf="!loginForm.get('Username').hasError('required') &&
-                                loginForm.get('Username').hasError('Username')">
+                                loginForm.get('Username').hasError('email') || loginForm.get('Username').hasError('pattern')">
                         Please enter a valid email address
                     </mat-error>
                 </mat-form-field>

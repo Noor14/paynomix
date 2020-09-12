@@ -1,1 +1,39 @@
-<p>bank-account works!</p>
+<section class="bankAccount">
+
+    <form fxLayout="column" fxLayoutAlign="start"
+    fxFlex="1 0 auto" name="form">
+   
+        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+            <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                <mat-label>First name</mat-label>
+                <input matInput formControlName="firstName" required>
+                <mat-error>First Name is required!</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
+                <mat-label>First name</mat-label>
+                <input matInput formControlName="firstName" required>
+                <mat-error>First Name is required!</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                <mat-label>Last name</mat-label>
+                <input matInput formControlName="lastName" required>
+                <mat-error>Last Name is required!</mat-error>
+            </mat-form-field>
+        </div>
+
+
+        <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch">
+            <button mat-raised-button matStepperPrevious class="my-4" color="accent" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
+            aria-label="Previous">
+            Previous
+            </button>
+            <button mat-raised-button matStepperNext class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
+                aria-label="Next">
+            Next
+            </button>
+        </div>
+
+  </form>
+</section>
+
+

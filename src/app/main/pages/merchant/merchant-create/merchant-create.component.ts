@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-merchant-create',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MerchantCreateComponent implements OnInit {
 
-  constructor() { }
+  public merchantInfoForm: FormGroup;
+  public businessDetailForm: FormGroup;
+  public merchantDetail: any = {};
 
-  ngOnInit() {
+  constructor(private readonly _cdref: ChangeDetectorRef) { }
+
+  ngOnInit(): void {
+    this._cdref.detectChanges();
   }
 
 }

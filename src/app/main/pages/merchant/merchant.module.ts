@@ -16,7 +16,10 @@ import { BusinessDetailComponent } from './tabs/business-detail/business-detail.
 import { OwnerDetailComponent } from './tabs/owner-detail/owner-detail.component';
 import { BankAccountComponent } from './tabs/bank-account/bank-account.component';
 import { AllGetherInfoComponent } from './tabs/all-gether-info/all-gether-info.component';
-
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [MerchantListComponent, MerchantCreateComponent, MerchantEditComponent, MerchantInfoComponent, BusinessDetailComponent, OwnerDetailComponent, BankAccountComponent, AllGetherInfoComponent],
@@ -28,7 +31,11 @@ import { AllGetherInfoComponent } from './tabs/all-gether-info/all-gether-info.c
     MatPaginatorModule,
     MatButtonModule,
     FuseSharedModule,
-    MatIconModule
+    MatIconModule,
+    MatStepperModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
   ]
 })
 export class MerchantModule { }
