@@ -13,28 +13,28 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Partners',
                 type     : 'item',
                 icon     : 'local_parking',
-                url      : '/pages/partner/partner-list'
+                url      : '/pages/partner',
             },
             {
                 id       : 'reseller',
                 title    : 'Resellers',
                 type     : 'item',
                 icon     : 'device_hub',
-                url      : '/pages/reseller/reseller-list'
+                url      : '/pages/reseller'
             },
                {
                 id       : 'merchant',
                 title    : 'Merchants',
                 type     : 'item',
                 icon     : 'home',
-                url      : '/pages/merchant/merchant-list'
+                url      : '/pages/merchant'
             },
             {
                 id       : 'pricing',
                 title    : 'Pricing Plan',
                 type     : 'item',
                 icon     : 'event_note',
-                url      : '/pages/pricing-plan/pricing-plan-list'
+                url      : '/pages/pricing-plan'
             },
             {
                 id       : 'sale',
@@ -68,7 +68,7 @@ export const navigation: FuseNavigation[] = [
                         title    : 'Users',
                         type     : 'item',
                         icon     : 'person_outline',
-                        url      : '/pages/user/user-list'
+                        url      : '/pages/user'
                     }
                ]
             },

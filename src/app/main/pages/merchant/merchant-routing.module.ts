@@ -6,6 +6,10 @@ import { MerchantEditComponent } from './merchant-edit/merchant-edit.component';
 
 
 const routes: Routes = [  
+  { path: '',
+  redirectTo: 'merchant-list',
+  pathMatch: 'full'
+},
   {
   path: 'merchant-list',
   component: MerchantListComponent

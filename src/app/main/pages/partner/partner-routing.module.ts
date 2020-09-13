@@ -6,6 +6,10 @@ import { PartnerEditComponent } from './partner-edit/partner-edit.component';
 
 
 const routes: Routes = [
+  { path: '',
+    redirectTo: 'partner-list',
+    pathMatch: 'full'
+  },
   {
     path: 'partner-list',
     component: PartnerListComponent

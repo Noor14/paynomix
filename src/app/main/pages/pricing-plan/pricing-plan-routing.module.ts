@@ -6,6 +6,10 @@ import { PricingPlanEditComponent } from './pricing-plan-edit/pricing-plan-edit.
 
 
 const routes: Routes = [
+  { path: '',
+  redirectTo: 'pricing-plan-list',
+  pathMatch: 'full'
+},
   {
     path: 'pricing-plan-list',
     component: PricingPlanListComponent

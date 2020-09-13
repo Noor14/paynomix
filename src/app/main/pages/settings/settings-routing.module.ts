@@ -4,7 +4,7 @@ import { SettingsComponent } from './settings.component';
 
 
 const routes: Routes = [
-  { path: '', component: SettingsComponent, pathMatch:'full'},
+  { path: '', component: SettingsComponent, pathMatch: 'full'},
 
 ];
 
