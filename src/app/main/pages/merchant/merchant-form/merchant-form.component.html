@@ -7,10 +7,10 @@
             <mat-step label="Business Detail" [stepControl]="businessDetailForm">
                 <app-business-detail [businessDetail]="merchantDetail" (stepTwo)="businessDetailForm = $event"></app-business-detail>
             </mat-step>
-          <!-- <mat-step label="Owner's Detail">
-                <app-owner-detail [ownerDetail]="merchantDetail"></app-owner-detail>
+             <mat-step label="Owner's Detail" [stepControl]="ownerDetailForm">
+                <app-owner-detail [ownerDetail]="merchantDetail" (stepThree)="ownerDetailForm = $event"></app-owner-detail>
             </mat-step>
-            <mat-step label="Bank Account">
+            <!-- <mat-step label="Bank Account">
                 <app-bank-account [bankAccount]="merchantDetail"></app-bank-account>
             </mat-step> -->
             <mat-step label="Done">

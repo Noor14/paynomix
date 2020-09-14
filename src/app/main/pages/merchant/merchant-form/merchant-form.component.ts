@@ -10,6 +10,7 @@ export class MerchantFormComponent implements OnInit {
 
   public merchantInfoForm: FormGroup;
   public businessDetailForm: FormGroup;
+  public ownerDetailForm: FormGroup;
   @Input() merchantDetail: any = {};
 
   constructor(private readonly _cdref: ChangeDetectorRef) { }

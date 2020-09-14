@@ -26,10 +26,10 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
     this.businessDetailForm = this._formBuilder.group({
       Descriptor: [''],
       TaxIDNo: [''],
-      BusinessType: ['', Validators.required],
+      BusinessType: ['eww', Validators.required],
       YearsInBusiness: [''],
-      WebSite: ['', Validators.required],
-      AcceptCreditCards: ['', Validators.required],
+      WebSite: ['weew', Validators.required],
+      AcceptCreditCards: ['ewew', Validators.required],
       BusinessPhone: [''],
       Fax: [''],
       BusinessAddress: [''],
