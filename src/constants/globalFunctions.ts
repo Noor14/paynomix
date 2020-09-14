@@ -16,6 +16,10 @@ export const snackBarConfig: any = {
     horizontalPosition: 'right',
     panelClass:'fuse-navy-50'
 };
+export const snackBarConfigWarn = {
+  ...snackBarConfig,
+  panelClass:'warn'
+}
 
 export const validator = {
   emailPattern: /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/

@@ -9,7 +9,7 @@ export class ResellerService extends BaseService {
         super(_http);
        }
 
-       resellerList(obj): any{
+       resellerList(obj: any): any{
         const url = `${environment.apiURL}/Reseller/Search`;
          return this.post(url, obj);
         }

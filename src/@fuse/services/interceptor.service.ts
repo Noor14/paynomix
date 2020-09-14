@@ -13,22 +13,24 @@ export class InterceptorService implements HttpInterceptor {
   intercept(
     request: HttpRequest<any>, next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const {Token, UserId} = JSON.parse(localStorage.getItem('userInfo'));
-    if (Token) {
-      request = request.clone({
-          setHeaders: {
-            'Content-Type': 'application/json; charset=utf-8',
-            'dataType': 'json',
-            'userid': UserId,
-            'authorization': `${Token}`
-          }
-      });
-      if (request.url.includes('Setting/MerchantSetting')) {
-        request = request.clone(
-          { headers: request.headers.delete('Content-Type', 'application/json; charset=utf-8')
+     const object = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'));
+     const token = object && object.Token;
+     const userID = object && object.UserId;
+      if (token) {
+        request = request.clone({
+            setHeaders: {
+              'Content-Type': 'application/json; charset=utf-8',
+              'dataType': 'json',
+              'userid': userID,
+              'authorization': `${token}`
+            }
         });
+        if (request.url.includes('Setting/MerchantSetting')) {
+          request = request.clone(
+            { headers: request.headers.delete('Content-Type', 'application/json; charset=utf-8')
+          });
+      }
     }
-  }
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
         return throwError(err);
