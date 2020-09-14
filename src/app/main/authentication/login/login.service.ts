@@ -9,10 +9,10 @@ import { environment } from 'environments/environment';
 export class LoginService extends BaseService {
 
   constructor(_http: HttpClient) {
-    super(_http)
+    super(_http);
    }
-   signIn(object: any){
+   signIn(object: any): any{
      const url = `${environment.apiURL}login`;
-     return this.post(url,object)
+     return this.post(url, object);
    }
 }

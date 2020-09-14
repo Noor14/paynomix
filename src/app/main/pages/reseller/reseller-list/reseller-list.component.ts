@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ResellerService } from '../reseller.service';
 
 @Component({
   selector: 'app-reseller-list',
@@ -34,12 +36,33 @@ export class ResellerListComponent implements OnInit {
       {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
       {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
       {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-    ])
-  constructor() { }
+    ]);
+
+       /**
+     * Constructor
+     *
+     * @param {ResellerService} _resellerService
+     */
+    
+  constructor(
+      private readonly _resellerService: ResellerService
+  ) { }
 
   ngOnInit(): void {
+      
+    this.getReseller();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  getReseller(): void{
+    this._resellerService.resellerList({
+        PartnerId: JSON.parse(localStorage.getItem('userInfo')).EntityId
+    }).then((res: any) =>{
+        if(res && !res.StatusCode){
+            console.log(res)
+        }
+    }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
 }
