@@ -2,7 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { environment } from '../../../../environments/environment';
-import { validateAllFormFields, validator } from 'constants/globalFunctions';
+import { snackBarConfig, validateAllFormFields, validator } from 'constants/globalFunctions';
+import { LoginService } from './login.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector     : 'login',
@@ -20,12 +24,18 @@ export class LoginComponent implements OnInit
      * Constructor
      *
      * @param {FormBuilder} _formBuilder
+     * @param {LoginService} _loginService
+     * @param {LoginService} _formBuilder
+     * @param {Router} _router
+     * @param {MatSnackBar} _snackBar
      */
     constructor(
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _loginService: LoginService,
+        private _router: Router,
+        private _snackBar: MatSnackBar
     )
     {
-        // Configure the layout
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -45,7 +55,15 @@ export class LoginComponent implements OnInit
 
     login(): void{
         if(this.loginForm.valid){
-
+            this._loginService.signIn(this.loginForm.value).then((res: any)=>{
+                if(res && !res.StatusCode){
+                    this._snackBar.open('Signing in', '', snackBarConfig)
+                    this._router.navigate(['/pages/dashboard']);
+                    localStorage.setItem('userInfo', JSON.stringify(res.Response));
+                }else{
+                    this._snackBar.open(res.StatusMessage, '', {...snackBarConfig, panelClass: 'warn'})
+                }
+            }).catch((err: HttpErrorResponse)=>(console.log))
         }else{
             validateAllFormFields(this.loginForm)
         }

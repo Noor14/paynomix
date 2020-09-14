@@ -10,6 +10,12 @@ export function validateAllFormFields(formGroup: FormGroup) {
       }
     });
 };
+export const snackBarConfig: any = {
+    duration: 3000,
+    verticalPosition: 'top',
+    horizontalPosition: 'right',
+    panelClass:'fuse-navy-50'
+};
 
 export const validator = {
   emailPattern: /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/
