@@ -6,7 +6,7 @@ import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService extends BaseService {
+export class AuthService extends BaseService {
 
   constructor(_http: HttpClient) {
     super(_http);

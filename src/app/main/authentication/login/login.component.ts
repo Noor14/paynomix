@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { environment } from '../../../../environments/environment';
 import { snackBarConfig, snackBarConfigWarn, validateAllFormFields, validator } from 'constants/globalFunctions';
-import { LoginService } from './login.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../auth.service';
 
 @Component({
     selector     : 'login',
@@ -24,14 +24,13 @@ export class LoginComponent implements OnInit
      * Constructor
      *
      * @param {FormBuilder} _formBuilder
-     * @param {LoginService} _loginService
-     * @param {LoginService} _formBuilder
+     * @param {AuthService} _authService
      * @param {Router} _router
      * @param {MatSnackBar} _snackBar
      */
     constructor(
         private _formBuilder: FormBuilder,
-        private _loginService: LoginService,
+        private _authService: AuthService,
         private _router: Router,
         private _snackBar: MatSnackBar
     )
@@ -55,7 +54,7 @@ export class LoginComponent implements OnInit
 
     login(): void{
         if(this.loginForm.valid){
-            this._loginService.signIn(this.loginForm.value).then((res: any)=>{
+            this._authService.signIn(this.loginForm.value).then((res: any)=>{
                 if(res && !res.StatusCode){
                     this._snackBar.open('Signing in', '', snackBarConfig);
                     this._router.navigate(['/pages/dashboard']);

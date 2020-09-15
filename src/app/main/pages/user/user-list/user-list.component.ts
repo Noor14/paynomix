@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,7 +13,7 @@ import { UserService } from '../user.service';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -40,7 +40,7 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getResellers())
+    .subscribe(() => this.getUsers())
   }
 
   ngOnDestroy(): void {
@@ -49,7 +49,7 @@ export class UserListComponent implements OnInit {
       this._unsubscribeAll.complete();
   }
 
-  getResellers(): void{
+  getUsers(): void{
     this._userService.userList(this._userConfigService.getUserMode())
     .then((res: any) => {
         if(res && !res.StatusCode){
