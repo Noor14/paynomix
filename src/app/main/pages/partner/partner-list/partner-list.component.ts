@@ -16,9 +16,9 @@ import { PartnerService } from '../partner.service';
 export class PartnerListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  displayedColumns = ['PartnerName', 'DBAName', 'FirstName', 'LastName', 'Action'];
+  public displayedColumns = ['PartnerName', 'DBAName', 'FirstName', 'LastName', 'Action'];
   public dataSource = new MatTableDataSource<any>()
-  public partners: any= [];
+  public partners: any = [];
   private _unsubscribeAll: Subject<any>;
   
       /**
