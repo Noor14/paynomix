@@ -11,29 +11,29 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ResellerListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['position', 'name', 'weight', 'symbol', 'action'];
+  public displayedColumns = ['resellerName', 'DBAName', 'TelephoneNumber', 'Email','Country', 'Action'];
   public dataSource = new MatTableDataSource<any>(
     [
-      {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-      {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-      {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-      {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-      {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-      {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-      {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-      {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-      {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-      {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-      {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-      {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-      {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-      {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-      {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-      {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-      {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-      {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-      {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-      {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
+      {resellerName: 1, DBAName: 'Hydrogen', TelephoneNumber: 1.0079,  Email: 'H' ,Country:'usa'},
+      {resellerName: 2, DBAName: 'Helium', TelephoneNumber: 4.0026,  Email: 'He',Country:'usa'},
+      {resellerName: 3, DBAName: 'Lithium', TelephoneNumber: 6.941,  Email: 'Li',Country:'usa'},
+      {resellerName: 4, DBAName: 'Beryllium', TelephoneNumber: 9.0122,  Email: 'Be',Country:'usa'},
+      {resellerName: 5, DBAName: 'Boron', TelephoneNumber: 10.811,  Email: 'B',Country:'usa'},
+      {resellerName: 6, DBAName: 'Carbon', TelephoneNumber: 12.0107,  Email: 'C',Country:'usa'},
+      {resellerName: 7, DBAName: 'Nitrogen', TelephoneNumber: 14.0067,  Email: 'N',Country:'usa'},
+      {resellerName: 8, DBAName: 'Oxygen', TelephoneNumber: 15.9994,  Email: 'O',Country:'usa'},
+      {resellerName: 9, DBAName: 'Fluorine', TelephoneNumber: 18.9984,  Email: 'F',Country:'usa'},
+      {resellerName: 10, DBAName: 'Neon', TelephoneNumber: 20.1797,  Email: 'Ne',Country:'usa'},
+      {resellerName: 11, DBAName: 'Sodium', TelephoneNumber: 22.9897,  Email: 'Na',Country:'usa'},
+      {resellerName: 12, DBAName: 'Magnesium', TelephoneNumber: 24.305,  Email: 'Mg',Country:'usa'},
+      {resellerName: 13, DBAName: 'Aluminum', TelephoneNumber: 26.9815,  Email: 'Al',Country:'usa'},
+      {resellerName: 14, DBAName: 'Silicon', TelephoneNumber: 28.0855,  Email: 'Si',Country:'usa'},
+      {resellerName: 15, DBAName: 'Phosphorus', TelephoneNumber: 30.9738,  Email: 'P',Country:'usa'},
+      {resellerName: 16, DBAName: 'Sulfur', TelephoneNumber: 32.065,  Email: 'S',Country:'usa'},
+      {resellerName: 17, DBAName: 'Chlorine', TelephoneNumber: 35.453,  Email: 'Cl',Country:'usa'},
+      {resellerName: 18, DBAName: 'Argon', TelephoneNumber: 39.948,  Email: 'Ar',Country:'usa'},
+      {resellerName: 19, DBAName: 'Potassium', TelephoneNumber: 39.0983,  Email: 'K',Country:'usa'},
+      {resellerName: 20, DBAName: 'Calcium', TelephoneNumber: 40.078,  Email: 'Ca',Country:'usa'},
     ])
   constructor() { }
 
