@@ -4,13 +4,13 @@ import { BaseService } from '@fuse/services/base.service';
 import { environment } from 'environments/environment';
 
 @Injectable({providedIn: 'root'})
-export class DashboardService extends BaseService {
+export class UserService extends BaseService {
     constructor(_http: HttpClient) {
         super(_http);
        }
 
-       dasboardStats(obj: any): any{
-        const url = `${environment.apiURL}dashboard/DashboardData`;
+       userList(obj: any): any{
+        const url = `${environment.apiURL}User/Search`;
          return this.post(url, obj);
         }
     

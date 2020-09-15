@@ -11,6 +11,6 @@ export class MerchantService extends BaseService {
 
        merchantList(obj: any): any{
         const url = `${environment.apiURL}Merchant/Search`;
-         return this.post(url, obj || {});
+         return this.post(url, obj);
         }
 }

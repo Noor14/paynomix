@@ -10,7 +10,7 @@ export class BaseService {
   
   post(url: string, data: any): any {
     const promise = new Promise((resolve, reject) => {
-      this._http.post(url, data)
+      this._http.post(url, data || {})
         .toPromise()
         .then(
           res => resolve(res)

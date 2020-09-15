@@ -25,7 +25,7 @@
                     <div class="pr-16">
                         <div class="h3 secondary-text">Total Transactions</div>
                         <div class="font-size-40 font-weight-300 line-height-1 mt-8">
-                            {{widgets.widget2.conversion.value}}
+                            {{dashboardUserStats?.Widget?.TotalTransaction}}
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     <div class="pr-16">
                         <div class="h3 secondary-text">Successful Transactions</div>
                         <div class="font-size-40 font-weight-300 line-height-1 mt-8">
-                            {{widgets.widget3.impressions.value}}
+                            {{dashboardUserStats?.Widget?.SuccessfulTransaction}}
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,9 @@
                     <div class="pr-16">
                         <div class="h3 secondary-text">Avg. Transactions</div>
                         <div class="font-size-40 font-weight-300 line-height-1 mt-8">
-                            {{widgets.widget4.visits.value}}
+                            <ng-container *ngIf="dashboardUserStats?.Widget?.AvgTransactionAmount">
+                                ${{dashboardUserStats?.Widget?.AvgTransactionAmount}}
+                            </ng-container>
                         </div>
                     </div>
 
@@ -127,38 +129,38 @@
     <section class="latestTransaction fuse-card auto-width">
         <div class="p-20"
         fxLayout="row" fxLayoutAlign="space-between center">
-            <h2 class="m-0">Last 10 Transactions</h2>
+            <h2 class="m-0">Recent Transactions</h2>
             <button mat-raised-button color="accent">VIEW ALL TRANSACTIONS</button>
         </div>
 
             <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
           
-              <!-- ID Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+              <!-- Transaction ID Column -->
+              <ng-container matColumnDef="TransactionId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction ID </th>
+                <td mat-cell *matCellDef="let row"> {{row.TransactionId}} </td>
               </ng-container>
           
-              <!-- Progress Column -->
-              <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Position </th>
-                <td mat-cell *matCellDef="let row"> {{row.position}}%</td>
+              <!--  Customer Name Column -->
+              <ng-container matColumnDef="CustomerName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.CustomerName}}</td>
               </ng-container>
           
               <!-- Name Column -->
-              <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
-                <td mat-cell *matCellDef="let row"> {{row.weight}} </td>
+              <ng-container matColumnDef="InsertedOn">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                <td mat-cell *matCellDef="let row"> {{row.InsertedOn | date: 'mediumDate'}} </td>
               </ng-container>
           
               <!-- Color Column -->
-              <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
-                <td mat-cell *matCellDef="let row"> {{row.symbol}} </td>
+              <ng-container matColumnDef="Amount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                <td mat-cell *matCellDef="let row"> {{row.Amount | currency}} </td>
               </ng-container>
 
                <!-- view Column -->
-               <ng-container matColumnDef="action">
+               <ng-container matColumnDef="Action">
                 <th mat-header-cell *matHeaderCellDef>Action</th>
                 <td mat-cell *matCellDef="let row"> 
                     <button mat-raised-button color="accent">View</button>

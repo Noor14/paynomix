@@ -25,7 +25,7 @@ export class PricingPlanListComponent implements OnInit {
     /**
     * Constructor
     *
-    * @param {ResellerService} _resellerService
+    * @param {PricingPlanService} _pricingPlanService
     * @param {UserConfigService} _userConfigService
     */
    
@@ -40,15 +40,15 @@ export class PricingPlanListComponent implements OnInit {
   ngOnInit(): void {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getPricingPlan())
+    .subscribe(() => this.getPricingPlans())
   }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
-}
+  }
 
-    getPricingPlan(): void{
+  getPricingPlans(): void{
     this._pricingPlanService.pricingPlanList(this._userConfigService.getUserMode())
     .then((res: any) => {
         if(res && !res.StatusCode){

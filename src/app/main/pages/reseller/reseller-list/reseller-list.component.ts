@@ -40,7 +40,7 @@ export class ResellerListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getReseller())
+    .subscribe(() => this.getResellers())
   }
 
   ngOnDestroy(): void {
@@ -49,7 +49,7 @@ export class ResellerListComponent implements OnInit, OnDestroy {
       this._unsubscribeAll.complete();
   }
 
-  getReseller(): void{
+  getResellers(): void{
     this._resellerService.resellerList(this._userConfigService.getUserMode())
     .then((res: any) => {
         if(res && !res.StatusCode){
