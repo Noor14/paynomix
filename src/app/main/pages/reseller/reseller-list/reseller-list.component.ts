@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserConfigService } from '@fuse/services/user.config.service';
 import { ResellerService } from '../reseller.service';
 
 @Component({
@@ -45,19 +46,19 @@ export class ResellerListComponent implements OnInit {
      */
     
   constructor(
-      private readonly _resellerService: ResellerService
+      private readonly _resellerService: ResellerService,
+      private readonly _userConfigService: UserConfigService
   ) { }
 
   ngOnInit(): void {
-    this.getReseller();
+    this._userConfigService.userModeChange.subscribe(() => this.getReseller())
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   getReseller(): void{
-    this._resellerService.resellerList({
-        PartnerId: JSON.parse(localStorage.getItem('userInfo')).EntityId
-    }).then((res: any) =>{
+    this._resellerService.resellerList(this._userConfigService.getUserMode()).then((res: any) =>{
         if(res && !res.StatusCode){
             console.log(res)
         }

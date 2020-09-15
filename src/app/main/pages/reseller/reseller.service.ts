@@ -10,7 +10,7 @@ export class ResellerService extends BaseService {
        }
 
        resellerList(obj: any): any{
-        const url = `${environment.apiURL}/Reseller/Search`;
+        const url = `${environment.apiURL}Reseller/Search`;
          return this.post(url, obj);
         }
     
