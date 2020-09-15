@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserConfigService } from '@fuse/services/user.config.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { UserConfigService } from '@fuse/services/user.config.service';
   templateUrl: './pages.component.html',
   styleUrls: ['./pages.component.scss']
 })
-export class PagesComponent implements OnInit {
+export class PagesComponent implements OnInit, OnDestroy {
 
   constructor(private readonly _userConfigService: UserConfigService) { }
 
@@ -21,6 +21,11 @@ export class PagesComponent implements OnInit {
         [userRole] : EntityId
       })
      }
+  }
+
+  ngOnDestroy(): void {
+    if(this._userConfigService.getUserMode())
+    this._userConfigService.setUserMode(null)
   }
 
 }
