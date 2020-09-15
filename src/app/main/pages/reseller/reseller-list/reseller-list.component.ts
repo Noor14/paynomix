@@ -14,6 +14,7 @@ import { ResellerService } from '../reseller.service';
   styleUrls: ['./reseller-list.component.scss']
 })
 export class ResellerListComponent implements OnInit, OnDestroy {
+  
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   public displayedColumns = ['ResellerName', 'DBAName', 'TelephoneNumber', 'Email', 'Country', 'Action'];
