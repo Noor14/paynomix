@@ -2,11 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { environment } from '../../../../environments/environment';
-import { snackBarConfig, snackBarConfigWarn, validateAllFormFields, validator } from 'constants/globalFunctions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../auth.service';
+import { validator, snackBarConfig, snackBarConfigWarn, validateAllFormFields } from '../../../../constants/globalFunctions';
 
 @Component({
     selector     : 'login',
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit
     ngOnInit(): void
     {
         this.loginForm = this._formBuilder.group({
-            Username    : ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
+            Username: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
             Password: ['', Validators.required]
         });
     }
@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit
             this._authService.signIn(this.loginForm.value).then((res: any)=>{
                 if(res && !res.StatusCode){
                     this._snackBar.open('Signing in', '', snackBarConfig);
-                    this._router.navigate(['/pages/dashboard']);
                     localStorage.setItem('userInfo', JSON.stringify(res.Response));
+                    this._router.navigate(['/pages/dashboard']);
                 }else{
                     this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
                 }

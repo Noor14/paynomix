@@ -25,7 +25,7 @@
                     <div class="pr-16">
                         <div class="h3 secondary-text">Total Transactions</div>
                         <div class="font-size-40 font-weight-300 line-height-1 mt-8">
-                            {{dashboardUserStats?.Widget?.TotalTransaction}}
+                            {{dashboardUserStats?.Widget?.TotalTransaction || 0}}
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     <div class="pr-16">
                         <div class="h3 secondary-text">Successful Transactions</div>
                         <div class="font-size-40 font-weight-300 line-height-1 mt-8">
-                            {{dashboardUserStats?.Widget?.SuccessfulTransaction}}
+                            {{dashboardUserStats?.Widget?.SuccessfulTransaction || 0}}
                         </div>
                     </div>
                 </div>
@@ -85,8 +85,8 @@
                     <div class="pr-16">
                         <div class="h3 secondary-text">Avg. Transactions</div>
                         <div class="font-size-40 font-weight-300 line-height-1 mt-8">
-                            <ng-container *ngIf="dashboardUserStats?.Widget?.AvgTransactionAmount">
-                                ${{dashboardUserStats?.Widget?.AvgTransactionAmount}}
+                            <ng-container *ngIf="dashboardUserStats?.Widget">
+                                ${{dashboardUserStats?.Widget?.AvgTransactionAmount || 0}}
                             </ng-container>
                         </div>
                     </div>
