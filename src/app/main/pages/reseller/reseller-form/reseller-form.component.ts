@@ -21,8 +21,22 @@ export class ResellerFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
-     firstName : ['', Validators.required],
-     lastName  : ['', Validators.required],
+      partnersName: ['', Validators.required],
+      resellerName: ['', Validators.required],
+      country: ['', Validators.required],
+      DBAName: ['', ''],
+      Address: ['', Validators.required],
+      City: ['', Validators.required],
+      states: ['', Validators.required],
+      Zip: ['', Validators.required],
+      Email: ['', Validators.required],
+      AlternateEmail: ['', ''],
+      OfficePhone: ['', Validators.required],
+      ext1: ['', ''],
+      AlternatePhone: ['', ''],
+      ext2: ['', ''],
+      fax: ['', ''],
+      TaxId: ['', Validators.required]
  });
  }
 }
