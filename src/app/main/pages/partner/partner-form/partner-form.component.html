@@ -12,8 +12,8 @@
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>DBA Name</mat-label>
-                    <input matInput formControlName="DBAName" required>
-                    <mat-error>DBA Name is required!</mat-error>
+                    <input matInput formControlName="DBAName" >
+                    <!-- <mat-error>DBA Name is required!</mat-error> -->
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
@@ -89,21 +89,22 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Alternate Phone</mat-label>
-                    <input matInput formControlName="AlternatePhone" required>
-                    <mat-error>Alternate Phone is required!</mat-error>
+                    <input matInput formControlName="AlternatePhone" >
+                    <!-- <mat-error>Alternate Phone is required!</mat-error> -->
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Tax Id </mat-label>
-                    <input matInput formControlName="TaxId" required>
-                    <mat-error>Tax Id is required!</mat-error>
+                    <mat-label>Tax ID </mat-label>
+                    <input matInput formControlName="TaxId" >
+                    <!-- <mat-error>Tax Id is required!</mat-error> -->
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label>Exchange Rate </mat-label>
-                    <input matInput formControlName="ExchangeRate" required>
-                    <mat-error>Exchange Rate is required!</mat-error>
+                    <mat-label>Exchange Rate (%) </mat-label>
+                    <input matInput formControlName="ExchangeRate" >
+                    <mat-hint>This rate markup is used when currencies must be converted. It has no effect on transaction reporting.</mat-hint>
+                    <!-- <mat-error>Exchange Rate is required!</mat-error> -->
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
@@ -112,10 +113,7 @@
                     <mat-error>Default Settlement Currency is required!</mat-error>
                 </mat-form-field>
             </div>
-            <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-               <p>This rate markup is used when currencies must be converted. It has no effect on transaction reporting.
-            </p>
-            </div>
+           
 
             <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch">
                 <button mat-raised-button class="my-4" color="accent" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
