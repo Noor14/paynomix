@@ -75,8 +75,8 @@ createResellerForm(): void {
 
 }
   ngOnChanges(){
-    this.createResellerForm()
     if(this.resellerDetail){
+      this.createResellerForm()
     this.resellerForm.patchValue(this.resellerDetail)
     }
   }
