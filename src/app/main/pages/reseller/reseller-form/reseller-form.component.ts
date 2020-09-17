@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
@@ -12,7 +12,7 @@ import { PartnerService } from '../../partner/partner.service';
   templateUrl: './reseller-form.component.html',
   styleUrls: ['./reseller-form.component.scss']
 })
-export class ResellerFormComponent implements OnInit, OnDestroy {
+export class ResellerFormComponent implements OnInit, OnDestroy, OnChanges {
 
   public resellerForm: FormGroup;
   public statesList = states;
@@ -43,27 +43,7 @@ export class ResellerFormComponent implements OnInit, OnDestroy {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(() => this.getPartners())
-
-    this.resellerForm = this._formBuilder.group({
-      ResellerId: [0, Validators.required],
-      ResellerName: ['', Validators.required],
-      PartnerId: ['', Validators.required],
-      DBAName: [''],
-      TelephoneNumber: ['', Validators.required],
-      TelephoneExt: [''],
-      AlternativePhoneNumber: [''],
-      AlternativePhoneExt: [''],
-      Fax: [''],
-      Email: ['', Validators.required],
-      AlternateEmail: [''],
-      Address1: ['', Validators.required],
-      Country: ['', Validators.required],
-      City: ['', Validators.required],
-      State: ['', Validators.required],
-      Zip: ['', Validators.required],
-      TaxId: [''],
-    });
-
+    this.createResellerForm()
  }
 
 
@@ -72,15 +52,40 @@ export class ResellerFormComponent implements OnInit, OnDestroy {
   this._unsubscribeAll.next();
   this._unsubscribeAll.complete();
 }
+createResellerForm(): void {
+  this.resellerForm = this._formBuilder.group({
+    ResellerId: [0, Validators.required],
+    ResellerName: ['', Validators.required],
+    PartnerId: ['', Validators.required],
+    DBAName: [''],
+    TelephoneNumber: ['', Validators.required],
+    TelephoneExt: [''],
+    AlternativePhoneNumber: [''],
+    AlternativePhoneExt: [''],
+    Fax: [''],
+    Email: ['', Validators.required],
+    AlternateEmail: [''],
+    Address1: ['', Validators.required],
+    Country: ['', Validators.required],
+    City: ['', Validators.required],
+    State: ['', Validators.required],
+    Zip: ['', Validators.required],
+    TaxId: [''],
+  });
+
+}
+  ngOnChanges(){
+    this.createResellerForm()
+    if(this.resellerDetail){
+    this.resellerForm.patchValue(this.resellerDetail)
+    }
+  }
 
 getPartners(): void{
   this._partnerService.partnerList(this._userConfigService.getUserMode())
   .then((res: any) => {
       if(res && !res.StatusCode){
           this.partners = res.Response;
-          if(this.resellerDetail){
-            this.resellerForm.patchValue(this.resellerDetail)
-          }
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   }

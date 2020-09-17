@@ -10,7 +10,7 @@ export class ResellerService extends BaseService {
        }
 
        getResellerDetail(id: string){
-        const url = `${environment.apiURL}Reseller/${id}`;
+        const url = `${environment.apiURL}Reseller/GetResellerById/${id}`;
         return this.get(url);
        }
 

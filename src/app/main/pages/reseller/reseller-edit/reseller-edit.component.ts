@@ -45,7 +45,7 @@ export class ResellerEditComponent implements OnInit, OnDestroy {
       ),
       tap((res: any) => (this.resellerInfo = res.Response)),
     )
-    .subscribe(console.log);
+    .subscribe();
 
   }
 
