@@ -1,6 +1,6 @@
 <section class="createPricingPlan w-100-p">
     <h2>Add Pricing Plan</h2>
     <hr />
-    <app-pricing-plan-form></app-pricing-plan-form>
+    <app-pricing-plan-form (submitForm)="createPricingPlan($event)"></app-pricing-plan-form>
 
 </section>

@@ -8,10 +8,17 @@ export class PricingPlanService extends BaseService {
     constructor(_http: HttpClient) {
         super(_http);
        }
-
+       getPricingPlanDetail(id: string){
+        const url = `${environment.apiURL}PricingPlan/GetPricingPlanById/${id}`;
+        return this.get(url);
+       }
        pricingPlanList(obj: any): any{
         const url = `${environment.apiURL}PricingPlan/Search`;
          return this.post(url, obj);
+        }
+        savePricingPlan(obj: any){
+            const url = `${environment.apiURL}PricingPlan`;
+            return this.post(url, obj);   
         }
     
 }

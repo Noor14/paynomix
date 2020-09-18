@@ -1,6 +1,6 @@
 <section class="createPricingPlan w-100-p">
     <h2>Edit Pricing Plan</h2>
     <hr />
-    <app-pricing-plan-form></app-pricing-plan-form>
+    <app-pricing-plan-form [pricingPlanDetail]="pricingPlanInfo" (submitForm)="updatePricingPlan($event)"></app-pricing-plan-form>
 
 </section>
