@@ -20,8 +20,22 @@ export class PartnerFormComponent implements OnInit {
 
 ngOnInit(): void {
    this.form = this._formBuilder.group({
-    firstName : ['', Validators.required],
-    lastName  : ['', Validators.required],
+    PartnerName: ['', Validators.required], 
+    DBAName: ['', ''],
+    FirstName: ['', Validators.required],
+    LastName: ['', Validators.required],
+    Address: ['', Validators.required],
+    City: ['', Validators.required],
+    Email: ['', Validators.required],
+    Phone: ['', Validators.required],
+    AlternatePhone: ['', ''],
+    State: ['', Validators.required],
+    Country:  ['' , Validators.required],
+    WebsiteUrl: ['', Validators.required],
+    Zip: ['', Validators.required],
+    TaxId: ['', ''],
+    ExchangeRate: [0.00 , ''],
+    DefaultSettlementCurrency: ['', Validators.required]
 });
 }
 
