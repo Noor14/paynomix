@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { states, validateAllFormFields } from 'constants/globalFunctions';
+import { locationConfig, validateAllFormFields } from 'constants/globalFunctions';
 
 @Component({
   selector: 'app-partner-form',
@@ -11,7 +11,7 @@ export class PartnerFormComponent implements OnInit, OnChanges {
   public partnerForm: FormGroup;
   @Output() submitForm = new EventEmitter<any>();
   @Input() partnerDetail: any = null;
-  public statesList = states;
+  public locationObj = locationConfig;
 
       /**
      * Constructor

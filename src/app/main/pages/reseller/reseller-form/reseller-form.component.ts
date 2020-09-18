@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { states, validateAllFormFields } from '../../../../../constants/globalFunctions';
+import { locationConfig, validateAllFormFields } from '../../../../../constants/globalFunctions';
 import { PartnerService } from '../../partner/partner.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { PartnerService } from '../../partner/partner.service';
 export class ResellerFormComponent implements OnInit, OnDestroy, OnChanges {
 
   public resellerForm: FormGroup;
-  public statesList = states;
+  public locationObj = locationConfig;
   public partners: any = [];
   @Output() submitForm = new EventEmitter<any>();
   @Input() resellerDetail: any = null;
