@@ -74,12 +74,13 @@ createResellerForm(): void {
   });
 
 }
-  ngOnChanges(){
-    if(this.resellerDetail){
-      this.createResellerForm()
-    this.resellerForm.patchValue(this.resellerDetail)
-    }
+
+ngOnChanges(){
+  if(this.resellerDetail){
+    this.createResellerForm()
+  this.resellerForm.patchValue(this.resellerDetail)
   }
+}
 
 getPartners(): void{
   this._partnerService.partnerList(this._userConfigService.getUserMode())

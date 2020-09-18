@@ -1,4 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { snackBarConfig } from 'constants/globalFunctions';
+import { PartnerService } from '../partner.service';
 
 @Component({
   selector: 'app-partner-create',
@@ -7,10 +12,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PartnerCreateComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
-
-  }
+     /**
+     * Constructor
+     *
+     * @param {PartnerService} _partnerService
+     * @param {MatSnackBar} _snackBar
+     * @param {Router} _router
+     */
+    
+    constructor(
+      private readonly _partnerService: PartnerService,
+      private readonly _snackBar: MatSnackBar,
+      private readonly _router: Router
+    ) { }
+  
+    ngOnInit(): void {}
+  
+    createReseller(event: any){
+      this._partnerService.savePartner(event)
+      .then((res: any) => {
+        if(res && !res.StatusCode){
+          this._snackBar.open('Partner created', '', snackBarConfig);
+          this._router.navigate(['/pages/partner/partner-list']);
+  
+        }
+    }).catch((err: HttpErrorResponse)=>(console.log))
+    
+    }
 
 }
