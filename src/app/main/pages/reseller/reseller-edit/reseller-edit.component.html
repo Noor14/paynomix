@@ -1,1 +1,5 @@
-<p>reseller-edit works!</p>
+<section class="editReseller w-100-p">
+    <h2>Edit Reseller</h2>
+    <hr />
+    <app-reseller-form [resellerDetail]="resellerInfo" (submitForm)="updateReseller($event)"></app-reseller-form>
+</section>

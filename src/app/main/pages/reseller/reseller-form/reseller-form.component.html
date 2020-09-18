@@ -1,116 +1,111 @@
 <section class="resellerForm">
     <div class="outer-layer mt-20 p-20">
         <form fxLayout="column" fxLayoutAlign="start"
-        fxFlex="1 0 auto" name="form" [formGroup]="form">
+        fxFlex="1 0 auto" name="form" [formGroup]="resellerForm">
     
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label>Partner </mat-label>
-                    <mat-select [formControl]="partnersName" required >
-                    <mat-option [value]="'patners'"> patners</mat-option>
-                    <mat-error> Partner is required!</mat-error>
-             </mat-select>
+                    <mat-label>Partner</mat-label>
+                    <mat-select formControlName="PartnerId" required >
+                        <mat-option [value]="item.PartnerId" *ngFor="let item of partners">{{item.PartnerName}}</mat-option>
+                    </mat-select>
+                     <mat-error> Partner is required!</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Reseller Name</mat-label>
-                    <input matInput formControlName="resellerName" required>
+                    <input matInput formControlName="ResellerName" required>
                     <mat-error>Reseller Name is required!</mat-error>
                 </mat-form-field>
             </div>
+
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>DBA Name</mat-label>
                     <input matInput formControlName="DBAName" >
-                
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50">
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Country</mat-label>
-                         <mat-select [formControl]="country" required >
+                         <mat-select formControlName="Country" required >
                                <mat-option [value]="'United States'">United States</mat-option>
                         </mat-select>
                         <mat-error>Country is required!</mat-error>
                  </mat-form-field>
             </div>
+
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50"  [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Street Address</mat-label>
-                    <input matInput formControlName="Address" required>
+                    <textarea matInput formControlName="Address1" required></textarea>
                     <mat-error>Street Address is required!</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label> City</mat-label>
                     <input matInput formControlName="City" required>
                     <mat-error>City Name is required!</mat-error>
                 </mat-form-field>
             </div>
+
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>States</mat-label>
-                    <mat-select [formControl]="states" >
-             
-               <mat-option [value]="' States'"> States</mat-option>
-             </mat-select>
-             <mat-error>States is required!</mat-error>
-                </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                    <mat-label>States</mat-label>
+                    <mat-select formControlName="State" >
+                        <mat-option [value]="item.name" *ngFor="let item of statesList">{{item.name}}</mat-option>
+                    </mat-select>
+                    <mat-error>States is required!</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Zip / Postal Code</mat-label>
                     <input matInput formControlName="Zip" required>
                     <mat-error>Zip / Postal Code is required!</mat-error>
                 </mat-form-field> 
             </div>
+
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-               
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label> Email</mat-label>
                     <input matInput formControlName="Email" required>
                     <mat-error>Email is required!</mat-error>
                 </mat-form-field>
-
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Alternate Email</mat-label>
                     <input matInput formControlName="AlternateEmail" >
                 </mat-form-field>
             </div>
+
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Office Phone</mat-label>
-                    <input matInput formControlName="OfficePhone" required>
+                    <input matInput formControlName="TelephoneNumber" required>
                     <mat-error>Office Phone is required!</mat-error>
                 </mat-form-field>
-
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Ext</mat-label>
-                    <input matInput formControlName="ext1" >
-                   
+                    <input matInput formControlName="TelephoneExt" >
                 </mat-form-field>
             </div>
+
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Alternate Phone</mat-label>
-                    <input matInput formControlName="AlternatePhone" >
-                 
+                    <input matInput formControlName="AlternativePhoneNumber" >
                 </mat-form-field>
-
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Ext</mat-label>
-                    <input matInput formControlName="ext2" >
-                 
+                    <input matInput formControlName="AlternativePhoneExt" >
                 </mat-form-field>
             </div>
            
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Fax </mat-label>
-                    <input matInput formControlName="fax" >
+                    <input matInput formControlName="Fax" >
                 </mat-form-field>
-
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Tax ID</mat-label>
-                    <input matInput formControlName="taxId" required>
+                    <input matInput formControlName="TaxId">
                     <mat-error>Tax Id is required!</mat-error>
                 </mat-form-field>
-
             </div>
 
             <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch">
@@ -119,7 +114,7 @@
                 Cancel
                 </button>
                 <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
-                    aria-label="Submit" [disabled]="form.invalid">
+                    aria-label="Submit" [disabled]="resellerForm.invalid" (click)="submit()">
                 Submit
                 </button>
             </div>

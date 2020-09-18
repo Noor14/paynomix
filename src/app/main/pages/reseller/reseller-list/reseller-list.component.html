@@ -15,19 +15,19 @@
 
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p mat-card">
       
-        <!-- Reseller name Column -->
-        <ng-container matColumnDef="resellerName">
+        <!-- ResellerName Column -->
+        <ng-container matColumnDef="ResellerName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Reseller Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.resellerName}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.ResellerName}} </td>
         </ng-container>
     
-        <!-- DBA Name Column -->
+        <!-- DBAName Column -->
         <ng-container matColumnDef="DBAName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> DBA Name</th>
-          <td mat-cell *matCellDef="let row"> {{row.DBAName}}%</td>
+          <td mat-cell *matCellDef="let row"> {{row.DBAName}}</td>
         </ng-container>
     
-        <!-- Telephone Nummber Column -->
+        <!-- TelephoneNumber Column -->
         <ng-container matColumnDef="TelephoneNumber">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Telephone Number </th>
           <td mat-cell *matCellDef="let row"> {{row.TelephoneNumber}} </td>
@@ -43,12 +43,13 @@
            <ng-container matColumnDef="Country">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
             <td mat-cell *matCellDef="let row"> {{row.Country}} </td>
-          </ng-container>                                     
+          </ng-container>   
+
          <!-- Action Column -->
          <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef>Action</th>
-          <td mat-cell *matCellDef="let row"> 
-            <mat-icon class="secondary-text">edit</mat-icon>
+          <td mat-cell *matCellDef="let row">
+              <mat-icon class="secondary-text pointer" [routerLink]="['/pages/reseller/reseller-edit', row.ResellerId]">edit</mat-icon>
           </td>
         </ng-container>
     

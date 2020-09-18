@@ -1,62 +1,63 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserConfigService } from '@fuse/services/user.config.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { MerchantService } from '../merchant.service';
 
 @Component({
   selector: 'app-merchant-list',
   templateUrl: './merchant-list.component.html',
   styleUrls: ['./merchant-list.component.scss']
 })
-export class MerchantListComponent implements OnInit {
+export class MerchantListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['BusinessTitle','FirstName', 'Reseller','Email','Phone','BoardedDate','BoardingStatus', 'action'];
-  public dataSource = new MatTableDataSource<any>(
-    [
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      {BoardingStatus: 1, BusinessTitle: 'depooot',FirstName:'jawad', Reseller:'json' ,Email:'json@Email.com', Phone:'12312223465',BoardedDate:'9/14/2020'},
-      
-     
-    ])
-  constructor() { }
+  public displayedColumns = ['BusinessTitle', 'Reseller', 'FirstName', 'Email', 'Phone', 'BoardedDate', 'BoardingStatus', 'Action'];
+  public dataSource = new MatTableDataSource<any>()
+  public merchants: any= [];
+  private _unsubscribeAll: Subject<any>;
+
+    /**
+    * Constructor
+    *
+    * @param {MerchantService} _merchantService
+    * @param {UserConfigService} _userConfigService
+    */
+   
+   constructor(
+     private readonly _merchantService: MerchantService,
+     private readonly _userConfigService: UserConfigService
+ ) { 
+           // Set the private defaults
+           this._unsubscribeAll = new Subject();
+ }
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this._userConfigService.userModeChange
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe(() => this.getMerchants())
   }
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+  }
+
+  getMerchants(): void{
+    this._merchantService.merchantList(this._userConfigService.getUserMode())
+    .then((res: any) => {
+        if(res && !res.StatusCode){
+            this.merchants = res.Response;
+            this.dataSource.data = this.merchants;
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+        }
+    }).catch((err: HttpErrorResponse)=>(console.log))
+  }
+
 
 }

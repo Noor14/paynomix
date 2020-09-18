@@ -23,33 +23,33 @@
     
         <!-- Reserve Column -->
         <ng-container matColumnDef="Reserve">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Reserve(%) </th>
-          <td mat-cell *matCellDef="let row"> ${{row.Reserve}}</td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Reserve (%) </th>
+          <td mat-cell *matCellDef="let row">{{row.Reserve}}</td>
         </ng-container>
     
         <!-- Discount Rate Column -->
         <ng-container matColumnDef="DiscountRate">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount Rate(%) </th>
-          <td mat-cell *matCellDef="let row"> ${{row.DiscountRate}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Discount Rate (%) </th>
+          <td mat-cell *matCellDef="let row">{{row.DiscountRate}} </td>
         </ng-container>
     
         <!-- Monthly Fee Column -->
-        <ng-container matColumnDef="MonthlyFee">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Monthly Fee($) </th>
-          <td mat-cell *matCellDef="let row"> ${{row.MonthlyFee}} </td>
+        <ng-container matColumnDef="MonthlyMinimunFee">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Monthly Fee ($) </th>
+          <td mat-cell *matCellDef="let row">{{row.MonthlyMinimunFee | currency}} </td>
         </ng-container>
-         <!-- Fee Amoount Column -->
+         <!-- Fee Amount Column -->
          <ng-container matColumnDef="FeeAmount">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fee Amoount($) </th>
-          <td mat-cell *matCellDef="let row"> ${{row.FeeAmount}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fee Amount ($) </th>
+          <td mat-cell *matCellDef="let row">{{row.FeeAmount | currency}} </td>
         </ng-container>
          <!-- Transaction Fee Column -->
          <ng-container matColumnDef="GateWayTransactionFee">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Fee($) </th>
-          <td mat-cell *matCellDef="let row"> ${{row.GateWayTransactionFee}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Fee ($) </th>
+          <td mat-cell *matCellDef="let row">{{row.GateWayTransactionFee | currency}} </td>
         </ng-container>
          <!-- Action Column -->
-         <ng-container matColumnDef="action">
+         <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let row"> 
             <mat-icon class="secondary-text">edit</mat-icon>

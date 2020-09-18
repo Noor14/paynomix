@@ -1,50 +1,49 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserConfigService } from '@fuse/services/user.config.service';
 import { environment } from 'environments/environment';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
+  public dashboardUserStats: any;
   public widgets: any;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['transaction', 'name', 'date', 'amount', 'action'];
-  public dataSource = new MatTableDataSource<any>(
-    [
-      {transaction: 1, name: 'Hydrogen', date: 1.0079, amount: 'H'},
-      {transaction: 2, name: 'Helium', date: 4.0026, amount: 'He'},
-      {transaction: 3, name: 'Lithium', date: 6.941, amount: 'Li'},
-      {transaction: 4, name: 'Beryllium', date: 9.0122, amount: 'Be'},
-      {transaction: 5, name: 'Boron', date: 10.811, amount: 'B'},
-      {transaction: 6, name: 'Carbon', date: 12.0107, amount: 'C'},
-      {transaction: 7, name: 'Nitrogen', date: 14.0067, amount: 'N'},
-      {transaction: 8, name: 'Oxygen', date: 15.9994, amount: 'O'},
-      {transaction: 9, name: 'Fluorine', date: 18.9984, amount: 'F'},
-      {transaction: 10, name: 'Neon', date: 20.1797, amount: 'Ne'},
-      {transaction: 11, name: 'Sodium', date: 22.9897, amount: 'Na'},
-      {transaction: 12, name: 'Magnesium', date: 24.305, amount: 'Mg'},
-      {transaction: 13, name: 'Aluminum', date: 26.9815, amount: 'Al'},
-      {transaction: 14, name: 'Silicon', date: 28.0855, amount: 'Si'},
-      {transaction: 15, name: 'Phosphorus', date: 30.9738, amount: 'P'},
-      {transaction: 16, name: 'Sulfur', date: 32.065, amount: 'S'},
-      {transaction: 17, name: 'Chlorine', date: 35.453, amount: 'Cl'},
-      {transaction: 18, name: 'Argon', date: 39.948, amount: 'Ar'},
-      {transaction: 19, name: 'Potassium', date: 39.0983, amount: 'K'},
-      {transaction: 20, name: 'Calcium', date: 40.078, amount: 'Ca'},
-    ]
-  );
-  constructor(
-  ) { }
+  public displayedColumns = ['TransactionId', 'CustomerName', 'InsertedOn', 'Amount', 'Action'];
+  public dataSource = new MatTableDataSource<any>();
+  private _unsubscribeAll: Subject<any>;
+
+
+  /**
+  * Constructor
+  *
+  * @param {DashboardService} _dashboardService
+  * @param {UserConfigService} _userConfigService
+  */
+ 
+ constructor(
+   private readonly _dashboardService: DashboardService,
+   private readonly _userConfigService: UserConfigService
+) { 
+         // Set the private defaults
+         this._unsubscribeAll = new Subject();
+}
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this._userConfigService.userModeChange
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe(() => this.getDashboardStats())
     this.widgets = {
       widget2: {
           conversion: {
@@ -266,7 +265,7 @@ export class DashboardComponent implements OnInit {
               },
               maintainAspectRatio: false,
               tooltips           : {
-                  transaction : 'nearest',
+                  position : 'nearest',
                   mode     : 'index',
                   intersect: false
               },
@@ -313,7 +312,25 @@ export class DashboardComponent implements OnInit {
               }
           }
       }
-  };
+    };
   }
+
+ngOnDestroy(): void {
+   // Unsubscribe from all subscriptions
+   this._unsubscribeAll.next();
+   this._unsubscribeAll.complete();
+}
+
+getDashboardStats(): void{
+ this._dashboardService.dasboardStats(this._userConfigService.getUserMode())
+ .then((res: any) => {
+     if(res && !res.StatusCode){
+         this.dashboardUserStats = res.Response;
+         this.dataSource.data = this.dashboardUserStats.Transactions;
+         this.dataSource.paginator = this.paginator;
+         this.dataSource.sort = this.sort;
+     }
+ }).catch((err: HttpErrorResponse)=>(console.log))
+}
 
 }

@@ -6,10 +6,11 @@ import { ResellerEditComponent } from './reseller-edit/reseller-edit.component';
 
 
 const routes: Routes = [
-  { path: '',
-  redirectTo: 'reseller-list',
-  pathMatch: 'full'
-},
+  { 
+    path: '',
+    redirectTo: 'reseller-list',
+    pathMatch: 'full'
+  },
   {
     path: 'reseller-list',
     component: ResellerListComponent
