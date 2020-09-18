@@ -14,7 +14,7 @@ import { PartnerService } from '../partner.service';
 })
 export class PartnerEditComponent implements OnInit, OnDestroy {
 
-  public resellerInfo: any = {};
+  public partnerInfo: any = {};
   private _unsubscribeAll: Subject<any>;
   /**
      * Constructor
@@ -43,13 +43,13 @@ export class PartnerEditComponent implements OnInit, OnDestroy {
       switchMap((id) =>
         this._partnerService.getPartnerDetail(id)
       ),
-      tap((res: any) => (this.resellerInfo = res.Response)),
+      tap((res: any) => (this.partnerInfo = res.Response)),
     )
     .subscribe();
 
   }
 
-  updatePartner(event){
+  updatePartner(event: any){
     this._partnerService.savePartner(event)
     .then((res: any) => {
       if(res && !res.StatusCode){
