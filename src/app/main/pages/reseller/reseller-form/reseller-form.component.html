@@ -45,7 +45,6 @@
                     <mat-error>City Name is required!</mat-error>
                 </mat-form-field>
             </div>
-
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>States</mat-label>
@@ -56,58 +55,54 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Zip / Postal Code</mat-label>
-                    <input matInput formControlName="Zip" required>
+                    <input matInput formControlName="Zip" nospace required>
                     <mat-error>Zip / Postal Code is required!</mat-error>
                 </mat-form-field> 
             </div>
-
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label> Email</mat-label>
-                    <input matInput formControlName="Email" required>
+                    <input matInput formControlName="Email" type="email" nospace required>
                     <mat-error>Email is required!</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Alternate Email</mat-label>
-                    <input matInput formControlName="AlternateEmail" >
+                    <input nospace matInput formControlName="AlternateEmail" type="email" >
                 </mat-form-field>
             </div>
 
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Office Phone</mat-label>
-                    <input matInput formControlName="TelephoneNumber" required>
+                    <input nospace matInput formControlName="TelephoneNumber" required>
                     <mat-error>Office Phone is required!</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Ext</mat-label>
-                    <input matInput formControlName="TelephoneExt" >
+                    <mat-label> Office Phone Ext</mat-label>
+                    <input nospace matInput formControlName="TelephoneExt" >
                 </mat-form-field>
             </div>
-
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Alternate Phone</mat-label>
-                    <input matInput formControlName="AlternativePhoneNumber" >
+                    <input nospace matInput formControlName="AlternativePhoneNumber" >
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Ext</mat-label>
-                    <input matInput formControlName="AlternativePhoneExt" >
+                    <mat-label>Alternate Phone Ext</mat-label>
+                    <input matInput nospace formControlName="AlternativePhoneExt" >
                 </mat-form-field>
             </div>
-           
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Fax </mat-label>
-                    <input matInput formControlName="Fax" >
+                    <input nospace matInput formControlName="Fax" >
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Tax ID</mat-label>
-                    <input matInput formControlName="TaxId">
+                    <input nospace matInput formControlName="TaxId">
                     <mat-error>Tax Id is required!</mat-error>
                 </mat-form-field>
             </div>
-
             <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch">
                 <button mat-raised-button class="my-4" color="accent" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
                 aria-label="Cancel" [routerLink]="'/pages/reseller/reseller-list'">
@@ -118,7 +113,6 @@
                 Submit
                 </button>
             </div>
-
       </form>
     </div>
 

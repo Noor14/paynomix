@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { locationConfig, validateAllFormFields } from 'constants/globalFunctions';
+import { locationConfig, validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-partner-form',
@@ -40,22 +40,21 @@ createPartnerForm(): void{
   this.partnerForm = this._formBuilder.group({
     PartnerId: [0, Validators.required],
     PartnerName: ['', Validators.required], 
-    DBAName: ['', ''],
+    DBAName: [''],
     FirstName: ['', Validators.required],
     LastName: ['', Validators.required],
-    Phone: ['', Validators.required],
-    WebsiteUrl: ['', Validators.required],
-    TaxId: [''],
+    Country:  [''],
     Address1: ['', Validators.required],
     City: ['', Validators.required],
+    State: [''],
     Zip: ['', Validators.required],
-    Email: ['', Validators.required],
-    State: ['', Validators.required],
-    Country:  ['' , Validators.required],
-    DefaultSettlementCurrency: ['', Validators.required],
-    ExchangeRateMarkup: [''],
+    Email:  ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
+    WebsiteUrl: ['', Validators.required],
+    Phone: ['', Validators.required],
     AlternatePhone: [''],
-
+    TaxId: [''],
+    ExchangeRateMarkup: [''],
+    DefaultSettlementCurrency: ['', Validators.required]
 });
 
 }

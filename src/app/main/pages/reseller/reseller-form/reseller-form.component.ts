@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { locationConfig, validateAllFormFields } from '../../../../../constants/globalFunctions';
+import { locationConfig, validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
 import { PartnerService } from '../../partner/partner.service';
 
 @Component({
@@ -63,8 +63,8 @@ createResellerForm(): void {
     AlternativePhoneNumber: [''],
     AlternativePhoneExt: [''],
     Fax: [''],
-    Email: ['', Validators.required],
-    AlternateEmail: [''],
+    Email: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
+    AlternateEmail:['', [Validators.email, Validators.pattern(validator.emailPattern)]],
     Address1: ['', Validators.required],
     Country: ['', Validators.required],
     City: ['', Validators.required],
