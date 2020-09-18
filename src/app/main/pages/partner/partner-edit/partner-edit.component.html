@@ -1,5 +1,5 @@
 <section class="EditPartner w-100-p">
     <h2>Edit Partner</h2>
     <hr />
-    <app-partner-form></app-partner-form>
+    <app-partner-form [partnerDetail]="partnerInfo" (submitForm)="updateReseller($event)"></app-partner-form>
 </section>

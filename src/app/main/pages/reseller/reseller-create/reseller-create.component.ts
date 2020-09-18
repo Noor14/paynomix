@@ -29,7 +29,7 @@ export class ResellerCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  createReseller(event){
+  createReseller(event: any){
     this._resellerService.saveReseller(event)
     .then((res: any) => {
       if(res && !res.StatusCode){
