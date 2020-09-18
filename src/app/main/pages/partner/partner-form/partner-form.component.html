@@ -60,46 +60,46 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Zip / Postal Code</mat-label>
-                    <input matInput formControlName="Zip" required>
+                    <input matInput formControlName="Zip" nospace required>
                     <mat-error>Postal is required!</mat-error>
                 </mat-form-field>
-
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                    <mat-label> Email</mat-label>
+                    <input matInput formControlName="Email" nospace required>
+                    <mat-error>Email is required!</mat-error>
+                </mat-form-field>
+               
+            </div>
+            <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Phone Number</mat-label>
                     <input matInput formControlName="Phone" >
                     <mat-error>phone Number is required!</mat-error>
                 </mat-form-field>
-            </div>
-            <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label> Email</mat-label>
-                    <input matInput formControlName="Email" required>
-                    <mat-error>Email is required!</mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label> Website Url</mat-label>
-                    <input matInput formControlName="WebsiteUrl" required>
-                    <mat-error> Web Site Url is required!</mat-error>
-                </mat-form-field>
-            </div>
-            <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" type="number" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Alternate Phone</mat-label>
                     <input matInput formControlName="AlternatePhone" >
                     <!-- <mat-error>Alternate Phone is required!</mat-error> -->
                 </mat-form-field>
-
+               
+            </div>
+            <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+               
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                    <mat-label> Website Url</mat-label>
+                    <input matInput formControlName="WebsiteUrl"type="url" nospace required>
+                    <mat-error> Web Site Url is required!</mat-error>
+                </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Tax ID </mat-label>
-                    <input matInput formControlName="TaxId" >
+                    <input nospace matInput formControlName="TaxId" >
                     <!-- <mat-error>Tax Id is required!</mat-error> -->
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Exchange Rate (%) </mat-label>
-                    <input matInput formControlName="ExchangeRateMarkup" >
+                    <input matInput nospace formControlName="ExchangeRateMarkup" >
                     <mat-hint>This rate markup is used when currencies must be converted. It has no effect on transaction reporting.</mat-hint>
                     <!-- <mat-error>Exchange Rate is required!</mat-error> -->
                 </mat-form-field>
