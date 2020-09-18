@@ -1,111 +1,116 @@
 <section class="pricingPlanForm">
     <div class="outer-layer mt-20 p-20">
         <form fxLayout="column" fxLayoutAlign="start"
-        fxFlex="1 0 auto" name="form" [formGroup]="form">
+        fxFlex="1 0 auto" name="form" [formGroup]="pricngPlanForm">
     
-            <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label>First name</mat-label>
-                    <input matInput formControlName="firstName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>First Name is required!</mat-error>
+            <div fxFlex="1 0 auto">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Pricing Plan Name</mat-label>
+                    <input matInput formControlName="PricingTitle" required>
+                    <mat-error>Pricing Plan Name is required!</mat-error>
                 </mat-form-field>
-
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Last name</mat-label>
-                    <input matInput formControlName="lastName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>Last Name is required!</mat-error>
+            </div>
+            <div fxFlex="1 0 auto">
+                <mat-form-field appearance="outline" fxFlex="100">
+                    <mat-label>Pricing Plan Description </mat-label>
+                    <textarea matInput formControlName="Description" required></textarea>
+                    <mat-error>Pricing Plan Description is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label>First name</mat-label>
-                    <input matInput formControlName="firstName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>First Name is required!</mat-error>
+                    <mat-label>Reserve (%) </mat-label>
+                    <input matInput formControlName="Reserve" required>
+                    <mat-error>Reserve is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Last name</mat-label>
-                    <input matInput formControlName="lastName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>Last Name is required!</mat-error>
+                    <mat-label>Discount Rate (%) </mat-label>
+                    <input matInput formControlName="DiscountRate" required>
+                    <mat-error>Discount Rate is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label>First name</mat-label>
-                    <input matInput formControlName="firstName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>First Name is required!</mat-error>
+                    <mat-label>Auth Fee ($)</mat-label>
+                    <input matInput formControlName="AuthFee" required>
+                    <mat-error>Auth Fee is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Last name</mat-label>
-                    <input matInput formControlName="lastName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>Last Name is required!</mat-error>
+                    <mat-label> Chargeback Fee ($)</mat-label>
+                    <input matInput formControlName="ChargeBack" required>
+                    <mat-error>Chargeback Fee is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label>First name</mat-label>
-                    <input matInput formControlName="firstName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>First Name is required!</mat-error>
+                    <mat-label>Retrieval Fee ($)</mat-label>
+                    <input matInput formControlName="RetrievalFee" required>
+                    <mat-error>Retrieval Fee ($) is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Last name</mat-label>
-                    <input matInput formControlName="lastName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>Last Name is required!</mat-error>
+                    <mat-label>Monthly Minimum Fee ($)</mat-label>
+                    <input matInput formControlName="MonthlyMinimunFee" required>
+                    <mat-error>Monthly Minimum Fee is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label>First name</mat-label>
-                    <input matInput formControlName="firstName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>First Name is required!</mat-error>
+                    <mat-label>Monthly Statement Fee ($)</mat-label>
+                    <input matInput formControlName="MonthlyStatementFee" required>
+                    <mat-error>Monthly Statement Fee is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Last name</mat-label>
-                    <input matInput formControlName="lastName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>Last Name is required!</mat-error>
+                    <mat-label>Application Setup Fee ($)</mat-label>
+                    <input matInput formControlName="ApplicationSetupFee" required>
+                    <mat-error>Application Setup Fee  is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label>First name</mat-label>
-                    <input matInput formControlName="firstName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>First Name is required!</mat-error>
+                    <mat-label>Wire Transfer Fee ($)</mat-label>
+                    <input matInput formControlName="WireTransferFee" required>
+                    <mat-error>Wire Transfer Fee is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Last name</mat-label>
-                    <input matInput formControlName="lastName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>Last Name is required!</mat-error>
+                    <mat-label>Gateway Setup Fee ($)</mat-label>
+                    <input matInput formControlName="GateWaySetupFee" required>
+                    <mat-error>Gateway Setup Fee is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label>First name</mat-label>
-                    <input matInput formControlName="firstName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>First Name is required!</mat-error>
+                    <mat-label>Gateway Monthly Access ($)</mat-label>
+                    <input matInput formControlName="GateWayMonthlyAccess" required>
+                    <mat-error>Gateway Monthly Access is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Last name</mat-label>
-                    <input matInput formControlName="lastName" required>
-                    <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                    <mat-error>Last Name is required!</mat-error>
+                    <mat-label>Gateway Transaction Fee ($) </mat-label>
+                    <input matInput formControlName="GateWayTransactionFee" required>
+                    <mat-error>ateway Transaction Fee is required!</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                    <mat-label>Fee Amount ($)</mat-label>
+                    <input matInput formControlName="FeeAmount" required>
+                    <mat-error>Fee Amount is required!</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="'pl-4 pr-4'" [ngClass.gt-sm]="'pl-4 pr-4'">
+                    <mat-label>Other Fee ($) </mat-label>
+                    <input matInput formControlName="OtherFee" required>
+                    <mat-error>Other Fee is required!</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                    <mat-label>Transaction Fees ($)</mat-label>
+                    <input matInput formControlName="TransactionFee" required>
+                    <mat-error>Transaction Fees is required!</mat-error>
                 </mat-form-field>
             </div>
 
@@ -115,7 +120,7 @@
                 Cancel
                 </button>
                 <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
-                    aria-label="Submit" [disabled]="form.invalid">
+                    aria-label="Submit" [disabled]="pricngPlanForm.invalid">
                 Submit
                 </button>
             </div>
