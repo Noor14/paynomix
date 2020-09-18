@@ -29,7 +29,7 @@ export class PartnerCreateComponent implements OnInit {
   
     ngOnInit(): void {}
   
-    createReseller(event: any){
+    createPartner(event: any){
       this._partnerService.savePartner(event)
       .then((res: any) => {
         if(res && !res.StatusCode){
