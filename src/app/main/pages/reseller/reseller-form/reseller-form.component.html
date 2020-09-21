@@ -27,7 +27,7 @@
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Country</mat-label>
                          <mat-select formControlName="Country" required >
-                            <mat-option [value]="item" *ngFor="let item of locationObj.countries">{{item}}</mat-option>
+                            <mat-option [value]="item.code" *ngFor="let item of locationObj.countries">{{item.name}}</mat-option>
                         </mat-select>
                         <mat-error>Country is required!</mat-error>
                  </mat-form-field>

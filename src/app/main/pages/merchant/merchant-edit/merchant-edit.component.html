@@ -1,5 +1,5 @@
 <section class="merchantEdit w-100-p">
     <h2>Edit Merchant</h2>
     <hr />
-    <app-merchant-form [merchantDetail]="merchantDetail"></app-merchant-form>
+    <app-merchant-form [merchantDetail]="merchantDetail" (submitForm)="updateMerchant($event)"></app-merchant-form>
 </section>

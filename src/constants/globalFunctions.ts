@@ -261,7 +261,10 @@ export const locationConfig =
             abbreviation: 'WY'
         }
       ],
-    countries: ['United States']
+    countries: [{
+        code: 'US',
+        name: 'United States'
+    }]
 } 
 
 

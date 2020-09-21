@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -11,12 +11,25 @@ export class MerchantFormComponent implements OnInit {
   public merchantInfoForm: FormGroup;
   public businessDetailForm: FormGroup;
   public ownerDetailForm: FormGroup;
-  @Input() merchantDetail: any = {};
+  public bankAccountForm: FormGroup;
+  @Input() merchantDetail: any = null;
+  @Output() submitForm = new EventEmitter<any>();
+
 
   constructor(private readonly _cdref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this._cdref.detectChanges();
+  }
+
+  save(): void{
+    const obj = {
+      ...this.ownerDetailForm.value,
+      MerchantBankAccount: this.bankAccountForm.value,
+      MerchantAccountSetup: this.merchantInfoForm.value,
+      MerchantBusiness: this.businessDetailForm.value,
+    }
+    this.submitForm.emit(obj);
   }
 
 }
