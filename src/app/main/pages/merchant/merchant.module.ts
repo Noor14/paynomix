@@ -21,7 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MerchantFormComponent } from './merchant-form/merchant-form.component';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
 @NgModule({
   declarations: [MerchantListComponent, MerchantCreateComponent, MerchantEditComponent, MerchantInfoComponent, BusinessDetailComponent, OwnerDetailComponent, BankAccountComponent, AllGetherInfoComponent, MerchantFormComponent],
   imports: [
@@ -37,6 +37,7 @@ import { MerchantFormComponent } from './merchant-form/merchant-form.component';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatDatepickerModule
   ]
 })
 export class MerchantModule { }

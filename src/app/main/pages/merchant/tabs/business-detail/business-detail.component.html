@@ -5,83 +5,88 @@
    
         <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>First Name is required!</mat-error>
+                <mat-label>DBA - Statement Descriptor</mat-label>
+                <input matInput formControlName="Descriptor" >
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>First Name is required!</mat-error>
+                <mat-label>Tax ID Number</mat-label>
+                <input matInput formControlName="TaxIDNo" >
+                
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                <mat-label>Last name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>Last Name is required!</mat-error>
+                <mat-label>Business Type (e.g. LLC)</mat-label>
+                <mat-select formControlName="BusinessType" required >
+                    <mat-option [value]="'Sole'">Sole</mat-option>
+                    <mat-option [value]="'Corp'">Corp</mat-option>
+                    <mat-option [value]="'LLC'">LLC</mat-option>
+                    <mat-option [value]="'Partner'">Partner</mat-option>
+                    <mat-option [value]="'Non-Profit'">Non-Profit</mat-option>
+                    <mat-option [value]="'Govt.'">Govt.</mat-option>
+                </mat-select>
+                <mat-error>Business Type (e.g. LLC) is required!</mat-error>
             </mat-form-field>
         </div>
 
         <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>First Name is required!</mat-error>
+                <mat-label>Business Phone </mat-label>
+                <input matInput formControlName="BusinessPhone" mask="(000) 000-0000">
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>First Name is required!</mat-error>
+                <mat-label>Years in Business </mat-label>
+                <input matInput formControlName="YearsInBusiness">
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                <mat-label>Last name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>Last Name is required!</mat-error>
+                <mat-label> Website</mat-label>
+                <input matInput formControlName="WebSite" required>
+                <mat-error>Website is required!</mat-error>
             </mat-form-field>
         </div>
 
         <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>First Name is required!</mat-error>
+                <mat-label>Currently Accept Credit Cards</mat-label>
+                <mat-select formControlName="AcceptCreditCards" required>
+                    <mat-option [value]="true">Yes</mat-option>
+                    <mat-option [value]="false">No</mat-option>
+                </mat-select>
+                <mat-error>Credit Cards is required!</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                <mat-label>Last name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>Last Name is required!</mat-error>
+                <mat-label>Fax</mat-label>
+                <input matInput formControlName="Fax" >
             </mat-form-field>
         </div>
 
         <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>First Name is required!</mat-error>
+                <mat-label>   Street Address</mat-label>
+                <input matInput formControlName="BusinessAddress" >
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                <mat-label>Last name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>Last Name is required!</mat-error>
+                <mat-label>Street Address Line 2</mat-label>
+                <input matInput formControlName="BusinessAddress1" >
             </mat-form-field>
         </div>
 
         <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>First Name is required!</mat-error>
+                <mat-label> City</mat-label>
+                <input matInput formControlName="BusinessCity" >
+               
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>First Name is required!</mat-error>
+                <mat-label>State</mat-label>
+                <mat-select formControlName="BusinessState">
+                    <mat-option [value]="true">Yes</mat-option>
+                    <mat-option [value]="false">No</mat-option>
+                </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                <mat-label>Last name</mat-label>
-                <input matInput formControlName="Descriptor" required>
-                <mat-error>Last Name is required!</mat-error>
+                <mat-label>Zip Code</mat-label>
+                <input matInput formControlName="BusinessZip" >
             </mat-form-field>
         </div>
 
