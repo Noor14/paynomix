@@ -27,7 +27,8 @@ export class PricingPlanCreateComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {}
-  createPartner(event: any){
+  
+  createPricingPlan(event: any){
     this._pricingPlanService.savePricingPlan(event)
     .then((res: any) => {
       if(res && !res.StatusCode){
