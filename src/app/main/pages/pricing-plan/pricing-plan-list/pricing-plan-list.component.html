@@ -52,7 +52,7 @@
          <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let row"> 
-            <mat-icon class="secondary-text">edit</mat-icon>
+            <mat-icon class="secondary-text pointer" [routerLink]="['/pages/pricing-plan/pricing-plan-edit', row.PricingPlanID]">edit</mat-icon>
           </td>
         </ng-container>
     

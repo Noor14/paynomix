@@ -16,7 +16,7 @@ import { MerchantService } from '../merchant.service';
 export class MerchantListComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['BusinessTitle', 'Reseller', 'FirstName', 'Email', 'Phone', 'BoardedDate', 'BoardingStatus', 'Action'];
+  public displayedColumns = ['CompanyName', 'Reseller', 'FirstName', 'Email', 'Phone', 'BoardedDate', 'BoardingStatus', 'Action'];
   public dataSource = new MatTableDataSource<any>()
   public merchants: any= [];
   private _unsubscribeAll: Subject<any>;

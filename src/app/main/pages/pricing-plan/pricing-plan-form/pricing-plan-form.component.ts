@@ -48,8 +48,8 @@ export class PricingPlanFormComponent implements OnInit, OnChanges {
       GateWaySetupFee: ['', Validators.required],
       GateWayMonthlyAccess: ['', Validators.required],
       GateWayTransactionFee: ['', Validators.required],
-      OtherFee: ['', Validators.required],
       FeeAmount: ['', Validators.required],
+      OtherFee: ['', Validators.required],
       TransactionFee: ['', Validators.required],
       });
   }
