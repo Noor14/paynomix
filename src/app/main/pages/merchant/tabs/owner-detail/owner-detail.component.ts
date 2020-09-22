@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { locationConfig, validator } from '../../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-owner-detail',
@@ -8,10 +9,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class OwnerDetailComponent implements OnInit {
  
-  @Input() ownerDetail: any;
-
+  public locationObj = locationConfig;
+  @Input() ownerDetail: any = null;
   public ownerDetailForm: FormGroup;
-  @Input() businessDetail: any;
   @Output() stepThree = new EventEmitter<any>();
 
   /**
@@ -24,21 +24,35 @@ export class OwnerDetailComponent implements OnInit {
 ) { }
 
   ngOnInit(): void {
+    this.createOwnerDetailForm()
+  }
+  createOwnerDetailForm(): void{
     this.ownerDetailForm = this._formBuilder.group({
-      Descriptor: [''],
-      TaxIDNo: [''],
-      BusinessType: ['', Validators.required],
-      YearsInBusiness: [''],
-      WebSite: ['', Validators.required],
-      AcceptCreditCards: ['', Validators.required],
-      BusinessPhone: [''],
-      Fax: [''],
-      BusinessAddress: [''],
-      BusinessAddress1: [''],
-      BusinessCity: [''],
-      BusinessState: [''],
-      BusinessZip: [''],
+      MerchantId: [0, Validators.required],
+      ResellerId: ['1060'],
+      FirstName: ['', Validators.required],
+      LastName: ['', Validators.required],
+      DOB: ['', Validators.required],
+      SSN: [''],
+      DrivingLicense: [''],
+      DLState: [''],
+      Address1: ['', Validators.required],
+      Address2: [''],
+      City: ['', Validators.required],
+      Country: ['US', Validators.required],
+      State: ['', Validators.required],
+      Zip: ['', Validators.required],
+      Phone: ['', Validators.required],
+      Email: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+      BackDocLink: [''],
+      FrontDocLink: [''],
   });
+  }
+  ngOnChanges(): void{
+    if(this.ownerDetail){
+      this.createOwnerDetailForm();
+      this.ownerDetailForm.patchValue(this.ownerDetail)
+    }
   }
   ngAfterViewInit(): void {
     this.stepThree.emit(this.ownerDetailForm);

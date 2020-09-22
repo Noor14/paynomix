@@ -1,15 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { locationConfig } from '../../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-business-detail',
   templateUrl: './business-detail.component.html',
   styleUrls: ['./business-detail.component.scss']
 })
-export class BusinessDetailComponent implements OnInit, AfterViewInit {
-
+export class BusinessDetailComponent implements OnInit, AfterViewInit, OnChanges {
+  
+  public locationObj = locationConfig;
   public businessDetailForm: FormGroup;
-  @Input() businessDetail: any;
+  @Input() businessDetail: any = null;
   @Output() stepTwo = new EventEmitter<any>();
 
   /**
@@ -23,21 +25,32 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+    this.createBusinessDetailForm();
+  }
+
+  createBusinessDetailForm(): void{
     this.businessDetailForm = this._formBuilder.group({
-      Descriptor: [''],
-      TaxIDNo: [''],
-      BusinessType: ['eww', Validators.required],
-      YearsInBusiness: [''],
-      WebSite: ['weew', Validators.required],
-      AcceptCreditCards: ['ewew', Validators.required],
-      BusinessPhone: [''],
-      Fax: [''],
-      BusinessAddress: [''],
-      BusinessAddress1: [''],
-      BusinessCity: [''],
-      BusinessState: [''],
-      BusinessZip: [''],
+      BusinessId: [0, Validators.required],
+      BusinessType: ['', Validators.required],
+      Descriptor:  [''],
+      TaxIDNo:  [''],
+      YearsInBusiness:  [''],
+      WebSite: ['', Validators.required],
+      AcceptCreditCards: ['', Validators.required],
+      BusinessPhone:  [''],
+      Fax:  [''],
+      BusinessAddress:  [''],
+      BusinessAddress1:  [''],
+      BusinessCity:  [''],
+      BusinessState:  [''],
+      BusinessZip:  ['']
   });
+  }
+  ngOnChanges(): void{
+    if(this.businessDetail){
+      this.createBusinessDetailForm();
+      this.businessDetailForm.patchValue(this.businessDetail)
+    }
   }
   ngAfterViewInit(): void {
     this.stepTwo.emit(this.businessDetailForm);

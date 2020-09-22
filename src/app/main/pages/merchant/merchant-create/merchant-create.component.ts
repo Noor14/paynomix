@@ -1,4 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { snackBarConfig, snackBarConfigWarn } from '../../../../../constants/globalFunctions';
+import { MerchantService } from '../merchant.service';
 
 @Component({
   selector: 'app-merchant-create',
@@ -7,10 +12,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MerchantCreateComponent implements OnInit {
 
-
-  constructor() { }
+ /**
+     * Constructor
+     *
+     * @param {MerchantService} _merchantService
+     * @param {MatSnackBar} _snackBar
+     * @param {Router} _router
+     */
+  constructor(
+    private readonly _merchantService: MerchantService,
+    private readonly _snackBar: MatSnackBar,
+    private readonly _router: Router
+  )
+  {}
 
   ngOnInit(): void {
   }
 
+  createMerchant(event: any): void{
+    console.log(event)
+    this._merchantService.saveMerchant(event)
+    .then((res: any) => {
+      if(res && !res.StatusCode){
+        this._snackBar.open('Merchant created', '', snackBarConfig);
+        this._router.navigate(['/pages/merchant/merchant-list']);
+
+      }else{
+        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
+      }
+  }).catch((err: HttpErrorResponse)=>(console.log))
+  }
 }

@@ -8,9 +8,16 @@ export class MerchantService extends BaseService {
     constructor(_http: HttpClient) {
         super(_http);
        }
-
+       getMerchantDetail(id: string){
+        const url = `${environment.apiURL}Merchant/GetMerchantById/${id}`;
+        return this.get(url);
+       }
        merchantList(obj: any): any{
         const url = `${environment.apiURL}Merchant/Search`;
          return this.post(url, obj);
-        }
+       }
+       saveMerchant(obj: any){
+        const url = `${environment.apiURL}Merchant`;
+        return this.post(url, obj);   
+    }
 }
