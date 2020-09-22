@@ -30,7 +30,8 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(): void{
     if(this.merchantInfo){
       this.createMerchantInfoForm();
-      this.merchantInfoForm.patchValue(this.merchantInfo)
+      this.merchantInfoForm.patchValue(this.merchantInfo);
+      this.stepOne.emit(this.merchantInfoForm);
     }
   }
  

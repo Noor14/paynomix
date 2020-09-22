@@ -53,7 +53,8 @@ export class OwnerDetailComponent implements OnInit {
   ngOnChanges(): void{
     if(this.ownerDetail){
       this.createOwnerDetailForm();
-      this.ownerDetailForm.patchValue(this.ownerDetail)
+      this.ownerDetailForm.patchValue(this.ownerDetail);
+      this.stepThree.emit(this.ownerDetailForm);
     }
   }
   ngAfterViewInit(): void {
