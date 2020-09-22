@@ -10,6 +10,8 @@ import { locationConfig, validator } from '../../../../../../constants/globalFun
 export class BusinessDetailComponent implements OnInit, AfterViewInit, OnChanges {
   
   public locationObj = locationConfig;
+  public validatorObj = validator; 
+
   public businessDetailForm: FormGroup;
   @Input() businessDetail: any = null;
   @Output() stepTwo = new EventEmitter<any>();

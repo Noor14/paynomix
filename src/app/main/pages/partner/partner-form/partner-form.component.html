@@ -33,7 +33,7 @@
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Country</mat-label>
                   <mat-select formControlName="Country">
-                    <mat-option [value]="item.code" *ngFor="let item of locationObj.countries">{{item.name}}</mat-option>
+                    <mat-option [value]="item.code" *ngFor="let item of globalConfig?.locationConfig?.countries">{{item.name}}</mat-option>
                   </mat-select>
                 </mat-form-field>
 
@@ -53,14 +53,14 @@
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>States</mat-label>
                     <mat-select formControlName="State" >
-                        <mat-option [value]="item.name" *ngFor="let item of locationObj.states">{{item.name}}</mat-option>
+                        <mat-option [value]="item.name" *ngFor="let item of globalConfig?.locationConfig?.states">{{item.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Zip / Postal Code</mat-label>
-                    <input matInput formControlName="Zip" nospace required>
+                    <input matInput formControlName="Zip"  numberOnly [maxlength]="globalConfig?.validator?.zipMaxLength" required>
                     <mat-error>Postal is required!</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
@@ -99,7 +99,7 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Exchange Rate (%) </mat-label>
-                    <input matInput nospace formControlName="ExchangeRateMarkup" numberOnly >
+                    <input matInput formControlName="ExchangeRateMarkup" numberOnly >
                     <mat-hint>This rate markup is used when currencies must be converted. It has no effect on transaction reporting.</mat-hint>
                     <!-- <mat-error>Exchange Rate is required!</mat-error> -->
                 </mat-form-field>

@@ -10,6 +10,7 @@ import { validator } from '../../../../../../constants/globalFunctions';
 export class BankAccountComponent implements OnInit, AfterViewInit {
 
   public bankAccountForm: FormGroup;
+  public validatorConfig = validator;
   @Input() bankAccountDetail: any = null;
   @Output() stepFour = new EventEmitter<any>();
 
