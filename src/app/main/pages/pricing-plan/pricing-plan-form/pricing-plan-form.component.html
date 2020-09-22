@@ -26,7 +26,7 @@
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Discount Rate (%) </mat-label>
-                    <input matInput formControlName="DiscountRate" required>
+                    <input matInput numberOnly formControlName="DiscountRate" required>
                     <mat-error>Discount Rate is required!</mat-error>
                 </mat-form-field>
             </div>
