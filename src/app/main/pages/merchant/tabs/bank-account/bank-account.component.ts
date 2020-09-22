@@ -39,7 +39,7 @@ export class BankAccountComponent implements OnInit, AfterViewInit {
       BankAccountId: [0, Validators.required],
       BankAccountType: ['', Validators.required],
       RoutingNumber: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
-      AccountNumber: ['', Validators.required],
+      AccountNumber: ['',[Validators.required, Validators.maxLength(17)]],
       Currency: ['usd', Validators.required]
   });
   }
