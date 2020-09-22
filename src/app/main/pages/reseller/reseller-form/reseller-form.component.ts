@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { locationConfig, validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
+import * as globalConfig from '../../../../../constants/globalFunctions';
 import { PartnerService } from '../../partner/partner.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { PartnerService } from '../../partner/partner.service';
 export class ResellerFormComponent implements OnInit, OnDestroy, OnChanges {
 
   public resellerForm: FormGroup;
-  public locationObj = locationConfig;
+  public globalConfig = globalConfig;
   public partners: any = [];
   @Output() submitForm = new EventEmitter<any>();
   @Input() resellerDetail: any = null;
@@ -63,13 +63,13 @@ createResellerForm(): void {
     AlternativePhoneNumber: [''],
     AlternativePhoneExt: [''],
     Fax: [''],
-    Email: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
-    AlternateEmail:['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+    Email: ['', [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
+    AlternateEmail:['', [Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
     Address1: ['', Validators.required],
     Country: ['', Validators.required],
     City: ['', Validators.required],
     State: ['', Validators.required],
-    Zip: ['', [Validators.required,Validators.max(5)]],
+    Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
     TaxId: [''],
   });
 
@@ -95,7 +95,7 @@ getPartners(): void{
    if(this.resellerForm.valid){
      this.submitForm.emit(this.resellerForm.value);
    }else{
-    validateAllFormFields(this.resellerForm)
+    globalConfig.validateAllFormFields(this.resellerForm)
    }
  }
 

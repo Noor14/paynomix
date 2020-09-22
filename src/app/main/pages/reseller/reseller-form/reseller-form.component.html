@@ -27,7 +27,7 @@
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Country</mat-label>
                          <mat-select formControlName="Country" required >
-                            <mat-option [value]="item.code" *ngFor="let item of locationObj.countries">{{item.name}}</mat-option>
+                            <mat-option [value]="item.code" *ngFor="let item of globalConfig?.locationConfig?.countries">{{item.name}}</mat-option>
                         </mat-select>
                         <mat-error>Country is required!</mat-error>
                  </mat-form-field>
@@ -48,14 +48,14 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>States</mat-label>
-                    <mat-select formControlName="State" required >
-                        <mat-option [value]="item.name" *ngFor="let item of locationObj.states">{{item.name}}</mat-option>
+                    <mat-select formControlName="State" required>
+                        <mat-option [value]="item.name" *ngFor="let item of globalConfig?.locationConfig?.states">{{item.name}}</mat-option>
                     </mat-select>
                     <mat-error>States is required!</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Zip / Postal Code</mat-label>
-                    <input matInput formControlName="Zip" numberOnly required>
+                    <input matInput formControlName="Zip" [maxlength]="globalConfig?.validator?.zipMaxLength" numberOnly required>
                     <mat-error>Zip / Postal Code is required!</mat-error>
                 </mat-form-field> 
             </div>

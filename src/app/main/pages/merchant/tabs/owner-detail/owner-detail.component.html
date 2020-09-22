@@ -71,7 +71,7 @@
     <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
             <mat-label>Zip Code</mat-label>
-            <input matInput formControlName="Zip" numberOnly required >
+            <input matInput formControlName="Zip" numberOnly required [maxlength]="validatorObj.zipMaxLength">
             <mat-error> Zip Code is required!</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">

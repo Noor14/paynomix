@@ -10,6 +10,8 @@ import { locationConfig, validator } from '../../../../../../constants/globalFun
 export class OwnerDetailComponent implements OnInit {
  
   public locationObj = locationConfig;
+  public validatorObj = validator; 
+  
   @Input() ownerDetail: any = null;
   public ownerDetailForm: FormGroup;
   @Output() stepThree = new EventEmitter<any>();
@@ -41,7 +43,7 @@ export class OwnerDetailComponent implements OnInit {
       City: ['', Validators.required],
       Country: ['US', Validators.required],
       State: ['', Validators.required],
-      Zip: ['', [Validators.required,Validators.max(5)]],
+      Zip: ['', [Validators.required, Validators.maxLength(validator.zipMaxLength)]],
       Phone: ['', Validators.required],
       Email: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
       BackDocLink: [''],

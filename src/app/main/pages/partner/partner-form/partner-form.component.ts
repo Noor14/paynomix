@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { locationConfig, validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
+import * as globalConfig from '../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-partner-form',
@@ -11,7 +11,7 @@ export class PartnerFormComponent implements OnInit, OnChanges {
   public partnerForm: FormGroup;
   @Output() submitForm = new EventEmitter<any>();
   @Input() partnerDetail: any = null;
-  public locationObj = locationConfig;
+  public globalConfig = globalConfig;
 
       /**
      * Constructor
@@ -47,13 +47,13 @@ createPartnerForm(): void{
     Address1: ['', Validators.required],
     City: ['', Validators.required],
     State: [''],
-    Zip: ['', [Validators.required,Validators.max(5)]],
-    Email:  ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
+    Zip: ['', [Validators.required,Validators.maxLength(globalConfig.validator.zipMaxLength)]],
+    Email:  ['', [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
     WebsiteUrl: ['', Validators.required],
     Phone: ['', Validators.required],
     AlternatePhone: [''],
     TaxId: [''],
-    ExchangeRateMarkup: ['',Validators.max(100)],
+    ExchangeRateMarkup: ['', Validators.max(globalConfig.validator.maxPercentage)],
     DefaultSettlementCurrency: ['', Validators.required]
 });
 
@@ -63,7 +63,7 @@ submit(){
    if(this.partnerForm.valid){
      this.submitForm.emit(this.partnerForm.value);
    }else{
-    validateAllFormFields(this.partnerForm)
+    globalConfig.validateAllFormFields(this.partnerForm)
    }
  }
 
