@@ -43,7 +43,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit, OnChanges
       BusinessAddress1:  [''],
       BusinessCity:  [''],
       BusinessState:  [''],
-      BusinessZip:  ['']
+      BusinessZip:  ['',Validators.max(5)]
   });
   }
   ngOnChanges(): void{

@@ -9,8 +9,8 @@
                 <input matInput formControlName="Descriptor" >
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
-                <mat-label>Tax ID Number</mat-label>
-                <input matInput formControlName="TaxIDNo" >
+                <mat-label>Tax ID </mat-label>
+                <input matInput formControlName="TaxIDNo" nospace >
                 
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
@@ -34,11 +34,11 @@
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
                 <mat-label>Years in Business </mat-label>
-                <input matInput formControlName="YearsInBusiness">
+                <input matInput formControlName="YearsInBusiness" numberOnly>
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                 <mat-label> Website</mat-label>
-                <input matInput formControlName="WebSite" required>
+                <input matInput formControlName="WebSite" nospace required>
                 <mat-error>Website is required!</mat-error>
             </mat-form-field>
         </div>
@@ -55,7 +55,7 @@
 
             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                 <mat-label>Fax</mat-label>
-                <input matInput formControlName="Fax" >
+                <input matInput formControlName="Fax" numberOnly >
             </mat-form-field>
         </div>
 
@@ -85,7 +85,7 @@
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                 <mat-label>Zip Code</mat-label>
-                <input matInput formControlName="BusinessZip" >
+                <input matInput formControlName="BusinessZip" numberOnly >
             </mat-form-field>
         </div>
 

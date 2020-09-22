@@ -55,7 +55,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Zip / Postal Code</mat-label>
-                    <input matInput formControlName="Zip" nospace required>
+                    <input matInput formControlName="Zip" numberOnly required>
                     <mat-error>Zip / Postal Code is required!</mat-error>
                 </mat-form-field> 
             </div>
@@ -79,7 +79,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label> Office Phone Ext</mat-label>
-                    <input nospace matInput formControlName="TelephoneExt" >
+                    <input numberOnly matInput formControlName="TelephoneExt" >
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
@@ -89,13 +89,13 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Alternate Phone Ext</mat-label>
-                    <input matInput nospace formControlName="AlternativePhoneExt" >
+                    <input matInput numberOnly formControlName="AlternativePhoneExt" >
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Fax </mat-label>
-                    <input nospace matInput formControlName="Fax" >
+                    <input numberOnly matInput formControlName="Fax" >
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Tax ID</mat-label>
