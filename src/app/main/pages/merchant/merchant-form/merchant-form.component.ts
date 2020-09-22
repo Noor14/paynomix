@@ -24,10 +24,10 @@ export class MerchantFormComponent implements OnInit {
 
   save(): void{
     const obj = {
-      ...this.ownerDetailForm.value,
-      MerchantBankAccount: this.bankAccountForm.value,
-      MerchantAccountSetup: this.merchantInfoForm.value,
-      MerchantBusiness: this.businessDetailForm.value,
+      ...{...this.merchantDetail, ...this.ownerDetailForm.value},
+      MerchantBankAccount: (this.merchantDetail && this.merchantDetail.MerchantBankAccount)? {...this.merchantDetail.MerchantBankAccount, ...this.bankAccountForm.value} : {...this.bankAccountForm.value},
+      MerchantAccountSetup: (this.merchantDetail && this.merchantDetail.MerchantAccountSetup)? {...this.merchantDetail.MerchantAccountSetup, ...this.merchantInfoForm.value}: {...this.merchantInfoForm.value},
+      MerchantBusiness: (this.merchantDetail && this.merchantDetail.MerchantBusiness)? {...this.merchantDetail.MerchantBusiness, ...this.businessDetailForm.value}: {...this.businessDetailForm.value},
     }
     this.submitForm.emit(obj);
   }

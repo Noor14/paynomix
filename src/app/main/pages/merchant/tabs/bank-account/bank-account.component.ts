@@ -30,7 +30,8 @@ export class BankAccountComponent implements OnInit, AfterViewInit {
   ngOnChanges(): void{
     if(this.bankAccountDetail){
       this.createBankAccountForm();
-      this.bankAccountForm.patchValue(this.bankAccountDetail)
+      this.bankAccountForm.patchValue(this.bankAccountDetail);
+      this.stepFour.emit(this.bankAccountForm);
     }
   }
   ngAfterViewInit(): void {
