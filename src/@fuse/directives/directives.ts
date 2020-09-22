@@ -5,6 +5,7 @@ import { FuseInnerScrollDirective } from '@fuse/directives/fuse-inner-scroll/fus
 import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseMatSidenavHelperDirective, FuseMatSidenavTogglerDirective } from '@fuse/directives/fuse-mat-sidenav/fuse-mat-sidenav.directive';
 import { NoSpaceDirective } from './no-space.directive';
+import { NumberDirective } from './number.directive';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { NoSpaceDirective } from './no-space.directive';
         FuseMatSidenavHelperDirective,
         FuseMatSidenavTogglerDirective,
         FusePerfectScrollbarDirective,
-        NoSpaceDirective
+        NoSpaceDirective,
+        NumberDirective
     ],
     imports     : [],
     exports     : [
@@ -22,7 +24,8 @@ import { NoSpaceDirective } from './no-space.directive';
         FuseMatSidenavHelperDirective,
         FuseMatSidenavTogglerDirective,
         FusePerfectScrollbarDirective,
-        NoSpaceDirective
+        NoSpaceDirective,
+        NumberDirective
     ]
 })
 export class FuseDirectivesModule

@@ -269,5 +269,6 @@ export const locationConfig =
 
 
 export const validator = {
-  emailPattern: /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/
+  emailPattern : /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/,
+  number : /^[0-9]+$/
 };
