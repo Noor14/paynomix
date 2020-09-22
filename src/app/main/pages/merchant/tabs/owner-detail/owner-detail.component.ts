@@ -41,7 +41,7 @@ export class OwnerDetailComponent implements OnInit {
       City: ['', Validators.required],
       Country: ['US', Validators.required],
       State: ['', Validators.required],
-      Zip: ['', [Validators.required,Validators.max(5)]],
+      Zip: ['', [Validators.required, Validators.maxLength(validator.zipMaxLength)]],
       Phone: ['', Validators.required],
       Email: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
       BackDocLink: [''],

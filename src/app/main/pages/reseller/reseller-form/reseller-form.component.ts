@@ -69,7 +69,7 @@ createResellerForm(): void {
     Country: ['', Validators.required],
     City: ['', Validators.required],
     State: ['', Validators.required],
-    Zip: ['', [Validators.required, Validators.maxLength(5)]],
+    Zip: ['', [Validators.required, Validators.maxLength(validator.zipMaxLength)]],
     TaxId: [''],
   });
 

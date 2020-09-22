@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { validator } from '../../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-bank-account',
@@ -38,8 +39,8 @@ export class BankAccountComponent implements OnInit, AfterViewInit {
     this.bankAccountForm = this._formBuilder.group({
       BankAccountId: [0, Validators.required],
       BankAccountType: ['', Validators.required],
-      RoutingNumber: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
-      AccountNumber: ['',[Validators.required, Validators.maxLength(17)]],
+      RoutingNumber: ['', [Validators.required, Validators.maxLength(validator.maxRoutingNo), Validators.minLength(validator.maxRoutingNo)]],
+      AccountNumber: ['',[Validators.required, Validators.maxLength(validator.accMaxLength)]],
       Currency: ['usd', Validators.required]
   });
   }

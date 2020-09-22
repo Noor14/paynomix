@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { locationConfig } from '../../../../../../constants/globalFunctions';
+import { locationConfig, validator } from '../../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-business-detail',
@@ -43,7 +43,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit, OnChanges
       BusinessAddress1:  [''],
       BusinessCity:  [''],
       BusinessState:  [''],
-      BusinessZip:  ['',Validators.max(5)]
+      BusinessZip:  ['', Validators.maxLength(validator.zipMaxLength)]
   });
   }
   ngOnChanges(): void{

@@ -270,5 +270,11 @@ export const locationConfig =
 
 export const validator = {
   emailPattern : /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/,
-  number : /^[0-9]+$/
+  number : /^[0-9]+$/,
+  zipMaxLength: 5,
+  accMaxLength: 17,
+  maxPercentage: 100,
+  maxRoutingNo: 9,
+  minRoutingNo: 9
+
 };

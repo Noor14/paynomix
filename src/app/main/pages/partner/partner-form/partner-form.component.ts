@@ -47,13 +47,13 @@ createPartnerForm(): void{
     Address1: ['', Validators.required],
     City: ['', Validators.required],
     State: [''],
-    Zip: ['', [Validators.required,Validators.max(5)]],
+    Zip: ['', [Validators.required,Validators.maxLength(validator.zipMaxLength)]],
     Email:  ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
     WebsiteUrl: ['', Validators.required],
     Phone: ['', Validators.required],
     AlternatePhone: [''],
     TaxId: [''],
-    ExchangeRateMarkup: ['',Validators.max(100)],
+    ExchangeRateMarkup: ['', Validators.max(validator.maxPercentage)],
     DefaultSettlementCurrency: ['', Validators.required]
 });
 

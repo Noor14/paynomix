@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { validateAllFormFields } from '../../../../../constants/globalFunctions';
+import { validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-pricing-plan-form',
@@ -36,8 +36,8 @@ export class PricingPlanFormComponent implements OnInit, OnChanges {
       PricingPlanID: [0, Validators.required],
       PricingTitle: ['', Validators.required],     
       Description: ['', Validators.required],
-      Reserve: ['', [Validators.required, Validators.max(100)]],
-      DiscountRate: ['', [Validators.required, Validators.max(100)]],
+      Reserve: ['', [Validators.required, Validators.max(validator.maxPercentage)]],
+      DiscountRate: ['', [Validators.required, Validators.max(validator.maxPercentage)]],
       AuthFee: ['', Validators.required],
       ChargeBack: ['', Validators.required],
       RetrievalFee: ['', Validators.required],
