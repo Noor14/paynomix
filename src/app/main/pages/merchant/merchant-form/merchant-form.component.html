@@ -1,7 +1,7 @@
 <section class="merchantForm">
     <div class="outer-layer mt-20">
-        <mat-horizontal-stepper [linear]="true" #stepper>
-            <!-- <mat-step label="Merchant Info" [stepControl]="merchantInfoForm">
+        <mat-horizontal-stepper [linear]="true" #stepper (selectionChange) = "stepChange($event)">
+            <mat-step label="Merchant Info" [stepControl]="merchantInfoForm">
                 <app-merchant-info [merchantInfo]="merchantDetail?.MerchantAccountSetup" (stepOne)="merchantInfoForm = $event"></app-merchant-info>
             </mat-step>
              <mat-step label="Business Detail" [stepControl]="businessDetailForm">
@@ -11,10 +11,10 @@
                 <app-owner-detail [ownerDetail]="merchantDetail" (stepThree)="ownerDetailForm = $event"></app-owner-detail>
             </mat-step>
             <mat-step label="Bank Account" [stepControl]="bankAccountForm">
-                <app-bank-account [bankAccountDetail]="merchantDetail?.MerchantBankAccount" (stepFour)="bankAccountForm = $event"></app-bank-account>
-            </mat-step> -->
+                <app-bank-account [bankAccountDetail]="merchantDetail?.MerchantBankAccount" (stepFour)="bankAccountForm = $event" ></app-bank-account>
+            </mat-step>
             <mat-step label="Done">
-                <app-all-gether-info [allInfo]="stepper" (saveAll) ="save()" ></app-all-gether-info>
+                <app-all-gether-info [allInfo]="boardingObject" (saveAll) ="save()" ></app-all-gether-info>
             </mat-step>
         </mat-horizontal-stepper>
     </div>
