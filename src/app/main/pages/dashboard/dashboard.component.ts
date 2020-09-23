@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public widgets: any;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['TransactionId', 'CardholderName', 'TransactionType', 'InsertedOn', 'Amount', 'Action'];
+  public displayedColumns = ['TransactionId', 'TransactionType', 'InsertedOn', 'Amount', 'Status', 'CardholderName', 'Action'];
   public dataSource = new MatTableDataSource<any>();
   private _unsubscribeAll: Subject<any>;
 
