@@ -1,139 +1,171 @@
 <section class="allGetherInfo">
 
-    <div fxLayout="column" fxLayoutAlign="start">
 
         <h2 class="text-center m-0">Thank your for filling out our Merchant Boarding Process.</h2>
-        <h2 class="text-center">Please <span color="teal-300">Review</span> details before <span>Submitting</span></h2>
+        <h2 class="text-center">Please <span class="green-600-fg">Review</span> details before <span class="orange-600-fg">Submitting.</span></h2>
 
-        <h3 class="text-uppercase text-bold">Merchant Info  <mat-icon class="pointer">edit</mat-icon></h3>
-        <mat-list>
-            <mat-list-item>
-               <h4 matLine>Merchant Name</h4>
-               <h4 class="text-bold">sdsd</h4>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item>
-                <h4 matLine>Merchant Email </h4>
-                <h4 class="text-bold">sdsd</h4>
-             </mat-list-item>
-             <mat-divider></mat-divider>
-         </mat-list>
-
-         <h3 class="text-uppercase text-bold">Business Detail  <mat-icon class="pointer">edit</mat-icon></h3>
-         <mat-list>
-             <mat-list-item>
-                <h4 matLine>DBA - Statement Descriptor</h4>
-                <h4 class="text-bold">sdsd</h4>
-             </mat-list-item>
-             <mat-divider></mat-divider>
-             <mat-list-item>
-                 <h4 matLine>Tax ID </h4>
-                 <h4 class="text-bold">sdsd</h4>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>
-                <h4 matLine>Business Type (e.g. LLC)</h4>
-                <h4 class="text-bold">sdsd</h4>
-             </mat-list-item>
-             <mat-divider></mat-divider>
-             <mat-list-item>
-                <h4 matLine>Years in Business</h4>
-                <h4 class="text-bold">sdsd</h4>
-             </mat-list-item>
-             <mat-divider></mat-divider>
-             <mat-list-item>
-                <h4 matLine>Website </h4>
-                <h4 class="text-bold">sdsd</h4>
-             </mat-list-item>
-             <mat-divider></mat-divider>
-             <mat-list-item>
-                <h4 matLine>Currently Accept Credit Cards   </h4>
-                <h4 class="text-bold">sdsd</h4>
-             </mat-list-item>
-             <mat-divider></mat-divider>
-             <mat-list-item>
-                <h4 matLine>Business Phone </h4>
-                <h4 class="text-bold">sdsd</h4>
-             </mat-list-item>
-             <mat-divider></mat-divider>
-             <mat-list-item>
-                <h4 matLine>Fax </h4>
-                <h4 class="text-bold">sdsd</h4>
-             </mat-list-item>
-             <mat-divider></mat-divider>
-             <mat-list-item>
-                <h4 matLine>Business Address </h4>
-                <h4 class="text-bold">sdsd</h4>
-             </mat-list-item>
-             <mat-divider></mat-divider>
-          </mat-list>
-          <h3 class="text-uppercase text-bold">OWNSER'S DETAIL  <mat-icon class="pointer">edit</mat-icon></h3>
-          <mat-list>
-              <mat-list-item>
-                 <h4 matLine>First Name</h4>
-                 <h4 class="text-bold">sdsd</h4>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>
-                  <h4 matLine>Last Name</h4>
-                  <h4 class="text-bold">sdsd</h4>
-               </mat-list-item>
-               <mat-divider></mat-divider>
-               <mat-list-item>
-                 <h4 matLine>DOB</h4>
-                 <h4 class="text-bold">sdsd</h4>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>
-                 <h4 matLine>SSN</h4>
-                 <h4 class="text-bold">sdsd</h4>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>
-                 <h4 matLine>Drivers License </h4>
-                 <h4 class="text-bold">sdsd</h4>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>
-                 <h4 matLine>DL State  </h4>
-                 <h4 class="text-bold">sdsd</h4>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>
-                 <h4 matLine> Address </h4>
-                 <h4 class="text-bold">sdsd</h4>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>
-                 <h4 matLine>Email </h4>
-                 <h4 class="text-bold">sdsd</h4>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-              <mat-list-item>
-                 <h4 matLine>Owner's Phone </h4>
-                 <h4 class="text-bold">sdsd</h4>
-              </mat-list-item>
-              <mat-divider></mat-divider>
-           </mat-list>
-           <h3 class="text-uppercase text-bold">BANK ACCOUNT<mat-icon class="pointer">edit</mat-icon></h3>
-           <mat-list>
-               <mat-list-item>
-                  <h4 matLine>Bank Account Type </h4>
-                  <h4 class="text-bold">sdsd</h4>
-               </mat-list-item>
-               <mat-divider></mat-divider>
-               <mat-list-item>
-                   <h4 matLine>Bank Routing Number</h4>
-                   <h4 class="text-bold">sdsd</h4>
+        <section class="merchant-info">
+            <h3 class="text-uppercase text-bold">Merchant Info <mat-icon class="pointer" (click)="moveToStep(0)">edit</mat-icon></h3>
+            <hr />
+            <mat-list>
+                <mat-list-item>
+                   <h4 matLine>Compnay Name</h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantAccountSetup?.MerchantUserName || '--'}}</h4>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item>
-                  <h4 matLine>Bank Account Number</h4>
-                  <h4 class="text-bold">sdsd</h4>
+                    <h4 matLine>Merchant Email </h4>
+                    <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantAccountSetup?.MerchantEmail || '--'}}</h4>
+                 </mat-list-item>
+                 <mat-divider></mat-divider>
+                 <mat-list-item>
+                    <h4 matLine>Pricing Plan</h4>
+                    <h4 class="text-bold" fxFlex="1 0 auto">sdsd</h4>
+                 </mat-list-item>
+                 <mat-divider></mat-divider>
+             </mat-list>
+        </section>
+
+        <section class="business-detail">
+            <h3 class="text-uppercase text-bold">Business Detail <mat-icon class="pointer" (click)="moveToStep(1)">edit</mat-icon></h3>
+            <hr />
+           <mat-list>
+               <mat-list-item>
+                  <h4 matLine>DBA - Statement Descriptor</h4>
+                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.Descriptor || '--'}}</h4>
                </mat-list-item>
                <mat-divider></mat-divider>
+               <mat-list-item>
+                   <h4 matLine>Tax ID </h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.TaxIDNo || '--'}}</h4>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                  <h4 matLine>Business Type (e.g. LLC)</h4>
+                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.BusinessType || '--'}}</h4>
+               </mat-list-item>
+               <mat-divider></mat-divider>
+               <mat-list-item>
+                  <h4 matLine>Years in Business</h4>
+                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.YearsInBusiness || '--'}}</h4>
+               </mat-list-item>
+               <mat-divider></mat-divider>
+               <mat-list-item>
+                  <h4 matLine>Website </h4>
+                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.WebSite || '--'}}</h4>
+               </mat-list-item>
+               <mat-divider></mat-divider>
+               <mat-list-item>
+                  <h4 matLine>Currently Accept Credit Cards</h4>
+                  <h4 class="text-bold" fxFlex="1 0 auto">{{(allInfo?.MerchantBusiness?.AcceptCreditCards)? 'Yes': 'No'}}</h4>
+               </mat-list-item>
+               <mat-divider></mat-divider>
+               <mat-list-item>
+                  <h4 matLine>Business Phone </h4>
+                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.BusinessPhone || '--'}}</h4>
+               </mat-list-item>
+               <mat-divider></mat-divider>
+               <mat-list-item>
+                  <h4 matLine>Fax </h4>
+                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.Fax || '--'}}</h4>
+               </mat-list-item>
+               <mat-divider></mat-divider>
+               <mat-list-item>
+                  <h4 matLine>Business Address </h4>
+                  <h4 class="text-bold" fxFlex="1 0 auto">
+                      <ng-container *ngIf="allInfo?.MerchantBusiness?.BusinessAddress">{{allInfo?.MerchantBusiness?.BusinessAddress + ','}} </ng-container>
+                      <ng-container *ngIf="allInfo?.MerchantBusiness?.BusinessAddress1">{{allInfo?.MerchantBusiness?.BusinessAddress1 + ','}} </ng-container>
+                      <ng-container *ngIf="allInfo?.MerchantBusiness?.BusinessCity">{{allInfo?.MerchantBusiness?.BusinessCity + ','}} </ng-container>
+                      <ng-container *ngIf="allInfo?.MerchantBusiness?.BusinessState">{{allInfo?.MerchantBusiness?.BusinessState + ','}} </ng-container>
+                      {{allInfo?.MerchantBusiness?.BusinessZip || '--'}}
+                  </h4>
+               </mat-list-item>
+               <mat-divider></mat-divider>
+           </mat-list>
+        </section>
+      
+        <section class="ownersDetail">
+            <h3 class="text-uppercase text-bold">Owner's Detail <mat-icon class="pointer" (click)="moveToStep(2)">edit</mat-icon></h3>
+            <hr />
+  
+            <mat-list>
+                <mat-list-item>
+                   <h4 matLine>First Name</h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.FirstName || '--'}}</h4>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <h4 matLine>Last Name</h4>
+                    <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.LastName || '--'}}</h4>
+                 </mat-list-item>
+                 <mat-divider></mat-divider>
+                 <mat-list-item>
+                   <h4 matLine>DOB</h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.DOB | date: 'mediumDate' || '--'}}</h4>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                   <h4 matLine>SSN</h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.SSN || '--'}}</h4>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                   <h4 matLine>Drivers License </h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.DrivingLicense || '--'}}</h4>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                   <h4 matLine>DL State  </h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.DLState || '--'}}</h4>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                   <h4 matLine> Address </h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">
+                      <ng-container *ngIf="allInfo?.Address1"> {{allInfo?.Address1 + ',' }} </ng-container>
+                       <ng-container *ngIf="allInfo?.Address2"> {{allInfo?.Address2 + ',' }} </ng-container>
+                       <ng-container *ngIf="allInfo?.City">{{allInfo?.City + ',' }} </ng-container>
+                       <ng-container *ngIf="allInfo?.State">{{allInfo?.State + ',' }} </ng-container>
+                       {{allInfo?.Zip || '--'}}
+                    </h4>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                   <h4 matLine>Email </h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.Email || '--'}}</h4>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                   <h4 matLine>Owner's Phone </h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.Phone || '--'}}</h4>
+                </mat-list-item>
+                <mat-divider></mat-divider>
             </mat-list>
-        <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch">
+        </section>
+      
+       <section class="bank-account">
+        <h3 class="text-uppercase text-bold">Bank Account <mat-icon class="pointer" (click)="moveToStep(3)">edit</mat-icon></h3>
+        <hr />
+       <mat-list>
+           <mat-list-item>
+              <h4 matLine>Bank Account Type </h4>
+              <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBankAccount?.BankAccountType || '--'}}</h4>
+           </mat-list-item>
+           <mat-divider></mat-divider>
+           <mat-list-item>
+               <h4 matLine>Bank Routing Number</h4>
+               <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBankAccount?.RoutingNumber || '--'}}</h4>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <h4 matLine>Bank Account Number</h4>
+              <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBankAccount?.AccountNumber || '--'}}</h4>
+           </mat-list-item>
+           <mat-divider></mat-divider>
+       </mat-list>
+       </section>
+      
+        <div class="mt-20" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch">
             <button mat-raised-button matStepperPrevious class="my-4" color="accent" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
             aria-label="Previous">
                 Previous
@@ -143,8 +175,6 @@
                 Submit
             </button>
         </div>
-    </div>
-
 
 </section>
 
