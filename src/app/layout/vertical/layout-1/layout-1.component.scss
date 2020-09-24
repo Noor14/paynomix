@@ -50,6 +50,7 @@ vertical-layout-1 {
                             background-color: #fff;
                             box-shadow: 0px 0px 3px 3px #ecececc9;
                             border-radius: 2px;
+                            overflow-y: hidden;
                             &.inner-scroll {
                                 flex: 1 1 0%;
                                 min-height: 0;

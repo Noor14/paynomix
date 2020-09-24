@@ -168,7 +168,7 @@
                 <!--  Cardholder Name Column -->
                 <ng-container matColumnDef="CardholderName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Cardholder Name </th>
-                    <td mat-cell *matCellDef="let row"> {{row.CardholderName}}</td>
+                    <td mat-cell *matCellDef="let row"> {{row.CardholderName || '--'}}</td>
                 </ng-container>
                 
                <!-- Action Column -->

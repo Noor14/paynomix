@@ -1,13 +1,20 @@
 <section class="bottomSheet">
     <ng-template [ngIf]="isOpen" >
             <div class="overlay" (click)= "isOpen = false"></div>
-            <section class="list" [@slideInOutSheet]>
+            <section class="sheet-body" [@slideInBottom]>
                 <!-- <div class="search"></div> -->
-                <div *ngFor="let item of list">dfdffd</div>
+                <section class="sheet-content" fxLayout="row wrap" fxLayoutWrap fxLayoutAlign="start">
+                    <div class="item" fxLayout="row" fxLayoutAlign="start center" fxFlex.xs="100" fxFlex.gt-xs="50" fxFlex.gt-sm="20" fxFlex.sm="33" *ngFor="let obj of repeatingItems">
+                        <span class="circle">{{obj?.name?.trim()?.charAt(0)?.toUpperCase()}}</span>
+                        <span>{{obj?.name}}</span>
+                    </div>
+                </section>
+              
             </section>
     </ng-template>
 
     <button mat-fab color="accent" class="moreHoriz" (click)="isOpen = true" *ngIf="!isOpen">
         <mat-icon>more_horiz</mat-icon>
     </button>
+
 </section>

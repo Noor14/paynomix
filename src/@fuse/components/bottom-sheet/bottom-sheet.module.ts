@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BottomSheetComponent } from './bottom-sheet.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -14,7 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FlexLayoutModule
   ]
 })
 export class BottomSheetModule { }
