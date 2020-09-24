@@ -1,0 +1,13 @@
+<section class="bottomSheet">
+    <ng-template [ngIf]="isOpen" >
+            <div class="overlay" (click)= "isOpen = false"></div>
+            <section class="list" [@slideInOutSheet]>
+                <!-- <div class="search"></div> -->
+                <div *ngFor="let item of list">dfdffd</div>
+            </section>
+    </ng-template>
+
+    <button mat-fab color="accent" class="moreHoriz" (click)="isOpen = true" *ngIf="!isOpen">
+        <mat-icon>more_horiz</mat-icon>
+    </button>
+</section>
