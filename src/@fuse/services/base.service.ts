@@ -15,10 +15,7 @@ export class BaseService {
         .then(
           res => resolve(res)
         )
-        .catch(err => {
-          return reject(err);
-          }
-        );
+        .catch(err => reject(err));
     });
     return promise;
   }
@@ -30,13 +27,7 @@ export class BaseService {
         .then(
           res => resolve(res)
         )
-        .catch((err: any) => {
-          if (err.status == 401) {
-            localStorage.clear();
-          }
-          return reject(err);
-          }
-        );
+        .catch((err: any) => reject(err));
     });
     return promise;
   }
@@ -48,10 +39,7 @@ export class BaseService {
         .then(
           res => resolve(res)
         )
-        .catch((err: any) => {
-          return reject(err);
-          }
-        );
+        .catch((err: any) => reject(err));
     });
     return promise;
   }
@@ -63,10 +51,7 @@ export class BaseService {
         .then(
           res => resolve(res)
         )
-        .catch((err: any) => {
-          return reject(err);
-          }
-        );
+        .catch((err: any) => reject(err));
     });
     return promise;
   }
