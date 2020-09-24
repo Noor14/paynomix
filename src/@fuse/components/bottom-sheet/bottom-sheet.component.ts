@@ -10,8 +10,8 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class BottomSheetComponent implements OnInit {
 
-  list: any[] = new Array(10);
   @Input() isOpen: boolean = false;
+  @Input() repeatingItems: any[] = [];
   constructor() { }
 
   ngOnInit() {
