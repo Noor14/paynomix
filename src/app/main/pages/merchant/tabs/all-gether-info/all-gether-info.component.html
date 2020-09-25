@@ -5,7 +5,11 @@
         <h2 class="text-center">Please <span class="green-600-fg">Review</span> details before <span class="orange-600-fg">Submitting.</span></h2>
 
         <section class="merchant-info">
-            <h3 class="text-uppercase text-bold">Merchant Info <mat-icon class="pointer" (click)="moveToStep(0)">edit</mat-icon></h3>
+            <h3 class="text-uppercase text-bold">Merchant Info 
+               <button mat-icon-button (click)="moveToStep(0)">
+                <mat-icon>edit</mat-icon>
+               </button>
+            </h3>
             <hr />
             <mat-list>
                 <mat-list-item>
@@ -27,7 +31,11 @@
         </section>
 
         <section class="business-detail">
-            <h3 class="text-uppercase text-bold">Business Detail <mat-icon class="pointer" (click)="moveToStep(1)">edit</mat-icon></h3>
+            <h3 class="text-uppercase text-bold">Business Detail 
+                 <button mat-icon-button (click)="moveToStep(1)">
+                  <mat-icon>edit</mat-icon>
+                 </button>
+            </h3>
             <hr />
            <mat-list>
                <mat-list-item>
@@ -85,7 +93,11 @@
         </section>
       
         <section class="ownersDetail">
-            <h3 class="text-uppercase text-bold">Owner's Detail <mat-icon class="pointer" (click)="moveToStep(2)">edit</mat-icon></h3>
+            <h3 class="text-uppercase text-bold">Owner's Detail 
+               <button mat-icon-button (click)="moveToStep(2)">
+                  <mat-icon>edit</mat-icon>
+               </button>
+            </h3>
             <hr />
   
             <mat-list>
@@ -144,7 +156,11 @@
         </section>
       
        <section class="bank-account">
-        <h3 class="text-uppercase text-bold">Bank Account <mat-icon class="pointer" (click)="moveToStep(3)">edit</mat-icon></h3>
+        <h3 class="text-uppercase text-bold">Bank Account 
+         <button mat-icon-button (click)="moveToStep(3)">
+            <mat-icon>edit</mat-icon>
+         </button>  
+        </h3>
         <hr />
        <mat-list>
            <mat-list-item>
