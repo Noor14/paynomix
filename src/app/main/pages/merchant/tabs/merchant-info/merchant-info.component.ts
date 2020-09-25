@@ -24,7 +24,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     *
     * @param {ResellerService} _resellerService
     * @param {UserConfigService} _userConfigService
-   * @param {FormBuilder} _formBuilder
+    * @param {FormBuilder} _formBuilder
     * 
     */
    
@@ -65,7 +65,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
             return {
               id: item.ResellerId, 
               name: item.ResellerName
-            }
+            };
           });
       }
     }).catch((err: HttpErrorResponse)=>(console.log))
