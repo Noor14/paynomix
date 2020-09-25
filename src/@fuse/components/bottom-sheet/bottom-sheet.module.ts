@@ -4,6 +4,8 @@ import { BottomSheetComponent } from './bottom-sheet.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -16,7 +18,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     MatButtonModule,
     MatIconModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatInputModule,
+    MatFormFieldModule,
   ]
 })
 export class BottomSheetModule { }

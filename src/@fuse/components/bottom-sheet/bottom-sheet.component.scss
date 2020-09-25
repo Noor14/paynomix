@@ -14,8 +14,13 @@
         bottom: 0;
         padding: 15px;
         background: #fdfcfc; // dynamic
+        .close-button{
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
         .sheet-content{
-            max-height: 300px;
+            max-height: 200px;
             overflow-y: auto;
             .item{
                 padding: 0 15px;

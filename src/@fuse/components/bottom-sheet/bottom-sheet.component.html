@@ -2,14 +2,21 @@
     <ng-template [ngIf]="isOpen" >
             <div class="overlay" (click)= "isOpen = false"></div>
             <section class="sheet-body" [@slideInBottom]>
-                <!-- <div class="search"></div> -->
+                <section class="search mt-20" fxLayout="row">
+                    <mat-form-field appearance="outline" fxFlex="100" >
+                        <mat-label>Search</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                </section>
                 <section class="sheet-content" fxLayout="row wrap" fxLayoutWrap fxLayoutAlign="start">
                     <div class="item" fxLayout="row" fxLayoutAlign="start center" fxFlex.xs="100" fxFlex.gt-xs="50" fxFlex.gt-sm="20" fxFlex.sm="33" *ngFor="let obj of repeatingItems">
                         <span class="circle">{{obj?.name?.trim()?.charAt(0)?.toUpperCase()}}</span>
                         <span>{{obj?.name}}</span>
                     </div>
                 </section>
-              
+                <button mat-icon-button color="accent" class="close-button" (click)="isOpen = false">
+                    <mat-icon>close</mat-icon>
+                </button>
             </section>
     </ng-template>
 
