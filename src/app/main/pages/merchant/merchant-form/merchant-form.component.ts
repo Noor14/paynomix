@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { UserConfigService } from '@fuse/services/user.config.service';
@@ -12,7 +12,7 @@ import { ResellerService } from '../../reseller/reseller.service';
   templateUrl: './merchant-form.component.html',
   styleUrls: ['./merchant-form.component.scss']
 })
-export class MerchantFormComponent implements OnInit {
+export class MerchantFormComponent implements OnInit, OnDestroy {
 
   public merchantInfoForm: FormGroup;
   public businessDetailForm: FormGroup;
@@ -49,6 +49,11 @@ export class MerchantFormComponent implements OnInit {
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(() => this.getResellers())
   
+  }
+  ngOnDestroy(): void{
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
   }
   getResellers(): void{
     this._resellerService.resellerList(this._userConfigService.getUserMode())

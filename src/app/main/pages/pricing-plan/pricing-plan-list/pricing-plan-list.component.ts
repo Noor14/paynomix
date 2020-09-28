@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AssigneeDialogComponent } from '@fuse/components/assignee-dialog/assignee-dialog.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -31,7 +33,8 @@ export class PricingPlanListComponent implements OnInit, OnDestroy {
    
    constructor(
      private readonly _pricingPlanService: PricingPlanService,
-     private readonly _userConfigService: UserConfigService
+     private readonly _userConfigService: UserConfigService,
+     private dialog: MatDialog
  ) { 
            // Set the private defaults
            this._unsubscribeAll = new Subject();
@@ -47,6 +50,13 @@ export class PricingPlanListComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
+
+
+  openDialog() {
+    this.dialog.open(AssigneeDialogComponent);
+  }
+
+
 
   getPricingPlans(): void{
     this._pricingPlanService.pricingPlanList(this._userConfigService.getUserMode())

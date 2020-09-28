@@ -11,3 +11,4 @@ export * from './sidebar/sidebar.module';
 export * from './theme-options/theme-options.module';
 export * from './widget/widget.module';
 export * from './bottom-sheet/bottom-sheet.module';
+export * from './assignee-dialog/assignee-dialog.module';

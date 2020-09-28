@@ -15,7 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PricingPlanFormComponent } from './pricing-plan-form/pricing-plan-form.component';
-
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AssigneeDialogModule } from '@fuse/components';
 
 @NgModule({
   declarations: [PricingPlanListComponent, PricingPlanCreateComponent, PricingPlanEditComponent, PricingPlanFormComponent],
@@ -29,8 +31,11 @@ import { PricingPlanFormComponent } from './pricing-plan-form/pricing-plan-form.
     FuseSharedModule,
     MatIconModule,
     MatInputModule,
+    MatMenuModule,
     MatSelectModule,
     MatFormFieldModule,
+    AssigneeDialogModule,
+    MatDialogModule
   ]
 })
 export class PricingPlanModule { }
