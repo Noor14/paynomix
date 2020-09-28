@@ -48,6 +48,11 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Fee ($) </th>
           <td mat-cell *matCellDef="let row">{{row.GateWayTransactionFee | currency}} </td>
         </ng-container>
+         <!-- Transaction Assigned Column -->
+         <ng-container matColumnDef="Assigned">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Assigned </th>
+          <td mat-cell *matCellDef="let row">{{row.Assigned || 0}} </td>
+        </ng-container>
          <!-- Action Column -->
          <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef>Action</th>

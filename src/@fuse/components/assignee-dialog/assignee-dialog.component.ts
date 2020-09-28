@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormControl} from '@angular/forms';
 @Component({
   selector: 'app-assignee-dialog',
   templateUrl: './assignee-dialog.component.html',
-  styleUrls: ['./assignee-dialog.component.scss']
+  styleUrls: ['./assignee-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AssigneeDialogComponent implements OnInit {
   toppingsControl = new FormControl([]);
