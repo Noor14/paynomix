@@ -18,7 +18,15 @@ export const snackBarConfig: any = {
 };
 export const snackBarConfigWarn = {
   ...snackBarConfig,
-  panelClass:'warn'
+  panelClass: 'warn'
+};
+
+export enum authRole {
+admin = 1,
+merchant,
+partner,
+reseller,
+customer
 }
 
 export const locationConfig =
