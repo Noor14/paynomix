@@ -44,9 +44,9 @@
           <td mat-cell *matCellDef="let row">{{row.FeeAmount | currency}} </td>
         </ng-container>
          <!-- Transaction Fee Column -->
-         <ng-container matColumnDef="GateWayTransactionFee">
+         <ng-container matColumnDef="TransactionFee">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Fee ($) </th>
-          <td mat-cell *matCellDef="let row">{{row.GateWayTransactionFee | currency}} </td>
+          <td mat-cell *matCellDef="let row">{{row.TransactionFee | currency}} </td>
         </ng-container>
          <!-- Transaction Assigned Column -->
          <ng-container matColumnDef="Assigned">
