@@ -14,10 +14,10 @@ export class PagesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const {EntityId, UserRoleId} = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     if(EntityId){
-      const userRole =  (UserRoleId == authRole.merchant)? 'MerchantId': 
-       (UserRoleId == authRole.partner)? 'PartnerId' : 
-       (UserRoleId == authRole.reseller)? 'ResellerId' : 
-       (UserRoleId == authRole.customer)? 'CustomerId' : 'DemoCustomerId';
+      const userRole =  (UserRoleId === authRole.merchant) ? 'MerchantId' : 
+       (UserRoleId === authRole.partner) ? 'PartnerId' : 
+       (UserRoleId === authRole.reseller) ? 'ResellerId' : 
+       (UserRoleId === authRole.customer) ? 'CustomerId' : 'DemoCustomerId';
        this._userConfigService.setUserMode({
         [userRole] : EntityId
       })
