@@ -53,7 +53,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy {
 
 
   openDialog() {
-    this.dialog.open(AssigneeDialogComponent);
+    this.dialog.open(AssigneeDialogComponent, {width: '550px'});
   }
 
 
