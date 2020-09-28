@@ -1,14 +1,14 @@
 <div class="dialog-content-wrapper">
-    <mat-toolbar class="mat-accent m-0">
+    <mat-toolbar class="mat-accent">
         <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title dialog-title">Select Partner</span>
+            <span class="title">Select Partner</span>
             <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-toolbar-row>
     </mat-toolbar>
 
-    <div mat-dialog-content class="p-24 m-0" >
+    <div mat-dialog-content class="p-24">
         <form name="assigneeForm" fxLayout="column" fxFlex>
             <mat-form-field appearance="fill">
                 <mat-label>Select</mat-label>
@@ -29,7 +29,7 @@
 
     </div>
 
-    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+    <div mat-dialog-actions class="px-24 py-16" fxLayout="row" fxLayoutAlign="end center">
         <button mat-raised-button
         color="accent" 
         class="mr-8"
