@@ -76,7 +76,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
       AccountSetupId: [0, Validators.required],
       MerchantUserName: ['', Validators.required],
       MerchantEmail: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
-      PricingPlanID: ['77', Validators.required],
+      PricingPlanID: ['77'],
       IpAddress: ['192.168.0.142', Validators.required]
       });
   }
