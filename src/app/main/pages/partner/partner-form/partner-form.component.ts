@@ -47,7 +47,7 @@ createPartnerForm(): void{
     Address1: ['', Validators.required],
     City: ['', Validators.required],
     State: [''],
-    Zip: ['', [Validators.required,Validators.maxLength(globalConfig.validator.zipMaxLength)]],
+    Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
     Email:  ['', [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
     WebsiteUrl: ['', Validators.required],
     Phone: ['', Validators.required],
