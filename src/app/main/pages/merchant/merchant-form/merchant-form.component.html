@@ -17,5 +17,8 @@
                 <app-all-gether-info [step]="stepper" [allInfo]="boardingObject" (saveAll) ="save()" ></app-all-gether-info>
             </mat-step>
         </mat-horizontal-stepper>
+
+        <app-bottom-sheet [repeatingItems]="resellers" *ngIf="!stepper?.selectedIndex"></app-bottom-sheet>
+
     </div>
 </section>

@@ -1,6 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { UserConfigService } from '@fuse/services/user.config.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ResellerService } from '../../reseller/reseller.service';
 
 @Component({
   selector: 'app-merchant-form',
@@ -16,15 +21,48 @@ export class MerchantFormComponent implements OnInit {
   @Input() merchantDetail: any = null;
   @Output() submitForm = new EventEmitter<any>();
   public boardingObject:any; 
+  public resellers: any[] = [];
+  private _unsubscribeAll: Subject<any>;
 
+   /**
+    * Constructor
+    *
+    * @param {ResellerService} _resellerService
+    * @param {UserConfigService} _userConfigService
+    * @param {ChangeDetectorRef} _cdref
+    * 
+    */
+   
+   constructor(
+    private readonly _resellerService: ResellerService,
+    private readonly _userConfigService: UserConfigService,
+    private readonly _cdref: ChangeDetectorRef,
 
-  constructor(private readonly _cdref: ChangeDetectorRef) { }
+) { 
+          // Set the private defaults
+          this._unsubscribeAll = new Subject();
+}
 
   ngOnInit(): void {
     this._cdref.detectChanges();
+    this._userConfigService.userModeChange
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe(() => this.getResellers())
   
   }
-
+  getResellers(): void{
+    this._resellerService.resellerList(this._userConfigService.getUserMode())
+    .then((res: any) => {
+          if(res && !res.StatusCode && res.Response && res.Response.length){
+          this.resellers = res.Response.map((item: any) => {
+            return {
+              id: item.ResellerId, 
+              name: item.ResellerName
+            };
+          });
+      }
+    }).catch((err: HttpErrorResponse)=>(console.log))
+  }
   private createBoardingObject(): void{
     this.boardingObject = {
       ...{...this.merchantDetail, ...this.ownerDetailForm.value},
