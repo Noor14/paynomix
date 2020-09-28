@@ -5,10 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { FuseSharedModule } from '@fuse/shared.module';
 @NgModule({
@@ -20,12 +18,10 @@ import { FuseSharedModule } from '@fuse/shared.module';
     MatChipsModule,
     MatFormFieldModule,
     MatInputModule,
-    FlexLayoutModule,
     MatToolbarModule,
-    ReactiveFormsModule,
+    FuseSharedModule,
     MatIconModule,
     MatButtonModule,
-    FormsModule,
 
   ]
 })
