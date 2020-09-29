@@ -55,7 +55,7 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Funding Manager',
                 type     : 'item',
                 icon     : 'account_balance',
-                url      : '/samples'
+                url      : '/pages/funds'
             },
             {
                 id       : 'user_mgmt',

@@ -1,0 +1,69 @@
+<section class="fundingList w-100-p">
+    <section fxLayout="row" fxLayoutALign="space-between center">
+        <h2>Funding Manager</h2>
+        <div class="searchBox">
+          
+        </div>
+    </section>
+    <hr />
+    <table mat-table [dataSource]="dataSource" matSort class="w-100-p mat-card mt-20">
+      
+        <!-- Partner Name Column -->
+        <ng-container matColumnDef="PartnerName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Partner Name</th>
+          <td mat-cell *matCellDef="let row"> {{row.PartnerName}} </td>
+        </ng-container>
+    
+        <!-- TotalTrans Amount Column -->
+        <ng-container matColumnDef="TotalTransAmount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Trans. Amount </th>
+          <td mat-cell *matCellDef="let row"> {{row.TotalTransAmount || 0 | currency }}</td>
+        </ng-container>
+    
+        <!-- Paynomix Fee Column -->
+        <ng-container matColumnDef="PaynomixFee">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Paynomix Fee </th>
+          <td mat-cell *matCellDef="let row"> {{row.PaynomixFee || 0 | currency }} </td>
+        </ng-container>
+    
+        <!-- Admin Commission Column -->
+        <ng-container matColumnDef="AdminCommission">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Admin Commission </th>
+          <td mat-cell *matCellDef="let row"> {{row.AdminCommission || 0 | currency }} </td>
+        </ng-container>
+
+        <!-- Partner Commision Column -->
+        <ng-container matColumnDef="PartnerCommision">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Partner Commision </th>
+        <td mat-cell *matCellDef="let row"> {{row.PartnerCommision || 0 | currency }} </td>
+        </ng-container>
+
+        <!-- Reseller Commision Column -->
+        <ng-container matColumnDef="ResellerCommision">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Reseller Commision </th>
+        <td mat-cell *matCellDef="let row"> {{row.ResellerCommision || 0 | currency }} </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let row"> {{row.Status || 'Pending'}} </td>
+        </ng-container>
+
+         <!-- Action Column -->
+         <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let row"> 
+            <button mat-raised-button color="accent">
+                Fund Now
+            </button>
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        </tr>
+    </table>
+    
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</section>
