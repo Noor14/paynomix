@@ -28,6 +28,25 @@ partner,
 reseller,
 customer
 }
+export enum transactionType{
+CreditCardVoid,
+CreditCardSale,
+CreditCardAuth,
+CreditCardFund,
+CreditCardRefund,
+CreditCardCapture,
+ACHDebit,
+ACHRefund,
+ACHVoid,
+}
+export enum transactionStatus{
+declined,
+approved,
+pending,
+funded,
+error,
+init
+}
 
 export const locationConfig =
 {
