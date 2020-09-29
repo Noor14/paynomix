@@ -185,7 +185,7 @@
                 
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/pages/partner/partner-edit', row.TransactionId]" routerLinkActive="router-link-active" ></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/pages/partner/partner-edit', row.TransactionId]"></tr>
             </table>
           
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
