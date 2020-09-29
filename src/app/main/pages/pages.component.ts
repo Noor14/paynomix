@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserConfigService } from '@fuse/services/user.config.service';
+import { authRole } from '../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-pages',
@@ -13,10 +14,10 @@ export class PagesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const {EntityId, UserRoleId} = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     if(EntityId){
-      const userRole =  (UserRoleId == 2)? 'MerchantId': 
-       (UserRoleId == 3)? 'PartnerId' : 
-       (UserRoleId == 4)? 'ResellerId' : 
-       (UserRoleId == 5)? 'CustomerId' : 'DemoCustomerId'
+      const userRole =  (UserRoleId === authRole.merchant) ? 'MerchantId' : 
+       (UserRoleId === authRole.partner) ? 'PartnerId' : 
+       (UserRoleId === authRole.reseller) ? 'ResellerId' : 
+       (UserRoleId === authRole.customer) ? 'CustomerId' : 'DemoCustomerId';
        this._userConfigService.setUserMode({
         [userRole] : EntityId
       })

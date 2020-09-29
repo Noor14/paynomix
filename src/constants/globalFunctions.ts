@@ -18,7 +18,34 @@ export const snackBarConfig: any = {
 };
 export const snackBarConfigWarn = {
   ...snackBarConfig,
-  panelClass:'warn'
+  panelClass: 'warn'
+};
+
+export enum authRole {
+admin = 1,
+merchant,
+partner,
+reseller,
+customer
+}
+export enum transactionType{
+CreditCardVoid,
+CreditCardSale,
+CreditCardAuth,
+CreditCardFund,
+CreditCardRefund,
+CreditCardCapture,
+ACHDebit,
+ACHRefund,
+ACHVoid,
+}
+export enum transactionStatus{
+declined,
+approved,
+pending,
+funded,
+error,
+init
 }
 
 export const locationConfig =

@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserConfigService } from '@fuse/services/user.config.service';
+import { transactionStatus, transactionType } from '../../../../constants/globalFunctions';
 import { environment } from 'environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,11 +17,13 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
+  public transStatus = transactionStatus;
+  public transType = transactionType;
   public dashboardUserStats: any;
   public widgets: any;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['TransactionId', 'TransactionType', 'InsertedOn', 'Amount', 'Status', 'CardholderName', 'Action'];
+  public displayedColumns = ['TransactionId', 'TransactionType', 'InsertedOn', 'Amount', 'Status', 'CardholderName'];
   public dataSource = new MatTableDataSource<any>();
   private _unsubscribeAll: Subject<any>;
 

@@ -19,7 +19,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['PricingTitle','Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'GateWayTransactionFee', 'Assigned', 'Action'];
+  public displayedColumns = ['PricingTitle','Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'TransactionFee', 'Assigned', 'Action'];
   public dataSource = new MatTableDataSource<any>();
   public pricingPlans: any= [];
   private _unsubscribeAll: Subject<any>;
