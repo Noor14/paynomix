@@ -42,7 +42,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
  this.settingForm = this._formBuilder.group({
-  MerchantId:['', Validators.required],
+  MerchantId:[''],
   MerchantUserName: ['', Validators.required],
   FirstName: ['', Validators.required],
   LastName: ['', Validators.required],
