@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     purpose: 'Please Select a Merchant',
     icon: 'home'
   });
-  public form: FormGroup;
+  public settingForm: FormGroup;
   public merchants: any= [];
   private _unsubscribeAll: Subject<any>;
 
@@ -40,10 +40,19 @@ export class SettingsComponent implements OnInit, OnDestroy {
  }
 
   ngOnInit(): void {
-    this.form = this._formBuilder.group({
-      firstName : ['', Validators.required],
-      lastName  : ['', Validators.required],
-  });
+ this.settingForm = this._formBuilder.group({
+  MerchantId:['', Validators.required],
+  MerchantUserName: ['', Validators.required],
+  FirstName: ['', Validators.required],
+  LastName: ['', Validators.required],
+  Address1: ['', Validators.required],
+  Address2: [''],
+  City: ['', Validators.required],
+  State: ['', Validators.required],
+  Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
+  Country: ['', Validators.required]
+});
+ }
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(() => this.getMerchants())
