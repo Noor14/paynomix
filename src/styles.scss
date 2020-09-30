@@ -12,5 +12,14 @@ app-pages{
     }
     .table-responsive {
         overflow-x: auto;
-        }
+        .mat-cell,.mat-header-cell
+          {
+            padding: 5px;
+            text-align: center;
+            & *{
+             justify-content: center;
+            }
+          }
+     
+    }
 }
