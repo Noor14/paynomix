@@ -5,7 +5,7 @@ import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MerchantService } from '../merchant/merchant.service';
-
+import * as globalConfig from '../../../../constants/globalFunctions';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -18,6 +18,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     icon: 'home'
   });
   public settingForm: FormGroup;
+  public globalConfig = globalConfig;
   public merchants: any= [];
   private _unsubscribeAll: Subject<any>;
 
@@ -52,7 +53,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
   Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
   Country: ['', Validators.required]
 });
- }
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(() => this.getMerchants())
