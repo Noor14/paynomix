@@ -73,16 +73,18 @@
                     [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                         <mat-label>Postal Code</mat-label>
                         <input matInput #postalCode 
-                               formControlName="Zip" maxlength="5" required>
+                               formControlName="Zip" numberOnly [maxlength]="globalConfig?.validator?.zipMaxLength" required>
                         <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
                         <mat-error>Postal Code is required!</mat-error>
                     </mat-form-field>
                 </div>
-
-                <button mat-raised-button color="accent"
-                 aria-label="save" [disabled]="settingForm.invalid">
-                 Save
-                </button>
+                <div fxLayout="row" class="my-4" fxLayoutAlign="start center">
+                    <button mat-raised-button color="accent"
+                    aria-label="save" [disabled]="settingForm.invalid">
+                    Save
+                   </button>
+                </div>
+              
     
           </form>
         </div>
