@@ -10,4 +10,16 @@ app-pages{
         border: 1px solid #eee;
         border-radius: 3px;
     }
+    .table-responsive {
+        overflow-x: auto;
+        .mat-cell,.mat-header-cell
+          {
+            padding: 5px;
+            text-align: center;
+            & *{
+             justify-content: center;
+            }
+          }
+     
+    }
 }

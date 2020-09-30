@@ -6,7 +6,8 @@
         </div>
     </section>
     <hr />
-    <table mat-table [dataSource]="dataSource" matSort class="w-100-p mat-card mt-20">
+    <section class="table-responsive mat-card mt-20">
+    <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
       
         <!-- Partner Name Column -->
         <ng-container matColumnDef="PartnerName">
@@ -64,6 +65,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;">
         </tr>
     </table>
-    
+    </section>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </section>

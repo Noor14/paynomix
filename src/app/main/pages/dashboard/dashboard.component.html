@@ -128,7 +128,7 @@
         <div class="p-20">
             <h2 class="m-0">Recent Transactions</h2>
         </div>
-
+        <div class="table-responsive">
             <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
           
               <!-- Transaction ID Column -->
@@ -187,7 +187,7 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/pages/partner/partner-edit', row.TransactionId]"></tr>
             </table>
-          
+        </div>
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </section>
 </section>
