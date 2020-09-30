@@ -7,32 +7,32 @@
         
         <div fxFlex.gt-sm="70" fxFlex.sm="70" class="outer-layer mt-20 p-20">
             <form fxLayout="column" fxLayoutAlign="start"
-            fxFlex="1 0 auto" name="form" [formGroup]="form">
+            fxFlex="1 0 auto" name="form" [formGroup]="settingForm">
         
                 <div fxFlex="1 0 auto">
                     <mat-form-field appearance="outline" fxFlex="100">
                         <mat-label>Company</mat-label>
-                        <input matInput formControlName="firstName" required>
+                        <input matInput formControlName="MerchantUserName" required>
                         <mat-error>Company is required!</mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                     <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                         <mat-label>First name</mat-label>
-                        <input matInput formControlName="firstName" required>
+                        <input matInput formControlName="FirstName" required>
                         <mat-error>First Name is required!</mat-error>
                     </mat-form-field>
     
                     <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                         <mat-label>Last name</mat-label>
-                        <input matInput formControlName="lastName" required>
+                        <input matInput formControlName="LastName" required>
                         <mat-error>Last Name is required!</mat-error>
                     </mat-form-field>
                 </div>
                 <div fxFlex="1 0 auto">
                     <mat-form-field appearance="outline" fxFlex="100">
                         <mat-label>Address</mat-label>
-                        <textarea  matInput formControlName="firstName" required></textarea>
+                        <textarea  matInput formControlName="Address1" required></textarea>
                         <mat-error>Address is required!</mat-error>
                     </mat-form-field>
                 </div>
@@ -40,35 +40,47 @@
                 <div fxFlex="1 0 auto">
                     <mat-form-field appearance="outline" fxFlex="100">
                         <mat-label>Address 2</mat-label>
-                        <textarea  matInput formControlName="firstName"></textarea>
+                        <textarea  matInput formControlName="Address2"></textarea>
                     </mat-form-field>
                 </div>
 
                 <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-
-                    <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33">
+                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="Country">
+                          <mat-option [value]="item.code" *ngFor="let item of globalConfig?.locationConfig?.countries">{{item.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>Country is required!</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50"
+                    [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                         <mat-label>City</mat-label>
-                        <input matInput formControlName="city" required>
+                        <input matInput formControlName="City" required>
                         <mat-error>City is required!</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="'px-8'" [ngClass.gt-sm]="'px-8'">
-                        <mat-label>State</mat-label>
-                        <input matInput formControlName="state" required>
+                  
+                </div>
+                <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                        <mat-label>States</mat-label>
+                    <mat-select formControlName="State" >
+                        <mat-option [value]="item.name" *ngFor="let item of globalConfig?.locationConfig?.states">{{item.name}}</mat-option>
+                    </mat-select>
                         <mat-error>State is required!</mat-error>
                     </mat-form-field>
-
-                    <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33">
+                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50"
+                    [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                         <mat-label>Postal Code</mat-label>
-                        <input matInput #postalCode value="94043"
-                               formControlName="postalCode" maxlength="5" required>
+                        <input matInput #postalCode 
+                               formControlName="Zip" maxlength="5" required>
                         <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
                         <mat-error>Postal Code is required!</mat-error>
                     </mat-form-field>
                 </div>
 
                 <button mat-raised-button  color="accent"
-                 aria-label="Submit" [disabled]="form.invalid">
+                 aria-label="Submit" [disabled]="settingForm.invalid">
                  Save
                 </button>
     
