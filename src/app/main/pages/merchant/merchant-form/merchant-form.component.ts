@@ -14,6 +14,10 @@ import { ResellerService } from '../../reseller/reseller.service';
 })
 export class MerchantFormComponent implements OnInit, OnDestroy {
 
+  public merchantBottomSheetInfo: object = Object.freeze({
+    purpose: 'Please Select a Reseller',
+    icon: 'device_hub'
+  });
   public merchantInfoForm: FormGroup;
   public businessDetailForm: FormGroup;
   public ownerDetailForm: FormGroup;

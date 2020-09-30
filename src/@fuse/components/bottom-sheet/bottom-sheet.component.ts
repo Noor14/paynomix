@@ -12,6 +12,7 @@ export class BottomSheetComponent implements OnInit {
 
   @Input() isOpen: boolean = false;
   @Input() repeatingItems: any[] = [];
+  @Input() info: object = {}
   constructor() { }
 
   ngOnInit() {
