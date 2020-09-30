@@ -4,7 +4,7 @@
             <section class="sheet-body" [@slideInBottom]>
                 <section class="search px-20 mt-20" fxLayout="row">
                     <mat-form-field appearance="outline" fxFlex="100" >
-                        <mat-label>Search</mat-label>
+                        <mat-label>{{info.purpose}}</mat-label>
                         <input matInput>
                     </mat-form-field>
                 </section>
@@ -20,8 +20,8 @@
             </section>
     </ng-template>
 
-    <button mat-fab color="accent" class="moreHoriz" (click)="isOpen = true" *ngIf="!isOpen">
-        <mat-icon>more_horiz</mat-icon>
+    <button class="pickup-button" mat-flat-button color="accent" (click)="isOpen = true" *ngIf="!isOpen">
+        <mat-icon>{{info.icon}}</mat-icon> {{info.purpose}}
     </button>
 
 </section>

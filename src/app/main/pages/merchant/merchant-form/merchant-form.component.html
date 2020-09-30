@@ -18,7 +18,7 @@
             </mat-step>
         </mat-horizontal-stepper>
 
-        <app-bottom-sheet [repeatingItems]="resellers" *ngIf="!stepper?.selectedIndex"></app-bottom-sheet>
+        <app-bottom-sheet [repeatingItems]="resellers" [info]="merchantBottomSheetInfo" *ngIf="!stepper?.selectedIndex"></app-bottom-sheet>
 
     </div>
 </section>
