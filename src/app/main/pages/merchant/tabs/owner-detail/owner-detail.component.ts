@@ -31,7 +31,6 @@ export class OwnerDetailComponent implements OnInit {
   createOwnerDetailForm(): void{
     this.ownerDetailForm = this._formBuilder.group({
       MerchantId: [0, Validators.required],
-      ResellerId: ['1060'],
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
       DOB: ['', Validators.required],

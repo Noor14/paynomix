@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
 
 @Component({
@@ -13,10 +13,15 @@ export class BottomSheetComponent implements OnInit {
   @Input() isOpen: boolean = false;
   @Input() repeatingItems: any[] = [];
   @Input() selectedId: number;
-  @Input() drawerConfig: object = {}
+  @Input() drawerConfig: any = {};
+  @Output() selected = new EventEmitter<number>();
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
- 
+  selectedItem(id: number): void{
+    this.selected.emit(id);
+    this.selectedId = id;
+    this.isOpen = false;
+  }
 }

@@ -9,7 +9,8 @@
                     </mat-form-field>
                 </section>
                 <section class="sheet-content" fxLayout="row wrap" fxLayoutWrap fxLayoutAlign="start">
-                    <div class="item" fxLayout="row" fxLayoutAlign="start center" fxFlex.xs="100" fxFlex.gt-xs="50" fxFlex.gt-sm="20" fxFlex.sm="33" *ngFor="let obj of repeatingItems"
+                    <div class="item" fxLayout="row" fxLayoutAlign="start center" fxFlex.xs="100" fxFlex.gt-xs="50" fxFlex.gt-sm="20" fxFlex.sm="33" 
+                    *ngFor="let obj of repeatingItems" (click)="selectedItem(obj.id)"
                     [ngClass]="{'selected': selectedId == obj.id}">
                         <span class="circle">{{obj?.name?.trim()?.charAt(0)?.toUpperCase()}}</span>
                         <span>{{obj?.name}}</span>

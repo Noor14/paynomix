@@ -14,6 +14,7 @@ export class AllGetherInfoComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   moveToStep(index: number){
     this.step.selectedIndex = index;
   }

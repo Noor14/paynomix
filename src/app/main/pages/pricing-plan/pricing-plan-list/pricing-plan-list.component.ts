@@ -21,7 +21,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   public displayedColumns = ['PricingTitle','Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'TransactionFee', 'Assigned', 'Action'];
   public dataSource = new MatTableDataSource<any>();
-  public pricingPlans: any= [];
+  public pricingPlans: any[] = [];
   private _unsubscribeAll: Subject<any>;
 
     /**

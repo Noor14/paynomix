@@ -26,7 +26,9 @@
 
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                 <mat-label>Pricing Plan</mat-label>
-                <input matInput formControlName="PricingPlanID">
+                <mat-select formControlName="PricingPlanID" required>
+                    <mat-option [value]="item.PricingPlanID" *ngFor="let item of pricingPlans">{{item.PricingTitle}}</mat-option>
+                </mat-select>
                 <mat-error>Pricing Plan is required!</mat-error>
             </mat-form-field>
         </div>

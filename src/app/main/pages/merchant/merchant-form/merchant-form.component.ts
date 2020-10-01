@@ -62,7 +62,7 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((userMode) => {
         if(!userMode || (userMode && !userMode.hasOwnProperty('ResellerId'))){
-          this.getResellers()
+          this.getResellers();
         }else{
           this.bottomSheetEnable = false;
         }
@@ -76,8 +76,7 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
   }
 
   getResellers(): void{
-    const userMode = this._userConfigService.getUserMode();
-    this._resellerService.resellerList(userMode)
+    this._resellerService.resellerList(this._userConfigService.getUserMode())
     .then((res: any) => {
           if(res && !res.StatusCode && res.Response && res.Response.length){
           this.resellers = res.Response.map((item: any) => {
@@ -99,14 +98,28 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
       MerchantBankAccount: (this.merchantDetail && this.merchantDetail.MerchantBankAccount)? {...this.merchantDetail.MerchantBankAccount, ...this.bankAccountForm.value} : {...this.bankAccountForm.value},
       MerchantAccountSetup: (this.merchantDetail && this.merchantDetail.MerchantAccountSetup)? {...this.merchantDetail.MerchantAccountSetup, ...this.merchantInfoForm.value}: {...this.merchantInfoForm.value},
       MerchantBusiness: (this.merchantDetail && this.merchantDetail.MerchantBusiness)? {...this.merchantDetail.MerchantBusiness, ...this.businessDetailForm.value}: {...this.businessDetailForm.value},
-    }
+    };
   }
   stepChange(event: MatStepper): void{
     if(event.selectedIndex == 4){
       this.createBoardingObject();
     }
   }
+  onSelected(event: number): void{
+    if(!this.merchantDetail){
+      this.merchantDetail = {
+        ResellerId : event,
+        MerchantAccountSetup: {
+        ResellerId : event
+        }
+      };
+    }else{
+      this.merchantDetail.ResellerId = event;
+      this.merchantDetail.MerchantAccountSetup.ResellerId = this.merchantDetail.ResellerId;
+      this.merchantDetail.MerchantAccountSetup = {...this.merchantDetail.MerchantAccountSetup};
+    }
 
+  }
   save(): void{
     this.createBoardingObject();
     this.submitForm.emit(this.boardingObject);
