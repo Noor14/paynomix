@@ -19,11 +19,17 @@
             right: 0;
             top: 0;
         }
+
+        .search{
+            padding: 5px;
+        }
         .sheet-content{
             max-height: 200px;
             overflow-y: auto;
             .item{
-                margin: 5px 0;
+                margin: 2px 0;
+                cursor: pointer;
+                padding: 5px;
                 .circle{
                     width: 30px;
                     height: 30px;
@@ -37,6 +43,16 @@
                     justify-content: center;
                     font-weight: 500;
                 }
+                &.selected{
+                    border-radius: 4px;
+                    color: #fff;
+                    background: #f4511e; // dynamic
+                    .circle{
+                        background-color: #fff;
+                    }
+
+                }
+              
             }
 
         }

@@ -27,6 +27,7 @@ export class PagesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if(this._userConfigService.getUserMode())
     this._userConfigService.setUserMode(null)
+    this._userConfigService.loggedInUser = {};
   }
 
 }

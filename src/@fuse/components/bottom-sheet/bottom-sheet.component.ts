@@ -12,7 +12,8 @@ export class BottomSheetComponent implements OnInit {
 
   @Input() isOpen: boolean = false;
   @Input() repeatingItems: any[] = [];
-  @Input() info: object = {}
+  @Input() selectedId: number;
+  @Input() drawerConfig: object = {}
   constructor() { }
 
   ngOnInit() {
