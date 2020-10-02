@@ -25,7 +25,7 @@ export class BottomSheetComponent implements OnInit {
       this.selected.emit(id);
       this.selectedId = id;
     }
-    this.isOpen = false;
+    this.closeDrawer();
   }
   closeDrawer(): void{
     this.close.emit(false);
