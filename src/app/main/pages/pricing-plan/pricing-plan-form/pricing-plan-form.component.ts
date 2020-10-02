@@ -27,8 +27,11 @@ export class PricingPlanFormComponent implements OnInit, OnChanges {
   
   ngOnChanges(){
     if(this.pricingPlanDetail){
-      this.createPricingPlanForm()
-      this.pricngPlanForm.patchValue(this.pricingPlanDetail)
+      if(!this.pricngPlanForm){
+        this.createPricingPlanForm();
+      }else{
+        this.pricngPlanForm.patchValue(this.pricingPlanDetail)
+      }
     }
   }
   createPricingPlanForm(): void{

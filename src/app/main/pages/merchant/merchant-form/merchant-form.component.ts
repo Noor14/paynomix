@@ -51,6 +51,7 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
     this._unsubscribeAll = new Subject();
     const user =  this._userConfigService.loggedInUser;
     if(user && user.hasOwnProperty('ResellerId')){
+      this.onSelected(user.ResellerId)
       this.bottomSheetEnable = false;
     }
 }
@@ -64,11 +65,14 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
         if(!userMode || (userMode && !userMode.hasOwnProperty('ResellerId'))){
           this.getResellers();
         }else{
+          this.onSelected(userMode.ResellerId)
           this.bottomSheetEnable = false;
         }
       })
     }
+  
   }
+
   ngOnDestroy(): void{
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
