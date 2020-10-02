@@ -43,7 +43,10 @@ export class MerchantEditComponent implements OnInit, OnDestroy {
       switchMap((id) =>
         this._merchantService.getMerchantDetail(id)
       ),
-      tap((res: any) => (this.merchantDetail = res.Response)),
+      tap((res: any) => {
+        this.merchantDetail = res.Response;
+        this.merchantDetail.MerchantAccountSetup.ResellerId = this.merchantDetail.ResellerId;
+      }),
     )
     .subscribe();
 
