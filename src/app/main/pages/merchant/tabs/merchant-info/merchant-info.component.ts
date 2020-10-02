@@ -53,13 +53,16 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     .then((res: any) => {
         if(res && !res.StatusCode && res.Response){
             const control = this.merchantInfoForm.controls['PricingPlanID'] as AbstractControl;
+            control.reset();
             (res.Response.length)? control.enable(): control.disable(); 
             this.pricingPlans = res.Response;
             
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
-  setPricingPlanName(title:string): void{
+  setPricingPlanName(): void{
+    const id = this.merchantInfoForm.controls['PricingPlanID'].value;
+    const title = this.pricingPlans.find(item=> item.PricingPlanID == id).PricingTitle
     this.merchantInfoForm.controls['PricingTitle'].setValue(title);
   }
 
