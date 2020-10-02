@@ -20,6 +20,7 @@ export class BottomSheetComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   selectedItem(id: number): void{
     if(this.selectedId != id){
       this.selected.emit(id);
@@ -29,5 +30,6 @@ export class BottomSheetComponent implements OnInit {
   }
   closeDrawer(): void{
     this.close.emit(false);
+    this.isOpen = false
   }
 }
