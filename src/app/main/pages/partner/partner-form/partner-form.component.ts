@@ -30,8 +30,11 @@ ngOnInit(): void{
 
 ngOnChanges(){
   if(this.partnerDetail){
-    this.createPartnerForm()
-    this.partnerForm.patchValue(this.partnerDetail)
+    if(!this.partnerForm){
+      this.createPartnerForm()
+    }else{
+      this.partnerForm.patchValue(this.partnerDetail)
+    }
   }
 }
 

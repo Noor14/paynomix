@@ -1,6 +1,6 @@
 <section class="bottomSheet">
     <ng-template [ngIf]="isOpen" >
-            <div class="overlay" (click)= "isOpen = false"></div>
+            <div class="overlay" (click)= "closeDrawer()"></div>
             <section class="sheet-body" [@slideInBottom]>
                 <section class="search mt-20" fxLayout="row">
                     <mat-form-field appearance="outline" fxFlex="100" >
@@ -16,7 +16,7 @@
                         <span>{{obj?.name}}</span>
                     </div>
                 </section>
-                <button mat-icon-button color="accent" class="close-button" (click)="isOpen = false">
+                <button mat-icon-button color="accent" class="close-button" (click)="closeDrawer()">
                     <mat-icon>close</mat-icon>
                 </button>
             </section>

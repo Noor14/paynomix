@@ -15,6 +15,7 @@ export class BottomSheetComponent implements OnInit {
   @Input() selectedId: number;
   @Input() drawerConfig: any = {};
   @Output() selected = new EventEmitter<number>();
+  @Output() close = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit(): void {
@@ -23,5 +24,8 @@ export class BottomSheetComponent implements OnInit {
     this.selected.emit(id);
     this.selectedId = id;
     this.isOpen = false;
+  }
+  closeDrawer(): void{
+    this.close.emit(false);
   }
 }
