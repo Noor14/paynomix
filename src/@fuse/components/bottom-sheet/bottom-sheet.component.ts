@@ -28,7 +28,7 @@ export class BottomSheetComponent implements OnInit {
     this.closeDrawer();
   }
   closeDrawer(): void{
-    this.close.emit(false);
     this.isOpen = false;
+    this.close.emit(this.isOpen);
   }
 }

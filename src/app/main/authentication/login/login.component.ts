@@ -29,10 +29,10 @@ export class LoginComponent implements OnInit
      * @param {MatSnackBar} _snackBar
      */
     constructor(
-        private _formBuilder: FormBuilder,
-        private _authService: AuthService,
-        private _router: Router,
-        private _snackBar: MatSnackBar
+        private readonly _formBuilder: FormBuilder,
+        private readonly _authService: AuthService,
+        private readonly _router: Router,
+        private readonly _snackBar: MatSnackBar
     )
     {
     }
