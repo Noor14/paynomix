@@ -35,7 +35,7 @@
 
 
         <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="center stretch">
-            <button mat-raised-button matStepperNext class="my-4"color="accent" [disabled]="merchantInfoForm.invalid"
+            <button mat-raised-button matStepperNext class="my-4"color="accent" [disabled]="!merchantInfoForm.valid"
                 aria-label="Next">
                 Next
             </button>
