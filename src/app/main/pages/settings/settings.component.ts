@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MerchantService } from '../merchant/merchant.service';
 import * as globalConfig from '../../../../constants/globalFunctions';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageUploaderOptions } from 'ngx-image-uploader';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -19,6 +19,19 @@ export class SettingsComponent implements OnInit, OnDestroy {
     icon: 'home',
     label: 'Search Merchant'
   });
+
+
+  imageOptions: ImageUploaderOptions = {
+    uploadUrl: 'https://fancy-image-uploader-demo.azurewebsites.net/api/demo/upload',
+    cropEnabled: true,
+    thumbnailResizeMode: 'fill',
+    autoUpload: false,
+    resizeOnLoad: false,
+    thumbnailWidth: 320,
+    thumbnailHeight: 200
+  };
+
+
   public settingForm: FormGroup;
   public globalConfig = globalConfig;
   public merchants: any= [];
@@ -82,29 +95,5 @@ export class SettingsComponent implements OnInit, OnDestroy {
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
-
-
-
-
-  // start for image croping
-  imageChangedEvent: any = '';
-    croppedImage: any = '';
-
-    fileChangeEvent(event: any): void {
-        this.imageChangedEvent = event;
-    }
-    imageCropped(event: ImageCroppedEvent) {
-        this.croppedImage = event.base64;
-    }
-    imageLoaded() {
-        // show cropper
-    }
-    cropperReady() {
-        // cropper ready
-    }
-    loadImageFailed() {
-        // show message
-    } 
-  // end for image croping 
 
 }

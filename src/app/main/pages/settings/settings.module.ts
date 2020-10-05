@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ImageCropperModule } from 'ngx-image-cropper';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -10,8 +9,7 @@ import { SettingsComponent } from './settings.component';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { BottomSheetModule } from '@fuse/components';
-
-
+import { ImageUploaderModule } from 'ngx-image-uploader';
 @NgModule({
   declarations: [SettingsComponent],
   imports: [
@@ -24,7 +22,7 @@ import { BottomSheetModule } from '@fuse/components';
     MatSelectModule,
     MatFormFieldModule,
     BottomSheetModule,
-    ImageCropperModule
+    ImageUploaderModule
   ]
 })
 export class SettingsModule { }

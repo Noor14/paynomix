@@ -4,19 +4,7 @@
 
     <section fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="start center">
         <div fxFlex.gt-sm="30" fxFlex.sm="30">
-            <input type="file" (change)="fileChangeEvent($event)" />
-                <image-cropper
-                    [imageChangedEvent]="imageChangedEvent"
-                    [maintainAspectRatio]="true"
-                    [aspectRatio]="4 / 3"
-                    format="png"
-                    (imageCropped)="imageCropped($event)"
-                    (imageLoaded)="imageLoaded()"
-                    (cropperReady)="cropperReady()"
-                    (loadImageFailed)="loadImageFailed()">
-            </image-cropper>
-
-<img [src]="croppedImage" />
+            <ngx-image-uploader [options]="imageOptions" #imageUploader></ngx-image-uploader>
         </div>
         
         <div fxFlex.gt-sm="70" fxFlex.sm="70" class="outer-layer mt-20 p-20">
