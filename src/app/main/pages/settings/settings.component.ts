@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MerchantService } from '../merchant/merchant.service';
 import * as globalConfig from '../../../../constants/globalFunctions';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -83,5 +84,27 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
 
 
+
+
+  // start for image croping
+  imageChangedEvent: any = '';
+    croppedImage: any = '';
+
+    fileChangeEvent(event: any): void {
+        this.imageChangedEvent = event;
+    }
+    imageCropped(event: ImageCroppedEvent) {
+        this.croppedImage = event.base64;
+    }
+    imageLoaded() {
+        // show cropper
+    }
+    cropperReady() {
+        // cropper ready
+    }
+    loadImageFailed() {
+        // show message
+    } 
+  // end for image croping 
 
 }
