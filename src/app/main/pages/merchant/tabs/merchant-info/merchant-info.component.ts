@@ -62,6 +62,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
             }else{
               this._snackBar.open('This reseller has no pricing plan yet', '', snackBarConfig);
               control.disable();
+              this.merchantInfoForm.controls.PricingTitle.reset();
             }  
             this.pricingPlans = res.Response;
         }
