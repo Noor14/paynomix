@@ -1,7 +1,7 @@
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatStepper } from '@angular/material/stepper';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -104,11 +104,26 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
       MerchantBusiness: (this.merchantDetail && this.merchantDetail.MerchantBusiness)? {...this.merchantDetail.MerchantBusiness, ...this.businessDetailForm.value}: {...this.businessDetailForm.value},
     };
   }
-  stepChange(event: MatStepper): void{
-    if(event.selectedIndex == 4){
+  stepChange(event: StepperSelectionEvent){
+    if(!event.previouslySelectedIndex && event.selectedIndex){
+    const result = false;
+      if(result){
+        if(event.selectedIndex == 4){
+          this.createBoardingObject();
+         }
+      }
+     else{
+        return false
+      }
+    }
+    else if(event.selectedIndex == 4){
       this.createBoardingObject();
     }
   }
+  // check(){
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  // }
   onSelected(event: number): void{
     if(!this.merchantDetail){
       this.merchantDetail = {

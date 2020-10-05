@@ -9,7 +9,6 @@ import { SettingsComponent } from './settings.component';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { BottomSheetModule } from '@fuse/components';
-import { ImageUploaderModule } from 'ngx-image-uploader';
 @NgModule({
   declarations: [SettingsComponent],
   imports: [
@@ -21,8 +20,7 @@ import { ImageUploaderModule } from 'ngx-image-uploader';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
-    BottomSheetModule,
-    ImageUploaderModule
+    BottomSheetModule
   ]
 })
 export class SettingsModule { }
