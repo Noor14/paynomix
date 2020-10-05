@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PricingPlanService } from 'app/main/pages/pricing-plan/pricing-plan.service';
-import { validator } from 'constants/globalFunctions';
+import { snackBarConfig, validator } from '../../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-merchant-info',
@@ -18,6 +19,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     * Constructor
     *
     * @param {FormBuilder} _formBuilder
+    * @param {MatSnackBar} _snackBar
     * @param {PricingPlanService} _pricingPlanService
     * 
     */
@@ -25,6 +27,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
    constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _pricingPlanService: PricingPlanService,
+    private readonly _snackBar: MatSnackBar
 
 ) {}
 
@@ -52,18 +55,22 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     this._pricingPlanService.pricingPlanList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode && res.Response){
-            const control = this.merchantInfoForm.controls['PricingPlanID'] as AbstractControl;
+            const control = this.merchantInfoForm.controls.PricingPlanID as AbstractControl;
             control.reset();
-            (res.Response.length)? control.enable(): control.disable(); 
+            if(res.Response.length){
+              control.enable();
+            }else{
+              this._snackBar.open('This reseller has no pricing plan yet', '', snackBarConfig);
+              control.disable();
+            }  
             this.pricingPlans = res.Response;
-            
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
   setPricingPlanName(): void{
-    const id = this.merchantInfoForm.controls['PricingPlanID'].value;
-    const title = this.pricingPlans.find(item=> item.PricingPlanID == id).PricingTitle
-    this.merchantInfoForm.controls['PricingTitle'].setValue(title);
+    const id = this.merchantInfoForm.controls.PricingPlanID.value;
+    const title = this.pricingPlans.find(item=> item.PricingPlanID == id).PricingTitle;
+    this.merchantInfoForm.controls.PricingTitle.setValue(title);
   }
 
   createMerchantInfoForm(): void{
