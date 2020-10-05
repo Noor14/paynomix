@@ -22,14 +22,15 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
 
   imageOptions: ImageUploaderOptions = {
-    uploadUrl: 'https://fancy-image-uploader-demo.azurewebsites.net/api/demo/upload',
     cropEnabled: true,
     thumbnailResizeMode: 'fill',
     autoUpload: false,
     resizeOnLoad: false,
     thumbnailWidth: 320,
-    thumbnailHeight: 200
-  };
+    thumbnailHeight: 200,
+    uploadUrl: 'http://some-server.com/upload',
+    allowedImageTypes: ['image/png', 'image/jpeg'],
+};
 
 
   public settingForm: FormGroup;
