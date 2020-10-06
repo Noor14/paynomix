@@ -120,20 +120,19 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
       this.createBoardingObject();
     }
   }
-  // check(){
-  //   event.preventDefault();
-  //   event.stopPropagation();
-  // }
+
   onSelected(event: number): void{
     if(!this.merchantDetail){
       this.merchantDetail = {
         ResellerId : event,
         MerchantAccountSetup: {
-        ResellerId : event
+        ResellerId : event,
+        resetPricingPlan: true
         }
       };
     }else{
       this.merchantDetail.ResellerId = event;
+      this.merchantDetail.MerchantAccountSetup.resetPricingPlan =  (this.merchantDetail.MerchantAccountSetup.resetPricingPlan == undefined)? false : true;
       this.merchantDetail.MerchantAccountSetup.ResellerId = this.merchantDetail.ResellerId;
       this.merchantDetail.MerchantAccountSetup = {...this.merchantDetail.MerchantAccountSetup};
     }
