@@ -10,7 +10,6 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { BottomSheetModule } from '@fuse/components';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { MatCardModule } from '@angular/material';
 @NgModule({
   declarations: [SettingsComponent],
   imports: [
@@ -24,7 +23,6 @@ import { MatCardModule } from '@angular/material';
     MatFormFieldModule,
     BottomSheetModule,
     NgxDropzoneModule,
-    MatCardModule
   ]
 })
 export class SettingsModule { }

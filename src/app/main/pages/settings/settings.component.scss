@@ -1,18 +1,26 @@
 .settings{
-    mat-card{
-        opacity: 0.7;
-        ngx-dropzone{
-            border-radius: 100%;
-            width: 160px;
-            height: 160px;
-            margin: auto;
-            border-color: #f4511e; // dynamic
-            ngx-dropzone-label{
-               .mat-icon{
-                   font-size: 40px;
-                   width: 40px;
-                   height: 40px;
-               } 
+    .mat-card{
+        .card-content{
+            opacity: 0.7;
+            ngx-dropzone{
+                border-radius: 100%;
+                width: 140px;
+                height: 140px;
+                margin: auto;
+                border-color: #f4511e; // dynamic
+                ngx-dropzone-label{
+                   .mat-icon{
+                       font-size: 40px;
+                       width: 40px;
+                       height: 40px;
+                   } 
+                }
+            }
+        }
+        ngx-dropzone-image-preview{
+            ngx-dropzone-remove-badge{
+                top: -10px;
+                right: 15px;
             }
         }
     } 

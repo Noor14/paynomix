@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
@@ -9,7 +9,8 @@ import * as globalConfig from '../../../../constants/globalFunctions';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  styleUrls: ['./settings.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SettingsComponent implements OnInit, OnDestroy {
 
@@ -18,7 +19,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     icon: 'home',
     label: 'Search Merchant'
   });
-
+  public bottomSheetEnable: boolean= true;
+  public bottomSheetDrawerOpen: boolean = false;
   public settingForm: FormGroup;
   public globalConfig = globalConfig;
   public merchants: any= [];
@@ -75,22 +77,31 @@ export class SettingsComponent implements OnInit, OnDestroy {
           this.merchants = res.Response.map((item: any) =>{
               return {
                 name: item.MerchantAccountSetup.MerchantUserName,
-                id: item.MerhcantId
+                id: item.MerchantId
               }
             })
+            console.log(this.merchants)
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
+
+  onSelected(event){
+    console.log(event)
+  }
+
+
+
+
 // start for image droper
 files: File[] = [];
  
-onSelect(event) {
+onFileSelect(event) {
   console.log(event);
   this.files.push(...event.addedFiles);
 }
  
-onRemove(event) {
+onFileRemove(event) {
   console.log(event);
   this.files.splice(this.files.indexOf(event), 1);
 }

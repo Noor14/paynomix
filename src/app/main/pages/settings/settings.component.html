@@ -4,19 +4,21 @@
 
     <section fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="start" fxLayoutAlign.gt-sm="start">
         <div fxFlex.gt-sm="30" fxFlex.sm="30" class="mt-20" [ngClass.sm]="'pr-20'" [ngClass.gt-sm]="'pr-20'">
-            <mat-card>
-                <mat-card-content class="text-center">
-                    <span class="text-secondry">Drag and Drop File or <span class="accent-fg">Browse</span>
-                    </span>
-                    <ngx-dropzone (change)="onSelect($event)" [accept]="'image/*'" class="my-12">
-                        <ngx-dropzone-label>
-                            <mat-icon class="accent-fg">cloud_upload</mat-icon>
-                        </ngx-dropzone-label>
-                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
-                        </ngx-dropzone-image-preview>
-                    </ngx-dropzone>
-                  </mat-card-content>
-              </mat-card>
+            <div class="mat-card text-center p-16">
+                <ng-container *ngIf="!files.length">
+                    <div class="card-content">
+                        <span class="text-secondry">Drag and Drop File or <span class="accent-fg">Browse</span>
+                        </span> 
+                        <ngx-dropzone (change)="onFileSelect($event)" [accept]="'image/*'" class="mt-8">
+                            <ngx-dropzone-label>
+                                <mat-icon class="accent-fg">cloud_upload</mat-icon>
+                            </ngx-dropzone-label>
+                        </ngx-dropzone>
+                    </div>
+                </ng-container>
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onFileRemove(f)">
+                </ngx-dropzone-image-preview>
+            </div>
         </div>
 
         <div fxFlex.gt-sm="70" fxFlex.sm="70" class="outer-layer mt-20 p-20">
@@ -103,6 +105,9 @@
           </form>
         </div>
     </section>
-
-    <app-bottom-sheet [repeatingItems]="merchants" [drawerConfig]="settingBottomSheetInfo"></app-bottom-sheet>
+    <ng-template [ngIf]="bottomSheetEnable">
+      <app-bottom-sheet [repeatingItems]="merchants" [drawerConfig]="settingBottomSheetInfo"
+      [isOpen]="bottomSheetDrawerOpen"
+      (selected)="onSelected($event)" (close)="bottomSheetDrawerOpen = $event"></app-bottom-sheet>
+    </ng-template>
 </section>
