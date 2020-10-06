@@ -2,10 +2,23 @@
     <h2>Settings</h2>
     <hr />
 
-    <section fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="start center" fxLayoutAlign.gt-sm="start center">
-        <div fxFlex.gt-sm="30" fxFlex.sm="30">
+    <section fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="start" fxLayoutAlign.gt-sm="start">
+        <div fxFlex.gt-sm="30" fxFlex.sm="30" class="mt-20" [ngClass.sm]="'pr-20'" [ngClass.gt-sm]="'pr-20'">
+            <mat-card>
+                <mat-card-content class="text-center">
+                    <span class="text-secondry">Drag and Drop Files Or <span               class="accent-fg">Browse</span>
+                    </span>
+                    <ngx-dropzone (change)="onSelect($event)" [accept]="'image/*'" class="my-12">
+                        <ngx-dropzone-label>
+                            <mat-icon class="accent-fg">cloud_upload</mat-icon>
+                        </ngx-dropzone-label>
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                        </ngx-dropzone-image-preview>
+                    </ngx-dropzone>
+                  </mat-card-content>
+              </mat-card>
         </div>
-        
+
         <div fxFlex.gt-sm="70" fxFlex.sm="70" class="outer-layer mt-20 p-20">
             <form fxLayout="column" fxLayoutAlign="start"
             fxFlex="1 0 auto" name="form" [formGroup]="settingForm">
