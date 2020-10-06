@@ -9,6 +9,11 @@ app-pages{
     .outer-layer{
         border: 1px solid #eee;
         border-radius: 3px;
+        .mat-form-field{
+          textarea{
+            resize: none;
+          }
+        }
     }
     .table-responsive {
         overflow-x: auto;
