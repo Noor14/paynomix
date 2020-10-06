@@ -127,12 +127,12 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
         ResellerId : event,
         MerchantAccountSetup: {
         ResellerId : event,
-        resetPricingPlan: true
+        resetPricingPlan: (this.bottomSheetEnable)? true: false
         }
       };
     }else{
       this.merchantDetail.ResellerId = event;
-      this.merchantDetail.MerchantAccountSetup.resetPricingPlan =  (this.merchantDetail.MerchantAccountSetup.resetPricingPlan == undefined)? false : true;
+      this.merchantDetail.MerchantAccountSetup.resetPricingPlan = (this.bottomSheetEnable)? true: false;
       this.merchantDetail.MerchantAccountSetup.ResellerId = this.merchantDetail.ResellerId;
       this.merchantDetail.MerchantAccountSetup = {...this.merchantDetail.MerchantAccountSetup};
     }
