@@ -46,6 +46,7 @@ export class MerchantEditComponent implements OnInit, OnDestroy {
       tap((res: any) => {
         this.merchantDetail = res.Response;
         this.merchantDetail.MerchantAccountSetup.ResellerId = this.merchantDetail.ResellerId;
+        this.merchantDetail.MerchantAccountSetup.resetPricingPlan = false;
       }),
     )
     .subscribe();
