@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MerchantService } from '../merchant/merchant.service';
 import * as globalConfig from '../../../../constants/globalFunctions';
-import { ImageUploaderOptions } from 'ngx-image-uploader';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -19,18 +18,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
     icon: 'home',
     label: 'Search Merchant'
   });
-
-
-  imageOptions: ImageUploaderOptions = {
-    uploadUrl: 'https://fancy-image-uploader-demo.azurewebsites.net/api/demo/upload',
-    cropEnabled: true,
-    thumbnailResizeMode: 'fill',
-    autoUpload: false,
-    resizeOnLoad: false,
-    thumbnailWidth: 320,
-    thumbnailHeight: 200
-  };
-
 
   public settingForm: FormGroup;
   public globalConfig = globalConfig;

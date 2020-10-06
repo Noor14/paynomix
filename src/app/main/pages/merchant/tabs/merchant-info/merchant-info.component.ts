@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PricingPlanService } from 'app/main/pages/pricing-plan/pricing-plan.service';
 import { snackBarConfig, validator } from '../../../../../../constants/globalFunctions';
+import { MerchantService } from '../../merchant.service';
 
 @Component({
   selector: 'app-merchant-info',
@@ -25,6 +26,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     */
    
    constructor(
+    private readonly _merchantService: MerchantService,
     private readonly _formBuilder: FormBuilder,
     private readonly _pricingPlanService: PricingPlanService,
     private readonly _snackBar: MatSnackBar
@@ -56,7 +58,9 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     .then((res: any) => {
         if(res && !res.StatusCode && res.Response){
             const control = this.merchantInfoForm.controls.PricingPlanID as AbstractControl;
-            control.reset();
+            if(this.merchantInfo.resetPricingPlan){
+              control.reset();
+            }
             if(res.Response.length){
               control.enable();
             }else{
@@ -84,4 +88,21 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
       IpAddress: ['192.168.0.142', Validators.required]
       });
   }
+
+
+  verifyMerchantExist(): void{
+    const obj = {
+      MerchantUserName: this.merchantInfoForm.controls.MerchantUserName.value,
+      Email: this.merchantInfoForm.controls.MerchantEmail.value,
+    };
+    this._merchantService.verifyMerchant(obj)
+    .then((res: any) => {
+      if(res && !res.StatusCode){
+        console.log(res)
+      }else{
+      }
+  }).catch((err: HttpErrorResponse)=>(console.log))
+  }
+
+
 }

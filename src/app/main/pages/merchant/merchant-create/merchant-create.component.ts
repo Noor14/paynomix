@@ -30,7 +30,6 @@ export class MerchantCreateComponent implements OnInit {
   }
 
   createMerchant(event: any): void{
-    console.log(event)
     this._merchantService.saveMerchant(event)
     .then((res: any) => {
       if(res && !res.StatusCode){

@@ -1,7 +1,7 @@
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatStepper } from '@angular/material/stepper';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -104,21 +104,35 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
       MerchantBusiness: (this.merchantDetail && this.merchantDetail.MerchantBusiness)? {...this.merchantDetail.MerchantBusiness, ...this.businessDetailForm.value}: {...this.businessDetailForm.value},
     };
   }
-  stepChange(event: MatStepper): void{
-    if(event.selectedIndex == 4){
+  stepChange(event: StepperSelectionEvent){
+    if(!event.previouslySelectedIndex && event.selectedIndex){
+    const result = false;
+      if(result){
+        if(event.selectedIndex == 4){
+          this.createBoardingObject();
+         }
+      }
+     else{
+        return false
+      }
+    }
+    else if(event.selectedIndex == 4){
       this.createBoardingObject();
     }
   }
+
   onSelected(event: number): void{
     if(!this.merchantDetail){
       this.merchantDetail = {
         ResellerId : event,
         MerchantAccountSetup: {
-        ResellerId : event
+        ResellerId : event,
+        resetPricingPlan: true
         }
       };
     }else{
       this.merchantDetail.ResellerId = event;
+      this.merchantDetail.MerchantAccountSetup.resetPricingPlan =  (this.merchantDetail.MerchantAccountSetup.resetPricingPlan == undefined)? false : true;
       this.merchantDetail.MerchantAccountSetup.ResellerId = this.merchantDetail.ResellerId;
       this.merchantDetail.MerchantAccountSetup = {...this.merchantDetail.MerchantAccountSetup};
     }
