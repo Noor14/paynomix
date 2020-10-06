@@ -9,14 +9,14 @@
                     <div class="card-content">
                         <span class="text-secondry">Drag and Drop File or <span class="accent-fg">Browse</span>
                         </span> 
-                        <ngx-dropzone (change)="onSelect($event)" [accept]="'image/*'" class="mt-8">
+                        <ngx-dropzone (change)="onFileSelect($event)" [accept]="'image/*'" class="mt-8">
                             <ngx-dropzone-label>
                                 <mat-icon class="accent-fg">cloud_upload</mat-icon>
                             </ngx-dropzone-label>
                         </ngx-dropzone>
                     </div>
                 </ng-container>
-                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onFileRemove(f)">
                 </ngx-dropzone-image-preview>
             </div>
         </div>
@@ -105,6 +105,9 @@
           </form>
         </div>
     </section>
-
-    <app-bottom-sheet [repeatingItems]="merchants" [drawerConfig]="settingBottomSheetInfo"></app-bottom-sheet>
+    <ng-template [ngIf]="bottomSheetEnable">
+      <app-bottom-sheet [repeatingItems]="merchants" [drawerConfig]="settingBottomSheetInfo"
+      [isOpen]="bottomSheetDrawerOpen"
+      (selected)="onSelected($event)" (close)="bottomSheetDrawerOpen = $event"></app-bottom-sheet>
+    </ng-template>
 </section>

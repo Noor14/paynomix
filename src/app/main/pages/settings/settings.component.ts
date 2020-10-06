@@ -19,7 +19,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     icon: 'home',
     label: 'Search Merchant'
   });
-
+  public bottomSheetEnable: boolean= true;
+  public bottomSheetDrawerOpen: boolean = false;
   public settingForm: FormGroup;
   public globalConfig = globalConfig;
   public merchants: any= [];
@@ -76,22 +77,31 @@ export class SettingsComponent implements OnInit, OnDestroy {
           this.merchants = res.Response.map((item: any) =>{
               return {
                 name: item.MerchantAccountSetup.MerchantUserName,
-                id: item.MerhcantId
+                id: item.MerchantId
               }
             })
+            console.log(this.merchants)
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
+
+  onSelected(event){
+    console.log(event)
+  }
+
+
+
+
 // start for image droper
 files: File[] = [];
  
-onSelect(event) {
+onFileSelect(event) {
   console.log(event);
   this.files.push(...event.addedFiles);
 }
  
-onRemove(event) {
+onFileRemove(event) {
   console.log(event);
   this.files.splice(this.files.indexOf(event), 1);
 }
