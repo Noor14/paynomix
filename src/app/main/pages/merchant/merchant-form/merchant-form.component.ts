@@ -6,6 +6,7 @@ import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ResellerService } from '../../reseller/reseller.service';
+import { MerchantService } from '../merchant.service';
 
 @Component({
   selector: 'app-merchant-form',
@@ -30,12 +31,12 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
   public resellers: any[] = [];
   private _unsubscribeAll: Subject<any>;
   public bottomSheetEnable: boolean = true;
-   
 
    /**
     * Constructor
     *
     * @param {ResellerService} _resellerService
+    * @param {MerchantService} _merchantService
     * @param {UserConfigService} _userConfigService
     * @param {ChangeDetectorRef} _cdref
     * 
@@ -43,6 +44,7 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
    
    constructor(
     private readonly _resellerService: ResellerService,
+    private readonly _merchantService: MerchantService,
     private readonly _userConfigService: UserConfigService,
     private readonly _cdref: ChangeDetectorRef,
 
@@ -70,7 +72,6 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
         }
       })
     }
-  
   }
 
   ngOnDestroy(): void{
@@ -106,19 +107,33 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
   }
   stepChange(event: StepperSelectionEvent){
     if(!event.previouslySelectedIndex && event.selectedIndex){
-    const result = false;
+      const result = false;
       if(result){
         if(event.selectedIndex == 4){
           this.createBoardingObject();
          }
       }
      else{
-        return false
+        return false;
+        this.verifyMerchantExist()
       }
     }
     else if(event.selectedIndex == 4){
       this.createBoardingObject();
     }
+  }
+  verifyMerchantExist(): void{
+    const obj = {
+      MerchantUserName: null,
+      Email: null,
+    };
+    this._merchantService.verifyMerchant(obj)
+    .then((res: any) => {
+      if(res && !res.StatusCode){
+        console.log(res)
+      }else{
+      }
+  }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
   onSelected(event: number): void{

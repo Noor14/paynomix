@@ -41,7 +41,7 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Make a Sale',
                 type     : 'item',
                 icon     : 'account_balance_wallet',
-                url      : '/samples'
+                url      : '/pages/sale'
             },
             {
                 id       : 'transaction',
