@@ -80,7 +80,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
                 id: item.MerchantId
               }
             })
-            console.log(this.merchants)
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
