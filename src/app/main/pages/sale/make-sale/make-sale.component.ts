@@ -11,7 +11,6 @@ declare var $;
 var cardnumber: any;
 var cardCvc: any;
 var cardExpiry: any;
-debugger;
 
 @Component({
   selector: 'app-make-sale',
