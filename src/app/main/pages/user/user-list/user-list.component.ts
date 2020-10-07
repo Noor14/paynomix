@@ -17,7 +17,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['Role', 'Username', 'Email', 'LastLogin', 'Action'];
+  public displayedColumns = ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin', 'Action'];
   public dataSource = new MatTableDataSource<any>();
   public users: any= [];
   private _unsubscribeAll: Subject<any>;
