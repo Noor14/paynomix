@@ -56,10 +56,14 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.complete();
   }
   getResellers(): void{
+    debugger;
     this._resellerService.resellerList(this._userConfigService.getUserMode())
     .then((res: any) => {
+      debugger;
           if(res && !res.StatusCode && res.Response && res.Response.length){
+            debugger;
           this.resellers = res.Response.map((item: any) => {
+            debugger;
             return {
               id: item.ResellerId, 
               name: item.ResellerName

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
-
+debugger;
 @Component({
   selector: 'app-bottom-sheet',
   templateUrl: './bottom-sheet.component.html',

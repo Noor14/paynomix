@@ -3,16 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { BaseService } from '@fuse/services/base.service';
 import { environment } from 'environments/environment';
 
+debugger;
 @Injectable({providedIn: 'root'})
-export class DashboardService extends BaseService {
+export class MakesaleService extends BaseService {
     constructor(_http: HttpClient) {
         super(_http);
        }
-
-       dasboardStats(obj: any): any{
+     
+     
+       getMerchantLocation(): any{
            debugger;
-        const url = `${environment.apiURL}dashboard/DashboardData`;
-         return this.post(url, obj);
+        const url = `${environment.apiURL}Location`;
+         return this.get(url);
         }
+      
     
 }

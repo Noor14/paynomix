@@ -1,0 +1,156 @@
+<section class="Make Sale w-100-p">
+    <h2>Make Sale</h2>
+    <hr />
+
+    <section fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="start center"
+     fxLayoutAlign.gt-sm="start center" style="padding-top: 60px;
+    padding-left: 20px;">
+        
+        
+        <div fxFlex.gt-sm="65" fxFlex.sm="65" class="abc">
+            <form fxLayout="column" fxLayoutAlign="start"
+            fxFlex="1 0 auto" name="form" >
+        
+                <div >
+                    <mat-form-field appearance="outline" fxFlex="80" >
+                        <mat-label>Transaction Amount</mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-error>Company is required!</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!-- for ach or cc toggle button -->
+                <div class="togglers" style="padding-bottom: 25px;" >
+                    <mat-button-toggle-group fxFlex="80" class="buttonToggle" name="fontStyle" 
+                        aria-label="Font Style" value="cc">
+                        <mat-button-toggle  fxFlex="50" class="Togglebankcard" value="cc" (click)="bankCard()"
+                           >
+                            Credit Card</mat-button-toggle>
+                        <mat-button-toggle  fxFlex="80" class="ToggleAch" value="ach" (click)="achCard()"
+                           >
+                            ACH</mat-button-toggle>
+                    </mat-button-toggle-group>
+                 
+                </div>
+                <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                    <mat-form-field appearance="outline" fxFlex="80">
+                        <mat-label>Company</mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-error>First Name is required!</mat-error>
+                    </mat-form-field>
+    
+                  
+                </div>
+                <div fxFlex="1 0 auto">
+                    <mat-form-field appearance="outline"  fxFlex="80">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-error>First Name is required!</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="1 0 auto">
+                    <mat-form-field appearance="outline" fxFlex="80">
+                        <mat-label>E-mail</mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-error>E-mail is required!</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="1 0 auto">
+                    <mat-form-field appearance="outline" fxFlex="80">
+                        <mat-label>Phone</mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-error>Phone is required!</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="1 0 auto">
+                    <mat-form-field appearance="outline" fxFlex="80" >
+                        <mat-label>Full Name</mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-error>First Name is required!</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+
+                    <mat-form-field appearance="outline" fxFlex="80">
+                        <mat-label>City</mat-label>
+                        <input matInput formControlName="city" required>
+                        <mat-error>City is required!</mat-error>
+                    </mat-form-field>
+
+                   
+                </div>
+                <div fxFlex="1 0 auto">
+                    <mat-form-field appearance="outline" fxFlex="80">
+                        <mat-label>Country</mat-label>
+                        <mat-select formControlName="Country">
+                            <mat-option [value]="'United States'">United States</mat-option>
+
+                        </mat-select>
+
+                    </mat-form-field>
+                </div>
+           
+    
+          </form>
+        </div>
+
+        
+
+        <div fxFlex="30" class="" style="padding-bottom: 210px;">
+            <div class="row" class="makeSaleACH">
+                <div class="makeSaleTotal">
+                    <p class="achTotal">Total </p>
+                    <b class="achTotalAmt">{{totalAmount | currency}}</b>
+                </div>
+                <hr style="width: 80%; color: #ccc;">
+                <br>
+                <div style="display: flex; justify-content: center;" *ngIf="!achButton">
+                    <img src="../../../../assets/images/logos/credit-cards-logos.png" style="width: 200px;">
+                </div>
+                <br *ngIf="!achButton">
+                <br *ngIf="!achButton">
+                <div class="example2" id="example-2" style="background-color:transparent">
+            
+                    <!-- Ach Form -->
+                    <form name="stripeForm"  id="stripeId"
+                     >
+                    <div class="row cardDetailTxt">
+                        <div>Cardholder Name</div>
+                    </div>
+                    <div class="row">
+                        <label>
+                            Name:
+                            <input type="text" >
+                          </label>
+                    </div>
+
+
+
+
+                    </form>
+
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <button [disabled]="processDisabled" type="submit"
+                        data-tid="elements_examples.form.pay_button" style="border: 0px; border-radius: 24px;
+                         cursor: pointer; 
+                         color: white; width: 90%; height: 40px;
+                         
+                         background-color:#23990c;" (click)="Paynow()">PROCESS
+                        {{totalAmount| currency}}</button>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+
+            </div>
+</div>
+
+
+
+
+<app-bottom-sheet [repeatingItems]="merchantLocationList" > </app-bottom-sheet>
+    </section>
+</section>
