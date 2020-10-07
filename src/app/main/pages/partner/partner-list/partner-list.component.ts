@@ -7,7 +7,7 @@ import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PartnerService } from '../partner.service';
-debugger;
+
 @Component({
   selector: 'app-partner-list',
   templateUrl: './partner-list.component.html',
@@ -37,7 +37,6 @@ export class PartnerListComponent implements OnInit, OnDestroy {
    }
   
     ngOnInit(): void {
-      debugger;
       this._userConfigService.userModeChange
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => this.getPartners())
@@ -50,7 +49,6 @@ export class PartnerListComponent implements OnInit, OnDestroy {
     }
   
     getPartners(): void{
-      debugger;
       this._partnerService.partnerList(this._userConfigService.getUserMode())
       .then((res: any) => {
           if(res && !res.StatusCode){

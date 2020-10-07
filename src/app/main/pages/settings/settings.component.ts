@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-debugger;
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',

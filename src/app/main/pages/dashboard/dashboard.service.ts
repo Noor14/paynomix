@@ -10,7 +10,6 @@ export class DashboardService extends BaseService {
        }
 
        dasboardStats(obj: any): any{
-           debugger;
         const url = `${environment.apiURL}dashboard/DashboardData`;
          return this.post(url, obj);
         }
