@@ -114,7 +114,8 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
          }
       }
      else{
-        return false
+        return false;
+        this.verifyMerchantExist()
       }
     }
     else if(event.selectedIndex == 4){

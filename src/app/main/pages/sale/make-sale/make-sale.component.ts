@@ -1,16 +1,9 @@
 
-import { Component, OnInit,ViewChild, NgModule, ElementRef } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { locationConfig } from 'constants/globalFunctions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MakesaleService } from '../../sale/sale.service';
-
-
-declare var $;
-
-var cardnumber: any;
-var cardCvc: any;
-var cardExpiry: any;
 
 @Component({
   selector: 'app-make-sale',
@@ -43,8 +36,7 @@ export class MakeSaleComponent implements OnInit {
   locationSelected = true;
   MerchantId = '';
   processDisabled = false;
-  // userId = localStorage.getItem('UserId');
-  // isMerchantSelect= false;
+
   States = locationConfig
 
   TransactionObject = [{
