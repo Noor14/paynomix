@@ -1,0 +1,44 @@
+<section class="setting-make-sale">
+    <div class="outer-layer p-20">
+        <form fxLayout="column" fxLayoutAlign="start"
+        fxFlex="1 0 auto" name="form">
+    
+            <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                    <mat-label>Merchant Name</mat-label>
+                  <mat-select>
+                    <mat-option>sdsd</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                    <mat-label>Merchant Location</mat-label>
+                    <mat-select>
+                        <mat-option >dgffgg</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="mat-card p-24 mb-16" fxLayout ="row row-wrap" fxLayoutAlign="start center" >
+                    <mat-checkbox class="my-4" fxFlex="25">Cardholder Name</mat-checkbox>
+                    <mat-checkbox class="my-4" fxFlex="25">Security Code (3-4 digit)</mat-checkbox>
+                    <mat-checkbox class="my-4" fxFlex="25">Street Address</mat-checkbox>
+                    <mat-checkbox class="my-4" fxFlex="25">Zip / Postal Code</mat-checkbox>
+                    <mat-checkbox class="my-4" fxFlex="25">Phone</mat-checkbox>
+                    <mat-checkbox class="my-4" fxFlex="25">Email Address</mat-checkbox>
+            </div>
+
+
+
+            <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
+                <button mat-raised-button class="my-4" color="accent" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
+                aria-label="Reset">
+                Reset
+                </button>
+                <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="save">
+                Save
+                </button>
+            </div>
+
+      </form>
+    </div>
+</section>

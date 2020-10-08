@@ -76,6 +76,11 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
         }
       })
     }
+
+    this.merchantInfoForm.statusChanges.subscribe((res)=>{
+      if(res == 'VALID'){
+      }
+    })
   }
 
   ngOnDestroy(): void{

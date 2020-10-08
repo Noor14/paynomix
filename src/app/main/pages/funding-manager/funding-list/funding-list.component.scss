@@ -1,0 +1,12 @@
+.fundingList{
+    .mat-tab-group{
+        .mat-tab-label-active{
+            color: #f4511e !important; //dynamic
+            background-color: rgba($color: #f4511e, $alpha: 0.05); //dynamic
+        }
+        .mat-ink-bar{
+            background-color: #f4511e !important; //dynamic
+        }
+    }
+
+}

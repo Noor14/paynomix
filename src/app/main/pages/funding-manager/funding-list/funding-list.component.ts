@@ -1,7 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
@@ -11,14 +9,14 @@ import { FundManagerService } from '../funding-manager.service';
 @Component({
   selector: 'app-funding-list',
   templateUrl: './funding-list.component.html',
-  styleUrls: ['./funding-list.component.scss']
+  styleUrls: ['./funding-list.component.scss'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class FundingListComponent implements OnInit, OnDestroy {
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   public displayedColumns = ['PartnerName', 'TotalTransAmount', 'PaynomixFee', 'AdminCommission', 'PartnerCommision', 'ResellerCommision', 'Status', 'Action'];
-  public dataSource = new MatTableDataSource<any>()
   public fundsList: any = [];
   private _unsubscribeAll: Subject<any>;
   
@@ -54,9 +52,6 @@ export class FundingListComponent implements OnInit, OnDestroy {
     .then((res: any) => {
         if(res && !res.StatusCode){
             this.fundsList = res.Response;
-            this.dataSource.data = this.fundsList;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
