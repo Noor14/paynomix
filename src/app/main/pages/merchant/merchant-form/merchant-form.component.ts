@@ -76,9 +76,6 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
         }
       })
     }
-
-    this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: true});
-
   }
 
   ngOnDestroy(): void{
