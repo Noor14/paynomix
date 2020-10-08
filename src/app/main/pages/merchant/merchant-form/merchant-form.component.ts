@@ -2,7 +2,9 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { UserConfigService } from '@fuse/services/user.config.service';
+import { snackBarConfigWarn } from 'constants/globalFunctions';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ResellerService } from '../../reseller/reseller.service';
@@ -38,6 +40,7 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
     * @param {ResellerService} _resellerService
     * @param {MerchantService} _merchantService
     * @param {UserConfigService} _userConfigService
+    * @param {MatSnackBar} _snackBar
     * @param {ChangeDetectorRef} _cdref
     * 
     */
@@ -47,6 +50,7 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
     private readonly _merchantService: MerchantService,
     private readonly _userConfigService: UserConfigService,
     private readonly _cdref: ChangeDetectorRef,
+    private readonly _snackBar: MatSnackBar
 
 ) { 
     // Set the private defaults
@@ -72,6 +76,9 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
         }
       })
     }
+
+    this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: true});
+
   }
 
   ngOnDestroy(): void{
@@ -105,33 +112,35 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
       MerchantBusiness: (this.merchantDetail && this.merchantDetail.MerchantBusiness)? {...this.merchantDetail.MerchantBusiness, ...this.businessDetailForm.value}: {...this.businessDetailForm.value},
     };
   }
-  stepChange(event: StepperSelectionEvent){
+  async stepChange(event: StepperSelectionEvent){
     if(!event.previouslySelectedIndex && event.selectedIndex){
-      const result = false;
+      const result = await this.verifyMerchantExist();
       if(result){
         if(event.selectedIndex == 4){
           this.createBoardingObject();
          }
       }
      else{
-        return false;
-        this.verifyMerchantExist()
+      this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: true});
       }
     }
     else if(event.selectedIndex == 4){
       this.createBoardingObject();
     }
   }
-  verifyMerchantExist(): void{
+
+  verifyMerchantExist(): boolean{
     const obj = {
-      MerchantUserName: null,
-      Email: null,
+      MerchantUserName: this.merchantInfoForm.controls.MerchantUserName.value,
+      Email: this.merchantInfoForm.controls.MerchantEmail.value,
     };
-    this._merchantService.verifyMerchant(obj)
+  return this._merchantService.verifyMerchant(obj)
     .then((res: any) => {
       if(res && !res.StatusCode){
         console.log(res)
       }else{
+        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
+        return false;
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   }
