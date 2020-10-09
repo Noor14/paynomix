@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit
                     localStorage.setItem('userInfo', JSON.stringify(res.Response));
                     this._router.navigate(['/pages/dashboard']);
                 }else{
-                    this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
+                    this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
                 }
             }).catch((err: HttpErrorResponse)=>(console.log))
         }else{

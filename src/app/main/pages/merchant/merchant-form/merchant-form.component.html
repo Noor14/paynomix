@@ -1,6 +1,6 @@
 <section class="merchantForm">
     <div class="outer-layer mt-20">
-        <mat-horizontal-stepper [linear]="true" #stepper (selectionChange) = "stepChange($event)">
+        <mat-horizontal-stepper linear #stepper (selectionChange) = "stepChange($event)">
             <mat-step label="Merchant Info" [stepControl]="merchantInfoForm">
                 <app-merchant-info [merchantInfo]="merchantDetail?.MerchantAccountSetup" (stepOne)="merchantInfoForm = $event"></app-merchant-info>
             </mat-step>
