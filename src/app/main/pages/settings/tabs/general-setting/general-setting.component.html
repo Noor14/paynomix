@@ -1,7 +1,7 @@
 <section class="general-setting p-16">
     <section class="make-sale">
         <mat-accordion class="example-headers-align" multi>
-            <mat-expansion-panel class="mb-8">
+            <mat-expansion-panel class="mb-8" [expanded]="step === 0" (opened)="setStep(0)">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="accent-fg">
                     Setting Make Sale
@@ -10,7 +10,7 @@
                 <app-make-sale-setting></app-make-sale-setting>
             </mat-expansion-panel>
    
-            <mat-expansion-panel class="mb-8">
+            <!-- <mat-expansion-panel class="mb-8" [expanded]="step === 1" (opened)="setStep(1)">
               <mat-expansion-panel-header>
                 <mat-panel-title class="accent-fg">
                   Other Setting
@@ -18,7 +18,7 @@
               </mat-expansion-panel-header>
           
                 Noor
-            </mat-expansion-panel>
+            </mat-expansion-panel> -->
 
           </mat-accordion>
     </section>

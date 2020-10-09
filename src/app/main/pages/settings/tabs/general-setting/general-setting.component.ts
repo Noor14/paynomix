@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneralSettingComponent implements OnInit {
 
+  public step: number = 0;
   constructor() { }
 
   ngOnInit() {
   }
 
+  setStep(index: number) {
+    this.step = index;
+  }
 }
