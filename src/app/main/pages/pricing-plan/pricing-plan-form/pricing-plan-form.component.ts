@@ -50,10 +50,11 @@ export class PricingPlanFormComponent implements OnInit, OnChanges {
       WireTransferFee: ['', Validators.required],
       GateWaySetupFee: ['', Validators.required],
       GateWayMonthlyAccess: ['', Validators.required],
-      GateWayTransactionFee: ['', Validators.required],
+      PerTransactionFee: ['', Validators.required],
+      PricingPlanType: ['', Validators.required],
       FeeAmount: ['', Validators.required],
       OtherFee: ['', Validators.required],
-      TransactionFee: ['', Validators.required],
+      TransactionFee: ['', [Validators.required, Validators.max(validator.maxPercentage)]],
       });
   }
   submit(){
