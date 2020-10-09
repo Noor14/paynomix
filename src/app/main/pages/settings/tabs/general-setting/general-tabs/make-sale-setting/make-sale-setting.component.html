@@ -18,16 +18,37 @@
                 </mat-form-field>
             </div>
 
-            <div class="mat-card p-24 mb-16" fxLayout ="row row-wrap" fxLayoutAlign="start center" >
-                    <mat-checkbox class="my-4" fxFlex="25">Cardholder Name</mat-checkbox>
-                    <mat-checkbox class="my-4" fxFlex="25">Security Code (3-4 digit)</mat-checkbox>
-                    <mat-checkbox class="my-4" fxFlex="25">Street Address</mat-checkbox>
-                    <mat-checkbox class="my-4" fxFlex="25">Zip / Postal Code</mat-checkbox>
-                    <mat-checkbox class="my-4" fxFlex="25">Phone</mat-checkbox>
-                    <mat-checkbox class="my-4" fxFlex="25">Email Address</mat-checkbox>
+            <div class="mat-card p-24 mb-16" 
+            fxLayout ="row wrap"  
+            fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center start" fxLayoutAlign="start" >
+                    <mat-checkbox class="my-4" fxFlex="25" 
+                    fxFlex.sm="50" fxFlex.lt-sm="100">
+                    Cardholder Name
+                   </mat-checkbox>
+                    <mat-checkbox class="my-4" fxFlex="25" 
+                    fxFlex.sm="50"
+                    fxFlex.lt-sm="100">
+                    Security Code (3-4 digit)
+                    </mat-checkbox>
+                    <mat-checkbox class="my-4" fxFlex="25" 
+                    fxFlex.sm="50"
+                    fxFlex.lt-sm="100">
+                    Street Address
+                   </mat-checkbox>
+                    <mat-checkbox class="my-4" fxFlex="25" 
+                    fxFlex.sm="50"
+                    fxFlex.lt-sm="100">
+                    Zip / Postal Code
+                    </mat-checkbox>
+                    <mat-checkbox class="my-4" fxFlex="25" 
+                    fxFlex.sm="50"
+                    fxFlex.lt-sm="100">
+                    Phone
+                   </mat-checkbox>
+                    <mat-checkbox class="my-4" fxFlex="25" 
+                    fxFlex.sm="50"
+                    fxFlex.lt-sm="100">Email Address</mat-checkbox>
             </div>
-
-
 
             <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
                 <button mat-raised-button class="my-4" color="accent" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
