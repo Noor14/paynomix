@@ -18,7 +18,7 @@ export class MerchantListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   public displayedColumns = ['CompanyName', 'Reseller', 'FirstName', 'Email', 'Phone', 'BoardedDate', 'BoardingStatus', 'Action'];
   public dataSource = new MatTableDataSource<any>()
-  public merchants: any= [];
+  public merchants: any [] = [];
   private _unsubscribeAll: Subject<any>;
 
     /**

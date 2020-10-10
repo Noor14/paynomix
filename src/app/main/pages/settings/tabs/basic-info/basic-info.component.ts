@@ -55,7 +55,7 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getDetail())
+    .subscribe()
   }
   
   ngOnDestroy(): void {
@@ -67,12 +67,7 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     this._merchantService.merchantList(this._userConfigService.getUserMode())
     .then((res: any) => {
         if(res && !res.StatusCode && res.Response && res.Response.length){
-          this.merchants = res.Response.map((item: any) =>{
-              return {
-                name: item.MerchantAccountSetup.MerchantUserName,
-                id: item.MerchantId
-              }
-            })
+          this.merchants = res.Response;
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }

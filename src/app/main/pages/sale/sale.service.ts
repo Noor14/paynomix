@@ -4,14 +4,14 @@ import { BaseService } from '@fuse/services/base.service';
 import { environment } from 'environments/environment';
 
 @Injectable({providedIn: 'root'})
-export class MakesaleService extends BaseService {
+export class SaleService extends BaseService {
     constructor(_http: HttpClient) {
         super(_http);
        }
-       getMerchantLocation(): any{
-        const url = `${environment.apiURL}Location`;
-         return this.get(url);
-        }
-      
-    
+
+    locationList(obj: any){
+    const url = `${environment.apiURL}Location/Search`;
+    return this.post(url, obj);
+    }
+   
 }

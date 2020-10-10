@@ -3,7 +3,7 @@ import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { locationConfig } from 'constants/globalFunctions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MakesaleService } from '../../sale/sale.service';
+import { SaleService } from '../../sale/sale.service';
 
 @Component({
   selector: 'app-make-sale',
@@ -85,8 +85,8 @@ export class MakeSaleComponent implements OnInit {
   // public merchantLocationList: any[] = [];
 
   constructor(
-    private _formBuilder: FormBuilder,
-    private _MakeAsaleService: MakesaleService,
+    private readonly _formBuilder: FormBuilder,
+    private readonly _saleService: SaleService,
   ) { }
 
   ngOnInit() {
@@ -106,14 +106,9 @@ export class MakeSaleComponent implements OnInit {
   }
 
   getLocations() {
-   
-    this._MakeAsaleService.getMerchantLocation().then((res: any) => {
-      if (res.StatusCode == 0) {
-          
-       
-        // this.merchantLocationList = res.Response;
+    this._saleService.locationList({}).then((res: any) => {
+      if (res && !res.StatusCode) {
         this.merchantLocationList = res.Response.map((item: any) => {
-        
           return {
             id: item.LocationId, 
             name: item.MerchantName

@@ -1,19 +1,19 @@
 <section class="setting-make-sale">
     <div class="outer-layer p-20">
         <form fxLayout="column" fxLayoutAlign="start"
-        fxFlex="1 0 auto" name="form">
+        fxFlex="1 0 auto" name="form" [formGroup]="makeSaleSettingForm">
     
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Merchant Name</mat-label>
-                  <mat-select>
-                    <mat-option>sdsd</mat-option>
+                  <mat-select formControlName="MerchantId" (selectionChange)="onMerchantSelect()">
+                    <mat-option *ngFor="let item of merchants" [value]="item.MerchantId">{{item?.MerchantAccountSetup?.MerchantUserName}}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Merchant Location</mat-label>
-                    <mat-select>
-                        <mat-option >dgffgg</mat-option>
+                    <mat-select formControlName="LocationId">
+                        <mat-option *ngFor="let item of locations" [value]="item.LocationId">{{item.DisplayName}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

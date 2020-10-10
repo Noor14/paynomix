@@ -10,10 +10,10 @@ export class GeneralSettingComponent implements OnInit {
   public step: number = 0;
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  setStep(index: number) {
+  setStep(index: number): void {
     this.step = index;
   }
 }
