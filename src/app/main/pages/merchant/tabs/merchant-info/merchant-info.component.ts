@@ -3,7 +3,8 @@ import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, OnChange
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PricingPlanService } from 'app/main/pages/pricing-plan/pricing-plan.service';
-import { snackBarConfig, validator } from '../../../../../../constants/globalFunctions';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { snackBarConfig, snackBarConfigWarn, validator } from '../../../../../../constants/globalFunctions';
 import { MerchantService } from '../../merchant.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     *
     * @param {FormBuilder} _formBuilder
     * @param {MatSnackBar} _snackBar
+    * @param {MerchantService} _merchantService
     * @param {PricingPlanService} _pricingPlanService
     * 
     */
@@ -28,12 +30,24 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
    constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _pricingPlanService: PricingPlanService,
+    private readonly _merchantService: MerchantService,
     private readonly _snackBar: MatSnackBar
 
 ) {}
 
  ngOnInit(): void {
   this.createMerchantInfoForm();
+  this.merchantInfoForm.valueChanges
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .subscribe(res=> {
+        if((res.MerchantUserName || res.MerchantEmail) && this.merchantInfoForm.valid){
+          console.log(`debounced text input value ${res}`);
+          this.verifyMerchantExist();
+        }
+      });
  }
 
   ngOnChanges(): void{
@@ -51,7 +65,22 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit(): void {
     this.stepOne.emit(this.merchantInfoForm);
   }
-
+  verifyMerchantExist(){
+    const obj = {
+      MerchantUserName: this.merchantInfoForm.controls.MerchantUserName.value,
+      Email: this.merchantInfoForm.controls.MerchantEmail.value,
+    };
+   this._merchantService.verifyMerchant(obj)
+    .then((res: any) => {
+      if(res && !res.StatusCode){
+        console.log(res)
+        this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: false})
+      }else{
+        this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: true})
+        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
+      }
+  }).catch((err: HttpErrorResponse)=>(console.log))
+  }
   getPricingPlans(obj): void{
     this._pricingPlanService.pricingPlanList(obj)
     .then((res: any) => {
