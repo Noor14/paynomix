@@ -1,20 +1,12 @@
-app-pages .outer-layer {
-   
-    border-radius: 3px;
-}
-.makeSaleACH{
-     margin-left: 0px; border: 1px solid #ccc;background:#FDFCFC; padding: 25px;
+.makeSale{
+    display: block !important;
+    .mat-button-toggle-checked {
+        background-color: #f4511e;
+        color: #fff!important;
+    }.btnMakesale{
+        border-radius: 25px !important;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23) !important;
+        padding: 3px 15px !important;
+        }
     
-    } 
-    .makeSaleTotal {
-        margin-left: -10px;
-     }
-     .example2 .input {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        bottom: 0;
-        padding-bottom: 7px;
-        color: #32325d;
-        background-color: transparent;
-    }
+}

@@ -1,129 +1,62 @@
-
-import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
-import { Subject } from 'rxjs';
-import { locationConfig } from 'constants/globalFunctions';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SaleService } from '../../sale/sale.service';
-
+import * as globalConfig from '../../../../../constants/globalFunctions';
 @Component({
   selector: 'app-make-sale',
   templateUrl: './make-sale.component.html',
   styleUrls: ['./make-sale.component.scss']
 })
 export class MakeSaleComponent implements OnInit {
-
-  merchantLocationList: any;
-
-  elements: any;
-  cardNumbers:any;
-  cardExpirys:any;
-  cardCvcs:any;
-  userQuestionUpdate = new Subject<string>();
-  @ViewChild('mainPage', { static: false }) mainPage: ElementRef;
-  public searchMerchantLocation: any;
-  public openSheet: boolean = false;
-  // public merchantLocationList: any[] = [];
-  public selectedLocationId;
-  form: FormGroup;
-  stripeform: FormGroup;
-  achForm: FormGroup;
-  secretkey: any;
-  stripe: any
-  transactionAmount = false;
-  stripeformValid = false;
   achButton = false;
-  totalAmount: any
-  locationSelected = true;
-  MerchantId = '';
-  processDisabled = false;
-
-  States = locationConfig
-
-  TransactionObject = [{
-    TransactionId: 0,
-    CustomerId: 2,
-    CustomerName: "",
-    InvoiceNo: "",
-    Amount: '',
-    StripeFee: 0,
-    PaynomixFee: 0,
-    PaymentType: "",
-    PaymentData: "",
-    TransactionType: 1,
-    CustomerEmail: "",
-    Status: 0,
-    StatusMessage: "",
-    DocId: "",
-    AppId: "",
-    ProfileId: 0,
-    CardholderName: "",
-    CardType: "",
-    Last4digit: "",
-    CurrencyCode: "",
-    Currency: "usd",
-    TransferGroup: "",
-    PaynomixKey: "",
-    OriginalChargeID: "",
-    Description: "",
-    ConnectedAccountID: "",
-    Phone: "",
-    Company: "",
-    Country: "",
-    ZipCode: "",
-    City: "",
-    State: "",
-    Address: "",
-    Stripe: "",
-    LocationId: '',
-    LocationName: '',
-    MerchantId: '',
-    // UserId: this.userId,
-  }
-  ]
- 
-
-  // public merchantLocationList: any[] = [];
-
+  public makeSaleForm: FormGroup;
+  public globalConfig = globalConfig;
+  public makeSaleFormAch: FormGroup;
+  public makeSaleFormCc: FormGroup;
   constructor(
-    private readonly _formBuilder: FormBuilder,
-    private readonly _saleService: SaleService,
+    private _formBuilder: FormBuilder,
   ) { }
 
+  public settingBottomSheetInfo: object = Object.freeze({
+    purpose: 'Please Select a Location',
+    icon: 'location_on',
+    label: 'Search Location'
+  });
+
   ngOnInit() {
-    this.getLocations();
-    this.form = this._formBuilder.group({
-      Company: ['', [Validators.pattern('[a-zA-Z ]*$')]],
-      CustomerName: [''],
-      Email: ['', [Validators.email]],
-      Phone: [''],
-      Country: [''],
-      ZipCode: ['', ''],
-      City: [''],
-      State: [this.States[0].name],
-      Address: [''],
-      Amount: [{ value: '', disabled: this.locationSelected }],
+   this.createMakeSaleForm();
+  }
+  bankCard() {
+   
+      this.achButton = false;
+    } 
+  achCard() {
+
+    this.achButton = true;
+  }
+  createMakeSaleForm(): void {
+    this.makeSaleForm = this._formBuilder.group({
+      Amount: ['', Validators.required],
+      Company: ['', Validators.required],
+      CustomerName: ['', Validators.required],
+      Email: ['', Validators.required],
+      Phone: ['', Validators.required],
+      Address: ['', Validators.required],
+      City: ['', Validators.required],
+      State: ['', Validators.required],
+      Country: ['', Validators.required]
+    });
+    this.makeSaleFormCc = this._formBuilder.group({
+      CardholderName: ['', Validators.required],
+      CardNumber: ['', Validators.required],
+      CardExpiration: ['', Validators.required],
+      SecurityCode:  ['', Validators.required],
+      StreetAddress:  ['', Validators.required],
+      ZipCode: ['', Validators.required]
+    });
+    this.makeSaleFormAch = this._formBuilder.group({
+      RoutingNumber:['', Validators.required],
+      AccountNumber: ['', Validators.required]
+     
     });
   }
-
-  getLocations() {
-    this._saleService.locationList({}).then((res: any) => {
-      if (res && !res.StatusCode) {
-        this.merchantLocationList = res.Response.map((item: any) => {
-          return {
-            id: item.LocationId, 
-            name: item.MerchantName
-          };
-        });
-        setTimeout(() => {
-          // const element = document.getElementsByClassName('bottomSheet')[0] as any;
-          // element.click();
-        }, 0)
-      }
-    })
-  }
-
-
-
-
-
 }
