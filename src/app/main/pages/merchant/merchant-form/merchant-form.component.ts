@@ -38,19 +38,15 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
     * Constructor
     *
     * @param {ResellerService} _resellerService
-    * @param {MerchantService} _merchantService
     * @param {UserConfigService} _userConfigService
-    * @param {MatSnackBar} _snackBar
     * @param {ChangeDetectorRef} _cdref
     * 
     */
    
    constructor(
     private readonly _resellerService: ResellerService,
-    private readonly _merchantService: MerchantService,
     private readonly _userConfigService: UserConfigService,
     private readonly _cdref: ChangeDetectorRef,
-    private readonly _snackBar: MatSnackBar
 
 ) { 
     // Set the private defaults
@@ -109,37 +105,10 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
       MerchantBusiness: (this.merchantDetail && this.merchantDetail.MerchantBusiness)? {...this.merchantDetail.MerchantBusiness, ...this.businessDetailForm.value}: {...this.businessDetailForm.value},
     };
   }
-  async stepChange(event: StepperSelectionEvent){
-    if(!event.previouslySelectedIndex && event.selectedIndex){
-      const result = await this.verifyMerchantExist();
-      if(result){
-        if(event.selectedIndex == 4){
-          this.createBoardingObject();
-         }
-      }
-     else{
-      this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: true});
-      }
-    }
-    else if(event.selectedIndex == 4){
+  stepChange(event: StepperSelectionEvent){
+    if(event.selectedIndex == 4){
       this.createBoardingObject();
     }
-  }
-
-  verifyMerchantExist(): boolean{
-    const obj = {
-      MerchantUserName: this.merchantInfoForm.controls.MerchantUserName.value,
-      Email: this.merchantInfoForm.controls.MerchantEmail.value,
-    };
-  return this._merchantService.verifyMerchant(obj)
-    .then((res: any) => {
-      if(res && !res.StatusCode){
-        console.log(res)
-      }else{
-        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
-        return false;
-      }
-  }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
   onSelected(event: number): void{

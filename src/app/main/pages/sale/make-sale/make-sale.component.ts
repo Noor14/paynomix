@@ -1,62 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as globalConfig from '../../../../../constants/globalFunctions';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AchInfoComponent } from '../sale-info/ach-info/ach-info.component';
+import { CreditcardInfoComponent } from '../sale-info/creditcard-info/creditcard-info.component';
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-make-sale',
   templateUrl: './make-sale.component.html',
   styleUrls: ['./make-sale.component.scss']
 })
-export class MakeSaleComponent implements OnInit {
-  achButton = false;
-  public makeSaleForm: FormGroup;
-  public globalConfig = globalConfig;
-  public makeSaleFormAch: FormGroup;
-  public makeSaleFormCc: FormGroup;
+export class MakeSaleComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  private componentRef: ComponentRef<any>;
+  public bottomSheetEnable: boolean =  true;
+  public bottomSheetDrawerOpen: boolean = true;
+
   constructor(
-    private _formBuilder: FormBuilder,
+    private readonly _resolver: ComponentFactoryResolver,
   ) { }
 
-  public settingBottomSheetInfo: object = Object.freeze({
+  public makeSaleBottomSheetInfo: object = Object.freeze({
     purpose: 'Please Select a Location',
     icon: 'location_on',
     label: 'Search Location'
   });
 
-  ngOnInit() {
-   this.createMakeSaleForm();
+  ngOnInit(): void{
   }
-  bankCard() {
-   
-      this.achButton = false;
-    } 
-  achCard() {
 
-    this.achButton = true;
+  ngAfterViewInit(): void{
+    this.renderingComponent(CreditcardInfoComponent);
   }
+  renderingComponent(type, data?) {
+    const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
+      this.container.clear();
+      this.componentRef = this.container.createComponent(factory);
+      this.componentRef.instance.data = data;
+  }
+  cardType(type: number): void{
+    (type)? this.renderingComponent(AchInfoComponent) : 
+    this.renderingComponent(CreditcardInfoComponent);
+  }
+
+  onSelected(event: number): void{
+    console.log(event)
+  }
+
   createMakeSaleForm(): void {
-    this.makeSaleForm = this._formBuilder.group({
-      Amount: ['', Validators.required],
-      Company: ['', Validators.required],
-      CustomerName: ['', Validators.required],
-      Email: ['', Validators.required],
-      Phone: ['', Validators.required],
-      Address: ['', Validators.required],
-      City: ['', Validators.required],
-      State: ['', Validators.required],
-      Country: ['', Validators.required]
-    });
-    this.makeSaleFormCc = this._formBuilder.group({
-      CardholderName: ['', Validators.required],
-      CardNumber: ['', Validators.required],
-      CardExpiration: ['', Validators.required],
-      SecurityCode:  ['', Validators.required],
-      StreetAddress:  ['', Validators.required],
-      ZipCode: ['', Validators.required]
-    });
-    this.makeSaleFormAch = this._formBuilder.group({
-      RoutingNumber:['', Validators.required],
-      AccountNumber: ['', Validators.required]
-     
-    });
+ 
   }
 }

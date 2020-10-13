@@ -6,6 +6,9 @@
 
 app-pages{
     width: 100%;
+    .accent-alpha-bg{
+      background-color: rgba($color: #f4511e, $alpha: 0.03) !important; // dynamic
+    }
     .outer-layer{
         border: 1px solid #eee;
         border-radius: 3px;

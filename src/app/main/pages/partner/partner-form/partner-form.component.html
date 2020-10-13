@@ -1,7 +1,6 @@
 <section class="partnerForm">
     <div class="outer-layer mt-20 p-20">
-        <form fxLayout="column" fxLayoutAlign="start"
-        fxFlex="1 0 auto" name="form" [formGroup]="partnerForm">
+        <form fxLayout="column" fxLayoutAlign="start" name="form" [formGroup]="partnerForm">
     
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
@@ -113,7 +112,7 @@
            
 
             <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
-                <button mat-raised-button class="my-4" color="accent" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
+                <button mat-raised-button class="my-4 accent-fg accent-alpha-bg" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
                 aria-label="Cancel" [routerLink]="'/pages/partner/partner-list'">
                 Cancel
                 </button>
