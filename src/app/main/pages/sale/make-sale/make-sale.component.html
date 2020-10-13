@@ -1,177 +1,50 @@
 <section class="makeSale w-100-p">
     <h2>Make Sale</h2>
     <hr />
-    <div class=" mt-20 p-20 outer-layer"  fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between " fxLayoutAlign.gt-sm="space-between " fxFlex="1 0 auto">
-        <div fxFlex.gt-sm="60" fxFlex.sm="60" >
-            <form fxLayout="column" fxLayoutAlign="start"
-            fxFlex="1 0 auto" name="makeSaleForm" [formGroup]="makeSaleForm">
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline" fxFlex.gt-sm="100" fxFlex.sm="100" >
-                        <mat-label>Transaction Amount</mat-label>
-                        <input matInput formControlName="Amount" required>
-                        <mat-error>Transaction Amount is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                 <!-- for ach or cc toggle button -->
-                 <div class="togglers" style="padding-bottom: 25px;" >
-                    <mat-button-toggle-group  fxFlex.gt-sm="100" fxFlex.sm="100"class="buttonToggle"     name="fontStyle" 
-                        aria-label="Font Style" value="cc" >
-                        <mat-button-toggle  fxFlex.gt-sm="50" fxFlex.sm="50" class="Togglebankcard " value="cc" 
-                            (click)="bankCard()"> Credit Card
-                        </mat-button-toggle>
-                        <mat-button-toggle   fxFlex.gt-sm="50" fxFlex.sm="50" class="ToggleAch" value="ach" (click)="achCard()">ACH</mat-button-toggle>
-                    </mat-button-toggle-group>
-                </div>
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline" fxFlex.gt-sm="100" fxFlex.sm="100" >
-                        <mat-label>Company</mat-label>
-                        <input matInput formControlName="Company" required>
-                        <mat-error>Company is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label>Customer Name</mat-label>
-                        <input matInput formControlName="CustomerName" required>
-                        <mat-error>Customer Name is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                        <mat-label> E-mail</mat-label>
-                        <input matInput formControlName="Email" required>
-                        <mat-error> E-mail is required!</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                        <mat-label>Phone</mat-label>
-                        <input matInput formControlName="Phone" required>
-                        <mat-error>Phone is required!</mat-error>
-                    </mat-form-field> 
-                </div>
-                 <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label>Address</mat-label>
-                        <textarea matInput formControlName="Address" required></textarea>
-                        <mat-error> Address is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                 <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label>City</mat-label>
-                        <input matInput formControlName="City" required>
-                        <mat-error>City is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                        <mat-label>States</mat-label>
-                        <mat-select formControlName="State" required>
-                            <mat-option [value]="item.name" *ngFor="let item of globalConfig?.locationConfig?.states">{{item.name}}</mat-option>
-                        </mat-select>
-                        <mat-error>States is required!</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                        <mat-label>Country</mat-label>
-                        <mat-select formControlName="Country">
-                            <mat-option [value]="'United States'">United States</mat-option>
-                        </mat-select>
-                        <mat-error>Country is required!</mat-error>
-                    </mat-form-field> 
-                </div>
-          </form>
+    <div class="mt-20 p-20 outer-layer" 
+    fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" 
+    fxLayoutAlign="start stretch" fxLayoutAlign.sm="space-between start" fxLayoutAlign.gt-sm="space-between start">
+        
+        <div fxFlex.gt-sm="60" fxFlex.sm="60" fxFlex="100"
+         fxLayout="column" fxLayoutAlign="start stretch"
+         [ngClass.sm]="'pr-12'" [ngClass.gt-sm]="'pr-12'">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Transaction Amount</mat-label>
+                <input matInput required>
+                <mat-error>Transaction Amount is required!</mat-error>
+            </mat-form-field>
+
+            <mat-button-toggle-group class="mb-24" (change)="cardType($event.value)">
+                <mat-button-toggle class="w-50-p" [value]="0" checked="true"> Credit Card
+                </mat-button-toggle>
+                <mat-button-toggle class="w-50-p" [value]="1">ACH</mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <app-personal-info></app-personal-info>
+
         </div>
-        <div fxFlex.gt-sm="40" fxFlex.sm="40" >
-            <div class="outer-layer ml-20"  fxLayout="column" fxLayoutAlign="center stretch">
-                <div fxLayout="row" fxLayoutAlign="space-between center" class="mx-40 my-20">
+
+
+        <div fxFlex.gt-sm="40" fxFlex.sm="40" fxFlex="100" 
+        fxLayout="column" fxLayoutAlign="start stretch"
+        [ngClass.sm]="'pl-12'" [ngClass.gt-sm]="'pl-12'">
+            <div class="outer-layer p-20">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
                     <span>Total</span>
                     <span>price</span>
                 </div> 
-                <hr style="display: block; width: 80%;">
-                    <div class="mx-auto my-8" *ngIf="!achButton">
-                        <img src="../../../../assets/images/credit-cards-logos.png">
-                    </div>
-            <form class="mx-20"fxLayout="column" fxLayoutAlign="start"
-                fxFlex="1 0 auto" name="makeSaleFormCc" [formGroup]="makeSaleFormCc"  *ngIf="!achButton">
-                
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label>Cardholder Name</mat-label>
-                        <input matInput formControlName="CardholderName" required>
-                        <mat-error>Cardholder Name is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label>Card Number</mat-label>
-                        <input matInput formControlName="CardNumber" required>
-                        <mat-error>Card Number is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label>Card Expiration</mat-label>
-                        <input matInput formControlName="CardExpiration" required>
-                        <mat-error>CiCard Expiration is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label> Security Code</mat-label>
-                        <input matInput formControlName="SecurityCode" required>
-                        <mat-error>Security Code is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label>Street Address</mat-label>
-                        <input matInput formControlName="StreetAddress" required>
-                        <mat-error>Street Address is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label> Zip Code </mat-label>
-                        <input matInput formControlName="ZipCode" required>
-                        <mat-error> Zip Code is required!</mat-error>
-                    </mat-form-field>
-                </div>
-            </form>
-             <form class="mx-20"fxLayout="column" fxLayoutAlign="start"
-                fxFlex="1 0 auto" name="makeSaleFormAch" [formGroup]="makeSaleFormAch"  *ngIf="achButton">
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label>Routing Number</mat-label>
-                        <input matInput formControlName="RoutingNumber" required>
-                        <mat-error>Routing Number is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
-                        <mat-label>Account Number</mat-label>
-                        <input matInput formControlName="AccountNumber" required>
-                        <mat-error>Account Number is required!</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center stretch" fxLayoutAlign.sm=" center" fxLayoutAlign.gt-sm=" center"  >
-                    <div class="mb-12">
-                        <img src="../../../../assets/images/routing.png">
-                    </div>
-                </div>
-               
-            </form>
-            <div fxLayout="row" class="mb-20" fxLayoutAlign="center">
-                <button mat-raised-button  class="btnMakesale accent">
-                    Process
-                </button>
+                <hr />
+                <ng-template #renderingContainer></ng-template>
             </div>
         </div>
+
     </div>
 
 
-<app-bottom-sheet [repeatingItems]="merchants" [drawerConfig]="settingBottomSheetInfo"
-[isOpen]="bottomSheetDrawerOpen"
-(selected)="onSelected($event)" (close)="bottomSheetDrawerOpen = $event"></app-bottom-sheet>
-
-<!-- <app-bottom-sheet [repeatingItems]="merchantLocationList" > </app-bottom-sheet> -->
-    </div>
+    <ng-template [ngIf]="bottomSheetEnable">
+        <app-bottom-sheet [repeatingItems]="merchants" [drawerConfig]="makeSaleBottomSheetInfo"
+        [isOpen]="bottomSheetDrawerOpen"
+        (selected)="onSelected($event)" (close)="bottomSheetDrawerOpen = $event"></app-bottom-sheet>
+    </ng-template>
 </section>

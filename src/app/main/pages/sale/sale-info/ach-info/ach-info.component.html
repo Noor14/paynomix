@@ -1,0 +1,29 @@
+<section class="ach-info" [@fadeInOut]>
+        <form fxLayout="column" fxLayoutAlign="center stretch"
+        name="Form" [formGroup]="achForm">
+        
+            <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
+                <mat-label>Routing Number</mat-label>
+                <input matInput formControlName="RoutingNumber" required>
+                <mat-error>Routing Number is required!</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline"  fxFlex.gt-sm="100" fxFlex.sm="100">
+                <mat-label>Account Number</mat-label>
+                <input matInput formControlName="AccountNumber" required>
+                <mat-error>Account Number is required!</mat-error>
+            </mat-form-field>
+            
+            <div class="mx-auto my-8">
+                <img src="../../../../assets/images/routing.png">
+            </div>
+    
+            
+            <div fxLayout="row" fxLayoutAlign="center">
+                <button fxFlex="100" mat-raised-button class="processBtn accent-alpha-bg accent-fg">
+                    Process
+                </button>
+            </div>
+
+        </form>
+</section>
