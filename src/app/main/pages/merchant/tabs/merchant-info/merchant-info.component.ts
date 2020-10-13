@@ -37,17 +37,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
 
  ngOnInit(): void {
   this.createMerchantInfoForm();
-  this.merchantInfoForm.valueChanges
-      .pipe(
-        debounceTime(400),
-        distinctUntilChanged()
-      )
-      .subscribe(res=> {
-        if((res.MerchantUserName || res.MerchantEmail) && this.merchantInfoForm.valid){
-          console.log(`debounced text input value ${res}`);
-          this.verifyMerchantExist();
-        }
-      });
+  this.detectControlChanges()
  }
 
   ngOnChanges(): void{
@@ -56,6 +46,9 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
         this.createMerchantInfoForm();
         this.stepOne.emit(this.merchantInfoForm);
       }else{
+        if(this.merchantInfo.AccountSetupId){
+          this.merchantInfoForm.controls.MerchantEmail.disable();
+        }
         this.merchantInfoForm.patchValue(this.merchantInfo);
       }
       this.getPricingPlans({ResellerId: this.merchantInfo.ResellerId});
@@ -65,16 +58,43 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit(): void {
     this.stepOne.emit(this.merchantInfoForm);
   }
+
+  detectControlChanges(): void{
+    this.merchantInfoForm.get('MerchantUserName').valueChanges
+    .pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    )
+    .subscribe(res=> {
+      if(res && !this.merchantInfo.MerchantUserName){
+        this.verifyMerchantExist();
+      }else if(res && this.merchantInfo.MerchantUserName != res ){
+        this.verifyMerchantExist();
+      }
+    });
+
+    this.merchantInfoForm.get('MerchantEmail').valueChanges
+    .pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    )
+    .subscribe(res=> {
+      if(res && res.match(validator.emailPattern) && !this.merchantInfo.MerchantEmail){
+        this.verifyMerchantExist();
+      }
+    });
+  }
+
+
   verifyMerchantExist(){
     const obj = {
       MerchantUserName: this.merchantInfoForm.controls.MerchantUserName.value,
-      Email: this.merchantInfoForm.controls.MerchantEmail.value,
+      Email: (this.merchantInfo && this.merchantInfo.AccountSetupId)? '': this.merchantInfoForm.controls.MerchantEmail.value,
     };
    this._merchantService.verifyMerchant(obj)
     .then((res: any) => {
       if(res && !res.StatusCode){
-        console.log(res)
-        this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: false})
+        this.merchantInfoForm.controls.MerchantUserName.setErrors(null)
       }else{
         this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: true})
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
@@ -110,7 +130,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     this.merchantInfoForm = this._formBuilder.group({
       AccountSetupId: [0, Validators.required],
       MerchantUserName: ['', Validators.required],
-      MerchantEmail: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
+      MerchantEmail: [{value:'', disabled: false}, [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
       PricingPlanID: [{value: '', disabled: true}, Validators.required],
       PricingTitle: ['', Validators.required],
       IpAddress: ['192.168.0.142', Validators.required]

@@ -8,7 +8,7 @@
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                 <mat-label>Company Name</mat-label>
                 <input matInput formControlName="MerchantUserName" required>
-                <mat-error>Company Name is required!</mat-error>
+                <mat-error *ngIf="merchantInfoForm.get('MerchantUserName').hasError('required')">Company Name is required!</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
