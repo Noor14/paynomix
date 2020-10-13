@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-creditcard-info',
   templateUrl: './creditcard-info.component.html',
-  styleUrls: ['./creditcard-info.component.scss']
+  styleUrls: ['./creditcard-info.component.scss'],
+  animations   : fuseAnimations
+
 })
 export class CreditcardInfoComponent implements OnInit {
 
