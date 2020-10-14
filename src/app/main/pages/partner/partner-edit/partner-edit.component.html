@@ -1,5 +1,13 @@
-<section class="EditPartner w-100-p">
-    <h2>Edit Partner</h2>
+<section class="editPartner w-100-p">
+    <h2>Partner Information</h2>
     <hr />
-    <app-partner-form [partnerDetail]="partnerInfo" (submitForm)="updatePartner($event)"></app-partner-form>
+    <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="Edit Partner">
+            <app-partner-form [partnerDetail]="partnerInfo" (submitForm)="updatePartner($event)"></app-partner-form>
+        </mat-tab>
+        <mat-tab label="Pricing Plan">
+           <app-pricing-plan-list [getPricingPlanBy] = "{PartnerId: partnerInfo?.PartnerId}"></app-pricing-plan-list>
+        </mat-tab>
+    </mat-tab-group>
+    
 </section>

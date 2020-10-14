@@ -7,7 +7,16 @@
 app-pages{
     width: 100%;
     .accent-alpha-bg{
-      background-color: rgba($color: #f4511e, $alpha: 0.03) !important; // dynamic
+      background-color: rgba($color: #f4511e, $alpha: 0.02) !important; // dynamic
+    }
+    .mat-tab-group{
+      .mat-tab-label-active{
+          color: #f4511e !important; //dynamic
+          background-color: rgba($color: #f4511e, $alpha: 0.05); //dynamic
+      }
+      .mat-ink-bar{
+          background-color: #f4511e !important; //dynamic
+      }
     }
     .outer-layer{
         border: 1px solid #eee;

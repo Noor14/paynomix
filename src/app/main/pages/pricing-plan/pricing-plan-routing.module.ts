@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PricingPlanListComponent } from './pricing-plan-list/pricing-plan-list.component';
 import { PricingPlanCreateComponent } from './pricing-plan-create/pricing-plan-create.component';
 import { PricingPlanEditComponent } from './pricing-plan-edit/pricing-plan-edit.component';
+import { PricingPlanComponent } from './pricing-plan/pricing-plan.component';
 
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'pricing-plan-list',
-    component: PricingPlanListComponent
+    component: PricingPlanComponent
   },
   {
     path: 'pricing-plan-create',

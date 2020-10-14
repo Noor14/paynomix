@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { PartnerRoutingModule } from './partner-routing.module';
 import { PartnerListComponent } from './partner-list/partner-list.component';
 import { MatTableModule } from '@angular/material/table';
@@ -15,9 +14,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { PartnerFormComponent } from './partner-form/partner-form.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
 
 @NgModule({
-  declarations: [PartnerListComponent, PartnerEditComponent, PartnerCreateComponent, PartnerFormComponent],
+  declarations: [
+    PartnerListComponent, 
+    PartnerEditComponent, 
+    PartnerCreateComponent, 
+    PartnerFormComponent
+  ],
   imports: [
     CommonModule,
     PartnerRoutingModule,
@@ -29,7 +35,9 @@ import { PartnerFormComponent } from './partner-form/partner-form.component';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
+    MatTabsModule,
     MatFormFieldModule,
+    PricingPlanModule
 
   ]
 })
