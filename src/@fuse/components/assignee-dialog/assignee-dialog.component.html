@@ -1,7 +1,7 @@
 <div class="dialog-content-wrapper">
     <mat-toolbar class="mat-accent">
         <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title">Select Partner</span>
+            <span class="title">Select {{data?.AssignTo}}</span>
             <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
                 <mat-icon>close</mat-icon>
             </button>
@@ -13,7 +13,9 @@
             <mat-form-field appearance="outline">
                 <mat-label>Select</mat-label>
                 <mat-select [formControl]="toppingsControl" multiple>
-                  <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                  <mat-option *ngFor="let item of data?.AssigneeList" [value]="item.id">
+                      {{item.name}}
+                </mat-option>
                 </mat-select>
               </mat-form-field>
 

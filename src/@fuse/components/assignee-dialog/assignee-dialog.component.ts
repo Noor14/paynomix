@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormControl} from '@angular/forms';
+
 @Component({
   selector: 'app-assignee-dialog',
   templateUrl: './assignee-dialog.component.html',
@@ -8,10 +9,14 @@ import {FormControl} from '@angular/forms';
 })
 export class AssigneeDialogComponent implements OnInit {
   toppingsControl = new FormControl([]);
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  @Input() data: any;
+
   constructor() { }
 
   ngOnInit() {
+    if(this.data){
+
+    }
   }
  
 
