@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,13 +15,14 @@ import { PricingPlanService } from '../pricing-plan.service';
   templateUrl: './pricing-plan-list.component.html',
   styleUrls: ['./pricing-plan-list.component.scss']
 })
-export class PricingPlanListComponent implements OnInit, OnDestroy {
+export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['PricingTitle','Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'TransactionFee', 'Assigned', 'Action'];
+  public displayedColumns = ['PricingTitle','Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'TransactionFee', 'AssignCount', 'Action'];
   public dataSource = new MatTableDataSource<any>();
   public pricingPlans: any[] = [];
+  @Input() getPricingPlanBy: any;
   private _unsubscribeAll: Subject<any>;
 
     /**
@@ -34,16 +35,23 @@ export class PricingPlanListComponent implements OnInit, OnDestroy {
    constructor(
      private readonly _pricingPlanService: PricingPlanService,
      private readonly _userConfigService: UserConfigService,
-     private dialog: MatDialog
+     private readonly _dialog: MatDialog
  ) { 
            // Set the private defaults
            this._unsubscribeAll = new Subject();
  }
 
   ngOnInit(): void {
-    this._userConfigService.userModeChange
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getPricingPlans())
+    // this._userConfigService.userModeChange
+    // .pipe(takeUntil(this._unsubscribeAll))
+    // .subscribe(() => this.getPricingPlans(this._userConfigService.getUserMode()))
+  }
+
+  ngOnChanges(): void{
+    if(this.getPricingPlanBy && Object.keys(this.getPricingPlanBy).length && 
+    Object.values(this.getPricingPlanBy).toString()){
+      this.getPricingPlans(this.getPricingPlanBy)
+    }
   }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
@@ -53,13 +61,13 @@ export class PricingPlanListComponent implements OnInit, OnDestroy {
 
 
   openDialog() {
-    this.dialog.open(AssigneeDialogComponent, {width: '550px'});
+    this._dialog.open(AssigneeDialogComponent, {width: '550px'});
   }
 
 
 
-  getPricingPlans(): void{
-    this._pricingPlanService.pricingPlanList(this._userConfigService.getUserMode())
+  getPricingPlans(obj: any): void{
+    this._pricingPlanService.pricingPlanList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
             this.pricingPlans = res.Response;
