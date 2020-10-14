@@ -62,7 +62,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
   detectControlChanges(): void{
     this.merchantInfoForm.get('MerchantUserName').valueChanges
     .pipe(
-      debounceTime(300),
+      debounceTime(500),
       distinctUntilChanged()
     )
     .subscribe(res=> {
@@ -75,7 +75,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.merchantInfoForm.get('MerchantEmail').valueChanges
     .pipe(
-      debounceTime(300),
+      debounceTime(500),
       distinctUntilChanged()
     )
     .subscribe(res=> {
@@ -94,7 +94,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
    this._merchantService.verifyMerchant(obj)
     .then((res: any) => {
       if(res && !res.StatusCode){
-        this.merchantInfoForm.controls.MerchantUserName.setErrors(null)
+        delete this.merchantInfoForm.controls.MerchantUserName.errors.notUnique;
       }else{
         this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: true})
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
@@ -130,7 +130,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     this.merchantInfoForm = this._formBuilder.group({
       AccountSetupId: [0, Validators.required],
       MerchantUserName: ['', Validators.required],
-      MerchantEmail: [{value:'', disabled: false}, [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
+      MerchantEmail: [{value: '', disabled: false}, [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
       PricingPlanID: [{value: '', disabled: true}, Validators.required],
       PricingTitle: ['', Validators.required],
       IpAddress: ['192.168.0.142', Validators.required]
