@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { snackBarConfig } from 'constants/globalFunctions';
@@ -10,7 +10,8 @@ import { PartnerService } from '../partner.service';
 @Component({
   selector: 'app-partner-edit',
   templateUrl: './partner-edit.component.html',
-  styleUrls: ['./partner-edit.component.scss']
+  styleUrls: ['./partner-edit.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PartnerEditComponent implements OnInit, OnDestroy {
 
