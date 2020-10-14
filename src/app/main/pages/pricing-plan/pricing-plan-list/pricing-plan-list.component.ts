@@ -70,7 +70,8 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   openDialog() {
-    this._dialog.open(AssigneeDialogComponent, {width: '550px'});
+   const dialogRef = this._dialog.open(AssigneeDialogComponent, {width: '550px'});
+   dialogRef.componentInstance.data = this.assignPricingPlan;
   }
 
 
@@ -94,7 +95,12 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
    return this._partnerService.partnerList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
-            return res.Response;
+            return res.Response.map((item: any) => {
+              return {
+                id: item.PartnerId, 
+                name: item.PartnerName
+              };
+            });
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
@@ -103,7 +109,12 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
    return this._resellerService.resellerList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
-            return res.Response;
+            return res.Response.map((item: any) => {
+              return {
+                id: item.ResellerId, 
+                name: item.ResellerName
+              };
+            });
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
@@ -112,7 +123,12 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     return this._merchantService.merchantList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
-            return  res.Response;
+            return  res.Response.map((item: any) => {
+              return {
+                id: item.MerchantId, 
+                name: item.MerchantAccountSetup.MerchantUserName
+              };
+            });
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
