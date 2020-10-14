@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, OnChanges, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PricingPlanService } from 'app/main/pages/pricing-plan/pricing-plan.service';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { snackBarConfig, snackBarConfigWarn, validator } from '../../../../../../constants/globalFunctions';
 import { MerchantService } from '../../merchant.service';
 
@@ -12,11 +13,13 @@ import { MerchantService } from '../../merchant.service';
   templateUrl: './merchant-info.component.html',
   styleUrls: ['./merchant-info.component.scss']
 })
-export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
+export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   public pricingPlans: any[] = [];
   public merchantInfoForm: FormGroup;
   @Input() merchantInfo: any = null;
   @Output() stepOne = new EventEmitter<any>();
+  private _unsubscribeAll: Subject<any>;
+
    /**
     * Constructor
     *
@@ -33,11 +36,13 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     private readonly _merchantService: MerchantService,
     private readonly _snackBar: MatSnackBar
 
-) {}
+) {
+   // Set the private defaults
+   this._unsubscribeAll = new Subject();
+}
 
  ngOnInit(): void {
   this.createMerchantInfoForm();
-  this.detectControlChanges()
  }
 
   ngOnChanges(): void{
@@ -59,9 +64,15 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
     this.stepOne.emit(this.merchantInfoForm);
   }
 
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next();
+    this._unsubscribeAll.complete();
+  }
   detectControlChanges(): void{
     this.merchantInfoForm.get('MerchantUserName').valueChanges
     .pipe(
+      takeUntil(this._unsubscribeAll),
       debounceTime(500),
       distinctUntilChanged()
     )
@@ -75,6 +86,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.merchantInfoForm.get('MerchantEmail').valueChanges
     .pipe(
+      takeUntil(this._unsubscribeAll),
       debounceTime(500),
       distinctUntilChanged()
     )
@@ -101,6 +113,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   }
+
   getPricingPlans(obj): void{
     this._pricingPlanService.pricingPlanList(obj)
     .then((res: any) => {
@@ -120,6 +133,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
+
   setPricingPlanName(): void{
     const id = this.merchantInfoForm.controls.PricingPlanID.value;
     const title = this.pricingPlans.find(item=> item.PricingPlanID == id).PricingTitle;
@@ -135,6 +149,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges {
       PricingTitle: ['', Validators.required],
       IpAddress: ['192.168.0.142', Validators.required]
       });
+    this.detectControlChanges();
   }
 
 }
