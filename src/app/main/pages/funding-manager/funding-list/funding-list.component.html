@@ -8,10 +8,10 @@
     <hr />
     <mat-tab-group mat-align-tabs="start">
       <mat-tab label="Pending Fund">
-        <app-non-funded-table [nonFundedList]="fundsList" [displayedColumns]= "displayedColumns"></app-non-funded-table>
+        <ng-template #renderingContainerNonFunded></ng-template>
       </mat-tab>
       <mat-tab label="Funded">
-        <app-funded-table [fundedList]="fundsList" [displayedColumns]= "displayedColumns"></app-funded-table>
+        <ng-template #renderingContainerFunded></ng-template>
       </mat-tab>
   </mat-tab-group>
 </section>
