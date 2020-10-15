@@ -2,11 +2,11 @@ import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
-  selector: 'app-non-funded',
-  templateUrl: './non-funded.component.html',
-  styleUrls: ['./non-funded.component.scss']
+  selector: 'app-non-funded-table',
+  templateUrl: './non-funded-table.component.html',
+  styleUrls: ['./non-funded-table.component.scss']
 })
-export class NonFundedComponent implements OnInit, OnChanges {
+export class NonFundedTableComponent implements OnInit, OnChanges {
   public dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

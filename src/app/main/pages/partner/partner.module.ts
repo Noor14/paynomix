@@ -16,14 +16,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { PartnerFormComponent } from './partner-form/partner-form.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
+import { PartnerTableComponent } from './partner-table/partner-table.component';
+import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 
 @NgModule({
   declarations: [
     PartnerListComponent, 
     PartnerEditComponent, 
     PartnerCreateComponent, 
-    PartnerFormComponent
+    PartnerFormComponent, 
+    PartnerTableComponent,
   ],
+  entryComponents:[PartnerTableComponent],
   imports: [
     CommonModule,
     PartnerRoutingModule,
@@ -37,8 +41,7 @@ import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
     MatSelectModule,
     MatTabsModule,
     MatFormFieldModule,
-    PricingPlanModule
-
+    PricingPlanModule,
   ]
 })
 export class PartnerModule { }

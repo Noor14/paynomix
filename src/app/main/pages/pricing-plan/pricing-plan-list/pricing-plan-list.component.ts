@@ -1,16 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { AssigneeDialogComponent } from '@fuse/components/assignee-dialog/assignee-dialog.component';
+import { ChangeDetectorRef, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnChanges, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MerchantService } from '../../merchant/merchant.service';
 import { PartnerService } from '../../partner/partner.service';
 import { ResellerService } from '../../reseller/reseller.service';
+import { PricingPlanTableComponent } from '../pricing-plan-table/pricing-plan-table.component';
 import { PricingPlanService } from '../pricing-plan.service';
 
 @Component({
@@ -20,10 +17,9 @@ import { PricingPlanService } from '../pricing-plan.service';
 })
 export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'TransactionFee', 'AssignCount', 'Action'];
-  public dataSource = new MatTableDataSource<any>();
+  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  private componentRef: ComponentRef<any>;
+
   public pricingPlans: any[] = [];
   @Input() getPricingPlanBy: any;
   @Input() headerVisibility: boolean = true;
@@ -35,6 +31,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     *
     * @param {PricingPlanService} _pricingPlanService
     * @param {UserConfigService} _userConfigService
+    * @param {ComponentFactoryResolver} _resolver
     * @param {MerchantService} _merchantService
     * @param {ResellerService} _resellerService
     * @param {PartnerService} _partnerService
@@ -46,25 +43,24 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
      private readonly _merchantService: MerchantService,
      private readonly _resellerService: ResellerService,
      private readonly _partnerService: PartnerService,
-     private readonly _cdref: ChangeDetectorRef,
-     private readonly _dialog: MatDialog
+    private readonly _resolver: ComponentFactoryResolver,
+    private readonly _cdref: ChangeDetectorRef,
  ) { 
            // Set the private defaults
            this._unsubscribeAll = new Subject();
  }
 
   ngOnInit(): void {
-    this._cdref.detectChanges();
-    this._userConfigService.userModeChange
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => {
-      this.getPricingPlanBy = this._userConfigService.getUserMode();
-      this.getPricingPlans(this.getPricingPlanBy);
-    });
+    // this._cdref.detectChanges();
+    // this._userConfigService.userModeChange
+    // .pipe(takeUntil(this._unsubscribeAll))
+    // .subscribe(() => {
+    //   this.getPricingPlanBy = this._userConfigService.getUserMode();
+    //   this.getPricingPlans(this.getPricingPlanBy);
+    // });
   }
 
   ngOnChanges(): void{
-    console.log('jdhj')
     if (this.getPricingPlanBy && 
       Object.keys(this.getPricingPlanBy).length && 
       Object.values(this.getPricingPlanBy).toString()){
@@ -86,22 +82,25 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     this._unsubscribeAll.complete();
   }
 
-  openDialog() {
-   const dialogRef = this._dialog.open(AssigneeDialogComponent, {width: '550px'});
-   dialogRef.componentInstance.data = this.assignPricingPlan;
+ renderingComponent(type, data?) {
+    const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
+      this.container.clear();
+      this.componentRef = this.container.createComponent(factory);
+      this.componentRef.instance.data = data;
   }
-
-
   getPricingPlans(obj: any): void{
     this._pricingPlanService.pricingPlanList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
           if(res.Response && res.Response.length){
             this.pricingPlans = res.Response;
-            this.dataSource.data = this.pricingPlans;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
             this.assignPricingPlan = this.assignPlan(obj);
+            this.renderingComponent(PricingPlanTableComponent, {
+              pricingPlans: this.pricingPlans,
+              assignPricingPlan: this.assignPricingPlan
+            })
+          }else{
+            this.renderingComponent(NoFoundComponent)
           }
 
         }

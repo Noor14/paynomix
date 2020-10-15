@@ -15,7 +15,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit {
   public bottomSheetDrawerOpen: boolean = true;
 
   constructor(
-    private readonly _resolver: ComponentFactoryResolver,
+    private readonly _resolver: ComponentFactoryResolver
   ) { }
 
   public makeSaleBottomSheetInfo: object = Object.freeze({

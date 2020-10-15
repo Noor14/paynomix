@@ -1,11 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { PartnerTableComponent } from '../partner-table/partner-table.component';
 import { PartnerService } from '../partner.service';
 
 @Component({
@@ -14,10 +13,8 @@ import { PartnerService } from '../partner.service';
   styleUrls: ['./partner-list.component.scss']
 })
 export class PartnerListComponent implements OnInit, OnDestroy {
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['PartnerName', 'DBAName', 'FirstName', 'LastName', 'Action'];
-  public dataSource = new MatTableDataSource<any>()
+  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  private componentRef: ComponentRef<any>;
   public partners: any = [];
   private _unsubscribeAll: Subject<any>;
   
@@ -26,11 +23,14 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       *
       * @param {PartnerService} _partnerService
       * @param {UserConfigService} _userConfigService
+      * @param {ComponentFactoryResolver} _resolver
       */
      
      constructor(
        private readonly _partnerService: PartnerService,
-       private readonly _userConfigService: UserConfigService
+       private readonly _userConfigService: UserConfigService,
+      private readonly _resolver: ComponentFactoryResolver,
+
    ) { 
              // Set the private defaults
              this._unsubscribeAll = new Subject();
@@ -47,16 +47,26 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       this._unsubscribeAll.next();
       this._unsubscribeAll.complete();
     }
+    renderingComponent(type, data?) {
+      const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
+        this.container.clear();
+        this.componentRef = this.container.createComponent(factory);
+        this.componentRef.instance.data = data;
+    }
   
     getPartners(): void{
       this._partnerService.partnerList(this._userConfigService.getUserMode())
       .then((res: any) => {
-          if(res && !res.StatusCode){
-              this.partners = res.Response;
-              this.dataSource.data = this.partners;
-              this.dataSource.paginator = this.paginator;
-              this.dataSource.sort = this.sort;
+        if(res && !res.StatusCode){
+          if(res.Response && res.Response.length){
+            this.partners = res.Response;
+            this.renderingComponent(PartnerTableComponent,{
+              partners: this.partners,
+            })
+          }else{
+            this.renderingComponent(NoFoundComponent)
           }
+        }
       }).catch((err: HttpErrorResponse)=>(console.log))
     }
 
