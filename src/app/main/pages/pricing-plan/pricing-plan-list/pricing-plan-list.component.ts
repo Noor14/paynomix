@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -22,11 +22,11 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['PricingTitle','Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'TransactionFee', 'AssignCount', 'Action'];
+  public displayedColumns = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'TransactionFee', 'AssignCount', 'Action'];
   public dataSource = new MatTableDataSource<any>();
   public pricingPlans: any[] = [];
   @Input() getPricingPlanBy: any;
-  @Input() headerVisibility: boolean= true;
+  @Input() headerVisibility: boolean = true;
   private _unsubscribeAll: Subject<any>;
   public assignPricingPlan: any = {}
 
@@ -46,6 +46,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
      private readonly _merchantService: MerchantService,
      private readonly _resellerService: ResellerService,
      private readonly _partnerService: PartnerService,
+     private readonly _cdref: ChangeDetectorRef,
      private readonly _dialog: MatDialog
  ) { 
            // Set the private defaults
@@ -53,17 +54,32 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
  }
 
   ngOnInit(): void {
-    // this._userConfigService.userModeChange
-    // .pipe(takeUntil(this._unsubscribeAll))
-    // .subscribe(() => this.getPricingPlans(this._userConfigService.getUserMode()))
+    this._cdref.detectChanges();
+    this._userConfigService.userModeChange
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe(() => {
+      this.getPricingPlanBy = this._userConfigService.getUserMode();
+      this.getPricingPlans(this.getPricingPlanBy);
+    });
   }
 
   ngOnChanges(): void{
-    if(this.getPricingPlanBy && Object.keys(this.getPricingPlanBy).length && 
-    Object.values(this.getPricingPlanBy).toString()){
-      this.getPricingPlans(this.getPricingPlanBy)
+    console.log('jdhj')
+    if (this.getPricingPlanBy && 
+      Object.keys(this.getPricingPlanBy).length && 
+      Object.values(this.getPricingPlanBy).toString()){
+      this.getPricingPlans(this.getPricingPlanBy);
     }
+    // else if(!this.getPricingPlanBy || !Object.keys(this.getPricingPlanBy).length){
+    //   this._userConfigService.userModeChange
+    //   .pipe(takeUntil(this._unsubscribeAll))
+    //   .subscribe(() => {
+    //     this.getPricingPlanBy = this._userConfigService.getUserMode();
+    //     this.getPricingPlans(this.getPricingPlanBy);
+    //   });
+    // }
   }
+
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
@@ -137,10 +153,10 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
 
   assignPlan(obj: any): any{
     const object:any = {};
-    if(obj
-      && !Object.keys(obj).length){
+    if(!obj || (obj
+      && !Object.keys(obj).length)){
         object.AssignTo = 'Partner';
-        this.getPartners(obj).then(res => object.AssigneeList = res)
+        this.getPartners(obj).then(res => object.AssigneeList = res);
       }
       else if(obj
         && obj.hasOwnProperty('PartnerId')){

@@ -39,7 +39,7 @@ export class MerchantListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getMerchants())
+    .subscribe(() => this.getMerchants());
   }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
