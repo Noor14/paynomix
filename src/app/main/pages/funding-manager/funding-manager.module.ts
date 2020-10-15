@@ -12,10 +12,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { FundedTableComponent } from './tabs/funded-table/funded-table.component';
 import { NonFundedTableComponent } from './tabs/non-funded-table/non-funded-table.component';
+import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 
 
 @NgModule({
   declarations: [FundingListComponent, FundedTableComponent, NonFundedTableComponent],
+  entryComponents: [FundedTableComponent, NonFundedTableComponent],
   imports: [
     CommonModule,
     FundingManagerRoutingModule,
@@ -26,7 +28,8 @@ import { NonFundedTableComponent } from './tabs/non-funded-table/non-funded-tabl
     MatButtonModule,
     MatTabsModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    NoFoundModule
   ]
 })
 export class FundingManagerModule { }

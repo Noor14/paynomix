@@ -31,7 +31,7 @@
         <!-- Last Login Column -->
         <ng-container matColumnDef="LastLogin">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Login </th>
-          <td mat-cell *matCellDef="let row"> {{row.LastLogin | date : 'medium'}}</td>
+          <td mat-cell *matCellDef="let row"> {{row?.LastLogin | date : 'medium' || '--'}}</td>
         </ng-container>
         
         <!-- Action Column -->
