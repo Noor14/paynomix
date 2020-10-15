@@ -1,11 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { UserTableComponent } from '../user-table/user-table.component';
 import { UserService } from '../user.service';
 
 @Component({
@@ -14,11 +13,9 @@ import { UserService } from '../user.service';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit, OnDestroy {
+  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  private componentRef: ComponentRef<any>;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin', 'Action'];
-  public dataSource = new MatTableDataSource<any>();
   public users: any= [];
   private _unsubscribeAll: Subject<any>;
 
@@ -27,11 +24,13 @@ export class UserListComponent implements OnInit, OnDestroy {
      *
      * @param {ResellerService} _resellerService
      * @param {UserConfigService} _userConfigService
+     * @param {ComponentFactoryResolver} _resolver
      */
     
     constructor(
       private readonly _userService: UserService,
-      private readonly _userConfigService: UserConfigService
+      private readonly _userConfigService: UserConfigService,
+      private readonly _resolver: ComponentFactoryResolver
   ) { 
             // Set the private defaults
             this._unsubscribeAll = new Subject();
@@ -48,16 +47,25 @@ export class UserListComponent implements OnInit, OnDestroy {
       this._unsubscribeAll.next();
       this._unsubscribeAll.complete();
   }
-
+  renderingComponent(type, data?) {
+    const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
+      this.container.clear();
+      this.componentRef = this.container.createComponent(factory);
+      this.componentRef.instance.data = data;
+  }
   getUsers(): void{
     this._userService.userList(this._userConfigService.getUserMode())
     .then((res: any) => {
-        if(res && !res.StatusCode){
-            this.users = res.Response;
-            this.dataSource.data = this.users;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
+      if(res && !res.StatusCode){
+        if(res.Response && res.Response.length){
+          this.users = res.Response;
+          this.renderingComponent(UserTableComponent,{
+            users: this.users,
+          })
+        }else{
+          this.renderingComponent(NoFoundComponent)
         }
+      }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 

@@ -7,15 +7,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatButtonModule } from '@angular/material/button';
-import { FundedComponent } from './tabs/funded/funded.component';
-import { NonFundedComponent } from './tabs/non-funded/non-funded.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { FundedTableComponent } from './tabs/funded-table/funded-table.component';
+import { NonFundedTableComponent } from './tabs/non-funded-table/non-funded-table.component';
 
 
 @NgModule({
-  declarations: [FundingListComponent, FundedComponent, NonFundedComponent],
+  declarations: [FundingListComponent, FundedTableComponent, NonFundedTableComponent],
   imports: [
     CommonModule,
     FundingManagerRoutingModule,

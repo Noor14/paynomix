@@ -1,4 +1,4 @@
-<section class="funded mt-20">
+<section class="non-funded mt-20">
     <div class="table-responsive mat-card">
         <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
           
@@ -52,7 +52,11 @@
                     <mat-icon class="secondary-text">more_vert</mat-icon>
                   </button>
                   <mat-menu #menu="matMenu" xPosition="before">
-                    <button mat-menu-item (click)="openDialog()">
+                    <button mat-menu-item >
+                      <mat-icon class="secondary-text">edit</mat-icon>
+                      <span>Fund Now</span>
+                    </button>
+                    <button mat-menu-item>
                       <mat-icon class="secondary-text">how_to_reg</mat-icon>
                       <span>Go to Fund Detail</span>
                     </button>

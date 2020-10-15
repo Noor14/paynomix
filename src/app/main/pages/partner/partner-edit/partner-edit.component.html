@@ -6,7 +6,7 @@
             <app-partner-form [partnerDetail]="partnerInfo" (submitForm)="updatePartner($event)"></app-partner-form>
         </mat-tab>
         <mat-tab label="Pricing Plan">
-           <app-pricing-plan-list [getPricingPlanBy] = "{PartnerId: partnerInfo?.PartnerId}"></app-pricing-plan-list>
+           <app-pricing-plan-list [headerVisibility]="false" [getPricingPlanBy] = "{PartnerId: partnerInfo?.PartnerId}"></app-pricing-plan-list>
         </mat-tab>
     </mat-tab-group>
     

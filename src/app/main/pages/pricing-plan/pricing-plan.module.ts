@@ -18,7 +18,8 @@ import { PricingPlanFormComponent } from './pricing-plan-form/pricing-plan-form.
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AssigneeDialogModule } from '@fuse/components';
-import { PricingPlanComponent } from './pricing-plan/pricing-plan.component';
+import { PricingPlanTableComponent } from './pricing-plan-table/pricing-plan-table.component';
+import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { PricingPlanComponent } from './pricing-plan/pricing-plan.component';
     PricingPlanCreateComponent, 
     PricingPlanEditComponent, 
     PricingPlanFormComponent, 
-    PricingPlanComponent
+    PricingPlanTableComponent,
+  ],
+  entryComponents: [
+    PricingPlanTableComponent,
   ],
   exports: [
     PricingPlanListComponent, 
@@ -45,7 +49,8 @@ import { PricingPlanComponent } from './pricing-plan/pricing-plan.component';
     MatSelectModule,
     MatFormFieldModule,
     AssigneeDialogModule,
-    MatDialogModule
+    MatDialogModule,
+    NoFoundModule
   ]
 })
 export class PricingPlanModule { }
