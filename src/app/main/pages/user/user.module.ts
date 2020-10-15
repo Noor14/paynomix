@@ -9,10 +9,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatIconModule } from '@angular/material/icon';
+import { UserTableComponent } from './user-table/user-table.component';
+import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 
 
 @NgModule({
-  declarations: [UserListComponent],
+  declarations: [UserListComponent, UserTableComponent],
+  entryComponents :[UserTableComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -22,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     FuseSharedModule,
     MatIconModule,
+    NoFoundModule
   ]
 })
 export class UserModule { }

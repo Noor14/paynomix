@@ -1,11 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ResellerTableComponent } from '../../reseller/reseller-table/reseller-table.component';
+import { MerchantTableComponent } from '../merchant-table/merchant-table.component';
 import { MerchantService } from '../merchant.service';
 
 @Component({
@@ -14,11 +14,9 @@ import { MerchantService } from '../merchant.service';
   styleUrls: ['./merchant-list.component.scss']
 })
 export class MerchantListComponent implements OnInit, OnDestroy {
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['CompanyName', 'Reseller', 'FirstName', 'Email', 'Phone', 'BoardedDate', 'BoardingStatus', 'Action'];
-  public dataSource = new MatTableDataSource<any>();
-  public merchants: any [] = [];
+  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  private componentRef: ComponentRef<any>;
+  public merchants:any[] = [];
   private _unsubscribeAll: Subject<any>;
 
     /**
@@ -26,11 +24,13 @@ export class MerchantListComponent implements OnInit, OnDestroy {
     *
     * @param {MerchantService} _merchantService
     * @param {UserConfigService} _userConfigService
+    *  @param {ComponentFactoryResolver} _resolver
     */
    
    constructor(
      private readonly _merchantService: MerchantService,
-     private readonly _userConfigService: UserConfigService
+     private readonly _userConfigService: UserConfigService,
+     private readonly _resolver: ComponentFactoryResolver
  ) { 
            // Set the private defaults
            this._unsubscribeAll = new Subject();
@@ -46,16 +46,27 @@ export class MerchantListComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
+  renderingComponent(type, data?) {
+    const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
+      this.container.clear();
+      this.componentRef = this.container.createComponent(factory);
+      this.componentRef.instance.data = data;
+  }
 
   getMerchants(): void{
     this._merchantService.merchantList(this._userConfigService.getUserMode())
     .then((res: any) => {
-        if(res && !res.StatusCode){
-            this.merchants = res.Response;
-            this.dataSource.data = this.merchants;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
+      if(res && !res.StatusCode){
+        if(res.Response && res.Response.length){
+          this.merchants = res.Response;
+          this.renderingComponent(MerchantTableComponent,{
+            merchants: this.merchants,
+          })
+        }else{
+          this.renderingComponent(NoFoundComponent)
         }
+      }
+       
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
