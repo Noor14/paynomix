@@ -76,11 +76,11 @@ export class FundingListComponent implements OnInit, OnDestroy {
             this.fundsList = res.Response;
             //to do
             this.renderingComponent(NonFundedTableComponent, {
-              fundedList: this.fundsList,
+              nonFundedList: this.fundsList,
               type: 'nonFunded'
             })
             this.renderingComponent(FundedTableComponent, {
-              nonFundedList: this.fundsList,
+              fundedList: this.fundsList,
             })
           }else{
             this.renderingComponent(NoFoundComponent)
