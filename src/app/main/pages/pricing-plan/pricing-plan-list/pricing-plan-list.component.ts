@@ -26,6 +26,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
   public dataSource = new MatTableDataSource<any>();
   public pricingPlans: any[] = [];
   @Input() getPricingPlanBy: any;
+  @Input() headerVisibility: boolean= true;
   private _unsubscribeAll: Subject<any>;
   public assignPricingPlan: any = {}
 

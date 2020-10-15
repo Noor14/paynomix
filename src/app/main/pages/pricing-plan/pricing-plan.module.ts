@@ -18,15 +18,13 @@ import { PricingPlanFormComponent } from './pricing-plan-form/pricing-plan-form.
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AssigneeDialogModule } from '@fuse/components';
-import { PricingPlanComponent } from './pricing-plan/pricing-plan.component';
 
 @NgModule({
   declarations: [
     PricingPlanListComponent, 
     PricingPlanCreateComponent, 
     PricingPlanEditComponent, 
-    PricingPlanFormComponent, 
-    PricingPlanComponent
+    PricingPlanFormComponent
   ],
   exports: [
     PricingPlanListComponent, 
