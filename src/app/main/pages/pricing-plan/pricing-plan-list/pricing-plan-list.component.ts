@@ -1,10 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { AssigneeDialogComponent } from '@fuse/components/assignee-dialog/assignee-dialog.component';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -20,10 +15,8 @@ import { PricingPlanService } from '../pricing-plan.service';
 })
 export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+ 
   public displayedColumns = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'TransactionFee', 'AssignCount', 'Action'];
-  public dataSource = new MatTableDataSource<any>();
   public pricingPlans: any[] = [];
   @Input() getPricingPlanBy: any;
   @Input() headerVisibility: boolean = true;
@@ -47,7 +40,6 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
      private readonly _resellerService: ResellerService,
      private readonly _partnerService: PartnerService,
      private readonly _cdref: ChangeDetectorRef,
-     private readonly _dialog: MatDialog
  ) { 
            // Set the private defaults
            this._unsubscribeAll = new Subject();
@@ -86,11 +78,6 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     this._unsubscribeAll.complete();
   }
 
-  openDialog() {
-   const dialogRef = this._dialog.open(AssigneeDialogComponent, {width: '550px'});
-   dialogRef.componentInstance.data = this.assignPricingPlan;
-  }
-
 
   getPricingPlans(obj: any): void{
     this._pricingPlanService.pricingPlanList(obj)
@@ -98,9 +85,6 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
         if(res && !res.StatusCode){
           if(res.Response && res.Response.length){
             this.pricingPlans = res.Response;
-            this.dataSource.data = this.pricingPlans;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
             this.assignPricingPlan = this.assignPlan(obj);
           }
 
