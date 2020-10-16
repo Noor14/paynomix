@@ -114,7 +114,8 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
             return res.Response.map((item: any) => {
               return {
                 id: item.PartnerId, 
-                name: item.PartnerName
+                name: item.PartnerName,
+                pricingPlanIds: item.PricingPlanIds
               };
             });
         }
@@ -128,7 +129,9 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
             return res.Response.map((item: any) => {
               return {
                 id: item.ResellerId, 
-                name: item.ResellerName
+                name: item.ResellerName,
+                pricingPlanIds: item.PricingPlanIds
+
               };
             });
         }
@@ -155,15 +158,18 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     if(!obj || (obj
       && !Object.keys(obj).length)){
         object.AssignTo = 'Partner';
+        object.AssignMultiple = true;
         this.getPartners(obj).then(res => object.AssigneeList = res);
       }
       else if(obj
         && obj.hasOwnProperty('PartnerId')){
           object.AssignTo = 'Reseller';
+          object.AssignMultiple = true;
           this.getResellers(obj).then(res => object.AssigneeList = res)
 
       }else{
         object.AssignTo = 'Merchant';
+        object.AssignMultiple = false;
         this.getMerchants(obj).then(res => object.AssigneeList = res)
 
       }

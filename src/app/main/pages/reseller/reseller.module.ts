@@ -17,6 +17,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ResellerFormComponent } from './reseller-form/reseller-form.component';
 import { ResellerTableComponent } from './reseller-table/reseller-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
+import { MatTabsModule } from '@angular/material';
+import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
-    NoFoundModule
+    NoFoundModule,
+    MatTabsModule,
+    PricingPlanModule
   ]
 })
 export class ResellerModule { }
