@@ -51,7 +51,8 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
 
     this.makeSaleSettingForm = this._formBuilder.group({
       MerchantId : ['' , Validators.required],
-      LocationId: ['' , Validators.required]
+      LocationId: [{value: '', disabled: true} , Validators.required],
+      SaleSetting: this._formBuilder.array([])
     });
   }
 
@@ -70,22 +71,36 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
+  settingFields(data: any){
+    const fields = data.FieldViewModel.map((item: any) => {
+      return {
+        [item.ControlName]: [item.IsRequired]
+      };
+    });
+    const obj = Object.assign({}, fields);
+    console.log(obj);
+    // return this._formBuilder.group(obj);
+  }
+
   onMerchantSelect(): void{
     const obj = {MerchantId: this.makeSaleSettingForm.controls.MerchantId.value};
     this.makeSaleSettingForm.controls.LocationId.reset();
+    this.makeSaleSettingForm.controls.LocationId.disable();
     this._saleService.locationList(obj).then((res: any)=>{
       if(res && !res.StatusCode){
         this.locations = res.Response;
+        this.makeSaleSettingForm.controls.LocationId.enable();
       }
     })
   }
-  onSelectMerchantLocation(){
+  onSelectMerchantLocation(): void{
     const locationId = this.makeSaleSettingForm.controls.LocationId.value;
     this._settingService.getSaleSetingByLocationId(locationId).then((res: any)=>{
       if(res && !res.StatusCode){
         this.makeSaleSettings = res.Response;
+        this.settingFields(res.Response);
       }
-    })
+    });
   }
 
 }

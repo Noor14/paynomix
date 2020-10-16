@@ -18,38 +18,16 @@
                 </mat-form-field>
             </div>
 
-            <ng-container *ngIf="makeSaleSettingForm.controls.LocationId.value">
+            <!-- <ng-container *ngIf="makeSaleSettingForm.controls.LocationId.value">
                 <section [@fadeInOut]>
                 <div class="mat-card p-24 mb-16" 
                 fxLayout ="row wrap"  
                 fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center start" fxLayoutAlign="start" >
                         <mat-checkbox class="my-4" fxFlex="25" 
-                        fxFlex.sm="50" fxFlex.lt-sm="100">
+                        fxFlex.sm="50" fxFlex.lt-sm="100" formArrayName="SaleSetting"
+                        *ngFor="let item of makeSaleSettingForm.get('SaleSetting'); let i = index;"> 
                         Cardholder Name
                        </mat-checkbox>
-                        <mat-checkbox class="my-4" fxFlex="25" 
-                        fxFlex.sm="50"
-                        fxFlex.lt-sm="100">
-                        Security Code (3-4 digit)
-                        </mat-checkbox>
-                        <mat-checkbox class="my-4" fxFlex="25" 
-                        fxFlex.sm="50"
-                        fxFlex.lt-sm="100">
-                        Street Address
-                       </mat-checkbox>
-                        <mat-checkbox class="my-4" fxFlex="25" 
-                        fxFlex.sm="50"
-                        fxFlex.lt-sm="100">
-                        Zip / Postal Code
-                        </mat-checkbox>
-                        <mat-checkbox class="my-4" fxFlex="25" 
-                        fxFlex.sm="50"
-                        fxFlex.lt-sm="100">
-                        Phone
-                       </mat-checkbox>
-                        <mat-checkbox class="my-4" fxFlex="25" 
-                        fxFlex.sm="50"
-                        fxFlex.lt-sm="100">Email Address</mat-checkbox>
                 </div>
     
                 <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
@@ -62,7 +40,7 @@
                     </button>
                 </div>
                </section>
-            </ng-container>
+            </ng-container> -->
 
 
       </form>
