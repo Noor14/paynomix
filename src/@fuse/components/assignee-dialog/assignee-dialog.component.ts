@@ -14,7 +14,19 @@ export class AssigneeDialogComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.data.AssignMultiple){
+      this.selectedChips = this.data.AssigneeList.filter((obj) => 
+       obj.pricingPlanIds && obj.pricingPlanIds.indexOf(this.data.PricingPlanID) >=0
+      )
+      if(this.selectedChips && this.selectedChips.length){
+       const list = this.selectedChips.map(item => item.id)
+       this.selectedAssignee.setValue(list);
+      }
+    }else{
+      
+    }
+  }
    
   onChange(){
     this.selectedChips = this.data.AssigneeList.filter(

@@ -114,7 +114,8 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
             return res.Response.map((item: any) => {
               return {
                 id: item.PartnerId, 
-                name: item.PartnerName
+                name: item.PartnerName,
+                pricingPlanIds: item.PricingPlanIds
               };
             });
         }
@@ -128,7 +129,9 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
             return res.Response.map((item: any) => {
               return {
                 id: item.ResellerId, 
-                name: item.ResellerName
+                name: item.ResellerName,
+                pricingPlanIds: item.PricingPlanIds
+
               };
             });
         }
