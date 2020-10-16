@@ -6,15 +6,20 @@ import { SaleService } from '../../../../../sale/sale.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { fuseAnimations } from '@fuse/animations';
+import { SettingService } from '../../../../settings.service';
 
 @Component({
   selector: 'app-make-sale-setting',
   templateUrl: './make-sale-setting.component.html',
-  styleUrls: ['./make-sale-setting.component.scss']
+  styleUrls: ['./make-sale-setting.component.scss'],
+  animations   : fuseAnimations
+
 })
 export class MakeSaleSettingComponent implements OnInit, OnDestroy {
   public merchants: any[] = [];
   public locations: any[] = [];
+  public makeSaleSettings: any;
   private _unsubscribeAll: Subject<any>;
   public makeSaleSettingForm: FormGroup;
 
@@ -23,6 +28,8 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
     *
     * @param {MerchantService} _merchantService
     * @param {UserConfigService} _userConfigService
+    * @param {SettingService} _settingService
+    * @param {SaleService} _saleService
     * @param {FormBuilder} _formBuilder
     */
    
@@ -30,7 +37,8 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
     private readonly _merchantService: MerchantService,
     private readonly _saleService: SaleService,
     private readonly _formBuilder: FormBuilder,
-    private readonly _userConfigService: UserConfigService
+    private readonly _userConfigService: UserConfigService,
+    private readonly _settingService: SettingService
 ) { 
           // Set the private defaults
           this._unsubscribeAll = new Subject();
@@ -68,6 +76,14 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
     this._saleService.locationList(obj).then((res: any)=>{
       if(res && !res.StatusCode){
         this.locations = res.Response;
+      }
+    })
+  }
+  onSelectMerchantLocation(){
+    const locationId = this.makeSaleSettingForm.controls.LocationId.value;
+    this._settingService.getSaleSetingByLocationId(locationId).then((res: any)=>{
+      if(res && !res.StatusCode){
+        this.makeSaleSettings = res.Response;
       }
     })
   }
