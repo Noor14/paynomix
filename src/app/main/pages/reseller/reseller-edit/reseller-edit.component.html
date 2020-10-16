@@ -1,5 +1,13 @@
 <section class="editReseller w-100-p">
-    <h2>Edit Reseller</h2>
+    <h2>Reseller Details</h2>
     <hr />
-    <app-reseller-form [resellerDetail]="resellerInfo" (submitForm)="updateReseller($event)"></app-reseller-form>
+    <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="Reseller Info">
+            <app-reseller-form [resellerDetail]="resellerInfo" (submitForm)="updateReseller($event)"></app-reseller-form>
+        </mat-tab>
+        <mat-tab label="Pricing Plan">
+           <app-pricing-plan-list [headerVisibility]="false" [getPricingPlanBy] = "{ResellerId: resellerInfo?.ResellerId}"></app-pricing-plan-list>
+        </mat-tab>
+    </mat-tab-group>
+   
 </section>

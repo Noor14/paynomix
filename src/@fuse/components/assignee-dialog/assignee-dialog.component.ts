@@ -8,28 +8,37 @@ import {FormControl} from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class AssigneeDialogComponent implements OnInit {
-  toppingsControl = new FormControl([]);
+  public selectedAssignee = new FormControl([]);
+  public selectedChips: any[] = [];
   @Input() data: any;
 
   constructor() { }
 
-  ngOnInit() {
-    if(this.data){
+  ngOnInit() {}
+   
+  onChange(){
+    this.selectedChips = this.data.AssigneeList.filter(
+     (obj:any) => {
+       if(this.data.AssignMultiple){
+        return this.selectedAssignee.value.indexOf(obj.id) >= 0
+       }else{
+        return this.selectedAssignee.value == obj.id
+       }
+    })
+  }
 
+  onRemoved(id: number, index: number) {
+    if(this.data.AssignMultiple){
+      const list = this.selectedAssignee.value;
+      const ind = list.indexOf(id);
+      if (ind !== -1) {
+       list.splice(index, 1)
+       this.selectedAssignee.setValue(list);
+      }
+    }else{
+      this.selectedAssignee.reset();
     }
-  }
- 
-
-  onToppingRemoved(topping: string) {
-    const toppings = this.toppingsControl.value as string[];
-    this.removeFirst(toppings, topping);
-    this.toppingsControl.setValue(toppings); // To trigger change detection
+    this.selectedChips.splice(index, 1);
   }
 
-  private removeFirst<T>(array: T[], toRemove: T): void {
-    const index = array.indexOf(toRemove);
-    if (index !== -1) {
-      array.splice(index, 1);
-    }
-  }
 }

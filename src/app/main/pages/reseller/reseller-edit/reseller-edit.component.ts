@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { snackBarConfig } from 'constants/globalFunctions';
@@ -10,11 +10,14 @@ import { ResellerService } from '../reseller.service';
 @Component({
   selector: 'app-reseller-edit',
   templateUrl: './reseller-edit.component.html',
-  styleUrls: ['./reseller-edit.component.scss']
+  styleUrls: ['./reseller-edit.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ResellerEditComponent implements OnInit, OnDestroy {
-
+  @Input() getPricingPlanBy: any;
   public resellerInfo: any = {};
+
+  public assignPricingPlan: any = {}
   private _unsubscribeAll: Subject<any>;
   /**
      * Constructor
@@ -35,6 +38,7 @@ export class ResellerEditComponent implements OnInit, OnDestroy {
     this._unsubscribeAll = new Subject();
   }
 
+  
   ngOnInit(): void {
     this._route.paramMap
     .pipe(
