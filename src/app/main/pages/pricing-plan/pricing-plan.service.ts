@@ -16,9 +16,9 @@ export class PricingPlanService extends BaseService {
         const url = `${environment.apiURL}PricingPlan/Search`;
          return this.post(url, obj);
         }
-        savePricingPlan(obj: any){
+       savePricingPlan(obj: any){
             const url = `${environment.apiURL}PricingPlan`;
             return this.post(url, obj);   
         }
     
-}
+};

@@ -5,9 +5,11 @@ import { MerchantService } from '../../../../../merchant/merchant.service';
 import { SaleService } from '../../../../../sale/sale.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { SettingService } from '../../../../settings.service';
+import { snackBarConfig } from 'constants/globalFunctions';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-make-sale-setting',
@@ -30,6 +32,7 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
     * @param {UserConfigService} _userConfigService
     * @param {SettingService} _settingService
     * @param {SaleService} _saleService
+    * @param {MatSnackBar} _snackBar
     * @param {FormBuilder} _formBuilder
     */
    
@@ -38,7 +41,9 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
     private readonly _saleService: SaleService,
     private readonly _formBuilder: FormBuilder,
     private readonly _userConfigService: UserConfigService,
-    private readonly _settingService: SettingService
+    private readonly _settingService: SettingService,
+    private readonly _snackBar: MatSnackBar
+
 ) { 
           // Set the private defaults
           this._unsubscribeAll = new Subject();
@@ -72,19 +77,21 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
   }
 
   settingFields(data: any){
-    const fields = data.FieldViewModel.map((item: any) => {
-      return {
+    const saleSetting = this.makeSaleSettingForm.controls.SaleSetting as FormArray;
+    data.forEach((item: any) => {
+     const obj = {
         [item.ControlName]: [item.IsRequired]
       };
+      const formGroup  = this._formBuilder.group(obj);
+      saleSetting.push(formGroup);
     });
-    const obj = Object.assign({}, fields);
-    console.log(obj);
-    // return this._formBuilder.group(obj);
+    
   }
 
   onMerchantSelect(): void{
     const obj = {MerchantId: this.makeSaleSettingForm.controls.MerchantId.value};
     this.makeSaleSettingForm.controls.LocationId.reset();
+    this.makeSaleSettingForm.controls.SaleSetting['controls'] = [];
     this.makeSaleSettingForm.controls.LocationId.disable();
     this._saleService.locationList(obj).then((res: any)=>{
       if(res && !res.StatusCode){
@@ -101,6 +108,24 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
         this.settingFields(res.Response);
       }
     });
+  }
+  save(){
+    const locationId = this.makeSaleSettingForm.controls.LocationId.value;
+    this.makeSaleSettings.map(obj => {
+      obj.LocationId =  locationId;
+      this.makeSaleSettingForm.value.SaleSetting.filter(control => {
+            if (Object.keys(control).indexOf(obj.ControlName) !== -1) {
+              obj.IsRequired = control[obj.ControlName];
+              return obj;
+            }
+        });
+      });
+      this._settingService.saveSaleSettingByLocation(this.makeSaleSettings).then((res: any)=>{
+        if(res && !res.StatusCode){
+          this._snackBar.open('Make sale setting updated successfully', '' , snackBarConfig)
+        }
+      });
+
   }
 
 }

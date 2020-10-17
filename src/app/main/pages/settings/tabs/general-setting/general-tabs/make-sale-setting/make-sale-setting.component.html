@@ -18,31 +18,31 @@
                 </mat-form-field>
             </div>
 
-            <!-- <ng-container *ngIf="makeSaleSettingForm.controls.LocationId.value">
+            <ng-container *ngIf="makeSaleSettingForm.get('SaleSetting')['controls'].length">
                 <section [@fadeInOut]>
                 <div class="mat-card p-24 mb-16" 
                 fxLayout ="row wrap"  
-                fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center start" fxLayoutAlign="start" >
+                fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center start" fxLayoutAlign="start"
+                formArrayName="SaleSetting">
+                    <ng-container *ngFor="let item of makeSaleSettingForm.get('SaleSetting')['controls']; let i = index;" [formGroupName]="i">
                         <mat-checkbox class="my-4" fxFlex="25" 
-                        fxFlex.sm="50" fxFlex.lt-sm="100" formArrayName="SaleSetting"
-                        *ngFor="let item of makeSaleSettingForm.get('SaleSetting'); let i = index;"> 
-                        Cardholder Name
-                       </mat-checkbox>
+                        fxFlex.sm="50" fxFlex.lt-sm="100" [formControlName]="makeSaleSettings[i].ControlName"> 
+                            {{makeSaleSettings[i].FieldName}}
+                        </mat-checkbox>
+                    </ng-container>   
                 </div>
-    
                 <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
                     <button mat-raised-button class="my-4 accent-fg accent-alpha-bg" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
                     aria-label="Reset">
                     Reset
                     </button>
-                    <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="save">
+                    <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="save"
+                    (click)="save()">
                     Save
                     </button>
                 </div>
                </section>
-            </ng-container> -->
-
-
+            </ng-container>
       </form>
     </div>
 </section>
