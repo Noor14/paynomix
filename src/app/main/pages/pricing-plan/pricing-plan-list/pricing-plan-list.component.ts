@@ -145,7 +145,9 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
             return  res.Response.map((item: any) => {
               return {
                 id: item.MerchantId, 
-                name: item.MerchantAccountSetup.MerchantUserName
+                name: item.MerchantAccountSetup.MerchantUserName,
+                pricingPlanIds: [item.MerchantAccountSetup.PricingPlanID]
+
               };
             });
         }
