@@ -9,12 +9,18 @@
                   <mat-select formControlName="MerchantId" (selectionChange)="onMerchantSelect()">
                     <mat-option *ngFor="let item of merchants" [value]="item.MerchantId">{{item?.MerchantAccountSetup?.MerchantUserName}}</mat-option>
                   </mat-select>
+                  <mat-error *ngIf="makeSaleSettingForm.get('MerchantId').hasError('required')">
+                    Merchant is required
+                  </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Merchant Location</mat-label>
                     <mat-select formControlName="LocationId" (selectionChange)="onSelectMerchantLocation()">
                         <mat-option *ngFor="let item of locations" [value]="item.LocationId">{{item.DisplayName}}</mat-option>
                     </mat-select>
+                    <mat-error *ngIf="makeSaleSettingForm.get('LocationId').hasError('required')">
+                        Merchant Location is required
+                    </mat-error>
                 </mat-form-field>
             </div>
 
@@ -33,11 +39,11 @@
                 </div>
                 <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
                     <button mat-raised-button class="my-4 accent-fg accent-alpha-bg" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
-                    aria-label="Reset">
+                    aria-label="Reset" (click)="reset()">
                     Reset
                     </button>
                     <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="save"
-                    (click)="save()">
+                    (click)="save()" [disabled]="makeSaleSettingForm.invalid">
                     Save
                     </button>
                 </div>

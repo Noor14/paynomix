@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { SettingService } from '../../../../settings.service';
-import { snackBarConfig } from 'constants/globalFunctions';
+import { snackBarConfig, validateAllFormFields } from '../../../../../../../../constants/globalFunctions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -109,22 +109,32 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
       }
     });
   }
+  reset(){
+    this.makeSaleSettingForm.reset();
+    this.makeSaleSettingForm.controls.LocationId.disable();
+  }
   save(){
-    const locationId = this.makeSaleSettingForm.controls.LocationId.value;
-    this.makeSaleSettings.map(obj => {
-      obj.LocationId =  locationId;
-      this.makeSaleSettingForm.value.SaleSetting.filter(control => {
-            if (Object.keys(control).indexOf(obj.ControlName) !== -1) {
-              obj.IsRequired = control[obj.ControlName];
-              return obj;
-            }
+    if(this.makeSaleSettingForm.invalid){
+      validateAllFormFields(this.makeSaleSettingForm)
+
+    }else{
+      const locationId = this.makeSaleSettingForm.controls.LocationId.value;
+      this.makeSaleSettings.map(obj => {
+        obj.LocationId =  locationId;
+        this.makeSaleSettingForm.value.SaleSetting.filter(control => {
+              if (Object.keys(control).indexOf(obj.ControlName) !== -1) {
+                obj.IsRequired = control[obj.ControlName];
+                return obj;
+              }
+          });
         });
-      });
-      this._settingService.saveSaleSettingByLocation(this.makeSaleSettings).then((res: any)=>{
-        if(res && !res.StatusCode){
-          this._snackBar.open('Make sale setting updated successfully', '' , snackBarConfig)
-        }
-      });
+        this._settingService.saveSaleSettingByLocation(this.makeSaleSettings).then((res: any)=>{
+          if(res && !res.StatusCode){
+            this._snackBar.open('Make sale setting updated successfully', '' , snackBarConfig)
+          }
+        });
+    }
+
 
   }
 
