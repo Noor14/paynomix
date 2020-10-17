@@ -10,7 +10,7 @@
                     <mat-option *ngFor="let item of merchants" [value]="item.MerchantId">{{item?.MerchantAccountSetup?.MerchantUserName}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="makeSaleSettingForm.get('MerchantId').hasError('required')">
-                    Merchant is required
+                    Merchant Name is required
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
