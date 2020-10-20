@@ -64,7 +64,10 @@ export class PartnerListComponent implements OnInit, OnDestroy {
               partners: this.partners,
             })
           }else{
-            this.renderingComponent(NoFoundComponent)
+            this.renderingComponent(NoFoundComponent, {
+              icon: 'no-pricing-plan',
+              text: 'No Partner List found'
+            });
           }
         }
       }).catch((err: HttpErrorResponse)=>(console.log))

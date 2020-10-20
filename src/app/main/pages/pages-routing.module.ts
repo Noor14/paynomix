@@ -15,6 +15,7 @@ const routes: Routes = [
     { path: 'reseller', loadChildren: () => import('./reseller/reseller.module').then(m => m.ResellerModule)},
     { path: 'merchant', loadChildren: () => import('./merchant/merchant.module').then(m => m.MerchantModule)},
     { path: 'sale', loadChildren: () => import('./sale/sale.module').then(m => m.SaleModule)},
+    { path: 'transaction', loadChildren: () => import('./transaction/transaction.module').then(m => m.TransactionModule)},
     { path: 'pricing-plan', loadChildren: () => import('./pricing-plan/pricing-plan.module').then(m => m.PricingPlanModule)},
     { path: 'funds', loadChildren: () => import('./funding-manager/funding-manager.module').then(m => m.FundingManagerModule)},
     { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule)},

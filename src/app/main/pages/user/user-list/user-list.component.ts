@@ -63,7 +63,10 @@ export class UserListComponent implements OnInit, OnDestroy {
             users: this.users,
           })
         }else{
-          this.renderingComponent(NoFoundComponent)
+          this.renderingComponent(NoFoundComponent, {
+            icon: 'no-pricing-plan',
+            text: 'No User found'
+          });
         }
       }
     }).catch((err: HttpErrorResponse)=>(console.log))

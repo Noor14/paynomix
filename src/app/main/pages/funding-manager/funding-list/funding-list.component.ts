@@ -78,14 +78,20 @@ export class FundingListComponent implements OnInit, OnDestroy {
                 type: 'nonFunded'
               });
             }else{
-              this.renderingComponent(NoFoundComponent);
+              this.renderingComponent(NoFoundComponent,{
+                icon: 'no-pricing-plan',
+                text: 'No complete fund found'
+              });
             }
             if(res.Response.CompletedFundingList && res.Response.CompletedFundingList.length){
               this.renderingComponent(FundedTableComponent, {
                 fundedList: res.Response.CompletedFundingList,
               });
             }else{
-              this.renderingComponent(NoFoundComponent);
+              this.renderingComponent(NoFoundComponent, {
+                icon: 'no-pricing-plan',
+                text: 'No pending fund found'
+              });
             }
           }
         }

@@ -48,7 +48,7 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Transaction',
                 type     : 'item',
                 icon     : 'attach_money',
-                url      : '/samples'
+                url      : '/pages/transaction'
             },
             {
                 id       : 'fund',
