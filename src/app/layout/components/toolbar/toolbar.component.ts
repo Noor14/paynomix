@@ -115,8 +115,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
     }
 
     logout(): void{
-        localStorage.clear()
-        this._router.navigate(['/login'])
+        localStorage.clear();
+        this._router.navigate(['/login']);
     }
 
 
