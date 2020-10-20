@@ -83,7 +83,10 @@ export class FundingListComponent implements OnInit, OnDestroy {
               fundedList: this.fundsList,
             })
           }else{
-            this.renderingComponent(NoFoundComponent)
+            this.renderingComponent(NoFoundComponent, {
+              icon: 'no-pricing-plan',
+              text: 'No funding found'
+            });
           }
         }
     }).catch((err: HttpErrorResponse)=>(console.log))

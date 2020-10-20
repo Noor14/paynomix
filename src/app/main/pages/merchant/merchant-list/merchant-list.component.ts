@@ -4,7 +4,6 @@ import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ResellerTableComponent } from '../../reseller/reseller-table/reseller-table.component';
 import { MerchantTableComponent } from '../merchant-table/merchant-table.component';
 import { MerchantService } from '../merchant.service';
 
@@ -63,7 +62,10 @@ export class MerchantListComponent implements OnInit, OnDestroy {
             merchants: this.merchants,
           })
         }else{
-          this.renderingComponent(NoFoundComponent)
+          this.renderingComponent(NoFoundComponent, {
+            icon: 'no-pricing-plan',
+            text: 'No Merchants found'
+          });
         }
       }
        
