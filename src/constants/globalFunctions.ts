@@ -14,7 +14,7 @@ export const snackBarConfig: any = {
     duration: 3000,
     verticalPosition: 'top',
     horizontalPosition: 'right',
-    panelClass:'fuse-navy-50'
+    panelClass: 'fuse-navy-50'
 };
 export const snackBarConfigWarn = {
   ...snackBarConfig,

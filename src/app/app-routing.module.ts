@@ -1,10 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard, PageGuard } from '@fuse/services/auth.guard';
 
 
 const routes: Routes = [
-  { path: 'pages', loadChildren: () => import('./main/pages/pages.module').then(m => m.PagesModule)},
-  { path: '', loadChildren: () => import('./main/authentication/authentication.module').then(m => m.AuthenticationModule)}
+  { 
+  path: 'pages',
+  loadChildren: () => import('./main/pages/pages.module').then(m => m.PagesModule),
+  canActivate: [PageGuard], 
+  canActivateChild: [PageGuard]
+  },
+  { 
+  path: '', 
+  loadChildren: () => import('./main/authentication/authentication.module').then(m => m.AuthenticationModule),
+  canActivate: [AuthGuard], 
+  canActivateChild: [AuthGuard] 
+}
 
 ];
 
