@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
+import { environment } from '../../../../environments/environment';
 import { BaseService } from '@fuse/services/base.service';
 
 @Injectable({providedIn: 'root'})
@@ -16,9 +16,9 @@ export class PricingPlanService extends BaseService {
         const url = `${environment.apiURL}PricingPlan/Search`;
          return this.post(url, obj);
         }
-        savePricingPlan(obj: any){
+       savePricingPlan(obj: any){
             const url = `${environment.apiURL}PricingPlan`;
             return this.post(url, obj);   
         }
     
-}
+};

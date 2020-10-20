@@ -1,0 +1,11 @@
+.no-found{
+    height: calc(100vh - 284px);
+
+    mat-icon{
+        width: 130px;
+        height: 130px;
+        svg{
+            width: 100%;
+        }
+    }
+}

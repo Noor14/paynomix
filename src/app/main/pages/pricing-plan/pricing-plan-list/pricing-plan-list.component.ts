@@ -51,13 +51,13 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
  }
 
   ngOnInit(): void {
-    // this._cdref.detectChanges();
-    // this._userConfigService.userModeChange
-    // .pipe(takeUntil(this._unsubscribeAll))
-    // .subscribe(() => {
-    //   this.getPricingPlanBy = this._userConfigService.getUserMode();
-    //   this.getPricingPlans(this.getPricingPlanBy);
-    // });
+    this._cdref.detectChanges();
+    this._userConfigService.userModeChange
+    .pipe(takeUntil(this._unsubscribeAll))
+    .subscribe(() => {
+      this.getPricingPlanBy = this._userConfigService.getUserMode();
+      this.getPricingPlans(this.getPricingPlanBy);
+    });
   }
 
   ngOnChanges(): void{
@@ -100,7 +100,10 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
               assignPricingPlan: this.assignPricingPlan
             })
           }else{
-            this.renderingComponent(NoFoundComponent)
+            this.renderingComponent(NoFoundComponent, {
+              icon: 'no-pricing-plan',
+              text: 'No pricing plan found'
+            });
           }
 
         }
@@ -145,7 +148,9 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
             return  res.Response.map((item: any) => {
               return {
                 id: item.MerchantId, 
-                name: item.MerchantAccountSetup.MerchantUserName
+                name: item.MerchantAccountSetup.MerchantUserName,
+                pricingPlanIds: [item.MerchantAccountSetup.PricingPlanID]
+
               };
             });
         }
