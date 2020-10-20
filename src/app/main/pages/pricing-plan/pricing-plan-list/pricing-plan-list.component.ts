@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnChanges, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnChanges, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
@@ -21,7 +21,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
   private componentRef: ComponentRef<any>;
 
   public pricingPlans: any[] = [];
-  @Input() getPricingPlanBy: any;
+  @Input() getPricingPlanBy: any = null;
   @Input() headerVisibility: boolean = true;
   private _unsubscribeAll: Subject<any>;
   public assignPricingPlan: any = {}
@@ -35,6 +35,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     * @param {MerchantService} _merchantService
     * @param {ResellerService} _resellerService
     * @param {PartnerService} _partnerService
+    * @param {ChangeDetectorRef} _cdref
     */
    
    constructor(
@@ -43,21 +44,21 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
      private readonly _merchantService: MerchantService,
      private readonly _resellerService: ResellerService,
      private readonly _partnerService: PartnerService,
-    private readonly _resolver: ComponentFactoryResolver,
-    private readonly _cdref: ChangeDetectorRef,
+     private readonly _resolver: ComponentFactoryResolver,
  ) { 
            // Set the private defaults
            this._unsubscribeAll = new Subject();
  }
 
   ngOnInit(): void {
-    this._cdref.detectChanges();
-    this._userConfigService.userModeChange
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => {
-      this.getPricingPlanBy = this._userConfigService.getUserMode();
-      this.getPricingPlans(this.getPricingPlanBy);
-    });
+    if (this.headerVisibility){
+      this._userConfigService.userModeChange
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => {
+        this.getPricingPlanBy = this._userConfigService.getUserMode();
+        this.getPricingPlans(this.getPricingPlanBy);
+      });
+    }
   }
 
   ngOnChanges(): void{
@@ -82,7 +83,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     this._unsubscribeAll.complete();
   }
 
- renderingComponent(type, data?) {
+ renderingComponent(type, data?): void {
     const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
       this.container.clear();
       this.componentRef = this.container.createComponent(factory);

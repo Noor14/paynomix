@@ -12,5 +12,9 @@ export class FundManagerService extends BaseService {
         const url = `${environment.apiURL}Transaction/SearchFundTransaction`;
          return this.post(url, obj);
         }
+       fundTransfer(obj: any){
+            const url = `${environment.apiURL}Transaction/TransferFunds`;
+            return this.post(url, obj);   
+       }
     
 }

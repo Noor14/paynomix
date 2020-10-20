@@ -52,12 +52,12 @@
                     <mat-icon class="secondary-text">more_vert</mat-icon>
                   </button>
                   <mat-menu #menu="matMenu" xPosition="before">
-                    <button mat-menu-item >
-                      <mat-icon class="secondary-text">edit</mat-icon>
+                    <button mat-menu-item (click)="openDialogToFund(row)">
+                      <mat-icon class="secondary-text">monetization_on</mat-icon>
                       <span>Fund Now</span>
                     </button>
                     <button mat-menu-item>
-                      <mat-icon class="secondary-text">how_to_reg</mat-icon>
+                      <mat-icon class="secondary-text">arrow_forward</mat-icon>
                       <span>Go to Fund Detail</span>
                     </button>
                   </mat-menu>
@@ -71,3 +71,39 @@
     </div>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </section>
+
+
+
+<ng-template #fundDialog>
+  <div class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title">Fund</span>
+            <button mat-icon-button aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24">
+      <p class="text-center text-size-normal"> Are you sure, you want to fund of amount?
+        <br /> 
+        <strong>{{selectedToFund?.TotalTransAmount | currency}}</strong>
+      </p>
+    </div>
+
+    <div mat-dialog-actions class="px-24 py-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-stroked-button
+        color="accent" 
+        class="mr-8"
+        aria-label="NO">
+            No
+        </button>    
+        <button mat-stroked-button
+        color="accent"
+        aria-label="YES" (click)="fundNow()">
+            Yes
+        </button>
+    </div>
+  </div>
+</ng-template>

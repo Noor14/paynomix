@@ -16,9 +16,9 @@ export class PartnerService extends BaseService {
         const url = `${environment.apiURL}Partner/Search`;
          return this.post(url, obj);
         }
-        savePartner(obj: any){
+       savePartner(obj: any){
             const url = `${environment.apiURL}Partner`;
             return this.post(url, obj);   
-        }
+       }
     
 }
