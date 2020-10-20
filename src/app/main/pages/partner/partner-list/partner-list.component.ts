@@ -66,7 +66,7 @@ export class PartnerListComponent implements OnInit, OnDestroy {
           }else{
             this.renderingComponent(NoFoundComponent, {
               icon: 'no-pricing-plan',
-              text: 'No Partner List found'
+              text: 'No partner found'
             });
           }
         }
