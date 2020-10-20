@@ -53,7 +53,7 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
     this._unsubscribeAll = new Subject();
     const user =  this._userConfigService.loggedInUser;
     if(user && user.hasOwnProperty('ResellerId')){
-      this.onSelected(user.ResellerId)
+      this.onSelected(user.ResellerId);
       this.bottomSheetEnable = false;
     }
 }
