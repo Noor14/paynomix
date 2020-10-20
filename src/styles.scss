@@ -40,3 +40,11 @@ app-pages{
      
     }
 }
+.mat-dialog-container {
+  padding: 0 !important;
+  .dialog-content-wrapper{
+      .title{
+          font-weight: normal !important;
+      }
+  }
+}

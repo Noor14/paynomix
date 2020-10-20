@@ -1,11 +1,10 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-assignee-dialog',
   templateUrl: './assignee-dialog.component.html',
   styleUrls: ['./assignee-dialog.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class AssigneeDialogComponent implements OnInit {
   public selectedAssignee = new FormControl([]);
@@ -14,7 +13,7 @@ export class AssigneeDialogComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void{
       this.selectedChips = this.data.AssigneeList && this.data.AssigneeList.filter((obj) => 
        obj.pricingPlanIds && obj.pricingPlanIds.indexOf(this.data.PricingPlanID) >=0
       )

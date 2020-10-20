@@ -23,7 +23,6 @@ export class FundingListComponent implements OnInit, OnDestroy {
   @ViewChild('renderingContainerNonFunded', { read: ViewContainerRef, static: false }) nonFundedContainer: ViewContainerRef;
   private nonFundedComponentRef: ComponentRef<any>;
 
-  public fundsList: any = [];
   private _unsubscribeAll: Subject<any>;
   
       /**
@@ -72,24 +71,31 @@ export class FundingListComponent implements OnInit, OnDestroy {
     this._fundManagerService.fundingList(this._userConfigService.getUserMode())
     .then((res: any) => {
         if(res && !res.StatusCode){
-          if(res.Response && res.Response.length){
-            this.fundsList = res.Response;
-            //to do
-            this.renderingComponent(NonFundedTableComponent, {
-              nonFundedList: this.fundsList,
-              type: 'nonFunded'
-            })
-            this.renderingComponent(FundedTableComponent, {
-              fundedList: this.fundsList,
-            })
-          }else{
-            this.renderingComponent(NoFoundComponent, {
-              icon: 'no-pricing-plan',
-              text: 'No funding found'
-            });
+          if(res.Response && res.Response){
+            if(res.Response.PendingFundingList && res.Response.PendingFundingList.length){
+              this.renderingComponent(NonFundedTableComponent, {
+                nonFundedList: res.Response.PendingFundingList,
+                type: 'nonFunded'
+              });
+            }else{
+              this.renderingComponent(NoFoundComponent,{
+                icon: 'no-pricing-plan',
+                text: 'No complete fund found'
+              });
+            }
+            if(res.Response.CompletedFundingList && res.Response.CompletedFundingList.length){
+              this.renderingComponent(FundedTableComponent, {
+                fundedList: res.Response.CompletedFundingList,
+              });
+            }else{
+              this.renderingComponent(NoFoundComponent, {
+                icon: 'no-pricing-plan',
+                text: 'No pending fund found'
+              });
+            }
           }
         }
-    }).catch((err: HttpErrorResponse)=>(console.log))
+    }).catch((err: HttpErrorResponse)=>(console.log));
   }
 
 }

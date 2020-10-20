@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FundedTableComponent } from './tabs/funded-table/funded-table.component';
 import { NonFundedTableComponent } from './tabs/non-funded-table/non-funded-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -29,7 +30,9 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
     MatTabsModule,
     MatMenuModule,
     MatIconModule,
-    NoFoundModule
+    NoFoundModule,
+    MatToolbarModule,
+
   ]
 })
 export class FundingManagerModule { }
