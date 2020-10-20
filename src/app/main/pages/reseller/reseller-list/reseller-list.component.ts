@@ -66,7 +66,8 @@ export class ResellerListComponent implements OnInit, OnDestroy {
           }else{
             this.renderingComponent(NoFoundComponent, {
               icon: 'no-pricing-plan',
-              text: 'No reseller found'
+              text: 'No reseller found',
+              subText: "You Haven't made any Reseller yet"
             });
           }
         }
