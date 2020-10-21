@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { UserConfigService } from '@fuse/services/user.config.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, takeUntil, tap } from 'rxjs/operators';
 import { AchInfoComponent } from '../sale-info/ach-info/ach-info.component';
 import { CreditcardInfoComponent } from '../sale-info/creditcard-info/creditcard-info.component';
 import { SaleService } from '../sale.service';
@@ -15,12 +15,13 @@ import { SaleService } from '../sale.service';
 export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  @ViewChild('amount', {static: false}) amountInput: ElementRef;
   private componentRef: ComponentRef<any>;
   public bottomSheetEnable: boolean =  true;
   public bottomSheetDrawerOpen: boolean = false;
   public merchantLocation: any[] = [];
   private _unsubscribeAll: Subject<any>;
-
+  private selectedLocationId: number;
   constructor(
     private readonly _resolver: ComponentFactoryResolver,
     private readonly _userConfigService: UserConfigService,
@@ -45,6 +46,15 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void{
     this.renderingComponent(CreditcardInfoComponent);
+    fromEvent(this.amountInput.nativeElement, 'keyup')
+    .pipe(
+        takeUntil(this._unsubscribeAll),
+        filter(Boolean),
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap((text) => this.transactionInitialize(Number(this.amountInput.nativeElement.value)))
+    )
+    .subscribe();
   }
   
   ngOnDestroy(): void{
@@ -81,8 +91,22 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
+
+  transactionInitialize(Amount: number): void{
+    const obj = {
+      Amount,
+      LocationId: this.selectedLocationId
+    };
+    this._saleService.transactionInit(obj)
+    .then((res: any) => {
+          if(res && !res.StatusCode){
+            console.log(res)
+      }
+    }).catch((err: HttpErrorResponse)=>(console.log))
+  }
+
   onSelected(event: number): void{
-    console.log(event);
+    this.selectedLocationId = event;
   }
 
   createMakeSaleForm(): void {

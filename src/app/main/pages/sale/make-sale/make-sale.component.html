@@ -11,7 +11,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Transaction Amount</mat-label>
-                <input matInput required>
+                <input matInput required #amount [disabled]="!selectedLocationId">
                 <mat-error>Transaction Amount is required!</mat-error>
             </mat-form-field>
 

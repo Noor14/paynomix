@@ -13,5 +13,10 @@ export class SaleService extends BaseService {
     const url = `${environment.apiURL}Location/Search`;
     return this.post(url, obj);
     }
+
+    transactionInit(obj: any){
+        const url = `${environment.apiURL}Transaction/InitTransaction`;
+        return this.post(url, obj);
+    }
    
 }
