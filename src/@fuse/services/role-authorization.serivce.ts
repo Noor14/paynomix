@@ -1,27 +1,22 @@
-import { Injectable } from '@angular/core';
-import { UserConfigService } from './user.config.service';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class RoleAuthorizationService {
   
-  private userRoles: any;
-  constructor(private readonly _userConfigService: UserConfigService) {}
+  private userRole: number;
+  constructor() {}
     
-    isAuthorized() {
-      this.userRoles = this._userConfigService.getUserMode();
-      if(!this.userRoles){
+    isAuthorized(): boolean {
+      // this.userRole = this._userConfigService.getUserMode();
+      // if(!this.userRole){
         const info = localStorage.getItem('userInfo');
         if(info){
-         this.userRoles = JSON.parse(info).UserAccount.UserRights;
+         this.userRole = JSON.parse(info).UserRoleId;
         }
+        return this.userRole && !!this.userRole;
       }
-        return this.userRoles && this.userRoles.length && !!this.userRoles;
-    }
+    // }
 
-    hasRole(role) {
-        return this.isAuthorized() && this.userRoles.some(obj => obj.RightId == role);
+    hasRole(role): boolean {
+        return this.isAuthorized() && this.userRole === role
     }
 
  }
