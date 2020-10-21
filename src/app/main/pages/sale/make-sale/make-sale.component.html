@@ -42,7 +42,7 @@
     </div>
     <ng-template [ngIf]="bottomSheetEnable">
         <app-bottom-sheet [repeatingItems]="merchantLocation" [isOpen]="bottomSheetDrawerOpen"
-         [selectedId]="null" [drawerConfig]="makeSaleBottomSheetInfo"
+         [drawerConfig]="makeSaleBottomSheetInfo"
          (selected)="onSelected($event)" (close)="bottomSheetDrawerOpen = $event"></app-bottom-sheet>
     </ng-template>
 </section>

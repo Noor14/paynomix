@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -24,8 +24,8 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private readonly _resolver: ComponentFactoryResolver,
     private readonly _userConfigService: UserConfigService,
-    private readonly _saleService: SaleService
-
+    private readonly _saleService: SaleService,
+    private readonly _cdref: ChangeDetectorRef,
   ) { 
     this._unsubscribeAll = new Subject();
 
@@ -75,6 +75,8 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
             };
           });
           this.bottomSheetDrawerOpen = true;
+          this._cdref.detectChanges();
+
       }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
