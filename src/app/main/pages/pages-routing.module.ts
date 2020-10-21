@@ -45,23 +45,13 @@ const routes: Routes = [
     { path: 'sale', 
       loadChildren: () => import('./sale/sale.module').then(m => m.SaleModule),
       data: {
-        roles: [
-          authRole.admin,
-          authRole.partner,
-          authRole.reseller,
-          authRole.merchant
-        ]
+        roles: Object.values(authRole)
       }
     },
     { path: 'transaction', 
       loadChildren: () => import('./transaction/transaction.module').then(m => m.TransactionModule),
       data: {
-        roles: [
-          authRole.admin,
-          authRole.partner,
-          authRole.reseller,
-          authRole.merchant
-        ]
+        roles: Object.values(authRole)
       }
     },
     { path: 'pricing-plan', 
@@ -79,8 +69,6 @@ const routes: Routes = [
       data: {
         roles: [
           authRole.admin,
-          authRole.partner,
-          authRole.reseller
         ]
       }
     },
@@ -90,7 +78,8 @@ const routes: Routes = [
         roles: [
           authRole.admin,
           authRole.partner,
-          authRole.reseller
+          authRole.reseller,
+          authRole.merchant
         ]
       }
     },
