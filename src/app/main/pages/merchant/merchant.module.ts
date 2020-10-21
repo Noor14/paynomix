@@ -16,13 +16,13 @@ import { BusinessDetailComponent } from './tabs/business-detail/business-detail.
 import { OwnerDetailComponent } from './tabs/owner-detail/owner-detail.component';
 import { BankAccountComponent } from './tabs/bank-account/bank-account.component';
 import { AllGetherInfoComponent } from './tabs/all-gether-info/all-gether-info.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MerchantFormComponent } from './merchant-form/merchant-form.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatListModule} from '@angular/material/list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatListModule } from '@angular/material/list';
 import { BottomSheetModule } from '@fuse/components';
 import { MerchantTableComponent } from './merchant-table/merchant-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
