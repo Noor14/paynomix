@@ -78,7 +78,7 @@ const routes: Routes = [
       loadChildren: () => import('./funding-manager/funding-manager.module').then(m => m.FundingManagerModule),
       data: {
         roles: [
-          authRole.admin,
+          authRole.admin
         ]
       }
     },
