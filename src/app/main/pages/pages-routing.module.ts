@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PageGuard } from '@fuse/services/auth.guard';
 import { authRole } from '../../../constants/globalFunctions';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
@@ -12,18 +13,22 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
     { path: 'dashboard',
+      canLoad: [PageGuard],
       component: DashboardComponent,
       data: {
-        roles: Object.values(authRole)
+        roles: Object.values(authRole).filter(item => typeof item === 'number')
       }
     },
     { path: 'partner', 
+      canLoad: [PageGuard],
       loadChildren: () => import('./partner/partner.module').then(m => m.PartnerModule),
       data: {
         roles: [authRole.admin]
       }
     },
     { path: 'reseller', 
+    canLoad: [PageGuard],
+
       loadChildren: () => import('./reseller/reseller.module').then(m => m.ResellerModule),
       data: {
         roles: [
@@ -33,6 +38,7 @@ const routes: Routes = [
       }
     },
     { path: 'merchant',
+      canLoad: [PageGuard],
       loadChildren: () => import('./merchant/merchant.module').then(m => m.MerchantModule),
       data: {
         roles: [
@@ -43,18 +49,21 @@ const routes: Routes = [
       }
     },
     { path: 'sale', 
+      canLoad: [PageGuard],
       loadChildren: () => import('./sale/sale.module').then(m => m.SaleModule),
       data: {
-        roles: Object.values(authRole)
+        roles: Object.values(authRole).filter(item => typeof item === 'number')
       }
     },
     { path: 'transaction', 
+      canLoad: [PageGuard],
       loadChildren: () => import('./transaction/transaction.module').then(m => m.TransactionModule),
       data: {
-        roles: Object.values(authRole)
+        roles: Object.values(authRole).filter(item => typeof item === 'number')
       }
     },
     { path: 'pricing-plan', 
+      canLoad: [PageGuard],
       loadChildren: () => import('./pricing-plan/pricing-plan.module').then(m => m.PricingPlanModule),
       data: {
         roles: [
@@ -65,6 +74,7 @@ const routes: Routes = [
       }
     },
     { path: 'funds', 
+      canLoad: [PageGuard],
       loadChildren: () => import('./funding-manager/funding-manager.module').then(m => m.FundingManagerModule),
       data: {
         roles: [
@@ -73,6 +83,7 @@ const routes: Routes = [
       }
     },
     { path: 'user',
+      canLoad: [PageGuard],
       loadChildren: () => import('./user/user.module').then(m => m.UserModule),
       data: {
         roles: [
@@ -84,9 +95,10 @@ const routes: Routes = [
       }
     },
     { path: 'settings',
+      canLoad: [PageGuard],
       loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
       data: {
-        roles: Object.values(authRole)
+        roles: Object.values(authRole).filter(item => typeof item === 'number')
       }
 
     },

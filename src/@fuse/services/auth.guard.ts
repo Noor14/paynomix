@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { RoleAuthorizationService } from './role-authorization.serivce';
 
 @Injectable({providedIn: 'root'})
-export class AuthGuard implements CanActivate, CanActivateChild  {
+export class AuthGuard extends RoleAuthorizationService implements CanActivate, CanActivateChild  {
     
     constructor(
-        protected _route: Router,
-        protected _roleAuthorizationService: RoleAuthorizationService,
+        protected readonly _route: Router
+    ) {
+      super();
+    }
 
-    ) { }
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
         return this.canActivate(childRoute, state);
     }
@@ -39,24 +40,16 @@ export class AuthGuard implements CanActivate, CanActivateChild  {
   export class PageGuard extends AuthGuard {
     constructor(
       _route: Router,  
-      _roleAuthorizationService: RoleAuthorizationService,
       ){
-      super(_route, _roleAuthorizationService)
+      super(_route);
     }
-    canActivate(next: ActivatedRouteSnapshot,
+    canActivate(_next: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): boolean {
 
         const userInfo = (localStorage.getItem('userInfo')) ? 
         JSON.parse(localStorage.getItem('userInfo')) : undefined;
         if (userInfo) {
-          const roles = next.data.roles;
-        //   if(!this._roleAuthorizationService.isAuthorized()){
-        //     return false;
-        //   }
-        //   else if (roles && !roles.some(r => this._roleAuthorizationService.hasRole(r))) {
-        //     return false;
-        //   }
-          return true;
+         return this.canLoad(_next);
         }
         else {
             if(this._route && this._route.url && this._route.url !== '/'){
@@ -68,14 +61,17 @@ export class AuthGuard implements CanActivate, CanActivateChild  {
         }
       }
       
-      canLoad(_route: Route): boolean {
+      canLoad(_route): boolean {
+         if (!this.isAuthorized()) {
+          return false;
+         }
          const roles = _route.data && _route.data.roles;
-         if(!this._roleAuthorizationService.isAuthorized()){
+         if (roles && roles.length &&  !roles.some(r => this.hasRole(r))) {
+           if(!_route.url){
+            this._route.navigate(['/pages/dashboard']);
+           }
             return false;
           }
-          else if (roles && !roles.some(r => this._roleAuthorizationService.hasRole(r))) {
-            return false;
-          }
-            return true;
+          return true;
       }
   };
