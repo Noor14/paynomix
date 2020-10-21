@@ -3,6 +3,7 @@ import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
+import { RoleAuthorizationService } from '@fuse/services/role-authorization.serivce';
 
 @Component({
     selector       : 'fuse-navigation',
@@ -11,7 +12,7 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FuseNavigationComponent implements OnInit
+export class FuseNavigationComponent extends RoleAuthorizationService implements OnInit
 {
     @Input()
     layout = 'vertical';
@@ -32,6 +33,7 @@ export class FuseNavigationComponent implements OnInit
         private _fuseNavigationService: FuseNavigationService
     )
     {
+        super();
         // Set the private defaults
         this._unsubscribeAll = new Subject();
     }
@@ -71,5 +73,8 @@ export class FuseNavigationComponent implements OnInit
              // Mark for check
              this._changeDetectorRef.markForCheck();
          });
+    }
+    isExist(roles): boolean{
+       return roles.some((r: number) => this.hasRole(r));
     }
 }

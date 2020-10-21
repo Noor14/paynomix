@@ -1,4 +1,5 @@
 import { FuseNavigation } from '@fuse/types';
+import { authRole } from '../../constants/globalFunctions';
 
 export const navigation: FuseNavigation[] = [
             {
@@ -6,7 +7,8 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Dashboard',
                 type     : 'item',
                 icon     : 'bar_chart',
-                url      : '/pages/dashboard'
+                url      : '/pages/dashboard',
+                roles    :  Object.values(authRole).filter(item => typeof item === 'number')
             },
             {
                 id       : 'partner',
@@ -14,54 +16,68 @@ export const navigation: FuseNavigation[] = [
                 type     : 'item',
                 icon     : 'local_parking',
                 url      : '/pages/partner',
+                roles    : [authRole.admin]
+
             },
             {
                 id       : 'reseller',
                 title    : 'Resellers',
                 type     : 'item',
                 icon     : 'device_hub',
-                url      : '/pages/reseller'
+                url      : '/pages/reseller',
+                roles    :  [ authRole.admin, authRole.partner ]
+
             },
                {
                 id       : 'merchant',
                 title    : 'Merchants',
                 type     : 'item',
                 icon     : 'home',
-                url      : '/pages/merchant'
+                url      : '/pages/merchant',
+                roles    :  [ authRole.admin,  authRole.partner, authRole.reseller]
+
             },
             {
                 id       : 'pricing',
                 title    : 'Pricing Plan',
                 type     : 'item',
                 icon     : 'event_note',
-                url      : '/pages/pricing-plan'
+                url      : '/pages/pricing-plan',
+                roles    :  [ authRole.admin,  authRole.partner, authRole.reseller]
+
             },
             {
                 id       : 'sale',
                 title    : 'Make a Sale',
                 type     : 'item',
                 icon     : 'account_balance_wallet',
-                url      : '/pages/sale'
+                url      : '/pages/sale',
+                roles    : Object.values(authRole).filter(item => typeof item === 'number')
+
             },
             {
                 id       : 'transaction',
                 title    : 'Transaction',
                 type     : 'item',
                 icon     : 'attach_money',
-                url      : '/pages/transaction'
+                url      : '/pages/transaction',
+                roles    : Object.values(authRole).filter(item => typeof item === 'number')
+
             },
             {
                 id       : 'fund',
                 title    : 'Funding Manager',
                 type     : 'item',
                 icon     : 'account_balance',
-                url      : '/pages/funds'
+                url      : '/pages/funds',
+                roles:   [ authRole.admin]
             },
             {
                 id       : 'user_mgmt',
                 title    : 'User Managment',
                 type     : 'collapsable',
                 icon     : 'supervised_user_circle',
+                roles    :    [authRole.admin, authRole.partner, authRole.reseller, authRole.merchant],
                 children : [
                     {
                         id       : 'user',
@@ -77,7 +93,9 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Settings',
                 type     : 'item',
                 icon     : 'settings',
-                url      : '/pages/settings'
+                url      : '/pages/settings',
+                roles    : Object.values(authRole).filter(item => typeof item === 'number')
+
             }
             
 ];
