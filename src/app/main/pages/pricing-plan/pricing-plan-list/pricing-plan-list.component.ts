@@ -103,7 +103,10 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
           }else{
             this.renderingComponent(NoFoundComponent, {
               icon: 'no-pricing-plan',
-              text: 'No pricing plan found'
+              text: 'No pricing plan found',
+              subText: (!obj)? 
+              "You Haven't made any Pricing Plan yet" : 
+              "You haven't been assigned any Pricing Plan yet"
             });
           }
 

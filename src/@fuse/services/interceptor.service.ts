@@ -39,8 +39,8 @@ export class InterceptorService implements HttpInterceptor {
                 // Checking if it is an Authentication Error (401)
                 if (err.status === 401) {
                   // <Log the user out of your application code>
-                  localStorage.clear()
-                  this._router.navigate([ '/login' ]);
+                  localStorage.clear();
+                  this._router.navigate([ 'login' ]);
                   // return throwError(err);
                 }
                 // If it is not an authentication error, just throw it

@@ -28,6 +28,7 @@ export class PagesComponent implements OnInit, OnDestroy {
     if(this._userConfigService.getUserMode())
     this._userConfigService.setUserMode(null)
     this._userConfigService.loggedInUser = {};
+    localStorage.clear();
   }
 
 }

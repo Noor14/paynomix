@@ -59,8 +59,16 @@ export class AppComponent implements OnInit, OnDestroy
         this._matIconRegistry
         .addSvgIcon(
             'no-pricing-plan',
-            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/no-pricing-plan.svg')
-          );
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/no-pricing-plan.svg')
+          )
+        .addSvgIcon(
+            'no-reseller',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/no-reseller.svg')
+        )
+        .addSvgIcon(
+            'no-partner',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/no-partner.svg')
+        );  
        
 
         // Get default navigation

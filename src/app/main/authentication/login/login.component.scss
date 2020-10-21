@@ -23,8 +23,11 @@ login {
                 }
 
                 .logo {
-                    width: 130px;
+                    width: 80px;
                     margin: 32px auto;
+                    img{
+                        width: 100%;
+                    }
                 }
 
                 .title {

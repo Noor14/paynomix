@@ -64,7 +64,8 @@ export class MerchantListComponent implements OnInit, OnDestroy {
         }else{
           this.renderingComponent(NoFoundComponent, {
             icon: 'no-pricing-plan',
-            text: 'No merchant found'
+            text: 'No merchant found',
+            subText: "You Haven't made any Merchant yet"
           });
         }
       }
