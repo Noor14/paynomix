@@ -113,7 +113,12 @@
                  <mat-divider></mat-divider>
                  <mat-list-item>
                    <h4 matLine>DOB</h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.DOB | date: 'mediumDate' || '--'}}</h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">
+                     <ng-template [ngIf]="row?.DOB" [ngIfElse]="other">
+                        {{row.DOB | date : 'mediumDate'}}
+                      </ng-template>
+                      <ng-template #other>--</ng-template>
+                     </h4>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item>

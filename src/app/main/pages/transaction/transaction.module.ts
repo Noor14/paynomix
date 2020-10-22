@@ -14,6 +14,7 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
   entryComponents: [
     TransactionTableComponent,
   ],
+  exports: [TransactionTableComponent],
   imports: [
     CommonModule,
     TransactionRoutingModule,
@@ -25,7 +26,6 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
     FuseSharedModule,
     MatIconModule,
     MatInputModule,
-    
   ]
 })
 export class TransactionModule { }

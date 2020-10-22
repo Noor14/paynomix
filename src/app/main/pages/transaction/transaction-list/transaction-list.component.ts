@@ -14,8 +14,8 @@ import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 export class TransactionListComponent implements OnInit {
   @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
-  public transaction: any =[];
   private _unsubscribeAll: Subject<any>;
+
   //  @param {ComponentFactoryResolver} _resolver
   //  @param {TransactionService} _transactionService
   //  @param {UserConfigService} _userConfigService
@@ -52,14 +52,13 @@ export class TransactionListComponent implements OnInit {
     .then((res: any) => {
       if(res && !res.StatusCode){
         if(res.Response && res.Response.length){
-          this.transaction = res.Response;
-          this.renderingComponent(TransactionTableComponent,{
-            transaction: this.transaction,
+          this.renderingComponent(TransactionTableComponent, {
+            transaction: res.Response
           })
         }else{
           this.renderingComponent(NoFoundComponent, {
             icon: 'supervised_user_circle',
-            text: 'No user found'
+            text: 'No transaction found'
           });
         }
       }

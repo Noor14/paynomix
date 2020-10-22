@@ -13,6 +13,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { TransactionModule } from './transaction/transaction.module';
+import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -30,7 +32,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule,
     ChartsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    TransactionModule,
+    NoFoundModule,
+
   ]
 })
 export class PagesModule { }
