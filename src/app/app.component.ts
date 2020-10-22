@@ -62,15 +62,19 @@ export class AppComponent implements OnInit, OnDestroy
             this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/no-pricing-plan.svg')
           )
         .addSvgIcon(
+            'no-partner',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/no-partner.svg')
+        )
+        .addSvgIcon(
             'no-reseller',
             this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/no-reseller.svg')
         )
         .addSvgIcon(
-            'no-partner',
-            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/no-partner.svg')
-        );  
+            'no-transaction',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/no-transaction.svg')
+        );
        
-
+        
         // Get default navigation
         this.navigation = navigation;
 
