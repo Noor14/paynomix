@@ -57,7 +57,7 @@ export class TransactionListComponent implements OnInit {
           })
         }else{
           this.renderingComponent(NoFoundComponent, {
-            icon: 'supervised_user_circle',
+            icon: 'no-transaction',
             text: 'No transaction found'
           });
         }
