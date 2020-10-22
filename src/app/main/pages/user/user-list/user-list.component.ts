@@ -64,7 +64,7 @@ export class UserListComponent implements OnInit, OnDestroy {
           })
         }else{
           this.renderingComponent(NoFoundComponent, {
-            icon: 'no-pricing-plan',
+            icon: 'supervised_user_circle',
             text: 'No user found'
           });
         }

@@ -1,13 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
-import { transactionStatus, transactionType } from '../../../../constants/globalFunctions';
 import { environment } from 'environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { TransactionTableComponent } from '../transaction/transaction-table/transaction-table.component';
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -16,15 +14,10 @@ import { DashboardService } from './dashboard.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-
-  public transStatus = transactionStatus;
-  public transType = transactionType;
+  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  private componentRef: ComponentRef<any>;
   public dashboardUserStats: any;
   public widgets: any;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['TransactionId', 'TransactionType', 'InsertedOn', 'Amount', 'Status', 'CardholderName'];
-  public dataSource = new MatTableDataSource<any>();
   private _unsubscribeAll: Subject<any>;
 
 
@@ -37,7 +30,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
  
  constructor(
    private readonly _dashboardService: DashboardService,
-   private readonly _userConfigService: UserConfigService
+   private readonly _userConfigService: UserConfigService,
+   private readonly _resolver: ComponentFactoryResolver
+
 ) { 
          // Set the private defaults
          this._unsubscribeAll = new Subject();
@@ -323,15 +318,29 @@ ngOnDestroy(): void {
    this._unsubscribeAll.next();
    this._unsubscribeAll.complete();
 }
-
+renderingComponent(type, data?) {
+    const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
+      this.container.clear();
+      this.componentRef = this.container.createComponent(factory);
+      this.componentRef.instance.data = data;
+  }
 getDashboardStats(): void{
  this._dashboardService.dasboardStats(this._userConfigService.getUserMode())
  .then((res: any) => {
      if(res && !res.StatusCode){
          this.dashboardUserStats = res.Response;
-         this.dataSource.data = this.dashboardUserStats.Transactions;
-         this.dataSource.paginator = this.paginator;
-         this.dataSource.sort = this.sort;
+         if(this.dashboardUserStats && this.dashboardUserStats.Transactions
+             && this.dashboardUserStats.Transactions.length){
+            this.renderingComponent(TransactionTableComponent, {
+              transaction: this.dashboardUserStats.Transactions
+            })
+          }else{
+            this.renderingComponent(NoFoundComponent, {
+              icon: 'no-transaction',
+              text: 'No Transaction Found',
+              subText: "You Haven't made any Transaction yet"
+            });
+          }
      }
  }).catch((err: HttpErrorResponse)=>(console.log))
 }

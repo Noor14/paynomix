@@ -1,1 +1,59 @@
-<p>transaction-list works!</p>
+<section class="userList w-100-p">
+    <section fxLayout="row" fxLayoutALign="space-between center">
+        <h2>Transaction</h2>
+        <div class="searchBox">
+          
+        </div>
+    </section>
+    <hr />
+    <section class="transactionGrid" fxLayout="column" fxLayoutAlign="space-between center"
+    fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+        <!-- Widget 1 -->
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="33">
+            <div class="mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+                <div class="p-16 " fxLayout="column" fxLayoutAlign="center center">
+                        <div class="h3 secondary-text">Total Transactions</div>
+                        <div class="font-size-36 font-weight-500 line-height-1 mt-8">
+                            <!-- {{dashboardUserStats?.Widget?.TotalTransaction || 0}} -->
+                            {{200 | currency}}
+
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Widget 1 -->
+
+        <!-- Widget 2 -->
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="34">
+            <div class="mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
+                <div class="p-16 " fxLayout="column" fxLayoutAlign="center center">
+                        <div class="h3 secondary-text">Successful Transactions</div>
+                        <div class="font-size-36 font-weight-500 line-height-1 mt-8">
+                            <!-- {{dashboardUserStats?.Widget?.SuccessfulTransaction || 0}} -->
+                            {{100 | currency}}
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Widget 2 -->
+
+        <!-- Widget 3 -->
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="33">
+            <div class="mb-32">
+                <div class="p-16" fxLayout="column" fxLayoutAlign="center center">
+                        <div class="h3 secondary-text">Avg. Transactions</div>
+                        <div class="font-size-36 font-weight-500 line-height-1 mt-8">
+                                <!-- {{dashboardUserStats?.Widget?.AvgTransactionAmount || 0 | currency }} 56-->
+                                {{56 | currency}}
+
+                        </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- / Widget 3 -->
+
+    </section>
+   
+    <ng-template #renderingContainer></ng-template>
+</section>
