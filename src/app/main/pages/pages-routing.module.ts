@@ -12,9 +12,11 @@ const routes: Routes = [
     path: '',
     component: PagesComponent,
     children: [
-    { path: 'dashboard',
+
+    { 
+      path: 'dashboard',
       canLoad: [PageGuard],
-      component: DashboardComponent,
+      loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
       data: {
         roles: Object.values(authRole).filter(item => typeof item === 'number')
       }
