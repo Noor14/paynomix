@@ -2,13 +2,10 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
 import { UserConfigService } from '@fuse/services/user.config.service';
-import { snackBarConfigWarn } from 'constants/globalFunctions';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ResellerService } from '../../reseller/reseller.service';
-import { MerchantService } from '../merchant.service';
 
 @Component({
   selector: 'app-merchant-form',
@@ -29,7 +26,7 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
   public bankAccountForm: FormGroup;
   @Input() merchantDetail: any = null;
   @Output() submitForm = new EventEmitter<any>();
-  public boardingObject:any; 
+  public boardingObject: any; 
   public resellers: any[] = [];
   private _unsubscribeAll: Subject<any>;
   public bottomSheetEnable: boolean = true;
@@ -70,7 +67,7 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
           this.onSelected(userMode.ResellerId)
           this.bottomSheetEnable = false;
         }
-      })
+      });
     }
   }
 

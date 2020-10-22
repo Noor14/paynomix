@@ -16,10 +16,12 @@ export class BottomSheetComponent implements OnInit {
   @Input() drawerConfig: any = {};
   @Output() selected = new EventEmitter<number>();
   @Output() close = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
   selectedItem(id: number): void{
     if(this.selectedId != id){
       this.selected.emit(id);
