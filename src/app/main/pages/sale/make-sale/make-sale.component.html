@@ -35,6 +35,14 @@
                     <span>price</span>
                 </div> 
                 <hr />
+                <ng-template [ngIf]="stripeInstanceInitialize">
+                    <ngx-stripe-card-group >
+                        <ngx-stripe-card-number [options]="cardOptions"></ngx-stripe-card-number>
+                        <ngx-stripe-card-expiry [options]="cardOptions"></ngx-stripe-card-expiry>
+                        <ngx-stripe-card-cvc [options]="cardOptions"></ngx-stripe-card-cvc>
+                    </ngx-stripe-card-group>
+                </ng-template>
+             
                 <ng-template #renderingContainer></ng-template>
             </div>
         </div>
