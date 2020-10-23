@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
@@ -30,7 +29,7 @@ export class FundingListComponent implements OnInit, OnDestroy {
       /**
       * Constructor
       *
-      * @param {PartnerService} _fundManagerService
+      * @param {FundManagerService} _fundManagerService
       * @param {UserConfigService} _userConfigService
       * @param {ComponentFactoryResolver} _resolver
       */
@@ -38,7 +37,7 @@ export class FundingListComponent implements OnInit, OnDestroy {
      constructor(
        private readonly _fundManagerService: FundManagerService,
        private readonly _userConfigService: UserConfigService,
-      private readonly _resolver: ComponentFactoryResolver
+       private readonly _resolver: ComponentFactoryResolver
 
    ) { 
              // Set the private defaults
@@ -48,16 +47,18 @@ export class FundingListComponent implements OnInit, OnDestroy {
    ngOnInit(): void {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getFundingList())
+    .subscribe(() => this.getFundingList());
   }
 
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+    this.nonFundedComponentRef && this.nonFundedComponentRef.destroy();
+    this.fundedComponentRef && this.fundedComponentRef.destroy();
   }
   renderingComponent(type, data?) {
-    if(data.type === 'nonFunded'){
+    if(data.name === 'nonFunded'){
       const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
       this.nonFundedContainer.clear();
       this.nonFundedComponentRef = this.nonFundedContainer.createComponent(factory);
@@ -76,10 +77,10 @@ export class FundingListComponent implements OnInit, OnDestroy {
             if(res.Response && res.Response.PendingFundingList && res.Response.PendingFundingList.length){
               this.renderingComponent(NonFundedTableComponent, {
                 nonFundedList: res.Response.PendingFundingList,
-                type: 'nonFunded'
+                name: 'nonFunded'
               });
             }else{
-              this.renderingComponent(NoFoundComponent,{
+              this.renderingComponent(NoFoundComponent, {
                 icon: 'no-pricing-plan',
                 text: 'No complete fund found'
               });

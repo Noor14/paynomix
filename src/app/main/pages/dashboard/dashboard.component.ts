@@ -317,6 +317,7 @@ ngOnDestroy(): void {
    // Unsubscribe from all subscriptions
    this._unsubscribeAll.next();
    this._unsubscribeAll.complete();
+   this.componentRef && this.componentRef.destroy();
 }
 renderingComponent(type, data?) {
     const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);

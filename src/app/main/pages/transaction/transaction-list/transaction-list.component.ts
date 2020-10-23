@@ -39,6 +39,7 @@ export class TransactionListComponent implements OnInit {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
+    this.componentRef && this.componentRef.destroy();
 }
 
   renderingComponent(type, data?) {

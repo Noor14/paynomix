@@ -15,7 +15,7 @@ import { PartnerService } from '../partner.service';
 export class PartnerListComponent implements OnInit, OnDestroy {
   @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
-  public partners: any = [];
+  public partners: any[] = [];
   private _unsubscribeAll: Subject<any>;
   
       /**
@@ -46,6 +46,8 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       // Unsubscribe from all subscriptions
       this._unsubscribeAll.next();
       this._unsubscribeAll.complete();
+      this.componentRef && this.componentRef.destroy();
+
     }
     renderingComponent(type, data?) {
         const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
