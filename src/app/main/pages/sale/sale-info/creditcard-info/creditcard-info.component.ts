@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { StripeElementsOptions } from '@stripe/stripe-js';
@@ -7,6 +7,7 @@ import { StripeElementsOptions } from '@stripe/stripe-js';
   selector: 'app-creditcard-info',
   templateUrl: './creditcard-info.component.html',
   styleUrls: ['./creditcard-info.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations   : fuseAnimations
 
 })
@@ -48,9 +49,9 @@ export class CreditcardInfoComponent implements OnInit {
   ngOnInit(): void {
     this.creditcardForm = this._formBuilder.group({
       CardholderName: ['', Validators.required],
-      CardNumber: ['', Validators.required],
-      CardExpiration: ['', Validators.required],
-      SecurityCode:  ['', Validators.required],
+      // CardNumber: ['', Validators.required],
+      // CardExpiration: ['', Validators.required],
+      // SecurityCode:  ['', Validators.required],
       StreetAddress:  ['', Validators.required],
       ZipCode: ['', Validators.required]
     });

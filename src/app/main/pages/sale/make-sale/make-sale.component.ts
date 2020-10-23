@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { snackBarConfigWarn } from '../../../../../constants/globalFunctions';
@@ -19,7 +19,6 @@ import {
   selector: 'app-make-sale',
   templateUrl: './make-sale.component.html',
   styleUrls: ['./make-sale.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -34,12 +33,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   public stripeInstanceInitialize:any;
   private selectedCardType: number = 0;
   // stripe declaration
-  @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
-
-
-
-  
-
+  // @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
 
   constructor(
     private readonly _resolver: ComponentFactoryResolver,

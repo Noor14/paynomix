@@ -114,8 +114,8 @@
                  <mat-list-item>
                    <h4 matLine>DOB</h4>
                    <h4 class="text-bold" fxFlex="1 0 auto">
-                     <ng-template [ngIf]="row?.DOB" [ngIfElse]="other">
-                        {{row.DOB | date : 'mediumDate'}}
+                     <ng-template [ngIf]="allInfo?.DOB" [ngIfElse]="other">
+                        {{allInfo?.DOB | date : 'mediumDate'}}
                       </ng-template>
                       <ng-template #other>--</ng-template>
                      </h4>
@@ -187,7 +187,12 @@
        </section>
       
         <div class="mt-20" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch">
-            <button mat-raised-button matStepperPrevious class="my-4 accent-fg accent-alpha-bg" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
+            <button mat-raised-button class="my-4 accent-fg accent-alpha-bg"
+            [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
+            *ngIf="allInfo?.MerchantId">
+               Send Merchant Link
+            </button>
+            <button mat-raised-button matStepperPrevious class="my-4 accent-fg accent-alpha-bg" [ngClass.sm]="['mr-4', 'ml-4']" [ngClass.gt-sm]="['mr-4', 'ml-4']"
             aria-label="Previous">
                 Previous
             </button>
