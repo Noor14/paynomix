@@ -3,6 +3,12 @@
             <img src="../../../../../../assets/images/credit-cards-logos.png">
         </div>
 
+        <ngx-stripe-card-group>
+            <ngx-stripe-card-number [options]="cardOptions"></ngx-stripe-card-number>
+            <ngx-stripe-card-expiry [options]="cardOptions"></ngx-stripe-card-expiry>
+            <ngx-stripe-card-cvc [options]="cardOptions"></ngx-stripe-card-cvc>
+        </ngx-stripe-card-group>
+
         <form fxLayout="column" fxLayoutAlign="center stretch"
         name="Form" [formGroup]="creditcardForm">
         
@@ -13,25 +19,25 @@
             </mat-form-field>
         
         
-            <mat-form-field appearance="outline">
+            <!-- <mat-form-field appearance="outline">
                 <mat-label>Card Number</mat-label>
                 <input matInput formControlName="CardNumber" required>
                 <mat-error>Card Number is required!</mat-error>
             </mat-form-field>
+         -->
         
-        
-            <mat-form-field appearance="outline">
+            <!-- <mat-form-field appearance="outline">
                 <mat-label>Card Expiration</mat-label>
                 <input matInput formControlName="CardExpiration" required>
                 <mat-error>Card Expiration is required!</mat-error>
-            </mat-form-field>
+            </mat-form-field> -->
         
         
-            <mat-form-field appearance="outline">
+            <!-- <mat-form-field appearance="outline">
                 <mat-label> Security Code</mat-label>
                 <input matInput formControlName="SecurityCode" required>
                 <mat-error>Security Code is required!</mat-error>
-            </mat-form-field>
+            </mat-form-field> -->
         
         
             <mat-form-field appearance="outline">
