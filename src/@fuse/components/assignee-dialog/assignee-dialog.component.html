@@ -1,6 +1,6 @@
 <div class="dialog-content-wrapper">
     <mat-toolbar class="mat-accent">
-        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
             <span class="title">Select {{data?.AssignTo}}</span>
             <button mat-icon-button aria-label="Close dialog">
                 <mat-icon>close</mat-icon>
@@ -9,7 +9,7 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24">
-        <form name="assigneeForm" fxLayout="column" fxFlex>
+        <form name="assigneeForm" fxLayout="column">
             <mat-form-field appearance="outline">
                 <mat-label>Select</mat-label>
                 <mat-select [formControl]="selectedAssignee" [multiple]="data?.AssignMultiple" (selectionChange)="onChange()">

@@ -35,7 +35,8 @@ export class MerchantCreateComponent implements OnInit {
       if(res && !res.StatusCode){
         this._snackBar.open('Merchant created', '', snackBarConfig);
         this._router.navigate(['/pages/merchant/merchant-list']);
-
+        //  dialog open
+        
       }else{
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
       }

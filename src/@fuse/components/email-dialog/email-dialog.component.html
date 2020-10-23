@@ -1,41 +1,46 @@
 <div class="dialog-content-wrapper">
     <mat-toolbar class="mat-accent">
-        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title">Select </span>
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title">Send Merchant Link</span>
             <button mat-icon-button aria-label="Close dialog">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-toolbar-row>
     </mat-toolbar>
 
-    <div mat-dialog-content class="p-24">
-        <form name="emailForm" fxLayout="column" fxFlex>
+    <div mat-dialog-content class="p-24 email-height">
+        <form name="emailForm" fxLayout="column"  [formGroup]="emailForm">
             <mat-form-field appearance="outline">
-                <mat-label>Select</mat-label>
-                <mat-select formControlName="select" >
-                  <!-- <mat-option *ngFor="let item of data?.AssigneeList" [value]="item.id">
-                      {{item.name}}
-                </mat-option> -->
-                <mat-option></mat-option>
-                </mat-select>
-              </mat-form-field> 
+                <mat-label>To</mat-label>
+                <input matInput formControlName="SendTo" >  
+            </mat-form-field> 
+            <mat-form-field appearance="outline">
+                <mat-label>CC</mat-label>
+                <input matInput formControlName="SendFrom" >  
+            </mat-form-field> 
+            <mat-form-field appearance="outline">
+                <mat-label>Bcc</mat-label>
+                <input matInput formControlName="Bcc" >  
+            </mat-form-field> 
+            <mat-form-field appearance="outline">
+            <mat-label>Subject</mat-label>
+            <input matInput formControlName="Subject" readonly>  
+            </mat-form-field>  
+            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                <mat-label>Message </mat-label>
+                <textarea  matInput formControlName="BodyContent" readonly></textarea> 
+            </mat-form-field>
 
         </form>
 
     </div>
 
-    <div mat-dialog-actions class="px-24 py-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-stroked-button
-        color="accent" 
-        class="mr-8"
-        aria-label="CLOSE">
+    <div mat-dialog-actions class="px-24 py-12" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-stroked-button color="accent" class="mr-8" aria-label="CLOSE">
             Close
         </button>    
-        <button mat-stroked-button
-        color="accent"
-        class="save-button"
-        aria-label="SAVE">
-                Assign
+        <button mat-stroked-button color="accent" class="save-button" aria-label="SAVE">
+            Send
         </button>
     </div>
 </div>
