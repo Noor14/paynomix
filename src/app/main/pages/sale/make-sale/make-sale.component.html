@@ -11,7 +11,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Transaction Amount</mat-label>
-                <input matInput required #amount [disabled]="!selectedLocationId">
+                <input matInput required #amount numberOnly [disabled]="!selectedLocationId">
                 <mat-error>Transaction Amount is required!</mat-error>
             </mat-form-field>
 
@@ -32,17 +32,10 @@
             <div class="outer-layer p-20">
                 <div fxLayout="row" fxLayoutAlign="space-between center">
                     <span>Total</span>
-                    <span>price</span>
+                    <span>{{amount.value | currency}}</span>
                 </div> 
                 <hr />
-                <ng-template [ngIf]="stripeInstanceInitialize">
-                    <ngx-stripe-card-group >
-                        <ngx-stripe-card-number [options]="cardOptions"></ngx-stripe-card-number>
-                        <ngx-stripe-card-expiry [options]="cardOptions"></ngx-stripe-card-expiry>
-                        <ngx-stripe-card-cvc [options]="cardOptions"></ngx-stripe-card-cvc>
-                    </ngx-stripe-card-group>
-                </ng-template>
-             
+
                 <ng-template #renderingContainer></ng-template>
             </div>
         </div>
