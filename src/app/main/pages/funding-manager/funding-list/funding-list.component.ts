@@ -71,19 +71,18 @@ export class FundingListComponent implements OnInit, OnDestroy {
     this._fundManagerService.fundingList(this._userConfigService.getUserMode())
     .then((res: any) => {
         if(res && !res.StatusCode){
-          if(res.Response && res.Response){
-            if(res.Response.PendingFundingList && res.Response.PendingFundingList.length){
+            if(res.Response && res.Response.PendingFundingList && res.Response.PendingFundingList.length){
               this.renderingComponent(NonFundedTableComponent, {
                 nonFundedList: res.Response.PendingFundingList,
                 type: 'nonFunded'
               });
             }else{
-              this.renderingComponent(NoFoundComponent,{
+              this.renderingComponent(NoFoundComponent, {
                 icon: 'no-pricing-plan',
                 text: 'No complete fund found'
               });
             }
-            if(res.Response.CompletedFundingList && res.Response.CompletedFundingList.length){
+            if(res.Response && res.Response.CompletedFundingList && res.Response.CompletedFundingList.length){
               this.renderingComponent(FundedTableComponent, {
                 fundedList: res.Response.CompletedFundingList,
               });
@@ -93,7 +92,6 @@ export class FundingListComponent implements OnInit, OnDestroy {
                 text: 'No pending fund found'
               });
             }
-          }
         }
     }).catch((err: HttpErrorResponse)=>(console.log));
   }
