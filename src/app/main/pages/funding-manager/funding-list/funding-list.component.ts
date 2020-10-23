@@ -17,10 +17,12 @@ import { NonFundedTableComponent } from '../tabs/non-funded-table/non-funded-tab
 
 })
 export class FundingListComponent implements OnInit, OnDestroy {
-  @ViewChild('renderingContainerFunded', { read: ViewContainerRef, static: false }) fundedContainer: ViewContainerRef;
+  @ViewChild('renderingContainerFunded', { read: ViewContainerRef, static: false }) 
+  fundedContainer: ViewContainerRef;
   private fundedComponentRef: ComponentRef<any>;
 
-  @ViewChild('renderingContainerNonFunded', { read: ViewContainerRef, static: false }) nonFundedContainer: ViewContainerRef;
+  @ViewChild('renderingContainerNonFunded', { read: ViewContainerRef, static: false }) 
+  nonFundedContainer: ViewContainerRef;
   private nonFundedComponentRef: ComponentRef<any>;
 
   private _unsubscribeAll: Subject<any>;
@@ -55,7 +57,7 @@ export class FundingListComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.complete();
   }
   renderingComponent(type, data?) {
-    if(data.type == 'nonFunded'){
+    if(data.type === 'nonFunded'){
       const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
       this.nonFundedContainer.clear();
       this.nonFundedComponentRef = this.nonFundedContainer.createComponent(factory);
@@ -71,8 +73,7 @@ export class FundingListComponent implements OnInit, OnDestroy {
     this._fundManagerService.fundingList(this._userConfigService.getUserMode())
     .then((res: any) => {
         if(res && !res.StatusCode){
-          if(res.Response && res.Response){
-            if(res.Response.PendingFundingList && res.Response.PendingFundingList.length){
+            if(res.Response && res.Response.PendingFundingList && res.Response.PendingFundingList.length){
               this.renderingComponent(NonFundedTableComponent, {
                 nonFundedList: res.Response.PendingFundingList,
                 type: 'nonFunded'
@@ -83,7 +84,7 @@ export class FundingListComponent implements OnInit, OnDestroy {
                 text: 'No complete fund found'
               });
             }
-            if(res.Response.CompletedFundingList && res.Response.CompletedFundingList.length){
+            if(res.Response && res.Response.CompletedFundingList && res.Response.CompletedFundingList.length){
               this.renderingComponent(FundedTableComponent, {
                 fundedList: res.Response.CompletedFundingList,
               });
@@ -93,7 +94,6 @@ export class FundingListComponent implements OnInit, OnDestroy {
                 text: 'No pending fund found'
               });
             }
-          }
         }
     }).catch((err: HttpErrorResponse)=>(console.log));
   }

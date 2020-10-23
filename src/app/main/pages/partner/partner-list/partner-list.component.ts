@@ -48,7 +48,7 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       this._unsubscribeAll.complete();
     }
     renderingComponent(type, data?) {
-      const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
+        const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
         this.container.clear();
         this.componentRef = this.container.createComponent(factory);
         this.componentRef.instance.data = data;
