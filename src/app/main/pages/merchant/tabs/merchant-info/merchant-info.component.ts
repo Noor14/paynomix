@@ -106,7 +106,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, 
    this._merchantService.verifyMerchant(obj)
     .then((res: any) => {
       if(res && !res.StatusCode){
-        delete this.merchantInfoForm.controls.MerchantUserName.errors.notUnique;
+        this.merchantInfoForm.controls.MerchantUserName.setErrors(null)
       }else{
         this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: true})
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)

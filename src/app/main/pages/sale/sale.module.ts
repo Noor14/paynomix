@@ -10,11 +10,13 @@ import { PersonalInfoComponent } from './sale-info/personal-info/personal-info.c
 import { CreditcardInfoComponent } from './sale-info/creditcard-info/creditcard-info.component';
 import { AchInfoComponent } from './sale-info/ach-info/ach-info.component';
 import { NgxStripeModule } from 'ngx-stripe';
+import { FuseSharedModule } from '@fuse/shared.module';
 @NgModule({
   declarations: [MakeSaleComponent, PersonalInfoComponent, CreditcardInfoComponent, AchInfoComponent],
   entryComponents: [CreditcardInfoComponent, AchInfoComponent],
   imports: [
     CommonModule,
+    FuseSharedModule,
     SaleRoutingModule,
     MatFormFieldModule,
     MatInputModule,
