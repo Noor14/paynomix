@@ -1,0 +1,41 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title">Select </span>
+            <button mat-icon-button aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24">
+        <form name="emailForm" fxLayout="column" fxFlex>
+            <mat-form-field appearance="outline">
+                <mat-label>Select</mat-label>
+                <mat-select formControlName="select" >
+                  <!-- <mat-option *ngFor="let item of data?.AssigneeList" [value]="item.id">
+                      {{item.name}}
+                </mat-option> -->
+                <mat-option></mat-option>
+                </mat-select>
+              </mat-form-field> 
+
+        </form>
+
+    </div>
+
+    <div mat-dialog-actions class="px-24 py-16" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-stroked-button
+        color="accent" 
+        class="mr-8"
+        aria-label="CLOSE">
+            Close
+        </button>    
+        <button mat-stroked-button
+        color="accent"
+        class="save-button"
+        aria-label="SAVE">
+                Assign
+        </button>
+    </div>
+</div>
