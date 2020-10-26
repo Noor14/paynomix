@@ -24,8 +24,5 @@ export class MerchantService extends BaseService {
         const url = `${environment.apiURL}Merchant`;
         return this.post(url, obj);
     }
-    sendEmail(data) {
-        const url = `${environment.apiURL}setting/sendEmail`
-        return this.post(url, data);
-     }
+
 }

@@ -26,11 +26,10 @@ export class AllGetherInfoComponent implements OnInit {
   openDialog() { 
     const obj:any = {
       SendTo: this.allInfo.MerchantAccountSetup.MerchantEmail,
-      SendFrom: this.allInfo.Email,
       Subject: this.allInfo.EmailSubject,
-      BodyContent: this.allInfo.merchantLink,
+      HtmlBodyContent: this.allInfo.EmailBody,
       MerchantName: `${this.allInfo.FirstName} ${this.allInfo.LastName}`,
-      PartnerId: this.allInfo.PartnerId
+      PartnerId: this.allInfo.Reseller.PartnerId
     }
     const dialogRef = this._dialog.open(EmailDialogComponent, {width: '660px'});
     dialogRef.componentInstance.data = obj;

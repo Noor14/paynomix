@@ -1,7 +1,7 @@
+
 .dialog-content-wrapper{
-   
-    .email-height{
-        max-height: 65vh !important;
-        overflow: auto !important;
-    }
+    textarea{
+        resize: none;
+      }
 }
+

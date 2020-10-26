@@ -1,9 +1,9 @@
 import { Component, OnInit , Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
-import { MerchantService } from 'app/main/pages/merchant/merchant.service';
-import { validator } from '../../../constants/globalFunctions';
+import { validator, validateAllFormFields } from '../../../constants/globalFunctions';
 import { snackBarConfig } from 'constants/globalFunctions';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SettingService } from '../../../app/main/pages/settings/settings.service';
 
 @Component({
   selector: 'app-email-dialog',
@@ -19,34 +19,39 @@ export class EmailDialogComponent implements OnInit {
      *
      * @param {FormBuilder} _formBuilder
       * @param {MatSnackBar} _snackBar
+      * @param {SettingService} _settingService
      */
-  constructor(private readonly _formBuilder: FormBuilder,  private readonly _snackBar: MatSnackBar, private _merchantService: MerchantService) { }
+  constructor(
+    private readonly _formBuilder: FormBuilder,
+    private readonly _snackBar: MatSnackBar, 
+    private _settingService: SettingService
+    ) { }
  
   ngOnInit() {
     this.createEmailForm();
   }
   createEmailForm(): void{
     this.emailForm = this._formBuilder.group({
-        PartnerId: [''],
-        SendTo: ['', [Validators.email, Validators.pattern(validator.emailPattern)]], 
-        SendFrom: [''],
+        PartnerId: ['', Validators.required],
+        SendTo: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]], 
         Bcc: [''],
         Cc: [''],
-        Subject: [''],
-        HtmlBodyContent: [''],
-        BodyContent: [''], 
-        MerchantName: [''],
+        Subject: ['', Validators.required],
+        HtmlBodyContent: ['', Validators.required],
+        MerchantName: ['', Validators.required],
     });
     if(this.data) { 
       this.emailForm.patchValue(this.data);
     }
   }
   
-  submit(){
+  sendEmail(){
     if(this.emailForm.valid){ 
-      this._merchantService.sendEmail(this.emailForm.value).then((res:any) => {
-        this._snackBar.open('Email has been Sent Successfully!', '', snackBarConfig);
+      this._settingService.sendEmail(this.emailForm.value).then((res:any) => {
+        this._snackBar.open('Email has been sent Successfully!', '', snackBarConfig);
       })
+    }else{
+      validateAllFormFields(this.emailForm)
     }
   }
 }
