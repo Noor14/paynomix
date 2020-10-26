@@ -189,7 +189,7 @@
         <div class="mt-20" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch">
             <button mat-raised-button class="my-4 accent-fg accent-alpha-bg"
             [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
-            *ngIf="allInfo?.MerchantId">
+            *ngIf="allInfo?.MerchantId" (click)="openDialog()">
                Send Merchant Link
             </button>
             <button mat-raised-button matStepperPrevious class="my-4 accent-fg accent-alpha-bg" [ngClass.sm]="['mr-4', 'ml-4']" [ngClass.gt-sm]="['mr-4', 'ml-4']"

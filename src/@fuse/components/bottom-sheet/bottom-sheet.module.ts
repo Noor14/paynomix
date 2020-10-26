@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FusePipesModule } from '@fuse/pipes/pipes.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -21,6 +23,8 @@ import { MatInputModule } from '@angular/material/input';
     FlexLayoutModule,
     MatInputModule,
     MatFormFieldModule,
+    FusePipesModule,
+    MatTooltipModule
   ]
 })
 export class BottomSheetModule { }
