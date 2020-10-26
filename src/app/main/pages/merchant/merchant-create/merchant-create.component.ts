@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
 import { snackBarConfig, snackBarConfigWarn } from '../../../../../constants/globalFunctions';
 import { MerchantService } from '../merchant.service';
 
@@ -22,7 +24,8 @@ export class MerchantCreateComponent implements OnInit {
   constructor(
     private readonly _merchantService: MerchantService,
     private readonly _snackBar: MatSnackBar,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _dialog: MatDialog
   )
   {}
 
@@ -35,11 +38,23 @@ export class MerchantCreateComponent implements OnInit {
       if(res && !res.StatusCode){
         this._snackBar.open('Merchant created', '', snackBarConfig);
         this._router.navigate(['/pages/merchant/merchant-list']);
+        this.openDialog(res.Reponse);
         //  dialog open
         
       }else{
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
+  }
+  openDialog(obj) {
+    const object:any = {
+      SendTo: obj.MerchantAccountSetup.MerchantEmail,
+      Subject: obj.EmailSubject,
+      HtmlBodyContent: obj.EmailBody,
+      MerchantName: `${obj.FirstName} ${obj.LastName}`,
+      PartnerId: obj.Reseller.PartnerId
+    }
+    const dialogRef = this._dialog.open(EmailDialogComponent, {width: '660px'});
+    dialogRef.componentInstance.data = object;
   }
 }

@@ -4,6 +4,7 @@ import { validator, validateAllFormFields } from '../../../constants/globalFunct
 import { snackBarConfig } from 'constants/globalFunctions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SettingService } from '../../../app/main/pages/settings/settings.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-email-dialog',
@@ -24,7 +25,8 @@ export class EmailDialogComponent implements OnInit {
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _snackBar: MatSnackBar, 
-    private _settingService: SettingService
+    private _settingService: SettingService,
+    private dialogRef: MatDialogRef<any>
     ) { }
  
   ngOnInit() {
@@ -49,6 +51,7 @@ export class EmailDialogComponent implements OnInit {
     if(this.emailForm.valid){ 
       this._settingService.sendEmail(this.emailForm.value).then((res:any) => {
         this._snackBar.open('Email has been sent Successfully!', '', snackBarConfig);
+        this.dialogRef.close();
       })
     }else{
       validateAllFormFields(this.emailForm)

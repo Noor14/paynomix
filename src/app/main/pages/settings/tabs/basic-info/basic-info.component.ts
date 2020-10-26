@@ -1,11 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MerchantService } from '../../../merchant/merchant.service';
 import * as globalConfig from '../../../../../../constants/globalFunctions';
+import { snackBarConfig } from '../../../../../../constants/globalFunctions';
+import { SettingService } from '../../settings.service';
 
 @Component({
   selector: 'app-basic-info',
@@ -18,20 +20,21 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
 
   public basicInfoForm: FormGroup;
   public globalConfig = globalConfig;
-  public merchants: any= [];
   private _unsubscribeAll: Subject<any>;
-  public  files: File[] = [];
+  public  userImage: any = null;
     /**
     * Constructor
     *
-    * @param {MerchantService} _merchantService
+    * @param {SettingService} _settingService
     * @param {UserConfigService} _userConfigService
+    * @param {MatSnackBar} _snackBar
     * @param {FormBuilder} _formBuilder
     */
    
    constructor(
-     private readonly _merchantService: MerchantService,
+     private readonly _settingService: SettingService,
      private readonly _userConfigService: UserConfigService,
+     private readonly _snackBar: MatSnackBar, 
      private _formBuilder: FormBuilder
 
  ) { 
@@ -40,9 +43,7 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
  }
 
   ngOnInit(): void {
-    this.basicInfoForm = this._formBuilder.group({
-      MerchantId:[''],
-      MerchantUserName: ['', Validators.required],
+    this.basicInfoForm = this._formBuilder.group({ 
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
       Address1: ['', Validators.required],
@@ -55,7 +56,8 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe()
+    .subscribe(() => this.getBasicDetail());
+   
   }
   
   ngOnDestroy(): void {
@@ -63,22 +65,53 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-  getDetail(): void{
-    this._merchantService.merchantList(this._userConfigService.getUserMode())
+  getBasicDetail(): void{
+    this._settingService.basicInfo(this._userConfigService.getUserMode())
     .then((res: any) => {
-        if(res && !res.StatusCode && res.Response && res.Response.length){
-          this.merchants = res.Response;
+        if(res && !res.StatusCode){
+          this.basicInfoForm.patchValue(res.Response);
+          console.log(res.Response);
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
+  } 
+
+  onFileSelect(event): any { 
+    this.userImage = event.addedFiles.pop();
   }
 
-  onFileSelect(event) {
-    console.log(event);
-    this.files.push(...event.addedFiles);
+ async convertFile(file){
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    const fileData = null;
+    return reader.onload = () => {
+        fileData.FileName = file.name;
+        fileData.FileType = file.type;
+        fileData.FileValue = (reader as any).result.split(',').pop();
+        return fileData
+    }
+  }
+
+
+ saveInfo(): void{
+    if(this.basicInfoForm.invalid){
+      globalConfig.validateAllFormFields(this.basicInfoForm);
+    }else{
+      const file = (this.userImage)? this.convertFile(this.userImage): null
+      const obj = {
+        ...this.basicInfoForm.value,
+        ...file
+      }
+      this._settingService.basicInfo(obj)
+      .then((res: any) => {
+        if(res && !res.StatusCode){
+          console.log(res.Response);
+          this._snackBar.open('Settings has been saved Successfully!', '', snackBarConfig); 
+        }
+      }).catch((err: HttpErrorResponse)=>(console.log))
+    }
   }
   
-  onFileRemove(event) {
-    console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
+  onFileRemove() {
+    this.userImage = {}
   }
 }

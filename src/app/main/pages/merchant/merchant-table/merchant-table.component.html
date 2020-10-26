@@ -49,8 +49,8 @@
                   <mat-icon class="secondary-text" >edit</mat-icon>
                   <span>Edit Merchant</span>
                 </button>
-                <button mat-menu-item>
-                  <mat-icon class="secondary-text">email</mat-icon>
+                <button mat-menu-item (click)="openDialog(row)">
+                  <mat-icon class="secondary-text" >email</mat-icon>
                   <span>Resend Email</span>
                 </button>
               </mat-menu>
