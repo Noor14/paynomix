@@ -11,8 +11,8 @@ import { LayoutModule } from 'app/layout/layout.module';
   imports: [
     CommonModule,
     PagesRoutingModule,
-    LayoutModule
-
+    LayoutModule,
   ]
 })
+
 export class PagesModule { }

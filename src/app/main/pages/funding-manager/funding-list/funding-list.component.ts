@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
@@ -12,7 +12,6 @@ import { NonFundedTableComponent } from '../tabs/non-funded-table/non-funded-tab
   selector: 'app-funding-list',
   templateUrl: './funding-list.component.html',
   styleUrls: ['./funding-list.component.scss'],
-  encapsulation: ViewEncapsulation.None
 
 })
 export class FundingListComponent implements OnInit, OnDestroy {

@@ -14,6 +14,7 @@ import { FundedTableComponent } from './tabs/funded-table/funded-table.component
 import { NonFundedTableComponent } from './tabs/non-funded-table/non-funded-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   entryComponents: [FundedTableComponent, NonFundedTableComponent],
   imports: [
     CommonModule,
+    MatDatepickerModule,
     FundingManagerRoutingModule,
     MatTableModule,
     MatSortModule,

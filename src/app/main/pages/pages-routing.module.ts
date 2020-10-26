@@ -2,10 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageGuard } from '@fuse/services/auth.guard';
 import { authRole } from '../../../constants/globalFunctions';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
-
-
 
 const routes: Routes = [
   {
@@ -29,8 +26,7 @@ const routes: Routes = [
       }
     },
     { path: 'reseller', 
-    canLoad: [PageGuard],
-
+      canLoad: [PageGuard],
       loadChildren: () => import('./reseller/reseller.module').then(m => m.ResellerModule),
       data: {
         roles: [
