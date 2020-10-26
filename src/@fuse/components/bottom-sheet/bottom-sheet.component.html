@@ -11,9 +11,9 @@
                 <section class="sheet-content" fxLayout="row wrap" fxLayoutWrap fxLayoutAlign="start">
                     <div class="item" fxLayout="row" fxLayoutAlign="start center" fxFlex.xs="100" fxFlex.gt-xs="50" fxFlex.gt-sm="20" fxFlex.sm="33" 
                     *ngFor="let obj of repeatingItems" (click)="selectedItem(obj.id)"
-                    [ngClass]="{'selected': selectedId == obj.id}">
+                    [ngClass]="{'selected': selectedId == obj.id}" matTooltipClass="example-tooltip-red" [matTooltip]="obj?.name" [matTooltipPosition]="'above'" >
                         <span class="circle">{{obj?.name?.trim()?.charAt(0)?.toUpperCase()}}</span>
-                        <span>{{obj?.name}}</span>
+                        <span>{{obj?.name | truncate : 15}}</span>
                     </div>
                 </section>
                 <button mat-icon-button color="accent" class="close-button" (click)="closeDrawer()">

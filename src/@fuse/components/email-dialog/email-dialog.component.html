@@ -1,0 +1,45 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title">Send Merchant Link</span>
+            <button mat-icon-button aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24">
+        <form name="emailForm" fxLayout="column"  [formGroup]="emailForm">
+            <mat-form-field appearance="outline">
+                <mat-label>To</mat-label>
+                <input matInput formControlName="SendTo"  required>  
+            </mat-form-field> 
+            <mat-form-field appearance="outline">
+                <mat-label>CC</mat-label>
+                <input matInput formControlName="Cc" >  
+            </mat-form-field> 
+            <mat-form-field appearance="outline">
+                <mat-label>Bcc</mat-label>
+                <input matInput formControlName="Bcc" >  
+            </mat-form-field> 
+            <mat-form-field appearance="outline">
+            <mat-label>Subject</mat-label>
+            <input matInput formControlName="Subject" readonly required>  
+            </mat-form-field>  
+            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                <mat-label>Message</mat-label>
+                <textarea matInput rows="5" readonly></textarea> 
+            </mat-form-field>
+
+        </form>
+    </div>
+
+    <div mat-dialog-actions class="px-24 py-12" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-stroked-button color="accent" class="mr-8" aria-label="CLOSE">
+            Close
+        </button>    
+        <button mat-stroked-button color="accent" class="save-button" aria-label="SAVE" (click)="sendEmail()">
+            Send
+        </button>
+    </div>
+</div>

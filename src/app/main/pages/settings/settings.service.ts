@@ -18,5 +18,8 @@ export class SettingService extends BaseService {
     const url = `${environment.apiURL}Setting/CreateRequiredFields`;
     return this.post(url, data);   
     }
-    
+    sendEmail(data) {
+        const url = `${environment.apiURL}setting/sendEmail`
+        return this.post(url, data);
+     } 
 }

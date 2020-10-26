@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-assignee-dialog',
   templateUrl: './assignee-dialog.component.html',
   styleUrls: ['./assignee-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AssigneeDialogComponent implements OnInit {
   public selectedAssignee = new FormControl([]);

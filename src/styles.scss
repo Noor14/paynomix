@@ -43,6 +43,10 @@ app-pages{
 .mat-dialog-container {
   padding: 0 !important;
   .dialog-content-wrapper{
+    div[mat-dialog-content]{
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
       .title{
           font-weight: normal !important;
       }
