@@ -26,6 +26,7 @@
         .sheet-content{
             max-height: 200px;
             overflow-y: auto;
+
             .item{
                 margin: 2px 0;
                 cursor: pointer;
@@ -68,4 +69,7 @@
             font-size: 1.3em;
         }
     }
+}
+.example-tooltip-red{ 
+    margin-bottom: -5px;
 }

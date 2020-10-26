@@ -23,7 +23,7 @@ export class AllGetherInfoComponent implements OnInit {
   submit(){
      this.saveAll.emit();
   }
-  openDialog() {
+  openDialog() { 
     const obj:any = {
       SendTo: this.allInfo.MerchantAccountSetup.MerchantEmail,
       SendFrom: this.allInfo.Email,

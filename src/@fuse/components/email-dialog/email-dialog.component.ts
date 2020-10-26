@@ -1,5 +1,9 @@
 import { Component, OnInit , Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { MerchantService } from 'app/main/pages/merchant/merchant.service';
+import { validator } from '../../../constants/globalFunctions';
+import { snackBarConfig } from 'constants/globalFunctions';
 
 @Component({
   selector: 'app-email-dialog',
@@ -14,8 +18,9 @@ export class EmailDialogComponent implements OnInit {
      * Constructor
      *
      * @param {FormBuilder} _formBuilder
+      * @param {MatSnackBar} _snackBar
      */
-  constructor(private readonly _formBuilder: FormBuilder) { }
+  constructor(private readonly _formBuilder: FormBuilder,  private readonly _snackBar: MatSnackBar, private _merchantService: MerchantService) { }
  
   ngOnInit() {
     this.createEmailForm();
@@ -23,7 +28,7 @@ export class EmailDialogComponent implements OnInit {
   createEmailForm(): void{
     this.emailForm = this._formBuilder.group({
         PartnerId: [''],
-        SendTo: [''], 
+        SendTo: ['', [Validators.email, Validators.pattern(validator.emailPattern)]], 
         SendFrom: [''],
         Bcc: [''],
         Cc: [''],
@@ -32,13 +37,16 @@ export class EmailDialogComponent implements OnInit {
         BodyContent: [''], 
         MerchantName: [''],
     });
-    if(this.data) {
+    if(this.data) { 
       this.emailForm.patchValue(this.data);
     }
   }
   
   submit(){
-    if(this.emailForm.valid){
+    if(this.emailForm.valid){ 
+      this._merchantService.sendEmail(this.emailForm.value).then((res:any) => {
+        this._snackBar.open('Email has been Sent Successfully!', '', snackBarConfig);
+      })
     }
   }
 }
