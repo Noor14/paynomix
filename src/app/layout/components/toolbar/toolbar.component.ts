@@ -9,6 +9,7 @@ import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 
 import { navigation } from 'app/navigation/navigation';
 import { Router } from '@angular/router';
+import { UserConfigService } from '@fuse/services/user.config.service';
 
 @Component({
     selector     : 'toolbar',
@@ -19,6 +20,7 @@ import { Router } from '@angular/router';
 
 export class ToolbarComponent implements OnInit, OnDestroy
 {
+    public userName: string;
     horizontalNavbar: boolean;
     rightNavbar: boolean;
     hiddenNavbar: boolean;
@@ -33,7 +35,9 @@ export class ToolbarComponent implements OnInit, OnDestroy
     /**
      * Constructor
      *
+     * @param {UserConfigService} _userConfigService
      * @param {FuseConfigService} _fuseConfigService
+     * @param {Router} _router
      * @param {FuseSidebarService} _fuseSidebarService
      * @param {TranslateService} _translateService
      */
@@ -41,6 +45,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
+        private readonly _userConfigService: UserConfigService,
         private readonly _router: Router
     )
     {
@@ -109,7 +114,8 @@ export class ToolbarComponent implements OnInit, OnDestroy
                 this.rightNavbar = settings.layout.navbar.position === 'right';
                 this.hiddenNavbar = settings.layout.navbar.hidden === true;
             });
-
+            //set userName
+        this.userName = this._userConfigService.loggedInUser.UserName
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {id: this._translateService.currentLang});
     }
