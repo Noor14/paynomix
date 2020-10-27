@@ -43,14 +43,17 @@
                     justify-content: center;
                     font-weight: 500;
                 }
-                &.selected{
+                &:hover{
+                    background: rgba(0, 0, 0, 0.12);
                     border-radius: 4px;
-                    color: #fff;
-                    background: #f4511e; // dynamic
                     .circle{
                         background-color: #fff;
                     }
-
+                }
+                &.selected{
+                    @extend :hover;
+                    color: #fff;
+                    background: #f4511e; // dynamic
                 }
               
             }
@@ -68,4 +71,8 @@
             font-size: 1.3em;
         }
     }
+}
+.mat-tooltip{
+    margin: 0 !important;
+    margin-bottom: -5px !important;
 }
