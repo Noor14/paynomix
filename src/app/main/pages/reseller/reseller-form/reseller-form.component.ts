@@ -54,22 +54,22 @@ export class ResellerFormComponent implements OnInit, OnDestroy, OnChanges {
 }
 createResellerForm(): void {
   this.resellerForm = this._formBuilder.group({
+    PartnerId: ['', Validators.required],
     ResellerId: [0, Validators.required],
     ResellerName: ['', Validators.required],
-    PartnerId: ['', Validators.required],
     DBAName: [''],
+    Country: ['', Validators.required],
+    Address1: ['', Validators.required],
+    City: ['', Validators.required],
+    State: ['', Validators.required],
+    Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
+    Email: ['', [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
+    AlternateEmail:['', [Validators.pattern(globalConfig.validator.emailPattern)]],
     TelephoneNumber: ['', Validators.required],
     TelephoneExt: [''],
     AlternativePhoneNumber: [''],
     AlternativePhoneExt: [''],
     Fax: [''],
-    Email: ['', [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
-    AlternateEmail:['', [Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
-    Address1: ['', Validators.required],
-    Country: ['', Validators.required],
-    City: ['', Validators.required],
-    State: ['', Validators.required],
-    Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
     TaxId: [''],
   });
 

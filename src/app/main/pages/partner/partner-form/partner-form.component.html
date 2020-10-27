@@ -60,12 +60,24 @@
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Zip / Postal Code</mat-label>
                     <input matInput formControlName="Zip"  numberOnly [maxlength]="globalConfig?.validator?.zipMaxLength" required>
-                    <mat-error>Postal is required!</mat-error>
+                    <mat-error *ngIf="partnerForm.get('Zip').hasError('required')">
+                        Postal Code is required!</mat-error>
+                    <mat-error *ngIf="!partnerForm.get('Zip').hasError('required') && partnerForm.get('Zip').hasError('maxLength')">
+                        Postal Code should have maximun length of 
+                        {{globalConfig?.validator?.zipMaxLength}} 
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label> Email</mat-label>
                     <input matInput formControlName="Email" nospace required>
-                    <mat-error>Email is required!</mat-error>
+                    <mat-error *ngIf="partnerForm.get('Email').hasError('required')">
+                        Email is required!
+                    </mat-error> 
+                    <mat-error
+                    *ngIf="!partnerForm.get('Email').hasError('required') &&
+                            partnerForm.get('Email').hasError('email') || partnerForm.get('Email').hasError('pattern')">
+                    Please enter a valid email address
+                </mat-error>
                 </mat-form-field>
                
             </div>
