@@ -3,7 +3,7 @@
         <mat-tab label="General Settings">
             <app-general-setting></app-general-setting>
         </mat-tab>
-        <mat-tab label="Basic Information">
+        <mat-tab label="Basic Information" *ngIf="basicInfoVisibility">
             <app-basic-info></app-basic-info>
         </mat-tab>
         <mat-tab label="PLG Manager">PLG Manager</mat-tab>
