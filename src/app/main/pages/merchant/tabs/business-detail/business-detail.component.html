@@ -16,12 +16,8 @@
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                 <mat-label>Business Type (e.g. LLC)</mat-label>
                 <mat-select formControlName="BusinessType" required >
-                    <mat-option [value]="'Sole'">Sole</mat-option>
-                    <mat-option [value]="'Corp'">Corp</mat-option>
-                    <mat-option [value]="'LLC'">LLC</mat-option>
-                    <mat-option [value]="'Partner'">Partner</mat-option>
-                    <mat-option [value]="'Non-Profit'">Non-Profit</mat-option>
-                    <mat-option [value]="'Govt.'">Govt.</mat-option>
+                    <mat-option [value]="'company'">Company</mat-option>
+                    <mat-option [value]="'individual'">Individual</mat-option>
                 </mat-select>
                 <mat-error>Business Type (e.g. LLC) is required!</mat-error>
             </mat-form-field>
@@ -86,6 +82,9 @@
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                 <mat-label>Zip Code</mat-label>
                 <input matInput formControlName="BusinessZip" numberOnly [maxlength]="validatorObj.zipMaxLength">
+                <mat-error *ngIf="businessDetailForm.get('BusinessZip').hasError('maxLength')">
+                Please enter valid zip
+                </mat-error>
             </mat-form-field>
         </div>
 

@@ -8,22 +8,30 @@
                 <mat-label>Bank Account Type</mat-label>
                 <mat-select formControlName="BankAccountType" required>
                     <mat-option [value]="'company'">Company</mat-option>
-                    <mat-option [value]="'Savings'">Savings</mat-option>
                     <mat-option [value]="'individual'">Individual</mat-option>
-                    <mat-option [value]="'Coorporate Checking'">Coorporate Checking</mat-option>
-                    <mat-option [value]="'Coorporate Savings'">Coorporate Savings</mat-option>
                 </mat-select>
                 <mat-error>Bank account type is required!</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
                 <mat-label>Bank Routing Number</mat-label>
                 <input numberOnly matInput formControlName="RoutingNumber" [maxlength]="validatorConfig.maxRoutingNo" minlength="9" required>
-                <mat-error>Bank routing number is required!</mat-error>
+                <mat-error *ngIf="bankAccountForm.get('RoutingNumber').hasError('required')">
+                    Bank routing number is required!
+                </mat-error>
+                <mat-error *ngIf="!bankAccountForm.get('RoutingNumber').hasError('required') && bankAccountForm.get('RoutingNumber').hasError('minLength')">
+                    Bank routing number is invalid
+                </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                 <mat-label>Bank Account Number</mat-label>
                 <input numberOnly matInput formControlName="AccountNumber" [maxlength]="validatorConfig.accMaxLength" required>
-                <mat-error>Bank account number is required!</mat-error>
+                <mat-error  *ngIf="bankAccountForm.get('AccountNumber').hasError('required')">Bank account number is required!
+                </mat-error>
+                <mat-error
+                *ngIf="!bankAccountForm.get('AccountNumber').hasError('required') &&
+                        bankAccountForm.get('AccountNumber').hasError('maxLength')">
+                Please enter a valid acccount number
+                </mat-error>
             </mat-form-field>
         </div>
 

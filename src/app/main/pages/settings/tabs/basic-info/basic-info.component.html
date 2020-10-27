@@ -81,7 +81,13 @@
                         <input matInput #postalCode 
                                formControlName="Zip" numberOnly [maxlength]="globalConfig?.validator?.zipMaxLength" required>
                         <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-                        <mat-error>Postal Code is required!</mat-error>
+                        <mat-error *ngIf="basicInfoForm.get('Zip').hasError('required')">
+                           Postal Code is required!
+                        </mat-error>
+                        <mat-error *ngIf="!basicInfoForm.get('Zip').hasError('required') &&
+                                        basicInfoForm.get('Zip').hasError('maxLength')">
+                            Postal Code is invalid!
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayout="row" class="my-4" fxLayoutAlign="start center">
