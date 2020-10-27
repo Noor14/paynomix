@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
 
 @Component({
   selector: 'app-merchant-table',
@@ -13,7 +14,7 @@ export class MerchantTableComponent implements OnInit {
   public displayedColumns : string[] =  ['CompanyName', 'Reseller', 'FirstName', 'Email', 'Phone', 'BoardedDate', 'BoardingStatus', 'Action'];
   @Input() data: any;
 
-  constructor() { }
+  constructor(private readonly _dialog: MatDialog) { }
 
   ngOnInit(): void{
     if(this.data){
@@ -21,5 +22,16 @@ export class MerchantTableComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
+  }
+  openDialog(value) {
+    const obj:any = {
+      SendTo: value.MerchantAccountSetup.MerchantEmail,
+      Subject: value.EmailSubject,
+      HtmlBodyContent: value.EmailBody,
+      MerchantName: `${value.FirstName} ${value.LastName}`,
+      PartnerId: value.Reseller.PartnerId
+    }
+    const dialogRef = this._dialog.open(EmailDialogComponent, {width: '660px'});
+    dialogRef.componentInstance.data = obj;
   } 
 }

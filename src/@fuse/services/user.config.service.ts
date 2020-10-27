@@ -12,10 +12,6 @@ export class UserConfigService {
 
     public setUserMode(obj: object) {
         this.userMode.next(obj);
-        if(obj != null &&
-            this.loggedInUser && 
-            !Object.keys(this.loggedInUser).length)
-            this.loggedInUser = obj;
       }
     public getUserMode() {
         return this.userMode.getValue();

@@ -13,7 +13,10 @@ export class SettingService extends BaseService {
     const url = `${environment.apiURL}Setting/GetRequiredFields/${LocationId}`;
     return this.get(url);
     }
-
+    basicInfo(obj: any): any{
+    const url = `${environment.apiURL}Setting/Search`;
+    return this.post(url, obj);   
+    }
     saveSaleSettingByLocation(data: any[]){
     const url = `${environment.apiURL}Setting/CreateRequiredFields`;
     return this.post(url, data);   

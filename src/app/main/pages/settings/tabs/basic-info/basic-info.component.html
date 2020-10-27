@@ -2,33 +2,26 @@
     <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="start" fxLayoutAlign.gt-sm="start">
         <div fxFlex.gt-sm="30" fxFlex.sm="30" class="mt-20" [ngClass.sm]="'pr-20'" [ngClass.gt-sm]="'pr-20'">
             <div class="mat-card text-center p-16">
-                <ng-container *ngIf="!files.length">
+                <ng-container *ngIf="!userImage">
                     <div class="card-content">
                         <span class="text-secondry">Drag and Drop File or <span class="accent-fg">Browse</span>
                         </span> 
-                        <ngx-dropzone (change)="onFileSelect($event)" [accept]="'image/*'" class="mt-8">
+                        <ngx-dropzone [multiple]="false" (change)="onFileSelect($event)" [accept]="'image/*'" class="mt-8">
                             <ngx-dropzone-label>
                                 <mat-icon class="accent-fg">cloud_upload</mat-icon>
                             </ngx-dropzone-label>
                         </ngx-dropzone>
                     </div>
                 </ng-container>
-                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onFileRemove(f)">
+                <ngx-dropzone-image-preview *ngIf="userImage" ngProjectAs="ngx-dropzone-preview" [file]="userImage" [removable]="true" (removed)="onFileRemove()">
                 </ngx-dropzone-image-preview>
             </div>
         </div>
 
         <div fxFlex.gt-sm="70" fxFlex.sm="70" class="outer-layer mt-20 p-20">
             <form fxLayout="column" fxLayoutAlign="start"
-             name="form" [formGroup]="basicInfoForm">
-        
-                <div fxFlex="1 0 auto">
-                    <mat-form-field appearance="outline" fxFlex="100">
-                        <mat-label>Company</mat-label>
-                        <input matInput formControlName="MerchantUserName" required>
-                        <mat-error>Company is required!</mat-error>
-                    </mat-form-field>
-                </div>
+             name="form" [formGroup]="basicInfoForm"> 
+
                 <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                     <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                         <mat-label>First name</mat-label>
@@ -93,7 +86,7 @@
                 </div>
                 <div fxLayout="row" class="my-4" fxLayoutAlign="start center">
                     <button mat-raised-button color="accent"
-                    aria-label="save" [disabled]="basicInfoForm.invalid">
+                    aria-label="save" (click)="saveInfo()" [disabled]="basicInfoForm.invalid">
                     Save
                    </button>
                 </div>

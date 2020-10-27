@@ -12,16 +12,18 @@ export class PagesComponent implements OnInit, OnDestroy {
   constructor(private readonly _userConfigService: UserConfigService) { }
 
   ngOnInit() {
-    const {EntityId, UserRoleId} = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
-    if(EntityId){
-      const userRole =  (UserRoleId === authRole.merchant) ? 'MerchantId' : 
-       (UserRoleId === authRole.partner) ? 'PartnerId' : 
-       (UserRoleId === authRole.reseller) ? 'ResellerId' : 
-       (UserRoleId === authRole.customer) ? 'CustomerId' : 'DemoCustomerId';
-       this._userConfigService.setUserMode({
-        [userRole] : EntityId
-      })
+    const {EntityId, UserRoleId, UserName} = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
+    const userRole =  (UserRoleId === authRole.merchant) ? 'MerchantId' : 
+     (UserRoleId === authRole.partner) ? 'PartnerId' : 
+     (UserRoleId === authRole.reseller) ? 'ResellerId' : 
+     (UserRoleId === authRole.customer) ? 'CustomerId' : 'DemoCustomerId';
+     const obj = {
+      [userRole] : EntityId
      }
+    if(EntityId){
+       this._userConfigService.setUserMode(obj)
+     }this._userConfigService.loggedInUser = { UserName, obj }
+
   }
 
   ngOnDestroy(): void {
