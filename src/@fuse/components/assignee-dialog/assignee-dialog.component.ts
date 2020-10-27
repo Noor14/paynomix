@@ -1,5 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormControl} from '@angular/forms';
+import { MatDialogRef, MatSnackBar } from '@angular/material';
+import { PricingPlanService } from 'app/main/pages/pricing-plan/pricing-plan.service';
+import { snackBarConfig, snackBarConfigWarn } from '../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-assignee-dialog',
@@ -11,8 +15,19 @@ export class AssigneeDialogComponent implements OnInit {
   public selectedAssignee = new FormControl([]);
   public selectedChips: any[] = [];
   @Input() data: any;
+  
+     /**
+    * Constructor
+    *
+    * @param {PricingPlanService} _pricingPlanService  
+    */
 
-  constructor() { }
+  constructor(
+    private readonly dialogRef: MatDialogRef<any>, 
+    private readonly _pricingPlanService: PricingPlanService, 
+    private readonly _snackBar: MatSnackBar,
+
+    ) { }
 
   ngOnInit(): void{
       this.selectedChips = this.data.AssigneeList && this.data.AssigneeList.filter((obj) => 
@@ -52,6 +67,22 @@ export class AssigneeDialogComponent implements OnInit {
       this.selectedAssignee.reset();
     }
     this.selectedChips.splice(index, 1);
+  }
+
+  assignPricingPlan() {
+    this.selectedChips.map(obj => {
+      obj.EntityId = obj.id;
+      obj.PricingPlanId = this.data.PricingPlanID;
+      obj.UserRoleId = this.data.UserRoleId
+    });
+     this._pricingPlanService.assignPricingPlan(this.selectedChips)
+     .then((res:any) =>{
+        if(res && !res.StatusCode) {
+          this._snackBar.open('Pricing Plan has been assigned successfully! ', '', snackBarConfig); 
+        }
+        this.dialogRef.close();
+     }).catch((err: HttpErrorResponse)=>(console.log));
+
   }
 
 }
