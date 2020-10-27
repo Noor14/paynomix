@@ -77,17 +77,16 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
 
   onFileSelect(event): any { 
     this.userImage = event.addedFiles.pop();
+    this.convertFile(this.userImage)
   }
 
  async convertFile(file){
     let reader = new FileReader();
     reader.readAsDataURL(file);
-    const fileData = null;
-    return reader.onload = () => {
-        fileData.FileName = file.name;
-        fileData.FileType = file.type;
-        fileData.FileValue = (reader as any).result.split(',').pop();
-        return fileData
+    reader.onload = () => {
+        this.userImage.FileName = file.name;
+        this.userImage.FileType = file.type;
+        this.userImage.FileValue = (reader as any).result.split(',').pop();
     }
   }
 
@@ -96,10 +95,9 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     if(this.basicInfoForm.invalid){
       globalConfig.validateAllFormFields(this.basicInfoForm);
     }else{
-      const file = (this.userImage)? this.convertFile(this.userImage): null
       const obj = {
         ...this.basicInfoForm.value,
-        ...file
+        ...this.userImage
       }
       this._settingService.basicInfo(obj)
       .then((res: any) => {
