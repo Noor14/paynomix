@@ -18,6 +18,7 @@ import { SettingService } from '../../settings.service';
 })
 export class BasicInfoComponent implements OnInit, OnDestroy {
 
+  private settingDetail: any = {}
   public basicInfoForm: FormGroup;
   public globalConfig = globalConfig;
   private _unsubscribeAll: Subject<any>;
@@ -69,25 +70,24 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     this._settingService.basicInfo(this._userConfigService.getUserMode())
     .then((res: any) => {
         if(res && !res.StatusCode){
-          this.basicInfoForm.patchValue(res.Response);
-          console.log(res.Response);
+          this.settingDetail = res.Response;
+          this.basicInfoForm.patchValue(this.settingDetail);
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   } 
 
   onFileSelect(event): any { 
     this.userImage = event.addedFiles.pop();
+    this.convertFile(this.userImage)
   }
 
  async convertFile(file){
     let reader = new FileReader();
     reader.readAsDataURL(file);
-    const fileData = null;
-    return reader.onload = () => {
-        fileData.FileName = file.name;
-        fileData.FileType = file.type;
-        fileData.FileValue = (reader as any).result.split(',').pop();
-        return fileData
+    reader.onload = () => {
+        this.userImage.FileName = file.name;
+        this.userImage.FileType = file.type;
+        this.userImage.FileValue = (reader as any).result.split(',').pop();
     }
   }
 
@@ -96,12 +96,12 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     if(this.basicInfoForm.invalid){
       globalConfig.validateAllFormFields(this.basicInfoForm);
     }else{
-      const file = (this.userImage)? this.convertFile(this.userImage): null
       const obj = {
+        ...this.settingDetail,
         ...this.basicInfoForm.value,
-        ...file
+        ...this.userImage
       }
-      this._settingService.basicInfo(obj)
+      this._settingService.saveBasicInfo(obj)
       .then((res: any) => {
         if(res && !res.StatusCode){
           console.log(res.Response);

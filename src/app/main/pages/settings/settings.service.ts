@@ -17,6 +17,11 @@ export class SettingService extends BaseService {
     const url = `${environment.apiURL}Setting/Search`;
     return this.post(url, obj);   
     }
+    saveBasicInfo(obj: any): any{
+        const url = `${environment.apiURL}Setting/CreateUserSetting`;
+        return this.post(url, obj);   
+        }
+    
     saveSaleSettingByLocation(data: any[]){
     const url = `${environment.apiURL}Setting/CreateRequiredFields`;
     return this.post(url, data);   
