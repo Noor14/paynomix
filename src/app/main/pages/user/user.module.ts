@@ -11,10 +11,11 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { UserTableComponent } from './user-table/user-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
-
-
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { MatCardModule,MatFormFieldModule, MatInputModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
-  declarations: [UserListComponent, UserTableComponent],
+  declarations: [UserListComponent, UserTableComponent, ChangePasswordComponent],
   entryComponents :[UserTableComponent],
   imports: [
     CommonModule,
@@ -25,7 +26,11 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
     MatButtonModule,
     FuseSharedModule,
     MatIconModule,
-    NoFoundModule
+    NoFoundModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FlexLayoutModule
   ]
 })
 export class UserModule { }
