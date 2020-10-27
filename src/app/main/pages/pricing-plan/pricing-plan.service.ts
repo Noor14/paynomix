@@ -20,5 +20,8 @@ export class PricingPlanService extends BaseService {
             const url = `${environment.apiURL}PricingPlan`;
             return this.post(url, obj);   
         }
-    
-};
+       assignPricingPlan(obj : any) {
+        const url = `${environment.apiURL}PricingPlan/AssignPricingPlan`
+        return this.post(url, obj);
+       }
+    }
