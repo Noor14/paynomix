@@ -23,7 +23,7 @@
 
         </div>
 
-        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
             <button mat-button [matMenuTriggerFor]="userMenu"
                     class="user-button">
@@ -34,7 +34,7 @@
                 </div>
             </button>
 
-            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before">
 
                 <button mat-menu-item>
                     <mat-icon>vpn_key</mat-icon>
