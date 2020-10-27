@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnChanges, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
+import { authRole } from '../../../../../constants/globalFunctions';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MerchantService } from '../../merchant/merchant.service';
@@ -169,17 +170,20 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
       && !Object.keys(obj).length)){
         object.AssignTo = 'Partner';
         object.AssignMultiple = true;
+        object.UserRoleId = authRole.partner;
         this.getPartners(obj).then(res => object.AssigneeList = res);
       }
       else if(obj
         && obj.hasOwnProperty('PartnerId')){
           object.AssignTo = 'Reseller';
           object.AssignMultiple = true;
+          object.UserRoleId = authRole.reseller;
           this.getResellers(obj).then(res => object.AssigneeList = res)
 
       }else{
         object.AssignTo = 'Merchant';
         object.AssignMultiple = false;
+        object.UserRoleId = authRole.merchant;
         this.getMerchants(obj).then(res => object.AssigneeList = res)
 
       }

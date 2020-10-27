@@ -19,11 +19,11 @@ export class NonFundedTableComponent implements OnInit {
   @Input() data: any;
   public displayedColumns: string[] = ['PartnerName', 'TotalTransAmount', 'PaynomixFee', 'AdminCommission', 'PartnerCommision', 'ResellerCommision', 'Status', 'Action'];
   public selectedToFund: any;
-
+  public dialogRef;
   constructor(
     private readonly _dialog: MatDialog,
     private readonly _fundManagerService: FundManagerService,
-    private readonly _snackBar: MatSnackBar
+    private readonly _snackBar: MatSnackBar,
 
   ) { }
 
@@ -37,7 +37,7 @@ export class NonFundedTableComponent implements OnInit {
 
   openDialogToFund(obj: any): void{
     this.selectedToFund = obj;
-    this._dialog.open(this.fundDialog, {width: '550px'});
+    this.dialogRef = this._dialog.open(this.fundDialog, {width: '550px'});
   }
 
   fundNow(): void{
@@ -46,10 +46,11 @@ export class NonFundedTableComponent implements OnInit {
     .then((res: any) => {
         if(res && !res.StatusCode){
           console.log(res);
-          this._snackBar.open('Amount funded successfully', '', snackBarConfig);
+          this._snackBar.open('Amount funded successfully', '', snackBarConfig); 
         }else{
           this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
         }
+        this.dialogRef.close();
     }).catch((err: HttpErrorResponse)=>(console.log));
   }
 

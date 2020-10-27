@@ -79,7 +79,7 @@
     <mat-toolbar class="mat-accent">
         <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
             <span class="title">Fund</span>
-            <button mat-icon-button aria-label="Close dialog">
+            <button mat-icon-button aria-label="Close dialog" (click)="dialogRef.close()">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-toolbar-row>
@@ -96,7 +96,7 @@
         <button mat-stroked-button
         color="accent" 
         class="mr-8"
-        aria-label="NO">
+        aria-label="NO" (click)="dialogRef.close()">
             No
         </button>    
         <button mat-stroked-button

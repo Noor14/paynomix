@@ -5,6 +5,7 @@ import { snackBarConfig } from 'constants/globalFunctions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SettingService } from '../../../app/main/pages/settings/settings.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-email-dialog',
@@ -49,10 +50,11 @@ export class EmailDialogComponent implements OnInit {
   
   sendEmail(){
     if(this.emailForm.valid){ 
-      this._settingService.sendEmail(this.emailForm.value).then((res:any) => {
+      this._settingService.sendEmail(this.emailForm.value)
+      .then((res:any) => {
         this._snackBar.open('Email has been sent Successfully!', '', snackBarConfig);
         this.dialogRef.close();
-      })
+      }).catch((err: HttpErrorResponse)=>(console.log));
     }else{
       validateAllFormFields(this.emailForm)
     }
