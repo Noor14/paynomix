@@ -18,6 +18,7 @@ import { SettingService } from '../../settings.service';
 })
 export class BasicInfoComponent implements OnInit, OnDestroy {
 
+  private settingDetail: any = {}
   public basicInfoForm: FormGroup;
   public globalConfig = globalConfig;
   private _unsubscribeAll: Subject<any>;
@@ -69,8 +70,8 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     this._settingService.basicInfo(this._userConfigService.getUserMode())
     .then((res: any) => {
         if(res && !res.StatusCode){
-          this.basicInfoForm.patchValue(res.Response);
-          console.log(res.Response);
+          this.settingDetail = res.Response;
+          this.basicInfoForm.patchValue(this.settingDetail);
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   } 
@@ -96,10 +97,11 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
       globalConfig.validateAllFormFields(this.basicInfoForm);
     }else{
       const obj = {
+        ...this.settingDetail,
         ...this.basicInfoForm.value,
         ...this.userImage
       }
-      this._settingService.basicInfo(obj)
+      this._settingService.saveBasicInfo(obj)
       .then((res: any) => {
         if(res && !res.StatusCode){
           console.log(res.Response);
