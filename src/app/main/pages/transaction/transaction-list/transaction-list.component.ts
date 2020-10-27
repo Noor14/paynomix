@@ -15,10 +15,17 @@ export class TransactionListComponent implements OnInit {
   @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
+  public transactionType: any = {};
 
-  //  @param {ComponentFactoryResolver} _resolver
-  //  @param {TransactionService} _transactionService
-  //  @param {UserConfigService} _userConfigService
+   
+  /**
+     * Constructor
+     *
+     * @param {UserConfigService} _userConfigService
+     * @param {TransactionService} _transactionService
+     * @param {ComponentFactoryResolver} _resolver
+     */
+
 
 
   constructor(
@@ -52,9 +59,10 @@ export class TransactionListComponent implements OnInit {
     this._transactionService.transactionList(this._userConfigService.getUserMode())
     .then((res: any) => {
       if(res && !res.StatusCode){
-        if(res.Response && res.Response.length){
+        this.transactionType = res.Response.TotalTransaction;
+        if(res.Response && res.Response.Transactions.length){
           this.renderingComponent(TransactionTableComponent, {
-            transaction: res.Response
+            transaction: res.Response.Transactions
           })
         }else{
           this.renderingComponent(NoFoundComponent, {
