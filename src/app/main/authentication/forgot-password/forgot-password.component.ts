@@ -41,4 +41,32 @@ export class ForgotPasswordComponent implements OnInit
             email: ['', [Validators.required, Validators.email]]
         });
     }
+
+    // resetPassword(): void{
+    //     if (this.resetPasswordForm.invalid){
+    //         return;
+    //     }
+    //     else {
+    //         this._loginService.resetPassword(this.resetPasswordForm.value).then((res: any) => {
+    //             if (!res.StatusCode) {
+    //             this._router.navigate(['/login']);
+    //             this._snacksBar.open('An email has been sent. Follow the directions in email to reset your password', '', {
+    //               duration: 4000,
+    //               verticalPosition: 'top',
+    //               horizontalPosition: 'end',
+    //               panelClass: ['white-snackbar']
+    //             });
+    //            } else {
+    //             //  here we display toasters error
+    //             this._snacksBar.open('The email address does not exist in our system', '', {
+    //               duration: 3000,
+    //               verticalPosition: 'top',
+    //               horizontalPosition: 'end',
+    //               panelClass: ['alert-snackbar']
+      
+    //             });
+    //            } 
+    //           });
+    //     }
+    // }
 }
