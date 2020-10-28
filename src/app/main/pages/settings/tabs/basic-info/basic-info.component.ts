@@ -7,7 +7,7 @@ import { environment } from 'environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as globalConfig from '../../../../../../constants/globalFunctions';
-import { snackBarConfig } from '../../../../../../constants/globalFunctions';
+import { snackBarConfig, snackBarConfigWarn } from '../../../../../../constants/globalFunctions';
 import { SettingService } from '../../settings.service';
 
 @Component({
@@ -106,8 +106,9 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
       this._settingService.saveBasicInfo(obj)
       .then((res: any) => {
         if(res && !res.StatusCode){
-          console.log(res.Response);
           this._snackBar.open('Settings has been saved Successfully!', '', snackBarConfig); 
+        }else{
+          this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn); 
         }
       }).catch((err: HttpErrorResponse)=>(console.log))
     }

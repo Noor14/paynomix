@@ -24,10 +24,35 @@
                 right: 15px;
             }
         }
-        .resetImageIcon{
-            position: absolute;
-            right: 5px;
-            top: 1px;
+        .uploadedFile{
+            height: 140px;
+            margin: 10px;
+            img{
+                width: 100%;
+                border-radius: 5px;
+                height: 100%;
+        
+            }
+            .resetImageIcon{
+                display: none;
+            }
+            &:hover{
+                opacity: .8;
+                .resetImageIcon{
+                    display: block;
+                    position: absolute;
+                    right: 15px;
+                    top: 10px;
+                    background: #aeaeae;
+                    border-radius: 100%;
+                    color: white;
+                    font-size: 17px;
+                    line-height: inherit;
+                    cursor: pointer;
+                }
+            }
+
         }
+  
     } 
 }
