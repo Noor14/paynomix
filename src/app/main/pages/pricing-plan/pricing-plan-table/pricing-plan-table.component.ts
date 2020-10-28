@@ -13,7 +13,7 @@ export class PricingPlanTableComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
   
-  public displayedColumns: string[] = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'TransactionFee', 'AssignCount', 'Action'];
+  public displayedColumns: string[] = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'PerTransactionFee', 'TransactionFee', 'AssignCount', 'Action'];
   constructor(
     private readonly _dialog: MatDialog
   ) { }
