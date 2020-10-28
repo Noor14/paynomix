@@ -134,7 +134,7 @@
                     <mat-error *ngIf="pricngPlanForm.get('TransactionFee').hasError('required')">
                         Transaction Fee is required!
                     </mat-error>
-                    <mat-error *ngIf="!pricngPlanForm.get('TransactionFee').hasError('required') &&     pricngPlanForm.get('TransactionFee').hasError('max')">
+                    <mat-error *ngIf="!pricngPlanForm.get('TransactionFee').hasError('required') && pricngPlanForm.get('TransactionFee').hasError('max')">
                         Transaction Fee should not exceed from {{maxPercentage}}%
                     </mat-error>
                 </mat-form-field>
