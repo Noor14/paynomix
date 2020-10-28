@@ -9,6 +9,7 @@ import { validateAllFormFields, validator } from '../../../../../constants/globa
 })
 export class PricingPlanFormComponent implements OnInit, OnChanges {
 
+  public maxPercentage = validator.maxPercentage;
   public pricngPlanForm: FormGroup;
   @Output() submitForm = new EventEmitter<any>();
   @Input() pricingPlanDetail: any = null;
@@ -39,8 +40,8 @@ export class PricingPlanFormComponent implements OnInit, OnChanges {
       PricingPlanID: [0, Validators.required],
       PricingTitle: ['', Validators.required],     
       Description: ['', Validators.required],
-      Reserve: ['', [Validators.required, Validators.max(validator.maxPercentage)]],
-      DiscountRate: ['', [Validators.required, Validators.max(validator.maxPercentage)]],
+      Reserve: ['', [Validators.required, Validators.max(this.maxPercentage)]],
+      DiscountRate: ['', [Validators.required, Validators.max(this.maxPercentage)]],
       AuthFee: ['', Validators.required],
       ChargeBack: ['', Validators.required],
       RetrievalFee: ['', Validators.required],
@@ -54,7 +55,7 @@ export class PricingPlanFormComponent implements OnInit, OnChanges {
       PricingPlanType: ['', Validators.required],
       FeeAmount: ['', Validators.required],
       OtherFee: ['', Validators.required],
-      TransactionFee: ['', [Validators.required, Validators.max(validator.maxPercentage)]],
+      TransactionFee: ['', [Validators.required, Validators.max(this.maxPercentage)]],
       });
   }
   submit(){
