@@ -37,7 +37,7 @@ export class MerchantCreateComponent implements OnInit {
     .then((res: any) => {
       if(res && !res.StatusCode){
         this._snackBar.open('Merchant created', '', snackBarConfig);
-        this.openDialog(res.Reponse);        
+        this.openDialog(res.Response);        
       }else{
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
       }
