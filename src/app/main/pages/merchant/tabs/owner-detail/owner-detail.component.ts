@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { locationConfig, validator } from '../../../../../../constants/globalFunctions';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-owner-detail',
   templateUrl: './owner-detail.component.html',
@@ -15,7 +15,7 @@ export class OwnerDetailComponent implements OnInit {
   @Input() ownerDetail: any = null;
   public ownerDetailForm: FormGroup;
   @Output() stepThree = new EventEmitter<any>();
-
+  public maxDate = moment();
   /**
    * Constructor
    *
