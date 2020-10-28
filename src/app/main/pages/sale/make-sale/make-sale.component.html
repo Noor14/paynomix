@@ -21,7 +21,7 @@
                 <mat-button-toggle class="w-50-p" [value]="1">ACH</mat-button-toggle>
             </mat-button-toggle-group>
 
-            <app-personal-info></app-personal-info>
+            <app-personal-info (personalInfo)="personalInformation($event)"></app-personal-info>
 
         </div>
 
