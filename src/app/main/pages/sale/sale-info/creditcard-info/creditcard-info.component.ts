@@ -1,7 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
 import { StripeElementsOptions } from '@stripe/stripe-js';
+import { StripeCardNumberComponent, StripeService } from 'ngx-stripe';
+import { SaleService } from '../../sale.service';
+import { snackBarConfig , snackBarConfigWarn} from 'constants/globalFunctions';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-creditcard-info',
@@ -12,6 +18,8 @@ import { StripeElementsOptions } from '@stripe/stripe-js';
 
 })
 export class CreditcardInfoComponent implements OnInit {
+  @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
+  @Input() data: any;
   public elementsOptions: StripeElementsOptions = {
     locale: 'en',
   };
@@ -42,9 +50,22 @@ export class CreditcardInfoComponent implements OnInit {
  
    }
  };
-  public creditcardForm: FormGroup
+  public creditcardForm: FormGroup;
+
+/**
+     * Constructor
+     *
+     * @param {SaleService} _saleService
+     * @param {StripeService} _stripeService
+     * @param {MatSnackBar} _snackBar
+     * @param {Router} _router
+     */
+
   constructor(
-    private readonly _formBuilder: FormBuilder
+    private readonly _saleService: SaleService,
+    private readonly _formBuilder: FormBuilder,
+    private readonly _stripeService: StripeService,
+    private readonly _snackBar: MatSnackBar,
   ) { }
   ngOnInit(): void {
     this.creditcardForm = this._formBuilder.group({
@@ -52,9 +73,36 @@ export class CreditcardInfoComponent implements OnInit {
       // CardNumber: ['', Validators.required],
       // CardExpiration: ['', Validators.required],
       // SecurityCode:  ['', Validators.required],
-      StreetAddress:  ['', Validators.required],
+      Address:  ['', Validators.required],
       ZipCode: ['', Validators.required]
     });
   }
+  payNow() {
+    this._stripeService.confirmCardPayment(this.data.SecretKey, {
+      payment_method: {
+        card: this.card.element
+        }
+      }).subscribe((result:any) => {
+         if(result.error) {
+          this._snackBar.open(result.error.message, '', snackBarConfigWarn);  
+         } else {
+          this.transactionProcess(result.paymentIntent);
+         }
+      }) 
+  } 
+
+private transactionProcess(paymentIntent){
+  const object = [{
+    Stripe : JSON.stringify(paymentIntent),
+    ...this.data,
+    ...this.creditcardForm.value
+   }]
+   this._saleService.payTransaction(object)
+   .then((res :any) => {
+     if(res && !res.StatusCode) {
+      this._snackBar.open('Transaction has been Approved', '', snackBarConfig);  
+     }
+   }).catch((err: HttpErrorResponse)=>(console.log))
+ }
 
 }
