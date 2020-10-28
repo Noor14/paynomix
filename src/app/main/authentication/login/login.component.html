@@ -15,7 +15,7 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input nospace matInput formControlName="Username">
+                    <input nospace matInput type="email"formControlName="Username">
                     <mat-icon matSuffix class="secondary-text">mail</mat-icon>
                     <mat-error *ngIf="loginForm.get('Username').hasError('required')">
                         Email is required
