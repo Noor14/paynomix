@@ -64,7 +64,7 @@ createResellerForm(): void {
     State: ['', Validators.required],
     Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
     Email: ['', [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
-    AlternateEmail:['', [Validators.pattern(globalConfig.validator.emailPattern)]],
+    AlternateEmail: ['', [Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
     TelephoneNumber: ['', Validators.required],
     TelephoneExt: [''],
     AlternativePhoneNumber: [''],
