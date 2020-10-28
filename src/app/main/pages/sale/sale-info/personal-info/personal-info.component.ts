@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as globalConfig  from '../../../../../../constants/globalFunctions';
 
@@ -8,7 +8,8 @@ import * as globalConfig  from '../../../../../../constants/globalFunctions';
   styleUrls: ['./personal-info.component.scss']
 })
 export class PersonalInfoComponent implements OnInit {
-
+  
+  @Output() personalInfo = new EventEmitter<string>();
   public personalInfoForm: FormGroup;
   public locationConfig = globalConfig.locationConfig;
   constructor(private _formBuilder: FormBuilder) { }
@@ -24,7 +25,10 @@ export class PersonalInfoComponent implements OnInit {
     State: ['', Validators.required],
     Country: ['', Validators.required]
   });
-
+  this.personalInfoForm.valueChanges
+  .subscribe((form)=> {
+    this.personalInfo.emit(form);
+  }) 
   }
-
+    
 }

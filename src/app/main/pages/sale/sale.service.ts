@@ -18,5 +18,9 @@ export class SaleService extends BaseService {
         const url = `${environment.apiURL}Transaction/InitTransaction`;
         return this.post(url, obj);
     }
+    payTransaction(obj):any {
+        const url = `${environment.apiURL}Transaction`;
+        return this.post(url, obj);
+    }
    
 }

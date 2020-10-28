@@ -14,6 +14,7 @@ import {
   StripeElementsOptions,
   PaymentIntent,
 } from '@stripe/stripe-js';
+
 @Component({
   // changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-make-sale',
@@ -28,6 +29,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   public bottomSheetEnable: boolean =  true;
   public bottomSheetDrawerOpen: boolean = false;
   public merchantLocation: any[] = [];
+  public payObject:any = {};
   private _unsubscribeAll: Subject<any>;
   private selectedLocationId: number;
   public stripeInstanceInitialize:any;
@@ -96,10 +98,10 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.componentRef.changeDetectorRef.detectChanges();
   }
 
-  cardType(type: number): void{
+  cardType(type: number, data): void{
     this.selectedCardType = type;
     (type) ? this.renderingComponent(AchInfoComponent) : 
-    this.renderingComponent(CreditcardInfoComponent);
+    this.renderingComponent(CreditcardInfoComponent, data);
   }
   
   getMerchantLocation(): void{
@@ -132,7 +134,12 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
             if(res.Response.PublishKey){
               // this.stripeInstanceInitialize = this._stripeService.setKey(res.Response.PublishKey);
               this._stripeService.setKey(res.Response.PublishKey);
-              this.cardType(this.selectedCardType);
+              this.payObject = {
+                Amount,
+                LocationId: this.selectedLocationId,
+                SecretKey: res.Response.SecretKey
+              }
+              this.cardType(this.selectedCardType, this.payObject);
             }else{
               this._snackBar.open('Please select another location', '', snackBarConfigWarn);
             }
@@ -141,9 +148,17 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
          }
     }).catch((err: HttpErrorResponse)=>(this._snackBar.open(err.error.Message, '', snackBarConfigWarn)))
   }
+  personalInformation(value) {
+    this.payObject = {...this.payObject, ...value}; 
+    this.componentRef.instance.data = this.payObject
+  }
 
   onSelected(event: number): void{
     this.selectedLocationId = event;
+    this.container.clear();
+    if(Number(this.amountInput.nativeElement.value)){
+      this.transactionInitialize(Number(this.amountInput.nativeElement.value));
+    }
   }
 
 }
