@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { UserConfigService } from '@fuse/services/user.config.service';
+import { environment } from 'environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as globalConfig from '../../../../../../constants/globalFunctions';
@@ -22,7 +23,7 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
   public basicInfoForm: FormGroup;
   public globalConfig = globalConfig;
   private _unsubscribeAll: Subject<any>;
-  public  userImage: any = null;
+  public  userImage: any = {};
     /**
     * Constructor
     *
@@ -71,6 +72,7 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     .then((res: any) => {
         if(res && !res.StatusCode){
           this.settingDetail = res.Response;
+          this.userImage.FilePath = `${environment.apiURL.split('api/').shift()}${this.settingDetail.FilePath}`;
           this.basicInfoForm.patchValue(this.settingDetail);
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
@@ -112,6 +114,6 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
   }
   
   onFileRemove() {
-    this.userImage = {}
+    this.userImage = {};
   }
 }

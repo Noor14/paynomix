@@ -57,7 +57,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => {
         this.getPricingPlanBy = this._userConfigService.getUserMode();
-        this.getPricingPlans(this.getPricingPlanBy);
+        this.getPricingPlans();
       });
     }
   }
@@ -66,16 +66,8 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     if (this.getPricingPlanBy && 
       Object.keys(this.getPricingPlanBy).length && 
       Object.values(this.getPricingPlanBy).toString()){
-      this.getPricingPlans(this.getPricingPlanBy);
+      this.getPricingPlans();
     }
-    // else if(!this.getPricingPlanBy || !Object.keys(this.getPricingPlanBy).length){
-    //   this._userConfigService.userModeChange
-    //   .pipe(takeUntil(this._unsubscribeAll))
-    //   .subscribe(() => {
-    //     this.getPricingPlanBy = this._userConfigService.getUserMode();
-    //     this.getPricingPlans(this.getPricingPlanBy);
-    //   });
-    // }
   }
 
   ngOnDestroy(): void {
@@ -91,13 +83,13 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
       this.componentRef = this.container.createComponent(factory);
       this.componentRef.instance.data = data;
   }
-  getPricingPlans(obj: any): void{
-    this._pricingPlanService.pricingPlanList(obj)
+  getPricingPlans(): void{
+    this._pricingPlanService.pricingPlanList(this.getPricingPlanBy)
     .then((res: any) => {
         if(res && !res.StatusCode){
           if(res.Response && res.Response.length){
             this.pricingPlans = res.Response;
-            this.assignPricingPlan = this.assignPlan(obj);
+            this.assignPricingPlan = this.assignPlan(this.getPricingPlanBy);
             this.renderingComponent(PricingPlanTableComponent, {
               pricingPlans: this.pricingPlans,
               assignPricingPlan: this.assignPricingPlan
@@ -106,7 +98,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
             this.renderingComponent(NoFoundComponent, {
               icon: 'no-pricing-plan',
               text: 'No pricing plan found',
-              subText: (!obj)? 
+              subText: (!this.getPricingPlanBy)? 
               "You Haven't made any Pricing Plan yet" : 
               "You haven't been assigned any Pricing Plan yet"
             });
@@ -115,6 +107,11 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
+
+  change(event){
+    console.log('change', event)
+  }
+
 
   getPartners(obj: any): Promise<any[]>{
    return this._partnerService.partnerList(obj)
