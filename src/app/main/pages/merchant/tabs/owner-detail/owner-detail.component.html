@@ -17,7 +17,7 @@
        
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
             <mat-label>DOB</mat-label>
-            <input matInput formControlName="DOB" [matDatepicker]="picker" required>
+            <input matInput formControlName="DOB" [matDatepicker]="picker" [max]="maxDate" required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error>DOB is required!</mat-error>
@@ -27,11 +27,11 @@
     <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
             <mat-label>SSN </mat-label>
-            <input matInput formControlName="SSN" >
+            <input matInput numberOnly formControlName="SSN" >
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
             <mat-label>Drivers License </mat-label>
-            <input matInput formControlName="DrivingLicense" >
+            <input matInput numberOnly formControlName="DrivingLicense" >
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
             <mat-label>DL State</mat-label>
@@ -70,19 +70,20 @@
 
     <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-            <mat-label>Zip Code</mat-label>
+            <mat-label>Zip /Postal Code</mat-label>
             <input matInput formControlName="Zip" numberOnly required [maxlength]="validatorObj.zipMaxLength">
             <mat-error *ngIf="ownerDetailForm.get('Zip').hasError('required')">
-                 Zip Code is required!
+                Postal Code is required!
             </mat-error>
             <mat-error *ngIf="!ownerDetailForm.get('Zip').hasError('required') &&
                             ownerDetailForm.get('Zip').hasError('maxLength')">
-                Please enter valid zip
+                            Postal Code should have maximun length of 
+                            {{globalConfig?.validator?.zipMaxLength}} 
                 </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
             <mat-label>Owner's Email</mat-label>
-            <input nospace matInput formControlName="Email" >
+            <input nospace matInput type="email" formControlName="Email" >
             <mat-error *ngIf="ownerDetailForm.get('Email').hasError('email') ||
                                 ownerDetailForm.get('Email').hasError('pattern')">
             Please enter valid email

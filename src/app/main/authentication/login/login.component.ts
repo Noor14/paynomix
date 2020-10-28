@@ -5,8 +5,8 @@ import { environment } from '../../../../environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '../auth.service';
 import { validator, snackBarConfig, snackBarConfigWarn, validateAllFormFields } from '../../../../constants/globalFunctions';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
     selector     : 'login',
@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit
      * Constructor
      *
      * @param {FormBuilder} _formBuilder
-     * @param {AuthService} _authService
+     * @param {AuthenticationService} _authenticationService
      * @param {Router} _router
      * @param {MatSnackBar} _snackBar
      */
     constructor(
         private readonly _formBuilder: FormBuilder,
-        private readonly _authService: AuthService,
+        private readonly _authenticationService: AuthenticationService,
         private readonly _router: Router,
         private readonly _snackBar: MatSnackBar
     )
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit
 
     login(): void{
         if(this.loginForm.valid){
-            this._authService.signIn(this.loginForm.value).then((res: any)=>{
+            this._authenticationService.signIn(this.loginForm.value).then((res: any)=>{
                 if(res && !res.StatusCode){
                     this._snackBar.open('Signing in', '', snackBarConfig);
                     localStorage.setItem('userInfo', JSON.stringify(res.Response));

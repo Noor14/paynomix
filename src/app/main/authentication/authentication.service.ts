@@ -6,7 +6,7 @@ import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends BaseService {
+export class AuthenticationService extends BaseService {
 
   constructor(_http: HttpClient) {
     super(_http);
@@ -15,4 +15,12 @@ export class AuthService extends BaseService {
      const url = `${environment.apiURL}login`;
      return this.post(url, object);
    }
+
+
+   resetPassword(object: any): any{
+    const url = `${environment.apiURL}Login/ResetPassword`;
+    return this.post(url, object);
+  }
+
+
 }

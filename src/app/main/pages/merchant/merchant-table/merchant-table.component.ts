@@ -29,7 +29,7 @@ export class MerchantTableComponent implements OnInit {
       Subject: value.EmailSubject,
       HtmlBodyContent: value.EmailBody,
       MerchantName: `${value.FirstName} ${value.LastName}`,
-      PartnerId: value.Reseller.PartnerId
+      PartnerId: value.PartnerId
     }
     const dialogRef = this._dialog.open(EmailDialogComponent, {width: '660px'});
     dialogRef.componentInstance.data = obj;

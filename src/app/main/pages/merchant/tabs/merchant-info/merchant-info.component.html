@@ -13,7 +13,7 @@
 
             <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
                 <mat-label>Merchant Email</mat-label>
-                <input matInput nospace formControlName="MerchantEmail" required>
+                <input matInput nospace type="email" formControlName="MerchantEmail" required>
                 <mat-error *ngIf="merchantInfoForm.get('MerchantEmail').hasError('required')">
                     Merchant Email is required!
                 </mat-error>

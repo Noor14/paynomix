@@ -13,11 +13,13 @@
                         </ngx-dropzone>
                     </div>
                 </ng-container>
-                <ngx-dropzone-image-preview *ngIf="userImage && !userImage.FilePath" ngProjectAs="ngx-dropzone-preview" [file]="userImage" [removable]="true" (removed)="onFileRemove()">
+                <ngx-dropzone-image-preview *ngIf="(userImage | json) != ({} | json) && !userImage.FilePath" ngProjectAs="ngx-dropzone-preview" [file]="userImage" [removable]="true" (removed)="onFileRemove()">
                 </ngx-dropzone-image-preview>
                 <ng-container *ngIf="userImage && userImage.FilePath">
-                    <img [src]="userImage.FilePath" alt="img">
-                    <mat-icon class="resetImageIcon" (click)="onFileRemove()">close</mat-icon>
+                    <div class="uploadedFile">
+                        <img [src]="userImage.FilePath" alt="img">
+                        <mat-icon class="resetImageIcon" (click)="onFileRemove()">close</mat-icon>
+                    </div>
                 </ng-container>
             </div>
         </div>
@@ -90,7 +92,8 @@
                         </mat-error>
                         <mat-error *ngIf="!basicInfoForm.get('Zip').hasError('required') &&
                                         basicInfoForm.get('Zip').hasError('maxLength')">
-                            Postal Code is invalid!
+                                        Postal Code should have maximun length of 
+                                        {{globalConfig?.validator?.zipMaxLength}} 
                         </mat-error>
                     </mat-form-field>
                 </div>

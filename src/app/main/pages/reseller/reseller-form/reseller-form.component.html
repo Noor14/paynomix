@@ -82,7 +82,7 @@
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Alternate Email</mat-label>
                     <input nospace matInput formControlName="AlternateEmail" type="email" >
-                    <mat-error *ngIf="resellerForm.get('AlternateEmail').hasError('pattern')">
+                    <mat-error *ngIf="resellerForm.get('AlternateEmail').hasError('email') || resellerForm.get('AlternateEmail').hasError('pattern')">
                     Please enter a valid email address
                     </mat-error>
                 </mat-form-field>
