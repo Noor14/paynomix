@@ -12,15 +12,15 @@
         <form name="emailForm" fxLayout="column"  [formGroup]="emailForm">
             <mat-form-field appearance="outline">
                 <mat-label>To</mat-label>
-                <input matInput formControlName="SendTo"  required>  
+                <input type="email"matInput formControlName="SendTo"  required>  
             </mat-form-field> 
             <mat-form-field appearance="outline">
                 <mat-label>CC</mat-label>
-                <input matInput formControlName="Cc" >  
+                <input type="email" matInput formControlName="Cc" >  
             </mat-form-field> 
             <mat-form-field appearance="outline">
                 <mat-label>Bcc</mat-label>
-                <input matInput formControlName="Bcc" >  
+                <input  type="email" matInput formControlName="Bcc" >  
             </mat-form-field> 
             <mat-form-field appearance="outline">
             <mat-label>Subject</mat-label>
