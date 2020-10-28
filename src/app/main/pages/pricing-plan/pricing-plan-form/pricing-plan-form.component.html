@@ -25,7 +25,7 @@
                         Reserve is required!
                     </mat-error>
                     <mat-error *ngIf="!pricngPlanForm.get('Reserve').hasError('required') && pricngPlanForm.get('Reserve').hasError('max')">
-                        Reserve have should be maximum of {{maxPercentage}}
+                        Reserve should not exceed from {{maxPercentage}}%
                     </mat-error>
                 </mat-form-field>
 
