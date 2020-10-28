@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { AssigneeDialogComponent } from '@fuse/components/assignee-dialog/assignee-dialog.component';
 
@@ -12,8 +12,9 @@ export class PricingPlanTableComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
+  @Output() updateList = new EventEmitter<boolean>();
   
-  public displayedColumns: string[] = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'FeeAmount', 'TransactionFee', 'AssignCount', 'Action'];
+  public displayedColumns: string[] = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'PerTransactionFee', 'TransactionFee', 'AssignCount', 'Action'];
   constructor(
     private readonly _dialog: MatDialog
   ) { }
@@ -29,6 +30,11 @@ export class PricingPlanTableComponent implements OnInit {
   openDialog(PricingPlanID) {
     const dialogRef = this._dialog.open(AssigneeDialogComponent, {width: '550px'});
     dialogRef.componentInstance.data ={...this.data.assignPricingPlan, PricingPlanID};
+  //   dialogRef.afterClosed().subscribe(result => {
+  //    if(result){
+  //     this.updateList.emit(result)
+  //    }
+  // });
    }
  
 }

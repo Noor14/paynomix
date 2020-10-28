@@ -37,10 +37,7 @@ export class MerchantCreateComponent implements OnInit {
     .then((res: any) => {
       if(res && !res.StatusCode){
         this._snackBar.open('Merchant created', '', snackBarConfig);
-        this.openDialog(res.Reponse);
-        this._router.navigate(['/pages/merchant/merchant-list']);
-        //  dialog open
-        
+        this.openDialog(res.Reponse);        
       }else{
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
       }
@@ -52,9 +49,10 @@ export class MerchantCreateComponent implements OnInit {
       Subject: obj.EmailSubject,
       HtmlBodyContent: obj.EmailBody,
       MerchantName: `${obj.FirstName} ${obj.LastName}`,
-      PartnerId: obj.Reseller.PartnerId
+      PartnerId: obj.PartnerId
     }
     const dialogRef = this._dialog.open(EmailDialogComponent, {width: '660px'});
     dialogRef.componentInstance.data = object;
+    dialogRef.afterClosed().subscribe(()=>this._router.navigate(['/pages/merchant/merchant-list']))
   }
 }
