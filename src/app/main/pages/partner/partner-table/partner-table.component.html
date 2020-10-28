@@ -10,7 +10,7 @@
         <!-- DBA Name Column -->
         <ng-container matColumnDef="DBAName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> DBA Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.DBAName}}</td>
+          <td mat-cell *matCellDef="let row"> {{row.DBAName || '--'}}</td>
         </ng-container>
     
         <!-- First Name Column -->

@@ -20,7 +20,13 @@
         <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
             <mat-label> E-mail</mat-label>
             <input matInput formControlName="Email" required>
-            <mat-error> E-mail is required!</mat-error>
+            <mat-error *ngIf="personalInfoForm.get('Email').hasError('required')">
+                Email is required!
+            </mat-error> 
+            <mat-error *ngIf="!personalInfoForm.get('Email').hasError('required') &&
+                                personalInfoForm.get('Email').hasError('email') || personalInfoForm.get('Email').hasError('pattern')">
+            Please enter a valid email address
+        </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
             <mat-label>Phone</mat-label>

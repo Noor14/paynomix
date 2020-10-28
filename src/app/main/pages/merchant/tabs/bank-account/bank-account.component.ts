@@ -44,7 +44,7 @@ export class BankAccountComponent implements OnInit, AfterViewInit {
     this.bankAccountForm = this._formBuilder.group({
       BankAccountId: [0, Validators.required],
       BankAccountType: ['', Validators.required],
-      RoutingNumber: ['', [Validators.required, Validators.maxLength(validator.maxRoutingNo), Validators.minLength(validator.maxRoutingNo)]],
+      RoutingNumber: ['', [Validators.required, Validators.maxLength(validator.maxRoutingNo), Validators.minLength(validator.minRoutingNo)]],
       AccountNumber: ['',[Validators.required, Validators.maxLength(validator.accMaxLength)]],
       Currency: ['usd', Validators.required]
   });
