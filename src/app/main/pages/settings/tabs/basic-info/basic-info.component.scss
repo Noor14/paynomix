@@ -1,5 +1,6 @@
 .basicInfo{
     .mat-card{
+        position: relative;
         .card-content{
             opacity: 0.7;
             ngx-dropzone{
@@ -22,6 +23,11 @@
                 top: -10px;
                 right: 15px;
             }
+        }
+        .resetImageIcon{
+            position: absolute;
+            right: 5px;
+            top: 1px;
         }
     } 
 }

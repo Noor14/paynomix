@@ -2,7 +2,7 @@
     <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="start" fxLayoutAlign.gt-sm="start">
         <div fxFlex.gt-sm="30" fxFlex.sm="30" class="mt-20" [ngClass.sm]="'pr-20'" [ngClass.gt-sm]="'pr-20'">
             <div class="mat-card text-center p-16">
-                <ng-container *ngIf="!userImage">
+                <ng-container *ngIf="(userImage | json) == ({} | json)">
                     <div class="card-content">
                         <span class="text-secondry">Drag and Drop File or <span class="accent-fg">Browse</span>
                         </span> 
@@ -13,8 +13,12 @@
                         </ngx-dropzone>
                     </div>
                 </ng-container>
-                <ngx-dropzone-image-preview *ngIf="userImage" ngProjectAs="ngx-dropzone-preview" [file]="userImage" [removable]="true" (removed)="onFileRemove()">
+                <ngx-dropzone-image-preview *ngIf="userImage && !userImage.FilePath" ngProjectAs="ngx-dropzone-preview" [file]="userImage" [removable]="true" (removed)="onFileRemove()">
                 </ngx-dropzone-image-preview>
+                <ng-container *ngIf="userImage && userImage.FilePath">
+                    <img [src]="userImage.FilePath" alt="img">
+                    <mat-icon class="resetImageIcon" (click)="onFileRemove()">close</mat-icon>
+                </ng-container>
             </div>
         </div>
 
