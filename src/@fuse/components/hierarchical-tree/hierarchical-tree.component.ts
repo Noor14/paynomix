@@ -39,5 +39,8 @@ export class HierarchicalTreeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void{
     this.hierarchySubscriber && this.hierarchySubscriber.unsubscribe();
   }
+  selectUserMode(node): void{
+    console.log(node)
+  }
 
 }
