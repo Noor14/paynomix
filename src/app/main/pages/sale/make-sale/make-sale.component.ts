@@ -31,7 +31,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   public merchantLocation: any[] = [];
   public payObject:any = {};
   private _unsubscribeAll: Subject<any>;
-  private selectedLocationId: number;
+  public selectedLocationId: number;
   public stripeInstanceInitialize:any;
   private selectedCardType: number = 0;
   // stripe declaration

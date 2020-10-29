@@ -2,7 +2,7 @@
     <mat-toolbar class="mat-accent">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
             <span class="title">Select {{data?.AssignTo}}</span>
-            <button mat-icon-button aria-label="Close dialog" (click)="dialogRef.close()">
+            <button mat-icon-button aria-label="Close dialog" (click)="_dialogRef.close()">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-toolbar-row>
@@ -39,7 +39,7 @@
             <button mat-stroked-button
             color="accent" 
             class="mr-8"
-            aria-label="CLOSE" (click)="dialogRef.close()">
+            aria-label="CLOSE" (click)="_dialogRef.close()">
                 Close
             </button>    
             <button mat-stroked-button

@@ -26,8 +26,8 @@ export class EmailDialogComponent implements OnInit {
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _snackBar: MatSnackBar, 
-    private _settingService: SettingService,
-    private dialogRef: MatDialogRef<any>
+    private readonly _settingService: SettingService,
+    public readonly _dialogRef: MatDialogRef<any>
     ) { }
  
   ngOnInit() {
@@ -53,7 +53,7 @@ export class EmailDialogComponent implements OnInit {
       this._settingService.sendEmail(this.emailForm.value)
       .then((res:any) => {
         this._snackBar.open('Email has been sent Successfully!', '', snackBarConfig);
-        this.dialogRef.close();
+        this._dialogRef.close();
       }).catch((err: HttpErrorResponse)=>(console.log));
     }else{
       validateAllFormFields(this.emailForm)
