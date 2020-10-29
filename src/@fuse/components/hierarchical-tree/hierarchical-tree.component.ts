@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
+import { HierarchicalTreeService } from './hierarchical-tree.service';
 
 interface FoodNode {
   name: string;
@@ -45,13 +46,24 @@ export class HierarchicalTreeComponent implements OnInit {
   treeControl = new NestedTreeControl<FoodNode>(node => node.children);
   dataSource = new MatTreeNestedDataSource<FoodNode>();
 
-  constructor() {
+  constructor(
+    private readonly _hierarchyService: HierarchicalTreeService
+  ) {
     this.dataSource.data = TREE_DATA;
   }
 
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
   ngOnInit() {
+    this.getHierarchy()
+  }
+  getHierarchy() {
+    this._hierarchyService.getHierarchy()
+    .then((res:any) => {
+      if(res && !res.StatusCode) {
+        this.dataSource.data = res.Response;
+      }
+    })
   }
 
 }

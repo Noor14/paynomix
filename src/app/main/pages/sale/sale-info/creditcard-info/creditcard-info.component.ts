@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
@@ -20,6 +20,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class CreditcardInfoComponent implements OnInit {
   @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
   @Input() data: any;
+  @Output() resetCreditCard = new EventEmitter<any>();
   public elementsOptions: StripeElementsOptions = {
     locale: 'en',
   };
@@ -100,7 +101,8 @@ private transactionProcess(paymentIntent){
    this._saleService.payTransaction(object)
    .then((res :any) => {
      if(res && !res.StatusCode) {
-      this._snackBar.open('Transaction has been Approved', '', snackBarConfig);  
+      this._snackBar.open('Transaction has been Approved', '', snackBarConfig);
+      this.resetCreditCard.emit(true);
      }
    }).catch((err: HttpErrorResponse)=>(console.log))
  }
