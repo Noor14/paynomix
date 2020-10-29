@@ -14,7 +14,8 @@ import { TruncatePipe } from './truncate.pipe';
         HtmlToPlaintextPipe,
         FilterPipe,
         CamelCaseToDashPipe,
-        TruncatePipe
+        TruncatePipe,
+        FilterPipe
     ],
     imports     : [],
     exports     : [
