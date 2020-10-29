@@ -15,6 +15,7 @@ export class OwnerDetailComponent implements OnInit {
   @Input() ownerDetail: any = null;
   public ownerDetailForm: FormGroup;
   @Output() stepThree = new EventEmitter<any>();
+  maxDate: Date;
 
   /**
    * Constructor
@@ -22,11 +23,17 @@ export class OwnerDetailComponent implements OnInit {
    * @param {FormBuilder} _formBuilder
    */
   constructor(
-    private _formBuilder: FormBuilder
-) { }
+    private _formBuilder: FormBuilder,
+   
+) { 
+  this.maxDate = new Date();
+}
 
   ngOnInit(): void {
+    debugger;
     this.createOwnerDetailForm()
+    
+    
   }
   createOwnerDetailForm(): void{
     this.ownerDetailForm = this._formBuilder.group({
