@@ -5,12 +5,12 @@
                 <section class="search mt-20" fxLayout="row">
                     <mat-form-field appearance="outline" fxFlex="100" >
                         <mat-label>{{drawerConfig.label}}</mat-label>
-                        <input matInput>
+                        <input matInput #search>
                     </mat-form-field>
                 </section>
                 <section class="sheet-content" fxLayout="row wrap" fxLayoutWrap fxLayoutAlign="start">
                     <div class="item" fxLayout="row" fxLayoutAlign="start center" fxFlex.xs="100" fxFlex.gt-xs="50" fxFlex.gt-sm="20" fxFlex.sm="33" 
-                    *ngFor="let obj of repeatingItems" (click)="selectedItem(obj.id)"
+                    *ngFor="let obj of repeatingItems | filter : search.value" (click)="selectedItem(obj.id)"
                     [ngClass]="{'selected': selectedId == obj.id}" [matTooltip]="obj?.name" [matTooltipPosition]="'above'" >
                         <span class="circle">{{obj?.name?.trim()?.charAt(0)?.toUpperCase()}}</span>
                         <span>{{obj?.name | truncate : 15}}</span>
