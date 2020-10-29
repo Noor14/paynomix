@@ -1,6 +1,6 @@
 <section class="hierarchy">
     <div [matMenuTriggerFor]="tree" #triggerMenu class="ml-16 selectedMode">{{selectedNode?.title}}</div>
-    <mat-menu #tree="matMenu" class="tree-panel">
+    <mat-menu #tree="matMenu" class="tree-panel" (closed)= menuClosed()>
         <div class="searching">
             <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
                 <mat-label>Search</mat-label>

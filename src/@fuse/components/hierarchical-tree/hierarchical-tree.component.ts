@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import { UserConfigService } from '@fuse/services/user.config.service';
@@ -14,9 +14,10 @@ interface Node {
   styleUrls: ['./hierarchical-tree.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class HierarchicalTreeComponent implements OnInit, OnDestroy {
+export class HierarchicalTreeComponent implements OnInit, OnDestroy, OnChanges{
 @ViewChild(MatMenuTrigger, {static: false}) triggerMenu: MatMenuTrigger;
-// @ViewChild('menuTrigger', {static: true}) menuTrigger: MatMenuTrigger;
+@Input() toggleHierarchy: boolean;
+@Output() menuToggle = new EventEmitter<boolean>()
  public selectedNode: any = {}
  public treeControl = new NestedTreeControl<Node>(node => node.children);
  public dataSource = new MatTreeNestedDataSource<Node>();
@@ -37,7 +38,20 @@ export class HierarchicalTreeComponent implements OnInit, OnDestroy {
       }
     })
   }
-
+  ngOnChanges(){
+    if(this.toggleHierarchy != undefined){
+      if(this.toggleHierarchy){
+        this.triggerMenu.openMenu();
+        this.menuToggle.emit(true);
+      }else{
+      this.triggerMenu.closeMenu();
+      this.menuToggle.emit(false);
+      }
+   }
+  }
+  menuClosed(){
+    this.menuToggle.emit(false);
+  }
   ngOnDestroy(): void{
     this.hierarchySubscriber && this.hierarchySubscriber.unsubscribe();
   }
