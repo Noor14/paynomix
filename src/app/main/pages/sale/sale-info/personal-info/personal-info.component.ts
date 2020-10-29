@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as globalConfig  from '../../../../../../constants/globalFunctions';
 
@@ -7,12 +7,20 @@ import * as globalConfig  from '../../../../../../constants/globalFunctions';
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss']
 })
-export class PersonalInfoComponent implements OnInit {
-  
+export class PersonalInfoComponent implements OnInit, OnChanges {
+
+  @Input() transactionApproved: any = null;
   @Output() personalInfo = new EventEmitter<string>();
   public personalInfoForm: FormGroup;
   public locationConfig = globalConfig.locationConfig;
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(
+    private _formBuilder: FormBuilder) {
+       }
+  ngOnChanges() {
+     if(this.transactionApproved) {
+       this.personalInfoForm.reset();
+     }
+  }
 
   ngOnInit() {
     this.personalInfoForm = this._formBuilder.group({
@@ -28,7 +36,7 @@ export class PersonalInfoComponent implements OnInit {
   this.personalInfoForm.valueChanges
   .subscribe((form)=> {
     this.personalInfo.emit(form);
-  }) 
-  }
+  }); 
     
+}
 }

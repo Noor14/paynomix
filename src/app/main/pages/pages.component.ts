@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HierarchicalTreeService } from '@fuse/components/hierarchical-tree/hierarchical-tree.service';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { authRole } from '../../../constants/globalFunctions';
 
@@ -9,9 +10,12 @@ import { authRole } from '../../../constants/globalFunctions';
 })
 export class PagesComponent implements OnInit, OnDestroy {
 
-  constructor(private readonly _userConfigService: UserConfigService) { }
+  constructor(
+    private readonly _hierarchyService: HierarchicalTreeService,
+    private readonly _userConfigService: UserConfigService) { }
 
   ngOnInit() {
+    this.getHierarchy();
     const {EntityId, UserRoleId, UserName} = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     const userRole =  (UserRoleId === authRole.merchant) ? 'MerchantId' : 
      (UserRoleId === authRole.partner) ? 'PartnerId' : 
@@ -25,7 +29,14 @@ export class PagesComponent implements OnInit, OnDestroy {
      }this._userConfigService.loggedInUser = { UserName, obj }
 
   }
-
+  getHierarchy() {
+    this._hierarchyService.getHierarchyTree()
+    .then((res:any) => {
+      if(res && !res.StatusCode) {
+       this._userConfigService.setHierarchy(res.Response);
+      }
+    })
+  }
   ngOnDestroy(): void {
     if(this._userConfigService.getUserMode())
     this._userConfigService.setUserMode(null)

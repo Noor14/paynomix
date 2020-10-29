@@ -12,16 +12,15 @@
             <mat-form-field appearance="outline">
                 <mat-label>Transaction Amount</mat-label>
                 <input matInput required #amount numberOnly [disabled]="!selectedLocationId">
-                <mat-error>Transaction Amount is required!</mat-error>
             </mat-form-field>
 
-            <mat-button-toggle-group class="mb-24" (change)="cardType($event.value)">
+            <mat-button-toggle-group class="mb-24">
                 <mat-button-toggle class="w-50-p" [value]="0" checked="true"> Credit Card
                 </mat-button-toggle>
                 <mat-button-toggle class="w-50-p" [value]="1">ACH</mat-button-toggle>
             </mat-button-toggle-group>
 
-            <app-personal-info (personalInfo)="personalInformation($event)"></app-personal-info>
+            <app-personal-info (personalInfo)="personalInformation($event)" [transactionApproved]="transactionApproved"></app-personal-info>
 
         </div>
 

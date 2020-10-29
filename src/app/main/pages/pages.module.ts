@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
 import { LayoutModule } from 'app/layout/layout.module';
+import { HierarchicalTreeService } from '@fuse/components/hierarchical-tree/hierarchical-tree.service';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,9 @@ import { LayoutModule } from 'app/layout/layout.module';
     CommonModule,
     PagesRoutingModule,
     LayoutModule,
+  ],
+  providers: [
+    HierarchicalTreeService
   ]
 })
 

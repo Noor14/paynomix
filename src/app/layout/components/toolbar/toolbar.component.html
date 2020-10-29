@@ -10,7 +10,7 @@
             </button>
 
             <div class="toolbar-separator" *ngIf="!hiddenNavbar && !rightNavbar" fxHide.gt-md></div>
-
+            <app-hierarchical-tree fxFlex="1 0 auto"></app-hierarchical-tree>
             <!-- <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNavbar">
                 <div class="logo ml-16">
                     <img class="logo-icon" src="assets/images/logos/logo.svg">
@@ -28,7 +28,7 @@
             <button mat-button [matMenuTriggerFor]="userMenu"
                     class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <img class="avatar mr-0 mr-sm-16" src="assets/images/avatars/Velazquez.jpg">
+                    <!-- <img class="avatar mr-0 mr-sm-16" src="assets/images/avatars/Velazquez.jpg"> -->
                     <span class="username mr-12" fxHide fxShow.gt-sm>{{userName}}</span>
                     <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>

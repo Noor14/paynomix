@@ -23,7 +23,7 @@ export class AssigneeDialogComponent implements OnInit {
     */
 
   constructor(
-    private readonly dialogRef: MatDialogRef<any>, 
+    public readonly _dialogRef: MatDialogRef<any>, 
     private readonly _pricingPlanService: PricingPlanService, 
     private readonly _snackBar: MatSnackBar,
 
@@ -79,8 +79,11 @@ export class AssigneeDialogComponent implements OnInit {
      .then((res:any) =>{
         if(res && !res.StatusCode) {
           this._snackBar.open('Pricing Plan has been assigned successfully! ', '', snackBarConfig); 
+          this._dialogRef.close(true);
+        }else{
+          this._snackBar.open('Pricing Plan has not been assigned yet', '', snackBarConfigWarn);
+          this._dialogRef.close();
         }
-        this.dialogRef.close();
      }).catch((err: HttpErrorResponse)=>(console.log));
 
   }

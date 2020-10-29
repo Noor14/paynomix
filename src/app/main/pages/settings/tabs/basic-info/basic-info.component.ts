@@ -72,8 +72,9 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     .then((res: any) => {
         if(res && !res.StatusCode){
           this.settingDetail = res.Response;
-          this.userImage.FilePath = `${environment.apiURL.split('api/').shift()}${this.settingDetail.FilePath}`;
           this.basicInfoForm.patchValue(this.settingDetail);
+          if(this.settingDetail.FilePath)
+          this.userImage.FilePath = `${environment.apiURL.split('api/').shift()}${this.settingDetail.FilePath}`;
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   } 

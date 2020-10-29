@@ -1,4 +1,4 @@
-<div class="dialog-content-wrapper">
+<div class="assigneeDialog dialog-content-wrapper">
     <mat-toolbar class="mat-accent">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
             <span class="title">Assign to {{data?.AssignTo}}</span>
@@ -8,41 +8,58 @@
         </mat-toolbar-row>
     </mat-toolbar>
 
-    <div mat-dialog-content class="p-24">
-        <form name="assigneeForm" fxLayout="column">
-            <mat-form-field appearance="outline">
-                <mat-label>Select</mat-label>
-                <mat-select [formControl]="selectedAssignee" [multiple]="data?.AssignMultiple" (selectionChange)="onChange()">
-                  <mat-option *ngFor="let item of data?.AssigneeList" [value]="item.id">
-                      {{item.name}}
-                </mat-option>
-                </mat-select>
-              </mat-form-field>
+    <ng-container *ngIf="data?.AssigneeList.length then assigneeTemplate; else nofound">
+    </ng-container>
 
-              <mat-chip-list>
-                <mat-chip *ngFor="let item of selectedChips; let i = index"
-                  [removable]="true" (removed)="onRemoved(item.id, i)">
-                  {{ item.name }}
-                  <mat-icon matChipRemove>cancel</mat-icon>
-                </mat-chip>
-            </mat-chip-list>
 
-        </form>
 
-    </div>
-
-    <div mat-dialog-actions class="px-24 py-16" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-stroked-button
-        color="accent" 
-        class="mr-8"
-        aria-label="CLOSE" (click)="dialogRef.close()">
-            Close
-        </button>    
-        <button mat-stroked-button
-        color="accent"
-        class="save-button"
-        aria-label="SAVE" (click)="assignPricingPlan()">
-                Assign
-        </button>
-    </div>
 </div>
+
+<!-- assigneeTemplate -->
+<ng-template #assigneeTemplate>
+    <div mat-dialog-content class="p-24" fxLayout="column">
+        <mat-form-field appearance="outline">
+            <mat-label>Select</mat-label>
+            <mat-select [formControl]="selectedAssignee" [multiple]="data?.AssignMultiple" (selectionChange)="onChange()">
+              <mat-option *ngFor="let item of data?.AssigneeList" [value]="item.id">
+                  {{item.name}}
+            </mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+          <mat-chip-list>
+            <mat-chip *ngFor="let item of selectedChips; let i = index"
+              [removable]="true" (removed)="onRemoved(item.id, i)">
+              {{ item.name }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+
+        <div mat-dialog-actions class="px-24 py-16" fxLayout="row" fxLayoutAlign="end center">
+            <button mat-stroked-button
+            color="accent" 
+            class="mr-8"
+            aria-label="CLOSE" (click)="_dialogRef.close()">
+                Close
+            </button>    
+            <button mat-stroked-button
+            color="accent"
+            class="save-button"
+            aria-label="SAVE" (click)="assignPricingPlan()">
+                    Assign
+            </button>
+        </div>
+
+    </div>
+
+</ng-template>
+<!-- / assigneeTemplate -->
+
+<!-- no found template -->
+<ng-template #nofound>
+    <div mat-dialog-content class="p-24" fxLayout="column">
+        <h2 class="text-center">No {{data?.AssignTo}} Found</h2>
+        <span class="text-center">You haven't been assigned any Pricing Plan yet</span>
+    </div>
+</ng-template>
+<!-- no found template -->

@@ -14,6 +14,7 @@ import {
   StripeElementsOptions,
   PaymentIntent,
 } from '@stripe/stripe-js';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   // changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,9 +32,10 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   public merchantLocation: any[] = [];
   public payObject:any = {};
   private _unsubscribeAll: Subject<any>;
-  private selectedLocationId: number;
+  public selectedLocationId: number;
   public stripeInstanceInitialize:any;
   private selectedCardType: number = 0;
+  public transactionApproved:boolean = false; 
   // stripe declaration
   // @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
 
@@ -42,7 +44,8 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly _userConfigService: UserConfigService,
     private readonly _saleService: SaleService,
     private readonly _snackBar: MatSnackBar,
-    private readonly _stripeService: StripeService
+    private readonly _stripeService: StripeService,
+    private _router: Router
 
   ) { 
     this._unsubscribeAll = new Subject();
@@ -59,6 +62,11 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(() => this.getMerchantLocation());
+    // this._router.events.pipe(
+    //   filter(event => event instanceof NavigationEnd)
+    // ).subscribe(() => {
+    //   this.scrollBottom();
+    // });
   }
 
   ngAfterViewInit(): void{
@@ -72,14 +80,17 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     )
     .subscribe(res => {
       if(this.amountInput.nativeElement.value){
-        this.transactionInitialize(Number(this.amountInput.nativeElement.value));
+        this.transactionInitialize(Number(this.amountInput.nativeElement.value)*100);
       }else{
        this.stripeInstanceInitialize = undefined;
        this.container.clear();
       }
     });
+    
   }
-  
+  // scrollBottom() {
+  //   // window.scroll(0, )
+  // }
   ngOnDestroy(): void{
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
@@ -95,6 +106,13 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.container.clear();
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = data;
+    this.componentRef.instance.resetCreditCard.subscribe(res=>{ 
+      if(res) {
+        this.container.clear();
+        this.transactionApproved = res;
+      }
+    })
+
     this.componentRef.changeDetectorRef.detectChanges();
   }
 
@@ -122,6 +140,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
  transactionInitialize(Amount: number): void{
+   
     const obj = {
       Amount,
       LocationId: this.selectedLocationId
@@ -137,7 +156,8 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
               this.payObject = {
                 Amount,
                 LocationId: this.selectedLocationId,
-                SecretKey: res.Response.SecretKey
+                SecretKey: res.Response.SecretKey,
+                TransactionId: res.Response.TransactionId,
               }
               this.cardType(this.selectedCardType, this.payObject);
             }else{
@@ -157,7 +177,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.selectedLocationId = event;
     this.container.clear();
     if(Number(this.amountInput.nativeElement.value)){
-      this.transactionInitialize(Number(this.amountInput.nativeElement.value));
+      this.transactionInitialize(Number(this.amountInput.nativeElement.value)*100);
     }
   }
 
