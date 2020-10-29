@@ -1,5 +1,13 @@
-.mat-form-field-wrapper{
-    .mat-form-field-infix{
-        width: 0 !important;
+.assigneeDialog{
+    .mat-form-field-wrapper{
+        .mat-form-field-infix{
+            width: 0 !important;
+        }
+    }
+    h2{
+        font-weight: bold;
+        margin: 5px 0;
+        color: rgba($color: #000000, $alpha: 0.85);
+        text-transform: capitalize;
     }
 }
