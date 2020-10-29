@@ -94,7 +94,9 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
         if(res && !res.StatusCode){
           if(res.Response && res.Response.length){
             this.pricingPlans = res.Response;
-            this.assignPricingPlan = this.assignPlan(this.getPricingPlanBy);
+            if(this.assignPricingPlan && !Object.keys(this.assignPricingPlan).length){
+              this.assignPricingPlan = this.assignPlan(this.getPricingPlanBy);
+            }
             this.renderingComponent(PricingPlanTableComponent, {
               pricingPlans: this.pricingPlans,
               assignPricingPlan: this.assignPricingPlan
@@ -112,11 +114,6 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
-
-  change(event){
-    console.log('change', event)
-  }
-
 
   getPartners(obj: any): Promise<any[]>{
    return this._partnerService.partnerList(obj)

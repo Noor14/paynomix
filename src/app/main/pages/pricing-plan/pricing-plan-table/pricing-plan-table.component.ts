@@ -32,7 +32,7 @@ export class PricingPlanTableComponent implements OnInit {
     dialogRef.componentInstance.data ={...this.data.assignPricingPlan, PricingPlanID};
     dialogRef.afterClosed().subscribe(result => {
      if(result){
-      this.updateList.emit(result)
+      this.updateList.emit(result);
      }
   });
    }
