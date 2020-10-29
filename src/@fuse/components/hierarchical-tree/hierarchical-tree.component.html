@@ -2,13 +2,13 @@
     <div [matMenuTriggerFor]="tree" class="ml-16">Noor</div>
     <mat-menu #tree="matMenu" class="tree-panel">
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
             <mat-label>Search</mat-label>
             <input matInput >
         </mat-form-field>
 
 
-        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="hierarchy-tree">
             <!-- This is the tree node template for leaf nodes -->
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
               <li class="mat-tree-node">
@@ -29,12 +29,12 @@
                   </button>
                   {{node.name}}
                 </div>
-                <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                <ul [class.hierarchy-tree-invisible]="!treeControl.isExpanded(node)">
                   <ng-container matTreeNodeOutlet></ng-container>
                 </ul>
               </li>
             </mat-nested-tree-node>
-          </mat-tree>
+        </mat-tree>
 
     </mat-menu>
 </section>
