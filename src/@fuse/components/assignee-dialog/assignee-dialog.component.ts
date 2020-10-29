@@ -79,8 +79,11 @@ export class AssigneeDialogComponent implements OnInit {
      .then((res:any) =>{
         if(res && !res.StatusCode) {
           this._snackBar.open('Pricing Plan has been assigned successfully! ', '', snackBarConfig); 
+          this.dialogRef.close(true);
+        }else{
+          this._snackBar.open('Pricing Plan has not been assigned yet', '', snackBarConfigWarn);
+          this.dialogRef.close();
         }
-        this.dialogRef.close();
      }).catch((err: HttpErrorResponse)=>(console.log));
 
   }

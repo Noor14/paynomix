@@ -82,6 +82,11 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
       this.container.clear();
       this.componentRef = this.container.createComponent(factory);
       this.componentRef.instance.data = data;
+      this.componentRef.instance.updateList.subscribe(res=>{
+        if(res){
+          this.getPricingPlans();
+        }
+      })
   }
   getPricingPlans(): void{
     this._pricingPlanService.pricingPlanList(this.getPricingPlanBy)
