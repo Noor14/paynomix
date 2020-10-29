@@ -1,0 +1,25 @@
+.example-tree-invisible {
+    display: none;
+    }
+    
+    .example-tree ul,
+    .example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+    }
+          
+
+.tree-panel{
+    margin-top: 17px;
+    width: 100%;
+    max-width: unset !important;  
+    width: calc(100% - 60px);
+    position: absolute;
+    right: 0;
+    left: 0;
+    mat-form-field{
+        display: block;
+        padding: 0 1.8rem;
+    }
+}
