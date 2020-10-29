@@ -9,7 +9,7 @@ export class HierarchicalTreeService  extends BaseService {
   constructor(_http: HttpClient) {
     super(_http);
   }
-  getHierarchy(){
+  getHierarchyTree(){
     const url = `${environment.apiURL}Dashboard/Hierarchy`;
     return this.get(url);
 }

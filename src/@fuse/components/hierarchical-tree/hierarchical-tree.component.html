@@ -1,13 +1,14 @@
 <section class="hierarchy">
-    <div [matMenuTriggerFor]="tree" class="ml-16">Noor</div>
+    <div [matMenuTriggerFor]="tree" class="ml-16 selectedMode">Noor</div>
     <mat-menu #tree="matMenu" class="tree-panel">
-
-        <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
-            <mat-label>Search</mat-label>
-            <input matInput >
-        </mat-form-field>
-
-
+        <div class="searching">
+            <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
+                <mat-label>Search</mat-label>
+                <input matInput >
+            </mat-form-field>
+            <hr />
+        </div>
+       
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="hierarchy-tree">
             <!-- This is the tree node template for leaf nodes -->
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -34,7 +35,7 @@
                 </ul>
               </li>
             </mat-nested-tree-node>
-          </mat-tree>
+        </mat-tree>
 
     </mat-menu>
 </section>

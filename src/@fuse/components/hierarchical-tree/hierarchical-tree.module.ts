@@ -7,7 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatTreeModule} from '@angular/material/tree';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { HierarchicalTreeService } from './hierarchical-tree.service';
 
 @NgModule({
   declarations: [HierarchicalTreeComponent],
@@ -20,9 +19,6 @@ import { HierarchicalTreeService } from './hierarchical-tree.service';
     MatTreeModule,
     MatFormFieldModule,
     MatInputModule,
-  ],
-  providers: [
-    HierarchicalTreeService
-]
+  ]
 })
 export class HierarchicalTreeModule { }
