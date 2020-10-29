@@ -1,5 +1,5 @@
 <section class="hierarchy">
-    <div [matMenuTriggerFor]="tree" class="ml-16 selectedMode">Noor</div>
+    <div [matMenuTriggerFor]="tree" #triggerMenu class="ml-16 selectedMode">{{selectedNode?.title}}</div>
     <mat-menu #tree="matMenu" class="tree-panel">
         <div class="searching">
             <mat-form-field appearance="outline" (click)="$event.stopPropagation()">

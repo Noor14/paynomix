@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
-import { HierarchicalTreeService } from './hierarchical-tree.service';
 import { UserConfigService } from '@fuse/services/user.config.service';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 interface Node {
   title: string;
@@ -15,13 +15,14 @@ interface Node {
   encapsulation: ViewEncapsulation.None
 })
 export class HierarchicalTreeComponent implements OnInit, OnDestroy {
-
+@ViewChild(MatMenuTrigger, {static: false}) triggerMenu: MatMenuTrigger;
+// @ViewChild('menuTrigger', {static: true}) menuTrigger: MatMenuTrigger;
+ public selectedNode: any = {}
  public treeControl = new NestedTreeControl<Node>(node => node.children);
  public dataSource = new MatTreeNestedDataSource<Node>();
  private hierarchySubscriber: any;
 
   constructor(
-    private readonly _hierarchyService: HierarchicalTreeService,
     private readonly _userConfigService: UserConfigService
   ) {
   }
@@ -32,6 +33,7 @@ export class HierarchicalTreeComponent implements OnInit, OnDestroy {
    this.hierarchySubscriber = this._userConfigService.getUserHierarchy.subscribe(res=> {
       if(res){
         this.dataSource.data = res;
+        this.selectedNode = res[0];
       }
     })
   }
@@ -40,7 +42,26 @@ export class HierarchicalTreeComponent implements OnInit, OnDestroy {
     this.hierarchySubscriber && this.hierarchySubscriber.unsubscribe();
   }
   selectUserMode(node): void{
-    console.log(node)
+    this.selectedNode = node;
+    this.triggerMenu.closeMenu();
+    let obj:any = {};
+    if(this.selectedNode.hasOwnProperty('locationid')){
+      obj.LocationId = this.selectedNode.locationid;
+    }else if(this.selectedNode.hasOwnProperty('merchantid')){
+      obj.MerchantId = this.selectedNode.merchantid;
+    }
+    else if(this.selectedNode.hasOwnProperty('resellerid')){
+      obj.ResellerId = this.selectedNode.resellerid;
+    }else{
+      if(this.selectedNode.partnerid > 1 ){
+        obj.PartnerId = this.selectedNode.partnerid;
+      } else{
+        obj = null;
+      }
+
+    }
+
+    this._userConfigService.setUserMode(obj);
   }
 
 }
