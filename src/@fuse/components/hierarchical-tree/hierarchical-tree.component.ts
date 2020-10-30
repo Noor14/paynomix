@@ -16,9 +16,9 @@ interface Node {
 })
 export class HierarchicalTreeComponent implements OnInit, OnDestroy, OnChanges{
 @ViewChild(MatMenuTrigger, {static: false}) triggerMenu: MatMenuTrigger;
-@Input() toggleHierarchy: boolean;
+@Input() toggleHierarchy: boolean = false;
 @Output() menuToggle = new EventEmitter<boolean>()
- public selectedNode: any = {}
+ public selectedNode: any = {};
  public treeControl = new NestedTreeControl<Node>(node => node.children);
  public dataSource = new MatTreeNestedDataSource<Node>();
  private hierarchySubscriber: any;
@@ -39,15 +39,9 @@ export class HierarchicalTreeComponent implements OnInit, OnDestroy, OnChanges{
     })
   }
   ngOnChanges(){
-    if(this.toggleHierarchy != undefined){
       if(this.toggleHierarchy){
         this.triggerMenu.openMenu();
-        this.menuToggle.emit(true);
-      }else{
-      this.triggerMenu.closeMenu();
-      this.menuToggle.emit(false);
       }
-   }
   }
   menuClosed(){
     this.menuToggle.emit(false);
