@@ -14,6 +14,8 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { MatCardModule,MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [UserListComponent, UserTableComponent, ChangePasswordComponent],
   entryComponents :[UserTableComponent],
@@ -30,7 +32,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatTooltipModule
   ]
 })
 export class UserModule { }

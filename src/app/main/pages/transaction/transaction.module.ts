@@ -7,7 +7,7 @@ import { MatButtonModule, MatIconModule, MatInputModule, MatPaginatorModule, Mat
 import { FuseSharedModule } from '@fuse/shared.module';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [TransactionListComponent, TransactionTableComponent, TransactionDetailComponent],
@@ -26,6 +26,7 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
     FuseSharedModule,
     MatIconModule,
     MatInputModule,
+    MatTooltipModule
   ]
 })
 export class TransactionModule { }

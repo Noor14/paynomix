@@ -1,6 +1,7 @@
 .hierarchy{
     .selectedMode{
         cursor: pointer;
+        font-size: 14px;
     }
 }
 .hierarchy-tree{
@@ -15,11 +16,12 @@
         list-style-type: none;
         mat-icon{
             color:  #f4511e;
+            margin-right: -16px;
         }
     }
 }
 .tree-panel{
-    margin-top: 17px;
+    top: 33px;
     width: 100%;
     max-width: unset !important;  
     width: calc(100% - 65px);

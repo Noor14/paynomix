@@ -21,6 +21,7 @@ import { UserConfigService } from '@fuse/services/user.config.service';
 export class ToolbarComponent implements OnInit, OnDestroy
 {
     public userName: string;
+    public toggleHierarchy: boolean = false;
     horizontalNavbar: boolean;
     rightNavbar: boolean;
     hiddenNavbar: boolean;
@@ -125,7 +126,9 @@ export class ToolbarComponent implements OnInit, OnDestroy
         this._router.navigate(['/login']);
     }
 
-
+    toggleHierarchyTree(){
+        this.toggleHierarchy = true;
+    }
     /**
      * On destroy
      */

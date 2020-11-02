@@ -28,6 +28,9 @@ import { MerchantTableComponent } from './merchant-table/merchant-table.componen
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { MatMenuModule} from '@angular/material/menu';
 import { EmailDialogModule } from '@fuse/components/email-dialog/email-dialog.module';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
+
 @NgModule({
   declarations: [MerchantListComponent, MerchantCreateComponent, MerchantEditComponent, MerchantInfoComponent, BusinessDetailComponent, OwnerDetailComponent, BankAccountComponent, AllGetherInfoComponent, MerchantFormComponent, MerchantTableComponent],
   entryComponents: [MerchantTableComponent],
@@ -49,7 +52,9 @@ import { EmailDialogModule } from '@fuse/components/email-dialog/email-dialog.mo
     BottomSheetModule,
     NoFoundModule,
     MatMenuModule,
-    EmailDialogModule
+    EmailDialogModule,
+    MatTooltipModule
+
   ]
 })
 export class MerchantModule { }
