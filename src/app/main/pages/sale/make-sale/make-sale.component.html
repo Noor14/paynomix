@@ -1,4 +1,4 @@
-<section class="makeSale w-100-p">
+<section class="makeSale w-100-p" #makeSale>
     <h2>Make Sale</h2>
     <hr />
     <div class="mt-20 p-20 outer-layer" 
@@ -20,7 +20,7 @@
                 <mat-button-toggle class="w-50-p" [value]="1">ACH</mat-button-toggle>
             </mat-button-toggle-group>
 
-            <app-personal-info (personalInfo)="personalInformation($event)" [transactionApproved]="transactionApproved"></app-personal-info>
+            <app-personal-info (personalInfo)="personalInformation($event)" [resetPersonalInfo]="transactionApproved"></app-personal-info>
 
         </div>
 
@@ -40,7 +40,7 @@
         </div>
 
     </div>
-    <ng-template [ngIf]="bottomSheetEnable">
+    <ng-template [ngIf]="bottomSheetEnable" >
         <app-bottom-sheet [repeatingItems]="merchantLocation" [isOpen]="bottomSheetDrawerOpen"
          [drawerConfig]="makeSaleBottomSheetInfo"
          (selected)="onSelected($event)" (close)="bottomSheetDrawerOpen = $event"></app-bottom-sheet>

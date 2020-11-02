@@ -8,13 +8,9 @@ import { debounceTime, distinctUntilChanged, filter, takeUntil, tap } from 'rxjs
 import { AchInfoComponent } from '../sale-info/ach-info/ach-info.component';
 import { CreditcardInfoComponent } from '../sale-info/creditcard-info/creditcard-info.component';
 import { SaleService } from '../sale.service';
-import { StripeService, StripeCardNumberComponent } from 'ngx-stripe';
-import {
-  StripeCardElementOptions,
-  StripeElementsOptions,
-  PaymentIntent,
-} from '@stripe/stripe-js';
+import { StripeService } from 'ngx-stripe';
 import { NavigationEnd, Router } from '@angular/router';
+import { FuseConfigService } from '@fuse/services/config.service';
 
 @Component({
   // changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,6 +20,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  @ViewChild('makeSale', {static: false}) makeSaleView: ElementRef;
   @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
   @ViewChild('amount', {static: false}) amountInput: ElementRef;
   private componentRef: ComponentRef<any>;
@@ -36,8 +33,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   public stripeInstanceInitialize:any;
   private selectedCardType: number = 0;
   public transactionApproved:boolean = false; 
-  // stripe declaration
-  // @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
+  
 
   constructor(
     private readonly _resolver: ComponentFactoryResolver,
@@ -62,15 +58,10 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(() => this.getMerchantLocation());
-    // this._router.events.pipe(
-    //   filter(event => event instanceof NavigationEnd)
-    // ).subscribe(() => {
-    //   this.scrollBottom();
-    // });
+
   }
 
   ngAfterViewInit(): void{
-    // this.renderingComponent(CreditcardInfoComponent);
     fromEvent(this.amountInput.nativeElement, 'keyup')
     .pipe(
         takeUntil(this._unsubscribeAll),
@@ -86,11 +77,15 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
        this.container.clear();
       }
     });
-    
+    // this._router.events.pipe(
+    //   filter(event => event instanceof NavigationEnd)
+    // ).subscribe(() => {
+      this.scrollBottom();
+    // });
   }
-  // scrollBottom() {
-  //   // window.scroll(0, )
-  // }
+  scrollBottom() {
+    this.makeSaleView.nativeElement.scrollTop = this.makeSaleView.nativeElement.scrollHeight
+  }
   ngOnDestroy(): void{
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
@@ -110,6 +105,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
       if(res) {
         this.container.clear();
         this.transactionApproved = res;
+        this.amountInput= undefined;
       }
     })
 
@@ -125,7 +121,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   getMerchantLocation(): void{
     this._saleService.locationList(this._userConfigService.getUserMode())
     .then((res: any) => {
-          if(res && !res.StatusCode && res.Response && res.Response.length){
+          if(res && !res.StatusCode && res.Response && res.Response.length){ 
           this.merchantLocation = res.Response.map((item: any) => {
             return {
               id: item.LocationId, 
@@ -133,25 +129,22 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
             };
           });
           this.bottomSheetDrawerOpen = true;
-
-      }
+          this.scrollBottom() 
+        }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
 
  transactionInitialize(Amount: number): void{
-   
     const obj = {
       Amount,
       LocationId: this.selectedLocationId
     };
-    // this.stripeInstanceInitialize = undefined;
     this.container.clear();
     this._saleService.transactionInit(obj)
     .then((res: any) => {
           if(res && !res.StatusCode){
             if(res.Response.PublishKey){
-              // this.stripeInstanceInitialize = this._stripeService.setKey(res.Response.PublishKey);
               this._stripeService.setKey(res.Response.PublishKey);
               this.payObject = {
                 Amount,
