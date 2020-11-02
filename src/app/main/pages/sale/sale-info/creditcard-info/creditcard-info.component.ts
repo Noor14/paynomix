@@ -71,9 +71,6 @@ export class CreditcardInfoComponent implements OnInit {
   ngOnInit(): void {
     this.creditcardForm = this._formBuilder.group({
       CardholderName: ['', Validators.required],
-      // CardNumber: ['', Validators.required],
-      // CardExpiration: ['', Validators.required],
-      // SecurityCode:  ['', Validators.required],
       Address:  ['', Validators.required],
       ZipCode: ['', Validators.required]
     });

@@ -112,7 +112,10 @@
                     <mat-label>Exchange Rate (%) </mat-label>
                     <input matInput formControlName="ExchangeRateMarkup" numberOnly >
                     <mat-hint>This rate markup is used when currencies must be converted. It has no effect on transaction reporting.</mat-hint>
-                    <!-- <mat-error>Exchange Rate is required!</mat-error> -->
+                    <mat-error>Exchange Rate is required!</mat-error>
+                    <mat-error *ngIf="partnerForm.get('ExchangeRateMarkup').hasError('max')">
+                        Exchange Rate should not exceed from {{globalConfig?.validator?.maxPercentage}}%
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.xs]="'mt-20'" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
