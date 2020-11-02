@@ -21,13 +21,17 @@
     }
 }
 .tree-panel{
-    top: 33px;
+    top: 17px;
     width: 100%;
     max-width: unset !important;  
     width: calc(100% - 65px);
     position: absolute;
     right: 0;
     left: 0;
+    button.active{
+        background-color: rgba($color: #000000, $alpha: .04);
+        color: #f4511e;
+    }
     .searching{
         padding: 0 1.8rem;
         mat-form-field{
