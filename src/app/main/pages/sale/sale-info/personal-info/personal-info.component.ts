@@ -9,7 +9,7 @@ import * as globalConfig  from '../../../../../../constants/globalFunctions';
 })
 export class PersonalInfoComponent implements OnInit, OnChanges {
 
-  @Input() transactionApproved: any = null;
+  @Input() resetPersonalInfo: boolean = false;
   @Output() personalInfo = new EventEmitter<string>();
   public personalInfoForm: FormGroup;
   public locationConfig = globalConfig.locationConfig;
@@ -17,7 +17,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     private _formBuilder: FormBuilder) {
        }
   ngOnChanges() {
-     if(this.transactionApproved) {
+     if(this.resetPersonalInfo) {
        this.personalInfoForm.reset();
      }
   }
