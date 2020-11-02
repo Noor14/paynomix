@@ -24,9 +24,15 @@ toolbar {
             width: 38px;
         }
     }
-
+    .searchIcon{
+        cursor: pointer;
+        padding: 0 20px;
+        margin: 0;
+        width: 64px!important;
+        height: 64px!important;
+        line-height: 64px!important
+    }
     .user-button,
-    fuse-search-bar,
     .language-button,
     .chat-panel-toggle-button,
     .quick-panel-toggle-button {

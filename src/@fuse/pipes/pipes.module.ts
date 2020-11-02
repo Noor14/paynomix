@@ -15,7 +15,6 @@ import { TruncatePipe } from './truncate.pipe';
         FilterPipe,
         CamelCaseToDashPipe,
         TruncatePipe,
-        FilterPipe
     ],
     imports     : [],
     exports     : [
