@@ -130,7 +130,7 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
         });
         this._settingService.saveSaleSettingByLocation(this.makeSaleSettings).then((res: any)=>{
           if(res && !res.StatusCode){
-            this._snackBar.open('Make sale setting updated successfully', '' , snackBarConfig)
+            this._snackBar.open('Settings saved successfully', '' , snackBarConfig)
           }
         });
     }
