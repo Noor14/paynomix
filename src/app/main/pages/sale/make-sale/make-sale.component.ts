@@ -36,8 +36,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   public stripeInstanceInitialize:any;
   private selectedCardType: number = 0;
   public transactionApproved:boolean = false; 
-  // stripe declaration
-  // @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
+  
 
   constructor(
     private readonly _resolver: ComponentFactoryResolver,
@@ -70,7 +69,6 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void{
-    // this.renderingComponent(CreditcardInfoComponent);
     fromEvent(this.amountInput.nativeElement, 'keyup')
     .pipe(
         takeUntil(this._unsubscribeAll),
@@ -110,6 +108,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
       if(res) {
         this.container.clear();
         this.transactionApproved = res;
+        this.amountInput= undefined;
       }
     })
 
@@ -140,18 +139,15 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
  transactionInitialize(Amount: number): void{
-   
     const obj = {
       Amount,
       LocationId: this.selectedLocationId
     };
-    // this.stripeInstanceInitialize = undefined;
     this.container.clear();
     this._saleService.transactionInit(obj)
     .then((res: any) => {
           if(res && !res.StatusCode){
             if(res.Response.PublishKey){
-              // this.stripeInstanceInitialize = this._stripeService.setKey(res.Response.PublishKey);
               this._stripeService.setKey(res.Response.PublishKey);
               this.payObject = {
                 Amount,
