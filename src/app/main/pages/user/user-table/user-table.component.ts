@@ -11,7 +11,7 @@ export class UserTableComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   public dataSource = new MatTableDataSource<any>();
   @Input() data: any;
-  public displayedColumns: string[] =  ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin', 'Action'];
+  public displayedColumns: string[] =  ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin'];
   constructor() { }
 
   ngOnInit(): void{
