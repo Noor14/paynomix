@@ -1,4 +1,6 @@
-<section class="table-responsive mat-card">
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+<section class="table-responsive mat-card fixedTableheight">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
         <!--  Transaction Type Column -->
         <ng-container matColumnDef="TransactionId">
@@ -47,7 +49,27 @@
         <!--  Cardholder Name Column -->
         <ng-container matColumnDef="CardholderName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Cardholder Name </th>
-            <td mat-cell *matCellDef="let row"> {{row.CardholderName || '--'}}</td>
+            <td mat-cell *matCellDef="let row">
+
+
+
+
+
+                <span 
+                class="showGridButton"> {{row.CardholderName || '--'}}
+               </span>
+    
+    
+    <div class="hideGridButton" style="padding-right:10px;">
+                   
+    
+                       <mat-icon  matTooltip="Transaction Details"
+                     
+                       [routerLink]="['/pages/transaction/transaction-detail', row.TransactionId]"
+                      class="iconsList" style="font-size:24px;">pageview</mat-icon> 
+                    </div>
+
+            </td>
         </ng-container>
        
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -55,4 +77,3 @@
         </tr>
     </table>
   </section>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

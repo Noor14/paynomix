@@ -1,4 +1,5 @@
-<section class="table-responsive mat-card">
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<section class="table-responsive mat-card fixedTableheight">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
       
         <!-- ResellerName Column -->
@@ -28,22 +29,40 @@
           <!-- Country Column -->
           <ng-container matColumnDef="Country">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
-            <td mat-cell *matCellDef="let row"> {{row.Country}} </td>
+            <td mat-cell *matCellDef="let row"> 
+                
+                
+              
+            
+                <span class="showGridButton" 
+                >    {{row.Country}}  </span> 
+           
+               <div class="hideGridButton" style="padding-right:10px;">
+                
+                   <mat-icon 
+                   class="iconsList"
+                   matTooltip="Edit Reseller"
+                   [routerLink]="['/pages/reseller/reseller-edit', row.ResellerId]"
+                   >edit</mat-icon>
+       
+           
+                </div>
+            
+            </td>
           </ng-container>   
 
         <!-- Action Column -->
-        <ng-container matColumnDef="Action">
+        <!-- <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let row">
             <button mat-icon-button [routerLink]="['/pages/reseller/reseller-edit', row.ResellerId]">
               <mat-icon class="secondary-text" >edit</mat-icon>
             </button>
           </td>
-        </ng-container>
+        </ng-container> -->
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;">
         </tr>
     </table>
   </section>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

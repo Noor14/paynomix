@@ -52,3 +52,50 @@ app-pages{
       }
   }
 }
+
+.fixedTableheight{
+    height:77vh;
+}
+
+.fixedTableheight > mat-table > mat-row{
+    height:77vh;
+}
+
+
+
+
+
+.showGridButton{
+    display:block;
+
+}
+.hideGridButton{
+    display:none;
+}
+
+.iconsList{
+    cursor: pointer;
+    margin-right:3px;
+}
+
+.mat-row:hover {
+        background-color:#f5f3f3 !important;
+
+
+        .showGridButton{
+            display:none;
+        
+        }
+        .hideGridButton{
+            display:block;
+            animation: showNav 250ms ease-in-out both;
+
+        }  
+    }
+
+
+
+    @keyframes showNav {
+        from {opacity: 0;}
+        to {opacity: 1;}
+      }
