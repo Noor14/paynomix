@@ -14,7 +14,7 @@ export class PricingPlanTableComponent implements OnInit {
   @Input() data: any;
   @Output() updateList = new EventEmitter<boolean>();
   
-  public displayedColumns: string[] = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'PerTransactionFee', 'TransactionFee', 'AssignCount', 'Action'];
+  public displayedColumns: string[] = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'PerTransactionFee', 'TransactionFee', 'AssignCount'];
   constructor(
     private readonly _dialog: MatDialog
   ) { }

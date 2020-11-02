@@ -11,7 +11,7 @@ export class ResellerTableComponent implements OnInit  {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
-  public displayedColumns: string[] = ['ResellerName', 'DBAName', 'TelephoneNumber', 'Email', 'Country', 'Action'];
+  public displayedColumns: string[] = ['ResellerName', 'DBAName', 'TelephoneNumber', 'Email', 'Country'];
 
   constructor() { }
 

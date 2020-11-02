@@ -11,7 +11,7 @@ export class PartnerTableComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
-  public displayedColumns: string[] =  ['PartnerName', 'DBAName', 'FirstName', 'LastName', 'Action'];
+  public displayedColumns: string[] =  ['PartnerName', 'DBAName', 'FirstName', 'LastName'];
   
   constructor() { }
 
