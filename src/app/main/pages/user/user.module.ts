@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserTableComponent } from './user-table/user-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { MatCardModule,MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatCardModule,MatDialogModule,MatFormFieldModule, MatInputModule, MatToolbarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [UserListComponent, UserTableComponent, ChangePasswordComponent],
@@ -24,10 +24,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSortModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatToolbarModule,
     FuseSharedModule,
     MatIconModule,
     NoFoundModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     FlexLayoutModule
