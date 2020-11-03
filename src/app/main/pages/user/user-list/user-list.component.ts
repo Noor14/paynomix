@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getUsers())
+    .subscribe(() => this.getUsers()); 
   }
 
   ngOnDestroy(): void {
