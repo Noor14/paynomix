@@ -21,6 +21,9 @@ export class AuthGuard extends RoleAuthorizationService implements CanActivate, 
              const userInfo = (localStorage.getItem('userInfo')) ? 
              JSON.parse(localStorage.getItem('userInfo')) : undefined;
              if(!userInfo){
+               if(this._route.url === '/'){
+                 this._route.navigate(['login']);
+               }
                 return true;
              }
              else{
