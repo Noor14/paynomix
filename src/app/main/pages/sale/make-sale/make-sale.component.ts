@@ -162,6 +162,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     }).catch((err: HttpErrorResponse)=>(this._snackBar.open(err.error.Message, '', snackBarConfigWarn)))
   }
   personalInformation(value) {
+    this.payObject.Amount / 100
     this.payObject = {...this.payObject, ...value}; 
     this.componentRef.instance.data = this.payObject
   }
