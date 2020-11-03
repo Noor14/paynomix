@@ -1,5 +1,4 @@
-<section class="users mt-20">
-  <section class="table-responsive mat-card">
+<section class="table-responsive mat-card mt-20">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
         <!-- First Name Column -->
         <ng-container matColumnDef="FirstName">
@@ -44,8 +43,8 @@
         <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let row"> 
-            <button mat-icon-button (click)="openDialog()">
-              <mat-icon class="secondary-text">edit</mat-icon>
+            <button mat-icon-button (click)="openDialog(row)">
+              <mat-icon class="secondary-text" >edit</mat-icon>
             </button>
           </td>
         </ng-container>
@@ -56,63 +55,54 @@
     </table>
 </section>
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-</section>
-
 
 <ng-template #userDialog>
-  <div class="dialog-content-wrapper">
-    <mat-toolbar class="mat-accent">
-        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title">Send Merchant Link</span>
-            <button mat-icon-button  aria-label="Close dialog">
-                <mat-icon>close</mat-icon>
+    <div class="dialog-content-wrapper">
+        <mat-toolbar class="mat-accent">
+            <mat-toolbar-row  fxLayout="row" fxLayoutAlign="space-between center">
+                <span class="title">Update User</span>
+                <button mat-icon-button aria-label="Close dialog" (click)="dialogRef.close()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <div mat-dialog-content class="p-24 mx-0"> 
+            <form fxLayout="column" name="form" [formGroup]="userForm">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="" formControlName="FirstName">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="" formControlName="LastName">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="" disabled readonly="true" formControlName="Username">
+                </mat-form-field> 
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="" formControlName="Email">
+                </mat-form-field> 
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Phone</mat-label>
+                    <input matInput  placeholder="" formControlName="Phone">
+                </mat-form-field>
+            </form>
+        </div>
+
+        <div mat-dialog-actions class="px-24 my-12" fxLayout="row" fxLayoutAlign="end center">
+            <button mat-stroked-button color="accent" class="mr-8" aria-label="Cancel" (click)="dialogRef.close()">
+                Cancel
             </button>
-        </mat-toolbar-row>
-    </mat-toolbar>
-
-    <div mat-dialog-content class="m-0">
-        <form name="userForm" fxLayout="column"  [formGroup]="userForm">
-            <mat-form-field appearance="outline">
-                <mat-label>To</mat-label>
-                <input type="email" matInput formControlName="SendTo"  required>  
-            </mat-form-field> 
-            <mat-form-field appearance="outline">
-                <mat-label>CC</mat-label>
-                <input type="email" matInput formControlName="Cc" >  
-            </mat-form-field> 
-            <mat-form-field appearance="outline">
-                <mat-label>Bcc</mat-label>
-                <input  type="email" matInput formControlName="Bcc" >  
-            </mat-form-field> 
-            <mat-form-field appearance="outline">
-            <mat-label>Subject</mat-label>
-            <input matInput formControlName="Subject" readonly required>  
-            </mat-form-field>  
-            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                <mat-label>Message</mat-label>
-                <textarea matInput rows="5" readonly>
-          Hello,
-
-          Thank you for signing up on Paynomix Inc. You’re almost ready to go! 
-          Please fill out your application to complete the boarding process by
-          clicking the following link.
-          Launch Application
-          We appreciate the opportunity to work with you.
-          Paynomix Team.
-                </textarea> 
-            </mat-form-field>
-
-        </form>
+            <button mat-stroked-button color="accent" aria-label="Update User" (click)="updateUser()">
+                Update User
+            </button>
+        </div>
     </div>
-
-    <div mat-dialog-actions class="px-24 my-12" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-stroked-button color="accent" class="mr-8" aria-label="CLOSE" (click)="_dialogRef.close()">
-            Close
-        </button>    
-        <button mat-stroked-button color="accent" class="save-button" aria-label="SAVE" (click)="sendEmail()">
-            Send
-        </button>
-    </div>
-</div>
-
 </ng-template>

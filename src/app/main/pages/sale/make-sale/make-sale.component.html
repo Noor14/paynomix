@@ -11,7 +11,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Transaction Amount</mat-label>
-                <input matInput required #amount numberOnly [disabled]="!selectedLocationId">
+                <input matInput required #amount [disabled]="!selectedLocationId">
             </mat-form-field>
 
             <mat-button-toggle-group class="mb-24">

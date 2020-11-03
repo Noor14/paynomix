@@ -56,7 +56,7 @@ createPartnerForm(): void{
     Phone: ['', Validators.required],
     AlternatePhone: [''],
     TaxId: [''],
-    ExchangeRateMarkup: ['', Validators.max(globalConfig.validator.maxPercentage)],
+    ExchangeRateMarkup: ['', [Validators.required ,Validators.max(globalConfig.validator.maxPercentage)]],
     DefaultSettlementCurrency: ['', Validators.required]
 });
 
