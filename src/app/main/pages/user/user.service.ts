@@ -13,5 +13,9 @@ export class UserService extends BaseService {
         const url = `${environment.apiURL}User/Search`;
          return this.post(url, obj);
         }
+        updateUser(obj: any):any {
+            const url = `${environment.apiURL}User`;
+            return this.post(url,obj);
+          }
     
 }

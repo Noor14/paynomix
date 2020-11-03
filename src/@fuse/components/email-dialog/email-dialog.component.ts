@@ -52,7 +52,7 @@ export class EmailDialogComponent implements OnInit {
     if(this.emailForm.valid){ 
       this._settingService.sendEmail(this.emailForm.value)
       .then((res:any) => {
-        this._snackBar.open('Email has been sent Successfully!', '', snackBarConfig);
+        this._snackBar.open('Email has been sent successfully!', '', snackBarConfig);
         this._dialogRef.close();
       }).catch((err: HttpErrorResponse)=>(console.log));
     }else{

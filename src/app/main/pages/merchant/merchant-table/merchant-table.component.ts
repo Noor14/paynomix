@@ -23,15 +23,15 @@ export class MerchantTableComponent implements OnInit {
       this.dataSource.sort = this.sort;
     }
   }
-  openDialog(value) {
-    const obj:any = {
-      SendTo: value.MerchantAccountSetup.MerchantEmail,
-      Subject: value.EmailSubject,
-      HtmlBodyContent: value.EmailBody,
-      MerchantName: `${value.FirstName} ${value.LastName}`,
-      PartnerId: value.PartnerId
+  openDialog(obj) {
+    const object:any = {
+      SendTo: obj.MerchantAccountSetup.MerchantEmail,
+      Subject: obj.EmailSubject,
+      HtmlBodyContent: obj.EmailBody,
+      MerchantName: `${obj.FirstName} ${obj.LastName}`,
+      PartnerId: obj.PartnerId
     }
     const dialogRef = this._dialog.open(EmailDialogComponent, {width: '660px'});
-    dialogRef.componentInstance.data = obj;
+    dialogRef.componentInstance.data = object;
   } 
 }
