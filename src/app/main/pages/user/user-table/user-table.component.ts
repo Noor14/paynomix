@@ -18,7 +18,7 @@ export class UserTableComponent implements OnInit {
   public displayedColumns: string[] = ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin', 'Action'];
   constructor(
     private readonly _dialog: MatDialog,
-    private _formBuilder: FormBuilder
+    private readonly _formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +30,7 @@ export class UserTableComponent implements OnInit {
   }
   openDialog(): void {
     this.dialogRef = this._dialog.open(this.userDialog, {width: '660px'});
+    if(!this.userForm)
     this.createUserForm();
   }
   createUserForm(): void {

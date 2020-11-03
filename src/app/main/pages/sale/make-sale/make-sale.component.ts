@@ -10,10 +10,8 @@ import { CreditcardInfoComponent } from '../sale-info/creditcard-info/creditcard
 import { SaleService } from '../sale.service';
 import { StripeService } from 'ngx-stripe';
 import { NavigationEnd, Router } from '@angular/router';
-import { FuseConfigService } from '@fuse/services/config.service';
 
 @Component({
-  // changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-make-sale',
   templateUrl: './make-sale.component.html',
   styleUrls: ['./make-sale.component.scss'],
@@ -27,10 +25,9 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   public bottomSheetEnable: boolean =  true;
   public bottomSheetDrawerOpen: boolean = false;
   public merchantLocation: any[] = [];
-  public payObject:any = {};
+  private payObject:any = {};
   private _unsubscribeAll: Subject<any>;
   public selectedLocationId: number;
-  public stripeInstanceInitialize:any;
   private selectedCardType: number = 0;
   public transactionApproved:boolean = false; 
   
@@ -73,14 +70,13 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
       if(this.amountInput.nativeElement.value){
         this.transactionInitialize(Number(this.amountInput.nativeElement.value)*100);
       }else{
-       this.stripeInstanceInitialize = undefined;
        this.container.clear();
       }
     });
     // this._router.events.pipe(
     //   filter(event => event instanceof NavigationEnd)
     // ).subscribe(() => {
-      this.scrollBottom();
+      // this.scrollBottom();
     // });
   }
   scrollBottom() {
@@ -129,7 +125,6 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
             };
           });
           this.bottomSheetDrawerOpen = true;
-          this.scrollBottom() 
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
