@@ -15,7 +15,7 @@ export class UserTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   public dataSource = new MatTableDataSource<any>();
-  public dialogRef;
+  public dialogRef: any;
   @Input() data: any;
   public userForm: FormGroup;
   public displayedColumns: string[] = ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin', 'Action'];
@@ -45,7 +45,7 @@ export class UserTableComponent implements OnInit {
       UserID : ['', Validators.required],
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
-      Username: ['', Validators.required],
+      Username: [{value:'', disabled: true}, Validators.required],
       Email: ['', Validators.required],
       Phone: ['', Validators.required],
     });

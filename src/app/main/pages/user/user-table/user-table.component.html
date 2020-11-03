@@ -1,4 +1,5 @@
-<section class="table-responsive mat-card mt-20">
+<section class="mt-20">
+  <div class="table-responsive mat-card ">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
         <!-- First Name Column -->
         <ng-container matColumnDef="FirstName">
@@ -53,8 +54,9 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;">
         </tr>
     </table>
+  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </section>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
 <ng-template #userDialog>
     <div class="dialog-content-wrapper">
@@ -71,27 +73,27 @@
             <form fxLayout="column" name="form" [formGroup]="userForm">
                 <mat-form-field appearance="outline">
                     <mat-label>First Name</mat-label>
-                    <input matInput placeholder="" formControlName="FirstName">
+                    <input matInput formControlName="FirstName">
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Last Name</mat-label>
-                    <input matInput placeholder="" formControlName="LastName">
+                    <input matInput formControlName="LastName">
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Username</mat-label>
-                    <input matInput placeholder="" disabled readonly="true" formControlName="Username">
+                    <input matInput readonly formControlName="Username">
                 </mat-form-field> 
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="" formControlName="Email">
+                    <input type="email" matInput formControlName="Email">
                 </mat-form-field> 
 
                 <mat-form-field appearance="outline">
                     <mat-label>Phone</mat-label>
-                    <input matInput  placeholder="" formControlName="Phone">
+                    <input matInput formControlName="Phone">
                 </mat-form-field>
             </form>
         </div>
