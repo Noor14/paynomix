@@ -1,11 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '@fuse/animations';
 import {transactionType, transactionStatus } from '../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-transaction-table',
   templateUrl: './transaction-table.component.html',
-  styleUrls: ['./transaction-table.component.scss']
+  styleUrls: ['./transaction-table.component.scss'],
+  animations   : fuseAnimations
 })
 export class TransactionTableComponent implements OnInit{
   public transStatus = transactionStatus;

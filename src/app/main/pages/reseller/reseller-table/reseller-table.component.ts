@@ -1,10 +1,12 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-reseller-table',
   templateUrl: './reseller-table.component.html',
-  styleUrls: ['./reseller-table.component.scss']
+  styleUrls: ['./reseller-table.component.scss'],
+  animations   : fuseAnimations
 })
 export class ResellerTableComponent implements OnInit  {
   public dataSource = new MatTableDataSource<any>();

@@ -1,15 +1,19 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.scss']
+  styleUrls: ['./user-table.component.scss'],
+  animations   : fuseAnimations
+
 })
 export class UserTableComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   public dataSource = new MatTableDataSource<any>();
+  public showHover = -1;
   @Input() data: any;
   public displayedColumns: string[] =  ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin'];
   constructor() { }

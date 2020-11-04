@@ -1,11 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '@fuse/animations';
 import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
 
 @Component({
   selector: 'app-merchant-table',
   templateUrl: './merchant-table.component.html',
-  styleUrls: ['./merchant-table.component.scss']
+  styleUrls: ['./merchant-table.component.scss'],
+  animations   : fuseAnimations
 })
 export class MerchantTableComponent implements OnInit {
   public dataSource = new MatTableDataSource<any>();
