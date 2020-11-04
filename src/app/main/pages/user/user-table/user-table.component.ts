@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { snackBarConfig, snackBarConfigWarn } from 'constants/globalFunctions';
 import { UserService } from '../user.service';
@@ -16,7 +16,7 @@ export class UserTableComponent implements OnInit {
   @ViewChild('userDialog', { static: false }) userDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  public showHover = -1;
+  public actionButtonsOnHover = -1;
   public dataSource = new MatTableDataSource<any>();
   public dialogRef: any;
   @Input() data: any;
