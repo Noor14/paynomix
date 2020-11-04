@@ -1,5 +1,5 @@
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-  <section class="pricingPlan-table table-responsive mat-card fixedTableheight">
+  <section class="pricingPlan-table table-responsive mat-card">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
   
     <!-- Pricing Title Column -->
@@ -38,52 +38,21 @@
     <!-- Transaction Assigned Column -->
     <ng-container matColumnDef="AssignCount">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Assigned </th>
-    <td mat-cell *matCellDef="let row">
-        <span class="showGridButton" 
-         >   {{row.AssignCount || 0}} </span> 
-    
-        <div class="hideGridButton" style="padding-right:10px;">
-         
-            <mat-icon 
-            
-            matTooltip="Edit Picing Plan"
-            class="iconsList" [routerLink]="['/pages/pricing-plan/pricing-plan-edit', row.PricingPlanID]">edit</mat-icon>
-
-           <mat-icon  matTooltip="Assign Pricing Plan"
-          
-          class="iconsList" (click)="openDialog(row.PricingPlanID)">how_to_reg</mat-icon> 
-
-         </div>
-        
-        
-        
-    
+    <td mat-cell *matCellDef="let row;let ri = index">
+          <ng-template [ngIf]="ri != showHoverAction" [ngIfElse]="ButtonsList">
+            {{row.AssignCount || 0}}
+        </ng-template>
+                 <ng-template #ButtonsList>
+            <div [@fadeIn]>
+                <mat-icon  matTooltip="Assign Pricing Plan"   class="iconsList" (click)="openDialog(row.PricingPlanID)">how_to_reg</mat-icon> 
+            </div>
+      </ng-template>
     </td>
     </ng-container>
-    <!-- Action Column -->
-    <!-- <ng-container matColumnDef="Action">
-    <th mat-header-cell *matHeaderCellDef>Action</th>
-    <td mat-cell *matCellDef="let row"> 
-  
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon class="secondary-text">more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item >
-          <mat-icon class="secondary-text">edit</mat-icon>
-          <span>Edit Pricing Plan</span>
-        </button>
-        <button mat-menu-item >
-          <mat-icon class="secondary-text">how_to_reg</mat-icon>
-            <span>Assign to {{data?.assignPricingPlan?.AssignTo}}</span>
-             
-        </button>
-      </mat-menu>
-    </td>
-    </ng-container> -->
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row  (mouseenter)="showHoverAction = i"  (mouseleave)="showHoverAction = -1" 
+    *matRowDef="let row; columns: displayedColumns;let i = index">
     </tr>
+    
     </table>
     </section>

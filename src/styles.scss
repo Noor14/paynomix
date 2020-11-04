@@ -6,9 +6,7 @@
 
 app-pages{
     width: 100%;
-    .accent-alpha-bg{
-      background-color: rgba($color: #f4511e, $alpha: 0.02) !important; // dynamic
-    }
+    
     .mat-tab-group{
       .mat-tab-label-active{
           color: #f4511e !important; //dynamic
@@ -28,6 +26,7 @@ app-pages{
         }
     }
     .table-responsive {
+      height:77vh;
         overflow-x: auto;
         .mat-cell,.mat-header-cell
           {
@@ -39,6 +38,12 @@ app-pages{
           }
      
     }
+}
+.accent-alpha-bg{
+    background-color:#f5f5f5 !important; // dynamic
+  }
+mat-icon{
+    cursor:pointer
 }
 .mat-dialog-container {
   padding: 0 !important;
@@ -53,49 +58,10 @@ app-pages{
   }
 }
 
-.fixedTableheight{
-    height:77vh;
-}
-
-.fixedTableheight > mat-table > mat-row{
-    height:77vh;
-}
-
-
-
-
-
-.showGridButton{
-    display:block;
-
-}
-.hideGridButton{
-    display:none;
-}
-
-.iconsList{
-    cursor: pointer;
-    margin-right:3px;
-}
-
 .mat-row:hover {
+    box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
         background-color:#f5f3f3 !important;
+     
+        transition: box-shadow 0.3s;
 
-
-        .showGridButton{
-            display:none;
-        
-        }
-        .hideGridButton{
-            display:block;
-            animation: showNav 250ms ease-in-out both;
-
-        }  
     }
-
-
-
-    @keyframes showNav {
-        from {opacity: 0;}
-        to {opacity: 1;}
-      }

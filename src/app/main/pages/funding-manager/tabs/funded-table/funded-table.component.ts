@@ -1,10 +1,12 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '@fuse/animations';
 
 @Component({
   selector: 'app-funded-table',
   templateUrl: './funded-table.component.html',
-  styleUrls: ['./funded-table.component.scss']
+  styleUrls: ['./funded-table.component.scss'],
+  animations   : fuseAnimations
 })
 export class FundedTableComponent implements OnInit {
   public dataSource = new MatTableDataSource<any>();

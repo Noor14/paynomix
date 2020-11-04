@@ -4,18 +4,27 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { snackBarConfig, snackBarConfigWarn } from 'constants/globalFunctions';
 import { UserService } from '../user.service';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '@fuse/animations';
+
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.scss']
+  styleUrls: ['./user-table.component.scss'],
+  animations   : fuseAnimations
+
 })
 export class UserTableComponent implements OnInit {
   @ViewChild('userDialog', { static: false }) userDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   public dataSource = new MatTableDataSource<any>();
+
   public dialogRef: any;
+
+  public showHover = -1;
+
   @Input() data: any;
   public userForm: FormGroup;
   public displayedColumns: string[] = ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin', 'Action'];
