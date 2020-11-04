@@ -1,5 +1,6 @@
-<section class="non-funded mt-20">
-    <div class="table-responsive mat-card">
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<section class="non-funded table-responsive mt-20">
+    <div class=" mat-card">
         <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
           
             <!-- Partner Name Column -->
@@ -39,37 +40,40 @@
             </ng-container>
     
             <!-- Status Column -->
-            <ng-container matColumnDef="Status">
-            <th mat-header-cell *matHeaderCellDef> Status </th>
-            <td mat-cell *matCellDef="let row"> {{row.Status}} </td>
-            </ng-container>
-    
-             <!-- Action Column -->
-             <ng-container matColumnDef="Action">
-              <th mat-header-cell *matHeaderCellDef>Action</th>
-              <td mat-cell *matCellDef="let row"> 
-                <button mat-icon-button [matMenuTriggerFor]="menu">
-                    <mat-icon class="secondary-text">more_vert</mat-icon>
-                  </button>
-                  <mat-menu #menu="matMenu" xPosition="before">
-                    <button mat-menu-item (click)="openDialogToFund(row)">
-                      <mat-icon class="secondary-text">monetization_on</mat-icon>
-                      <span>Fund Now</span>
-                    </button>
-                    <button mat-menu-item>
-                      <mat-icon class="secondary-text">arrow_forward</mat-icon>
-                      <span>Go to Fund Detail</span>
-                    </button>
-                  </mat-menu>
-              </td>
-            </ng-container>
-        
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-            </tr>
+                <ng-container matColumnDef="Status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let row;let ind = index">
+                        <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="ButtonsList">
+                            <span  style="background-color:#ff9800; color: white; padding: 2px 6px 2px 6px; font-size: 11px; border-radius: 16px;" >   {{row.Status}} </span> 
+                        </ng-template>
+                           <ng-template #ButtonsList>
+                            
+
+                               <button mat-icon-button matTooltip="Fund Now" aria-label="fund"
+                                [@fadeIn]    
+                               (click)="openDialogToFund(row)">
+                               <mat-icon>monetization_on</mat-icon>
+                           
+                               </button>
+               
+                               <button mat-icon-button matTooltip="Go to Fund Detail" 
+                               aria-label="detail" [@fadeIn]>
+                               <mat-icon>arrow_forward</mat-icon> 
+                               </button>
+               
+
+
+
+                         </ng-template>
+                    </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
+                    *matRowDef="let row; columns: displayedColumns;let i = index">
+                    </tr>    
         </table>
     </div>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+   
 </section>
 
 

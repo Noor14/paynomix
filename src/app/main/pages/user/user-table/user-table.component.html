@@ -1,4 +1,5 @@
 <section class="mt-20">
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   <div class="table-responsive mat-card ">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
         <!-- First Name Column -->
@@ -29,35 +30,31 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> User Role </th>
           <td mat-cell *matCellDef="let row"> {{row.Role}} </td>
         </ng-container>
+
         <!-- Last Login Column -->
         <ng-container matColumnDef="LastLogin">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Login </th>
-          <td mat-cell *matCellDef="let row"> 
-            <ng-template [ngIf]="row?.LastLogin" [ngIfElse]="other">
+          <td mat-cell *matCellDef="let row; let ind = index"> 
+             <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
+               <ng-template [ngIf]="row?.LastLogin" [ngIfElse]="other">
               {{row.LastLogin | date : 'medium'}}
+             </ng-template>
+             <ng-template #other>--</ng-template>
             </ng-template>
-            <ng-template #other>--</ng-template>
+            <ng-template #actionControl>
+                <button mat-icon-button aria-label="edit" matTooltip="Edit User" [@fadeIn]>
+                  <mat-icon>edit</mat-icon>
+                </button>
+          </ng-template>
           </td>
         </ng-container>
-        
-        <!-- Action Column -->
-        <ng-container matColumnDef="Action">
-          <th mat-header-cell *matHeaderCellDef>Action</th>
-          <td mat-cell *matCellDef="let row"> 
-            <button mat-icon-button (click)="openDialog(row)">
-              <mat-icon class="secondary-text" >edit</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-    
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
+        *matRowDef="let row; columns: displayedColumns; let i = index">
         </tr>
     </table>
-  </div>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-</section>
-
+    </div>
+  </section>
 <ng-template #userDialog>
     <div class="dialog-content-wrapper">
         <mat-toolbar class="mat-accent">

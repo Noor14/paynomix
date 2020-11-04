@@ -1,3 +1,4 @@
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 <section class="table-responsive mat-card">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
       
@@ -28,22 +29,29 @@
           <!-- Country Column -->
           <ng-container matColumnDef="Country">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
-            <td mat-cell *matCellDef="let row"> {{row.Country}} </td>
-          </ng-container>   
+            <td mat-cell *matCellDef="let row;let ind = index">          
+                <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="ButtonsList">
+                    {{row.Country}} 
+                </ng-template>
+                <ng-template #ButtonsList>
+                    <div [@fadeIn]>
+                       
+                    </div>
+                    <button mat-icon-button aria-label="edit" matTooltip="Edit Reseller" 
+                    [routerLink]="['/pages/reseller/reseller-edit', row.ResellerId]"
+                    [@fadeIn]>
+                    <mat-icon >edit</mat-icon>
+                   </button>      
 
-        <!-- Action Column -->
-        <ng-container matColumnDef="Action">
-          <th mat-header-cell *matHeaderCellDef>Action</th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-icon-button [routerLink]="['/pages/reseller/reseller-edit', row.ResellerId]">
-              <mat-icon class="secondary-text" >edit</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-        </tr>
+
+
+              </ng-template>
+            </td>
+          </ng-container>   
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
+          *matRowDef="let row; columns: displayedColumns;let i = index">
+          </tr>
+        
     </table>
   </section>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

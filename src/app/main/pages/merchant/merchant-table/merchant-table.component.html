@@ -1,3 +1,4 @@
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 <section class="table-responsive mat-card">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
       
@@ -35,30 +36,35 @@
           <!--   Status  Column -->
         <ng-container matColumnDef="BoardingStatus">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-          <td mat-cell *matCellDef="let row"> {{row?.MerchantAccountSetup?.BoardingStatus || '--'}} </td>
-        </ng-container>
-        <!-- Action Column -->
-        <ng-container matColumnDef="Action">
-          <th mat-header-cell *matHeaderCellDef>Action</th>
-          <td mat-cell *matCellDef="let row"> 
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon class="secondary-text">more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item [routerLink]="['/pages/merchant/merchant-edit', row.MerchantId]">
-                  <mat-icon class="secondary-text" >edit</mat-icon>
-                  <span>Edit Merchant</span>
+          <td mat-cell *matCellDef="let row;let ind = index"> 
+
+             <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="ButtonsList">
+                <span style="color: white !important;padding: 2px 6px 2px 6px;font-size: 11px;width: 60px;border-radius: 16px;" [ngClass]=" (row?.MerchantAccountSetup?.BoardingStatus ==  'Active') ? 'green-600' :  (row?.MerchantAccountSetup?.BoardingStatus ==  'Decline') ? 'red-500'  :  (row?.MerchantAccountSetup?.BoardingStatus ==  'Approved') ? 'cyan-500' : 'orange-500'  " > {{row?.MerchantAccountSetup?.BoardingStatus || '--'}} </span>
+            </ng-template>
+             <ng-template #ButtonsList>
+           
+
+
+                <button mat-icon-button matTooltip="Edit Merchant" aria-label="edit" [@fadeIn]    
+                [routerLink]="['/pages/merchant/merchant-edit', row.MerchantId]">
+                <mat-icon>edit</mat-icon> 
                 </button>
-                <button mat-menu-item (click)="openDialog(row)">
-                  <mat-icon class="secondary-text" >email</mat-icon>
-                  <span>Resend Email</span>
+
+
+                <button mat-icon-button matTooltip="Resend Email" aria-label="resend" [@fadeIn]    
+                (click)="openDialog(row)">
+                <mat-icon>email</mat-icon> 
                 </button>
-              </mat-menu>
-          </td>
+
+
+
+          </ng-template>
+            </td>
         </ng-container>
+   
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
+        *matRowDef="let row; columns: displayedColumns;let i = index">
         </tr>
     </table>
   </section>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

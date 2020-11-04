@@ -1,19 +1,21 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '@fuse/animations';
 import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
 
 @Component({
   selector: 'app-merchant-table',
   templateUrl: './merchant-table.component.html',
-  styleUrls: ['./merchant-table.component.scss']
+  styleUrls: ['./merchant-table.component.scss'],
+  animations   : fuseAnimations
 })
 export class MerchantTableComponent implements OnInit {
   public dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns : string[] =  ['CompanyName', 'Reseller', 'FirstName', 'Email', 'Phone', 'BoardedDate', 'BoardingStatus', 'Action'];
+  public displayedColumns : string[] =  ['CompanyName', 'Reseller', 'FirstName', 'Email', 'Phone', 'BoardedDate', 'BoardingStatus'];
   @Input() data: any;
-
+  public actionControlOnHover = -1;
   constructor(private readonly _dialog: MatDialog) { }
 
   ngOnInit(): void{
