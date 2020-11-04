@@ -15,6 +15,7 @@ export class PricingPlanTableComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
   @Output() updateList = new EventEmitter<boolean>();
+  public actionControlOnHover = -1;
   
   public displayedColumns: string[] = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'PerTransactionFee', 'TransactionFee', 'AssignCount'];
   constructor(
