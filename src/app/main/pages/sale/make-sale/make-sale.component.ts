@@ -168,5 +168,4 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
       this.transactionInitialize(Number(this.amountInput.nativeElement.value)*100);
     }
   }
-
 }

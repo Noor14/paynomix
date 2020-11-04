@@ -1,11 +1,13 @@
 import { Component, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { fuseAnimations } from '@fuse/animations';
 import { AssigneeDialogComponent } from '@fuse/components/assignee-dialog/assignee-dialog.component';
 
 @Component({
   selector: 'app-pricing-plan-table',
   templateUrl: './pricing-plan-table.component.html',
-  styleUrls: ['./pricing-plan-table.component.scss']
+  styleUrls: ['./pricing-plan-table.component.scss'],
+  animations   : fuseAnimations
 })
 export class PricingPlanTableComponent implements OnInit {
   public dataSource = new MatTableDataSource<any>();
@@ -14,7 +16,7 @@ export class PricingPlanTableComponent implements OnInit {
   @Input() data: any;
   @Output() updateList = new EventEmitter<boolean>();
   
-  public displayedColumns: string[] = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'PerTransactionFee', 'TransactionFee', 'AssignCount', 'Action'];
+  public displayedColumns: string[] = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'PerTransactionFee', 'TransactionFee', 'AssignCount'];
   constructor(
     private readonly _dialog: MatDialog
   ) { }

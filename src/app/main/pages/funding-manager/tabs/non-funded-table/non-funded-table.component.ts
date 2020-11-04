@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '@fuse/animations';
 import { snackBarConfig, snackBarConfigWarn } from '../../../../../../constants/globalFunctions';
 import { FundManagerService } from '../../funding-manager.service';
 
@@ -8,7 +9,8 @@ import { FundManagerService } from '../../funding-manager.service';
   selector: 'app-non-funded-table',
   templateUrl: './non-funded-table.component.html',
   styleUrls: ['./non-funded-table.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations   : fuseAnimations
 
 })
 export class NonFundedTableComponent implements OnInit {
@@ -17,7 +19,7 @@ export class NonFundedTableComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
-  public displayedColumns: string[] = ['PartnerName', 'TotalTransAmount', 'PaynomixFee', 'AdminCommission', 'PartnerCommision', 'ResellerCommision', 'Status', 'Action'];
+  public displayedColumns: string[] = ['PartnerName', 'TotalTransAmount', 'PaynomixFee', 'AdminCommission', 'PartnerCommision', 'ResellerCommision', 'Status'];
   public selectedToFund: any;
   public dialogRef;
   constructor(
