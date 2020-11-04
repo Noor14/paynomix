@@ -8,7 +8,7 @@ import { FraudMgmtRoutingModule } from './fraud-mgmt-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    FraudMgmtRoutingModule
+    FraudMgmtRoutingModule,
   ]
 })
 export class FraudMgmtModule { }
