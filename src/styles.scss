@@ -35,7 +35,9 @@ app-pages{
        transition: box-shadow 0.3s;
 
    }
-
+mat-icon{
+    cursor: pointer;
+}
         .mat-cell,.mat-header-cell
           {
             padding: 5px;
