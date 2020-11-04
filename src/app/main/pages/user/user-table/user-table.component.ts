@@ -17,12 +17,12 @@ export class UserTableComponent implements OnInit {
   @ViewChild('userDialog', { static: false }) userDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  public actionButtonsOnHover = -1;
+  public actionControlOnHover = -1;
   public dataSource = new MatTableDataSource<any>();
   public dialogRef: any;
   @Input() data: any;
   public userForm: FormGroup;
-  public displayedColumns: string[] = ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin', 'Action'];
+  public displayedColumns: string[] = ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin'];
   constructor(
     private readonly _dialog: MatDialog,
     private readonly _userService : UserService,
