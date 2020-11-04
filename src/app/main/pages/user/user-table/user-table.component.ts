@@ -1,13 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { snackBarConfig, snackBarConfigWarn } from 'constants/globalFunctions';
 import { UserService } from '../user.service';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
-
-
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
@@ -19,12 +17,9 @@ export class UserTableComponent implements OnInit {
   @ViewChild('userDialog', { static: false }) userDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  public actionButtonsOnHover = -1;
   public dataSource = new MatTableDataSource<any>();
-
   public dialogRef: any;
-
-  public showHover = -1;
-
   @Input() data: any;
   public userForm: FormGroup;
   public displayedColumns: string[] = ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin', 'Action'];
