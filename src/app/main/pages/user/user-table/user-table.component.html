@@ -30,17 +30,18 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> User Role </th>
           <td mat-cell *matCellDef="let row"> {{row.Role}} </td>
         </ng-container>
+
         <!-- Last Login Column -->
         <ng-container matColumnDef="LastLogin">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Login </th>
           <td mat-cell *matCellDef="let row; let ind = index"> 
-             <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="ButtonsList">
+             <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
                <ng-template [ngIf]="row?.LastLogin" [ngIfElse]="other">
               {{row.LastLogin | date : 'medium'}}
              </ng-template>
              <ng-template #other>--</ng-template>
             </ng-template>
-            <ng-template #ButtonsList>
+            <ng-template #actionControl>
                 <button mat-icon-button aria-label="edit" matTooltip="Edit User" [@fadeIn]>
                   <mat-icon>edit</mat-icon>
                 </button>
