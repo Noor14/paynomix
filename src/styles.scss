@@ -25,7 +25,8 @@ app-pages{
         }
     }
     .table-responsive {
-        // height:77vh;
+    
+        height:calc(100vh - 23vh);
         overflow-x: auto;
 
 .mat-row:hover {
