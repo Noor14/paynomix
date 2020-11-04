@@ -5,6 +5,7 @@ import { RestrictedTransactionComponent } from './restricted-transaction/restric
 import { CountryOriginComponent } from './country-origin/country-origin.component';
 import { ProxyBlockingComponent } from './proxy-blocking/proxy-blocking.component';
 import { TransactionControlsComponent } from './transaction-controls.component';
+import { TransactionControlsRoutingModule } from './transaction-controls-routing.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { TransactionControlsComponent } from './transaction-controls.component';
     TransactionControlsComponent],
   imports: [
     CommonModule,
+    TransactionControlsRoutingModule
   ]
 })
 export class TransactionControlsModule { }
