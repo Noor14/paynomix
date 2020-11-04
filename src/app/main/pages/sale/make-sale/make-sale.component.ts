@@ -10,6 +10,8 @@ import { CreditcardInfoComponent } from '../sale-info/creditcard-info/creditcard
 import { SaleService } from '../sale.service';
 import { StripeService } from 'ngx-stripe';
 import { NavigationEnd, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
 
 @Component({
   selector: 'app-make-sale',
@@ -38,7 +40,8 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly _saleService: SaleService,
     private readonly _snackBar: MatSnackBar,
     private readonly _stripeService: StripeService,
-    private _router: Router
+    private _router: Router,
+    private readonly _dialog: MatDialog
 
   ) { 
     this._unsubscribeAll = new Subject();
@@ -100,8 +103,9 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.componentRef.instance.resetCreditCard.subscribe(res=>{ 
       if(res) {
         this.container.clear();
-        this.transactionApproved = res;
+        this.transactionApproved = true;
         this.amountInput= undefined;
+        this.openDialog(res)
       }
     })
 
@@ -142,7 +146,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
             if(res.Response.PublishKey){
               this._stripeService.setKey(res.Response.PublishKey);
               this.payObject = {
-                Amount,
+                Amount: Amount/100,
                 LocationId: this.selectedLocationId,
                 SecretKey: res.Response.SecretKey,
                 TransactionId: res.Response.TransactionId,
@@ -154,10 +158,9 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
          }else{
           this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
          }
-    }).catch((err: HttpErrorResponse)=>(this._snackBar.open(err.error.Message, '', snackBarConfigWarn)))
+    }).catch((err: HttpErrorResponse) =>(console.log))
   }
   personalInformation(value) {
-    this.payObject.Amount / 100
     this.payObject = {...this.payObject, ...value}; 
     this.componentRef.instance.data = this.payObject
   }
@@ -169,5 +172,10 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
       this.transactionInitialize(Number(this.amountInput.nativeElement.value)*100);
     }
   }
+
+  openDialog(data) {
+    const dialogRef = this._dialog.open(ReceiptDialogComponent, {width: '400px'});
+    dialogRef.componentInstance.data = data;
+   }
 
 }

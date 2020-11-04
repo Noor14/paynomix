@@ -1,0 +1,89 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title">Recipt</span>
+            <button mat-icon-button aria-label="Close dialog" (click)="_dialogRef.close()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div md-dialog-content class="p-24">
+        <div class="print_receipt">
+            <table id="print_receipt">
+                <tr> 
+                    <td colspan="2" align="center"><img class="logo"  [src]="data?.imageUrl || '../../../assets/images/paynomix-logos/logo.svg'"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p align="center">
+                            <strong>{{data?.CustomerName}}</strong><BR>
+                            {{data?.City}}<BR>
+                            {{data?.Country}}, {{data?.ZipCode}}<BR>
+                            {{data?.Phone  }}
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" class="w-50">Trans. Type:</td>
+                    <td class="w-50"> 
+                        {{(data?.TransactionType ==  0) ?  'CC - Void ' : (data?.TransactionType ==  1) ?  'CC - Sale ' :  (data?.TransactionType == 2) ? 'CC - Auth '  :  (data?.TransactionType ==  4) ? 'CC - Refund' : (data?.TransactionType ==  5) ? 'CC - Capture' : (data?.TransactionType ==  6) ? 'ACH - Debit' : (data?.TransactionType ==  7) ? 'ACH - Refund' : 'ACH - Void '}}
+                   </td>
+                </tr>
+                <tr>
+                    <td align="left">Trans. Date:</td>
+                    <td> 
+                        {{data.InsertedOn | date: 'MM/dd/yyyy hh:mm:ss a'}} 
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">Trans. Amount:</td>
+                    <td>{{data?.Amount | currency}}</td>
+                </tr>
+
+                <tr>
+                    <td align="left">Trans. Status:</td>
+                    <td>Approved</td>
+                </tr>
+                <tr>
+                    <td align="left">Card #:</td>
+                    <td>xxxxxxxxxxxx5454</td>
+                </tr>
+                <tr>
+                    <td align="left">Card Type:</td>
+                    <td>{{data?.CardType || '--'}}</td>
+                </tr>
+                <tr>
+                    <td align="left">Card Holder:</td>
+                    <td>{{data?.CardholderName}}</td>
+                </tr>
+
+                <tr>
+                    <td align="left">Ref ID:</td>
+                    <td>{{data?.OriginalPaymentID}}</td>
+                </tr>
+                <tr>
+                    <td align="left">Auth Response:</td>
+                    <td>{{data?.OriginalChargeID}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p align="center">
+                            Thank You<br>
+                            *****************************<br>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+    <div mat-dialog-actions class="px-24 py-12" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-stroked-button color="accent" class="mr-8" aria-label="CLOSE" (click)="_dialogRef.close()">
+            Close
+        </button>
+        <button mat-stroked-button color="accent" class="print-button" aria-label="Print">
+            Print
+        </button>
+    </div>
+</div>
