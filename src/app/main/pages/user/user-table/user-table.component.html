@@ -35,7 +35,7 @@
         <ng-container matColumnDef="LastLogin">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Login </th>
           <td mat-cell *matCellDef="let row; let ind = index"> 
-             <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
+             <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="ButtonsList">
                <ng-template [ngIf]="row?.LastLogin" [ngIfElse]="other">
               {{row.LastLogin | date : 'medium'}}
              </ng-template>
