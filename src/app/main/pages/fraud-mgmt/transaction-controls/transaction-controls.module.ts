@@ -6,7 +6,7 @@ import { CountryOriginComponent } from './country-origin/country-origin.componen
 import { ProxyBlockingComponent } from './proxy-blocking/proxy-blocking.component';
 import { TransactionControlsComponent } from './transaction-controls.component';
 import { TransactionControlsRoutingModule } from './transaction-controls-routing.module';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { TransactionControlsRoutingModule } from './transaction-controls-routing
     TransactionControlsComponent],
   imports: [
     CommonModule,
-    TransactionControlsRoutingModule
+    TransactionControlsRoutingModule,
+    MatTabsModule,
   ]
 })
 export class TransactionControlsModule { }
