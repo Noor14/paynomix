@@ -105,10 +105,16 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, 
     };
    this._merchantService.verifyMerchant(obj)
     .then((res: any) => {
-      if(res && !res.StatusCode){
-        this.merchantInfoForm.controls.MerchantUserName.setErrors(null)
+      if (res && !res.StatusCode) {
+        if (res.Response.ismerchantnameexist) {
+          this.merchantInfoForm.controls['MerchantUserName'].setErrors({'notUnique': true });
+          this._snackBar.open(res.Response.message, '', snackBarConfigWarn);
+        }
+        if (res.Response.isemailexist) {
+          this.merchantInfoForm.controls['MerchantEmail'].setErrors({'notUnique': true });
+          this._snackBar.open(res.Response.message, '', snackBarConfigWarn);
+        }
       }else{
-        this.merchantInfoForm.controls.MerchantUserName.setErrors({notUnique: true})
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
       }
   }).catch((err: HttpErrorResponse)=>(console.log))

@@ -8,32 +8,26 @@ import { debounceTime, distinctUntilChanged, filter, takeUntil, tap } from 'rxjs
 import { AchInfoComponent } from '../sale-info/ach-info/ach-info.component';
 import { CreditcardInfoComponent } from '../sale-info/creditcard-info/creditcard-info.component';
 import { SaleService } from '../sale.service';
-import { StripeService, StripeCardNumberComponent } from 'ngx-stripe';
-import {
-  StripeCardElementOptions,
-  StripeElementsOptions,
-  PaymentIntent,
-} from '@stripe/stripe-js';
+import { StripeService } from 'ngx-stripe';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
-  // changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-make-sale',
   templateUrl: './make-sale.component.html',
   styleUrls: ['./make-sale.component.scss'],
 })
 export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  @ViewChild('makeSale', {static: false}) makeSaleView: ElementRef;
   @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
   @ViewChild('amount', {static: false}) amountInput: ElementRef;
   private componentRef: ComponentRef<any>;
   public bottomSheetEnable: boolean =  true;
   public bottomSheetDrawerOpen: boolean = false;
   public merchantLocation: any[] = [];
-  public payObject:any = {};
+  private payObject:any = {};
   private _unsubscribeAll: Subject<any>;
   public selectedLocationId: number;
-  public stripeInstanceInitialize:any;
   private selectedCardType: number = 0;
   public transactionApproved:boolean = false; 
   
@@ -61,11 +55,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(() => this.getMerchantLocation());
-    // this._router.events.pipe(
-    //   filter(event => event instanceof NavigationEnd)
-    // ).subscribe(() => {
-    //   this.scrollBottom();
-    // });
+
   }
 
   ngAfterViewInit(): void{
@@ -80,15 +70,18 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
       if(this.amountInput.nativeElement.value){
         this.transactionInitialize(Number(this.amountInput.nativeElement.value)*100);
       }else{
-       this.stripeInstanceInitialize = undefined;
        this.container.clear();
       }
     });
-    
+    // this._router.events.pipe(
+    //   filter(event => event instanceof NavigationEnd)
+    // ).subscribe(() => {
+      // this.scrollBottom();
+    // });
   }
-  // scrollBottom() {
-  //   // window.scroll(0, )
-  // }
+  scrollBottom() {
+    this.makeSaleView.nativeElement.scrollTop = this.makeSaleView.nativeElement.scrollHeight
+  }
   ngOnDestroy(): void{
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
@@ -124,7 +117,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   getMerchantLocation(): void{
     this._saleService.locationList(this._userConfigService.getUserMode())
     .then((res: any) => {
-          if(res && !res.StatusCode && res.Response && res.Response.length){
+          if(res && !res.StatusCode && res.Response && res.Response.length){ 
           this.merchantLocation = res.Response.map((item: any) => {
             return {
               id: item.LocationId, 
@@ -132,8 +125,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
             };
           });
           this.bottomSheetDrawerOpen = true;
-
-      }
+        }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 

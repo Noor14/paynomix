@@ -166,20 +166,17 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     if(!obj || (obj
       && !Object.keys(obj).length)){
         object.AssignTo = 'Partner';
-        // object.AssignMultiple = true;
         object.UserRoleId = authRole.partner;
         this.getPartners(obj).then(res => object.AssigneeList = res);
       }
       else if(obj
         && obj.hasOwnProperty('PartnerId')){
           object.AssignTo = 'Reseller';
-          // object.AssignMultiple = true;
           object.UserRoleId = authRole.reseller;
           this.getResellers(obj).then(res => object.AssigneeList = res)
 
       }else{
         object.AssignTo = 'Merchant';
-        // object.AssignMultiple = false;
         object.UserRoleId = authRole.merchant;
         this.getMerchants(obj).then(res => object.AssigneeList = res)
 
