@@ -89,6 +89,71 @@ export const navigation: FuseNavigation[] = [
                ]
             },
             {
+                id       : 'fraud_mgmt',
+                title    : 'Fraud Managment',
+                type     : 'collapsable',
+                icon     : 'event_busy',
+                roles    :    Object.values(authRole).filter(item => typeof item === 'number'),
+                children : [
+                    {
+                        id       : 'transCtrl',
+                        title    : 'Transaction Controls',
+                        type     : 'item',
+                        icon     : 'person_outline',
+                        url      : '/pages/fraud-mgmt'
+                    },
+                    {
+                        id       : 'velocityCtrl',
+                        title    : 'Velocity Controls',
+                        type     : 'item',
+                        icon     : 'person_outline',
+                        url      : '/pages/user'
+                    },
+                    {
+                        id       : 'transDataCtrl',
+                        title    : 'Transaction Controls',
+                        type     : 'item',
+                        icon     : 'person_outline',
+                        url      : '/pages/user'
+                    },
+                    {
+                        id       : 'verificatoionTool',
+                        title    : 'Verification Tools',
+                        type     : 'item',
+                        icon     : 'person_outline',
+                        url      : '/pages/user'
+                    },
+                    {
+                        id       : 'blockingTool',
+                        title    : 'Blocking Tools',
+                        type     : 'item',
+                        icon     : 'person_outline',
+                        url      : '/pages/user'
+                    },
+                    {
+                        id       : 'transAlert',
+                        title    : 'Transaction Alerts',
+                        type     : 'item',
+                        icon     : 'person_outline',
+                        url      : '/pages/user'
+                    },
+                    {
+                        id       : 'chargeBackTool',
+                        title    : 'Charge Back Tools',
+                        type     : 'item',
+                        icon     : 'person_outline',
+                        url      : '/pages/user'
+                    },
+                    {
+                        id       : 'achTool',
+                        title    : 'ACH Tools',
+                        type     : 'item',
+                        icon     : 'person_outline',
+                        url      : '/pages/user'
+                    }
+               ]
+            },
+            {
                 id       : 'setting',
                 title    : 'Settings',
                 type     : 'item',

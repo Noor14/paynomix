@@ -19,7 +19,7 @@ import { ResellerTableComponent } from './reseller-table/reseller-table.componen
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { MatTabsModule } from '@angular/material';
 import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,8 @@ import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
     MatFormFieldModule,
     NoFoundModule,
     MatTabsModule,
-    PricingPlanModule
+    PricingPlanModule,
+    MatTooltipModule
   ]
 })
 export class ResellerModule { }

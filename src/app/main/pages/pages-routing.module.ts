@@ -98,7 +98,13 @@ const routes: Routes = [
       data: {
         roles: Object.values(authRole).filter(item => typeof item === 'number')
       }
-
+    },
+    { path: 'fraud-mgmt',
+      canLoad: [PageGuard],
+      loadChildren: () => import('./fraud-mgmt/fraud-mgmt.module').then(m => m.FraudMgmtModule),
+      data: {
+        roles: Object.values(authRole).filter(item => typeof item === 'number')
+      }
     },
     { path: '**', redirectTo: 'dashboard' }
   ]

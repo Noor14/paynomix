@@ -18,7 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
 import { PartnerTableComponent } from './partner-table/partner-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     PartnerListComponent, 
@@ -42,6 +42,7 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
     MatTabsModule,
     MatFormFieldModule,
     PricingPlanModule,
+    MatTooltipModule
   ]
 })
 export class PartnerModule { }
