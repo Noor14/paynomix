@@ -43,10 +43,15 @@
                 <ng-container matColumnDef="Status">
                     <th mat-header-cell *matHeaderCellDef> Status </th>
                     <td mat-cell *matCellDef="let row;let ind = index">
-                        <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="ButtonsList">
-                            <span  style="background-color:#ff9800; color: white; padding: 2px 6px 2px 6px; font-size: 11px; border-radius: 16px;" >   {{row.Status}} </span> 
+                        <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
+                            <mat-chip-list>
+                <mat-chip class="chipStatus py-4 px-8 orange-500">    {{row.Status}} 
+                                </mat-chip>
+                            </mat-chip-list>
+                       
+
                         </ng-template>
-                           <ng-template #ButtonsList>
+                           <ng-template #actionControl>
                             
 
                                <button mat-icon-button matTooltip="Fund Now" aria-label="fund"

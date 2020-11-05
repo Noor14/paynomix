@@ -50,10 +50,10 @@
         <ng-container matColumnDef="CardholderName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Cardholder Name </th>
             <td mat-cell *matCellDef="let row;let ind = index">
-                <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="ButtonsList">
+                <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
                      {{row.CardholderName || '--'}}
                 </ng-template>
-                    <ng-template #ButtonsList>
+                    <ng-template #actionControl>
                         <button mat-icon-button aria-label="detail" matTooltip="Transaction Details"
                         [routerLink]="['/pages/transaction/transaction-detail', row.TransactionId]"
                         [@fadeIn]>

@@ -29,12 +29,12 @@ app-pages{
         height:calc(100vh - 23vh);
         overflow-x: auto;
 
-.mat-row:hover {
-        box-shadow: 0 -3.5px 2px -3px rgba(0, 0, 0, 0.5) inset;
-        background-color:#f5f3f3 !important;
-       transition: box-shadow 0.3s;
+        .mat-row:hover {
+                box-shadow: 0 -3.5px 2px -3px rgba(0, 0, 0, 0.5) inset;
+                background-color:#f5f3f3 !important;
+            transition: box-shadow 0.3s;
 
-   }
+        }
         .mat-cell,.mat-header-cell
           {
             padding: 5px;
@@ -43,6 +43,13 @@ app-pages{
              justify-content: center;
             }
           }
+
+         .chipStatus{
+             height:auto !important;
+             min-height:20px !important;
+             font-size: 11px !important;
+             color:white !important;
+         }
      
     }
 

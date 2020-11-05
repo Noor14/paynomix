@@ -1,1 +1,58 @@
-<p>restricted-transaction works!</p>
+<section class="restricted-block p-40">
+    <div class="accent mt-20">
+        <div class="p-40">Restrict transaction processing to only those transactions that originate from servers you specify via IP addresses or domain name. This option can provide an extra level of security.</div> 
+    </div>
+    <mat-divider class="mt-20"></mat-divider>
+    <div class="mat-card p-20">
+    <div fxLayout="column" >
+        <div fxFlex>
+            <h3> <b>Lock Controls </b> </h3>
+        </div>
+        <mat-divider></mat-divider>
+    <div fxFlex fxLayout="row" class="mt-20">
+        <div fxFlex="30">    
+         Lock
+        </div>
+        <div fxFlex>
+            <mat-checkbox>Merchants</mat-checkbox>
+        </div>
+    </div>
+       <div fxLayout="row" class="my-4" fxLayoutAlign="center">
+        <button mat-raised-button color="accent"
+        aria-label="save" >
+        Save
+       </button>
+    </div>
+    <mat-divider  class="my-4"></mat-divider>
+    <div fxFlex>
+        <h3> <b>Add IP Address or Domain Sources </b> </h3>
+        <mat-divider ></mat-divider>
+    </div>
+    <div fxFlex fxLayout="row" class="mt-20">
+     <div fxFlex="30">    
+         IP Address / Domain
+    </div>
+        <div fxFlex>
+         <mat-form-field >
+             <mat-label>IP Address / Domain</mat-label>
+             <input matInput type="text" >
+           </mat-form-field>
+        </div>
+        </div>
+        <div fxLayout="row" class="my-4" fxLayoutAlign="center">
+         <button mat-raised-button color="accent"
+         aria-label="save" >
+         Add
+        </button>
+     </div>
+    <mat-divider  class="my-4"></mat-divider>
+    <div fxFlex>
+        <h3> <b>Restricted Transaction Sources </b> </h3>
+        <mat-divider ></mat-divider>
+    </div>
+    <div fxFlex fxLayout="row" class="mt-20">
+       --------------------------------
+           </div>
+</div>
+    </div>
+<section>
