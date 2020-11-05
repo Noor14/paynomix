@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { snackBarConfig, snackBarConfigWarn } from 'constants/globalFunctions';
 import { UserService } from '../user.service';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
 @Component({
   selector: 'app-user-table',

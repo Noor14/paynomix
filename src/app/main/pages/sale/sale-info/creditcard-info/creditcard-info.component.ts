@@ -19,6 +19,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class CreditcardInfoComponent implements OnInit {
   @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
   @Input() data: any;
+  @Input() requiredFields: any;
   @Output() resetCreditCard = new EventEmitter<any>();
   public elementsOptions: StripeElementsOptions = {
     locale: 'en',
