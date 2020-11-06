@@ -11,6 +11,7 @@ import { CreditcardInfoComponent } from './sale-info/creditcard-info/creditcard-
 import { AchInfoComponent } from './sale-info/ach-info/ach-info.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { FuseSharedModule } from '@fuse/shared.module';
+import { NgxMaskModule } from 'ngx-mask';
 @NgModule({
   declarations: [MakeSaleComponent, PersonalInfoComponent, CreditcardInfoComponent, AchInfoComponent],
   entryComponents: [CreditcardInfoComponent, AchInfoComponent],
@@ -27,7 +28,8 @@ import { FuseSharedModule } from '@fuse/shared.module';
     NgxStripeModule.forChild(),
     FormsModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
   ]
 })
 export class SaleModule { }

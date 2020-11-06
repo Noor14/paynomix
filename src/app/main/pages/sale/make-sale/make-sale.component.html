@@ -11,9 +11,17 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Transaction Amount</mat-label>
-                <input matInput required #amount [disabled]="!selectedLocationId">
+                <input matInput 
+                thousandSeparator="," 
+                mask="separator.2" 
+                prefix="$"
+                decimalMarker='.' 
+                dropSpecialCharacters="true"
+                
+           
+                required #amount [disabled]="!selectedLocationId">
             </mat-form-field>
-
+            <!-- (blur)="onBlur($event)"  -->
             <mat-button-toggle-group class="mb-24">
                 <mat-button-toggle class="w-50-p" [value]="0" checked="true"> Credit Card
                 </mat-button-toggle>
@@ -31,7 +39,7 @@
             <div class="outer-layer p-20">
                 <div fxLayout="row" fxLayoutAlign="space-between center">
                     <span>Total</span>
-                    <span>{{amount.value | currency}}</span>
+                    <span>{{newvalue | currency }}</span>
                 </div> 
                 <hr />
 

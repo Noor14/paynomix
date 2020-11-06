@@ -30,7 +30,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   public selectedLocationId: number;
   private selectedCardType: number = 0;
   public transactionApproved:boolean = false; 
-  
+  newvalue: any;
 
   constructor(
     private readonly _resolver: ComponentFactoryResolver,
@@ -67,8 +67,9 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
         distinctUntilChanged(),
     )
     .subscribe(res => {
+      this.newvalue = this.amountInput.nativeElement.value.replace(/[^0-9.]/g, '');
       if(this.amountInput.nativeElement.value){
-        this.transactionInitialize(Number(this.amountInput.nativeElement.value)*100);
+        this.transactionInitialize(Number(this.newvalue)*100);
       }else{
        this.container.clear();
       }

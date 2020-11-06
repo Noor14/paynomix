@@ -19,6 +19,8 @@ import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
 import { PartnerTableComponent } from './partner-table/partner-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { NgxMaskModule } from 'ngx-mask';
+
 @NgModule({
   declarations: [
     PartnerListComponent, 
@@ -42,7 +44,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatTabsModule,
     MatFormFieldModule,
     PricingPlanModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class PartnerModule { }
