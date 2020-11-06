@@ -8,14 +8,15 @@
         <div class="searching">
             <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
                 <mat-label>Search</mat-label>
-                <input matInput >
+                <input matInput [ngModel]="searchingText" (ngModelChange)="searchBy.next($event)">
             </mat-form-field>
             <hr />
         </div>
        
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="hierarchy-tree">
             <!-- This is the tree node template for leaf nodes -->
-            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle
+            [style.display]="!searchingText || node.ok?'block':'none'">
               <li class="mat-tree-node">
                 <!-- use a disabled button to provide padding for tree leaf -->
                 <button mat-icon-button disabled></button>
@@ -26,7 +27,8 @@
               </li>
             </mat-tree-node>
             <!-- This is the tree node template for expandable nodes -->
-            <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+            <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild"
+            [style.display]="!searchingText || node.ok?'block':'none'">
               <li>
                 <div class="mat-tree-node">
                   <button mat-icon-button matTreeNodeToggle 
@@ -40,7 +42,7 @@
                  {{node.title | truncate : 20 }}
                 </button>
                 </div>
-                <ul [class.hierarchy-tree-invisible]="!treeControl.isExpanded(node)">
+                <ul [class.hierarchy-tree-invisible]="!treeControl.isExpanded(node) && !searchingText" [ngClass]="treeControl.isExpanded(node) ? 'expanded' : 'collapsed'">
                   <ng-container matTreeNodeOutlet></ng-container>
                 </ul>
               </li>
