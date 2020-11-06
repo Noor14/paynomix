@@ -1,1 +1,48 @@
-<p>restricted-transaction works!</p>
+<section class="restricted-transaction w-100-p">
+    <div class="outer-layer m-20 p-20">
+                <h2 >Restricted Transaction</h2>
+                <hr />
+                <div class="mat-card p-20 ">
+                    <p>
+                        Restrict transaction processing to only those transactions that originate from servers you specify via IP addresses or domain name. This option can provide an extra level of security.
+                    </p>
+                </div>
+        <div class="mat-card mt-20">
+            <div class="outer-layer p-20" fxLayout="column" fxLayoutAlign="space-around start">
+                <h3 class="accent-fg">Lock Control</h3>
+                <hr>
+                <section   fxLayout="row" fxLayoutAlign="center center" >
+                    <label >Lock : </label>
+                    <mat-checkbox class="mx-12">Merchant</mat-checkbox>
+                </section>
+                <div class="my-20" fxFlex="100" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-raised-button color="accent">
+                        Submit
+                    </button>
+                </div>
+                <mat-divider></mat-divider>
+                <h3 class="accent-fg">Add IP Address Or Domain Source </h3>
+                <hr>
+                <section class="">
+                    <label >IP Address Or Domain</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Placeholder">
+                    </mat-form-field>
+                </section>
+                <div class="my-20"fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="row" fxLayoutAlign="center center" >
+                    <button mat-raised-button color="accent">Add</button>
+                </div>
+                <mat-divider></mat-divider>
+                <h3 class="accent-fg">Restricted Transaction Source </h3>
+                <hr>
+                <section class="">
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Placeholder">
+                    </mat-form-field>
+                </section>
+             </div>
+        </div>
+    </div>
+</section>
+
+
