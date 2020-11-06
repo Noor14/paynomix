@@ -13,7 +13,6 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { BasicInfoComponent } from './tabs/basic-info/basic-info.component';
 import { GeneralSettingComponent } from './tabs/general-setting/general-setting.component';
 import { MakeSaleSettingComponent } from './tabs/general-setting/general-tabs/make-sale-setting/make-sale-setting.component';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   declarations: [SettingsComponent, BasicInfoComponent, GeneralSettingComponent, MakeSaleSettingComponent],
@@ -28,7 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSelectModule,
     MatFormFieldModule,
     NgxDropzoneModule,
-    MatExpansionModule,
+    
     MatCheckboxModule
   ]
 })
