@@ -13,6 +13,7 @@ export class ResellerTableComponent implements OnInit  {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
+  public actionControlOnHover = -1;
   public displayedColumns: string[] = ['ResellerName', 'DBAName', 'TelephoneNumber', 'Email', 'Country'];
 
   constructor() { }

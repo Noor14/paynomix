@@ -42,22 +42,38 @@
             <!-- Status Column -->
                 <ng-container matColumnDef="Status">
                     <th mat-header-cell *matHeaderCellDef> Status </th>
-                    <td mat-cell *matCellDef="let row;let ri = index">
-                        <ng-template [ngIf]="ri != showHoverAction" [ngIfElse]="ButtonsList">
-                            <span  style="background-color:#ff9800; color: white; padding: 2px 6px 2px 6px; font-size: 11px; border-radius: 16px;" >   {{row.Status}} </span> 
+                    <td mat-cell *matCellDef="let row;let ind = index">
+                        <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
+                            <mat-chip-list>
+                <mat-chip class="chipStatus py-4 px-8 orange-500">    {{row.Status}} 
+                                </mat-chip>
+                            </mat-chip-list>
+                       
+
                         </ng-template>
-                           <ng-template #ButtonsList>
-                               <div [@fadeIn]>
-                                <mat-icon matTooltip="Fund Now"
-                                class="iconsList" (click)="openDialogToFund(row)">monetization_on</mat-icon>
-                               <mat-icon  matTooltip="Go to Fund Detail"
-                                class="iconsList" >arrow_forward</mat-icon> 
-                               </div>
+                           <ng-template #actionControl>
+                            
+
+                               <button mat-icon-button matTooltip="Fund Now" aria-label="fund"
+                                [@fadeIn]    
+                               (click)="openDialogToFund(row)">
+                               <mat-icon>monetization_on</mat-icon>
+                           
+                               </button>
+               
+                               <button mat-icon-button matTooltip="Go to Fund Detail" 
+                               aria-label="detail" [@fadeIn]>
+                               <mat-icon>arrow_forward</mat-icon> 
+                               </button>
+               
+
+
+
                          </ng-template>
                     </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row  (mouseenter)="showHoverAction = i"  (mouseleave)="showHoverAction = -1" 
+                    <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
                     *matRowDef="let row; columns: displayedColumns;let i = index">
                     </tr>    
         </table>
