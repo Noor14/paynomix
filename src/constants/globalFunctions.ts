@@ -308,6 +308,6 @@ export const validator = {
   accMaxLength: 17,
   maxPercentage: 100,
   maxRoutingNo: 9,
-  minRoutingNo: 9
-
+  minRoutingNo: 9,
+  passwordPattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{0,}$/
 };

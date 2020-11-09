@@ -1,88 +1,99 @@
 <div class="dialog-content-wrapper">
     <mat-toolbar class="mat-accent">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title">Recipt</span>
-            <button mat-icon-button aria-label="Close dialog" (click)="_dialogRef.close()">
+            <span class="title">Receipt</span>
+            <button mat-icon-button  aria-label="Close dialog" (click)="_dialogRef.close()">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-toolbar-row>
     </mat-toolbar>
-    <div md-dialog-content class="p-24">
-        <div class="print_receipt">
-            <table id="print_receipt">
-                <tr> 
-                    <td colspan="2" align="center"><img class="logo"  [src]="data?.imageUrl || '../../../assets/images/paynomix-logos/logo.svg'"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <p align="center">
-                            <strong>{{data?.CustomerName}}</strong><BR>
-                            {{data?.City}}<BR>
-                            {{data?.Country}}, {{data?.ZipCode}}<BR>
-                            {{data?.Phone  }}
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="left" class="w-50">Trans. Type:</td>
-                    <td class="w-50"> 
-                        {{(data?.TransactionType ==  0) ?  'CC - Void ' : (data?.TransactionType ==  1) ?  'CC - Sale ' :  (data?.TransactionType == 2) ? 'CC - Auth '  :  (data?.TransactionType ==  4) ? 'CC - Refund' : (data?.TransactionType ==  5) ? 'CC - Capture' : (data?.TransactionType ==  6) ? 'ACH - Debit' : (data?.TransactionType ==  7) ? 'ACH - Refund' : 'ACH - Void '}}
-                   </td>
-                </tr>
-                <tr>
-                    <td align="left">Trans. Date:</td>
-                    <td> 
-                        {{data.InsertedOn | date: 'MM/dd/yyyy hh:mm:ss a'}} 
-                    </td>
-                </tr>
-                <tr>
-                    <td align="left">Trans. Amount:</td>
-                    <td>{{data?.Amount | currency}}</td>
-                </tr>
 
-                <tr>
-                    <td align="left">Trans. Status:</td>
-                    <td>Approved</td>
-                </tr>
-                <tr>
-                    <td align="left">Card #:</td>
-                    <td>xxxxxxxxxxxx5454</td>
-                </tr>
-                <tr>
-                    <td align="left">Card Type:</td>
-                    <td>{{data?.CardType || '--'}}</td>
-                </tr>
-                <tr>
-                    <td align="left">Card Holder:</td>
-                    <td>{{data?.CardholderName}}</td>
-                </tr>
+    <div mat-dialog-content class="p-24 mx-0">
+        <table class="w-100-p">
+            <tr> 
+                <td colspan="2" class="text-center">
+                    <img class="logo" width="70"  [src]="data?.imageUrl || '../../../assets/images/paynomix-logos/logo.svg'">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p class="text-center">
+                        <strong>{{data?.CustomerName}}</strong><br />
+                        {{data?.City}}<br />
+                        {{data?.Country}}, {{data?.ZipCode}}<br />
+                        {{data?.Phone}}
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>Trans. Type:</td>
+                <td> 
+                    {{
+                        (data?.TransactionType ==  transType.CreditCardVoid) ?  'CC - Void ' : 
+                        (data?.TransactionType ==  transType.CreditCardSale) ?  'CC - Sale ' :  
+                        (data?.TransactionType == transType.CreditCardAuth) ? 'CC - Auth '  :  
+                        (data?.TransactionType ==  transType.CreditCardFund) ? 'CC - Fund' : 
+                        (data?.TransactionType ==  transType.CreditCardRefund) ? 'CC - Refund' : 
+                        (data?.TransactionType ==  transType.CreditCardCapture) ? 'CC - Capture' : 
+                        (data?.TransactionType ==  transType.ACHDebit) ? 'ACH - Debit' : 
+                        (data?.TransactionType ==  transType.ACHRefund) ? 'ACH - Refund' : 
+                        'ACH - Void '
+                    }}
+               </td>
+            </tr>
+            <tr>
+                <td>Trans. Date:</td>
+                <td> 
+                    {{data.InsertedOn | date: 'medium'}} 
+                </td>
+            </tr>
+            <tr>
+                <td>Trans. Amount:</td>
+                <td>{{data?.Amount | currency}}</td>
+            </tr>
 
-                <tr>
-                    <td align="left">Ref ID:</td>
-                    <td>{{data?.OriginalPaymentID}}</td>
-                </tr>
-                <tr>
-                    <td align="left">Auth Response:</td>
-                    <td>{{data?.OriginalChargeID}}</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <p align="center">
-                            Thank You<br>
-                            *****************************<br>
-                        </p>
-                    </td>
-                </tr>
-            </table>
+            <tr>
+                <td>Trans. Status:</td>
+                <td>Approved</td>
+            </tr>
+            <tr>
+                <td>Card #:</td>
+                <td>xxxxxxxxxxxx5454</td>
+            </tr>
+            <tr>
+                <td>Card Type:</td>
+                <td>{{data?.CardType || '--'}}</td>
+            </tr>
+            <tr>
+                <td>Card Holder:</td>
+                <td>{{data?.CardholderName}}</td>
+            </tr>
 
+            <tr>
+                <td>Ref ID:</td>
+                <td>{{data?.OriginalPaymentID}}</td>
+            </tr>
+            <tr>
+                <td>Auth Response:</td>
+                <td>{{data?.OriginalChargeID}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p class="text-center">
+                        Thank You <br/>
+                        *****************************
+                    </p>
+                </td>
+            </tr>
+        </table>
 
-        </div>
     </div>
-    <div mat-dialog-actions class="px-24 py-12" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-stroked-button color="accent" class="mr-8" aria-label="CLOSE" (click)="_dialogRef.close()">
+
+    <div mat-dialog-actions class="px-24 my-12" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button class="mr-8 accent-alpha-bg" aria-label="CLOSE" (click)="_dialogRef.close()">
             Close
-        </button>
-        <button mat-stroked-button color="accent" class="print-button" aria-label="Print">
+        </button>    
+        <button mat-raised-button color="accent" class="save-button" aria-label="print" (click)="print()">
             Print
         </button>
     </div>
