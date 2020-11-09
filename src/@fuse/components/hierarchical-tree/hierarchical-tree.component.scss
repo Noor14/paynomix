@@ -7,6 +7,33 @@
 .hierarchy-tree{
     overflow: auto;
     max-height: 250px;
+    mat-nested-tree-node[aria-expanded="true"]{
+        li:first-child{
+            .mat-tree-node{
+                &+ul{
+                    &.collapsed{
+                        mat-tree-node{
+                            display: none !important;
+                        }
+                        mat-nested-tree-node{
+                            @extend mat-tree-node;
+                        }
+                   
+                    }
+                    &.expanded{
+                        mat-tree-node{
+                            display: block !important;
+                        }
+                        mat-nested-tree-node{
+                            @extend mat-tree-node;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
     .hierarchy-tree-invisible {
         display: none;
     }

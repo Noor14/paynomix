@@ -6,7 +6,7 @@
                     <div class="card-content">
                         <span class="text-secondry">Drag and Drop File or <span class="accent-fg">Browse</span>
                         </span> 
-                        <ngx-dropzone [multiple]="false" (change)="onFileSelect($event)" [accept]="'image/*'" class="mt-8">
+                        <ngx-dropzone [multiple]="false" (change)="onFileSelect($event)" [maxFileSize]="5242880" [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
                             <ngx-dropzone-label>
                                 <mat-icon class="accent-fg">cloud_upload</mat-icon>
                             </ngx-dropzone-label>

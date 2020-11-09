@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as globalConfig  from '../../../../../../constants/globalFunctions';
+import { validateRequiredControl } from '../../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-personal-info',
@@ -12,6 +13,7 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   @Input() resetPersonalInfo: boolean = false;
   @Output() personalInfo = new EventEmitter<string>();
   public personalInfoForm: FormGroup;
+  @Input() requiredFields: any;
   public locationConfig = globalConfig.locationConfig;
   constructor(
     private _formBuilder: FormBuilder) {
@@ -20,13 +22,18 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
      if(this.resetPersonalInfo) {
        this.personalInfoForm.reset();
      }
+     if(this.requiredFields) {
+       this.createPersonalInfoForm()
+     }
   }
 
-  ngOnInit() {
-    this.personalInfoForm = this._formBuilder.group({
+  ngOnInit() { 
+}
+createPersonalInfoForm(){
+  this.personalInfoForm = this._formBuilder.group({
     Company: ['', Validators.required],
     CustomerName: ['', Validators.required],
-    Email:  ['', [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
+    Email:  ['', [validateRequiredControl.bind(this, this.requiredFields.EmailAddress), Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
     Phone: ['', Validators.required],
     Address: ['', Validators.required],
     City: ['', Validators.required],
@@ -40,3 +47,4 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
     
 }
 }
+

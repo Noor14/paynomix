@@ -5,9 +5,8 @@ import { fuseAnimations } from '@fuse/animations';
 import { StripeElementsOptions } from '@stripe/stripe-js';
 import { StripeCardNumberComponent, StripeService } from 'ngx-stripe';
 import { SaleService } from '../../sale.service';
-import { snackBarConfig , snackBarConfigWarn} from 'constants/globalFunctions';
+import { snackBarConfig , snackBarConfigWarn, validateAllFormFields} from 'constants/globalFunctions';
 import { HttpErrorResponse } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-creditcard-info',
@@ -20,6 +19,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class CreditcardInfoComponent implements OnInit {
   @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
   @Input() data: any;
+  @Input() requiredFields: any;
   @Output() resetCreditCard = new EventEmitter<any>();
   public elementsOptions: StripeElementsOptions = {
     locale: 'en',
@@ -66,7 +66,7 @@ export class CreditcardInfoComponent implements OnInit {
     private readonly _saleService: SaleService,
     private readonly _formBuilder: FormBuilder,
     private readonly _stripeService: StripeService,
-    private readonly _snackBar: MatSnackBar,
+    private readonly _snackBar: MatSnackBar
   ) { }
   ngOnInit(): void {
     this.creditcardForm = this._formBuilder.group({
@@ -76,17 +76,22 @@ export class CreditcardInfoComponent implements OnInit {
     });
   }
   payNow() {
-    this._stripeService.confirmCardPayment(this.data.SecretKey, {
-      payment_method: {
-        card: this.card.element
-        }
-      }).subscribe((result:any) => {
-         if(result.error) {
-          this._snackBar.open(result.error.message, '', snackBarConfigWarn);  
-         } else {
-          this.transactionProcess(result.paymentIntent);
-         }
-      }) 
+    if(this.creditcardForm.valid) {
+      this._stripeService.confirmCardPayment(this.data.SecretKey, {
+        payment_method: {
+          card: this.card.element
+          }
+        }).subscribe((result:any) => {
+           if(result.error) {
+            this._snackBar.open(result.error.message, '', snackBarConfigWarn);  
+           } else {
+            this.transactionProcess(result.paymentIntent);
+           }
+        }) 
+    } else{
+      validateAllFormFields(this.creditcardForm);
+  }
+  
   } 
 
 private transactionProcess(paymentIntent){
@@ -99,9 +104,8 @@ private transactionProcess(paymentIntent){
    .then((res :any) => {
      if(res && !res.StatusCode) {
       this._snackBar.open('Transaction has been Approved', '', snackBarConfig);
-      this.resetCreditCard.emit(true);
+      this.resetCreditCard.emit(res.Response);
      }
    }).catch((err: HttpErrorResponse)=>(console.log))
- }
-
+ } 
 }
