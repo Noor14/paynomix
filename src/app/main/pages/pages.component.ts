@@ -26,7 +26,7 @@ export class PagesComponent implements OnInit, OnDestroy {
      }
     if(EntityId){
        this._userConfigService.setUserMode(obj)
-     }this._userConfigService.loggedInUser = { UserName, obj }
+     }this._userConfigService.loggedInUser = { UserName, ...obj }
 
   }
   getHierarchy() {
