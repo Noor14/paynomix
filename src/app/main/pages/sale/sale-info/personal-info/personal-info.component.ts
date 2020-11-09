@@ -18,33 +18,34 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
   constructor(
     private _formBuilder: FormBuilder) {
        }
-  ngOnChanges() {
-     if(this.resetPersonalInfo) {
-       this.personalInfoForm.reset();
-     }
-     if(this.requiredFields) {
-       this.createPersonalInfoForm()
-     }
-  }
 
-  ngOnInit() { 
-}
-createPersonalInfoForm(){
-  this.personalInfoForm = this._formBuilder.group({
-    Company: ['', Validators.required],
-    CustomerName: ['', Validators.required],
-    Email:  ['', [validateRequiredControl.bind(this, this.requiredFields.EmailAddress), Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
-    Phone: ['', Validators.required],
-    Address: ['', Validators.required],
-    City: ['', Validators.required],
-    State: ['', Validators.required],
-    Country: ['', Validators.required]
-  });
-  this.personalInfoForm.valueChanges
-  .subscribe((form)=> {
-    this.personalInfo.emit(form);
-  }); 
-    
-}
+  ngOnInit(): void { 
+    this.createPersonalInfoForm()
+  }
+  ngOnChanges(): void {
+    if(this.resetPersonalInfo) {
+      this.personalInfoForm.reset();
+    }
+   //  if(this.requiredFields) {
+     //  this.createPersonalInfoForm()
+   //  }
+ }
+  createPersonalInfoForm(){
+    this.personalInfoForm = this._formBuilder.group({
+      Company: ['', Validators.required],
+      CustomerName: ['', Validators.required],
+      Email:  ['', [Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
+      Phone: ['', Validators.required],
+      Address: ['', Validators.required],
+      City: ['', Validators.required],
+      State: ['', Validators.required],
+      Country: ['', Validators.required]
+    });
+    this.personalInfoForm.valueChanges
+    .subscribe((form)=> {
+      this.personalInfo.emit(form);
+    }); 
+      
+  }
 }
 
