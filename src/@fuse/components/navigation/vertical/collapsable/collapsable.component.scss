@@ -40,3 +40,13 @@
         }
     }
 }
+.nav-link-icon{
+    svg{
+        width: 16px;
+        height: 16px;
+      *{
+        fill: #212121 !important;
+        stroke-width: 2px !important;
+      }
+    }
+}
