@@ -41,27 +41,39 @@
           <!--   Status  Column -->
         <ng-container matColumnDef="BoardingStatus">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-          <td mat-cell *matCellDef="let row;let ri = index"> 
+          <td mat-cell *matCellDef="let row;let ind = index"> 
 
-             <ng-template [ngIf]="ri != showHoverAction" [ngIfElse]="ButtonsList">
-                <span style="color: white !important;padding: 2px 6px 2px 6px;font-size: 11px;width: 60px;border-radius: 16px;" [ngClass]=" (row?.MerchantAccountSetup?.BoardingStatus ==  'Active') ? 'green-600' :  (row?.MerchantAccountSetup?.BoardingStatus ==  'Decline') ? 'red-500'  :  (row?.MerchantAccountSetup?.BoardingStatus ==  'Approved') ? 'cyan-500' : 'orange-500'  " > {{row?.MerchantAccountSetup?.BoardingStatus || '--'}} </span>
+             <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
+                <mat-chip-list>
+                <mat-chip class="py-4 px-16 fuse-white-fg"
+                [ngClass]=" (row?.MerchantAccountSetup?.BoardingStatus ==  'Active') ? 
+                'green-600' :  (row?.MerchantAccountSetup?.BoardingStatus ==  'Decline') ?
+                 'red-500'  :  (row?.MerchantAccountSetup?.BoardingStatus ==  'Approved') ? 
+                 'cyan-500' : 'orange-500'">
+                 <small>
+                   {{row?.MerchantAccountSetup?.BoardingStatus || '--'}} 
+                 </small>
+                </mat-chip>
+            </mat-chip-list>
             </ng-template>
-             <ng-template #ButtonsList>
-                <div [@fadeIn]>
-                    <mat-icon  matTooltip="Edit Merchant"
-                    class="iconsList" [routerLink]="['/pages/merchant/merchant-edit', row.MerchantId]"
-                    >edit</mat-icon> 
-                    <mat-icon  matTooltip="Resend Email"
-                    class="iconsList" (click)="openDialog(row)"
-                    >email</mat-icon> 
-                </div>
-          </ng-template>
+             <ng-template #actionControl>
+              <div [@fadeIn]>
+                <button mat-icon-button matTooltip="Edit Merchant" aria-label="edit"   
+                [routerLink]="['/pages/merchant/merchant-edit', row.MerchantId]">
+                <mat-icon>edit</mat-icon> 
+                </button>
+                <button mat-icon-button matTooltip="Resend Email" aria-label="resend"   
+                (click)="openDialog(row)">
+                <mat-icon>email</mat-icon> 
+                </button>
+              </div>
+            </ng-template>
             </td>
         </ng-container>
    
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row  (mouseenter)="showHoverAction = i"  (mouseleave)="showHoverAction = -1" 
+        <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
         *matRowDef="let row; columns: displayedColumns;let i = index">
         </tr>
     </table>
-  </section>
+</section>

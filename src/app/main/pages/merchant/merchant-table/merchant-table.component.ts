@@ -15,7 +15,7 @@ export class MerchantTableComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   public displayedColumns : string[] =  ['CompanyName', 'Reseller', 'FirstName', 'Email', 'Phone', 'PricingTitle', 'BoardedDate', 'BoardingStatus'];
   @Input() data: any;
-
+  public actionControlOnHover = -1;
   constructor(private readonly _dialog: MatDialog) { }
 
   ngOnInit(): void{

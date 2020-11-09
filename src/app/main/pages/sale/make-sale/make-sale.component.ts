@@ -192,5 +192,4 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
     dialogRef.componentInstance.data = data;
   }
-
 }

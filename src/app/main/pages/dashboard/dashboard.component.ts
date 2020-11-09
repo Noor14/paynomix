@@ -95,71 +95,60 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
       },
       widget3: {
-          impressions: {
-              value   : '87k',
-              ofTarget: 12
-          },
-          chartType  : 'line',
-          datasets   : [
-              {
-                  label: 'Impression',
-                  data : [67000, 54000, 82000, 57000, 72000, 57000, 87000, 72000, 89000, 98700, 112000, 136000, 110000, 149000, 98000],
-                  fill : false
-              }
-          ],
-          labels     : ['Jan 1', 'Jan 2', 'Jan 3', 'Jan 4', 'Jan 5', 'Jan 6', 'Jan 7', 'Jan 8', 'Jan 9', 'Jan 10', 'Jan 11', 'Jan 12', 'Jan 13', 'Jan 14', 'Jan 15'],
-          colors     : [
-              {
-                  borderColor: environment.themeColor
-              }
-          ],
-          options    : {
-              spanGaps           : false,
-              legend             : {
-                  display: false
-              },
-              maintainAspectRatio: false,
-              elements           : {
-                  point: {
-                      radius          : 2,
-                      borderWidth     : 1,
-                      hoverRadius     : 2,
-                      hoverBorderWidth: 1
-                  },
-                  line : {
-                      tension: 0
-                  }
-              },
-              layout             : {
-                  padding: {
-                      top   : 24,
-                      left  : 16,
-                      right : 16,
-                      bottom: 16
-                  }
-              },
-              scales             : {
-                  xAxes: [
-                      {
-                          display: false
-                      }
-                  ],
-                  yAxes: [
-                      {
-                          display: false,
-                          ticks  : {
-                              // min: 100,
-                              // max: 500
-                          }
-                      }
-                  ]
-              }
-          }
-      },
+        conversion: {
+            value   : 492,
+            ofTarget: 13
+        },
+        chartType : 'bar',
+        datasets  : [
+            {
+                label: 'Conversion',
+                data : [221, 428, 492, 471, 413, 344, 294]
+            }
+        ],
+        labels    : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        colors    : [
+            {
+                borderColor    : environment.themeColor,
+                backgroundColor: environment.themeColor
+            }
+        ],
+        options   : {
+            spanGaps           : false,
+            legend             : {
+                display: false
+            },
+            maintainAspectRatio: false,
+            layout             : {
+                padding: {
+                    top   : 24,
+                    left  : 16,
+                    right : 16,
+                    bottom: 16
+                }
+            },
+            scales             : {
+                xAxes: [
+                    {
+                        display: false
+                    }
+                ],
+                yAxes: [
+                    {
+                        display: false,
+                        ticks  : {
+                            min: 100,
+                            max: 500
+                        }
+                    }
+                ]
+            }
+        }
+    },
       widget4: {
           visits   : {
               value   : 882,
-              ofTarget: -9
+              ofTarget: 9
           },
           chartType: 'bar',
           datasets : [

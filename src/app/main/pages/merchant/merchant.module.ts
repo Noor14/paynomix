@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MerchantRoutingModule } from './merchant-routing.module';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { MatTableModule } from '@angular/material/table';
@@ -29,6 +28,7 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { MatMenuModule} from '@angular/material/menu';
 import { EmailDialogModule } from '@fuse/components/email-dialog/email-dialog.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 @NgModule({
@@ -53,7 +53,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     NoFoundModule,
     MatMenuModule,
     EmailDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule
 
   ]
 })
