@@ -100,49 +100,49 @@ export const navigation: FuseNavigation[] = [
                         title    : 'Transaction Controls',
                         type     : 'item',
                         svgIcon     : 'transaction-control',
-                        url      : '/pages/fraud-mgmt'
+                        url      : '/pages/fraud-mgmt/transaction-control'
                     },
                     {
                         id       : 'velocityCtrl',
                         title    : 'Velocity Controls',
                         type     : 'item',
                         svgIcon     : 'velocity-control',
-                        url      : '/pages/user'
+                        url      : '/pages/fraud-mgmt/velocity-control'
                     },
                     {
-                        id       : 'verificatoionTool',
+                        id       : 'verificationTool',
                         title    : 'Verification Tools',
                         type     : 'item',
                         svgIcon     : 'verification',
-                        url      : '/pages/user'
+                        url      : '/pages/fraud-mgmt/verification-tool'
                     },
                     {
                         id       : 'blockingTool',
                         title    : 'Blocking Tools',
                         type     : 'item',
                         icon     : 'block',
-                        url      : '/pages/user'
+                        url      : '/pages/fraud-mgmt/blocking-tool'
                     },
                     {
                         id       : 'transAlert',
                         title    : 'Transaction Alerts',
                         type     : 'item',
                         svgIcon     : 'transaction-alert',
-                        url      : '/pages/user'
+                        url      : '/pages/fraud-mgmt/transaction-alert'
                     },
                     {
                         id       : 'chargeBackTool',
                         title    : 'Charge Back Tools',
                         type     : 'item',
                         svgIcon     : 'charge-back',
-                        url      : '/pages/user'
+                        url      : '/pages/fraud-mgmt/charge-back'
                     },
                     {
                         id       : 'achTool',
                         title    : 'ACH Tools',
                         type     : 'item',
                         svgIcon     : 'ach',
-                        url      : '/pages/user'
+                        url      : '/pages/fraud-mgmt/ach'
                     }
                ]
             },
