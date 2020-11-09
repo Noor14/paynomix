@@ -45,32 +45,29 @@
 
              <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
                 <mat-chip-list>
-                <mat-chip class="chipStatus py-4 px-8"
+                <mat-chip class="py-4 px-16 fuse-white-fg"
                 [ngClass]=" (row?.MerchantAccountSetup?.BoardingStatus ==  'Active') ? 
                 'green-600' :  (row?.MerchantAccountSetup?.BoardingStatus ==  'Decline') ?
                  'red-500'  :  (row?.MerchantAccountSetup?.BoardingStatus ==  'Approved') ? 
-                 'cyan-500' : 'orange-500'  " > {{row?.MerchantAccountSetup?.BoardingStatus || '--'}} 
+                 'cyan-500' : 'orange-500'">
+                 <small>
+                   {{row?.MerchantAccountSetup?.BoardingStatus || '--'}} 
+                 </small>
                 </mat-chip>
             </mat-chip-list>
             </ng-template>
              <ng-template #actionControl>
-           
-
-
-                <button mat-icon-button matTooltip="Edit Merchant" aria-label="edit" [@fadeIn]    
+              <div [@fadeIn]>
+                <button mat-icon-button matTooltip="Edit Merchant" aria-label="edit"   
                 [routerLink]="['/pages/merchant/merchant-edit', row.MerchantId]">
                 <mat-icon>edit</mat-icon> 
                 </button>
-
-
-                <button mat-icon-button matTooltip="Resend Email" aria-label="resend" [@fadeIn]    
+                <button mat-icon-button matTooltip="Resend Email" aria-label="resend"   
                 (click)="openDialog(row)">
                 <mat-icon>email</mat-icon> 
                 </button>
-
-
-
-          </ng-template>
+              </div>
+            </ng-template>
             </td>
         </ng-container>
    
@@ -79,4 +76,4 @@
         *matRowDef="let row; columns: displayedColumns;let i = index">
         </tr>
     </table>
-  </section>
+</section>

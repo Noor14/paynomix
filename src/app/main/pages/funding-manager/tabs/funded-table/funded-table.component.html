@@ -1,7 +1,6 @@
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-<section class="funded mt-20 table-responsive ">
-    
-    <div class="mat-card ">
+<section class="funded">
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <div class="mat-card table-responsive mt-20">
         <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
           
             <!-- Partner Name Column -->
@@ -45,21 +44,18 @@
             <th mat-header-cell *matHeaderCellDef> Status </th>
             <td mat-cell *matCellDef="let row;let ind = index">
                 <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
-                  
                     <mat-chip-list>
-                        <mat-chip class="chipStatus py-4 px-8 cyan-500">    {{row.Status}} 
+                        <mat-chip class="py-4 px-16 cyan-500 fuse-white-fg">
+                          <small>{{row.Status}}</small>
                         </mat-chip>
                     </mat-chip-list>
-               
-               
                 </ng-template>
-                   <ng-template #actionControl>
-          <button mat-icon-button matTooltip="Go to Fund Detail" 
+                <ng-template #actionControl>
+                   <button mat-icon-button matTooltip="Go to Fund Detail" 
                    aria-label="detail" [@fadeIn]>
                    <mat-icon>arrow_forward</mat-icon> 
                    </button>
-   
-                 </ng-template>
+                </ng-template>
             </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -68,5 +64,4 @@
             </tr>
         </table>
     </div>
-
 </section>

@@ -42,20 +42,19 @@
           <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
             {{row.AssignCount || 0}}
         </ng-template>
-                 <ng-template #actionControl>
-            
-            <button mat-icon-button matTooltip="Edit PricingPlan" aria-label="edit" [@fadeIn]    
-            [routerLink]="['/pages/pricing-plan/pricing-plan-edit', row.PricingPlanID]">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button   [@fadeIn] matTooltip="Assign PricingPlan"
-            (click)="openDialog(row.PricingPlanID)" aria-label="assign"
-            [@fadeIn]>
-            <mat-icon>how_to_reg</mat-icon>
-           </button>    
-
-
-      </ng-template>
+          <ng-template #actionControl>
+            <div  [@fadeIn]>
+              <button mat-icon-button matTooltip="Edit PricingPlan" aria-label="edit"    
+              [routerLink]="['/pages/pricing-plan/pricing-plan-edit', row.PricingPlanID]">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Assign PricingPlan"
+              (click)="openDialog(row.PricingPlanID)" aria-label="assign">
+              <mat-icon>how_to_reg</mat-icon>
+             </button>    
+            </div>
+           
+        </ng-template>
     </td>
     </ng-container>
      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

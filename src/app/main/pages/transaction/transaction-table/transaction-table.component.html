@@ -53,13 +53,13 @@
                 <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
                      {{row.CardholderName || '--'}}
                 </ng-template>
-                    <ng-template #actionControl>
-                        <button mat-icon-button aria-label="detail" matTooltip="Transaction Details"
-                        [routerLink]="['/pages/transaction/transaction-detail', row.TransactionId]"
-                        [@fadeIn]>
-                          <mat-icon>pageview</mat-icon> 
-                        </button>      
-                      </ng-template>
+                <ng-template #actionControl>
+                    <button mat-icon-button aria-label="detail" matTooltip="Transaction Details"
+                    [routerLink]="['/pages/transaction/transaction-detail', row.TransactionId]"
+                    [@fadeIn]>
+                      <mat-icon>arrow_forward</mat-icon> 
+                    </button>      
+                  </ng-template>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

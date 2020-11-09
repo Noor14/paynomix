@@ -36,7 +36,6 @@ import {MatChipsModule} from '@angular/material/chips';
     MatToolbarModule,
     MatTooltipModule,
     MatChipsModule
-
   ]
 })
 export class FundingManagerModule { }
