@@ -56,7 +56,6 @@ export class UserTableComponent implements OnInit {
   updateUser() { 
     this._userService.updateUser(this.userForm.value).then((res: any) => { 
       if (res && !res.StatusCode) {
-          console.log(res.Response) 
           this._snackBar.open('User updated successfully!', '', snackBarConfig);
           this.dialogRef.close();
       } else{
