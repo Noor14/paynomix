@@ -1,0 +1,22 @@
+.transactionDetail{
+    mat-card{
+        table{
+            border-collapse: collapse;
+           
+                tr{  
+                    .hrLine{
+                    border-top:1px solid #aba6a6;
+                     }
+                    
+                    td{
+                        font-size: 10px;
+                       text-align: right;
+                       width: 100%;
+                      
+                        }
+                } 
+               
+            }
+           
+    }
+}
