@@ -23,29 +23,29 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
   public basicInfoForm: FormGroup;
   public globalConfig = globalConfig;
   private _unsubscribeAll: Subject<any>;
-  public  userImage: any = {};
-    /**
-    * Constructor
-    *
-    * @param {SettingService} _settingService
-    * @param {UserConfigService} _userConfigService
-    * @param {MatSnackBar} _snackBar
-    * @param {FormBuilder} _formBuilder
-    */
-   
-   constructor(
-     private readonly _settingService: SettingService,
-     private readonly _userConfigService: UserConfigService,
-     private readonly _snackBar: MatSnackBar, 
-     private _formBuilder: FormBuilder
+  public userImage: any = {};
+  /**
+  * Constructor
+  *
+  * @param {SettingService} _settingService
+  * @param {UserConfigService} _userConfigService
+  * @param {MatSnackBar} _snackBar
+  * @param {FormBuilder} _formBuilder
+  */
 
- ) { 
-      // Set the private defaults
-      this._unsubscribeAll = new Subject();
- }
+  constructor(
+    private readonly _settingService: SettingService,
+    private readonly _userConfigService: UserConfigService,
+    private readonly _snackBar: MatSnackBar,
+    private _formBuilder: FormBuilder
+
+  ) {
+    // Set the private defaults
+    this._unsubscribeAll = new Subject();
+  }
 
   ngOnInit(): void {
-    this.basicInfoForm = this._formBuilder.group({ 
+    this.basicInfoForm = this._formBuilder.group({
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
       Address1: ['', Validators.required],
@@ -55,66 +55,78 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
       Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
       Country: ['', Validators.required]
     });
-    
+
     this._userConfigService.userModeChange
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getBasicDetail());
-   
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => this.getBasicDetail());
+
   }
-  
+
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-  getBasicDetail(): void{
+  getBasicDetail(): void {
     this._settingService.basicInfo(this._userConfigService.getUserMode())
-    .then((res: any) => {
-        if(res && !res.StatusCode){
+      .then((res: any) => {
+        if (res && !res.StatusCode) {
           this.settingDetail = res.Response;
           this.basicInfoForm.patchValue(this.settingDetail);
-          if(this.settingDetail.FilePath)
-          this.userImage.FilePath = `${environment.apiURL.split('api/').shift()}${this.settingDetail.FilePath}`;
+          if (this.settingDetail.FilePath)
+            this.userImage.FilePath = `${environment.apiURL.split('api/').shift()}${this.settingDetail.FilePath}`;
         }
-    }).catch((err: HttpErrorResponse)=>(console.log))
-  } 
-
-  onFileSelect(event): any { 
-    this.userImage = event.addedFiles.pop();
-    this.convertFile(this.userImage)
+      }).catch((err: HttpErrorResponse) => (console.log))
   }
 
- async convertFile(file){
+  onFileSelect(event): any {
+    if (event.rejectedFiles.length) {
+      let rejectedFile = event.rejectedFiles.pop();
+      if (rejectedFile.reason == 'size') {
+        this._snackBar.open('This file exceeds the maximum size limit of 5MB', '', snackBarConfigWarn);
+        return;
+      }
+      else if (rejectedFile.reason == 'type') {
+        this._snackBar.open('Only files with the following extensions are allowed: png jpg jpeg', '', snackBarConfigWarn);
+        return;
+      }
+    } else {
+      this.userImage = event.addedFiles.pop();
+      this.convertFile(this.userImage)
+    }
+  }
+
+  async convertFile(file) {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-        this.userImage.FileName = file.name;
-        this.userImage.FileType = file.type;
-        this.userImage.FileValue = (reader as any).result.split(',').pop();
+      this.userImage.FileName = file.name;
+      this.userImage.FileType = file.type;
+      this.userImage.FileValue = (reader as any).result.split(',').pop();
     }
   }
 
 
- saveInfo(): void{
-    if(this.basicInfoForm.invalid){
+  saveInfo(): void {
+    if (this.basicInfoForm.invalid) {
       globalConfig.validateAllFormFields(this.basicInfoForm);
-    }else{
+    } else {
       const obj = {
         ...this.settingDetail,
         ...this.basicInfoForm.value,
         ...this.userImage
       }
       this._settingService.saveBasicInfo(obj)
-      .then((res: any) => {
-        if(res && !res.StatusCode){
-          this._snackBar.open('Settings has been saved Successfully!', '', snackBarConfig); 
-        }else{
-          this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn); 
-        }
-      }).catch((err: HttpErrorResponse)=>(console.log))
+        .then((res: any) => {
+          if (res && !res.StatusCode) {
+            this._snackBar.open('Settings has been saved Successfully!', '', snackBarConfig);
+          } else {
+            this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
+          }
+        }).catch((err: HttpErrorResponse) => (console.log))
     }
   }
-  
+
   onFileRemove() {
     this.userImage = {};
   }
