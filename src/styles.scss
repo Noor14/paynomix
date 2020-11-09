@@ -15,6 +15,9 @@ app-pages{
           background-color: #f4511e !important; //dynamic
       }
     }
+    .mat-standard-chip{
+      min-height: 28px;
+    }
     .outer-layer{
         border: 1px solid #eee;
         border-radius: 3px;
