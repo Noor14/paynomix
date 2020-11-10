@@ -27,6 +27,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     PartnerFormComponent, 
     PartnerTableComponent,
   ],
+  exports: [PartnerCreateComponent],
   entryComponents:[PartnerTableComponent],
   imports: [
     CommonModule,

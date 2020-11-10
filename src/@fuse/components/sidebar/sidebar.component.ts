@@ -535,6 +535,9 @@ export class FuseSidebarComponent implements OnInit, OnDestroy
 
         // Mark for check
         this._changeDetectorRef.markForCheck();
+        this._renderer.setStyle(this._elementRef.nativeElement, 'width', '60%');
+        this._renderer.setStyle(this._elementRef.nativeElement, 'max-width', '60%');
+        this._renderer.setStyle(this._elementRef.nativeElement, 'padding-left', '15px');
     }
 
     /**

@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
+import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -24,12 +25,14 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       * @param {PartnerService} _partnerService
       * @param {UserConfigService} _userConfigService
       * @param {ComponentFactoryResolver} _resolver
+      * @param {FuseSidebarService} _fuseSidebarService
       */
      
      constructor(
        private readonly _partnerService: PartnerService,
        private readonly _userConfigService: UserConfigService,
-      private readonly _resolver: ComponentFactoryResolver,
+       private readonly _resolver: ComponentFactoryResolver,
+       private readonly _fuseSidebarService: FuseSidebarService,
 
    ) { 
              // Set the private defaults
@@ -55,7 +58,7 @@ export class PartnerListComponent implements OnInit, OnDestroy {
         this.componentRef = this.container.createComponent(factory);
         this.componentRef.instance.data = data;
     }
-  
+
     getPartners(): void{
       this._partnerService.partnerList(this._userConfigService.getUserMode())
       .then((res: any) => {
@@ -74,6 +77,10 @@ export class PartnerListComponent implements OnInit, OnDestroy {
           }
         }
       }).catch((err: HttpErrorResponse)=>(console.log))
+    }
+
+    openSlidePanel(): void{
+        this._fuseSidebarService.getSidebar('quickPanel').toggleOpen();
     }
 
 }

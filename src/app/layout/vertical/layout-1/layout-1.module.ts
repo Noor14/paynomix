@@ -11,6 +11,7 @@ import { QuickPanelModule } from 'app/layout/components/quick-panel/quick-panel.
 import { ToolbarModule } from 'app/layout/components/toolbar/toolbar.module';
 
 import { VerticalLayout1Component } from 'app/layout/vertical/layout-1/layout-1.component';
+import { PartnerModule } from 'app/main/pages/partner/partner.module';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { VerticalLayout1Component } from 'app/layout/vertical/layout-1/layout-1.
         FooterModule,
         NavbarModule,
         QuickPanelModule,
-        ToolbarModule
+        ToolbarModule,
+        PartnerModule
     ],
     exports     : [
         VerticalLayout1Component
