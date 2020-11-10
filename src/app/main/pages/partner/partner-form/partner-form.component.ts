@@ -64,7 +64,7 @@ createPartnerForm(): void{
 
 submit(){
    if(this.partnerForm.valid){
-     this.submitForm.emit(this.partnerForm.value);
+     this.submitForm.emit({...this.partnerDetail, ...this.partnerForm.value});
    }else{
     globalConfig.validateAllFormFields(this.partnerForm)
    }
