@@ -20,7 +20,8 @@
                     <p class="text-center">
                         <strong>{{data?.CustomerName}}</strong><br />
                         {{data?.City}}<br />
-                        {{data?.Country}}, {{data?.ZipCode}}<br />
+                        <ng-container *ngIf="data?.Country">{{data?.Country + ','}}</ng-container> 
+                        {{data?.ZipCode}}<br />
                         {{data?.Phone}}
                     </p>
                 </td>
