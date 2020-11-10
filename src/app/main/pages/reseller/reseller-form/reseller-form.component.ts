@@ -97,7 +97,6 @@ getPartners(): void{
  submit(){
    if(this.resellerForm.valid){
      this.submitForm.emit({...this.resellerDetail, ...this.resellerForm.value});
-     console.log(this.submitForm);
    }else{
     globalConfig.validateAllFormFields(this.resellerForm)
    }
