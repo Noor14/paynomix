@@ -23,5 +23,10 @@ export class ResellerService extends BaseService {
         const url = `${environment.apiURL}Reseller/Search`;
          return this.post(url, obj);
         }
+
+        resendCredentials(obj: any): any{
+            const url = `${environment.apiURL}Setting/resendemail`;
+             return this.post(url, obj);
+            }
     
 };

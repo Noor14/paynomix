@@ -39,6 +39,14 @@
                     [@fadeIn]>
                     <mat-icon >edit</mat-icon>
                    </button>      
+                   <button mat-icon-button aria-label="send" 
+                   matTooltip="Send Credentials"
+                   (click)="resendEmail(row.ResellerId)"
+                   [@fadeIn]>
+                   <mat-icon >resend</mat-icon>
+                  </button>      
+
+
               </ng-template>
             </td>
           </ng-container>   

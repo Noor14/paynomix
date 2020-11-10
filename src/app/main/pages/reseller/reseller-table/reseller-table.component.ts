@@ -1,6 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
+import { MatSnackBar} from '@angular/material';
+import { snackBarConfig } from 'constants/globalFunctions';
+import { ResellerService } from '../reseller.service';
 
 @Component({
   selector: 'app-reseller-table',
@@ -16,7 +19,10 @@ export class ResellerTableComponent implements OnInit  {
   public actionControlOnHover = -1;
   public displayedColumns: string[] = ['ResellerName', 'DBAName', 'TelephoneNumber', 'Email', 'Country'];
 
-  constructor() { }
+  constructor(
+    private readonly _resellerService: ResellerService,
+    private _snacksBar: MatSnackBar
+  ) { }
 
   ngOnInit() : void{
     if(this.data){
@@ -26,5 +32,15 @@ export class ResellerTableComponent implements OnInit  {
     }
   
   }
+
+  resendEmail(obj) {
+    let resID = {"ResellerId" : obj}
+    this._resellerService.resendCredentials(resID).then((res:any) => {
+      if(res.StatusCode == 0) {
+    this._snackBar.open('Your credentials have been successfully Sent', '', snackBarConfig);
+    } 
+  });
+
+}
 
 }

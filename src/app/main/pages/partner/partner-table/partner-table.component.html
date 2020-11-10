@@ -32,6 +32,14 @@
                 [routerLink]="['/pages/partner/partner-edit', row.PartnerId]">
                 <mat-icon>edit</mat-icon> 
                 </button>
+                <button mat-icon-button aria-label="send" 
+                matTooltip="Send Credentials"
+                (click)="resendEmail(row.PartnerId)"
+                [@fadeIn]>
+                <mat-icon >resend</mat-icon>
+               </button> 
+
+
           </ng-template>
           </td>
         </ng-container>

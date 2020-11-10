@@ -1,6 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
+import { MatSnackBar} from '@angular/material';
+import { snackBarConfig } from 'constants/globalFunctions';
+import { PartnerService } from '../partner.service';
+
 
 @Component({
   selector: 'app-partner-table',
@@ -16,7 +20,10 @@ export class PartnerTableComponent implements OnInit {
   public actionControlOnHover = -1;
   public displayedColumns: string[] =  ['PartnerName', 'DBAName', 'FirstName', 'LastName'];
   
-  constructor() { }
+  constructor(
+    private readonly _partnerService: PartnerService,
+    private _snacksBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void{
     if(this.data){
@@ -25,4 +32,16 @@ export class PartnerTableComponent implements OnInit {
       this.dataSource.sort = this.sort;
     }
   }
+
+  resendEmail(obj) {
+    let prtID = {"PartnerId" : obj}
+    this._partnerService.resendCredentials(prtID).then((res:any) => {
+      if(res.StatusCode == 0) {
+    this._snackBar.open('Your credentials have been successfully Sent', '', snackBarConfig);
+    } 
+  });
+
+}
+
+
 }
