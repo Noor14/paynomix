@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -8,7 +8,8 @@ import { FuseNavigationService } from '@fuse/components/navigation/navigation.se
 @Component({
     selector   : 'fuse-nav-vertical-item',
     templateUrl: './item.component.html',
-    styleUrls  : ['./item.component.scss']
+    styleUrls  : ['./item.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class FuseNavVerticalItemComponent implements OnInit, OnDestroy
 {

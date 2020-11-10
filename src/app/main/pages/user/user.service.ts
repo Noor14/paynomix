@@ -17,5 +17,9 @@ export class UserService extends BaseService {
             const url = `${environment.apiURL}User`;
             return this.post(url,obj);
           }
+        updatePassword(obj: any): any {
+            const url = `${environment.apiURL}Login/ChangePassword`;
+            return this.post(url,obj);
+        }
     
 }

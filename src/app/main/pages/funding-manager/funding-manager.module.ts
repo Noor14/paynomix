@@ -16,7 +16,7 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {MatChipsModule} from '@angular/material/chips';
 @NgModule({
   declarations: [FundingListComponent, FundedTableComponent, NonFundedTableComponent],
   entryComponents: [FundedTableComponent, NonFundedTableComponent],
@@ -34,8 +34,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatIconModule,
     NoFoundModule,
     MatToolbarModule,
-    MatTooltipModule
-
+    MatTooltipModule,
+    MatChipsModule
   ]
 })
 export class FundingManagerModule { }

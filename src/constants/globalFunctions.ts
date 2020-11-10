@@ -1,4 +1,4 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 
 export function validateAllFormFields(formGroup: FormGroup) {         
     Object.keys(formGroup.controls).forEach(field => {  
@@ -20,6 +20,12 @@ export const snackBarConfigWarn = {
   ...snackBarConfig,
   panelClass: 'warn'
 };
+export function validateRequiredControl(control: AbstractControl, isRequired: boolean){
+    if(isRequired && !control.value){
+        return {required:  true}
+    }
+
+}
 
 export enum authRole {
 admin = 1,
@@ -302,6 +308,6 @@ export const validator = {
   accMaxLength: 17,
   maxPercentage: 100,
   maxRoutingNo: 9,
-  minRoutingNo: 9
-
+  minRoutingNo: 9,
+  passwordPattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{0,}$/
 };

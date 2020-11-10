@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MerchantRoutingModule } from './merchant-routing.module';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { MatTableModule } from '@angular/material/table';
@@ -30,6 +29,8 @@ import { MatMenuModule} from '@angular/material/menu';
 import { EmailDialogModule } from '@fuse/components/email-dialog/email-dialog.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { NgxMaskModule } from 'ngx-mask';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 @NgModule({
   declarations: [MerchantListComponent, MerchantCreateComponent, MerchantEditComponent, MerchantInfoComponent, BusinessDetailComponent, OwnerDetailComponent, BankAccountComponent, AllGetherInfoComponent, MerchantFormComponent, MerchantTableComponent],
@@ -55,6 +56,8 @@ import { NgxMaskModule } from 'ngx-mask';
     EmailDialogModule,
     MatTooltipModule,
     NgxMaskModule.forRoot()
+    MatChipsModule
+
 
   ]
 })

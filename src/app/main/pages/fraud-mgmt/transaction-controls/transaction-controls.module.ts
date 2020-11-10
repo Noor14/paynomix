@@ -7,6 +7,12 @@ import { ProxyBlockingComponent } from './proxy-blocking/proxy-blocking.componen
 import { TransactionControlsComponent } from './transaction-controls.component';
 import { TransactionControlsRoutingModule } from './transaction-controls-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule, MatSelectModule } from '@angular/material';
+import {MatDividerModule} from '@angular/material/divider';
+import { FuseSharedModule } from '@fuse/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +25,14 @@ import {MatTabsModule} from '@angular/material/tabs';
     CommonModule,
     TransactionControlsRoutingModule,
     MatTabsModule,
+    MatInputModule,
+    MatFormFieldModule ,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatSelectModule,
+    FuseSharedModule
+    
   ]
 })
 export class TransactionControlsModule { }

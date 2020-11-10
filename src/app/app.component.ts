@@ -72,6 +72,34 @@ export class AppComponent implements OnInit, OnDestroy
         .addSvgIcon(
             'no-transaction',
             this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/no-transaction.svg')
+        )
+        .addSvgIcon(
+            'fraud',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/fraud.svg')
+        )
+        .addSvgIcon(
+            'velocity-control',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/velocity-control.svg')
+        )
+        .addSvgIcon(
+            'transaction-control',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/transaction-control.svg')
+        )
+        .addSvgIcon(
+            'transaction-alert',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/transaction-alert.svg')
+        )
+        .addSvgIcon(
+            'charge-back',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/charge-back.svg')
+        )
+        .addSvgIcon(
+            'ach',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/ach.svg')
+        )
+        .addSvgIcon(
+            'verification',
+            this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/svg/verification.svg')
         );
        
         

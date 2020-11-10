@@ -16,6 +16,7 @@ export class TransactionTableComponent implements OnInit{
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   public dataSource = new MatTableDataSource<any>();
+  public actionControlOnHover = -1;
   public displayedColumns: string[] =  [
     'TransactionId', 
     'TransactionType',

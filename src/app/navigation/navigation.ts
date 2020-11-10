@@ -92,64 +92,57 @@ export const navigation: FuseNavigation[] = [
                 id       : 'fraud_mgmt',
                 title    : 'Fraud Managment',
                 type     : 'collapsable',
-                icon     : 'event_busy',
+                svgIcon     : 'fraud',
                 roles    :    Object.values(authRole).filter(item => typeof item === 'number'),
                 children : [
                     {
                         id       : 'transCtrl',
                         title    : 'Transaction Controls',
                         type     : 'item',
-                        icon     : 'person_outline',
-                        url      : '/pages/fraud-mgmt'
+                        svgIcon     : 'transaction-control',
+                        url      : '/pages/fraud-mgmt/transaction-control'
                     },
                     {
                         id       : 'velocityCtrl',
                         title    : 'Velocity Controls',
                         type     : 'item',
-                        icon     : 'person_outline',
-                        url      : '/pages/user'
+                        svgIcon     : 'velocity-control',
+                        url      : '/pages/fraud-mgmt/velocity-control'
                     },
                     {
-                        id       : 'transDataCtrl',
-                        title    : 'Transaction Controls',
-                        type     : 'item',
-                        icon     : 'person_outline',
-                        url      : '/pages/user'
-                    },
-                    {
-                        id       : 'verificatoionTool',
+                        id       : 'verificationTool',
                         title    : 'Verification Tools',
                         type     : 'item',
-                        icon     : 'person_outline',
-                        url      : '/pages/user'
+                        svgIcon     : 'verification',
+                        url      : '/pages/fraud-mgmt/verification-tool'
                     },
                     {
                         id       : 'blockingTool',
                         title    : 'Blocking Tools',
                         type     : 'item',
-                        icon     : 'person_outline',
-                        url      : '/pages/user'
+                        icon     : 'block',
+                        url      : '/pages/fraud-mgmt/blocking-tool'
                     },
                     {
                         id       : 'transAlert',
                         title    : 'Transaction Alerts',
                         type     : 'item',
-                        icon     : 'person_outline',
-                        url      : '/pages/user'
+                        svgIcon     : 'transaction-alert',
+                        url      : '/pages/fraud-mgmt/transaction-alert'
                     },
                     {
                         id       : 'chargeBackTool',
                         title    : 'Charge Back Tools',
                         type     : 'item',
-                        icon     : 'person_outline',
-                        url      : '/pages/user'
+                        svgIcon     : 'charge-back',
+                        url      : '/pages/fraud-mgmt/charge-back'
                     },
                     {
                         id       : 'achTool',
                         title    : 'ACH Tools',
                         type     : 'item',
-                        icon     : 'person_outline',
-                        url      : '/pages/user'
+                        svgIcon     : 'ach',
+                        url      : '/pages/fraud-mgmt/ach'
                     }
                ]
             },
