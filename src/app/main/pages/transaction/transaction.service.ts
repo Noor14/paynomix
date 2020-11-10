@@ -6,13 +6,17 @@ import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class TransactionService extends BaseService  {
+export class TransactionService extends BaseService {
 
   constructor(_http: HttpClient) {
     super(_http);
-   }
-  transactionList(obj: any): any{
+  }
+  transactionList(obj: any): any {
     const url = `${environment.apiURL}/Transaction/Search`;
-     return this.post(url, obj);
-    }
+    return this.post(url, obj);
+  }
+  getTransactionDetail(id: string) {
+    const url = `${environment.apiURL}Transaction/GetTransactionById/${id}`;
+    return this.get(url);
+  }
 }
