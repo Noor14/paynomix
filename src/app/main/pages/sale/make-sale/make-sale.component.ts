@@ -106,7 +106,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
       if (res) {
         this.container.clear();
         this.transactionApproved = true;
-        this.amountInput = undefined;
+        this.amountInput.nativeElement.value = '';
         this.openDialog(res)
       }
     })
@@ -182,8 +182,8 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
         res.Response.forEach((item) => {
           obj[item.ControlName] = item.IsRequired
         })
-       this.componentRef.instance.requiredFields = obj;
-       this.requiredFields = obj;
+      //  this.componentRef.instance.requiredFields = obj;
+      //  this.requiredFields = obj;
       }
     });
   }
