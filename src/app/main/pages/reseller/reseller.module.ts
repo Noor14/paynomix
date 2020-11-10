@@ -20,6 +20,7 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { MatTabsModule } from '@angular/material';
 import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatDialogModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     NoFoundModule,
     MatTabsModule,
     PricingPlanModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    MatToolbarModule
   ]
 })
 export class ResellerModule { }
