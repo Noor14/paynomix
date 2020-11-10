@@ -37,7 +37,7 @@ export class ResellerTableComponent implements OnInit  {
     let resID = {"ResellerId" : obj}
     this._resellerService.resendCredentials(resID).then((res:any) => {
       if(res.StatusCode == 0) {
-    this._snackBar.open('Your credentials have been successfully Sent', '', snackBarConfig);
+    this._snacksBar.open('Your credentials have been successfully Sent', '', snackBarConfig);
     } 
   });
 

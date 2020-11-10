@@ -37,7 +37,7 @@ export class PartnerTableComponent implements OnInit {
     let prtID = {"PartnerId" : obj}
     this._partnerService.resendCredentials(prtID).then((res:any) => {
       if(res.StatusCode == 0) {
-    this._snackBar.open('Your credentials have been successfully Sent', '', snackBarConfig);
+    this._snacksBar.open('Your credentials have been successfully Sent', '', snackBarConfig);
     } 
   });
 
