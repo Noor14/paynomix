@@ -52,11 +52,12 @@ export class ResellerFormComponent implements OnInit, OnDestroy, OnChanges {
   this._unsubscribeAll.next();
   this._unsubscribeAll.complete();
 }
+
 createResellerForm(): void {
   this.resellerForm = this._formBuilder.group({
     PartnerId: ['', Validators.required],
     ResellerId: [0, Validators.required],
-    ResellerName: [{value:'' , disabled:this.resellerDetail}, Validators.required],
+    ResellerName: [{value:'' , disabled:this.resellerDetail}, [Validators.required ,Validators.maxLength(globalConfig.validator.maxFieldLength)]],
     DBAName: [''],
     Country: ['', Validators.required],
     Address1: ['', Validators.required],

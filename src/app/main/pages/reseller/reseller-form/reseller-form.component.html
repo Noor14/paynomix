@@ -13,8 +13,9 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Reseller Name</mat-label>
-                    <input matInput formControlName="ResellerName" required [disabled]="resllerDetail">
-                    <mat-error>Reseller Name is required!</mat-error>
+                    <input matInput formControlName="ResellerName" required [disabled]="resllerDetail" [maxlength]="globalConfig?.validator?.maxFieldLength">
+                    <mat-error *ngIf="resellerForm.get('ResellerName').hasError('required')">Reseller Name is required!</mat-error>
+                    <mat-error *ngIf="!resellerForm.get('ResellerName').hasError('required') && resellerForm.get('ResellerName').hasError(maxLength)">Reseller Name should have maximun length of {{globalConfig?.validator?.maxFieldLength}}</mat-error>
                 </mat-form-field>
             </div>
 
