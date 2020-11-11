@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PricingPlanService } from 'app/main/pages/pricing-plan/pricing-plan.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { snackBarConfig, snackBarConfigWarn, validator } from '../../../../../../constants/globalFunctions';
+import { snackBarConfigWarn, validator } from '../../../../../../constants/globalFunctions';
 import { MerchantService } from '../../merchant.service';
 
 @Component({
@@ -131,7 +131,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, 
             if(res.Response.length){
               control.enable();
             }else{
-              this._snackBar.open('This reseller has no pricing plan yet', '', snackBarConfig);
+              this._snackBar.open('This reseller has no pricing plan yet', '', snackBarConfigWarn);
               control.disable();
               this.merchantInfoForm.controls.PricingTitle.reset();
             }  
