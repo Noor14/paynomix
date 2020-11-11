@@ -1,7 +1,17 @@
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<mat-paginator [pageSizeOptions]="[100, 150, 200, 250]"></mat-paginator>
 <section class="table-responsive mat-card">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
       
+         <!-- FirstName Column -->
+         <ng-container matColumnDef="FirstName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.FirstName || '--'}} </td>
+        </ng-container>
+         <!-- LastName Column -->
+         <ng-container matColumnDef="LastName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.LastName || '--'}} </td>
+        </ng-container>
         <!-- ResellerName Column -->
         <ng-container matColumnDef="ResellerName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Reseller Name </th>
