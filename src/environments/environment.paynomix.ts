@@ -4,7 +4,7 @@ export const environment = {
     mentom: false,
     paynomix : true,
     //apiURL: 'https://api.paynomix.com:444/api/',
-    apiURL: 'https://paynomix.clique.center/api/api/',//'https://api.paynomix.com:444/api/',
+    apiURL: 'https://paynomix.clique.center/api/api/',//Dev Environment
     title: 'Paynomix',
     assetPathName: 'paynomix',
     themeName: 'theme-default',
