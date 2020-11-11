@@ -27,7 +27,6 @@ export class PricingPlanEditComponent implements OnInit, OnDestroy {
   constructor(
     private readonly _route : ActivatedRoute,
     private readonly _pricingPlanService: PricingPlanService,
-
     private readonly _snackBar: MatSnackBar,
     private readonly _router: Router
 

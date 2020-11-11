@@ -18,9 +18,18 @@
             <tr>
                 <td colspan="2">
                     <p class="text-center">
-                        <strong>{{data?.CustomerName}}</strong><br />
-                        {{data?.City}}<br />
-                        {{data?.Country}}, {{data?.ZipCode}}<br />
+                        <ng-container *ngIf="data?.CustomerName">
+                            <strong>{{data?.CustomerName}}</strong><br />
+                        </ng-container>
+                        <ng-container *ngIf="data?.City">
+                            {{data?.City}}<br />
+                        </ng-container>
+                        <ng-container *ngIf="data?.Country">
+                            {{data?.Country + ','}}
+                        </ng-container> 
+                        <ng-container *ngIf="data?.ZipCode">
+                            {{data?.ZipCode}}<br />
+                        </ng-container> 
                         {{data?.Phone}}
                     </p>
                 </td>

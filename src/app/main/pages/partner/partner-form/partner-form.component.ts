@@ -42,7 +42,7 @@ ngOnChanges(){
 createPartnerForm(): void{
   this.partnerForm = this._formBuilder.group({
     PartnerId: [0, Validators.required],
-    PartnerName: ['', Validators.required], 
+    PartnerName: [{value: '', disabled: this.partnerDetail}, Validators.required], 
     DBAName: [''],
     FirstName: ['', Validators.required],
     LastName: ['', Validators.required],
@@ -51,7 +51,7 @@ createPartnerForm(): void{
     City: ['', Validators.required],
     State: [''],
     Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
-    Email:  ['', [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
+    Email:  [{value: '', disabled: this.partnerDetail}, [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
     WebsiteUrl: ['', Validators.required],
     Phone: ['', Validators.required],
     AlternatePhone: [''],
@@ -64,7 +64,7 @@ createPartnerForm(): void{
 
 submit(){
    if(this.partnerForm.valid){
-     this.submitForm.emit(this.partnerForm.value);
+     this.submitForm.emit({...this.partnerDetail, ...this.partnerForm.value});
    }else{
     globalConfig.validateAllFormFields(this.partnerForm)
    }
