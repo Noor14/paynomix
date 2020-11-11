@@ -5,7 +5,7 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Partner Name</mat-label>
-                    <input matInput formControlName="PartnerName" required [disabled]="partnerDetail">
+                    <input matInput formControlName="PartnerName" required>
                     <mat-error>Partner Name is required!</mat-error>
                 </mat-form-field>
 
@@ -69,7 +69,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label> Email</mat-label>
-                    <input matInput formControlName="Email" type="email" nospace [disabled]="partnerDetail" required>
+                    <input matInput formControlName="Email" type="email" nospace required>
                     <mat-error *ngIf="partnerForm.get('Email').hasError('required')">
                         Email is required!
                     </mat-error> 

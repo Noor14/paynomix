@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -25,14 +26,14 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       * @param {PartnerService} _partnerService
       * @param {UserConfigService} _userConfigService
       * @param {ComponentFactoryResolver} _resolver
-      * @param {FuseSidebarService} _fuseSidebarService
+      * @param {SlidingPanelService} _slidingPanelService
       */
      
      constructor(
        private readonly _partnerService: PartnerService,
        private readonly _userConfigService: UserConfigService,
        private readonly _resolver: ComponentFactoryResolver,
-       private readonly _fuseSidebarService: FuseSidebarService,
+       private readonly _slidingPanelService: SlidingPanelService,
 
    ) { 
              // Set the private defaults
@@ -80,7 +81,7 @@ export class PartnerListComponent implements OnInit, OnDestroy {
     }
 
     openSlidePanel(): void{
-        this._fuseSidebarService.getSidebar('quickPanel').toggleOpen();
+        this._slidingPanelService.getSidebar('slidePanel', 'PartnerCreateComponent').toggleOpen();
     }
 
 }

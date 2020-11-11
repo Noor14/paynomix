@@ -31,6 +31,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   ],
   entryComponents: [
     ResellerTableComponent,
+    ResellerCreateComponent
   ],
   imports: [
     CommonModule,

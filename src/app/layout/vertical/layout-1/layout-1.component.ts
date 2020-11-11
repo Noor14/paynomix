@@ -1,9 +1,12 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { navigation } from 'app/navigation/navigation';
+import {PartnerCreateComponent} from '../../../main/pages/partner/partner-create/partner-create.component'
+import { ResellerCreateComponent } from '../../../main/pages/reseller/reseller-create/reseller-create.component';
+import { PricingPlanCreateComponent } from '../../../main/pages/pricing-plan/pricing-plan-create/pricing-plan-create.component';
 
 @Component({
     selector     : 'vertical-layout-1',
@@ -13,6 +16,9 @@ import { navigation } from 'app/navigation/navigation';
 })
 export class VerticalLayout1Component implements OnInit, OnDestroy
 {
+    @ViewChild('renderingComponent', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+    private componentRef: ComponentRef<any>;
+
     fuseConfig: any;
     navigation: any;
 
@@ -25,7 +31,8 @@ export class VerticalLayout1Component implements OnInit, OnDestroy
      * @param {FuseConfigService} _fuseConfigService
      */
     constructor(
-        private _fuseConfigService: FuseConfigService
+        private _fuseConfigService: FuseConfigService,
+        private readonly _resolver: ComponentFactoryResolver
     )
     {
         // Set the defaults
@@ -61,4 +68,16 @@ export class VerticalLayout1Component implements OnInit, OnDestroy
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
     }
+
+    renderComponent(value) {
+        let factory:ComponentFactory<any>;
+        this.container.clear();
+        factory = this._resolver.resolveComponentFactory(rendererType[value]);
+        this.componentRef = this.container.createComponent(factory); 
+    }
 }
+export const rendererType = {
+    PartnerCreateComponent,
+    PricingPlanCreateComponent,
+    ResellerCreateComponent
+  }
