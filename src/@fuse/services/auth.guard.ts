@@ -62,16 +62,24 @@ export class AuthGuard extends RoleAuthorizationService implements CanActivate, 
       }
       
       canLoad(_route): boolean {
-         if (!this.isAuthorized()) {
+        const userInfo = (localStorage.getItem('userInfo')) ? 
+        JSON.parse(localStorage.getItem('userInfo')) : undefined;
+        if(!userInfo){
+          this._route.navigate(['login']);
           return false;
-         }
-         const roles = _route.data && _route.data.roles;
-         if (roles && roles.length &&  !roles.some(r => this.hasRole(r))) {
-           if(!_route.url){
-            this._route.navigate(['/pages/dashboard']);
-           }
+         }else{
+          if (!this.isAuthorized()) {
             return false;
-          }
-          return true;
+           }
+           const roles = _route.data && _route.data.roles;
+           if (roles && roles.length &&  !roles.some(r => this.hasRole(r))) {
+             if(!_route.url){
+              this._route.navigate(['/pages/dashboard']);
+             }
+              return false;
+            }
+            return true;
+         }
+    
       }
   };

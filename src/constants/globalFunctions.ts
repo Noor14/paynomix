@@ -311,5 +311,5 @@ export const validator = {
   minRoutingNo: 9,
   maxName: 25,
   maxFieldLength:35,
-  passwordPattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{0,}$/
+  passwordPattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$.!%*#?&])[A-Za-z\d@$!%*.#?&]{0,}$/
 };
