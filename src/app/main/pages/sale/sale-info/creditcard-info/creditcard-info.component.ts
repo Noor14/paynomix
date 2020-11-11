@@ -104,7 +104,7 @@ private transactionProcess(paymentIntent){
    .then((res :any) => {
      if(res && !res.StatusCode) {
       this._snackBar.open('Transaction has been Approved', '', snackBarConfig);
-      this.resetCreditCard.emit(res.Response);
+      this.resetCreditCard.emit(res.Response.shift());
      }
    }).catch((err: HttpErrorResponse)=>(console.log))
  } 

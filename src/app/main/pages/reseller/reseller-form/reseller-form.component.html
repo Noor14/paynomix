@@ -13,7 +13,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Reseller Name</mat-label>
-                    <input matInput formControlName="ResellerName" required>
+                    <input matInput formControlName="ResellerName" required [disabled]="resllerDetail">
                     <mat-error>Reseller Name is required!</mat-error>
                 </mat-form-field>
             </div>
@@ -69,7 +69,7 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label> Email</mat-label>
-                    <input matInput formControlName="Email" type="email" nospace required>
+                    <input matInput formControlName="Email" type="email" nospace required [disabled]="resllerDetail">
                     <mat-error *ngIf="resellerForm.get('Email').hasError('required')">
                         Email is required!
                     </mat-error> 
