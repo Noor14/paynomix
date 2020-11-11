@@ -15,6 +15,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class EmailDialogComponent implements OnInit {
   @Input() data: any;
  public emailForm : FormGroup;
+ public showCC : boolean = false;
+ public showBCC : boolean = false;
 
    /**
      * Constructor

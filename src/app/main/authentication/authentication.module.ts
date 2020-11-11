@@ -10,10 +10,11 @@ import { MatInputModule } from '@angular/material/input';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { InactiveUserComponent } from './inactive-user/inactive-user.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, ForgotPasswordComponent],
+  declarations: [LoginComponent, ForgotPasswordComponent, InactiveUserComponent],
   imports: [
     CommonModule,
     AuthenticationRoutingModule,

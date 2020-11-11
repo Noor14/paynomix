@@ -10,15 +10,19 @@
 
     <div mat-dialog-content class="p-24">
         <form name="emailForm" fxLayout="column"  [formGroup]="emailForm">
-            <mat-form-field appearance="outline">
+           <div fxLayout="row" fxLayoutAlign="end" class="Cursorpointer">
+            <span (click)="showCC = true" *ngIf="!showCC">Cc</span>&nbsp;&nbsp;
+            <span (click)="showBCC = true" *ngIf="!showBCC ">Bcc</span>
+           </div> 
+            <mat-form-field appearance="outline" >
                 <mat-label>To</mat-label>
                 <input type="email" matInput formControlName="SendTo"  required>  
             </mat-form-field> 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="showCC">
                 <mat-label>CC</mat-label>
                 <input type="email" matInput formControlName="Cc" >  
             </mat-form-field> 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="showBCC">
                 <mat-label>Bcc</mat-label>
                 <input  type="email" matInput formControlName="Bcc" >  
             </mat-form-field> 
