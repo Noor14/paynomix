@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { validator, validateAllFormFields, snackBarConfig, snackBarConfigWarn } from '../../../../../constants/globalFunctions'
 import { UserService } from '../user.service';
@@ -26,7 +27,8 @@ export class ChangePasswordComponent implements OnInit {
     private readonly _formBuilder: FormBuilder,
     private readonly _userConfigService: UserConfigService,
     private readonly _userService: UserService,
-    private readonly _snackBar: MatSnackBar
+    private readonly _snackBar: MatSnackBar,
+    private readonly _router: Router
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class ChangePasswordComponent implements OnInit {
         this._userService.updatePassword(this.changePasswordForm.value).then((res: any) => {
           if (res && !res.StatusCode) {
             this._snackBar.open('Password updated successfully!', '', snackBarConfig);
+            this.logout()
           } else {
             this._snackBar.open(`${res.StatusMessage}`, '', snackBarConfigWarn)
           }
@@ -58,5 +61,10 @@ export class ChangePasswordComponent implements OnInit {
       this.passwordMisMatchError = true;
       validateAllFormFields(this.changePasswordForm)
     }
+  }
+  logout(): void {
+    localStorage.clear();
+    this._snackBar.open('logout successfully!', '', snackBarConfig);
+    this._router.navigate(['/login']);
   }
 }
