@@ -4,46 +4,34 @@
       
          <!-- Partner Name Column -->
          <ng-container matColumnDef="FirstName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Partner Name </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.FirstName" [matTooltipPosition]="'above'" > {{row.FirstName | truncate : truncateTextLength || '--'}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Partner </th>
+          <td mat-cell *matCellDef="let row"> {{row.FirstName || '--'}} </td>
         </ng-container>
         
         <!-- ResellerName Column -->
         <ng-container matColumnDef="ResellerName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Reseller Name </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.ResellerName" [matTooltipPosition]="'above'"> {{row.ResellerName | truncate : truncateTextLength}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.ResellerName}} </td>
         </ng-container>
 
         <!-- Contact Person Column -->
         <ng-container matColumnDef="LastName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact Person</th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.FirstName+' '+ row?.LastName" [matTooltipPosition]="'above'"> {{row.FirstName | truncate : truncateTextLength || '--'}} {{row.LastName | truncate : truncateTextLength || '--'}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.FirstName || '--'}} {{row.LastName || '--'}} </td>
         </ng-container>
 
-        <!-- DBAName Column -->
-        <ng-container matColumnDef="DBAName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> DBA Name</th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.DBAName" [matTooltipPosition]="'above'"> {{row.DBAName | truncate : truncateTextLength || '--'}}</td>
-        </ng-container>
-    
          <!-- Email Column -->
          <ng-container matColumnDef="Email">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Email" [matTooltipPosition]="'above'"> {{row.Email | truncate : truncateTextLength}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
         </ng-container>
 
-        <!-- TelephoneNumber Column -->
-        <ng-container matColumnDef="TelephoneNumber">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.TelephoneNumber" [matTooltipPosition]="'above'"> {{row.TelephoneNumber | truncate : truncateTextLength}} </td>
-        </ng-container>
-
-          <!-- Country Column -->
-          <ng-container matColumnDef="Country">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+          <!-- TelephoneNumber Column -->
+          <ng-container matColumnDef="TelephoneNumber">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
             <td mat-cell *matCellDef="let row;let ind = index">          
                 <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
-                    {{row.Country}} 
+                    {{row.TelephoneNumber}} 
                 </ng-template>
                 <ng-template #actionControl>
                     <button mat-icon-button aria-label="edit" matTooltip="Edit Reseller" 
