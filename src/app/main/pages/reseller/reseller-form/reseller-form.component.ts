@@ -81,9 +81,8 @@ ngOnChanges(){
   if(this.resellerDetail){
     if(!this.resellerForm){
       this.createResellerForm()
-    }else{
-      this.resellerForm.patchValue(this.resellerDetail)
     }
+    this.resellerForm.patchValue(this.resellerDetail)
   }
 }
 
