@@ -65,10 +65,15 @@ export class EmailDialogComponent implements OnInit {
         MerchantName: ['', Validators.required],
     });
     if(this.data) { 
-      this.emailForm.patchValue(this.data);
-      this.emailObj.SendTo.push({email : this.emailForm.value.SendTo});
-      this.emailForm.value.SendTo = ''
+   //   this.emailForm.patchValue(this.data);
+      this.emailForm.value.PartnerId = this.data.PartnerId
+      this.emailForm.value.Subject = this.data.Subject
+      this.emailForm.value.HtmlBodyContent = this.data.HtmlBodyContent
+      this.emailForm.value.MerchantName = this.data.MerchantName
+      this.emailObj.SendTo.push({email : this.data.SendTo});
+ 
     }
+    
   }
   
   sendEmail(){
