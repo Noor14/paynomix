@@ -2,37 +2,43 @@
 <section class="table-responsive mat-card">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
       
+        <!-- Reseller Column -->
+        <ng-container matColumnDef="Reseller">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Reseller </th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Reseller?.ResellerName" [matTooltipPosition]="'above'"> {{row?.Reseller?.ResellerName}}</td>
+        </ng-container>
+
         <!-- Company Name Column -->
         <ng-container matColumnDef="CompanyName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Company Name </th>
           <td mat-cell *matCellDef="let row" [matTooltip]="row?.MerchantAccountSetup?.MerchantUserName" [matTooltipPosition]="'above'"> {{row?.MerchantAccountSetup?.MerchantUserName | truncate : truncateTextLength}} </td>
         </ng-container>
-        <!-- Reseller Column -->
-        <ng-container matColumnDef="Reseller">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Reseller </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Reseller?.ResellerName" [matTooltipPosition]="'above'"> {{row?.Reseller?.ResellerName | truncate : truncateTextLength}}</td>
-        </ng-container>
+    
         <!--  Contact Person  Column -->
         <ng-container matColumnDef="FirstName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
           <td mat-cell *matCellDef="let row" [matTooltip]="row?.FirstName +' '+ row?.LastName"
            [matTooltipPosition]="'above'"> {{row.FirstName | truncate : truncateTextLength}} {{row.LastName | truncate : truncateTextLength}} </td>
         </ng-container>
+
         <!-- Email Column -->
         <ng-container matColumnDef="Email">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
           <td mat-cell *matCellDef="let row" [matTooltip]="row?.MerchantAccountSetup?.MerchantEmail" [matTooltipPosition]="'above'" > {{row?.MerchantAccountSetup?.MerchantEmail | truncate : truncateTextLength}} </td>
         </ng-container>
+
         <!-- Phone Column -->
         <ng-container matColumnDef="Phone">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
           <td mat-cell *matCellDef="let row" [matTooltip]="row?.Phone" [matTooltipPosition]="'above'"> {{row.Phone | truncate : truncateTextLength}} </td>
         </ng-container>
+
         <!-- PricingPlan Column -->
         <ng-container matColumnDef="PricingTitle">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Pricing Plan </th>
           <td mat-cell *matCellDef="let row" [matTooltip]="row?.MerchantAccountSetup?.PricingTitle" [matTooltipPosition]="'above'"> {{row?.MerchantAccountSetup?.PricingTitle | truncate : truncateTextLength || 'No Pricing Plan' }} </td>
         </ng-container>
+        
         <!--  Boarded Date  Column -->
         <ng-container matColumnDef="BoardedDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Boarded Date </th>
