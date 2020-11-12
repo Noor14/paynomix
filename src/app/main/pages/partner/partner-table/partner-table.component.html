@@ -41,7 +41,7 @@
           </ng-template>
           </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
         <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
         *matRowDef="let row; columns: displayedColumns;let i = index">
         </tr>
