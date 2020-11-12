@@ -11,7 +11,7 @@
         <!-- DBA Name Column -->
         <ng-container matColumnDef="DBAName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> DBA Name </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.DBAName" [matTooltipPosition]="'above'"> {{row.DBAName | truncate : truncateTextLength || '--'}}</td>
+          <td mat-cell *matCellDef="let row"  [matTooltip]="row?.DBAName" [matTooltipPosition]="'above'"> {{row.DBAName | truncate : truncateTextLength || '--'}}</td>
         </ng-container>
     
         <!-- Contact Person Column -->
