@@ -28,7 +28,8 @@
                         </div>
                 </div>
 
-                <div class="h-80 w-100-p">
+                <div class="h-80 w-100-p"  >
+                    
                     <canvas baseChart
                             [datasets]="widgets.widget2.datasets"
                             [labels]="widgets.widget2.labels"
@@ -104,12 +105,12 @@
 
     <section class="transactionHistory fuse-card auto-width mb-32">
         <div class="p-20">
-            <h2>Transaction History</h2>
+            <h2>Transaction History (Last 7 days) </h2>
         </div>
-        <div class="h-368 pb-16">
+        <div class="h-368 pb-16" *ngIf="dashboardUserStats">
             <canvas baseChart
-                    [datasets]="widgets.widget5.datasets['today']"
-                    [labels]="widgets.widget5.labels"
+                    [datasets]="dashboardUserStats?.Volume"
+                    [labels]="transactionGraphVolumeLabel"
                     [colors]="widgets.widget5.colors"
                     [options]="widgets.widget5.options"
                     [chartType]="widgets.widget5.chartType">
