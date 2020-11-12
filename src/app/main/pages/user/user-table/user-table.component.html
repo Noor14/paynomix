@@ -70,27 +70,34 @@
             <form fxLayout="column" name="form" [formGroup]="userForm">
                 <mat-form-field appearance="outline">
                     <mat-label>First Name</mat-label>
-                    <input matInput formControlName="FirstName">
+                    <input matInput formControlName="FirstName" required [maxlength]="validator?.maxName">
+                    <mat-error *ngIf="userForm.get('FirstName').hasError('required')"> Last name is required</mat-error>
+                    <mat-error *ngIf="!userForm.get('FirstName').hasError('required') && userForm.get('FirstName').hasError('maxlength')"> First name should have maximum value is {{validator?.maxName}}</mat-error>
                 </mat-form-field>
-
+                
                 <mat-form-field appearance="outline">
                     <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="LastName">
+                    <input matInput formControlName="LastName" required [maxlength]="validator?.maxName">
+                    <mat-error *ngIf="userForm.get('LastName').hasError('required')"> Last name is required</mat-error>
+                    <mat-error *ngIf="!userForm.get('LastName').hasError('required') && userForm.get('LastName').hasError('maxlength')"> Last name should have maximum value is {{validator?.maxName}}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Username</mat-label>
-                    <input matInput readonly formControlName="Username">
+                    <input matInput readonly formControlName="Username" required>
+                    <mat-error>User name is required</mat-error>
                 </mat-form-field> 
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput formControlName="Email">
+                    <input type="email" matInput formControlName="Email" required>
+                    <mat-error>Email is required</mat-error>
                 </mat-form-field> 
 
                 <mat-form-field appearance="outline">
                     <mat-label>Phone</mat-label>
-                    <input matInput formControlName="Phone">
+                    <input matInput formControlName="Phone" required>
+                    <mat-error>Phone is required</mat-error>
                 </mat-form-field>
             </form>
         </div>
