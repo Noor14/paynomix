@@ -32,7 +32,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   ],
   entryComponents: [
     PricingPlanTableComponent,
-    PricingPlanCreateComponent
+    PricingPlanCreateComponent,
+    PricingPlanEditComponent
   ],
   exports: [
     PricingPlanListComponent, 

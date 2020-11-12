@@ -45,7 +45,7 @@
           <ng-template #actionControl>
             <div  [@fadeIn]>
               <button mat-icon-button matTooltip="Edit PricingPlan" aria-label="edit"    
-              [routerLink]="['/pages/pricing-plan/pricing-plan-edit', row.PricingPlanID]">
+               (click)="editPricingPlan(row)">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button matTooltip="Assign PricingPlan"

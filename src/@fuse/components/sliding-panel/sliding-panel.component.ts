@@ -1,5 +1,5 @@
 import { animate, AnimationBuilder, AnimationPlayer, style } from '@angular/animations';
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseMatchMediaService } from '@fuse/services/match-media.service';
@@ -64,6 +64,10 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
   @Output()
   openedChanged: EventEmitter<boolean>;
 
+  //close slidingPanel;
+   @Input()
+   isClosed: boolean
+
   @Output() componentName = new EventEmitter<any>();
 
   // Private
@@ -115,6 +119,11 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
     this._folded = false;
     this._unsubscribeAll = new Subject();
   }
+  // ngOnChanges(): void {
+  //   if(this.isClosed) {
+  //     this.toggleOpen()
+  //   }
+  // }
 
   // -----------------------------------------------------------------------------------------------------
   // @ Accessors
@@ -202,7 +211,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void { 
-
+    //  rendering the component on sliding panel
     this.componentNameSubscriber = this._slidingPanelService.componentNameChange.subscribe(
       res => {
         if(res)
@@ -232,6 +241,8 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
     // Setup folded
     this._setupFolded();
   }
+
+  
 
   /**
    * On destroy

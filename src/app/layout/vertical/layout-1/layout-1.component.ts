@@ -7,6 +7,7 @@ import { navigation } from 'app/navigation/navigation';
 import {PartnerCreateComponent} from '../../../main/pages/partner/partner-create/partner-create.component'
 import { ResellerCreateComponent } from '../../../main/pages/reseller/reseller-create/reseller-create.component';
 import { PricingPlanCreateComponent } from '../../../main/pages/pricing-plan/pricing-plan-create/pricing-plan-create.component';
+import { PricingPlanEditComponent } from '../../../main/pages/pricing-plan/pricing-plan-edit/pricing-plan-edit.component';
 
 @Component({
     selector     : 'vertical-layout-1',
@@ -18,6 +19,7 @@ export class VerticalLayout1Component implements OnInit, OnDestroy
 {
     @ViewChild('renderingComponent', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
     private componentRef: ComponentRef<any>;
+    public isClosed:boolean
 
     fuseConfig: any;
     navigation: any;
@@ -72,12 +74,24 @@ export class VerticalLayout1Component implements OnInit, OnDestroy
     renderComponent(value) {
         let factory:ComponentFactory<any>;
         this.container.clear();
-        factory = this._resolver.resolveComponentFactory(rendererType[value]);
-        this.componentRef = this.container.createComponent(factory); 
+        factory = this._resolver.resolveComponentFactory(rendererType[value.componentName]);
+        this.componentRef = this.container.createComponent(factory);
+        this.componentRef.instance.isClosed.subscribe(res => {
+            if (res) {
+             this.isClosed = res;
+            }
+          })
+        if(value.data) {
+            this.componentRef.instance.data = value.data;
+        }
+    }
+    checkForClose(value) {
+        console.log('value ', value)
     }
 }
 export const rendererType = {
     PartnerCreateComponent,
     PricingPlanCreateComponent,
-    ResellerCreateComponent
+    ResellerCreateComponent,
+    PricingPlanEditComponent
   }

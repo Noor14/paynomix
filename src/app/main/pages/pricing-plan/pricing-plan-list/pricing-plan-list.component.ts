@@ -188,5 +188,5 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
   }
   openSlidePanel(): void{
     this._slidingPanelService.getSidebar('slidePanel', 'PricingPlanCreateComponent').toggleOpen();
-}
+  }
 }

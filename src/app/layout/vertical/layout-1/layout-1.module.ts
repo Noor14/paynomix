@@ -34,7 +34,8 @@ import { ResellerModule } from 'app/main/pages/reseller/reseller.module';
         ToolbarModule,
         PartnerModule,
         PricingPlanModule,
-        ResellerModule
+        ResellerModule,
+        PricingPlanModule
     ],
     exports     : [
         VerticalLayout1Component

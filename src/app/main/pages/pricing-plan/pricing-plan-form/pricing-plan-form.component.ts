@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
 
@@ -7,7 +7,7 @@ import { validateAllFormFields, validator } from '../../../../../constants/globa
   templateUrl: './pricing-plan-form.component.html',
   styleUrls: ['./pricing-plan-form.component.scss']
 })
-export class PricingPlanFormComponent implements OnInit, OnChanges {
+export class PricingPlanFormComponent implements OnInit, OnChanges, AfterViewInit {
 
   public maxPercentage = validator.maxPercentage;
   public pricngPlanForm: FormGroup;
@@ -21,7 +21,7 @@ export class PricingPlanFormComponent implements OnInit, OnChanges {
     constructor(
       private _formBuilder: FormBuilder
   ) { }
-
+  
   ngOnInit(): void{
     this.createPricingPlanForm()
   }
@@ -30,9 +30,12 @@ export class PricingPlanFormComponent implements OnInit, OnChanges {
     if(this.pricingPlanDetail){
       if(!this.pricngPlanForm){
         this.createPricingPlanForm();
-      }else{
-        this.pricngPlanForm.patchValue(this.pricingPlanDetail)
       }
+    }
+  }
+  ngAfterViewInit(): void {
+    if(this.pricingPlanDetail) {
+      this.pricngPlanForm.patchValue(this.pricingPlanDetail);
     }
   }
   createPricingPlanForm(): void{

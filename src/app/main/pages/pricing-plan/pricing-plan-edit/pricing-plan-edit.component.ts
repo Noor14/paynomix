@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { snackBarConfig } from '../../../../../constants/globalFunctions';
@@ -16,6 +16,8 @@ export class PricingPlanEditComponent implements OnInit, OnDestroy {
 
   public pricingPlanInfo: any = {};
   private _unsubscribeAll: Subject<any>;
+  @Input() data: any;
+  @Output() isClosed = new EventEmitter<any>();
   /**
      * Constructor
      *
@@ -36,16 +38,19 @@ export class PricingPlanEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._route.paramMap
-    .pipe(
-      takeUntil(this._unsubscribeAll),
-      map((param) => param.get('id')),
-      switchMap((id) =>
-        this._pricingPlanService.getPricingPlanDetail(id)
-      ),
-      tap((res: any) => (this.pricingPlanInfo = res.Response)),
-    )
-    .subscribe();
+    // this._route.paramMap
+    // .pipe(
+    //   takeUntil(this._unsubscribeAll),
+    //   map((param) => param.get('id')),
+    //   switchMap((id) =>
+    //     this._pricingPlanService.getPricingPlanDetail(id)
+    //   ),
+    //   tap((res: any) => (this.pricingPlanInfo = res.Response)),
+    // )
+    // .subscribe();
+    if(this.data) {
+      this.pricingPlanInfo = this.data;
+    }
   }
 
   ngOnDestroy(): void{

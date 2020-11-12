@@ -64,7 +64,7 @@ export class SlidingPanelService {
      * @param rendringComponent
      * @returns {SlidingPanelComponent}
      */
-    getSidebar(key, componentName): SlidingPanelComponent
+    getSidebar(key, componentName, data?): SlidingPanelComponent
     {
         
         // Check if the sidebar exists
@@ -75,15 +75,29 @@ export class SlidingPanelService {
             return;
         } 
         // Return the sidebar
-        this.setComponentName(componentName);
+        this.setComponentName(componentName, data);
         return this._registry[key];
+    }
+    closeSlidingPanel(key) : SlidingPanelComponent {
+      if ( !this._registry[key] )
+      {
+          console.warn(`The sidebar with the key '${key}' doesn't exist in the registry.`);
+
+          return;
+      } 
+      // Return the sidebar 
+      return this._registry[key]; 
     }
 
     getComponentName() {
       return this.componentName.getValue();
     }
-    setComponentName(name) {
-        return this.componentName.next(name);
+    setComponentName(name, data?) {
+      const obj = {
+        componentName: name,
+        data
+      }
+        return this.componentName.next(obj);
       }
    
 }
