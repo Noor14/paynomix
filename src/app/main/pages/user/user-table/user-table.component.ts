@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
-import { snackBarConfig, snackBarConfigWarn } from 'constants/globalFunctions';
+import { snackBarConfig, snackBarConfigWarn, validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
 import { UserService } from '../user.service';
 import { fuseAnimations } from '@fuse/animations';
 @Component({
@@ -48,23 +48,27 @@ export class UserTableComponent implements OnInit {
   }
   createUserForm(): void {
     this.userForm = this._formBuilder.group({
-      UserID : ['', Validators.required],
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
-      Username: [{value:'', disabled: true}, [Validators.required, Validators.email, ]],
-      Email: ['', Validators.required],
+      Username: [{value:'', disabled: true}, Validators.required],
+      Email: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
       Phone: ['', Validators.required],
     });
   }
   updateUser() { 
-    this._userService.updateUser({...this.userObj, ...this.userForm.value}).then((res: any) => { 
-      if (res && !res.StatusCode) {
-          this._snackBar.open('User updated successfully!', '', snackBarConfig);
-          this.updateList.emit(true);
-          this.dialogRef.close();
-      } else{
-        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
-      }
-    }).catch((err: HttpErrorResponse)=>(console.log))
-  }
+    if(this.userForm.valid){
+      this._userService.updateUser({...this.userObj, ...this.userForm.value}).then((res: any) => { 
+        if (res && !res.StatusCode) {
+            this._snackBar.open('User updated successfully!', '', snackBarConfig);
+            this.updateList.emit(true);
+            this.dialogRef.close();
+        } else{
+          this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
+        }
+      }).catch((err: HttpErrorResponse)=>(console.log))
+    }else{
+      validateAllFormFields(this.userForm);
+    }
+    }
+
 }
