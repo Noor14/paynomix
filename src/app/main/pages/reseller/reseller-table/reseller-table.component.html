@@ -5,12 +5,12 @@
          <!-- FirstName Column -->
          <ng-container matColumnDef="FirstName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.FirstName | truncate :truncateTextLength || '--'}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.FirstName" [matTooltipPosition]="'above'"> {{row.FirstName | truncate :truncateTextLength || '--'}} </td>
         </ng-container>
          <!-- LastName Column -->
          <ng-container matColumnDef="LastName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.LastName |truncate:truncateTextLength || '--'}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.LastName" [matTooltipPosition]="'above'"> {{row.LastName |truncate:truncateTextLength || '--'}} </td>
         </ng-container>
         <!-- ResellerName Column -->
         <ng-container matColumnDef="ResellerName">

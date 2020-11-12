@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
-import { snackBarConfig, snackBarConfigWarn, validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
+import { snackBarConfig, snackBarConfigWarn, validateAllFormFields, validator ,truncateTextLength} from '../../../../../constants/globalFunctions';
 import { UserService } from '../user.service';
 import { fuseAnimations } from '@fuse/animations';
 @Component({
@@ -14,6 +14,7 @@ import { fuseAnimations } from '@fuse/animations';
 })
 export class UserTableComponent implements OnInit {
   public validator = validator;
+  public truncateTextLength = truncateTextLength;
   @ViewChild('userDialog', { static: false }) userDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
