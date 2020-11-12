@@ -23,7 +23,7 @@ import { InactiveUserComponent } from './inactive-user/inactive-user.component';
     MatIconModule,
     MatInputModule,
     FuseSharedModule,
-    MatButtonModule
+    MatButtonModule,
    
   ] 
   })
