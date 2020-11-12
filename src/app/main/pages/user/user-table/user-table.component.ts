@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { snackBarConfig, snackBarConfigWarn } from 'constants/globalFunctions';
@@ -16,6 +16,7 @@ export class UserTableComponent implements OnInit {
   @ViewChild('userDialog', { static: false }) userDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @Output() updateList = new EventEmitter<boolean>();
   public actionControlOnHover = -1;
   public dataSource = new MatTableDataSource<any>();
   public dialogRef: any;
@@ -57,6 +58,7 @@ export class UserTableComponent implements OnInit {
     this._userService.updateUser(this.userForm.value).then((res: any) => { 
       if (res && !res.StatusCode) {
           this._snackBar.open('User updated successfully!', '', snackBarConfig);
+          this.updateList.emit(true);
           this.dialogRef.close();
       } else{
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
