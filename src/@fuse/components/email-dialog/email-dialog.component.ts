@@ -40,7 +40,7 @@ export class EmailDialogComponent implements OnInit {
         Bcc: [''],
         Cc: [''],
         Subject: ['', Validators.required],
-        HtmlBodyContent: ['', Validators.required],
+        BodyContent: ['', Validators.required],
         MerchantName: ['', Validators.required],
     });
     if(this.data) { 

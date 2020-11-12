@@ -99,7 +99,7 @@
             <button mat-raised-button class="mr-8 accent-alpha-bg" aria-label="Cancel" (click)="dialogRef.close()">
                 Cancel
             </button>
-            <button mat-raised-button color="accent" aria-label="Update User" (click)="updateUser()">
+            <button mat-raised-button color="accent" aria-label="Update User" [disabled]="userForm.invalid" (click)="updateUser()">
                 Update User
             </button>
         </div>
