@@ -22,6 +22,7 @@ export class UserTableComponent implements OnInit {
   public dialogRef: any;
   @Input() data: any;
   public userForm: FormGroup;
+  private userObj: any ={};
   public displayedColumns: string[] = ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin'];
   constructor(
     private readonly _dialog: MatDialog,
@@ -37,25 +38,26 @@ export class UserTableComponent implements OnInit {
       this.dataSource.sort = this.sort;
     }
   }
-  openDialog(data): void { 
+  openDialog(obj): void { 
     this.dialogRef = this._dialog.open(this.userDialog, {width: '660px'});
     if(!this.userForm){
       this.createUserForm();
     }
-    this.userForm.patchValue(data);
+    this.userObj = obj
+    this.userForm.patchValue(this.userObj);
   }
   createUserForm(): void {
     this.userForm = this._formBuilder.group({
       UserID : ['', Validators.required],
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
-      Username: [{value:'', disabled: true}, Validators.required],
+      Username: [{value:'', disabled: true}, [Validators.required, Validators.email, ]],
       Email: ['', Validators.required],
       Phone: ['', Validators.required],
     });
   }
   updateUser() { 
-    this._userService.updateUser(this.userForm.value).then((res: any) => { 
+    this._userService.updateUser({...this.userObj, ...this.userForm.value}).then((res: any) => { 
       if (res && !res.StatusCode) {
           this._snackBar.open('User updated successfully!', '', snackBarConfig);
           this.updateList.emit(true);
