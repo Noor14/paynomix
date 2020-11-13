@@ -11,13 +11,13 @@
         <!-- DBA Name Column -->
         <ng-container matColumnDef="DBAName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> DBA Name </th>
-          <td mat-cell *matCellDef="let row"  [matTooltip]="row?.DBAName" [matTooltipPosition]="'above'"> {{row.DBAName | truncate : truncateTextLength || '--'}}</td>
+          <td mat-cell *matCellDef="let row"  [matTooltip]="row?.DBAName" [matTooltipPosition]="'above'"> {{row.DBAName || '--' | truncate : truncateTextLength}}</td>
         </ng-container>
     
         <!-- Contact Person Column -->
-        <ng-container matColumnDef="FirstName">
+        <ng-container matColumnDef="ContactPerson">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.FirstName +' '+ row?.LastName" [matTooltipPosition]="'above'"> {{row.FirstName | truncate : truncateTextLength}} {{row.LastName | truncate : truncateTextLength}}</td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.ContactPerson" [matTooltipPosition]="'above'"> {{row.ContactPerson | truncate : truncateTextLength}} </td>
         </ng-container>
 
        <!-- Email Column -->
@@ -34,10 +34,17 @@
                 {{row.Phone}} 
             </ng-template>
              <ng-template #actionControl>
-                <button mat-icon-button matTooltip="Edit Partner" aria-label="edit" [@fadeIn]    
+               <div  [@fadeIn]>
+                <button mat-icon-button matTooltip="Edit Partner" aria-label="edit"   
                 [routerLink]="['/pages/partner/partner-edit', row.PartnerId]">
                 <mat-icon>edit</mat-icon> 
                 </button>
+                <button mat-icon-button matTooltip="Send Credentials" aria-label="resend"   
+                (click)="openDialog(row.PartnerId)">
+                <mat-icon>email</mat-icon> 
+                </button> 
+               </div>
+
           </ng-template>
           </td>
         </ng-container>

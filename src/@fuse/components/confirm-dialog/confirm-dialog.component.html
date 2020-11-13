@@ -1,6 +1,30 @@
-<h1 matDialogTitle>Confirm</h1>
-<div mat-dialog-content>{{confirmMessage}}</div>
-<div mat-dialog-actions class="pt-24">
-    <button mat-raised-button class="mat-accent mr-16 accent-alpha-bg" (click)="dialogRef.close(true)">Confirm</button>
-    <button mat-raised-button (click)="dialogRef.close(false)">Cancel</button>
-</div>
+<div class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title">{{data?.title}}</span>
+            <button mat-icon-button aria-label="Close dialog" (click)="dialogRef.close()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0">
+      <h3 class="text-center"> 
+        {{data?.message}}
+      </h3>
+      <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button
+        class="mr-8 accent-alpha-bg"
+        aria-label="NO" (click)="dialogRef.close()">
+            No
+        </button>    
+        <button mat-raised-button
+        color="accent"
+        aria-label="YES" (click)="dialogRef.close(true)">
+            Yes
+        </button>
+    </div>
+    </div>
+
+  
+  </div>

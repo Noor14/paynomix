@@ -5,6 +5,7 @@ import { UserConfigService } from '@fuse/services/user.config.service';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { truncateTextLength } from '../../../constants/globalFunctions';
 
 interface Node {
   title: string;
@@ -18,7 +19,7 @@ interface Node {
 })
 export class HierarchicalTreeComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit{
 @ViewChild(MatMenuTrigger, {static: false}) triggerMenu: MatMenuTrigger;
-
+public truncateTextLength = truncateTextLength;
 @Input() toggleHierarchy: boolean = false;
 @Output() menuToggle = new EventEmitter<boolean>()
  public selectedNode: any = {};
