@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
-import { snackBarConfig, snackBarConfigWarn, validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
+import { snackBarConfig, snackBarConfigWarn, validateAllFormFields, validator ,truncateTextLength} from '../../../../../constants/globalFunctions';
 import { UserService } from '../user.service';
 import { fuseAnimations } from '@fuse/animations';
 @Component({
@@ -13,6 +13,8 @@ import { fuseAnimations } from '@fuse/animations';
 
 })
 export class UserTableComponent implements OnInit {
+  public validator = validator;
+  public truncateTextLength = truncateTextLength;
   @ViewChild('userDialog', { static: false }) userDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -48,8 +50,8 @@ export class UserTableComponent implements OnInit {
   }
   createUserForm(): void {
     this.userForm = this._formBuilder.group({
-      FirstName: ['', Validators.required],
-      LastName: ['', Validators.required],
+      FirstName: ['',[ Validators.required, Validators.maxLength(validator.maxName)]],
+      LastName: ['',[ Validators.required, Validators.maxLength(validator.maxName)]],
       Username: [{value:'', disabled: true}, Validators.required],
       Email: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
       Phone: ['', Validators.required],
