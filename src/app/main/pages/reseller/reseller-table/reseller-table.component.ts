@@ -16,7 +16,7 @@ export class ResellerTableComponent implements OnInit  {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
   public actionControlOnHover = -1;
-  public displayedColumns: string[] = ['FirstName', 'ResellerName', 'LastName', 'Email', 'TelephoneNumber'];
+  public displayedColumns: string[] = ['PartnerName', 'ResellerName', 'ContactPerson', 'Email', 'TelephoneNumber'];
 
   constructor() { }
 
