@@ -34,10 +34,17 @@
                 {{row.Phone}} 
             </ng-template>
              <ng-template #actionControl>
-                <button mat-icon-button matTooltip="Edit Partner" aria-label="edit" [@fadeIn]    
+               <div  [@fadeIn]>
+                <button mat-icon-button matTooltip="Edit Partner" aria-label="edit"   
                 [routerLink]="['/pages/partner/partner-edit', row.PartnerId]">
                 <mat-icon>edit</mat-icon> 
                 </button>
+                <button mat-icon-button matTooltip="Send Credentials" aria-label="resend"   
+                (click)="openDialog(row.PartnerId)">
+                <mat-icon>email</mat-icon> 
+                </button> 
+               </div>
+
           </ng-template>
           </td>
         </ng-container>

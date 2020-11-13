@@ -23,5 +23,5 @@ export class ResellerService extends BaseService {
         const url = `${environment.apiURL}Reseller/Search`;
          return this.post(url, obj);
         }
-    
+
 };

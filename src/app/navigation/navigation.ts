@@ -57,7 +57,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id       : 'transaction',
-                title    : 'Transaction',
+                title    : 'Transactions',
                 type     : 'item',
                 icon     : 'attach_money',
                 url      : '/pages/transaction',

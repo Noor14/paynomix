@@ -34,11 +34,18 @@
                     {{row.TelephoneNumber }} 
                 </ng-template>
                 <ng-template #actionControl>
+                  <div [@fadeIn]>
                     <button mat-icon-button aria-label="edit" matTooltip="Edit Reseller" 
                     [routerLink]="['/pages/reseller/reseller-edit', row.ResellerId]"
-                    [@fadeIn]>
+                    >
                     <mat-icon >edit</mat-icon>
-                   </button>      
+                   </button> 
+                   <button mat-icon-button matTooltip="Send Credentials" aria-label="resend"   
+                   (click)="openDialog(row.ResellerId)">
+                   <mat-icon>email</mat-icon> 
+                   </button> 
+                  </div>
+       
               </ng-template>
             </td>
           </ng-container>   
