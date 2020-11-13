@@ -18,7 +18,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public transStatus = transactionStatus;
   public transType = transactionType;
   public refundForm: FormGroup;
-  selection = new SelectionModel<any>(true, []);
+  public selection = new SelectionModel<any>(true, []);
   public showRefund: boolean;
   public selectedToRefund: any;
   public dialogRef;
