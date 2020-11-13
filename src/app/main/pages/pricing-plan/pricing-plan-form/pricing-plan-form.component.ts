@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
 
@@ -19,11 +19,13 @@ export class PricingPlanFormComponent implements OnInit, OnChanges, AfterViewIni
      * @param {FormBuilder} _formBuilder
      */
     constructor(
-      private _formBuilder: FormBuilder
+      private _formBuilder: FormBuilder,
+      private readonly _cdref: ChangeDetectorRef,
   ) { }
   
   ngOnInit(): void{
-    this.createPricingPlanForm()
+    this._cdref.detectChanges();
+    this.createPricingPlanForm();
   }
   
   ngOnChanges(){

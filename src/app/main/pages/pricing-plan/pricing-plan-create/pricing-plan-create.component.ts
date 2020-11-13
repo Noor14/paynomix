@@ -44,10 +44,5 @@ export class PricingPlanCreateComponent implements OnInit {
   }
   closeSlidingPanel(): void {
     this._slidingPanelService.closeSlidingPanel('slidePanel').toggleOpen();
-    this._slidingPanelService.unregister('slidePanel')
-    
-    // this._slidingPanelService.setComponentName('');
   }
-  
-
 }

@@ -6,6 +6,7 @@ import { snackBarConfig } from '../../../../../constants/globalFunctions';
 import { Subject } from 'rxjs';
 import { PricingPlanService } from '../pricing-plan.service';
 import { takeUntil, map, switchMap, tap } from 'rxjs/operators';
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 
 @Component({
   selector: 'app-pricing-plan-edit',
@@ -30,7 +31,8 @@ export class PricingPlanEditComponent implements OnInit, OnDestroy {
     private readonly _route : ActivatedRoute,
     private readonly _pricingPlanService: PricingPlanService,
     private readonly _snackBar: MatSnackBar,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private _slidingPanelService:SlidingPanelService
 
   ) { 
     // Set the private defaults
@@ -64,11 +66,15 @@ export class PricingPlanEditComponent implements OnInit, OnDestroy {
     .then((res: any) => {
       if(res && !res.StatusCode){
         this._snackBar.open('Pricing plan updated', '', snackBarConfig);
+        this.closeSlidingPanel();
         this._router.navigate(['/pages/pricing-plan/pricing-plan-list']);
 
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   
+  }
+  closeSlidingPanel(): void {
+    this._slidingPanelService.closeSlidingPanel('slidePanel').toggleOpen();
   }
 
 
