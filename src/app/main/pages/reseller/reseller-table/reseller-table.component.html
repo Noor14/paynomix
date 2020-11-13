@@ -1,37 +1,37 @@
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<mat-paginator [pageSizeOptions]="[100, 150, 200, 250]"></mat-paginator>
 <section class="table-responsive mat-card">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
       
+         <!-- Partner Name Column -->
+         <ng-container matColumnDef="FirstName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Partner </th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.FirstName" [matTooltipPosition]="'above'"> {{row.FirstName | truncate : truncateTextLength || '--'}} </td>
+        </ng-container>
+        
         <!-- ResellerName Column -->
         <ng-container matColumnDef="ResellerName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Reseller Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.ResellerName}} </td>
-        </ng-container>
-    
-        <!-- DBAName Column -->
-        <ng-container matColumnDef="DBAName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> DBA Name</th>
-          <td mat-cell *matCellDef="let row"> {{row.DBAName || '--'}}</td>
-        </ng-container>
-    
-        <!-- TelephoneNumber Column -->
-        <ng-container matColumnDef="TelephoneNumber">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Telephone Number </th>
-          <td mat-cell *matCellDef="let row"> {{row.TelephoneNumber}} </td>
-        </ng-container>
-    
-        <!-- Email Column -->
-        <ng-container matColumnDef="Email">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-          <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.ResellerName" [matTooltipPosition]="'above'"> {{row.ResellerName | truncate : truncateTextLength}} </td>
         </ng-container>
 
-          <!-- Country Column -->
-          <ng-container matColumnDef="Country">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+        <!-- Contact Person Column -->
+        <ng-container matColumnDef="LastName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact Person</th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.FirstName +' '+ row?.LastName" [matTooltipPosition]="'above'"> {{row.FirstName | truncate : truncateTextLength || '--'}} {{row.LastName | truncate : truncateTextLength || '--'}} </td>
+        </ng-container>
+
+         <!-- Email Column -->
+         <ng-container matColumnDef="Email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Email" [matTooltipPosition]="'above'"> {{row.Email | truncate : truncateTextLength}} </td>
+        </ng-container>
+
+          <!-- TelephoneNumber Column -->
+          <ng-container matColumnDef="TelephoneNumber">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
             <td mat-cell *matCellDef="let row;let ind = index">          
                 <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
-                    {{row.Country}} 
+                    {{row.TelephoneNumber }} 
                 </ng-template>
                 <ng-template #actionControl>
                     <button mat-icon-button aria-label="edit" matTooltip="Edit Reseller" 
@@ -42,7 +42,7 @@
               </ng-template>
             </td>
           </ng-container>   
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
           <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
           *matRowDef="let row; columns: displayedColumns; let i = index">
           </tr>

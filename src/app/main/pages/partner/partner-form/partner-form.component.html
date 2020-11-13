@@ -5,8 +5,9 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Partner Name</mat-label>
-                    <input matInput formControlName="PartnerName" required [disabled]="partnerDetail">
-                    <mat-error>Partner Name is required!</mat-error>
+                    <input matInput formControlName="PartnerName" required [maxlength]="globalConfig?.validator?.maxFieldLength">
+                    <mat-error *ngIf="partnerForm.get('PartnerName').hasError('required')">Partner Name is required!</mat-error>
+                    <mat-error *ngIf="!partnerForm.get('PartnerName').hasError('required') && partnerForm.get('PartnerName').hasError('maxLength')" > Partner Name should have maximun length of {{globalConfig?.validator?.maxFieldLength}} </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
@@ -18,14 +19,18 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>First Name</mat-label>
-                    <input matInput formControlName="FirstName" required>
-                    <mat-error>First Name is required!</mat-error>
+                    <input matInput formControlName="FirstName" required [maxlength]="globalConfig?.validator?.maxName" >
+                    <mat-error *ngIf="partnerForm.get('FirstName').hasError('required')">First Name is required!</mat-error>
+                    <mat-error *ngIf="!partnerForm.get('FirstName').hasError('required') && partnerForm.get('FirstName').hasError('maxLength')" > First Name should have maximun length of {{globalConfig?.validator?.maxName}} </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="LastName" required>
-                    <mat-error>Last Name is required!</mat-error>
+                    <input matInput formControlName="LastName" required [maxlength]="globalConfig?.validator?.maxName">
+                    <mat-error *ngIf="partnerForm.get('FirstName').hasError('required')">Last Name is required!</mat-error>
+                    <mat-error *ngIf="!partnerForm.get('LastName').hasError('required') && partnerForm.get('FirstName').hasError('maxLength')">Last Name should have maximum length of {{globalConfig?.validator?.maxName}}
+
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
@@ -69,7 +74,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label> Email</mat-label>
-                    <input matInput formControlName="Email" type="email" nospace [disabled]="partnerDetail" required>
+                    <input matInput formControlName="Email" type="email" nospace required>
                     <mat-error *ngIf="partnerForm.get('Email').hasError('required')">
                         Email is required!
                     </mat-error> 

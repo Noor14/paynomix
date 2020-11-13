@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
+import { truncateTextLength } from '../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-partner-table',
@@ -9,12 +10,13 @@ import { fuseAnimations } from '@fuse/animations';
   animations   : fuseAnimations
 })
 export class PartnerTableComponent implements OnInit {
+  public truncateTextLength = truncateTextLength ;
   public dataSource = new MatTableDataSource<any>()
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
   public actionControlOnHover = -1;
-  public displayedColumns: string[] =  ['PartnerName', 'DBAName', 'FirstName', 'LastName'];
+  public displayedColumns: string[] =  ['PartnerName', 'DBAName', 'FirstName', 'Email', 'Phone'];
   
   constructor() { }
 
