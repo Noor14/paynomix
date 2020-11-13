@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as globalConfic from '../../../../../../constants/globalFunctions';
+import * as globalConfig from '../../../../../../constants/globalFunctions';
 import * as moment from 'moment';
 @Component({
   selector: 'app-owner-detail',
@@ -9,7 +9,7 @@ import * as moment from 'moment';
 })
 export class OwnerDetailComponent implements OnInit {
  
-  public globalConfic = globalConfic; 
+  public globalConfig = globalConfig; 
   
   @Input() ownerDetail: any = null;
   public ownerDetailForm: FormGroup;
@@ -30,8 +30,8 @@ export class OwnerDetailComponent implements OnInit {
   createOwnerDetailForm(): void{
     this.ownerDetailForm = this._formBuilder.group({
       MerchantId: [0, Validators.required],
-      FirstName: ['',[ Validators.required , Validators.maxLength(globalConfic.validator.maxName)]],
-      LastName: ['',[ Validators.required , Validators.maxLength(globalConfic.validator.maxName)]],
+      FirstName: ['',[ Validators.required , Validators.maxLength(globalConfig.validator.maxName)]],
+      LastName: ['',[ Validators.required , Validators.maxLength(globalConfig.validator.maxName)]],
       DOB: ['', Validators.required],
       SSN: [''],
       DrivingLicense: [''],
@@ -41,9 +41,9 @@ export class OwnerDetailComponent implements OnInit {
       City: ['', Validators.required],
       Country: ['US', Validators.required],
       State: ['', Validators.required],
-      Zip: ['', [Validators.required, Validators.maxLength(globalConfic.validator.zipMaxLength)]],
+      Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
       Phone: ['', Validators.required],
-      Email: ['', [Validators.email, Validators.pattern(globalConfic.validator.emailPattern)]],
+      Email: ['', [Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
       BackDocLink: [''],
       FrontDocLink: [''],
   });
