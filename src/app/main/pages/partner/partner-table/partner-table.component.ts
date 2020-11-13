@@ -14,7 +14,7 @@ export class PartnerTableComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
   public actionControlOnHover = -1;
-  public displayedColumns: string[] =  ['PartnerName', 'DBAName', 'FirstName', 'LastName'];
+  public displayedColumns: string[] =  ['PartnerName', 'DBAName', 'FirstName', 'Email', 'Phone'];
   
   constructor() { }
 

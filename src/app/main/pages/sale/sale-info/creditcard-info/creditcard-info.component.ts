@@ -72,7 +72,8 @@ export class CreditcardInfoComponent implements OnInit {
     this.creditcardForm = this._formBuilder.group({
       CardholderName: ['', Validators.required],
       Address:  ['', Validators.required],
-      ZipCode: ['', Validators.required]
+      ZipCode: ['', Validators.required],
+      TransactionType: [1, Validators.required]
     });
   }
   payNow() {

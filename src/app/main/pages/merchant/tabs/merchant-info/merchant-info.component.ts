@@ -50,12 +50,11 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, 
       if(!this.merchantInfoForm){
         this.createMerchantInfoForm();
         this.stepOne.emit(this.merchantInfoForm);
-      }else{
+      }
         if(this.merchantInfo.AccountSetupId){
           this.merchantInfoForm.controls.MerchantEmail.disable();
         }
         this.merchantInfoForm.patchValue(this.merchantInfo);
-      }
       this.getPricingPlans({ResellerId: this.merchantInfo.ResellerId});
     }
   }

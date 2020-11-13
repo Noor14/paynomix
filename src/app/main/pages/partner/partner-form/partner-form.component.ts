@@ -32,9 +32,8 @@ ngOnChanges(){
   if(this.partnerDetail){
     if(!this.partnerForm){
       this.createPartnerForm()
-    }else{
-      this.partnerForm.patchValue(this.partnerDetail)
     }
+    this.partnerForm.patchValue(this.partnerDetail)
   }
 }
 

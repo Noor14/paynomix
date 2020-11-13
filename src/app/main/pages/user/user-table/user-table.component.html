@@ -1,6 +1,6 @@
-<section class="mt-20">
+<section class="mt-20 userTable">
 <mat-paginator [pageSizeOptions]="[100, 150, 200, 250]"></mat-paginator>
-  <div class="table-responsive mat-card ">
+  <div class="table-responsive mat-card">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
         <!-- First Name Column -->
         <ng-container matColumnDef="FirstName">
@@ -48,7 +48,7 @@
           </ng-template>
           </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
         *matRowDef="let row; columns: displayedColumns; let i = index">
         </tr>
@@ -99,7 +99,7 @@
             <button mat-raised-button class="mr-8 accent-alpha-bg" aria-label="Cancel" (click)="dialogRef.close()">
                 Cancel
             </button>
-            <button mat-raised-button color="accent" aria-label="Update User" (click)="updateUser()">
+            <button mat-raised-button color="accent" aria-label="Update User" [disabled]="userForm.invalid" (click)="updateUser()">
                 Update User
             </button>
         </div>

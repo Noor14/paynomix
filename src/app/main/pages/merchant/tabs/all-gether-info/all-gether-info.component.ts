@@ -27,7 +27,7 @@ export class AllGetherInfoComponent implements OnInit {
     const object:any = {
       SendTo: obj.MerchantAccountSetup.MerchantEmail,
       Subject: obj.EmailSubject,
-      HtmlBodyContent: obj.EmailBody,
+      BodyContent: obj.EmailBody,
       MerchantName: `${obj.FirstName} ${obj.LastName}`,
       PartnerId: obj.PartnerId
     }

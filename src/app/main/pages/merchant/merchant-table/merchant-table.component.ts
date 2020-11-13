@@ -13,7 +13,7 @@ export class MerchantTableComponent implements OnInit {
   public dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns : string[] =  ['CompanyName', 'Reseller', 'FirstName', 'Email', 'Phone', 'PricingTitle', 'BoardedDate', 'BoardingStatus'];
+  public displayedColumns : string[] =  ['Reseller', 'CompanyName', 'FirstName', 'Email', 'Phone', 'PricingTitle', 'BoardedDate', 'BoardingStatus'];
   @Input() data: any;
   public actionControlOnHover = -1;
   constructor(private readonly _dialog: MatDialog) { }
@@ -29,7 +29,7 @@ export class MerchantTableComponent implements OnInit {
     const object:any = {
       SendTo: obj.MerchantAccountSetup.MerchantEmail,
       Subject: obj.EmailSubject,
-      HtmlBodyContent: obj.EmailBody,
+      BodyContent: obj.EmailBody,
       MerchantName: `${obj.FirstName} ${obj.LastName}`,
       PartnerId: obj.PartnerId
     }
