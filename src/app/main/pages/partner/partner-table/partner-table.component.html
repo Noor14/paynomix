@@ -4,26 +4,26 @@
       
         <!-- Partner Name Column -->
         <ng-container matColumnDef="PartnerName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Partner Name</th>
-          <td mat-cell *matCellDef="let row"> {{row.PartnerName}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Partner </th>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.PartnerName" [matTooltipPosition]="'above'"> {{row.PartnerName | truncate : truncateTextLength}} </td>
         </ng-container>
     
         <!-- DBA Name Column -->
         <ng-container matColumnDef="DBAName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> DBA Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.DBAName || '--'}}</td>
+          <td mat-cell *matCellDef="let row"  [matTooltip]="row?.DBAName" [matTooltipPosition]="'above'"> {{row.DBAName | truncate : truncateTextLength || '--'}}</td>
         </ng-container>
     
-        <!-- First Name Column -->
+        <!-- Contact Person Column -->
         <ng-container matColumnDef="FirstName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
-          <td mat-cell *matCellDef="let row"> {{row.FirstName}} {{row.LastName}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.FirstName +' '+ row?.LastName" [matTooltipPosition]="'above'"> {{row.FirstName | truncate : truncateTextLength}} {{row.LastName | truncate : truncateTextLength}}</td>
         </ng-container>
 
        <!-- Email Column -->
        <ng-container matColumnDef="Email">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-        <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+        <td mat-cell *matCellDef="let row" [matTooltip]="row?.Email" [matTooltipPosition]="'above'"> {{row.Email | truncate : truncateTextLength}} </td>
       </ng-container>
 
         <!-- Phone Column -->

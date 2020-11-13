@@ -41,10 +41,10 @@ ngOnChanges(){
 createPartnerForm(): void{
   this.partnerForm = this._formBuilder.group({
     PartnerId: [0, Validators.required],
-    PartnerName: [{value: '', disabled: this.partnerDetail}, Validators.required], 
+    PartnerName: [{value: '', disabled: this.partnerDetail},[ Validators.required ,Validators.maxLength(globalConfig.validator.maxFieldLength)]], 
     DBAName: [''],
-    FirstName: ['', Validators.required],
-    LastName: ['', Validators.required],
+    FirstName: ['', [Validators.required,Validators.maxLength(globalConfig.validator.maxName)]],
+    LastName: ['', [Validators.required , Validators.maxLength(globalConfig.validator.maxName)]],
     Country:  [''],
     Address1: ['', Validators.required],
     City: ['', Validators.required],
