@@ -58,7 +58,7 @@ createResellerForm(): void {
     PartnerId: ['', Validators.required],
     ResellerId: [0, Validators.required],
     ResellerName: [{value:'' , disabled:this.resellerDetail}, [Validators.required ,Validators.maxLength(globalConfig.validator.maxFieldLength)]],
-    DBAName: [''],
+    DBAName: ['', Validators.maxLength(globalConfig.validator.maxFieldLength)],
     Country: ['', Validators.required],
     FirstName: ['',[ Validators.required, Validators.maxLength(globalConfig.validator.maxName)]],
     LastName: ['', [Validators.required, Validators.maxLength(globalConfig.validator.maxName)]],

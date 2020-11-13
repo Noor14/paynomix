@@ -51,6 +51,10 @@ export class CreditcardInfoComponent implements OnInit {
  
    }
  };
+ public cardOptionsCVC: any ={
+  ...this.cardOptions,
+  placeholder: 'CVV / CVC2 / CVV2 / CID'
+ }
   public creditcardForm: FormGroup;
 
 /**

@@ -38,7 +38,8 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>DBA Name</mat-label>
-                    <input matInput formControlName="DBAName" >
+                    <input matInput formControlName="DBAName" [maxlength]="globalConfig?.validator?.maxFieldLength">
+                    <mat-error *ngIf="!resellerForm.get('DBAName').hasError('required') && resellerForm.get('DBAName').hasError('maxLength')" > DBA Name should have maximun length of {{globalConfig?.validator?.maxFieldLength}} </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
