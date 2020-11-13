@@ -13,7 +13,7 @@
                     *ngFor="let obj of repeatingItems | filter : search.value" (click)="selectedItem(obj.id)"
                     [ngClass]="{'selected': selectedId == obj.id}" [matTooltip]="obj?.name" [matTooltipPosition]="'above'" >
                         <span class="circle">{{obj?.name?.trim()?.charAt(0)?.toUpperCase()}}</span>
-                        <span>{{obj?.name | truncate : 15}}</span>
+                        <span>{{obj?.name | truncate : truncateTextLength}}</span>
                     </div>
                 </section>
                 <button mat-icon-button color="accent" class="close-button" (click)="closeDrawer()">

@@ -42,7 +42,7 @@ createPartnerForm(): void{
   this.partnerForm = this._formBuilder.group({
     PartnerId: [0, Validators.required],
     PartnerName: [{value: '', disabled: this.partnerDetail},[ Validators.required ,Validators.maxLength(globalConfig.validator.maxFieldLength)]], 
-    DBAName: [''],
+    DBAName: ['' , Validators.maxLength(globalConfig.validator.maxFieldLength)],
     FirstName: ['', [Validators.required,Validators.maxLength(globalConfig.validator.maxName)]],
     LastName: ['', [Validators.required , Validators.maxLength(globalConfig.validator.maxName)]],
     Country:  [''],
