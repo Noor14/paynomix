@@ -8,8 +8,15 @@ fuse-navigation {
         margin: 0;
         padding: 0;
         width: 100%;
-         .nav-item.nav-collapsable.open {
-             background-color: unset;
+         .nav-item {
+             &.nav-collapsable{
+                 &.open{
+                    background-color: unset;
+                    .children{
+                        // font-size: 13.5px;
+                    }
+                 }
+             }
         }
     }
 }
