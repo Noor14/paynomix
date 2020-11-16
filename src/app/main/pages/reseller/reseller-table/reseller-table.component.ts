@@ -63,6 +63,7 @@ export class ResellerTableComponent implements OnInit  {
      } 
   }).catch((err: HttpErrorResponse)=>(console.log));
 
+
 }
 
 }
