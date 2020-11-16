@@ -321,9 +321,6 @@ getDashboardStats(): void{
      if(res && !res.StatusCode){
          this.dashboardUserStats = res.Response;
          this.transactionGraphVolumeLabel = res.Response.Volume[0].time.map(x => moment(x).format('MMM D'));
-         
-      
-         
          if(this.dashboardUserStats && this.dashboardUserStats.Transactions
              && this.dashboardUserStats.Transactions.length){
             this.renderingComponent(TransactionTableComponent, {
