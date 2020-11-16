@@ -51,6 +51,10 @@ export class CreditcardInfoComponent implements OnInit {
  
    }
  };
+ public cardOptionsCVC: any ={
+  ...this.cardOptions,
+  placeholder: 'CVV / CVC2 / CVV2 / CID'
+ }
   public creditcardForm: FormGroup;
 
 /**
@@ -72,7 +76,8 @@ export class CreditcardInfoComponent implements OnInit {
     this.creditcardForm = this._formBuilder.group({
       CardholderName: ['', Validators.required],
       Address:  ['', Validators.required],
-      ZipCode: ['', Validators.required]
+      ZipCode: ['', Validators.required],
+      TransactionType: [1, Validators.required]
     });
   }
   payNow() {

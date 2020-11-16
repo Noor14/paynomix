@@ -1,7 +1,7 @@
 <section class="hierarchy">
     <div [matMenuTriggerFor]="tree" #triggerMenu class="ml-16 selectedMode">
       <span [matTooltip]="selectedNode?.title" [matTooltipPosition]="'below'" >
-      {{selectedNode?.title | truncate : 20 }}
+      {{selectedNode?.title | truncate : truncateTextLength }}
     </span>
   </div>
     <mat-menu #tree="matMenu" class="tree-panel" (closed)= menuClosed()>
@@ -22,7 +22,7 @@
                 <button mat-icon-button disabled></button>
                 <button mat-button [ngClass]="{'active': node.key == selectedNode.key}" (click)="selectUserMode(node)" 
                 [matTooltip]="node.title" [matTooltipPosition]="'after'">
-                {{node.title | truncate : 20 }}
+                {{node.title | truncate : truncateTextLength }}
                 </button> 
               </li>
             </mat-tree-node>
@@ -39,7 +39,7 @@
                  </button>
                  <button mat-button [ngClass]="{'active': node.key == selectedNode.key}" (click)="selectUserMode(node)" 
                  [matTooltip]="node.title" [matTooltipPosition]="'after'">
-                 {{node.title | truncate : 20 }}
+                 {{node.title | truncate : truncateTextLength }}
                 </button>
                 </div>
                 <ul [class.hierarchy-tree-invisible]="!treeControl.isExpanded(node) && !searchingText" [ngClass]="treeControl.isExpanded(node) ? 'expanded' : 'collapsed'">

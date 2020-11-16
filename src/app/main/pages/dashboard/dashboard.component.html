@@ -24,12 +24,11 @@
 
                         <div class="h3 secondary-text">Total Transactions (Last 7 days)</div>
                         <div class="font-size-40 font-weight-300 line-height-1 mt-8 w-100-p transDigit">
-                            {{dashboardUserStats?.Widget?.TotalTransaction || 0 | number : '2.'}}
+                            {{dashboardUserStats?.Widget?.TotalTransaction || 0 | number}}
                         </div>
                 </div>
 
-                <div class="h-80 w-100-p"  >
-                    
+                <div class="h-80 w-100-p">
                     <canvas baseChart
                             [datasets]="widgets.widget2.datasets"
                             [labels]="widgets.widget2.labels"
@@ -104,13 +103,13 @@
     </section>
 
     <section class="transactionHistory fuse-card auto-width mb-32">
-        <div class="p-20">
-            <h2>Transaction History (Last 7 days) </h2>
+        <div class="px-20">
+            <h2>Transaction History</h2>
         </div>
-        <div class="h-368 pb-16" *ngIf="dashboardUserStats">
+        <div class="h-368 pb-16">
             <canvas baseChart
-                    [datasets]="dashboardUserStats?.Volume"
-                    [labels]="transactionGraphVolumeLabel"
+                    [datasets]="widgets.widget5.datasets['today']"
+                    [labels]="widgets.widget5.labels"
                     [colors]="widgets.widget5.colors"
                     [options]="widgets.widget5.options"
                     [chartType]="widgets.widget5.chartType">
@@ -120,7 +119,7 @@
     </section>
 
     <section class="latestTransaction fuse-card auto-width">
-        <div class="p-20">
+        <div class="px-20 pt-20">
             <h2 class="m-0">Recent Transactions</h2>
         </div>
         <ng-template #renderingContainer></ng-template>

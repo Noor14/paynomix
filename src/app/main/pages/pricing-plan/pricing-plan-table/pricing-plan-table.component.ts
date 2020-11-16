@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, ViewChild, EventEmitter } from '@angu
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
 import { AssigneeDialogComponent } from '@fuse/components/assignee-dialog/assignee-dialog.component';
+import { truncateTextLength } from '../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-pricing-plan-table',
@@ -10,6 +11,7 @@ import { AssigneeDialogComponent } from '@fuse/components/assignee-dialog/assign
   animations   : fuseAnimations
 })
 export class PricingPlanTableComponent implements OnInit {
+  public truncateTextLength = truncateTextLength;
   public dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

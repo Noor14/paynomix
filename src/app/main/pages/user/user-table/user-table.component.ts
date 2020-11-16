@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
-import { snackBarConfig, snackBarConfigWarn } from 'constants/globalFunctions';
+import { snackBarConfig, snackBarConfigWarn, validateAllFormFields, validator ,truncateTextLength} from '../../../../../constants/globalFunctions';
 import { UserService } from '../user.service';
 import { fuseAnimations } from '@fuse/animations';
 @Component({
@@ -13,14 +13,18 @@ import { fuseAnimations } from '@fuse/animations';
 
 })
 export class UserTableComponent implements OnInit {
+  public validator = validator;
+  public truncateTextLength = truncateTextLength;
   @ViewChild('userDialog', { static: false }) userDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @Output() updateList = new EventEmitter<boolean>();
   public actionControlOnHover = -1;
   public dataSource = new MatTableDataSource<any>();
   public dialogRef: any;
   @Input() data: any;
   public userForm: FormGroup;
+  private userObj: any ={};
   public displayedColumns: string[] = ['FirstName', 'LastName', 'Username', 'Phone', 'Role', 'LastLogin'];
   constructor(
     private readonly _dialog: MatDialog,
@@ -36,31 +40,37 @@ export class UserTableComponent implements OnInit {
       this.dataSource.sort = this.sort;
     }
   }
-  openDialog(data): void { 
+  openDialog(obj): void { 
     this.dialogRef = this._dialog.open(this.userDialog, {width: '660px'});
     if(!this.userForm){
       this.createUserForm();
     }
-    this.userForm.patchValue(data);
+    this.userObj = obj
+    this.userForm.patchValue(this.userObj);
   }
   createUserForm(): void {
     this.userForm = this._formBuilder.group({
-      UserID : ['', Validators.required],
-      FirstName: ['', Validators.required],
-      LastName: ['', Validators.required],
+      FirstName: ['',[ Validators.required, Validators.maxLength(validator.maxName)]],
+      LastName: ['',[ Validators.required, Validators.maxLength(validator.maxName)]],
       Username: [{value:'', disabled: true}, Validators.required],
-      Email: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
       Phone: ['', Validators.required],
     });
   }
   updateUser() { 
-    this._userService.updateUser(this.userForm.value).then((res: any) => { 
-      if (res && !res.StatusCode) {
-          this._snackBar.open('User updated successfully!', '', snackBarConfig);
-          this.dialogRef.close();
-      } else{
-        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
-      }
-    }).catch((err: HttpErrorResponse)=>(console.log))
-  }
+    if(this.userForm.valid){
+      this._userService.updateUser({...this.userObj, ...this.userForm.value}).then((res: any) => { 
+        if (res && !res.StatusCode) {
+            this._snackBar.open('User updated successfully!', '', snackBarConfig);
+            this.updateList.emit(true);
+            this.dialogRef.close();
+        } else{
+          this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
+        }
+      }).catch((err: HttpErrorResponse)=>(console.log))
+    }else{
+      validateAllFormFields(this.userForm);
+    }
+    }
+
 }

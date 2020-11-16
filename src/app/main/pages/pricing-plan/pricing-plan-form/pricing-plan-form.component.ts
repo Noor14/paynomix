@@ -30,9 +30,8 @@ export class PricingPlanFormComponent implements OnInit, OnChanges {
     if(this.pricingPlanDetail){
       if(!this.pricngPlanForm){
         this.createPricingPlanForm();
-      }else{
-        this.pricngPlanForm.patchValue(this.pricingPlanDetail)
       }
+      this.pricngPlanForm.patchValue(this.pricingPlanDetail)
     }
   }
   createPricingPlanForm(): void{

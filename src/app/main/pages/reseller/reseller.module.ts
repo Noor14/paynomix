@@ -20,7 +20,7 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { MatTabsModule } from '@angular/material';
 import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { MatDialogModule, MatToolbarModule } from '@angular/material';
+import { FuseConfirmDialogModule } from '@fuse/components';
 
 @NgModule({
   declarations: [
@@ -49,8 +49,7 @@ import { MatDialogModule, MatToolbarModule } from '@angular/material';
     MatTabsModule,
     PricingPlanModule,
     MatTooltipModule,
-    MatDialogModule,
-    MatToolbarModule
+    FuseConfirmDialogModule
   ]
 })
 export class ResellerModule { }

@@ -52,13 +52,16 @@ export class ResellerFormComponent implements OnInit, OnDestroy, OnChanges {
   this._unsubscribeAll.next();
   this._unsubscribeAll.complete();
 }
+
 createResellerForm(): void {
   this.resellerForm = this._formBuilder.group({
     PartnerId: ['', Validators.required],
     ResellerId: [0, Validators.required],
-    ResellerName: [{value:'' , disabled:this.resellerDetail}, Validators.required],
-    DBAName: [''],
+    ResellerName: [{value:'' , disabled:this.resellerDetail}, [Validators.required ,Validators.maxLength(globalConfig.validator.maxFieldLength)]],
+    DBAName: ['', Validators.maxLength(globalConfig.validator.maxFieldLength)],
     Country: ['', Validators.required],
+    FirstName: ['',[ Validators.required, Validators.maxLength(globalConfig.validator.maxName)]],
+    LastName: ['', [Validators.required, Validators.maxLength(globalConfig.validator.maxName)]],
     Address1: ['', Validators.required],
     City: ['', Validators.required],
     State: ['', Validators.required],
@@ -79,9 +82,8 @@ ngOnChanges(){
   if(this.resellerDetail){
     if(!this.resellerForm){
       this.createResellerForm()
-    }else{
-      this.resellerForm.patchValue(this.resellerDetail)
     }
+    this.resellerForm.patchValue(this.resellerDetail)
   }
 }
 

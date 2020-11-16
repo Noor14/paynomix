@@ -30,4 +30,8 @@ export class SettingService extends BaseService {
         const url = `${environment.apiURL}setting/sendEmail`
         return this.post(url, data);
      } 
+    resendCredentials(obj: any): any{
+        const url = `${environment.apiURL}Setting/resendemail`;
+         return this.post(url, obj);
+    }
 }
