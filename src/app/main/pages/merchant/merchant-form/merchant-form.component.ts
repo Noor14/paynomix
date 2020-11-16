@@ -24,6 +24,7 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
   public businessDetailForm: FormGroup;
   public ownerDetailForm: FormGroup;
   public bankAccountForm: FormGroup;
+  @Input() onBoardError: string;
   @Input() merchantDetail: any = null;
   @Output() submitForm = new EventEmitter<any>();
   public boardingObject: any; 

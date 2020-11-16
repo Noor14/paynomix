@@ -18,5 +18,9 @@ export class TransactionService extends BaseService {
   getTransactionDetail(id: string) {
     const url = `${environment.apiURL}Transaction/GetTransactionById/${id}`;
     return this.get(url);
-  }
+  } 
+  refundTransaction(data):any {
+    const url = `${environment.apiURL}Transaction/Refund/`;
+    return this.post(url, data);
+}
 }
