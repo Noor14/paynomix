@@ -23,8 +23,7 @@ export class PricingPlanFormComponent implements OnInit, OnChanges, AfterViewIni
       private readonly _cdref: ChangeDetectorRef,
   ) { }
   
-  ngOnInit(): void{
-    this._cdref.detectChanges();
+  ngOnInit(): void{ 
     this.createPricingPlanForm();
   }
   
@@ -36,6 +35,7 @@ export class PricingPlanFormComponent implements OnInit, OnChanges, AfterViewIni
     }
   }
   ngAfterViewInit(): void {
+    this._cdref.detectChanges();
     if(this.pricingPlanDetail) {
       this.pricngPlanForm.patchValue(this.pricingPlanDetail);
     }
