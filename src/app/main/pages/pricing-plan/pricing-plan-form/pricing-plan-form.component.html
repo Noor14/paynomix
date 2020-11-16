@@ -17,10 +17,23 @@
                     <mat-error>Pricing Plan Description is required!</mat-error>
                 </mat-form-field>
             </div>
+
+            <div fxFlex="1 0 auto">
+            <mat-form-field appearance="outline"  fxFlex="100" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                <mat-label>Pricing Plan Type </mat-label>
+                <mat-select formControlName="PricingPlanType" required>
+                    <mat-option [value]="1">Flat Rate</mat-option>
+                    <mat-option [value]="2">InterChange Plus Rates</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Reserve (%) </mat-label>
-                    <input numberOnly matInput formControlName="Reserve" required>
+                    <input  matInput
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="Reserve" required>
                     <mat-error *ngIf="pricngPlanForm.get('Reserve').hasError('required')">
                         Reserve is required!
                     </mat-error>
@@ -31,7 +44,10 @@
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Discount Rate (%) </mat-label>
-                    <input matInput numberOnly formControlName="DiscountRate" required>
+                    <input matInput 
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="DiscountRate" required>
                     <mat-error *ngIf="pricngPlanForm.get('DiscountRate').hasError('required')">
                         Discount Rate is required!
                     </mat-error>
@@ -43,94 +59,129 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Auth Fee ($)</mat-label>
-                    <input matInput formControlName="AuthFee" required>
+                    <input matInput
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="AuthFee" required>
                     <mat-error>Auth Fee is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label> Chargeback Fee ($)</mat-label>
-                    <input matInput formControlName="ChargeBack" required>
+                    <input matInput 
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="ChargeBack" required>
                     <mat-error>Chargeback Fee is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Retrieval Fee ($)</mat-label>
-                    <input matInput formControlName="RetrievalFee" required>
+                    <input matInput 
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="RetrievalFee" required>
                     <mat-error>Retrieval Fee ($) is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Monthly Minimum Fee ($)</mat-label>
-                    <input matInput formControlName="MonthlyMinimunFee" required>
+                    <input matInput 
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="MonthlyMinimunFee" required>
                     <mat-error>Monthly Minimum Fee is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Monthly Statement Fee ($)</mat-label>
-                    <input matInput formControlName="MonthlyStatementFee" required>
+                    <input matInput
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                     formControlName="MonthlyStatementFee" required>
                     <mat-error>Monthly Statement Fee is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Application Setup Fee ($)</mat-label>
-                    <input matInput formControlName="ApplicationSetupFee" required>
+                    <input matInput
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="ApplicationSetupFee" required>
                     <mat-error>Application Setup Fee  is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Wire Transfer Fee ($)</mat-label>
-                    <input matInput formControlName="WireTransferFee" required>
+                    <input matInput
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                     formControlName="WireTransferFee" required>
                     <mat-error>Wire Transfer Fee is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Gateway Setup Fee ($)</mat-label>
-                    <input matInput formControlName="GateWaySetupFee" required>
+                    <input matInput
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="GateWaySetupFee" required>
                     <mat-error>Gateway Setup Fee is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Gateway Monthly Access ($)</mat-label>
-                    <input matInput formControlName="GateWayMonthlyAccess" required>
+                    <input matInput
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="GateWayMonthlyAccess" required>
                     <mat-error>Gateway Monthly Access is required!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Per Transaction Fee ($) </mat-label>
-                    <input matInput formControlName="PerTransactionFee" required>
+                    <input matInput
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="PerTransactionFee" required>
                     <mat-error>Per Transaction Fee is required!</mat-error>
                 </mat-form-field>
             </div>
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Fee Amount ($)</mat-label>
-                    <input matInput formControlName="FeeAmount" required>
+                    <input matInput 
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="FeeAmount" required>
                     <mat-error>Fee Amount is required!</mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                    <mat-label>Pricing Plan Type </mat-label>
-                    <mat-select formControlName="PricingPlanType" required>
-                        <mat-option [value]="1">Flat Rate</mat-option>
-                        <mat-option [value]="2">InterChange Plus Rates</mat-option>
-                    </mat-select>
+                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                    <mat-label>Other Fee ($) </mat-label>
+                    <input matInput
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    formControlName="OtherFee" required>
+                    <mat-error>Other Fee is required!</mat-error>
                 </mat-form-field>
+
+               
             </div>
 
 
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                    <mat-label>Other Fee ($) </mat-label>
-                    <input matInput formControlName="OtherFee" required>
-                    <mat-error>Other Fee is required!</mat-error>
-                </mat-form-field>
+              
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Transaction Fee (%)</mat-label>
-                    <input numberOnly matInput formControlName="TransactionFee" required>
+                    <input 
+                    currencyMask 
+                    [options]="{ align: 'left', prefix: '' }"
+                    matInput formControlName="TransactionFee" required>
                     <mat-error *ngIf="pricngPlanForm.get('TransactionFee').hasError('required')">
                         Transaction Fee is required!
                     </mat-error>

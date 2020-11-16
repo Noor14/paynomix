@@ -55,3 +55,29 @@
     </table>
   </section>
 
+
+  <ng-template #confirmDialog>
+    <div class="dialog-content-wrapper">
+        <mat-toolbar class="mat-accent">
+            <mat-toolbar-row  fxLayout="row" fxLayoutAlign="space-between center">
+                <span class="title">Send Credentials</span>
+                <button mat-icon-button aria-label="Close dialog" (click)="dialogRef.close()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <div mat-dialog-content class="mx-0"> 
+            <h1 class="text-center">Are you sure?</h1>
+        </div>
+
+        <div mat-dialog-actions class="px-24 my-12" fxLayout="row" fxLayoutAlign="end center">
+            <button mat-raised-button class="mr-8 accent-alpha-bg" aria-label="Cancel" (click)="dialogRef.close()">
+                No
+            </button>
+            <button mat-raised-button color="accent" aria-label="Update User" (click)="resendEmail(ResellerData)">
+               Yes
+            </button>
+        </div>
+    </div>
+</ng-template>

@@ -3,6 +3,7 @@ import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, On
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { environment } from 'environments/environment';
+import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TransactionTableComponent } from '../transaction/transaction-table/transaction-table.component';
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public dashboardUserStats: any;
   public widgets: any;
   private _unsubscribeAll: Subject<any>;
+  public transactionGraphVolumeLabel: any;
 
 
   /**
@@ -287,7 +289,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                               tickMarkLength: 16
                           },
                           ticks    : {
-                              stepSize: 1000
+                             // stepSize: 1000
                           }
                       }
                   ]
@@ -319,6 +321,7 @@ getDashboardStats(): void{
  .then((res: any) => {
      if(res && !res.StatusCode){
          this.dashboardUserStats = res.Response;
+         this.transactionGraphVolumeLabel = res.Response.Volume[0].time.map(x => moment(x).format('MMM D'));
          if(this.dashboardUserStats && this.dashboardUserStats.Transactions
              && this.dashboardUserStats.Transactions.length){
             this.renderingComponent(TransactionTableComponent, {
