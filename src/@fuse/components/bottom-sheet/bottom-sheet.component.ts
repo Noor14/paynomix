@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
-import { truncateTextLength } from '../../../constants/globalFunctions';
+
 
 @Component({
   selector: 'app-bottom-sheet',
@@ -17,7 +17,7 @@ export class BottomSheetComponent implements OnInit {
   @Input() drawerConfig: any = {};
   @Output() selected = new EventEmitter<number>();
   @Output() close = new EventEmitter<boolean>();
-  public truncateTextLength = truncateTextLength;
+
   constructor() { }
 
   ngOnInit(): void {
