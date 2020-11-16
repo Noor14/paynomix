@@ -1,6 +1,6 @@
 <section class="transactionTable">
   <div fxLayout="row" fxLayoutAlign="space-between center">
-    <button (click)="RefundDialog()" *ngIf="showRefund"  mat-raised-button class="accent">
+    <button (click)="openRefundDialog()" *ngIf="showRefund"  mat-raised-button class="accent">
       Refund(s)
     </button>
     <mat-paginator [pageSizeOptions]="[100, 150, 200, 250]"></mat-paginator>
@@ -18,7 +18,7 @@
 		          </mat-checkbox>
 		        </th>
 		        <td mat-cell *matCellDef="let row">
-		          <mat-checkbox (click)="$event.stopPropagation();SelectRefundElement(row);"
+		          <mat-checkbox (click)="$event.stopPropagation(); selectRefundElement(row);"
 		            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
 		            [aria-label]="checkboxLabel(row)">
 		          </mat-checkbox>

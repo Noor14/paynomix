@@ -83,11 +83,10 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     const numRows = this.dataSource.data.length;
     return numSelected == numRows;
   }
-  SelectRefundElement(value) {
+  selectRefundElement(value) {
     this.selectedToRefund = value;
-    console.log(value);
   }
-  RefundDialog() {
+  openRefundDialog() {
     this.createRefundForm();
     this.dialogRef = this._dialog.open(this.refundDialog, { width: '600px' });
   }
@@ -104,7 +103,6 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       this._transactionService.refundTransaction(this.refundForm.value)
         .then((res: any) => {
           if (res && !res.StatusCode) {
-            console.log(res);
             this._snackBar.open('Amount refunded successfully', '', snackBarConfig);
           } else {
             this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
