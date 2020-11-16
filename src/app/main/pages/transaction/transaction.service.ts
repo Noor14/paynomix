@@ -20,7 +20,7 @@ export class TransactionService extends BaseService {
     return this.get(url);
   } 
   refundTransaction(data):any {
-    const url = `${environment.apiURL}Transaction/Refund/`;
+    const url = `${environment.apiURL}Transaction/Refund`;
     return this.post(url, data);
 }
 }

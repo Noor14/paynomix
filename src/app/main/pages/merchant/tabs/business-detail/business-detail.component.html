@@ -82,7 +82,7 @@
             <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                 <mat-label>Zip / Postal Code</mat-label>
                 <input matInput formControlName="BusinessZip" numberOnly [maxlength]="validatorObj.zipMaxLength">
-                <mat-error *ngIf="businessDetailForm.get('BusinessZip').hasError('maxLength')">
+                <mat-error *ngIf="businessDetailForm.get('BusinessZip').hasError('maxlength')">
                     Postal Code should have maximun length of 
                     {{globalConfig?.validator?.zipMaxLength}} 
                 </mat-error>
