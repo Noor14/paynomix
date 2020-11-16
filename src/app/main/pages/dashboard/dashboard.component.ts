@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public widgets: any;
   private _unsubscribeAll: Subject<any>;
   public transactionGraphVolumeLabel: any;
-
+  public showBars = false;
 
   /**
   * Constructor
@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           datasets  : [
               {
                   label: 'Conversion',
-                  data : [221, 428, 492, 471, 413, 344, 294]
+                  data : []
               }
           ],
           labels    : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -88,8 +88,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                       {
                           display: false,
                           ticks  : {
-                              min: 100,
-                              max: 500
+                             
                           }
                       }
                   ]
@@ -105,7 +104,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         datasets  : [
             {
                 label: 'Conversion',
-                data : [221, 428, 492, 471, 413, 344, 294]
+                data : []
             }
         ],
         labels    : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -139,8 +138,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     {
                         display: false,
                         ticks  : {
-                            min: 100,
-                            max: 500
+                          
                         }
                     }
                 ]
@@ -156,10 +154,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           datasets : [
               {
                   label: 'Visits',
-                  data : [432, 428, 327, 363, 456, 267, 231]
+                  data : []
               }
           ],
-          labels   : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          labels   : [],
           colors   : [
               {
                   borderColor    : environment.themeColor,
@@ -190,8 +188,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                       {
                           display: false,
                           ticks  : {
-                              min: 150,
-                              max: 500
+                            
                           }
                       }
                   ]
@@ -302,6 +299,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
       }
     };
+   
+    
   }
 
 ngOnDestroy(): void {
@@ -322,11 +321,30 @@ getDashboardStats(): void{
      if(res && !res.StatusCode){
          this.dashboardUserStats = res.Response;
          this.transactionGraphVolumeLabel = res.Response.Volume[0].time.map(x => moment(x).format('MMM D'));
+         
+      
+         
          if(this.dashboardUserStats && this.dashboardUserStats.Transactions
              && this.dashboardUserStats.Transactions.length){
             this.renderingComponent(TransactionTableComponent, {
               transaction: this.dashboardUserStats.Transactions
             })
+            if(this.dashboardUserStats.GraphViewModel.AvgTransGraph.data){
+                this.widgets.widget2.datasets[0].data =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.data
+                this.widgets.widget3.datasets[0].data =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.data
+                this.widgets.widget4.datasets[0].data =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.data
+                
+                this.widgets.widget2.datasets[0].label =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.label
+                this.widgets.widget3.datasets[0].label =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.label
+                this.widgets.widget4.datasets[0].label =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.label
+                
+                this.widgets.widget2.labels =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.days
+                this.widgets.widget3.labels =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.days
+                this.widgets.widget4.labels =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.days
+              
+                this.showBars = true
+             }
+
           }else{
             this.renderingComponent(NoFoundComponent, {
               icon: 'no-transaction',
