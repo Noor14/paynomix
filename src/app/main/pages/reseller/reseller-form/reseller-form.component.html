@@ -24,14 +24,14 @@
                     <mat-label>First Name</mat-label>
                     <input matInput formControlName="FirstName" required [maxlength]="globalConfig?.validator?.maxName">
                     <mat-error *ngIf="resellerForm.get('FirstName').hasError('required')">First Name is required!</mat-error>
-                    <mat-error *ngIf="!resellerForm.get('FirstName').hasError('required') && resellerForm.get('FirstName').hasError('maxLength')">First name should have maximun length of {{globalConfig?.validator?.maxName}}</mat-error>
+                    <mat-error *ngIf="!resellerForm.get('FirstName').hasError('required') && resellerForm.get('FirstName').hasError('maxlength')">First name should have maximun length of {{globalConfig?.validator?.maxName}}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Last Name</mat-label>
                     <input matInput formControlName="LastName" required [maxlength]="globalConfig?.validator?.maxName">
                     <mat-error *ngIf="resellerForm.get('LastName').hasError('required')">Last Name is required!</mat-error>
-                    <mat-error *ngIf="!resellerForm.get('LastName').hasError('required') && resellerForm.get('LastName').hasError('maxLength')">Last name should have maximun length of {{globalConfig?.validator?.maxName}}</mat-error>
+                    <mat-error *ngIf="!resellerForm.get('LastName').hasError('required') && resellerForm.get('LastName').hasError('maxlength')">Last name should have maximun length of {{globalConfig?.validator?.maxName}}</mat-error>
                 </mat-form-field>
             </div>
 
@@ -39,7 +39,7 @@
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>DBA Name</mat-label>
                     <input matInput formControlName="DBAName" [maxlength]="globalConfig?.validator?.maxFieldLength">
-                    <mat-error *ngIf="!resellerForm.get('DBAName').hasError('required') && resellerForm.get('DBAName').hasError('maxLength')" > DBA Name should have maximun length of {{globalConfig?.validator?.maxFieldLength}} </mat-error>
+                    <mat-error *ngIf="!resellerForm.get('DBAName').hasError('required') && resellerForm.get('DBAName').hasError('maxlength')" > DBA Name should have maximun length of {{globalConfig?.validator?.maxFieldLength}} </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
@@ -78,7 +78,7 @@
                     <mat-error *ngIf="resellerForm.get('Zip').hasError('required')">
                         Postal Code is required!</mat-error>
                     <mat-error *ngIf="!resellerForm.get('Zip').hasError('required') &&
-                                       resellerForm.get('Zip').hasError('maxLength')">
+                                       resellerForm.get('Zip').hasError('maxlength')">
                         Postal Code should have maximun length of 
                         {{globalConfig?.validator?.zipMaxLength}} 
                     </mat-error>

@@ -9,7 +9,7 @@
                 <mat-label>Company Name</mat-label>
                 <input matInput formControlName="MerchantUserName" required [maxlength]="globalConfig.validator.maxFieldLength" >
                 <mat-error *ngIf="merchantInfoForm.get('MerchantUserName').hasError('required')">Company Name is required!</mat-error>
-                <mat-error *ngIf="!merchantInfoForm.get('MerchantUserName').hasError('required') && merchantInfoForm.get('MerchantUserName').hasError('maxLength')" > Company Name should have maximun length of 
+                <mat-error *ngIf="!merchantInfoForm.get('MerchantUserName').hasError('required') && merchantInfoForm.get('MerchantUserName').hasError('maxlength')" > Company Name should have maximun length of 
                     {{globalConfig?.validator?.maxFieldLength}} </mat-error>
             </mat-form-field>
 

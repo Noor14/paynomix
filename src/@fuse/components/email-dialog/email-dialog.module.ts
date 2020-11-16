@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { EmailDialogComponent } from './email-dialog.component';
 import { MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
-import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -19,7 +18,6 @@ import {MatChipsModule} from '@angular/material/chips';
     MatIconModule,
     MatButtonModule,
     MatSelectModule,
-    MatChipsModule
   ]
 })
 export class EmailDialogModule { }

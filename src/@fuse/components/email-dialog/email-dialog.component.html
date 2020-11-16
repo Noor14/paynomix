@@ -10,83 +10,18 @@
 
     <div mat-dialog-content class="p-24">
         <form name="emailForm" fxLayout="column"  [formGroup]="emailForm">
-           <div fxLayout="row" fxLayoutAlign="end" class="Cursorpointer">
-    <button mat-icon-button  aria-label="CC" (click)="showCC = true" *ngIf="!showCC">Cc</button>
-    <button mat-icon-button  aria-label="BCC" (click)="showBCC = true" *ngIf="!showBCC ">Bcc</button>
-           </div> 
-            <!-- <mat-form-field appearance="outline" >
-                <mat-label>To</mat-label>
-                <input type="email" matInput formControlName="SendTo"  required>  
-            </mat-form-field>  -->
-
             <mat-form-field appearance="outline">
                 <mat-label>To</mat-label>
-                <mat-chip-list #chipList>
-                  <mat-chip *ngFor="let to of emailObj.SendTo" [selectable]="selectable"
-                           [removable]="removable" (remove)="remove(to,1)">
-                    {{to.email}}
-                    <mat-icon matChipRemove *ngIf="removable"
-                     (click)="remove(to,1)">cancel</mat-icon>
-                  </mat-chip>
-                  <input 
-                  formControlName="SendTo"
-                  [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  (matChipInputTokenEnd)="add($event,1)" />
-                </mat-chip-list>
-                <!-- [matChipInputAddOnBlur]="addOnBlur" -->
-              </mat-form-field>
-
-            <!-- <mat-form-field appearance="outline" *ngIf="showCC">
+                <input type="email" matInput formControlName="SendTo"  required>  
+            </mat-form-field> 
+            <mat-form-field appearance="outline">
                 <mat-label>CC</mat-label>
                 <input type="email" matInput formControlName="Cc" >  
-            </mat-form-field>  -->
-
-
-            <mat-form-field appearance="outline"  *ngIf="showCC">
-                <mat-label>CC</mat-label>
-                <mat-chip-list #chipList>
-                  <mat-chip *ngFor="let cc of emailObj.Cc" [selectable]="selectable"
-                           [removable]="removable" (remove)="remove(cc,2)">
-                    {{cc.email}}
-                    <mat-icon matChipRemove *ngIf="removable" (click)="remove(cc,2)">cancel</mat-icon>
-                  </mat-chip>
-                  <input 
-                 
-                  formControlName="Cc"
-                  [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  (matChipInputTokenEnd)="add($event,2)" />
-                </mat-chip-list>
-                <!-- [matChipInputAddOnBlur]="addOnBlur" -->
-              </mat-form-field>
-
-            <!-- <mat-form-field appearance="outline" *ngIf="showBCC">
+            </mat-form-field> 
+            <mat-form-field appearance="outline">
                 <mat-label>Bcc</mat-label>
                 <input  type="email" matInput formControlName="Bcc" >  
-            </mat-form-field>  -->
-
-            <mat-form-field appearance="outline"  *ngIf="showBCC">
-                <mat-label>BCC
-
-                </mat-label>
-                <mat-chip-list #chipList>
-                  <mat-chip *ngFor="let bcc of emailObj.Bcc" [selectable]="selectable"
-                           [removable]="removable" (remove)="remove(bcc,3)">
-                    {{bcc.email}}
-                    <mat-icon matChipRemove *ngIf="removable" (click)="remove(bcc,3)">cancel</mat-icon>
-                  </mat-chip>
-                  <input 
-                
-                  formControlName="Bcc"
-                  [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  (matChipInputTokenEnd)="add($event,3)" />
-                </mat-chip-list>
-                <!-- [matChipInputAddOnBlur]="addOnBlur" -->
-              </mat-form-field>
-
-
+            </mat-form-field> 
             <mat-form-field appearance="outline">
             <mat-label>Subject</mat-label>
             <input matInput formControlName="Subject" readonly required>  
@@ -109,8 +44,10 @@
     </div>
 
     <div mat-dialog-actions class="px-24 py-12" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-raised-button class="mr-8 accent-alpha-bg" aria-label="CLOSE" (click)="_dialogRef.close()">Cancel</button>
-<button mat-raised-button color="accent" class="save-button" aria-label="SAVE" (click)="sendEmail()">
+        <button mat-raised-button class="mr-8 accent-alpha-bg" aria-label="CLOSE" (click)="_dialogRef.close()">
+            Close
+        </button>    
+        <button mat-raised-button color="accent" class="save-button" aria-label="SAVE" (click)="sendEmail()">
             Send
         </button>
     </div>
