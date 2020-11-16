@@ -169,7 +169,9 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   personalInformation(value) {
     this.payObject = { ...this.payObject, ...value };
-    this.componentRef.instance.data = this.payObject
+    if(this.componentRef) {
+      this.componentRef.instance.data = this.payObject
+    } 
   }
 
   onSelected(event: number): void {
@@ -188,7 +190,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
           obj[item.ControlName] = item.IsRequired
         })
       //  this.componentRef.instance.requiredFields = obj;
-      //  this.requiredFields = obj;
+       this.requiredFields = obj;
       }
     });
   }
