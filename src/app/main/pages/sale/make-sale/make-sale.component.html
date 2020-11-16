@@ -43,6 +43,6 @@
     <ng-template [ngIf]="bottomSheetEnable" >
         <app-bottom-sheet [repeatingItems]="merchantLocation" [isOpen]="bottomSheetDrawerOpen"
          [drawerConfig]="makeSaleBottomSheetInfo"
-         (onSelected)="onSelected($event)" (close)="bottomSheetDrawerOpen = $event"></app-bottom-sheet>
+         (selected)="onSelected($event)" (close)="bottomSheetDrawerOpen = $event"></app-bottom-sheet>
     </ng-template>
 </section>
