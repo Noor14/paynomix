@@ -44,7 +44,8 @@ import { FuseConfirmDialogModule } from '@fuse/components';
     MatFormFieldModule,
     PricingPlanModule,
     MatTooltipModule,
-    FuseConfirmDialogModule
+    FuseConfirmDialogModule,
+    NoFoundModule
   ]
 })
 export class PartnerModule { }

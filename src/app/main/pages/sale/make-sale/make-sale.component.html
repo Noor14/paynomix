@@ -1,5 +1,5 @@
 <section class="makeSale w-100-p" #makeSale>
-    <h2>Make Sale</h2>
+    <h2>Make A Sale</h2>
     <hr />
     <div class="mt-20 p-20 outer-layer" 
          fxLayout.gt-sm="row" fxLayout="column" 
@@ -14,10 +14,10 @@
                 <input matInput required #amount [disabled]="!selectedLocationId">
             </mat-form-field>
 
-            <mat-button-toggle-group class="mb-24">
+            <mat-button-toggle-group class="mb-24" (change)="cardType($event.value)">
                 <mat-button-toggle class="w-50-p" [value]="0" checked="true"> Credit Card
                 </mat-button-toggle>
-                <mat-button-toggle class="w-50-p" [value]="1">ACH</mat-button-toggle>
+                <mat-button-toggle class="w-50-p" [value]="1" >ACH</mat-button-toggle>
             </mat-button-toggle-group>
 
             <app-personal-info (personalInfo)="personalInformation($event)" [resetPersonalInfo]="transactionApproved" [requiredFields]="requiredFields"></app-personal-info>
@@ -43,6 +43,6 @@
     <ng-template [ngIf]="bottomSheetEnable" >
         <app-bottom-sheet [repeatingItems]="merchantLocation" [isOpen]="bottomSheetDrawerOpen"
          [drawerConfig]="makeSaleBottomSheetInfo"
-         (selected)="onSelected($event)" (close)="bottomSheetDrawerOpen = $event"></app-bottom-sheet>
+         (onSelected)="onSelected($event)" (close)="bottomSheetDrawerOpen = $event"></app-bottom-sheet>
     </ng-template>
 </section>
