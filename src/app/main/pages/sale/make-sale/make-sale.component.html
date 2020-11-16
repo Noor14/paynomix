@@ -14,10 +14,10 @@
                 <input matInput required #amount [disabled]="!selectedLocationId">
             </mat-form-field>
 
-            <mat-button-toggle-group class="mb-24">
+            <mat-button-toggle-group class="mb-24" (change)="cardType($event.value)">
                 <mat-button-toggle class="w-50-p" [value]="0" checked="true"> Credit Card
                 </mat-button-toggle>
-                <mat-button-toggle class="w-50-p" [value]="1">ACH</mat-button-toggle>
+                <mat-button-toggle class="w-50-p" [value]="1" >ACH</mat-button-toggle>
             </mat-button-toggle-group>
 
             <app-personal-info (personalInfo)="personalInformation($event)" [resetPersonalInfo]="transactionApproved" [requiredFields]="requiredFields"></app-personal-info>
