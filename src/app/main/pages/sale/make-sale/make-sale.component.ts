@@ -158,7 +158,13 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
               SecretKey: res.Response.SecretKey,
               TransactionId: res.Response.TransactionId,
             }
-            this.cardType(this.selectedCardType, this.payObject);
+            this._saleService.getTransactionById(res.Response.TransactionId).
+            then((res:any)=> {
+              if(res && !res.StatusCode) {      
+                this.payObject = {...this.payObject, ...res.Response}
+                this.cardType(this.selectedCardType, this.payObject);
+              }
+            })
           } else {
             this._snackBar.open('Please select another location', '', snackBarConfigWarn);
           }
