@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit
     login(): void{
         this.loginClick = true;
         if(this.loginForm.valid){
-          
             this._authenticationService.signIn(this.loginForm.value).then((res: any)=>{
                 if(res && !res.StatusCode){
                     this._snackBar.open('Signing in', '', snackBarConfig);
