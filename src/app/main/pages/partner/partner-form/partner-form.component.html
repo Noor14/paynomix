@@ -89,12 +89,12 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Phone Number</mat-label>
-                    <input matInput currencyMask type="tel" formControlName="Phone" >
+                    <input matInput mask="(000) 000-0000" formControlName="Phone" >
                     <mat-error>Phone Number is required!</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" type="number" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Alternate Phone</mat-label>
-                    <input matInput formControlName="AlternatePhone" >
+                    <input matInput mask="(000) 000-0000" formControlName="AlternatePhone" >
                     <!-- <mat-error>Alternate Phone is required!</mat-error> -->
                 </mat-form-field>
                

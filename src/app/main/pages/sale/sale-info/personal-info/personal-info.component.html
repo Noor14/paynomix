@@ -30,7 +30,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
             <mat-label>Phone</mat-label>
-            <input matInput formControlName="Phone" required>
+            <input mask="(000) 000-0000" matInput formControlName="Phone" required>
             <mat-error>Phone is required!</mat-error>
         </mat-form-field> 
     </div>

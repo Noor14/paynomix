@@ -15,6 +15,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { MatDialogModule,MatFormFieldModule, MatInputModule, MatToolbarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   declarations: [UserListComponent, UserTableComponent, ChangePasswordComponent],
@@ -34,7 +35,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatFormFieldModule,
     MatInputModule,
     FlexLayoutModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgxMaskModule.forRoot()
+
   ]
 })
 export class UserModule { }

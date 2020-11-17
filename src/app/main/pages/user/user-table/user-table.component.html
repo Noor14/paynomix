@@ -22,7 +22,7 @@
         <!-- Phone Column -->
         <ng-container matColumnDef="Phone">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Phone" [matTooltipPosition]="'above'"> {{row.Phone || '--'}}</td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Phone" [matTooltipPosition]="'above'"> {{row.Phone || '--' | mask: '(000) 000-0000' }}</td>
         </ng-container>
 
         <!-- User Role Column -->
@@ -96,7 +96,7 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Phone</mat-label>
-                    <input matInput formControlName="Phone" required>
+                    <input matInput  mask="(000) 000-0000"  formControlName="Phone" required>
                     <mat-error>Phone is required</mat-error>
                 </mat-form-field>
             </form>

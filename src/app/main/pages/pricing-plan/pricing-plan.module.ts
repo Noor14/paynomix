@@ -22,6 +22,9 @@ import { PricingPlanTableComponent } from './pricing-plan-table/pricing-plan-tab
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { NgxCurrencyModule } from "ngx-currency";
+import {NgxMaskModule} from 'ngx-mask';
+
+
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { NgxCurrencyModule } from "ngx-currency";
     MatDialogModule,
     NoFoundModule,
     MatTooltipModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class PricingPlanModule { }
