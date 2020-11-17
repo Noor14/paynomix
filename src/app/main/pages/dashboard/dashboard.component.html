@@ -105,29 +105,25 @@
 
     </section>
 
-    <ng-container *ngIf="dashboardUserStats">
-        <section class="transactionHistory fuse-card auto-width mb-32" >
-            <div class="px-20">
-                <h2>Transaction History</h2>
-            </div>
-            <div class="h-368 pb-16" >
-                <canvas baseChart 
-                       [datasets]="dashboardUserStats?.Volume"
-                        [labels]="transactionGraphVolumeLabel"
-                        [colors]="widgets.widget5.colors"
-                        [options]="widgets.widget5.options"
-                        [chartType]="widgets.widget5.chartType">
-                </canvas>
-            </div>
-    
-        </section>
-    
-        <section class="latestTransaction fuse-card auto-width">
-            <div class="px-20 pt-20">
-                <h2 class="m-0">Recent Transactions</h2>
-            </div>
-            <ng-template #renderingContainer></ng-template>
-        </section>
-    </ng-container>
+    <section class="transactionHistory fuse-card auto-width mb-32" *ngIf="dashboardUserStats">
+        <div class="px-20">
+            <h2>Transaction History</h2>
+        </div>
+        <div class="h-368 pb-16" >
+            <canvas baseChart 
+                    [datasets]="dashboardUserStats?.Volume"
+                    [labels]="transactionGraphVolumeLabel"
+                    [colors]="widgets.widget5.colors"
+                    [options]="widgets.widget5.options"
+                    [chartType]="widgets.widget5.chartType">
+            </canvas>
+        </div>
 
+    </section>
+    <section class="latestTransaction fuse-card auto-width">
+        <div class="px-20 pt-20">
+            <h2 class="m-0">Recent Transactions</h2>
+        </div>
+        <ng-template #renderingContainer></ng-template>
+    </section>
 </section>

@@ -158,7 +158,13 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
               SecretKey: res.Response.SecretKey,
               TransactionId: res.Response.TransactionId,
             }
-            this.cardType(this.selectedCardType, this.payObject);
+            this._saleService.getTransactionById(res.Response.TransactionId).
+            then((res:any)=> {
+              if(res && !res.StatusCode) {      
+                this.payObject = {...this.payObject, ...res.Response}
+                this.cardType(this.selectedCardType, this.payObject);
+              }
+            })
           } else {
             this._snackBar.open('Please select another location', '', snackBarConfigWarn);
           }
@@ -169,7 +175,9 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   personalInformation(value) {
     this.payObject = { ...this.payObject, ...value };
-    this.componentRef.instance.data = this.payObject
+    if(this.componentRef) {
+      this.componentRef.instance.data = this.payObject
+    } 
   }
 
   onSelected(event: number): void {
@@ -188,7 +196,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
           obj[item.ControlName] = item.IsRequired
         })
       //  this.componentRef.instance.requiredFields = obj;
-      //  this.requiredFields = obj;
+       this.requiredFields = obj;
       }
     });
   }

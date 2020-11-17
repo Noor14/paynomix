@@ -16,7 +16,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   ],
   exports: [TransactionTableComponent],
   imports: [
-    MatDatepickerModule,
     CommonModule,
     TransactionRoutingModule,
     NoFoundModule,
@@ -29,7 +28,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatInputModule,
     MatTooltipModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDatepickerModule,
   ]
 })
 export class TransactionModule { }
