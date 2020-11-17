@@ -8,7 +8,6 @@ import { ChartsModule } from 'ng2-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
-
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
