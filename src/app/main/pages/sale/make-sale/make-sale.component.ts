@@ -76,6 +76,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
           this.transactionInitialize(Number(this.amountInput.nativeElement.value) * 100);
         } else {
           this.container.clear();
+          this.payObject = {};
         }
       });
     // this._router.events.pipe(
@@ -118,7 +119,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.selectedCardType = type;
     if(type) {
       this.renderingComponent(AchInfoComponent)
-    }else if(!type && (data || this.payObject)){
+    }else if(!type &&  (this.payObject.hasOwnProperty('SecretKey'))){
       this.renderingComponent(CreditcardInfoComponent, data||this.payObject);
     }else{
      this.container.clear();
