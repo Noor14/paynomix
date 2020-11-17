@@ -276,7 +276,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
                               display: false
                           },
                           ticks    : {
-                              fontColor: 'rgba(0,0,0,0.54)'
+                              fontColor: 'rgba(0,0,0,0.54)',
+                              min:0
                           }
                       }
                   ],
@@ -287,6 +288,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                           },
                           ticks    : {
                              // stepSize: 1000
+                             min:0
                           }
                       }
                   ]
