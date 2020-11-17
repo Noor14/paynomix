@@ -44,7 +44,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     'TransactionType',
     'InsertedOn',
     'Amount',
-    'CustomerName',
+    'MerchantName',
     'Status',
     'CardholderName'
   ];
