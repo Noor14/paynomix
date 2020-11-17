@@ -1,18 +1,26 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
 import { transactionType, transactionStatus, snackBarConfig, snackBarConfigWarn } from '../../../../../constants/globalFunctions';
 import { TransactionService } from '../transaction.service';
 import * as globalConfig from '../../../../../constants/globalFunctions';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-transaction-table',
   templateUrl: './transaction-table.component.html',
   styleUrls: ['./transaction-table.component.scss'],
-  animations: fuseAnimations
+  animations: [
+  trigger('detailExpandRefund', [
+    state('collapsed', style({ height: '0px', minHeight: '0' })),
+    state('expanded', style({ height: '*' })),
+    transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+  ]),
+  fuseAnimations,
+]
 })
 export class TransactionTableComponent implements OnInit, AfterViewInit {
   public transStatus = transactionStatus;
@@ -27,8 +35,10 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   public dataSource = new MatTableDataSource<any>();
+  @Output() updateList = new EventEmitter<boolean>();
   public actionControlOnHover = -1;
   public displayedColumns: string[] = [
+    'Icon',
     'Select',
     'TransactionId',
     'TransactionType',
@@ -38,6 +48,13 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     'Status',
     'CardholderName'
   ];
+ public RefundDisplayedColumns: string[] = [
+   'subTransactionId', 
+   'subAmount', 
+   'status', 
+   'subInsertedOn', 
+   'subAction'
+]; 
   constructor(
     private readonly _dialog: MatDialog,
     private readonly _formBuilder: FormBuilder,
@@ -89,6 +106,11 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   openRefundDialog() {
     this.createRefundForm();
     this.dialogRef = this._dialog.open(this.refundDialog, { width: '600px' });
+    this.dialogRef.afterClosed().subscribe(res=>{
+      if(res){
+        this.updateList.emit(true)
+      }
+    })
   }
   createRefundForm() {
     this.refundForm = this._formBuilder.group({
@@ -98,16 +120,19 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       Reason: ['requested_by_customer', Validators.required],
     });
   }
-  Refund() {
+  refund() {
     if (this.refundForm.valid) {
       this._transactionService.refundTransaction(this.refundForm.value)
         .then((res: any) => {
           if (res && !res.StatusCode) {
             this._snackBar.open('Amount refunded successfully', '', snackBarConfig);
+            this.dialogRef.close(true);
+
           } else {
             this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
+            this.dialogRef.close();
           }
-          this.dialogRef.close();
+
         }).catch((err: HttpErrorResponse)=>(console.log));
     } else  {
       globalConfig.validateAllFormFields(this.refundForm)

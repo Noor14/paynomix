@@ -1,5 +1,32 @@
 .transactionTable{
     .table-responsive{
         max-height: calc(100vh - 373px) !important;
+        tr{
+            // &.refund-row{
+             
+            // }
+            &.expanded {
+                & + .refund-row{
+                    min-height: auto;
+                    overflow: visible;
+                }
+            }
+            &:not(.expanded){
+                & + .refund-row{
+                   display: none;
+                   min-height: auto;
+                   height: auto;
+                   overflow: hidden;
+                   td{
+                       padding-top: 0;
+                       padding-bottom: 0;
+                   }
+                }
+            }
+          
+            
+        }
     }
 }
+
+
