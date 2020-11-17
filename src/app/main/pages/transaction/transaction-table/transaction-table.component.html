@@ -8,8 +8,82 @@
  
 
   <div class="table-responsive mat-card">
-      <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
-		 
+      <table mat-table [dataSource]="dataSource" matSort class="w-100-p" multiTemplateDataRows>
+         <!--  Transaction refund Column -->
+        <ng-container matColumnDef="Icon">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button *ngIf="row?.Refund?.length" (click)=" 
+            expandedRefundDetail = expandedRefundDetail === row ? null : row; 
+            expandedElement = null;">
+              <mat-icon class="accent-fg">
+                 <ng-container *ngIf="expandedRefundDetail === row; else otherIcon">
+                   remove
+                 </ng-container>
+                 <ng-template #otherIcon>
+                   add
+                 </ng-template>
+               </mat-icon>
+            </button>
+           
+          </td>
+
+        </ng-container>
+
+        <!-- Refund Table -->
+        <ng-container matColumnDef="expandedRefundDetail">
+          <td mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
+            <div class="expandedRefundDetail" 
+              [@detailExpandRefund]="row == expandedRefundDetail ? 'expanded' : 'collapsed'">
+              <table mat-table #table class="w-100-p" [dataSource]="row.Refund"
+                *ngIf="row.Refund.length && expandedRefundDetail">
+                <ng-container matColumnDef="subTransactionId">
+                  <th mat-header-cell *matHeaderCellDef>Transaction Id</th>
+                  <td mat-cell *matCellDef="let row">{{row.TransactionId}}</td>
+                </ng-container>
+              
+                <ng-container matColumnDef="subAmount">
+                  <th mat-header-cell *matHeaderCellDef>Amount</th>
+                  <td mat-cell *matCellDef="let row">{{row.Amount | currency}}</td>
+                </ng-container>
+                <ng-container matColumnDef="subInsertedOn">
+                  <th mat-header-cell *matHeaderCellDef>Updated On</th>
+                  <td mat-cell *matCellDef="let row">
+                      
+                    {{row.InsertedOn | date: 'MM/dd/yyyy'}}<br>
+                    {{row.InsertedOn | date: 'hh:mm:ss a'}}
+        
+                </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef>Status</th>
+                    <td mat-cell *matCellDef="let row">
+                      <span  
+                      [ngClass]="(row?.Status ==  0) ?  'red-600' : (row?.Status ==  1) ?  'green-400' :  (row?.Status == 2) ? 'orange-500'  :  (row?.Status ==  3) ? 'blue-700' : 'blue-500'  " >
+                      Refund
+                  </span>
+                      
+                      </td>
+                  </ng-container>
+
+                <ng-container matColumnDef="subAction">
+                  <th mat-header-cell *matHeaderCellDef>Action</th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-icon>email</mat-icon>
+                    <mat-icon>print</mat-icon>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="RefundDisplayedColumns; sticky:true;">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: RefundDisplayedColumns;">
+                </tr>
+              </table>
+
+            </div>
+          </td>
+        </ng-container>		 
 		  <!--  Transaction Selection Column -->
 		      <ng-container matColumnDef="Select">
 		        <th mat-header-cell *matHeaderCellDef>
@@ -87,8 +161,11 @@
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
       <tr mat-row (mouseenter)="actionControlOnHover = i" (mouseleave)="actionControlOnHover = -1"
-        *matRowDef="let row; columns: displayedColumns;let i = index">
+        *matRowDef="let row; columns: displayedColumns; let i = index"
+        [class.expanded]="expandedRefundDetail == row"
+        >
       </tr>
+      <tr mat-row class="refund-row" *matRowDef="let row; columns: ['expandedRefundDetail']"></tr>
     </table>
   </div>
 </section>
@@ -123,7 +200,7 @@
         </button>    
         <button mat-raised-button
         color="accent"
-        aria-label="Refund" (click)="Refund()">
+        aria-label="Refund" (click)="refund()">
             Refund
         </button>
     </div>
