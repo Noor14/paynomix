@@ -6,7 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SettingService } from '../../../app/main/pages/settings/settings.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-email-dialog',
@@ -16,8 +15,8 @@ import { environment } from '../../../environments/environment';
 export class EmailDialogComponent implements OnInit {
   @Input() data: any;
  public emailForm : FormGroup;
- public appInfo = environment;
-
+ public showCC : boolean = false;
+ public showBCC : boolean = false;
    /**
      * Constructor
      *
