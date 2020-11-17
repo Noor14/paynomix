@@ -19,8 +19,12 @@ export class SaleService extends BaseService {
         return this.post(url, obj);
     }
     payTransaction(obj):any {
-        const url = `${environment.apiURL}Transaction`;
+        const url = `${environment.apiURL}Transaction/Update`;
         return this.post(url, obj);
+    }
+    getTransactionById(id : string) { 
+        const url = `${environment.apiURL}Transaction/GetTransactionById/${id}`;
+        return this.get(url);
     }
    
 }

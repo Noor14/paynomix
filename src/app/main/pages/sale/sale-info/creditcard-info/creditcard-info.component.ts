@@ -101,9 +101,10 @@ export class CreditcardInfoComponent implements OnInit {
 
 private transactionProcess(paymentIntent){
   const object = [{
-    Stripe : JSON.stringify(paymentIntent),
     ...this.data,
-    ...this.creditcardForm.value
+    ...this.creditcardForm.value,
+    Stripe : JSON.stringify(paymentIntent),
+    Status:1,
    }]
    this._saleService.payTransaction(object)
    .then((res :any) => {
