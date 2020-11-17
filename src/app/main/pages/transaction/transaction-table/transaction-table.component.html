@@ -49,29 +49,37 @@
                 <ng-container matColumnDef="subInsertedOn">
                   <th mat-header-cell *matHeaderCellDef>Updated On</th>
                   <td mat-cell *matCellDef="let row">
-                      
-                    {{row.InsertedOn | date: 'MM/dd/yyyy'}}<br>
-                    {{row.InsertedOn | date: 'hh:mm:ss a'}}
-        
-                </td>
+                    {{row.InsertedOn | date: 'mediumDate'}}
+                  </td>
                 </ng-container>
 
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef>Status</th>
                     <td mat-cell *matCellDef="let row">
-                      <span  
-                      [ngClass]="(row?.Status ==  0) ?  'red-600' : (row?.Status ==  1) ?  'green-400' :  (row?.Status == 2) ? 'orange-500'  :  (row?.Status ==  3) ? 'blue-700' : 'blue-500'  " >
-                      Refund
-                  </span>
-                      
+                    <mat-chip-list>
+                        <mat-chip class="py-4 px-16 fuse-white-fg"
+                        [ngClass]="(data?.Status == transStatus.declined ) ?  'red-600' : 
+                        (data?.Status ==  transStatus.approved) ?  'green-400' :  
+                        (data?.Status == transStatus.pending) ? 'orange-500'  :  
+                        (data?.Status ==  transStatus.funded) ? 'blue-700' : 
+                        'blue-500'">
+                        <small>
+                          Refund
+                        </small>
+                        </mat-chip>
+                      </mat-chip-list>
                       </td>
                   </ng-container>
 
                 <ng-container matColumnDef="subAction">
                   <th mat-header-cell *matHeaderCellDef>Action</th>
                   <td mat-cell *matCellDef="let row">
-                    <mat-icon>email</mat-icon>
-                    <mat-icon>print</mat-icon>
+                    <button mat-icon-button>
+                      <mat-icon class="secondry-text">email</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                      <mat-icon class="secondry-text">print</mat-icon>
+                    </button>
                   </td>
                 </ng-container>
 
