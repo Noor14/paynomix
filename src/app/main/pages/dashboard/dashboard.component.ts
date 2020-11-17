@@ -323,26 +323,29 @@ getDashboardStats(): void{
      if(res && !res.StatusCode){
          this.dashboardUserStats = res.Response;
          this.transactionGraphVolumeLabel = res.Response.Volume[0].time.map(x => moment(x).format('MMM D'));
+         if(this.dashboardUserStats.GraphViewModel.AvgTransGraph.data.length >= 0 || this.dashboardUserStats.GraphViewModel.AvgTransGraph.data == null ){
+            this.widgets.widget2.datasets[0].data =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.data
+            this.widgets.widget3.datasets[0].data =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.data
+            this.widgets.widget4.datasets[0].data =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.data
+            
+            this.widgets.widget2.datasets[0].label =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.label
+            this.widgets.widget3.datasets[0].label =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.label
+            this.widgets.widget4.datasets[0].label =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.label
+            
+            this.widgets.widget2.labels =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.days
+            this.widgets.widget3.labels =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.days
+            this.widgets.widget4.labels =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.days
+          
+            this.showBars = true
+         }
+        
+        
          if(this.dashboardUserStats && this.dashboardUserStats.Transactions
              && this.dashboardUserStats.Transactions.length){
             this.renderingComponent(TransactionTableComponent, {
               transaction: this.dashboardUserStats.Transactions
             })
-            if(this.dashboardUserStats.GraphViewModel.AvgTransGraph.data){
-                this.widgets.widget2.datasets[0].data =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.data
-                this.widgets.widget3.datasets[0].data =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.data
-                this.widgets.widget4.datasets[0].data =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.data
-                
-                this.widgets.widget2.datasets[0].label =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.label
-                this.widgets.widget3.datasets[0].label =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.label
-                this.widgets.widget4.datasets[0].label =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.label
-                
-                this.widgets.widget2.labels =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.days
-                this.widgets.widget3.labels =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.days
-                this.widgets.widget4.labels =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.days
-              
-                this.showBars = true
-             }
+          
 
           }else{
             this.renderingComponent(NoFoundComponent, {

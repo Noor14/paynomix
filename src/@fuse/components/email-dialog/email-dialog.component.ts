@@ -16,8 +16,9 @@ import { environment } from '../../../environments/environment';
 export class EmailDialogComponent implements OnInit {
   @Input() data: any;
  public emailForm : FormGroup;
- public appInfo = environment;
-
+ public showCC : boolean = false;
+ public showBCC : boolean = false;
+ public appInfo= environment
    /**
      * Constructor
      *

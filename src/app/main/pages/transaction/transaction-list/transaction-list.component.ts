@@ -54,6 +54,11 @@ export class TransactionListComponent implements OnInit {
       this.container.clear();
       this.componentRef = this.container.createComponent(factory);
       this.componentRef.instance.data = data;
+      this.componentRef.instance.updateList.subscribe(res=>{
+        if(res){
+          this.getTransaction();
+        }
+      })
   }
   getTransaction(): void{
     this._transactionService.transactionList(this._userConfigService.getUserMode())
