@@ -14,8 +14,9 @@ import { BasicInfoComponent } from './tabs/basic-info/basic-info.component';
 import { GeneralSettingComponent } from './tabs/general-setting/general-setting.component';
 import { MakeSaleSettingComponent } from './tabs/general-setting/general-tabs/make-sale-setting/make-sale-setting.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ApiKeysComponent } from './tabs/api-keys/api-keys.component';
 @NgModule({
-  declarations: [SettingsComponent, BasicInfoComponent, GeneralSettingComponent, MakeSaleSettingComponent],
+  declarations: [SettingsComponent, BasicInfoComponent, GeneralSettingComponent, MakeSaleSettingComponent, ApiKeysComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,
