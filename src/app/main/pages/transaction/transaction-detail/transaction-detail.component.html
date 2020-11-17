@@ -1,97 +1,192 @@
-<section class="transactionDetail w-100-p">
-    <h2>Transaction Detail</h2>
-    <hr />
+<div id="transaction-detail" 
+style="background-color:transparent !important;padding:15px;"
+ class="page-layout simple fullwidth" 
+ fxLayout="column">
+    <div class="center" style="background-color:white !important;">
 
-    <div class="mt-20 p-20 outer-layer" fxLayoutAlign="start stretch" fxLayoutAlign.gt-sm="space-between start">
-        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch"
-            fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-            <div fxFlex.gt-sm="60" fxFlex.sm="60" fxFlex="100" fxLayout="column" fxLayoutAlign="start "
-                [ngClass.sm]="'pr-12'" [ngClass.gt-sm]="'pr-12'">
-                <div fxFlex.gt-sm="40" fxFlex.sm="40" fxFlex="100" fxLayout="column" fxLayoutAlign="start stretch"
-                    [ngClass.sm]="'pl-12'" [ngClass.gt-sm]="'pl-12'" class="w-100-p">
-                    <div class="mat-card ">
-                        <span><h6>{{transactionDetail?.MerchantName}}</h6></span>
-                        <hr>
-                        <table class="w-100-p">
-                            <tr>
-                                <td>TRANSACTION #</td>
-                                <td>{{transactionDetail?.TransactionId}}</td>
-                            </tr>
-                            <tr>
-                                <td>Transaction Type</td>
-                                <td>{{
-                            (transactionDetail?.TransactionType ==  transType.CreditCardVoid) ?  'CC - Void ' : 
-                            (transactionDetail?.TransactionType ==  transType.CreditCardSale) ?  'CC - Sale ' :  
-                            (transactionDetail?.TransactionType == transType.CreditCardAuth) ? 'CC - Auth '  :  
-                            (transactionDetail?.TransactionType ==  transType.CreditCardFund) ? 'CC - Fund' : 
-                            (transactionDetail?.TransactionType ==  transType.CreditCardRefund) ? 'CC - Refund' : 
-                            (transactionDetail?.TransactionType ==  transType.CreditCardCapture) ? 'CC - Capture' : 
-                            (transactionDetail?.TransactionType ==  transType.ACHDebit) ? 'ACH - Debit' : 
-                            (transactionDetail?.TransactionType ==  transType.ACHRefund) ? 'ACH - Refund' : 
-                            'ACH - Void '
-                        }}</td>
-                            </tr>
-                            <tr>
-                                <td>Transaction Amount</td>
-                                <td>{{transactionDetail?.Amount | currency}}</td>
-                            </tr>
-                            <tr>
-                                <td>Status</td>
-                                <td>{{
-                            (transactionDetail?.TransactionType ==  transStatus.declined) ?  'Declined' : 
-                            (transactionDetail?.TransactionType ==  transStatus.approved) ?  'Approved' :  
-                            (transactionDetail?.TransactionType == transStatus.pending) ? 'Pending'  :  
-                            (transactionDetail?.TransactionType ==  transStatus.funded) ? 'Funded' : 'Refund' }}</td>
-                            </tr>
-                            <tr>
-                                <td>Method</td>
-                                <td>Credit Card</td>
-                            </tr>
-                            <tr>
-                                <td>Auth Code</td>
-                                <td>{{transactionDetail?.AuthCode}}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Card Details</b></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Cardholder Name</td>
-                                <td>{{transactionDetail?.CardholderName}}</td>
-                            </tr>
-                            <tr>
-                                <td>TRANSACTION METHOD</td>
-                                <td>Credit Card</td>
-                            </tr>
-                            <tr>
-                                <td>TRANSACTION TYPE</td>
-                                <td> {{transactionDetail?.CardType | titlecase}}</td>
-                            </tr>
-                            <tr>
-                                <td>Last 4 digits</td>
-                                <td>XXXX-XXXX-XXXX-{{transactionDetail?.Last4digit}}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Merchant Account Details</b></td> 
-                            </tr>
-                            <tr>
-                                <td>Name</td>
-                                <td>{{transactionDetail?.MerchantName}}</td>
-                            </tr>
-                            
-                            <tr>
-                                <td>METHOD</td>
-                                <td>KEY ENTERED</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="my-12" fxLayoutAlign="end">
-                        <button mat-raised-button color="accent">
-                            <mat-icon>print</mat-icon> Print
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="top-bg "></div>
+
+    <div class="content" fxLayout="column" fxLayoutAlign="space-between none">
+
+      
+            
+            <h2>Transaction Details</h2>
+            
+            <button
+            
+            [routerLink]="'/merchant/transaction'" 
+            
+            style="margin-left:5px;width:110px;color :white !important;background-color:#039be5"
+
+
+             mat-button class="accent">
+            <mat-icon>arrow_back</mat-icon>
+            </button>
+
+
+    <div fxLayout="row" fxLayoutAlign="space-around center"  fxLayoutGap="20px">
+   <div fxFlex="" class="printnot">  
+<table  class="maintable">
+<tr class="topTr">
+    <td class="LeftColumn">Transaction ID</td>
+    <td>{{transactionDetail.TransactionId}}</td>
+</tr>
+
+<tr class="bordertr">
+    <td class="LeftColumn">Transaction Type</td>
+    <td >
+
+            {{  
+            (transactionDetail?.TransactionType ==  0)?
+              'Void ' : (transactionDetail?.TransactionType ==  1)?
+              'Sale ' :  (transactionDetail?.TransactionType == 2)?
+              'Auth '  :  (transactionDetail?.TransactionType ==  4)?
+              'Refund' : (transactionDetail?.TransactionType ==  5)?
+              'Capture' : (transactionDetail?.TransactionType ==  6)?
+              'Debit' : (transactionDetail?.TransactionType ==  7)?
+              'Refund' : 'Void '
+            }}
+
+    </td>
+    <!-- <td class="righttd">---</td> -->
+
+</tr>
+
+<tr class="bordertr">
+    <td class="LeftColumn">Transaction Amount</td>
+    <td class="font-size-16">{{transactionDetail.Amount | currency}}</td>
+</tr>
+<tr class="bordertr">
+    <td class="LeftColumn">Status</td>
+    <td>
+    <span *ngIf="transactionDetail.Status == true" style="color:limegreen"> Approved</span>
+    <span *ngIf="transactionDetail.Status == false" style="color:red">Decline</span>
+    </td>
+</tr>
+<tr class="bordertr">
+    <td class="LeftColumn">Date and Time</td>
+    <td>{{transactionDetail.InsertedOn | date:'dd/MM/yyyy hh:mm:ss a'}}</td>
+</tr>
+<tr class="bordertr">
+    <td class="LeftColumn">Method</td>
+    <td>Credit Card</td>
+</tr>
+<tr class="bordertr">
+    <td class="LeftColumn">Auth Code</td>
+    <td>{{transactionDetail.AuthCode}}</td>
+</tr>
+<tr class="bordertr">
+    <td class="LeftColumnHeading">Card Details</td>
+    <td></td>
+</tr>
+<tr class="bordertr">
+    <td class="LeftColumn">Cardholder Name</td>
+    <td>{{transactionDetail.CardholderName}}</td>
+</tr>
+<tr class="bordertr">
+    <td class="LeftColumn">Card Type</td>
+    <td>
+        {{transactionDetail.CardType | titlecase}}
+    </td>
+</tr>
+<tr class="bordertr">
+    <td class="LeftColumn">Last 4 Digits</td>
+    <td>XXXX-XXXX-XXXX-{{transactionDetail.Last4digit}}</td>
+</tr>
+<tr class="bordertr">
+    <td class="LeftColumnHeading" >Merchant Account Details</td>
+    <td></td>
+</tr>
+<tr class="bordertr lastTr">
+    <td>Name</td>
+    <td>{{transactionDetail.MerchantName}}</td>
+</tr>
+</table>
+</div> 
+
+<div fxFlex="60" >
+    <div class="mat-card right-card printDetail "id="printDetail">
+<span>
+    <b>{{transactionDetail.MerchantName}}</b>
+</span>
+<br>
+<hr>
+
+<table class="totalTable">
+<tr>
+    <td class="righttd">TRANSACTION ID</td>
+    <td  class="righttd">{{transactionDetail.TransactionId}}</td>
+</tr>
+<tr>
+    <td  class="righttd">DATE AND TIME</td>
+    <td  class="righttd">{{transactionDetail.InsertedOn | date:'dd/MM/yyyy hh:mm:ss a'}}</td>
+</tr>
+<tr>
+    <td  class="righttd">STATUS</td>
+    <td  class="righttd">
+        <span *ngIf="transactionDetail.Status == true" style="color:limegreen"> Approved</span>
+        <span *ngIf="transactionDetail.Status == false" style="color:red">Decline</span>
+    </td>
+</tr>
+<tr>
+    <td  class="righttd">AUTH CODE</td>
+    <td  class="righttd">{{transactionDetail.AuthCode}}</td>
+</tr>
+<tr>
+    <td  class="righttd">TRANSACTION METHOD</td>
+ 
+    <td  class="righttd">Credit Card</td>
+
+</tr>
+<tr>
+    <td class="righttd">TRANSACTION TYPE</td>
+    <td class="righttd">
+
+        {{
+            (transactionDetail?.TransactionType ==  0)? 
+            'Void ' : (transactionDetail?.TransactionType ==  1)?
+            'Sale ' :  (transactionDetail?.TransactionType == 2)?
+            'Auth '  :  (transactionDetail?.TransactionType ==  4)?
+            'Refund' : (transactionDetail?.TransactionType ==  5)?
+            'Capture' : (transactionDetail?.TransactionType ==  6)?
+            'Debit' : (transactionDetail?.TransactionType ==  7)?
+            'Refund' : 'Void '}}
+
+    </td>
+</tr>
+<tr>
+    <td class="righttd">CARDHOLDER NAME</td>
+    <td class="righttd">{{transactionDetail.CardholderName}}</td>
+</tr>
+<tr>
+    <td class="righttd">CARD</td>
+    <td class="righttd">XXXX-XXXX-XXXX-{{transactionDetail.Last4digit}}</td>
+</tr>
+<tr>
+    <td class="righttd">CARD TYPE</td>
+    <td class="righttd">
+        {{transactionDetail.CardType | titlecase}}
+    </td>
+</tr>
+</table>
+<hr>
+
+<hr>
+<table class="totalTable">
+    <tr>
+        <td class="righttd total">TOTAL (USD)</td>
+        <td class="righttd totalamt" style="font-size:14px !important;"><b>{{transactionDetail.Amount | currency}}</b></td>
+    </tr>
+
+</table>
+
+</div>
+<div class="printnot">
+    <button 
+    mat-button class="accent ml-136 pbtn" (click)="print()">Print</button>
+</div>
+</div>
+</div>
     </div>
-</section>
+</div>
+</div>
