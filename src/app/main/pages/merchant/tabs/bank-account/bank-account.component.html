@@ -14,11 +14,11 @@
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
                 <mat-label>Bank Routing Number</mat-label>
-                <input numberOnly matInput formControlName="RoutingNumber" [maxlength]="validatorConfig.maxRoutingNo" minlength="9" required>
+                <input numberOnly matInput formControlName="RoutingNumber" [maxlength]="validatorConfig.maxRoutingNo" [minlength]="validatorConfig?.minRoutingNo" required>
                 <mat-error *ngIf="bankAccountForm.get('RoutingNumber').hasError('required')">
                     Bank routing number is required!
                 </mat-error>
-                <mat-error *ngIf="!bankAccountForm.get('RoutingNumber').hasError('required') && bankAccountForm.get('RoutingNumber').hasError('minLength')">
+                <mat-error *ngIf="!bankAccountForm.get('RoutingNumber').hasError('required') && bankAccountForm.get('RoutingNumber').hasError('minlength')">
                     Bank routing number is invalid
                 </mat-error>
             </mat-form-field>
@@ -29,7 +29,7 @@
                 </mat-error>
                 <mat-error
                 *ngIf="!bankAccountForm.get('AccountNumber').hasError('required') &&
-                        bankAccountForm.get('AccountNumber').hasError('maxLength')">
+                        bankAccountForm.get('AccountNumber').hasError('maxlength')">
                 Please enter a valid acccount number
                 </mat-error>
             </mat-form-field>

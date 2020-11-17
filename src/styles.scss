@@ -41,10 +41,10 @@ app-pages{
         .mat-cell,.mat-header-cell
           {
             padding: 5px;
-            text-align: center;
-            & *{
-             justify-content: center;
-            }
+            // text-align: center;
+            // & *{
+            //  justify-content: end;
+            // }
           }
     }
 

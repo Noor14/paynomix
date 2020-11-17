@@ -4,9 +4,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { UserConfigService } from '@fuse/services/user.config.service';
-import { validator, validateAllFormFields, snackBarConfig, snackBarConfigWarn } from '../../../../../constants/globalFunctions'
+import { validator, validateAllFormFields, snackBarConfig, snackBarConfigWarn, } from '../../../../../constants/globalFunctions'
 import { UserService } from '../user.service';
-
+import * as globalConfig from '../../../../../constants/globalFunctions';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -15,7 +15,7 @@ import { UserService } from '../user.service';
 export class ChangePasswordComponent implements OnInit {
   public changePasswordForm: FormGroup;
   public passwordMisMatchError: boolean;
-
+  public globalConfig = globalConfig;
   /**
      * Constructor
      *
@@ -39,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
     this.changePasswordForm = this._formBuilder.group({
       UserName: [this._userConfigService.loggedInUser.UserName, Validators.required],
       Password: ['', Validators.required],
-      NewPassword: ['', [Validators.required, Validators.pattern(validator.passwordPattern)]],
+      NewPassword: ['', [Validators.required, Validators.minLength(globalConfig.validator.minPasswordLength), Validators.pattern(validator.passwordPattern)]],
       ConfirmPassword: ['', [Validators.required, Validators.pattern(validator.passwordPattern)]]
     });
   }
@@ -58,7 +58,7 @@ export class ChangePasswordComponent implements OnInit {
       }
     }
     else {
-      this.passwordMisMatchError = true;
+      // this.passwordMisMatchError = true;
       validateAllFormFields(this.changePasswordForm)
     }
   }

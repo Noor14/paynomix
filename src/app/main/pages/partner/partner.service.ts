@@ -20,5 +20,5 @@ export class PartnerService extends BaseService {
             const url = `${environment.apiURL}Partner`;
             return this.post(url, obj);   
        }
-    
+
 }

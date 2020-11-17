@@ -102,7 +102,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.container.clear();
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = data;
-    this.componentRef.instance.resetCreditCard.subscribe(res => {
+    this.componentRef.instance.resetCreditCard && this.componentRef.instance.resetCreditCard.subscribe(res => {
       if (res) {
         this.container.clear();
         this.transactionApproved = true;
@@ -114,10 +114,15 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.componentRef.changeDetectorRef.detectChanges();
   }
 
-  cardType(type: number, data): void {
+  cardType(type: number, data?): void {
     this.selectedCardType = type;
-    (type) ? this.renderingComponent(AchInfoComponent) :
-      this.renderingComponent(CreditcardInfoComponent, data);
+    if(type) {
+      this.renderingComponent(AchInfoComponent)
+    }else if(!type && (data || this.payObject)){
+      this.renderingComponent(CreditcardInfoComponent, data||this.payObject);
+    }else{
+     this.container.clear();
+    }
   }
 
   getMerchantLocation(): void {

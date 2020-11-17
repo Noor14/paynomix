@@ -14,7 +14,7 @@
                 <app-bank-account [bankAccountDetail]="merchantDetail?.MerchantBankAccount" (stepFour)="bankAccountForm = $event" ></app-bank-account>
             </mat-step>
             <mat-step label="Done">
-                <app-all-gether-info [step]="stepper" [allInfo]="boardingObject" (saveAll) ="save()" ></app-all-gether-info>
+                <app-all-gether-info [step]="stepper" [allInfo]="boardingObject" (saveAll) ="save()" [onBoardError]="onBoardError"></app-all-gether-info>
             </mat-step>
         </mat-horizontal-stepper>
 

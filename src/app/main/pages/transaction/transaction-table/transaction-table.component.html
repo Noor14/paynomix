@@ -1,17 +1,40 @@
 <section class="transactionTable">
-  <mat-paginator [pageSizeOptions]="[100, 150, 200, 250]"></mat-paginator>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <button (click)="openRefundDialog()" *ngIf="showRefund"  mat-raised-button class="accent">
+      Refund(s)
+    </button>
+    <mat-paginator [pageSizeOptions]="[100, 150, 200, 250]" class="ml-auto"></mat-paginator>
+  </div>
+ 
 
   <div class="table-responsive mat-card">
       <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
-          <!--  Transaction Type Column -->
-          <ng-container matColumnDef="TransactionId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Trans. ID </th>
-            <td mat-cell *matCellDef="let row"> {{row.TransactionId}} </td>
-          </ng-container>
-          <!--  Transaction Type Column -->
-          <ng-container matColumnDef="TransactionType">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Trans. Type</th>
-            <td mat-cell *matCellDef="let row" >{{
+		 
+		  <!--  Transaction Selection Column -->
+		      <ng-container matColumnDef="Select">
+		        <th mat-header-cell *matHeaderCellDef>
+		          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+		            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+		          </mat-checkbox>
+		        </th>
+		        <td mat-cell *matCellDef="let row">
+		          <mat-checkbox (click)="$event.stopPropagation(); selectRefundElement(row);"
+		            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+		            [aria-label]="checkboxLabel(row)">
+		          </mat-checkbox>
+		        </td>
+		      </ng-container>
+      
+	          <!--  Transaction Id Column -->
+	          <ng-container matColumnDef="TransactionId">
+	            <th mat-header-cell *matHeaderCellDef mat-sort-header> Trans. ID </th>
+	            <td mat-cell *matCellDef="let row"> {{row.TransactionId}} </td>
+	          </ng-container>
+
+      		    <!--  Transaction Type Column -->
+	          <ng-container matColumnDef="TransactionType">
+	            <th mat-header-cell *matHeaderCellDef mat-sort-header>Trans. Type</th>
+	            <td mat-cell *matCellDef="let row" >{{
                 (row.TransactionType ==  transType.CreditCardVoid) ?  'CC - Void ' : 
                 (row.TransactionType ==  transType.CreditCardSale) ?  'CC - Sale ' :  
                 (row.TransactionType == transType.CreditCardAuth) ? 'CC - Auth '  :  
@@ -21,53 +44,91 @@
                 (row.TransactionType ==  transType.ACHDebit) ? 'ACH - Debit' : 
                 (row.TransactionType ==  transType.ACHRefund) ? 'ACH - Refund' : 
                 'ACH - Void '}}</td>
-          </ng-container>
-          <!-- Inserted On Column -->
-          <ng-container matColumnDef="InsertedOn">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Time </th>
-            <td mat-cell *matCellDef="let row" [matTooltip]="row?.InsertedOn" [matTooltipPosition]="'above'"> {{row.InsertedOn | date: 'medium'}} </td>
-          </ng-container>
-          <!-- Trans. Amount Column -->
-          <ng-container matColumnDef="Amount">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Trans. Amount </th>
-            <td mat-cell *matCellDef="let row" [matTooltip]="row?.Amount" [matTooltipPosition]="'above'"> {{row.Amount | currency}} </td>
-          </ng-container>
-          <!-- Marchant Name Column -->
-          <ng-container matColumnDef="CustomerName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Marchant Name </th>
-            <td mat-cell *matCellDef="let row" [matTooltip]="row?.CustomerName" [matTooltipPosition]="'above'"> {{row?.CustomerName || '--'}}</td>
-          </ng-container>
-          <!--  Status  Column -->
-          <ng-container matColumnDef="Status">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-              <td mat-cell *matCellDef="let row"> {{
+		        </ng-container>
+		          <!-- Inserted On Column -->
+		        <ng-container matColumnDef="InsertedOn">
+		            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Time </th>
+		            <td mat-cell *matCellDef="let row" [matTooltip]="row?.InsertedOn" [matTooltipPosition]="'above'"> {{row.InsertedOn | date: 'medium'}} </td>
+		          </ng-container>
+		          <!-- Trans. Amount Column -->
+		          <ng-container matColumnDef="Amount">
+		            <th mat-header-cell *matHeaderCellDef mat-sort-header> Trans. Amount </th>
+		            <td mat-cell *matCellDef="let row" [matTooltip]="row?.Amount" [matTooltipPosition]="'above'"> {{row.Amount | currency}} </td>
+		          </ng-container>
+		          <!-- Marchant Name Column -->
+		          <ng-container matColumnDef="CustomerName">
+		            <th mat-header-cell *matHeaderCellDef mat-sort-header> Marchant Name </th>
+		            <td mat-cell *matCellDef="let row" [matTooltip]="row?.CustomerName" [matTooltipPosition]="'above'"> {{row?.CustomerName || '--'}}</td>
+		          </ng-container>
+		          <!--  Status  Column -->
+		          <ng-container matColumnDef="Status">
+	              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+	              <td mat-cell *matCellDef="let row"> {{
                   (row.Status == transStatus.declined ) ?  'Declined' : 
                   (row.Status ==  transStatus.approved) ?  'Approved' :  
                   (row.Status == transStatus.pending) ? 'Pending'  :  
                   (row.Status ==  transStatus.funded) ? 'Funded' : 
                   'Refund' }}</td>
-          </ng-container>
-          <!--  Cardholder Name Column -->
-          <ng-container matColumnDef="CardholderName">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cardholder Name </th>
-              <td mat-cell *matCellDef="let row;let ind = index">
-                  <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
-                       {{row.CardholderName || '--'}}
-                  </ng-template>
-                  <ng-template #actionControl>
-                      <button mat-icon-button aria-label="detail" matTooltip="Transaction Details"
-                      [routerLink]="['/pages/transaction/transaction-detail', row.TransactionId]"
-                      [@fadeIn]>
-                        <mat-icon>arrow_forward</mat-icon> 
-                      </button>      
-                    </ng-template>
-              </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
-          <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
-          *matRowDef="let row; columns: displayedColumns;let i = index">
-          </tr>
-      </table>
+      </ng-container>
+      <!--  Cardholder Name Column -->
+      <ng-container matColumnDef="CardholderName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cardholder Name </th>
+        <td mat-cell *matCellDef="let row;let ind = index">
+          <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
+            {{row.CardholderName || '--'}}
+          </ng-template>
+          <ng-template #actionControl>
+            <button mat-icon-button aria-label="detail" matTooltip="Transaction Details"
+              [routerLink]="['/pages/transaction/transaction-detail', row.TransactionId]" [@fadeIn]>
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          </ng-template>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+      <tr mat-row (mouseenter)="actionControlOnHover = i" (mouseleave)="actionControlOnHover = -1"
+        *matRowDef="let row; columns: displayedColumns;let i = index">
+      </tr>
+    </table>
   </div>
 </section>
 
+<ng-template #refundDialog>
+  <div class="dialog-content-wrapper">
+    <mat-toolbar class="mat-accent">
+        <mat-toolbar-row fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title">Refund</span>
+            <button mat-icon-button aria-label="Close dialog" (click)="dialogRef.close()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 m-0">
+      <form name="refundForm" fxLayout="column"  [formGroup]="refundForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Transaction Amount</mat-label>
+            <input type="TransactionAmount" matInput formControlName="TransactionAmount"  required>  
+        </mat-form-field> 
+        <mat-form-field appearance="outline">
+            <mat-label>Amount To Refund</mat-label>
+            <input type="Amount" numberOnly matInput formControlName="Amount" >  
+        </mat-form-field> 
+    </form>
+        <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button
+        class="mr-8 accent-alpha-bg"
+        aria-label="Cancel" (click)="dialogRef.close()">
+            Cancel
+        </button>    
+        <button mat-raised-button
+        color="accent"
+        aria-label="Refund" (click)="Refund()">
+            Refund
+        </button>
+    </div>
+    </div>
+
+
+  </div>
+</ng-template>
