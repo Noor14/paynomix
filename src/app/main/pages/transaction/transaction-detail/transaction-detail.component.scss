@@ -1,22 +1,77 @@
-.transactionDetail{
-    mat-card{
-        table{
-            border-collapse: collapse;
-           
-                tr{  
-                    .hrLine{
-                    border-top:1px solid #aba6a6;
-                     }
-                    
-                    td{
-                        font-size: 10px;
-                       text-align: right;
-                       width: 100%;
-                      
-                        }
-                } 
-               
-            }
-           
+    .totalTable{
+        width:100%;
+
+        
+        }
+    .right-card{
+    width: 267px;margin-top: -91px !important;
+    border-top: 10px solid #f4511e;
+    border-radius: 0px;
     }
+    .pbtn{
+        width:110px;
+    }
+.righttd{
+    text-align:right;
+    font-size:8px;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 0px !important;
+    
 }
+    .LeftColumn{
+        color:gray;
+        font-size:14px;
+    }
+    .LeftColumnHeading{
+        font-size:14px;
+        font-weight:600;
+    }
+    
+
+.bordertr{
+    border-style: solid;
+    border-top: 1px solid #c5bbbb;
+    border-right: 1px solid #c5bbbb;
+    border-bottom: 1px solid #c5bbbb;
+    border-left: none;
+}
+
+td{
+    padding-top: 8px;
+    padding-bottom: 9px;
+    padding-left: 10px;
+}
+
+.maintable{
+    border-collapse: collapse;
+    width: 430px;
+}
+.topTr{
+    border-right: 1px solid #c5bbbb;
+}
+.lastTr{
+    border-bottom: 1px solid #c5bbbb;
+}
+.printnot{
+ margin-top:5px;
+    }
+
+@media print {
+    .printDetail {
+       position: fixed;
+       width: 100%;
+       height:490px;
+     
+       border-top: 10px solid #f4511e;
+       border-radius: 0px;
+       left: 0;
+       right: 0;
+       top: 100px;
+       bottom: 0;
+       box-shadow:none;
+     }
+     .printnot{
+     display:none !important;
+     }
+   }

@@ -58,7 +58,7 @@ export class ChangePasswordComponent implements OnInit {
       }
     }
     else {
-      // this.passwordMisMatchError = true;
+      this.passwordMisMatchError = true;
       validateAllFormFields(this.changePasswordForm)
     }
   }

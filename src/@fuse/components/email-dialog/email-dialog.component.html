@@ -9,18 +9,22 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24">
+        <div fxLayout="row" fxLayoutAlign="end" class="Cursorpointer">
+            <button mat-icon-button  aria-label="CC" (click)="showCC = true" *ngIf="!showCC">Cc</button>
+            <button mat-icon-button  aria-label="BCC" (click)="showBCC = true" *ngIf="!showBCC ">Bcc</button>
+        </div> 
         <form name="emailForm" fxLayout="column"  [formGroup]="emailForm">
             <mat-form-field appearance="outline">
                 <mat-label>To</mat-label>
                 <input type="email" matInput formControlName="SendTo"  required>  
             </mat-form-field> 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="showCC">
                 <mat-label>CC</mat-label>
                 <input type="email" matInput formControlName="Cc" >  
             </mat-form-field> 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="showBCC">
                 <mat-label>Bcc</mat-label>
-                <input  type="email" matInput formControlName="Bcc" >  
+                <input  type="email" matInput formControlName="Bcc">  
             </mat-form-field> 
             <mat-form-field appearance="outline">
             <mat-label>Subject</mat-label>
@@ -31,12 +35,12 @@
                 <textarea matInput rows="5" readonly>
           Hello,
 
-          Thank you for signing up on Paynomix Inc. You’re almost ready to go! 
+          Thank you for signing up on {{appInfo?.title}} Inc. You’re almost ready to go! 
           Please fill out your application to complete the boarding process by
           clicking the following link.
           Launch Application
           We appreciate the opportunity to work with you.
-          Paynomix Team.
+          {{appInfo?.title}} Team.
                 </textarea> 
             </mat-form-field>
 
