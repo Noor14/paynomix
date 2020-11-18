@@ -29,10 +29,18 @@
             <mat-form-field appearance="outline" *ngIf="showCC">
                 <mat-label>CC</mat-label>
                 <input type="email" matInput formControlName="Cc" >  
+                <mat-error
+                *ngIf="emailForm.get('Cc').hasError('email') || emailForm.get('Cc').hasError('pattern')">
+                Please enter a valid email address
+            </mat-error> 
             </mat-form-field> 
             <mat-form-field appearance="outline" *ngIf="showBCC">
                 <mat-label>Bcc</mat-label>
                 <input  type="email" matInput formControlName="Bcc">  
+                <mat-error
+                *ngIf="emailForm.get('Bcc').hasError('email') || emailForm.get('Bcc').hasError('pattern')">
+                Please enter a valid email address
+            </mat-error> 
             </mat-form-field> 
             <mat-form-field appearance="outline">
             <mat-label>Subject</mat-label>
