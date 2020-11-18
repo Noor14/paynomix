@@ -200,7 +200,7 @@
             <mat-label>Amount To Refund</mat-label>
             <input type="Amount" matInput formControlName="Amount" required> 
             <mat-error *ngIf="refundForm.get('Amount').hasError('required')">Amount To Refund is required</mat-error>
-            <mat-error *ngIf="refundForm.get('Amount').hasError('amountExceed')">Amount should not exceed from transaction Amount</mat-error>
+            <mat-error *ngIf="refundForm.get('Amount').hasError('amountExceed')">Amount should not exceed from transaction amount</mat-error>
         </mat-form-field> 
     </form>
         <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
