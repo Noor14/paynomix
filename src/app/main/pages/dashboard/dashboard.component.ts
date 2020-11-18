@@ -335,18 +335,14 @@ getDashboardStats(): void{
             this.widgets.widget2.labels =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.days
             this.widgets.widget3.labels =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.days
             this.widgets.widget4.labels =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.days
-          
-            this.showBars = true
+            this.showBars = true;
          }
-        
         
          if(this.dashboardUserStats && this.dashboardUserStats.Transactions
              && this.dashboardUserStats.Transactions.length){
             this.renderingComponent(TransactionTableComponent, {
               transaction: this.dashboardUserStats.Transactions
             })
-          
-
           }else{
             this.renderingComponent(NoFoundComponent, {
               icon: 'no-transaction',
