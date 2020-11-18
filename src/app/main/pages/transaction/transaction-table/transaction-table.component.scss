@@ -1,29 +1,63 @@
 .transactionTable{
     .table-responsive{
         max-height: calc(100vh - 373px) !important;
-        tr{
-            &.expanded {
-                & + .refund-row{
-                    min-height: auto;
-                    overflow: visible;
-                }
-            }
-            &:not(.expanded){
-                & + .refund-row{
-                   display: none;
-                   min-height: auto;
-                   height: auto;
-                   overflow: hidden;
-                   td{
-                       padding-top: 0;
-                       padding-bottom: 0;
-                   }
-                }
-            }
-          
+            table{
+                thead{
+                        tr{
+                            th{
+                                z-index: 101 !important;
+                                &:nth-child(2){
+                                z-index: 102 !important;
+                                mat-checkbox{
+                                    vertical-align: super;
+                                }
+                                }
+                            }
+                        }
             
+                }
+                tbody{
+                    tr{
+                        &.expanded {
+                            & + .refund-row{
+                                min-height: auto;
+                                overflow: visible;
+                            }
+                        }
+                        &:not(.expanded){
+                            & + .refund-row{
+                               display: none;
+                            }
+                        }
+                        td:nth-child(2){
+                            mat-checkbox{
+                                vertical-align: super;
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            .expandedRefundDetail{
+                table{
+                    thead{
+                        tr{
+                            th{
+                                z-index: 100 !important;
+                                &:nth-child(2){
+                                z-index: 100 !important;
+                                }
+                            }
+                        }
+            
+                }  
+                }
+            }
         }
-    }
+         
+     
+   
+       
 }
 
 
