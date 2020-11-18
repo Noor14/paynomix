@@ -39,7 +39,7 @@ export class TransactionTableComponent implements OnInit {
   public dataSource = new MatTableDataSource<any>();
   @Output() updateList = new EventEmitter<boolean>();
   public actionControlOnHover = -1;
-  public displayedColumns: string[] = [
+  private columnstoDisplay: string[] = [
     'Icon',
     'Select',
     'TransactionId',
@@ -57,6 +57,8 @@ export class TransactionTableComponent implements OnInit {
    'status', 
    'InsertedOn'
 ]; 
+public displayedColumns : string[]= this.columnstoDisplay.slice()
+
   constructor(
     private readonly _dialog: MatDialog,
     private readonly _formBuilder: FormBuilder,
@@ -69,6 +71,9 @@ export class TransactionTableComponent implements OnInit {
       this.dataSource.data = this.data.transaction;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      if(this.data.hideCol && this.displayedColumns.length){
+        this.displayedColumns = this.displayedColumns.slice(2);
+      }
     }
   }
   masterToggle() {

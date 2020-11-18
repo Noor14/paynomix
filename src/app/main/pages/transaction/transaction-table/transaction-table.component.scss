@@ -12,9 +12,7 @@
                                     vertical-align: super;
                                     }
                                 }
-                                &.hideCol:nth-child(1), &.hideCol:nth-child(2), &.hideCol:nth-child(3){
-                                    display: none;
-                                }
+                               
                             }
                         }
             
@@ -33,9 +31,6 @@
                             }
                         }
                         td{
-                            &.hideCol:nth-child(1), &.hideCol:nth-child(2), &.hideCol:nth-child(3){
-                                display: none;
-                            }
                             &:nth-child(2){
                                 mat-checkbox{
                                     vertical-align: super;
