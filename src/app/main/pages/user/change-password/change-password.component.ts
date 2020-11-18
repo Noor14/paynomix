@@ -57,8 +57,11 @@ export class ChangePasswordComponent implements OnInit {
         }).catch((err: HttpErrorResponse) => (console.log))
       }
     }
-    else {
-      this.passwordMisMatchError = true;
+    else if(this.changePasswordForm.valid && this.changePasswordForm.controls['ConfirmPassword'].value != this.changePasswordForm.controls['NewPassword'].value){
+      this.changePasswordForm.controls.ConfirmPassword.setErrors({
+        notMatched: true
+     });
+    }else{
       validateAllFormFields(this.changePasswordForm)
     }
   }
