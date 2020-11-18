@@ -153,19 +153,13 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
         if (res && !res.StatusCode) {
           if (res.Response.PublishKey) {
             this._stripeService.setKey(res.Response.PublishKey);
-            this.payObject = {
+            const obj = {
               Amount: Amount / 100,
               LocationId: this.selectedLocationId,
               SecretKey: res.Response.SecretKey,
               TransactionId: res.Response.TransactionId,
             }
-            this._saleService.getTransactionById(res.Response.TransactionId).
-            then((res:any)=> {
-              if(res && !res.StatusCode) {      
-                this.payObject = {...this.payObject, ...res.Response}
-                this.cardType(this.selectedCardType, this.payObject);
-              }
-            })
+            this.getTransactionByID(obj, res.Response.TransactionId);
           } else {
             this._snackBar.open('Please select another location', '', snackBarConfigWarn);
           }
@@ -173,6 +167,18 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
           this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
         }
       }).catch((err: HttpErrorResponse) => (console.log))
+  }
+  private getTransactionByID(obj, id){
+    this._saleService.getTransactionById(id).
+    then((res:any)=> {
+      if(res && !res.StatusCode) {      
+        this.payObject = {...obj, ...res.Response}
+        this.cardType(this.selectedCardType, this.payObject);
+      } else {
+        this.payObject = {}
+        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
+      }
+    }).catch((err: HttpErrorResponse) => (console.log));
   }
   personalInformation(value) {
     this.payObject = { ...this.payObject, ...value };
