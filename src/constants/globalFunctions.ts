@@ -299,7 +299,7 @@ export const locationConfig =
         name: 'United States'
     }]
 } 
-
+export const truncateTextLength = 25;
 
 export const validator = {
   emailPattern : /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/,
@@ -309,5 +309,8 @@ export const validator = {
   maxPercentage: 100,
   maxRoutingNo: 9,
   minRoutingNo: 9,
-  passwordPattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{0,}$/
+  maxName: 25,
+  maxFieldLength:35,
+  passwordPattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$.!%*#?&])[A-Za-z\d@$!%*.#?&]{0,}$/,
+  minPasswordLength: 8
 };

@@ -6,13 +6,17 @@
     <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
             <mat-label>First name</mat-label>
-            <input matInput formControlName="FirstName" required >
-            <mat-error>First name is required!</mat-error>
+            <input matInput formControlName="FirstName" required [maxlength]="globalConfig.validator.maxName" >
+            <mat-error *ngIf="ownerDetailForm.get('FirstName').hasError('required')">First name is required!</mat-error>
+            <mat-error *ngIf="!ownerDetailForm.get('FirstName').hasError('required') && ownerDetailForm.get('FirstName').hasError('maxlength')" > First Name should have maximun length of 
+                {{globalConfig?.validator?.maxName}} </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
             <mat-label>Last Name</mat-label>
-            <input matInput formControlName="LastName" required >
-            <mat-error>Last Name is required!</mat-error>
+            <input matInput formControlName="LastName" required [maxlength]="globalConfig.validator.maxName">
+            <mat-error *ngIf="ownerDetailForm.get('LastName').hasError('required')">Last name is required!</mat-error>
+            <mat-error *ngIf="!ownerDetailForm.get('LastName').hasError('required') && ownerDetailForm.get('LastName').hasError('maxlength')" > Last name should have maximun length of 
+                {{globalConfig?.validator?.maxName}} </mat-error>
         </mat-form-field>
        
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
@@ -27,7 +31,7 @@
     <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
             <mat-label>SSN </mat-label>
-            <input matInput numberOnly formControlName="SSN" >
+            <input matInput mask="000-00-0000"  formControlName="SSN" >
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
             <mat-label>Drivers License </mat-label>
@@ -62,7 +66,7 @@
         <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
             <mat-label>State</mat-label>
             <mat-select formControlName="State" required>
-                <mat-option [value]="item.name" *ngFor="let item of locationObj.states">{{item.name}}</mat-option>
+                <mat-option [value]="item.name" *ngFor="let item of globalConfig?.locationConfig?.states">{{item.name}}</mat-option>
             </mat-select>
             <mat-error> State is required!</mat-error>
         </mat-form-field>
@@ -71,7 +75,7 @@
     <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
             <mat-label>Zip /Postal Code</mat-label>
-            <input matInput formControlName="Zip" numberOnly required [maxlength]="validatorObj.zipMaxLength">
+            <input matInput formControlName="Zip" numberOnly required [maxlength]="globalConfig?.validator?.zipMaxLength">
             <mat-error *ngIf="ownerDetailForm.get('Zip').hasError('required')">
                 Postal Code is required!
             </mat-error>
@@ -91,7 +95,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
             <mat-label>Owner's Phone </mat-label>
-            <input matInput formControlName="Phone" required >
+            <input mask="(000) 000-0000" matInput formControlName="Phone" required >
             <mat-error> Owner's Phone is required!</mat-error>
         </mat-form-field>
     </div>

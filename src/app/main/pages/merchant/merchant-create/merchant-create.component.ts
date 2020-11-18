@@ -13,7 +13,7 @@ import { MerchantService } from '../merchant.service';
   styleUrls: ['./merchant-create.component.scss']
 })
 export class MerchantCreateComponent implements OnInit {
-
+public onBoardError: string = undefined;
  /**
      * Constructor
      *
@@ -33,12 +33,14 @@ export class MerchantCreateComponent implements OnInit {
   }
 
   createMerchant(event: any): void{
+    this.onBoardError = undefined;
     this._merchantService.saveMerchant(event)
     .then((res: any) => {
       if(res && !res.StatusCode){
         this._snackBar.open('Merchant created', '', snackBarConfig);
         this.openDialog(res.Response);        
       }else{
+        this.onBoardError = res.StatusMessage;
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
@@ -47,7 +49,7 @@ export class MerchantCreateComponent implements OnInit {
     const object:any = {
       SendTo: obj.MerchantAccountSetup.MerchantEmail,
       Subject: obj.EmailSubject,
-      HtmlBodyContent: obj.EmailBody,
+      BodyContent: obj.EmailBody,
       MerchantName: `${obj.FirstName} ${obj.LastName}`,
       PartnerId: obj.PartnerId
     }

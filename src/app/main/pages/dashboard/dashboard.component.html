@@ -1,4 +1,5 @@
-<section class="dashboard w-100-p">
+<section class="dashboard w-100-p"
+>
 
     <section fxLayout="row" fxLayoutALign="space-between center">
         <h2>Dashboard</h2>
@@ -13,14 +14,16 @@
     </section>
 
     <section class="transactionGrid" fxLayout="column" fxLayoutAlign="start"
-    fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+    fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start"
+   
+    >
 
         <!-- Widget 1 -->
         <div class="widget" fxFlex="100" fxFlex.gt-sm="33">
 
             <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
 
-                <div class="p-16 pb-0" fxLayout="column" fxLayoutAlign="end start">
+                <div class="p-16 pb-0" [ngClass]="{'pb-16': !showBars}" fxLayout="column" fxLayoutAlign="end start">
 
                         <div class="h3 secondary-text">Total Transactions (Last 7 days)</div>
                         <div class="font-size-40 font-weight-300 line-height-1 mt-8 w-100-p transDigit">
@@ -28,8 +31,8 @@
                         </div>
                 </div>
 
-                <div class="h-80 w-100-p">
-                    <canvas baseChart
+                <div class="h-80 w-100-p" *ngIf="showBars">
+                    <canvas baseChart  
                             [datasets]="widgets.widget2.datasets"
                             [labels]="widgets.widget2.labels"
                             [colors]="widgets.widget2.colors"
@@ -48,7 +51,7 @@
 
             <div class="fuse-card auto-width mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
 
-                <div class="p-16 pb-0" fxLayout="column" fxLayoutAlign="end start">
+                <div class="p-16 pb-0" [ngClass]="{'pb-16': !showBars}" fxLayout="column" fxLayoutAlign="end start">
 
                         <div class="h3 secondary-text">Successful Transactions (Last 7 days)</div>
                         <div class="font-size-40 font-weight-300 line-height-1 mt-8 w-100-p transDigit">
@@ -56,8 +59,8 @@
                         </div>
                 </div>
 
-                <div class="h-80 w-100-p">
-                    <canvas baseChart
+                <div class="h-80 w-100-p" *ngIf="showBars">
+                    <canvas baseChart 
                             [datasets]="widgets.widget3.datasets"
                             [labels]="widgets.widget3.labels"
                             [colors]="widgets.widget3.colors"
@@ -72,11 +75,11 @@
         <!-- / Widget 2 -->
 
         <!-- Widget 3 -->
-        <div class="widget" fxFlex="100" fxFlex.gt-sm="33">
+        <div class="widget" fxFlex="100" fxFlex.gt-sm="33" >
 
             <div class="fuse-card auto-width mb-32">
 
-                <div class="p-16 pb-0" fxLayout="column" fxLayoutAlign="end start">
+                <div class="p-16 pb-0" [ngClass]="{'pb-16': !showBars}"  fxLayout="column" fxLayoutAlign="end start">
 
                         <div class="h3 secondary-text">Avg. Transactions (Last 7 days)</div>
                         <div class="font-size-40 font-weight-300 line-height-1 mt-8 w-100-p transDigit">
@@ -85,7 +88,7 @@
 
                 </div>
 
-                <div class="h-80 w-100-p">
+                <div class="h-80 w-100-p" *ngIf="showBars">
                     <canvas baseChart
                             [datasets]="widgets.widget4.datasets"
                             [labels]="widgets.widget4.labels"
@@ -102,14 +105,14 @@
 
     </section>
 
-    <section class="transactionHistory fuse-card auto-width mb-32">
-        <div class="p-20">
+    <section class="transactionHistory fuse-card auto-width mb-32" *ngIf="dashboardUserStats">
+        <div class="px-20">
             <h2>Transaction History</h2>
         </div>
-        <div class="h-368 pb-16">
-            <canvas baseChart
-                    [datasets]="widgets.widget5.datasets['today']"
-                    [labels]="widgets.widget5.labels"
+        <div class="h-368 pb-16" >
+            <canvas baseChart 
+                    [datasets]="dashboardUserStats?.Volume"
+                    [labels]="transactionGraphVolumeLabel"
                     [colors]="widgets.widget5.colors"
                     [options]="widgets.widget5.options"
                     [chartType]="widgets.widget5.chartType">
@@ -117,10 +120,10 @@
         </div>
 
     </section>
-
-    <section class="latestTransaction fuse-card auto-width">
-        <div class="p-20">
+    <section class="recentTransaction fuse-card auto-width" [hidden]="!dashboardUserStats">
+        <div class="px-20 pt-20" fxLayout="row" fxLayoutAlign="space-between center">
             <h2 class="m-0">Recent Transactions</h2>
+            <button mat-raised-button color="accent" [routerLink]="['/pages/transaction/transaction-list']">View All Transactions</button>
         </div>
         <ng-template #renderingContainer></ng-template>
     </section>

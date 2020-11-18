@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
-import { snackBarConfig, snackBarConfigWarn } from '../../../../../../constants/globalFunctions';
+import { snackBarConfig, snackBarConfigWarn, truncateTextLength } from '../../../../../../constants/globalFunctions';
 import { FundManagerService } from '../../funding-manager.service';
 
 @Component({
@@ -14,6 +14,7 @@ import { FundManagerService } from '../../funding-manager.service';
 
 })
 export class NonFundedTableComponent implements OnInit {
+  public truncateTextLength = truncateTextLength;
   @ViewChild('fundDialog', {static: false}) fundDialog: any;
   public dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

@@ -1,7 +1,7 @@
 <div class="dialog-content-wrapper">
     <mat-toolbar class="mat-accent">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title">Receipt</span>
+            <span class="title">Transaction Receipt</span>
             <button mat-icon-button  aria-label="Close dialog" (click)="_dialogRef.close()">
                 <mat-icon>close</mat-icon>
             </button>
@@ -21,15 +21,17 @@
                         <ng-container *ngIf="data?.CustomerName">
                             <strong>{{data?.CustomerName}}</strong><br />
                         </ng-container>
-                        <ng-container *ngIf="data?.City">
-                            {{data?.City}}<br />
+                        <ng-container *ngIf="data?.City && data?.Country && data?.ZipCode">
+                            <ng-container *ngIf="data?.City">
+                                {{data?.City}}<br />
+                            </ng-container>
+                            <ng-container *ngIf="data?.Country">
+                                {{data?.Country + ','}}
+                            </ng-container> 
+                            <ng-container *ngIf="data?.ZipCode">
+                                {{data?.ZipCode}}<br />
+                            </ng-container> 
                         </ng-container>
-                        <ng-container *ngIf="data?.Country">
-                            {{data?.Country + ','}}
-                        </ng-container> 
-                        <ng-container *ngIf="data?.ZipCode">
-                            {{data?.ZipCode}}<br />
-                        </ng-container> 
                         {{data?.Phone}}
                     </p>
                 </td>
@@ -63,11 +65,16 @@
 
             <tr>
                 <td>Trans. Status:</td>
-                <td>Approved</td>
+                <td>{{
+                    (data?.Status == transStatus.declined ) ?  'Declined' : 
+                    (data?.Status ==  transStatus.approved) ?  'Approved' :  
+                    (data?.Status == transStatus.pending) ? 'Pending'  :  
+                    (data?.Status ==  transStatus.funded) ? 'Funded' : 
+                    'Refund'}}</td>
             </tr>
             <tr>
                 <td>Card #:</td>
-                <td>xxxxxxxxxxxx5454</td>
+                <td>xxxxxxxxxxxx{{data?.Last4digit}}</td>
             </tr>
             <tr>
                 <td>Card Type:</td>

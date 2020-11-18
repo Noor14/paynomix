@@ -53,9 +53,8 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit, OnChanges
       if(!this.businessDetailForm){
         this.createBusinessDetailForm();
         this.stepTwo.emit(this.businessDetailForm);
-      }else{
-        this.businessDetailForm.patchValue(this.businessDetail);
       }
+      this.businessDetailForm.patchValue(this.businessDetail);
     }
   }
   ngAfterViewInit(): void {

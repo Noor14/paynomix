@@ -91,7 +91,7 @@
                            Postal Code is required!
                         </mat-error>
                         <mat-error *ngIf="!basicInfoForm.get('Zip').hasError('required') &&
-                                        basicInfoForm.get('Zip').hasError('maxLength')">
+                                        basicInfoForm.get('Zip').hasError('maxlength')">
                                         Postal Code should have maximun length of 
                                         {{globalConfig?.validator?.zipMaxLength}} 
                         </mat-error>

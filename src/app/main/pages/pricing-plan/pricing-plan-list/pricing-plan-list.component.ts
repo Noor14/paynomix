@@ -120,7 +120,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
    return this._partnerService.partnerList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
-            return res.Response.map((item: any) => {
+            return res.Response.sort((a,b)=> a.PartnerName.localeCompare(b.PartnerName)).map((item: any) => {
               return {
                 id: item.PartnerId, 
                 name: item.PartnerName,
@@ -135,7 +135,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
    return this._resellerService.resellerList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
-            return res.Response.map((item: any) => {
+            return res.Response.sort((a,b)=> a.ResellerName.localeCompare(b.ResellerName)).map((item: any) => {
               return {
                 id: item.ResellerId, 
                 name: item.ResellerName,
@@ -151,7 +151,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     return this._merchantService.merchantList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
-            return  res.Response.map((item: any) => {
+            return  res.Response.sort((a,b)=> a.MerchantAccountSetup.MerchantUserName.localeCompare(b.MerchantAccountSetup.MerchantUserName)).map((item: any) => {
               return {
                 id: item.MerchantId, 
                 name: item.MerchantAccountSetup.MerchantUserName,

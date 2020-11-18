@@ -9,34 +9,55 @@
     </mat-toolbar>
 
     <div mat-dialog-content class="p-24">
+        <div fxLayout="row" fxLayoutAlign="end" class="Cursorpointer">
+            <button mat-icon-button  aria-label="CC" (click)="showCC = true" *ngIf="!showCC">Cc</button>
+            <button mat-icon-button  aria-label="BCC" (click)="showBCC = true" *ngIf="!showBCC ">Bcc</button>
+        </div> 
         <form name="emailForm" fxLayout="column"  [formGroup]="emailForm">
             <mat-form-field appearance="outline">
                 <mat-label>To</mat-label>
-                <input type="email" matInput formControlName="SendTo"  required>  
+                <input type="email" matInput formControlName="SendTo" required> 
+                <mat-error *ngIf="emailForm.get('SendTo').hasError('required')">
+                    Email is required!
+                </mat-error>
+                <mat-error
+                    *ngIf="!emailForm.get('SendTo').hasError('required') &&
+                            emailForm.get('SendTo').hasError('email') || emailForm.get('SendTo').hasError('pattern')">
+                    Please enter a valid email address
+                </mat-error> 
             </mat-form-field> 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="showCC">
                 <mat-label>CC</mat-label>
                 <input type="email" matInput formControlName="Cc" >  
+                <mat-error
+                *ngIf="emailForm.get('Cc').hasError('email') || emailForm.get('Cc').hasError('pattern')">
+                Please enter a valid email address
+            </mat-error> 
             </mat-form-field> 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="showBCC">
                 <mat-label>Bcc</mat-label>
-                <input  type="email" matInput formControlName="Bcc" >  
+                <input  type="email" matInput formControlName="Bcc">  
+                <mat-error
+                *ngIf="emailForm.get('Bcc').hasError('email') || emailForm.get('Bcc').hasError('pattern')">
+                Please enter a valid email address
+            </mat-error> 
             </mat-form-field> 
             <mat-form-field appearance="outline">
             <mat-label>Subject</mat-label>
             <input matInput formControlName="Subject" readonly required>  
+            <mat-error>Subject is required</mat-error>
             </mat-form-field>  
             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                 <mat-label>Message</mat-label>
                 <textarea matInput rows="5" readonly>
           Hello,
 
-          Thank you for signing up on Paynomix Inc. You’re almost ready to go! 
+          Thank you for signing up on {{appInfo?.title}} Inc. You’re almost ready to go! 
           Please fill out your application to complete the boarding process by
           clicking the following link.
           Launch Application
           We appreciate the opportunity to work with you.
-          Paynomix Team.
+          {{appInfo?.title}} Team.
                 </textarea> 
             </mat-form-field>
 
@@ -47,7 +68,7 @@
         <button mat-raised-button class="mr-8 accent-alpha-bg" aria-label="CLOSE" (click)="_dialogRef.close()">
             Close
         </button>    
-        <button mat-raised-button color="accent" class="save-button" aria-label="SAVE" (click)="sendEmail()">
+        <button mat-raised-button color="accent" class="save-button" aria-label="SAVE" [disabled]="emailForm.invalid" (click)="sendEmail()">
             Send
         </button>
     </div>
