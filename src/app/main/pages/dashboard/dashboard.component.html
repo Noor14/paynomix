@@ -121,8 +121,9 @@
 
     </section>
     <section class="recentTransaction fuse-card auto-width" [hidden]="!dashboardUserStats">
-        <div class="px-20 pt-20">
+        <div class="px-20 pt-20" fxLayout="row" fxLayoutAlign="space-between center">
             <h2 class="m-0">Recent Transactions</h2>
+            <button mat-raised-button color="accent" [routerLink]="['/pages/transaction/transaction-list']">View All Transactions</button>
         </div>
         <ng-template #renderingContainer></ng-template>
     </section>
