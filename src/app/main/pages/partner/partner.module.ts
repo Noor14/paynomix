@@ -20,6 +20,9 @@ import { PartnerTableComponent } from './partner-table/partner-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { MatTooltipModule} from '@angular/material/tooltip';
 import { FuseConfirmDialogModule } from '@fuse/components';
+import {NgxMaskModule} from 'ngx-mask';
+import { NgxCurrencyModule } from 'ngx-currency';
+
 @NgModule({
   declarations: [
     PartnerListComponent, 
@@ -45,7 +48,9 @@ import { FuseConfirmDialogModule } from '@fuse/components';
     PricingPlanModule,
     MatTooltipModule,
     FuseConfirmDialogModule,
-    NoFoundModule
+    NoFoundModule,
+    NgxCurrencyModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class PartnerModule { }

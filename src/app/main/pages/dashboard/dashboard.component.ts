@@ -341,7 +341,8 @@ getDashboardStats(): void{
          if(this.dashboardUserStats && this.dashboardUserStats.Transactions
              && this.dashboardUserStats.Transactions.length){
             this.renderingComponent(TransactionTableComponent, {
-              transaction: this.dashboardUserStats.Transactions
+              transaction: this.dashboardUserStats.Transactions,
+              hideCol: true
             })
           }else{
             this.renderingComponent(NoFoundComponent, {

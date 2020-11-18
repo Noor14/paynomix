@@ -9,26 +9,7 @@
 
   <div class="table-responsive mat-card">
       <table mat-table [dataSource]="dataSource" matSort class="w-100-p" multiTemplateDataRows>
-         <!--  Transaction refund Column -->
-        <ng-container matColumnDef="Icon">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-icon-button *ngIf="row?.Refund?.length" (click)=" 
-            expandedRefundDetail = expandedRefundDetail === row ? null : row; 
-            expandedElement = null;">
-              <mat-icon class="accent-fg">
-                 <ng-container *ngIf="expandedRefundDetail === row; else otherIcon">
-                   remove
-                 </ng-container>
-                 <ng-template #otherIcon>
-                   add
-                 </ng-template>
-               </mat-icon>
-            </button>
-           
-          </td>
-
-        </ng-container>
+       
 
         <!-- Refund Table -->
         <ng-container matColumnDef="expandedRefundDetail">
@@ -37,41 +18,58 @@
               [@detailExpandRefund]="row == expandedRefundDetail ? 'expanded' : 'collapsed'">
               <table mat-table #table class="w-100-p" [dataSource]="row.Refund"
                 *ngIf="row.Refund && row.Refund.length && expandedRefundDetail">
-                <ng-container matColumnDef="subTransactionId">
+
+              	<!--  Transaction ID Column -->
+                <ng-container matColumnDef="TransactionId">
                   <th mat-header-cell *matHeaderCellDef>Transaction Id</th>
                   <td mat-cell *matCellDef="let row">{{row.TransactionId}}</td>
                 </ng-container>
-              
-                <ng-container matColumnDef="subAmount">
+              	    <!--  Transaction Type Column -->
+                <ng-container matColumnDef="TransactionType">
+                  <th mat-header-cell *matHeaderCellDef>Trans. Type</th>
+                  <td mat-cell *matCellDef="let row" >{{
+                    (row.TransactionType ==  transType.CreditCardVoid) ?  'CC - Void ' : 
+                    (row.TransactionType ==  transType.CreditCardSale) ?  'CC - Sale ' :  
+                    (row.TransactionType == transType.CreditCardAuth) ? 'CC - Auth '  :  
+                    (row.TransactionType ==  transType.CreditCardFund) ? 'CC - Fund' : 
+                    (row.TransactionType ==  transType.CreditCardRefund) ? 'CC - Refund' : 
+                    (row.TransactionType ==  transType.CreditCardCapture) ? 'CC - Capture' : 
+                    (row.TransactionType ==  transType.ACHDebit) ? 'ACH - Debit' : 
+                    (row.TransactionType ==  transType.ACHRefund) ? 'ACH - Refund' : 
+                    'ACH - Void '}}</td>
+                </ng-container>
+              	<!--  Transaction Amount Column -->
+                <ng-container matColumnDef="Amount">
                   <th mat-header-cell *matHeaderCellDef>Amount</th>
                   <td mat-cell *matCellDef="let row">{{row.Amount | currency}}</td>
                 </ng-container>
-                <ng-container matColumnDef="subInsertedOn">
+              	<!--  Transaction InsertedOn Column -->
+                <ng-container matColumnDef="InsertedOn">
                   <th mat-header-cell *matHeaderCellDef>Updated On</th>
                   <td mat-cell *matCellDef="let row">
-                    {{row.InsertedOn | date: 'mediumDate'}}
+                    {{row.InsertedOn | date: 'medium'}}
                   </td>
                 </ng-container>
-
+              	<!--  Transaction status Column -->
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef>Status</th>
                     <td mat-cell *matCellDef="let row">
                     <mat-chip-list>
                         <mat-chip class="py-4 px-16 fuse-white-fg"
                         [ngClass]="(data?.Status == transStatus.declined ) ?  'red-600' : 
-                        (data?.Status ==  transStatus.approved) ?  'green-400' :  
-                        (data?.Status == transStatus.pending) ? 'orange-500'  :  
                         (data?.Status ==  transStatus.funded) ? 'blue-700' : 
-                        'blue-500'">
+                        'green-400'">
                         <small>
-                          Refund
+                          {{(data?.Status == transStatus.declined ) ?  'Declined' : 
+                          (data?.Status ==  transStatus.funded) ? 'Funded' : 
+                          'Approved'}}
                         </small>
                         </mat-chip>
                       </mat-chip-list>
                       </td>
                   </ng-container>
 
-                <ng-container matColumnDef="subAction">
+                <!-- <ng-container matColumnDef="subAction">
                   <th mat-header-cell *matHeaderCellDef>Action</th>
                   <td mat-cell *matCellDef="let row">
                     <button mat-icon-button>
@@ -81,7 +79,7 @@
                       <mat-icon class="secondry-text">print</mat-icon>
                     </button>
                   </td>
-                </ng-container>
+                </ng-container> -->
 
                 <tr mat-header-row *matHeaderRowDef="RefundDisplayedColumns; sticky:true;">
                 </tr>
@@ -91,8 +89,27 @@
 
             </div>
           </td>
-        </ng-container>		 
-		  <!--  Transaction Selection Column -->
+        </ng-container>	
+
+          <!--  Transaction refund Column -->
+          <ng-container matColumnDef="Icon">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button *ngIf="row?.Refund?.length" (click)=" 
+              expandedRefundDetail = expandedRefundDetail === row ? null : row; 
+              expandedElement = null;">
+                <mat-icon class="accent-fg">
+                   <ng-container *ngIf="expandedRefundDetail === row; else otherIcon">
+                     remove
+                   </ng-container>
+                   <ng-template #otherIcon>
+                     add
+                   </ng-template>
+                 </mat-icon>
+              </button>
+            </td>
+          </ng-container>	 
+		      <!--  Transaction Selection Column -->
 		      <ng-container matColumnDef="Select">
 		        <th mat-header-cell *matHeaderCellDef>
 		          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
@@ -193,13 +210,15 @@
       <form name="refundForm" fxLayout="column"  [formGroup]="refundForm">
         <mat-form-field appearance="outline">
             <mat-label>Transaction Amount</mat-label>
-            <input type="TransactionAmount" matInput formControlName="TransactionAmount"  required>  
+            <input type="TransactionAmount" matInput formControlName="TransactionAmount"  currencyMask  [options]="{ align: 'left', prefix: '$' }" required>  
             <mat-error>Transaction Amount is required</mat-error>
         </mat-form-field> 
         <mat-form-field appearance="outline">
             <mat-label>Amount To Refund</mat-label>
-            <input type="Amount" matInput formControlName="Amount" required> 
-            <mat-error>Amount To Refund is required</mat-error>
+            <input type="Amount" matInput formControlName="Amount" currencyMask 
+            [options]="{ align: 'left', prefix: '$' }" required> 
+            <mat-error *ngIf="refundForm.get('Amount').hasError('required')">Amount To Refund is required</mat-error>
+            <mat-error *ngIf="refundForm.get('Amount').hasError('amountExceed')">Amount should not exceed from transaction amount</mat-error>
         </mat-form-field> 
     </form>
         <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
@@ -210,7 +229,7 @@
         </button>    
         <button mat-raised-button
         color="accent"
-        aria-label="Refund" [disabled]="refundForm.invalid" (click)="refund()">
+        aria-label="Refund" [disabled]="refundForm.invalid || !refundForm.controls['Amount'].value" (click)="refund()">
             Refund
         </button>
     </div>

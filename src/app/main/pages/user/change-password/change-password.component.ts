@@ -14,7 +14,6 @@ import * as globalConfig from '../../../../../constants/globalFunctions';
 })
 export class ChangePasswordComponent implements OnInit {
   public changePasswordForm: FormGroup;
-  public passwordMisMatchError: boolean;
   public globalConfig = globalConfig;
   /**
      * Constructor
@@ -44,21 +43,24 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
   updatePassword(): void {
-    if (this.changePasswordForm.valid && this.changePasswordForm.controls['ConfirmPassword'].value == this.changePasswordForm.controls['NewPassword'].value) {
-      this.passwordMisMatchError = false;
-      if (this.changePasswordForm.valid) {
+    if (this.changePasswordForm.valid) {
+        if (this.changePasswordForm.controls['ConfirmPassword'].value != this.changePasswordForm.controls['NewPassword'].value) {
+          this.changePasswordForm.controls.ConfirmPassword.setErrors({
+            notMatched: true
+        });
+        return
+        }
         this._userService.updatePassword(this.changePasswordForm.value).then((res: any) => {
           if (res && !res.StatusCode) {
             this._snackBar.open('Password updated successfully!', '', snackBarConfig);
             this.logout()
           } else {
-            this._snackBar.open(`${res.StatusMessage}`, '', snackBarConfigWarn)
+            this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
           }
         }).catch((err: HttpErrorResponse) => (console.log))
-      }
+      
     }
-    else {
-      this.passwordMisMatchError = true;
+  else{
       validateAllFormFields(this.changePasswordForm)
     }
   }

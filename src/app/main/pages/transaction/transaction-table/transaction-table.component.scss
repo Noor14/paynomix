@@ -8,10 +8,11 @@
                                 z-index: 101 !important;
                                 &:nth-child(2){
                                 z-index: 102 !important;
-                                mat-checkbox{
+                                    mat-checkbox{
                                     vertical-align: super;
+                                    }
                                 }
-                                }
+                               
                             }
                         }
             
@@ -29,9 +30,11 @@
                                display: none;
                             }
                         }
-                        td:nth-child(2){
-                            mat-checkbox{
-                                vertical-align: super;
+                        td{
+                            &:nth-child(2){
+                                mat-checkbox{
+                                    vertical-align: super;
+                                }
                             }
                         }
                         

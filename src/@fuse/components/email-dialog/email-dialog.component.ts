@@ -40,8 +40,8 @@ export class EmailDialogComponent implements OnInit {
     this.emailForm = this._formBuilder.group({
         PartnerId: ['', Validators.required],
         SendTo: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]], 
-        Bcc: [''],
-        Cc: [''],
+        Bcc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+        Cc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
         Subject: ['', Validators.required],
         BodyContent: ['', Validators.required],
         MerchantName: ['', Validators.required],
