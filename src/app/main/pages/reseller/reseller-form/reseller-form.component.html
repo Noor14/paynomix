@@ -109,7 +109,7 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Office Phone</mat-label>
-                    <input nospace matInput formControlName="TelephoneNumber" required>
+                    <input mask="(000) 000-0000" matInput formControlName="TelephoneNumber" required>
                     <mat-error>Office Phone is required!</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
@@ -120,7 +120,7 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Alternate Phone</mat-label>
-                    <input nospace matInput formControlName="AlternativePhoneNumber" >
+                    <input nospace  mask="(000) 000-0000" matInput formControlName="AlternativePhoneNumber" >
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Alternate Phone Ext</mat-label>
@@ -134,7 +134,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                     <mat-label>Tax ID</mat-label>
-                    <input nospace matInput formControlName="TaxId">
+                    <input nospace matInput numberOnly formControlName="TaxId">
                     <mat-error>Tax Id is required!</mat-error>
                 </mat-form-field>
             </div>

@@ -29,6 +29,7 @@ import { MatMenuModule} from '@angular/material/menu';
 import { EmailDialogModule } from '@fuse/components/email-dialog/email-dialog.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatChipsModule} from '@angular/material/chips';
+import {NgxMaskModule} from 'ngx-mask';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatMenuModule,
     EmailDialogModule,
     MatTooltipModule,
-    MatChipsModule
+    MatChipsModule,
+    NgxMaskModule.forRoot()
 
   ]
 })

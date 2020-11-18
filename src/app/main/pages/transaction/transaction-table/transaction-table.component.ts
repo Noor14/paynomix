@@ -39,7 +39,7 @@ export class TransactionTableComponent implements OnInit {
   public dataSource = new MatTableDataSource<any>();
   @Output() updateList = new EventEmitter<boolean>();
   public actionControlOnHover = -1;
-  public displayedColumns: string[] = [
+  private columnstoDisplay: string[] = [
     'Icon',
     'Select',
     'TransactionId',
@@ -50,13 +50,15 @@ export class TransactionTableComponent implements OnInit {
     'Status',
     'CardholderName'
   ];
-  public RefundDisplayedColumns: string[] = [
-    'subTransactionId',
-    'subAmount',
-    'status',
-    'subInsertedOn',
-    'subAction'
-  ];
+ public RefundDisplayedColumns: string[] = [
+   'TransactionId',
+   'TransactionType',
+   'Amount', 
+   'status', 
+   'InsertedOn'
+]; 
+public displayedColumns : string[]= this.columnstoDisplay.slice()
+
   constructor(
     private readonly _dialog: MatDialog,
     private readonly _formBuilder: FormBuilder,
@@ -69,6 +71,9 @@ export class TransactionTableComponent implements OnInit {
       this.dataSource.data = this.data.transaction;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      if(this.data.hideCol && this.displayedColumns.length){
+        this.displayedColumns = this.displayedColumns.slice(2);
+      }
     }
   }
   masterToggle() {
@@ -102,7 +107,7 @@ export class TransactionTableComponent implements OnInit {
   createRefundForm() {
     this.refundForm = this._formBuilder.group({
       TransactionId: [this.selectedToRefund.TransactionId, Validators.required],
-      TransactionAmount: [this.selectedToRefund.Amount, Validators.required],
+      TransactionAmount: [{value: this.selectedToRefund.Amount, disabled: this.selectedToRefund.Amount}, Validators.required],
       Amount: ['', Validators.required],
       Reason: ['requested_by_customer', Validators.required],
     });
@@ -110,13 +115,13 @@ export class TransactionTableComponent implements OnInit {
 
   refund() {
     if (this.refundForm.valid) {
-      if (this.refundForm.controls['Amount'].value > this.selectedToRefund.Amount) {
+      if(this.refundForm.controls['Amount'].value && this.refundForm.controls['Amount'].value > this.selectedToRefund.Amount) {
         this.refundForm.controls.Amount.setErrors({
           amountExceed: true
         })
         return;
       }
-      this._transactionService.refundTransaction(this.refundForm.value)
+      this._transactionService.refundTransaction({...this.refundForm.value, TransactionAmount:this.selectedToRefund.Amount})
         .then((res: any) => {
           if (res && !res.StatusCode) {
             this._snackBar.open('Amount refunded successfully', '', snackBarConfig);

@@ -31,7 +31,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
           <td mat-cell *matCellDef="let row; let ind = index">  
             <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
-                {{row.Phone}} 
+                {{row.Phone | mask: '(000) 000-0000'}} 
             </ng-template>
              <ng-template #actionControl>
                <div  [@fadeIn]>
