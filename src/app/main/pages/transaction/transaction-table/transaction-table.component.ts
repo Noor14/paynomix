@@ -109,6 +109,12 @@ export class TransactionTableComponent implements OnInit {
   }
   refund() {
     if (this.refundForm.valid) {
+      if(this.refundForm.controls['Amount'].value > this.selectedToRefund.Amount) {
+        this.refundForm.controls.Amount.setErrors({
+          amountExceed: true
+        })
+        return;
+      }
       this._transactionService.refundTransaction(this.refundForm.value)
         .then((res: any) => {
           if (res && !res.StatusCode) {
