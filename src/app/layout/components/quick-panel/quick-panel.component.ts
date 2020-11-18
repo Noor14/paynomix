@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-
+import * as moment from 'moment';
 @Component({
     selector     : 'quick-panel',
     templateUrl  : './quick-panel.component.html',
@@ -8,10 +8,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class QuickPanelComponent
 {
-    date: Date;
-    events: any[];
-    notes: any[];
-    settings: any;
+    public date;
+
 
     /**
      * Constructor
@@ -19,11 +17,7 @@ export class QuickPanelComponent
     constructor()
     {
         // Set the defaults
-        this.date = new Date();
-        this.settings = {
-            notify: true,
-            cloud : false,
-            retro : true
-        };
+        this.date = moment();
+    
     }
 }
