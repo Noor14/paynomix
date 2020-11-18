@@ -33,6 +33,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   public transactionApproved: boolean = false;
   public requiredFields: any;
   public onAmountEnter = new Subject<string>();
+  public onAmountEnterSubscriber:any;
   private selectedAmount:number;
 
   constructor(
@@ -62,12 +63,12 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-   this.onAmountEnter.pipe(
+   this.onAmountEnterSubscriber = this.onAmountEnter.pipe(
       debounceTime(500),
       distinctUntilChanged())
       .subscribe(res => {
        if (res) {
-          this.selectedAmount = Number(res)
+          this.selectedAmount = Number(res);
           this.transactionInitialize(this.selectedAmount * 100);
         }else{
           this.container.clear();
@@ -91,6 +92,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this._unsubscribeAll.complete();
     this.componentRef && this.componentRef.destroy();
     this.componentRef && this.componentRef.changeDetectorRef.detach();
+    this.onAmountEnterSubscriber && this.onAmountEnterSubscriber.unsubscibe();
   }
   renderingComponent(type, data?): void {
     const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
