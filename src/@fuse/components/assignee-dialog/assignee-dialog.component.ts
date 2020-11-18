@@ -74,9 +74,9 @@ export class AssigneeDialogComponent implements OnInit {
       .then((res: any) => {
         if (res && !res.StatusCode) {
           if(this.selectedChips.length){
-            this._snackBar.open('Pricing Plan has been assigned successfully! ', '', snackBarConfig);
+            this._snackBar.open('Pricing Plan has been assigned successfully!', '', snackBarConfig);
           }else{
-            this._snackBar.open('Pricing Plan has been unassigned successfully! ', '', snackBarConfig);
+            this._snackBar.open('Pricing Plan has been unassigned successfully!', '', snackBarConfig);
           }
           this._dialogRef.close(true);
         } else {
