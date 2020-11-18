@@ -102,7 +102,7 @@ export class TransactionTableComponent implements OnInit {
   createRefundForm() {
     this.refundForm = this._formBuilder.group({
       TransactionId: [this.selectedToRefund.TransactionId, Validators.required],
-      TransactionAmount: [(this.selectedToRefund) ? this.selectedToRefund.Amount : '', Validators.required],
+      TransactionAmount: [this.selectedToRefund.Amount, Validators.required],
       Amount: ['', Validators.required],
       Reason: ['requested_by_customer', Validators.required],
     });

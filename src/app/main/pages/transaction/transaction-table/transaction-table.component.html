@@ -193,7 +193,7 @@
       <form name="refundForm" fxLayout="column"  [formGroup]="refundForm">
         <mat-form-field appearance="outline">
             <mat-label>Transaction Amount</mat-label>
-            <input type="TransactionAmount" matInput formControlName="TransactionAmount"  required>  
+            <input type="TransactionAmount" readonly matInput formControlName="TransactionAmount"  required>  
             <mat-error>Transaction Amount is required</mat-error>
         </mat-form-field> 
         <mat-form-field appearance="outline">
