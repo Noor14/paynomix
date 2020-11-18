@@ -36,7 +36,7 @@
             <div class="expandedRefundDetail" 
               [@detailExpandRefund]="row == expandedRefundDetail ? 'expanded' : 'collapsed'">
               <table mat-table #table class="w-100-p" [dataSource]="row.Refund"
-                *ngIf="row.Refund.length && expandedRefundDetail">
+                *ngIf="row.Refund && row.Refund.length && expandedRefundDetail">
                 <ng-container matColumnDef="subTransactionId">
                   <th mat-header-cell *matHeaderCellDef>Transaction Id</th>
                   <td mat-cell *matCellDef="let row">{{row.TransactionId}}</td>
@@ -96,13 +96,13 @@
 		      <ng-container matColumnDef="Select">
 		        <th mat-header-cell *matHeaderCellDef>
 		          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
-		            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+		            [indeterminate]="selection.hasValue() && !isAllSelected()">
 		          </mat-checkbox>
 		        </th>
 		        <td mat-cell *matCellDef="let row">
-		          <mat-checkbox (click)="$event.stopPropagation(); selectRefundElement(row);"
-		            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
-		            [aria-label]="checkboxLabel(row)">
+		          <mat-checkbox (click)="$event.stopPropagation()"
+		            (change)="$event ? selection.toggle(row) : null; selectRefundElement(row)" [checked]="selection.isSelected(row)"
+		            >
 		          </mat-checkbox>
 		        </td>
 		      </ng-container>
@@ -138,9 +138,9 @@
 		            <td mat-cell *matCellDef="let row" [matTooltip]="row?.Amount" [matTooltipPosition]="'above'"> {{row.Amount | currency}} </td>
 		          </ng-container>
 		          <!-- Marchant Name Column -->
-		          <ng-container matColumnDef="CustomerName">
+		          <ng-container matColumnDef="MerchantName">
 		            <th mat-header-cell *matHeaderCellDef mat-sort-header> Marchant Name </th>
-		            <td mat-cell *matCellDef="let row" [matTooltip]="row?.CustomerName" [matTooltipPosition]="'above'"> {{row?.CustomerName || '--'}}</td>
+		            <td mat-cell *matCellDef="let row" [matTooltip]="row?.MerchantName" [matTooltipPosition]="'above'"> {{row?.MerchantName || '--'}}</td>
 		          </ng-container>
 		          <!--  Status  Column -->
 		          <ng-container matColumnDef="Status">
@@ -155,7 +155,7 @@
       <!--  Cardholder Name Column -->
       <ng-container matColumnDef="CardholderName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Cardholder Name </th>
-        <td mat-cell *matCellDef="let row;let ind = index">
+        <td mat-cell *matCellDef="let row;let ind = dataIndex">
           <ng-template [ngIf]="ind != actionControlOnHover" [ngIfElse]="actionControl">
             {{row.CardholderName || '--'}}
           </ng-template>
@@ -169,7 +169,7 @@
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
       <tr mat-row (mouseenter)="actionControlOnHover = i" (mouseleave)="actionControlOnHover = -1"
-        *matRowDef="let row; columns: displayedColumns; let i = index"
+        *matRowDef="let row; columns: displayedColumns; let i = dataIndex"
         [class.expanded]="expandedRefundDetail == row"
         >
       </tr>
@@ -194,10 +194,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Transaction Amount</mat-label>
             <input type="TransactionAmount" matInput formControlName="TransactionAmount"  required>  
+            <mat-error>Transaction Amount is required</mat-error>
         </mat-form-field> 
         <mat-form-field appearance="outline">
             <mat-label>Amount To Refund</mat-label>
-            <input type="Amount" numberOnly matInput formControlName="Amount" >  
+            <input type="Amount" matInput formControlName="Amount" required> 
+            <mat-error>Amount To Refund is required</mat-error>
         </mat-form-field> 
     </form>
         <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
@@ -208,7 +210,7 @@
         </button>    
         <button mat-raised-button
         color="accent"
-        aria-label="Refund" (click)="refund()">
+        aria-label="Refund" [disabled]="refundForm.invalid" (click)="refund()">
             Refund
         </button>
     </div>

@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
@@ -13,6 +13,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   selector: 'app-transaction-table',
   templateUrl: './transaction-table.component.html',
   styleUrls: ['./transaction-table.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
   trigger('detailExpandRefund', [
     state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -22,13 +23,14 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   fuseAnimations,
 ]
 })
-export class TransactionTableComponent implements OnInit, AfterViewInit {
+export class TransactionTableComponent implements OnInit {
+  public expandedRefundDetail:any;
   public transStatus = transactionStatus;
   public transType = transactionType;
   public refundForm: FormGroup;
   public selection = new SelectionModel<any>(true, []);
   public showRefund: boolean;
-  public selectedToRefund: any;
+  private selectedToRefund: any = {};
   public dialogRef;
   @Input() data: any;
   @ViewChild('refundDialog', { static: false }) refundDialog: any;
@@ -44,7 +46,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     'TransactionType',
     'InsertedOn',
     'Amount',
-    'CustomerName',
+    'MerchantName',
     'Status',
     'CardholderName'
   ];
@@ -60,14 +62,9 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     private readonly _formBuilder: FormBuilder,
     private readonly _transactionService: TransactionService,
     private readonly _snackBar: MatSnackBar,
-    private readonly _cdref: ChangeDetectorRef,
   ) { }
-  ngAfterViewInit(): void {
-    this._cdref.detectChanges();
-  }
 
   ngOnInit(): void {
-    this._cdref.detectChanges();
     if (this.data) {
       this.dataSource.data = this.data.transaction;
       this.dataSource.paginator = this.paginator;
@@ -79,29 +76,19 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
-  checkboxLabel(row?: any): string {
-    if (this.selection.selected.length == 1 && this.selection.hasValue()) {
-      this.showRefund = true;
-    }
-    if (this.selection.selected.length > 1 && this.selection.hasValue()) {
-      this.showRefund = false;
-    }
-    if (!this.selection.hasValue()) {
-      this.showRefund = false;
-    }
 
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.Amount + 1}`;
-  }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected == numRows;
   }
   selectRefundElement(value) {
-    this.selectedToRefund = value;
+    if (this.selection.selected.length == 1 && this.selection.hasValue()) {
+      this.selectedToRefund = value;
+      this.showRefund = true;
+    }else{
+      this.showRefund = false;
+    }
   }
   openRefundDialog() {
     this.createRefundForm();
