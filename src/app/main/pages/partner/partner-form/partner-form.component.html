@@ -115,7 +115,7 @@
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                     <mat-label>Exchange Rate (%) </mat-label>
-                    <input matInput formControlName="ExchangeRateMarkup"   currencyMask 
+                    <input matInput formControlName="ExchangeRateMarkup" currencyMask 
                     [options]="{ align: 'left', prefix: '' }"  required>
                     <mat-hint>This rate markup is used when currencies must be converted. It has no effect on transaction reporting.</mat-hint>
                     <mat-error *ngIf="partnerForm.get('ExchangeRateMarkup').hasError('required')">Exchange Rate is required!</mat-error>

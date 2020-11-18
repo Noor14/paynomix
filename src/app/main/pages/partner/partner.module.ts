@@ -21,6 +21,7 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { MatTooltipModule} from '@angular/material/tooltip';
 import { FuseConfirmDialogModule } from '@fuse/components';
 import {NgxMaskModule} from 'ngx-mask';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {NgxMaskModule} from 'ngx-mask';
     MatTooltipModule,
     FuseConfirmDialogModule,
     NoFoundModule,
+    NgxCurrencyModule,
     NgxMaskModule.forRoot()
   ]
 })
