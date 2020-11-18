@@ -56,7 +56,7 @@ export class TransactionTableComponent implements OnInit {
    'Amount', 
    'status', 
    'InsertedOn'
-]; 
+  ]; 
 public displayedColumns : string[]= this.columnstoDisplay.slice()
 
   constructor(

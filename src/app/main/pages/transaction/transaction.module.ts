@@ -8,9 +8,8 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { NgxCurrencyModule } from "ngx-currency";
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
-
+import { NgxCurrencyModule } from "ngx-currency";
 @NgModule({
   declarations: [TransactionListComponent, TransactionTableComponent, TransactionDetailComponent],
   entryComponents: [
