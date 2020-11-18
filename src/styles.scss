@@ -3,6 +3,8 @@
 
 // Import app.theme.scss
 @import "app/app.theme";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~saturn-datepicker/bundle.css';
 
 app-pages{
     width: 100%;
@@ -65,5 +67,20 @@ app-pages{
       }
   }
 }
+.mat-calendar-cell-semi-selected {
+  background-color: #039be540 !important;
+}
+body.theme-default .mat-calendar-body-selected {
+  background-color: #039be5 !important;
+  color: white !important;
+}
 
+.mat-calendar-body-begin-range:not(.mat-calendar-body-end-range) {
+  border-radius: 100% 0 0 100% !important;
+  background-color: #039be5 !important;
+}
+.mat-calendar-body-end-range:not(.mat-calendar-body-begin-range) {
+  border-radius: 0 100% 100% 0 !important;
+  background-color:  #039be5 !important;
+}
 
