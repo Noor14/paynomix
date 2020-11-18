@@ -5,32 +5,37 @@
         <!-- Reseller Column -->
         <ng-container matColumnDef="Reseller">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Reseller </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Reseller?.ResellerName" [matTooltipPosition]="'above'"> {{row?.Reseller?.ResellerName | truncate : truncateTextLength}}</td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Reseller?.ResellerName" [matTooltipPosition]="'above'"> {{row?.Reseller?.ResellerName || '--' | truncate : truncateTextLength}}</td>
         </ng-container>
 
         <!-- Company Name Column -->
         <ng-container matColumnDef="CompanyName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Company Name </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.MerchantAccountSetup?.MerchantUserName" [matTooltipPosition]="'above'"> {{row?.MerchantAccountSetup?.MerchantUserName | truncate : truncateTextLength}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.MerchantAccountSetup?.MerchantUserName" [matTooltipPosition]="'above'"> {{row?.MerchantAccountSetup?.MerchantUserName ||'--' | truncate : truncateTextLength}} </td>
         </ng-container>
     
         <!--  Contact Person  Column -->
         <ng-container matColumnDef="ContactPerson">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Person </th>
           <td mat-cell *matCellDef="let row" [matTooltip]="row?.ContactPerson"
-           [matTooltipPosition]="'above'"> {{row.ContactPerson | truncate : truncateTextLength}} </td>
+           [matTooltipPosition]="'above'"> {{row.ContactPerson ||'--' | truncate : truncateTextLength}} </td>
         </ng-container>
 
         <!-- Email Column -->
         <ng-container matColumnDef="Email">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.MerchantAccountSetup?.MerchantEmail" [matTooltipPosition]="'above'" > {{row?.MerchantAccountSetup?.MerchantEmail | truncate : truncateTextLength}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.MerchantAccountSetup?.MerchantEmail" [matTooltipPosition]="'above'" > {{row?.MerchantAccountSetup?.MerchantEmail ||'--' | truncate : truncateTextLength}} </td>
         </ng-container>
 
         <!-- Phone Column -->
         <ng-container matColumnDef="Phone">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Phone" [matTooltipPosition]="'above'"> {{row.Phone | mask: '(000) 000-0000' | truncate : truncateTextLength}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Phone" [matTooltipPosition]="'above'">
+            <ng-template [ngIf]="row?.Phone" [ngIfElse]="merchantPhone">
+              {{row.Phone | mask: '(000) 000-0000' | truncate : truncateTextLength}}
+            </ng-template> 
+            <ng-template #merchantPhone>--</ng-template>
+          </td>
         </ng-container>
 
         <!-- PricingPlan Column -->

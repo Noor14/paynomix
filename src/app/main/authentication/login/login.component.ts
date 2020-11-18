@@ -55,9 +55,9 @@ export class LoginComponent implements OnInit
     login(): void{
         this.loggedIn = true;
         if(this.loginForm.valid){
+            this._snackBar.open('Signing in', '', snackBarConfig);
             this._authenticationService.signIn(this.loginForm.value).then((res: any)=>{
                 if(res && !res.StatusCode){
-                    this._snackBar.open('Signing in', '', snackBarConfig);
                     localStorage.setItem('userInfo', JSON.stringify(res.Response));
                     this._router.navigate(['/pages/dashboard']);
                 }else{

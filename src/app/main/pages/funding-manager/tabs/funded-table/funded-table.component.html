@@ -6,7 +6,7 @@
             <!-- Partner Name Column -->
             <ng-container matColumnDef="PartnerName">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Partner Name</th>
-              <td mat-cell *matCellDef="let row"  [matTooltip]="row?.PartnerName" [matTooltipPosition]="'above'"> {{row.PartnerName | truncate: truncateTextLength }} </td>
+              <td mat-cell *matCellDef="let row"  [matTooltip]="row?.PartnerName" [matTooltipPosition]="'above'"> {{row.PartnerName||'--' | truncate: truncateTextLength }} </td>
             </ng-container>
         
             <!-- TotalTrans Amount Column -->
