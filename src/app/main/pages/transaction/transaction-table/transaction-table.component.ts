@@ -51,11 +51,11 @@ export class TransactionTableComponent implements OnInit {
     'CardholderName'
   ];
  public RefundDisplayedColumns: string[] = [
-   'subTransactionId', 
-   'subAmount', 
+   'TransactionId',
+   'TransactionType',
+   'Amount', 
    'status', 
-   'subInsertedOn', 
-   'subAction'
+   'InsertedOn'
 ]; 
   constructor(
     private readonly _dialog: MatDialog,
