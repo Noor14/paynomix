@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { snackBarConfigWarn } from '../../../../../constants/globalFunctions';
@@ -13,7 +13,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
 import { SettingService } from '../../settings/settings.service';
-
 @Component({
   selector: 'app-make-sale',
   templateUrl: './make-sale.component.html',
@@ -60,7 +59,6 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this._userConfigService.userModeChange
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => this.getMerchantLocation());
-
   }
 
   ngAfterViewInit(): void {
@@ -79,14 +77,16 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
           this.payObject = {};
         }
       });
-    // this._router.events.pipe(
-    //   filter(event => event instanceof NavigationEnd)
-    // ).subscribe(() => {
-    // this.scrollBottom();
-    // });
+    this.scrollToBottom();
+
   }
-  scrollBottom() {
-    this.makeSaleView.nativeElement.scrollTop = this.makeSaleView.nativeElement.scrollHeight
+
+  scrollToBottom() {
+    setTimeout(() => {
+      const container = this.makeSaleView.nativeElement.parentElement.parentElement.parentElement;
+      container.scrollTop = this.makeSaleView.nativeElement.scrollHeight;
+    }, 0);
+         
   }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions

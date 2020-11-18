@@ -30,7 +30,7 @@ export class TransactionTableComponent implements OnInit {
   public refundForm: FormGroup;
   public selection = new SelectionModel<any>(true, []);
   public showRefund: boolean;
-  public selectedToRefund: any = {};
+  private selectedToRefund: any = {};
   public dialogRef;
   @Input() data: any;
   @ViewChild('refundDialog', { static: false }) refundDialog: any;
