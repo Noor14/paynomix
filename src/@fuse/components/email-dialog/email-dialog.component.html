@@ -16,7 +16,15 @@
         <form name="emailForm" fxLayout="column"  [formGroup]="emailForm">
             <mat-form-field appearance="outline">
                 <mat-label>To</mat-label>
-                <input type="email" matInput formControlName="SendTo"  required>  
+                <input type="email" matInput formControlName="SendTo" required> 
+                <mat-error *ngIf="emailForm.get('SendTo').hasError('required')">
+                    Email is required!
+                </mat-error>
+                <mat-error
+                    *ngIf="!emailForm.get('SendTo').hasError('required') &&
+                            emailForm.get('SendTo').hasError('email') || emailForm.get('SendTo').hasError('pattern')">
+                    Please enter a valid email address
+                </mat-error> 
             </mat-form-field> 
             <mat-form-field appearance="outline" *ngIf="showCC">
                 <mat-label>CC</mat-label>
@@ -29,6 +37,7 @@
             <mat-form-field appearance="outline">
             <mat-label>Subject</mat-label>
             <input matInput formControlName="Subject" readonly required>  
+            <mat-error>Subject is required</mat-error>
             </mat-form-field>  
             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                 <mat-label>Message</mat-label>
@@ -51,7 +60,7 @@
         <button mat-raised-button class="mr-8 accent-alpha-bg" aria-label="CLOSE" (click)="_dialogRef.close()">
             Close
         </button>    
-        <button mat-raised-button color="accent" class="save-button" aria-label="SAVE" (click)="sendEmail()">
+        <button mat-raised-button color="accent" class="save-button" aria-label="SAVE" [disabled]="emailForm.invalid" (click)="sendEmail()">
             Send
         </button>
     </div>
