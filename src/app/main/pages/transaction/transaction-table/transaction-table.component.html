@@ -76,10 +76,8 @@
                     <mat-chip-list>
                         <mat-chip class="py-4 px-16 fuse-white-fg"
                         [ngClass]="(data?.Status == transStatus.declined ) ?  'red-600' : 
-                        (data?.Status ==  transStatus.approved) ?  'green-400' :  
-                        (data?.Status == transStatus.pending) ? 'orange-500'  :  
                         (data?.Status ==  transStatus.funded) ? 'blue-700' : 
-                        'blue-500'">
+                        'green-400'">
                         <small>
                           {{(data?.Status == transStatus.declined ) ?  'Declined' : 
                           (data?.Status ==  transStatus.funded) ? 'Funded' : 
