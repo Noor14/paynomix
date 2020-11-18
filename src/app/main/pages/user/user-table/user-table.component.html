@@ -22,7 +22,12 @@
         <!-- Phone Column -->
         <ng-container matColumnDef="Phone">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Phone" [matTooltipPosition]="'above'"> {{row.Phone || '--' | mask: '(000) 000-0000' }}</td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Phone" [matTooltipPosition]="'above'">
+            <ng-template [ngIf]="row?.Phone" [ngIfElse]="usersPhone" >
+              {{row.Phone | mask: '(000) 000-0000'}}
+            </ng-template> 
+            <ng-template #usersPhone >--</ng-template>
+            </td>
         </ng-container>
 
         <!-- User Role Column -->

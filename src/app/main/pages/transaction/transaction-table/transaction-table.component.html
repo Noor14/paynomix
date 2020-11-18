@@ -193,12 +193,13 @@
       <form name="refundForm" fxLayout="column"  [formGroup]="refundForm">
         <mat-form-field appearance="outline">
             <mat-label>Transaction Amount</mat-label>
-            <input type="TransactionAmount" matInput formControlName="TransactionAmount"  required>  
+            <input type="TransactionAmount" matInput formControlName="TransactionAmount"  currencyMask  [options]="{ align: 'left', prefix: '$' }" required>  
             <mat-error>Transaction Amount is required</mat-error>
         </mat-form-field> 
         <mat-form-field appearance="outline">
             <mat-label>Amount To Refund</mat-label>
-            <input type="Amount" matInput formControlName="Amount" required> 
+            <input type="Amount" matInput formControlName="Amount" currencyMask 
+            [options]="{ align: 'left', prefix: '$' }" required> 
             <mat-error *ngIf="refundForm.get('Amount').hasError('required')">Amount To Refund is required</mat-error>
             <mat-error *ngIf="refundForm.get('Amount').hasError('amountExceed')">Amount should not exceed from transaction Amount</mat-error>
         </mat-form-field> 
