@@ -16,7 +16,7 @@
         <!-- User Name Column -->
         <ng-container matColumnDef="Username">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> User Name </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Username" [matTooltipPosition]="'above'"> {{row.Username |truncate:truncateTextLength}}</td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Username" [matTooltipPosition]="'above'"> {{row.Username || '--' |truncate:truncateTextLength}}</td>
         </ng-container>
     
         <!-- Phone Column -->
