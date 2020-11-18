@@ -8,9 +8,12 @@
                                 z-index: 101 !important;
                                 &:nth-child(2){
                                 z-index: 102 !important;
-                                mat-checkbox{
+                                    mat-checkbox{
                                     vertical-align: super;
+                                    }
                                 }
+                                &.hideCol:nth-child(1), &.hideCol:nth-child(2), &.hideCol:nth-child(3){
+                                    display: none;
                                 }
                             }
                         }
@@ -29,9 +32,14 @@
                                display: none;
                             }
                         }
-                        td:nth-child(2){
-                            mat-checkbox{
-                                vertical-align: super;
+                        td{
+                            &.hideCol:nth-child(1), &.hideCol:nth-child(2), &.hideCol:nth-child(3){
+                                display: none;
+                            }
+                            &:nth-child(2){
+                                mat-checkbox{
+                                    vertical-align: super;
+                                }
                             }
                         }
                         
