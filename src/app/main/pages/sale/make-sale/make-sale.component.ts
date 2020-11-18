@@ -92,7 +92,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this._unsubscribeAll.complete();
     this.componentRef && this.componentRef.destroy();
     this.componentRef && this.componentRef.changeDetectorRef.detach();
-    this.onAmountEnterSubscriber && this.onAmountEnterSubscriber.unsubscibe();
+    this.onAmountEnterSubscriber && this.onAmountEnterSubscriber.unsubscribe();
   }
   renderingComponent(type, data?): void {
     const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
