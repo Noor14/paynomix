@@ -229,7 +229,7 @@
         </button>    
         <button mat-raised-button
         color="accent"
-        aria-label="Refund" [disabled]="refundForm.invalid" (click)="refund()">
+        aria-label="Refund" [disabled]="refundForm.invalid || !refundForm.controls['Amount'].value" (click)="refund()">
             Refund
         </button>
     </div>

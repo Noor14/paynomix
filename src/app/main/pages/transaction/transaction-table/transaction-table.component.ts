@@ -114,7 +114,7 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
   }
   refund() {
     if (this.refundForm.valid) {
-      if(this.refundForm.controls['Amount'].value > this.selectedToRefund.Amount) {
+      if(this.refundForm.controls['Amount'].value && this.refundForm.controls['Amount'].value > this.selectedToRefund.Amount) {
         this.refundForm.controls.Amount.setErrors({
           amountExceed: true
         })
