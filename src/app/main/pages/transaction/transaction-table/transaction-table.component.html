@@ -45,7 +45,7 @@
                 </ng-container>
               	    <!--  Transaction Type Column -->
                 <ng-container matColumnDef="TransactionType">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Trans. Type</th>
+                  <th mat-header-cell *matHeaderCellDef>Trans. Type</th>
                   <td mat-cell *matCellDef="let row" >{{
                     (row.TransactionType ==  transType.CreditCardVoid) ?  'CC - Void ' : 
                     (row.TransactionType ==  transType.CreditCardSale) ?  'CC - Sale ' :  
