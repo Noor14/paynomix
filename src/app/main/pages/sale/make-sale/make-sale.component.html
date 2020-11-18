@@ -11,7 +11,13 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Transaction Amount</mat-label>
-                <input matInput required #amount [disabled]="!selectedLocationId">
+                <input matInput #amount
+                 currencyMask
+                 [options]="{ align: 'left', prefix: '$' }"
+                 [disabled]="!selectedLocationId"
+                 ngModel
+                 (ngModelChange)="onAmountEnter.next($event)"
+                 required>
             </mat-form-field>
 
             <mat-button-toggle-group class="mb-24" (change)="cardType($event.value)">
@@ -31,7 +37,7 @@
             <div class="outer-layer p-20">
                 <div fxLayout="row" fxLayoutAlign="space-between center">
                     <span>Total</span>
-                    <span>{{amount.value | currency}}</span>
+                    <span>{{amount.value }}</span>
                 </div> 
                 <hr />
 

@@ -83,7 +83,12 @@
                <mat-divider></mat-divider>
                <mat-list-item>
                   <h4 matLine>Business Phone </h4>
-                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.BusinessPhone || '--'}}</h4>
+                  <h4 class="text-bold" fxFlex="1 0 auto">
+                     <ng-template [ngIf]="allInfo?.MerchantBusiness?.BusinessPhone" [ngIfElse]="businessPhone">
+                        {{allInfo?.MerchantBusiness?.BusinessPhone | mask: '(000) 000-0000'}}
+                     </ng-template>
+                     <ng-template #businessPhone>--</ng-template>
+                     </h4>
                </mat-list-item>
                <mat-divider></mat-divider>
                <mat-list-item>
@@ -136,7 +141,12 @@
                 <mat-divider></mat-divider>
                 <mat-list-item>
                    <h4 matLine>SSN</h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.SSN || '--'}}</h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">
+                     <ng-template [ngIf]="allInfo?.SSN" [ngIfElse]="ssn">
+                        {{allInfo?.SSN | mask: '000-00-0000' }}
+                      </ng-template>
+                      <ng-template #ssn>--</ng-template>
+                   </h4>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item>
@@ -167,7 +177,12 @@
                 <mat-divider></mat-divider>
                 <mat-list-item>
                    <h4 matLine>Owner's Phone </h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.Phone || '--'}}</h4>
+                   <h4 class="text-bold" fxFlex="1 0 auto">
+                      <ng-template [ngIf]="allInfo?.Phone" [ngIfElse]="ownersPhone">
+                        {{allInfo?.Phone | mask: '(000) 000-0000'}}
+                      </ng-template>
+                      <ng-template #ownersPhone>--</ng-template>
+                   </h4>
                 </mat-list-item>
                 <mat-divider></mat-divider>
             </mat-list>

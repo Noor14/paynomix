@@ -21,6 +21,7 @@ import { MatTabsModule } from '@angular/material';
 import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { FuseConfirmDialogModule } from '@fuse/components';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { FuseConfirmDialogModule } from '@fuse/components';
     MatTabsModule,
     PricingPlanModule,
     MatTooltipModule,
-    FuseConfirmDialogModule
+    FuseConfirmDialogModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class ResellerModule { }

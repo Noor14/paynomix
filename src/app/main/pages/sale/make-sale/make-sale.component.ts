@@ -3,13 +3,12 @@ import { AfterViewChecked, AfterViewInit, Component, ComponentFactory, Component
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { snackBarConfigWarn } from '../../../../../constants/globalFunctions';
-import { fromEvent, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, takeUntil, tap } from 'rxjs/operators';
 import { AchInfoComponent } from '../sale-info/ach-info/ach-info.component';
 import { CreditcardInfoComponent } from '../sale-info/creditcard-info/creditcard-info.component';
 import { SaleService } from '../sale.service';
 import { StripeService } from 'ngx-stripe';
-import { NavigationEnd, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
 import { SettingService } from '../../settings/settings.service';
@@ -33,6 +32,8 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   private selectedCardType: number = 0;
   public transactionApproved: boolean = false;
   public requiredFields: any;
+  public onAmountEnter = new Subject<string>();
+  private selectedAmount:number;
 
   constructor(
     private readonly _resolver: ComponentFactoryResolver,
@@ -40,7 +41,6 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     private readonly _saleService: SaleService,
     private readonly _snackBar: MatSnackBar,
     private readonly _stripeService: StripeService,
-    private readonly _router: Router,
     private readonly _dialog: MatDialog,
     private readonly _settingService: SettingService,
 
@@ -62,17 +62,14 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    fromEvent(this.amountInput.nativeElement, 'keyup')
-      .pipe(
-        takeUntil(this._unsubscribeAll),
-        filter(Boolean),
-        debounceTime(500),
-        distinctUntilChanged(),
-      )
+   this.onAmountEnter.pipe(
+      debounceTime(500),
+      distinctUntilChanged())
       .subscribe(res => {
-        if (this.amountInput.nativeElement.value) {
-          this.transactionInitialize(Number(this.amountInput.nativeElement.value) * 100);
-        } else {
+       if (res) {
+          this.selectedAmount = Number(res)
+          this.transactionInitialize(this.selectedAmount * 100);
+        }else{
           this.container.clear();
           this.payObject = {};
         }
@@ -108,6 +105,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
         this.container.clear();
         this.transactionApproved = true;
         this.amountInput.nativeElement.value = '';
+        this.selectedAmount = undefined;
         this.openDialog(res)
       }
     })
@@ -191,8 +189,8 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.selectedLocationId = event;
     this.container.clear();
     this.getRequiredFields(event);
-    if (Number(this.amountInput.nativeElement.value))
-      this.transactionInitialize(Number(this.amountInput.nativeElement.value) * 100);
+    if (this.selectedAmount)
+      this.transactionInitialize(this.selectedAmount * 100);
   }
 
   getRequiredFields(value): void {
