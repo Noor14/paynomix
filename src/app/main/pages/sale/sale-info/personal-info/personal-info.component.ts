@@ -32,14 +32,14 @@ export class PersonalInfoComponent implements OnInit, OnChanges {
  }
   createPersonalInfoForm(){
     this.personalInfoForm = this._formBuilder.group({
-      Company: ['', Validators.required],
-      CustomerName: ['', Validators.required],
+      Company: [''],
+      CustomerName: [''],
       Email:  ['', [Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
-      Phone: ['', Validators.required],
-      Address: ['', Validators.required],
-      City: ['', Validators.required],
-      State: ['', Validators.required],
-      Country: ['', Validators.required]
+      Phone: [''],
+      Address: [''],
+      City: [''],
+      State: [''],
+      Country: ['']
     });
     this.personalInfoForm.valueChanges
     .subscribe((form)=> {
