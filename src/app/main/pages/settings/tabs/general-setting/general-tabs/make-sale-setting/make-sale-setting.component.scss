@@ -1,7 +1,12 @@
 .setting-make-sale{
-    mat-checkbox{
-        border-bottom: 1px solid #eee;
+    form{
+        section{
+            mat-checkbox{
+                width: 0px;
+                border-bottom: 1px solid #eee;
+
+            }
+        }
+
     }
-
-
 }
