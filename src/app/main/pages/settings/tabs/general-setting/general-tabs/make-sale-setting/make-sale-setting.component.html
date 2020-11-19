@@ -1,8 +1,5 @@
 <section class="setting-make-sale">
-    <fieldset class="p-20">
-        <legend class="px-8">
-            Required Fields 
-        </legend>
+    <div class="p-24">
         <form fxLayout="column" fxLayoutAlign="start"
         fxFlex="1 0 auto" name="form" [formGroup]="makeSaleSettingForm">
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
@@ -25,15 +22,16 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-
+    
             <ng-container *ngIf="makeSaleSettingForm.get('SaleSetting')['controls'].length">
                 <section [@fadeInOut]>
-                <div class="mat-card p-24 mb-16" 
+                <h4 class="text-underline">Required Fields</h4>    
+                <div class="mb-16" 
                 fxLayout ="row wrap"  
                 fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center start" fxLayoutAlign="start"
                 formArrayName="SaleSetting">
                     <ng-container *ngFor="let item of makeSaleSettingForm.get('SaleSetting')['controls']; let i = index;" [formGroupName]="i">
-                        <mat-checkbox class="my-4" fxFlex="25" 
+                        <mat-checkbox class="my-4 py-8" fxFlex="25" 
                         fxFlex.sm="50" fxFlex.lt-sm="100" [formControlName]="makeSaleSettings[i].ControlName"> 
                             {{makeSaleSettings[i].FieldName}}
                         </mat-checkbox>
@@ -57,6 +55,7 @@
                 </div>
                </section>
             </ng-container>
-      </form>
-    </fieldset>
+        </form>
+    </div>
+   
 </section>
