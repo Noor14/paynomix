@@ -3,8 +3,7 @@ export const environment = {
     hmr: false,
     mentom: false,
     paynomix : true,
-    //apiURL: 'https://api.paynomix.com:444/api/',
-    apiURL: 'https://paynomix.clique.center/api/api/',//Dev Environment
+    apiURL: 'https://api.paynomix.com:444/api/',
     title: 'Paynomix',
     assetPathName: 'paynomix',
     themeName: 'theme-default',
