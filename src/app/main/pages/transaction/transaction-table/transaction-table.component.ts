@@ -77,6 +77,7 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
     }
   }
   masterToggle() {
+    this.showRefund = false;
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
