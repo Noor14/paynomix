@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 import { snackBarConfig } from 'constants/globalFunctions';
 import { Subject } from 'rxjs';
 import { takeUntil, map, switchMap, tap } from 'rxjs/operators';
@@ -32,6 +33,7 @@ export class PartnerEditComponent implements OnInit, OnDestroy {
     private readonly _snackBar: MatSnackBar,
     private readonly _router: Router,
     private readonly _cdref: ChangeDetectorRef,
+    private readonly _slidingPanelService: SlidingPanelService
 
   ) { 
     // Set the private defaults
@@ -58,11 +60,14 @@ export class PartnerEditComponent implements OnInit, OnDestroy {
     .then((res: any) => {
       if(res && !res.StatusCode){
         this._snackBar.open('Partner updated', '', snackBarConfig);
-        this._router.navigate(['/pages/partner/partner-list']);
-
+        this.closeSlidingPanel();
+        this._slidingPanelService.setSlidingPanelStatus(true);
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   
+  }
+  closeSlidingPanel(): void {
+    this._slidingPanelService.closeSlidingPanel('slidePanel').toggleOpen();
   }
 
   ngOnDestroy(): void{

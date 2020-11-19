@@ -37,6 +37,7 @@ export class ResellerCreateComponent implements OnInit {
       if(res && !res.StatusCode){
         this._snackBar.open('Reseller created', '', snackBarConfig);
         this.closeSlidingPanel();
+        this._slidingPanelService.setSlidingPanelStatus(true);
         // this._router.navigate(['/pages/reseller/reseller-list']);
       }
   }).catch((err: HttpErrorResponse)=>(console.log))

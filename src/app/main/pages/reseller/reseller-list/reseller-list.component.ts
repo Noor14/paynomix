@@ -43,7 +43,15 @@ export class ResellerListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getResellers())
+    .subscribe(() => this.getResellers());
+
+    const panelChangesSubscriber = this._slidingPanelService.panelChange.subscribe((res: any) => {
+      if (res) {
+        this.getResellers()
+        // this._slidingPanelService.setSlidingPanelStatus(false);
+        // panelChangesSubscriber && panelChangesSubscriber.unsubscribe();
+      }
+    })
   }
 
   ngOnDestroy(): void {

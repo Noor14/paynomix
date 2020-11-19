@@ -43,7 +43,15 @@ export class PartnerListComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
       this._userConfigService.userModeChange
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(() => this.getPartners())
+      .subscribe(() => this.getPartners());
+
+      const panelChangesSubscriber = this._slidingPanelService.panelChange.subscribe((res:any)=> {
+      if(res) {
+        this.getPartners();
+        // this._slidingPanelService.setSlidingPanelStatus(false);
+        // panelChangesSubscriber && panelChangesSubscriber.unsubscribe();
+      }
+      })
     }
 
     ngOnDestroy(): void {
