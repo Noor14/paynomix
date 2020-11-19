@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
@@ -16,7 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   animations   : fuseAnimations
 
 })
-export class CreditcardInfoComponent implements OnInit {
+export class CreditcardInfoComponent implements OnInit, OnChanges {
   @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
   @Input() data: any;
   @Input() requiredFields: any;
@@ -72,13 +72,35 @@ export class CreditcardInfoComponent implements OnInit {
     private readonly _stripeService: StripeService,
     private readonly _snackBar: MatSnackBar
   ) { }
+  ngOnChanges(): void {
+    if(this.requiredFields) {
+      console.log('required fields from cc', this.requiredFields);
+    }
+  }
   ngOnInit(): void {
     this.creditcardForm = this._formBuilder.group({
       CardholderName: ['', Validators.required],
-      Address:  [''],
+      StreetAddress:  [''],
       ZipCode: ['', Validators.required],
       TransactionType: [1, Validators.required]
     });
+    if(this.requiredFields) {
+      this.applyValidation();
+    }
+  }
+  applyValidation() {
+    if (this.requiredFields && Object.keys(this.requiredFields).length) {
+      for (const key in this.requiredFields) {
+        if (this.creditcardForm.value.hasOwnProperty(key)) {
+          if (this.requiredFields[key]) {
+            this.creditcardForm.get(key).setValidators([Validators.required]);
+          } else {
+            this.creditcardForm.get(key).setValidators([]);
+          }
+          this.creditcardForm.get(key).updateValueAndValidity();
+        }
+      }
+    }
   }
   payNow() {
     if(this.creditcardForm.valid) {
