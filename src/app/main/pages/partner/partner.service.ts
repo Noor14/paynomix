@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseService } from '@fuse/services/base.service';
 import { environment } from 'environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class PartnerService extends BaseService {
@@ -20,5 +21,5 @@ export class PartnerService extends BaseService {
             const url = `${environment.apiURL}Partner`;
             return this.post(url, obj);   
        }
-
+     
 }

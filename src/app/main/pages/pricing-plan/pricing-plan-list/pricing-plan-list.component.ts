@@ -62,6 +62,13 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
         this.getPricingPlanBy = this._userConfigService.getUserMode();
         this.getPricingPlans();
       });
+      const panelChangesSubscriber = this._slidingPanelService.panelChange.subscribe((res:any)=> {
+        if(res) {
+          this.getPricingPlans();
+          // this._slidingPanelService.setSlidingPanelStatus(false);
+          // panelChangesSubscriber && panelChangesSubscriber.unsubscribe();
+        }
+        })
     }
   }
 

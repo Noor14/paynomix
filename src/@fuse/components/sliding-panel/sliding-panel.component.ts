@@ -64,10 +64,6 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
   @Output()
   openedChanged: EventEmitter<boolean>;
 
-  //close slidingPanel;
-   @Input()
-   isClosed: boolean
-
   @Output() componentName = new EventEmitter<any>();
 
   // Private
@@ -119,11 +115,6 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
     this._folded = false;
     this._unsubscribeAll = new Subject();
   }
-  // ngOnChanges(): void {
-  //   if(this.isClosed) {
-  //     this.toggleOpen()
-  //   }
-  // }
 
   // -----------------------------------------------------------------------------------------------------
   // @ Accessors

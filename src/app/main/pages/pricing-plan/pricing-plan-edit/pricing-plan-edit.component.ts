@@ -66,9 +66,8 @@ export class PricingPlanEditComponent implements OnInit, OnDestroy {
     .then((res: any) => {
       if(res && !res.StatusCode){
         this._snackBar.open('Pricing plan updated', '', snackBarConfig);
+        this._slidingPanelService.setSlidingPanelStatus(true);
         this.closeSlidingPanel();
-        this._router.navigate(['/pages/pricing-plan/pricing-plan-list']);
-
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   

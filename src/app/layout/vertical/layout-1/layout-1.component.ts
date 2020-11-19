@@ -76,11 +76,11 @@ export class VerticalLayout1Component implements OnInit, OnDestroy
         this.container.clear();
         factory = this._resolver.resolveComponentFactory(rendererType[value.componentName]);
         this.componentRef = this.container.createComponent(factory);
-        this.componentRef.instance.isClosed.subscribe(res => {
-            if (res) {
-             this.isClosed = res;
-            }
-          })
+        // this.componentRef.instance.isClosed && this.componentRef.instance.isClosed.subscribe(res => {
+        //     if (res) {
+        //      this.isClosed = res;
+        //     }
+        //   })
         if(value.data) {
             this.componentRef.instance.data = value.data;
         }

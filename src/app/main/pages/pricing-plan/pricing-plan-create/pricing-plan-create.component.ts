@@ -36,8 +36,7 @@ export class PricingPlanCreateComponent implements OnInit {
       if(res && !res.StatusCode){
         this._snackBar.open('Pricing plan created', '', snackBarConfig);
         this.closeSlidingPanel();
-        this._router.navigate(['/pages/pricing-plan/pricing-plan-list']);
-
+        this._slidingPanelService.setSlidingPanelStatus(true);
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   

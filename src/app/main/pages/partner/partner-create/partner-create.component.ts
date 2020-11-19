@@ -37,6 +37,7 @@ export class PartnerCreateComponent implements OnInit {
         if(res && !res.StatusCode){
           this._snackBar.open('Partner created', '', snackBarConfig);
           this.closeSlidingPanel();
+          this._slidingPanelService.setSlidingPanelStatus(true);
           // this._router.navigate(['/pages/partner/partner-list']);
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
