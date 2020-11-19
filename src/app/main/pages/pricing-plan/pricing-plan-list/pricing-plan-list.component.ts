@@ -10,6 +10,7 @@ import { PartnerService } from '../../partner/partner.service';
 import { ResellerService } from '../../reseller/reseller.service';
 import { PricingPlanTableComponent } from '../pricing-plan-table/pricing-plan-table.component';
 import { PricingPlanService } from '../pricing-plan.service';
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 
 @Component({
   selector: 'app-pricing-plan-list',
@@ -36,6 +37,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     * @param {MerchantService} _merchantService
     * @param {ResellerService} _resellerService
     * @param {PartnerService} _partnerService
+    * @param {SlidingPanelService} _slidingPanelService
     * @param {ChangeDetectorRef} _cdref
     */
    
@@ -46,6 +48,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
      private readonly _resellerService: ResellerService,
      private readonly _partnerService: PartnerService,
      private readonly _resolver: ComponentFactoryResolver,
+     private readonly _slidingPanelService: SlidingPanelService,
  ) { 
            // Set the private defaults
            this._unsubscribeAll = new Subject();
@@ -183,5 +186,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
       }
       return object;
   }
-
+  openSlidePanel(): void{
+    this._slidingPanelService.getSidebar('slidePanel', 'PricingPlanCreateComponent').toggleOpen();
+  }
 }

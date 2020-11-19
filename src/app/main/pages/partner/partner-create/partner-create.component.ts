@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 import { snackBarConfig } from 'constants/globalFunctions';
 import { PartnerService } from '../partner.service';
 
@@ -24,7 +25,8 @@ export class PartnerCreateComponent implements OnInit {
     constructor(
       private readonly _partnerService: PartnerService,
       private readonly _snackBar: MatSnackBar,
-      private readonly _router: Router
+      private readonly _router: Router,
+      private _slidingPanelService:SlidingPanelService
     ) { }
   
     ngOnInit(): void {}
@@ -34,10 +36,14 @@ export class PartnerCreateComponent implements OnInit {
       .then((res: any) => {
         if(res && !res.StatusCode){
           this._snackBar.open('Partner created', '', snackBarConfig);
-          this._router.navigate(['/pages/partner/partner-list']);
+          this.closeSlidingPanel();
+          // this._router.navigate(['/pages/partner/partner-list']);
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
     
+    }
+    closeSlidingPanel(): void {
+      this._slidingPanelService.closeSlidingPanel('slidePanel').toggleOpen();
     }
 
 }

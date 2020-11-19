@@ -3,7 +3,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/m
 import { fuseAnimations } from '@fuse/animations';
 import { AssigneeDialogComponent } from '@fuse/components/assignee-dialog/assignee-dialog.component';
 import { truncateTextLength } from '../../../../../constants/globalFunctions';
-
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 @Component({
   selector: 'app-pricing-plan-table',
   templateUrl: './pricing-plan-table.component.html',
@@ -21,7 +21,8 @@ export class PricingPlanTableComponent implements OnInit {
   
   public displayedColumns: string[] = ['PricingTitle', 'Reserve', 'DiscountRate', 'MonthlyMinimunFee', 'PerTransactionFee', 'TransactionFee', 'AssignCount'];
   constructor(
-    private readonly _dialog: MatDialog
+    private readonly _dialog: MatDialog,
+    private readonly _slidingPanelService: SlidingPanelService,
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +41,9 @@ export class PricingPlanTableComponent implements OnInit {
       this.updateList.emit(result);
      }
   });
+   }
+   editPricingPlan(value) {
+    this._slidingPanelService.getSidebar('slidePanel', 'PricingPlanEditComponent', value).toggleOpen();
    }
  
 }

@@ -33,6 +33,7 @@ import {NgxMaskModule} from 'ngx-mask';
   ],
   entryComponents: [
     ResellerTableComponent,
+    ResellerCreateComponent
   ],
   imports: [
     CommonModule,

@@ -36,6 +36,8 @@ import {NgxMaskModule} from 'ngx-mask';
   ],
   entryComponents: [
     PricingPlanTableComponent,
+    PricingPlanCreateComponent,
+    PricingPlanEditComponent
   ],
   exports: [
     PricingPlanListComponent, 

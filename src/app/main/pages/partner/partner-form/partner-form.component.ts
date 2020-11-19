@@ -20,12 +20,11 @@ export class PartnerFormComponent implements OnInit, OnChanges {
      */
     constructor(
       private readonly _formBuilder: FormBuilder
-
   ) {}
 
 
 ngOnInit(): void{
-  this.createPartnerForm()
+  this.createPartnerForm();
 }
 
 ngOnChanges(){
