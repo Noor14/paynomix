@@ -193,7 +193,6 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   checkPInfoFormStatus(value) {
-    console.log('form status', value)
     this.personalInfoFormValidation = value;
   }
 
