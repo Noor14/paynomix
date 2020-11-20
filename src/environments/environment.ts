@@ -11,8 +11,8 @@ export const environment = {
     title: 'Paynomix',
     assetPathName: 'paynomix',
     themeName: 'theme-default',
-    themeColor: '#f4511e',
-    themeTransparentColor: '#f4511e99',
+    themeColor: '#039be5',
+    themeTransparentColor: '#039be599',
 };
 
 /*

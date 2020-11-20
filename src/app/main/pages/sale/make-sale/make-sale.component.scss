@@ -1,6 +1,7 @@
+@import "../../../../../assets/variables/_variables";
 .makeSale{
     .mat-button-toggle-checked {
-        background-color: #f4511e !important; //dynamic
+        background-color: $fgColor !important;
         color: #fff!important;
     }
 }
