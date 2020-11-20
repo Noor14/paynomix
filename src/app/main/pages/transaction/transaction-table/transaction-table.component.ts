@@ -139,7 +139,7 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
       globalConfig.validateAllFormFields(this.refundForm)
     }
   }
-  printRecipt(data) {
+  printReceipt(data) {
     const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
     dialogRef.componentInstance.data = data;
   }
