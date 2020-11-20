@@ -9,6 +9,7 @@ import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { NgxCurrencyModule } from "ngx-currency";
+import { ReceiptDialogModule } from '@fuse/components/receipt-dialog/receipt-dialog.module';
 
 @NgModule({
   declarations: [TransactionListComponent, TransactionTableComponent, TransactionDetailComponent],
@@ -32,7 +33,8 @@ import { NgxCurrencyModule } from "ngx-currency";
     MatToolbarModule,
     MatDatepickerModule,
     MatChipsModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    ReceiptDialogModule
 
   ]
 })
