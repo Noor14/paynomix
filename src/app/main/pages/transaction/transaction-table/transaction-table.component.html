@@ -147,12 +147,12 @@
 		          <!-- Inserted On Column -->
 		        <ng-container matColumnDef="InsertedOn">
 		            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Time </th>
-		            <td mat-cell *matCellDef="let row" [matTooltip]="row?.InsertedOn" [matTooltipPosition]="'above'"> {{row.InsertedOn | date: 'medium'}} </td>
+		            <td mat-cell *matCellDef="let row" [matTooltip]="row?.InsertedOn | date: 'medium'" [matTooltipPosition]="'above'"> {{row.InsertedOn | date: 'medium'}} </td>
 		          </ng-container>
 		          <!-- Trans. Amount Column -->
 		          <ng-container matColumnDef="Amount">
 		            <th mat-header-cell *matHeaderCellDef mat-sort-header> Trans. Amount </th>
-		            <td mat-cell *matCellDef="let row" [matTooltip]="row?.Amount" [matTooltipPosition]="'above'"> {{row.Amount | currency}} </td>
+		            <td mat-cell *matCellDef="let row" [matTooltip]="row?.Amount | currency" [matTooltipPosition]="'above'"> {{row.Amount | currency}} </td>
 		          </ng-container>
 		          <!-- Marchant Name Column -->
 		          <ng-container matColumnDef="MerchantName">
