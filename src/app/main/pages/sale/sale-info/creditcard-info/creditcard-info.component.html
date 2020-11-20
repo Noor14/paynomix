@@ -6,7 +6,7 @@
         <ngx-stripe-card-group>
             <ngx-stripe-card-number [options]="cardOptions"></ngx-stripe-card-number>
             <ngx-stripe-card-expiry [options]="cardOptions"></ngx-stripe-card-expiry>
-            <ngx-stripe-card-cvc [options]="cardOptionsCVC"></ngx-stripe-card-cvc>
+            <ngx-stripe-card-cvc [options]="cardOptionsCVC" ></ngx-stripe-card-cvc>
         </ngx-stripe-card-group>
 
         <form fxLayout="column" fxLayoutAlign="center stretch"
@@ -14,7 +14,7 @@
         
             <mat-form-field appearance="outline">
                 <mat-label>Cardholder Name</mat-label>
-                <input matInput formControlName="CardholderName" required>
+                <input matInput formControlName="CardholderName" [required]="requiredFields?.CardholderName">
                 <mat-error>Cardholder Name is required!</mat-error>
             </mat-form-field>
         
@@ -25,7 +25,7 @@
         
             <mat-form-field appearance="outline">
                 <mat-label> Zip Code </mat-label>
-                <input matInput formControlName="ZipCode" required>
+                <input matInput formControlName="ZipCode" [required]="requiredFields?.ZipCode" >
                 <mat-error> Zip Code is required!</mat-error>
             </mat-form-field>
         

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
@@ -16,10 +16,11 @@ import { HttpErrorResponse } from '@angular/common/http';
   animations   : fuseAnimations
 
 })
-export class CreditcardInfoComponent implements OnInit, OnChanges {
+export class CreditcardInfoComponent implements OnInit {
   @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
   @Input() data: any;
   @Input() requiredFields: any;
+  @Input() personalInfoFormValidation: FormGroup;
   @Output() resetCreditCard = new EventEmitter<any>();
   public elementsOptions: StripeElementsOptions = {
     locale: 'en',
@@ -72,16 +73,11 @@ export class CreditcardInfoComponent implements OnInit, OnChanges {
     private readonly _stripeService: StripeService,
     private readonly _snackBar: MatSnackBar
   ) { }
-  ngOnChanges(): void {
-    if(this.requiredFields) {
-      console.log('required fields from cc', this.requiredFields);
-    }
-  }
   ngOnInit(): void {
     this.creditcardForm = this._formBuilder.group({
-      CardholderName: ['', Validators.required],
+      CardholderName: [''],
       StreetAddress:  [''],
-      ZipCode: ['', Validators.required],
+      ZipCode: [''],
       TransactionType: [1, Validators.required]
     });
     if(this.requiredFields) {
@@ -103,7 +99,10 @@ export class CreditcardInfoComponent implements OnInit, OnChanges {
     }
   }
   payNow() {
-    if(this.creditcardForm.valid) {
+    if(this.creditcardForm.valid && this.personalInfoFormValidation.valid) {
+      console.log(this.card.elements.getElement('cardCvc'));
+      console.log(this.card.elements.getElement("cardNumber"));
+      console.log(this.card.elements.getElement('cardExpiry'));
       this._stripeService.confirmCardPayment(this.data.SecretKey, {
         payment_method: {
           card: this.card.element
@@ -117,6 +116,7 @@ export class CreditcardInfoComponent implements OnInit, OnChanges {
         }) 
     } else{
       validateAllFormFields(this.creditcardForm);
+      validateAllFormFields(this.personalInfoFormValidation);
   }
   
   } 
