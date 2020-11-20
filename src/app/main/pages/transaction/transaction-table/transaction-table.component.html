@@ -69,17 +69,17 @@
                       </td>
                   </ng-container>
 
-                <!-- <ng-container matColumnDef="subAction">
+                <ng-container matColumnDef="subAction">
                   <th mat-header-cell *matHeaderCellDef>Action</th>
                   <td mat-cell *matCellDef="let row">
-                    <button mat-icon-button>
+                    <!---<button mat-icon-button>
                       <mat-icon class="secondry-text">email</mat-icon>
-                    </button>
-                    <button mat-icon-button>
+                    </button>-->
+                    <button mat-icon-button (click)="printRecipt(row)">
                       <mat-icon class="secondry-text">print</mat-icon>
                     </button>
                   </td>
-                </ng-container> -->
+                </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="RefundDisplayedColumns; sticky:true;">
                 </tr>
