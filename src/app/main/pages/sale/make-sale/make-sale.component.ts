@@ -71,6 +71,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
           this.selectedAmount = Number(res);
           this.transactionInitialize(this.selectedAmount * 100);
         }else{
+          this.selectedAmount = undefined;
           this.container.clear();
           this.payObject = {};
         }
@@ -102,6 +103,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.container.clear();
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = data;
+    this.componentRef.instance.requiredFields = this.requiredFields;
     this.componentRef.instance.resetCreditCard && this.componentRef.instance.resetCreditCard.subscribe(res => {
       if (res) {
         this.container.clear();
