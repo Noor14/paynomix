@@ -76,6 +76,18 @@
                                 }
                             ]
                         },
+                        "quivverpay": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.quivverpay.ts"
+                                },
+                                {
+                                    "replace": "src/index.html",
+                                    "with": "src/index.quivverpay.html"
+                                }
+                            ]
+                        },
                         "paynomix": {
                             "fileReplacements": [
                                 {
@@ -109,6 +121,9 @@
                         },
                         "mentom": {
                             "browserTarget": "fuse:build:mentom"
+                        },
+                        "quivverpay": {
+                            "browserTarget": "fuse:build:quivverpay"
                         },
                         "paynomix": {
                             "browserTarget": "fuse:build:paynomix"
