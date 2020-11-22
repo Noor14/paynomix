@@ -115,7 +115,6 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
       Reason: ['requested_by_customer', Validators.required],
     });
   }
-
   refund() {
     if (this.refundForm.valid) {
       if(this.refundForm.controls['Amount'].value && this.refundForm.controls['Amount'].value > this.selectedToRefund.Amount) {
