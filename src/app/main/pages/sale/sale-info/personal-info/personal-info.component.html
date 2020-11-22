@@ -12,7 +12,8 @@
 
         <mat-form-field appearance="outline" >
             <mat-label>Customer Name</mat-label>
-            <input matInput formControlName="CustomerName">
+            <input matInput formControlName="CustomerName" [required]="requiredFields?.CustomerName">
+            <mat-error>CustomerName is required!</mat-error>
         </mat-form-field>
 
 
