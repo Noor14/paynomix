@@ -58,13 +58,13 @@ export class TransactionListComponent implements OnInit {
       date: [{ begin: this.dateTo, end: this.dateFrom }]
     })
   }
-  onDateChange(event) {
-    const obj = {
-      ToDate: moment(event.value.end).format("MM/DD/YYYY"),
-      FromDate: moment(event.value.begin).format("MM/DD/YYYY")
-    }
-    this.getTransaction(obj);
-  }
+  // onDateChange(event) {
+  //   const obj = {
+  //     ToDate: moment(event.value.end).format("MM/DD/YYYY"),
+  //     FromDate: moment(event.value.begin).format("MM/DD/YYYY")
+  //   }
+  //   this.getTransaction(obj);
+  // }
   renderingComponent(type, data?) {
     const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
     this.container.clear();
