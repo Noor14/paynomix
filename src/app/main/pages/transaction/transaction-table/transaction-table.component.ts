@@ -8,6 +8,7 @@ import { transactionType, transactionStatus, snackBarConfig, snackBarConfigWarn 
 import { TransactionService } from '../transaction.service';
 import * as globalConfig from '../../../../../constants/globalFunctions';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
 
 @Component({
   selector: 'app-transaction-table',
@@ -31,7 +32,7 @@ export class TransactionTableComponent implements OnInit {
   public selection = new SelectionModel<any>(true, []);
   public showRefund: boolean;
   private selectedToRefund: any = {};
-  public dialogRef;
+  public dialogRef: any;
   @Input() data: any;
   @ViewChild('refundDialog', { static: false }) refundDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -55,8 +56,9 @@ export class TransactionTableComponent implements OnInit {
    'TransactionType',
    'Amount', 
    'status', 
-   'InsertedOn'
-  ]; 
+   'InsertedOn',
+   'Action'
+]; 
 public displayedColumns : string[]= this.columnstoDisplay.slice()
 
   constructor(
@@ -137,5 +139,9 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
     } else {
       globalConfig.validateAllFormFields(this.refundForm)
     }
+  }
+  printReceipt(obj) {
+    const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
+    dialogRef.componentInstance.data = obj;
   }
 }

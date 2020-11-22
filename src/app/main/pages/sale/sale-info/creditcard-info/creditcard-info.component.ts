@@ -99,10 +99,7 @@ export class CreditcardInfoComponent implements OnInit {
     }
   }
   payNow() {
-    if(this.creditcardForm.valid && this.personalInfoFormValidation.valid) {
-      console.log(this.card.elements.getElement('cardCvc'));
-      console.log(this.card.elements.getElement("cardNumber"));
-      console.log(this.card.elements.getElement('cardExpiry'));
+    if(this.creditcardForm.valid) {
       this._stripeService.confirmCardPayment(this.data.SecretKey, {
         payment_method: {
           card: this.card.element
