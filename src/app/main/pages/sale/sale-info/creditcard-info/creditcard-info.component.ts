@@ -20,6 +20,7 @@ export class CreditcardInfoComponent implements OnInit {
   @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
   @Input() data: any;
   @Input() requiredFields: any;
+  @Input() personalInfoFormValidation: FormGroup;
   @Output() resetCreditCard = new EventEmitter<any>();
   public elementsOptions: StripeElementsOptions = {
     locale: 'en',
@@ -74,11 +75,28 @@ export class CreditcardInfoComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.creditcardForm = this._formBuilder.group({
-      CardholderName: ['', Validators.required],
-      Address:  [''],
-      ZipCode: ['', Validators.required],
+      CardholderName: [''],
+      StreetAddress:  [''],
+      ZipCode: [''],
       TransactionType: [1, Validators.required]
     });
+    if(this.requiredFields) {
+      this.applyValidation();
+    }
+  }
+  applyValidation() {
+    if (this.requiredFields && Object.keys(this.requiredFields).length) {
+      for (const key in this.requiredFields) {
+        if (this.creditcardForm.value.hasOwnProperty(key)) {
+          if (this.requiredFields[key]) {
+            this.creditcardForm.get(key).setValidators([Validators.required]);
+          } else {
+            this.creditcardForm.get(key).setValidators([]);
+          }
+          this.creditcardForm.get(key).updateValueAndValidity();
+        }
+      }
+    }
   }
   payNow() {
     if(this.creditcardForm.valid) {
@@ -95,6 +113,7 @@ export class CreditcardInfoComponent implements OnInit {
         }) 
     } else{
       validateAllFormFields(this.creditcardForm);
+      validateAllFormFields(this.personalInfoFormValidation);
   }
   
   } 

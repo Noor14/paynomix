@@ -5,6 +5,8 @@ import { TransactionService } from '../transaction.service';
 import { pipe, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-transaction-list',
@@ -16,8 +18,9 @@ export class TransactionListComponent implements OnInit {
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
-
-   
+  public rangeForm: FormGroup;
+  public dateTo = moment().format('YYYY-MM-DD');
+  public dateFrom = moment().subtract(15, 'd').format('YYYY-MM-DD');
   /**
      * Constructor
      *
@@ -31,53 +34,78 @@ export class TransactionListComponent implements OnInit {
   constructor(
     private readonly _transactionService: TransactionService,
     private readonly _userConfigService: UserConfigService,
-    private readonly _resolver: ComponentFactoryResolver
-  ) { 
-       // Set the private defaults
-       this._unsubscribeAll = new Subject();
+    private readonly _resolver: ComponentFactoryResolver,
+    private readonly _formBuilder: FormBuilder,
+  ) {
+    // Set the private defaults
+    this._unsubscribeAll = new Subject();
   }
 
   ngOnInit() {
+    this.dateRangeForm();
     this._userConfigService.userModeChange
-    .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getTransaction())
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => this.getTransaction())
   }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
     this.componentRef && this.componentRef.destroy();
-}
-
+  }
+  dateRangeForm() {
+    this.rangeForm = this._formBuilder.group({
+      date: [{ begin: this.dateTo, end: this.dateFrom }]
+    })
+  }
+  // onDateChange(event) {
+  //   const obj = {
+  //     ToDate: moment(event.value.end).format("MM/DD/YYYY"),
+  //     FromDate: moment(event.value.begin).format("MM/DD/YYYY")
+  //   }
+  //   this.getTransaction(obj);
+  // }
   renderingComponent(type, data?) {
     const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
-      this.container.clear();
-      this.componentRef = this.container.createComponent(factory);
-      this.componentRef.instance.data = data;
-      this.componentRef.instance.updateList.subscribe(res=>{
-        if(res){
-          this.getTransaction();
-        }
-      })
-  }
-  getTransaction(): void{
-    this._transactionService.transactionList(this._userConfigService.getUserMode())
-    .then((res: any) => {
-      if(res && !res.StatusCode){
-        this.transactionType = res.Response.TotalTransaction;
-        if(res.Response && res.Response.Transactions.length){
-          this.renderingComponent(TransactionTableComponent, {
-            transaction: res.Response.Transactions
-          })
-        }else{
-          this.renderingComponent(NoFoundComponent, {
-            icon: 'no-transaction',
-            text: 'No Transaction Found',
-            subText: "You Haven't made any Transaction yet"
-          });
-        }
+    this.container.clear();
+    this.componentRef = this.container.createComponent(factory);
+    this.componentRef.instance.data = data;
+    this.componentRef.instance.updateList.subscribe(res => {
+      if (res) {
+        this.getTransaction();
       }
-    }).catch(()=>(console.log))
+    });
+  }
+  getTransaction(data?): void {
+    let obj;
+    let mode = this._userConfigService.getUserMode();
+    if (mode) {
+      obj = {
+        ...data,
+        ...mode
+      }
+    } else {
+      obj = {
+        ...data,
+      }
+    }
+    this._transactionService.transactionList(obj)
+      .then((res: any) => {
+        if (res && !res.StatusCode) {
+          this.transactionType = res.Response.TotalTransaction;
+          if (res.Response && res.Response.Transactions.length) {
+            this.renderingComponent(TransactionTableComponent, {
+              transaction: res.Response.Transactions
+            })
+          } else {
+            this.renderingComponent(NoFoundComponent, {
+              icon: 'no-transaction',
+              text: 'No Transaction Found',
+              subText: "You Haven't made any Transaction yet"
+            });
+          }
+        }
+      }).catch(() => (console.log))
   }
 
 }
