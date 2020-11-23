@@ -69,10 +69,13 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
       debounceTime(500),
       distinctUntilChanged())
       .subscribe(res => {
-       if (res) {
+       if (res &&  Number(res) >= 0.5) {
           this.selectedAmount = Number(res);
           this.transactionInitialize(this.selectedAmount * 100);
         }else{
+          if(res && Number(res) < 0.50) {
+            this._snackBar.open('Amount must be greater than 0.50', '', snackBarConfigWarn);
+          }
           this.selectedAmount = undefined;
           this.container.clear();
           this.payObject = {};
@@ -211,7 +214,6 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
         res.Response.forEach((item) => {
           obj[item.ControlName] = item.IsRequired
         })
-      //  this.componentRef.instance.requiredFields = obj;
        this.requiredFields = obj;
       }
     });
