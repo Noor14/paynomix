@@ -57,11 +57,7 @@ export class TransactionTableComponent implements OnInit {
    'Amount', 
    'status', 
    'InsertedOn',
-<<<<<<< HEAD
-   'subAction'
-=======
    'Action'
->>>>>>> fe2940adf76b4bda96b0bf934f358bfc5f931a75
 ]; 
 public displayedColumns : string[]= this.columnstoDisplay.slice()
 
@@ -143,14 +139,8 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
       globalConfig.validateAllFormFields(this.refundForm)
     }
   }
-<<<<<<< HEAD
-  printReceipt(data) {
-    const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
-    dialogRef.componentInstance.data = data;
-=======
   printReceipt(obj) {
     const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
     dialogRef.componentInstance.data = obj;
->>>>>>> fe2940adf76b4bda96b0bf934f358bfc5f931a75
   }
 }
