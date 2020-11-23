@@ -19,7 +19,6 @@
                  (ngModelChange)="onAmountEnter.next($event)"
                  required>
             </mat-form-field>
-
             <mat-button-toggle-group class="mb-24" (change)="cardType($event.value)">
                 <mat-button-toggle class="w-50-p" [value]="0" checked="true"> Credit Card
                 </mat-button-toggle>
