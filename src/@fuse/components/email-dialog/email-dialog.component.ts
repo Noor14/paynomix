@@ -19,6 +19,7 @@ export class EmailDialogComponent implements OnInit {
  public showCC : boolean = false;
  public showBCC : boolean = false;
  public appInfo= environment
+public  reciptForm: FormGroup;
    /**
      * Constructor
      *
@@ -34,7 +35,14 @@ export class EmailDialogComponent implements OnInit {
     ) { }
  
   ngOnInit() {
+console.log(this.data)
+if(this.data.isSingleInput == true){
+    this.createReciptForm();
+}else{
     this.createEmailForm();
+}
+
+ 
   }
   createEmailForm(): void{
     this.emailForm = this._formBuilder.group({
@@ -50,6 +58,16 @@ export class EmailDialogComponent implements OnInit {
       this.emailForm.patchValue(this.data);
     }
   }
+
+  createReciptForm(): void{
+    this.reciptForm = this._formBuilder.group({
+        To: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+        Cc:[''],
+        Bcc: ['']
+    });
+   
+  }
+
   
   sendEmail(){
     if(this.emailForm.valid){ 
@@ -62,4 +80,26 @@ export class EmailDialogComponent implements OnInit {
       validateAllFormFields(this.emailForm)
     }
   }
+  sendreciptEmail(){
+      const obj = {
+        "TransactionID": this.data.TransactionId,
+        "MerchantID": this.data.MerchantId,
+        "To": this.reciptForm.value.To,  
+        "Cc": this.reciptForm.value.Cc,  
+        "Bcc": this.reciptForm.value.Bcc,  
+        "TemplateTypeID": "1"
+      }
+      if(this.reciptForm.valid){ 
+        this._settingService.sendRecipt(obj)
+        .then((res:any) => {
+          this._snackBar.open(res.StatusMessage, '', snackBarConfig);
+          this._dialogRef.close();
+        }).catch((err: HttpErrorResponse)=>(console.log));
+      }else{
+        validateAllFormFields(this.emailForm)
+      }
+
+
+  }
+
 }

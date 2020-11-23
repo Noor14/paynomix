@@ -1,13 +1,79 @@
+
 <div class="dialog-content-wrapper">
     <mat-toolbar class="mat-accent">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title">Send Merchant Link</span>
+            <span class="title"> {{(data.isSingleInput == true) ? 'Email Transaction Details' : 'Send Merchant Link'}} </span>
             <button mat-icon-button  aria-label="Close dialog" (click)="_dialogRef.close()">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-toolbar-row>
     </mat-toolbar>
 
+
+
+    <ng-template #singleInput [ngIf]="data.isSingleInput == true" [ngIfElse]="multiInput">
+    
+      
+  
+        <div mat-dialog-content class="p-24 m-0">
+            <div fxLayout="row" fxLayoutAlign="end" class="Cursorpointer">
+                <button mat-icon-button  aria-label="CC" (click)="showCC = true" *ngIf="!showCC">Cc</button>
+                <button mat-icon-button  aria-label="BCC" (click)="showBCC = true" *ngIf="!showBCC ">Bcc</button>
+            </div> 
+            <form name="reciptForm" fxLayout="column"  [formGroup]="reciptForm">
+
+            <mat-form-field appearance="outline">
+                <mat-label>To</mat-label>
+                <input type="email" matInput formControlName="To" required> 
+                <mat-error *ngIf="reciptForm.get('To').hasError('required')">
+                    Email is required!
+                </mat-error>
+                <mat-error
+                    *ngIf="!reciptForm.get('To').hasError('required') &&
+                    reciptForm.get('To').hasError('email') || reciptForm.get('To').hasError('pattern')">
+                    Please enter a valid email address
+                </mat-error> 
+            </mat-form-field> 
+            <mat-form-field appearance="outline" *ngIf="showCC">
+                <mat-label>CC</mat-label>
+                <input type="email" matInput formControlName="Cc" >  
+                <mat-error
+                *ngIf="reciptForm.get('Cc').hasError('email') || reciptForm.get('Cc').hasError('pattern')">
+                Please enter a valid email address
+            </mat-error> 
+            </mat-form-field> 
+            <mat-form-field appearance="outline" *ngIf="showBCC">
+                <mat-label>Bcc</mat-label>
+                <input  type="email" matInput formControlName="Bcc">  
+                <mat-error
+                *ngIf="reciptForm.get('Bcc').hasError('email') || reciptForm.get('Bcc').hasError('pattern')">
+                Please enter a valid email address
+            </mat-error> 
+            </mat-form-field>
+
+
+        </form>
+            <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+            <button mat-raised-button
+            class="mr-8 accent-alpha-bg"
+            aria-label="Cancel" (click)="dialogRef.close()">
+                Cancel
+            </button>    
+            <button mat-raised-button
+            color="accent"
+            aria-label="email"
+            (click)="sendreciptEmail();"
+            >
+                Send
+            </button>
+        </div>
+        </div>
+    
+    
+    </ng-template>
+    
+
+    <ng-template #multiInput >
     <div mat-dialog-content class="p-24">
         <div fxLayout="row" fxLayoutAlign="end" class="Cursorpointer">
             <button mat-icon-button  aria-label="CC" (click)="showCC = true" *ngIf="!showCC">Cc</button>
@@ -72,4 +138,6 @@
             Send
         </button>
     </div>
+</ng-template>
 </div>
+

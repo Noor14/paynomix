@@ -183,7 +183,9 @@ style="background-color:transparent !important;padding:15px;"
 </div>
 <div class="printnot">
     <button 
-    mat-button class="accent ml-136 pbtn" (click)="print()">Print</button>
+    mat-button class="accent pbtn" (click)="openemailDialog(transactionDetail)">Email</button>
+    <button 
+    mat-button class="accent pbtn" (click)="printReceipt(transactionDetail)">Print</button>
 </div>
 </div>
 </div>
