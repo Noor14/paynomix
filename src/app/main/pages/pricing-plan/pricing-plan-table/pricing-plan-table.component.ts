@@ -45,5 +45,10 @@ export class PricingPlanTableComponent implements OnInit {
    editPricingPlan(value) {
     this._slidingPanelService.getSidebar('slidePanel', 'PricingPlanEditComponent', value).toggleOpen();
    }
+   assignPricingPlan(value) {
+    this._slidingPanelService.getSidebar('slidePanel', 'AssigneeDialogComponent', value).toggleOpen();
+   }
+
+   
  
 }

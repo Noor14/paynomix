@@ -8,7 +8,7 @@ import {PartnerCreateComponent} from '../../../main/pages/partner/partner-create
 import { ResellerCreateComponent } from '../../../main/pages/reseller/reseller-create/reseller-create.component';
 import { PricingPlanCreateComponent } from '../../../main/pages/pricing-plan/pricing-plan-create/pricing-plan-create.component';
 import { PricingPlanEditComponent } from '../../../main/pages/pricing-plan/pricing-plan-edit/pricing-plan-edit.component';
-
+import { AssigneeDialogComponent } from '../../../../@fuse/components/assignee-dialog/assignee-dialog.component'
 @Component({
     selector     : 'vertical-layout-1',
     templateUrl  : './layout-1.component.html',
@@ -93,5 +93,6 @@ export const rendererType = {
     PartnerCreateComponent,
     PricingPlanCreateComponent,
     ResellerCreateComponent,
-    PricingPlanEditComponent
+    PricingPlanEditComponent,
+    AssigneeDialogComponent
   }
