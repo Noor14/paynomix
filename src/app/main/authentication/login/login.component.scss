@@ -2,11 +2,8 @@
 
 login {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url("/assets/images/backgrounds/dark-material-bg.jpg") no-repeat;
-    background-size: cover;
+ 
+   
     .login {
         .login-form-wrapper {
             .login-form {
@@ -87,6 +84,13 @@ login {
 
             }
         }
+    }.loginRight{
+        background: url("/assets/images/backgrounds/dark-material-bg.jpg") ;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-attachment: fixed;
+        height: 625px;
+
     }
     
 }
