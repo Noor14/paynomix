@@ -12,6 +12,7 @@ import { StripeService } from 'ngx-stripe';
 import { MatDialog } from '@angular/material';
 import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
 import { SettingService } from '../../settings/settings.service';
+import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-make-sale',
   templateUrl: './make-sale.component.html',
@@ -32,6 +33,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   private selectedCardType: number = 0;
   public transactionApproved: boolean = false;
   public requiredFields: any;
+  public personalInfoFormValidation: FormGroup
   public onAmountEnter = new Subject<string>();
   public onAmountEnterSubscriber:any;
   private selectedAmount:number;
@@ -71,6 +73,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
           this.selectedAmount = Number(res);
           this.transactionInitialize(this.selectedAmount * 100);
         }else{
+          this.selectedAmount = undefined;
           this.container.clear();
           this.payObject = {};
         }
@@ -102,6 +105,8 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.container.clear();
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = data;
+    this.componentRef.instance.requiredFields = this.requiredFields;
+    this.componentRef.instance.personalInfoFormValidation = this.personalInfoFormValidation;
     this.componentRef.instance.resetCreditCard && this.componentRef.instance.resetCreditCard.subscribe(res => {
       if (res) {
         this.container.clear();
@@ -185,6 +190,10 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     if(this.componentRef) {
       this.componentRef.instance.data = this.payObject
     } 
+  }
+
+  checkPersonalInfoFormStatus(value) {
+    this.personalInfoFormValidation = value;
   }
 
   onSelected(event: number): void {

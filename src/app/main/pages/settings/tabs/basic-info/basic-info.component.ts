@@ -102,6 +102,7 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     reader.onload = () => {
       this.userImage.FileName = file.name;
       this.userImage.FileType = file.type;
+      this.userImage.FileExtension = file.type;
       this.userImage.FileValue = (reader as any).result.split(',').pop();
     }
   }

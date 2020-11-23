@@ -37,7 +37,6 @@ export class InterceptorService implements HttpInterceptor {
       }
     }
     this._fuseProgressBarService.show();
-    this._fuseProgressBarService.setMode('query');
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
                 this._fuseProgressBarService.hide();
