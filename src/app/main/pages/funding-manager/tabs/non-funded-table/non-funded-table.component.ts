@@ -15,7 +15,7 @@ import { FundManagerService } from '../../funding-manager.service';
 })
 export class NonFundedTableComponent implements OnInit {
   public truncateTextLength = truncateTextLength;
-  @ViewChild('fundDialog', {static: false}) fundDialog: any;
+  @ViewChild('fundDialog') fundDialog: any;
   public dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

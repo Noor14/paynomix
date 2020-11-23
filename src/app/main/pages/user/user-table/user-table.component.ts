@@ -15,7 +15,7 @@ import { fuseAnimations } from '@fuse/animations';
 export class UserTableComponent implements OnInit {
   public validator = validator;
   public truncateTextLength = truncateTextLength;
-  @ViewChild('userDialog', { static: false }) userDialog: any;
+  @ViewChild('userDialog') userDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @Output() updateList = new EventEmitter<boolean>();

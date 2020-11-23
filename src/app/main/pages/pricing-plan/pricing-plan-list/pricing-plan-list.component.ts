@@ -18,7 +18,7 @@ import { PricingPlanService } from '../pricing-plan.service';
 })
 export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
 
-  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
 
   public pricingPlans: any[] = [];

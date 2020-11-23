@@ -17,7 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 })
 export class CreditcardInfoComponent implements OnInit {
-  @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
+  @ViewChild(StripeCardNumberComponent) card: StripeCardNumberComponent;
   @Input() data: any;
   @Input() requiredFields: any;
   @Input() personalInfoFormValidation: FormGroup;

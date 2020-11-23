@@ -34,7 +34,7 @@ export class TransactionTableComponent implements OnInit {
   private selectedToRefund: any = {};
   public dialogRef: any;
   @Input() data: any;
-  @ViewChild('refundDialog', { static: false }) refundDialog: any;
+  @ViewChild('refundDialog') refundDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   public dataSource = new MatTableDataSource<any>();

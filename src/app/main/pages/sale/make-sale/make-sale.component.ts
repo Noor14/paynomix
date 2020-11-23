@@ -20,9 +20,9 @@ import { FormGroup } from '@angular/forms';
 })
 export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('makeSale', { static: false }) makeSaleView: ElementRef;
-  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
-  @ViewChild('amount', { static: false }) amountInput: ElementRef;
+  @ViewChild('makeSale') makeSaleView: ElementRef;
+  @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild('amount') amountInput: ElementRef;
   private componentRef: ComponentRef<any>;
   public bottomSheetEnable: boolean = true;
   public bottomSheetDrawerOpen: boolean = false;

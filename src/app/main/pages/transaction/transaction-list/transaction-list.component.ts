@@ -12,7 +12,7 @@ import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
   styleUrls: ['./transaction-list.component.scss']
 })
 export class TransactionListComponent implements OnInit {
-  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
