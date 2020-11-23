@@ -6,7 +6,7 @@ import { TransactionTableComponent } from './transaction-table/transaction-table
 import { FuseSharedModule } from '@fuse/shared.module';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxCurrencyModule } from "ngx-currency";
 import { ReceiptDialogModule } from '@fuse/components/receipt-dialog/receipt-dialog.module';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +19,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [TransactionListComponent, TransactionTableComponent, TransactionDetailComponent],
   entryComponents: [
@@ -41,6 +41,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCheckboxModule,
     MatToolbarModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatChipsModule,
     NgxCurrencyModule,
     ReceiptDialogModule
