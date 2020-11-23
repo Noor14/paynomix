@@ -9,10 +9,10 @@ import { AchInfoComponent } from '../sale-info/ach-info/ach-info.component';
 import { CreditcardInfoComponent } from '../sale-info/creditcard-info/creditcard-info.component';
 import { SaleService } from '../sale.service';
 import { StripeService } from 'ngx-stripe';
-import { MatDialog } from '@angular/material';
 import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
 import { SettingService } from '../../settings/settings.service';
 import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-make-sale',
   templateUrl: './make-sale.component.html',

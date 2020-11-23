@@ -75,7 +75,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "4mb"
                 }
               ],
               "fileReplacements": [
@@ -89,7 +89,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "4mb"
                 }
               ],
               "fileReplacements": [
@@ -107,9 +107,13 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "4mb"
                 }
               ],
+              "index": {
+                "input": "src/index.mentom.html",
+                "output": "index.html"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -125,7 +129,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "4mb"
                 }
               ],
               "fileReplacements": [
@@ -139,7 +143,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "maximumWarning": "4mb"
                 }
               ],
               "fileReplacements": [

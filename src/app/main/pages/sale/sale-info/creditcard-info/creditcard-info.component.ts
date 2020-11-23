@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
 import { StripeElementsOptions } from '@stripe/stripe-js';
 import { StripeCardNumberComponent, StripeService } from 'ngx-stripe';
 import { SaleService } from '../../sale.service';
 import { snackBarConfig , snackBarConfigWarn, validateAllFormFields} from 'constants/globalFunctions';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-creditcard-info',

@@ -1,10 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { snackBarConfig, snackBarConfigWarn, validateAllFormFields, validator ,truncateTextLength} from '../../../../../constants/globalFunctions';
 import { UserService } from '../user.service';
 import { fuseAnimations } from '@fuse/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
