@@ -32,7 +32,7 @@ export class TransactionTableComponent implements OnInit {
   public selection = new SelectionModel<any>(true, []);
   public showRefund: boolean;
   private selectedToRefund: any = {};
-  public dialogRef;
+  public dialogRef: any;
   @Input() data: any;
   @ViewChild('refundDialog', { static: false }) refundDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -57,7 +57,11 @@ export class TransactionTableComponent implements OnInit {
    'Amount', 
    'status', 
    'InsertedOn',
+<<<<<<< HEAD
    'subAction'
+=======
+   'Action'
+>>>>>>> fe2940adf76b4bda96b0bf934f358bfc5f931a75
 ]; 
 public displayedColumns : string[]= this.columnstoDisplay.slice()
 
@@ -139,8 +143,14 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
       globalConfig.validateAllFormFields(this.refundForm)
     }
   }
+<<<<<<< HEAD
   printReceipt(data) {
     const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
     dialogRef.componentInstance.data = data;
+=======
+  printReceipt(obj) {
+    const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
+    dialogRef.componentInstance.data = obj;
+>>>>>>> fe2940adf76b4bda96b0bf934f358bfc5f931a75
   }
 }

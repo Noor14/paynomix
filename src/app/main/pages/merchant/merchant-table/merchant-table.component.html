@@ -47,7 +47,7 @@
         <!--  Boarded Date  Column -->
         <ng-container matColumnDef="BoardedDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Boarded Date </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.BoardedDate" [matTooltipPosition]="'above'"> {{row.BoardedDate | date: 'mediumDate'}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.BoardedDate | date: 'medium'" [matTooltipPosition]="'above'"> {{row.BoardedDate | date: 'medium'}} </td>
         </ng-container>
           <!--   Status  Column -->
         <ng-container matColumnDef="BoardingStatus">
