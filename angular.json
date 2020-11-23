@@ -92,6 +92,10 @@
                   "maximumWarning": "4mb"
                 }
               ],
+              "index": {
+                "input": "src/index.mentom.html",
+                "output": "index.html"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -110,10 +114,6 @@
                   "maximumWarning": "4mb"
                 }
               ],
-              "index": {
-                "input": "src/index.mentom.html",
-                "output": "index.html"
-              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
