@@ -100,10 +100,6 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.mentom.ts"
-                },
-                {
-                  "replace": "src/index.html",
-                  "with": "src/index.mentom.html"
                 }
               ]
             },
@@ -114,6 +110,10 @@
                   "maximumWarning": "4mb"
                 }
               ],
+              "index": {
+                "input": "src/index.quivverpay.html",
+                "output": "index.html"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

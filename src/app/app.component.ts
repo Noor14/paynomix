@@ -16,7 +16,7 @@ import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/tr';
 import { environment } from 'environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material/icon';
+import { MatIconRegistry } from "@angular/material/icon";
 
 @Component({
     selector   : 'app',
