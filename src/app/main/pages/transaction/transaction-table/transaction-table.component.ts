@@ -9,6 +9,7 @@ import { TransactionService } from '../transaction.service';
 import * as globalConfig from '../../../../../constants/globalFunctions';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
+import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
 
 @Component({
   selector: 'app-transaction-table',
@@ -115,6 +116,17 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
       Reason: ['requested_by_customer', Validators.required],
     });
   }
+
+ 
+
+  openemailDialog(x) {
+    const dialogRef = this._dialog.open(EmailDialogComponent, {width: '550px'});
+    x.isSingleInput = true
+    dialogRef.componentInstance.data = x ;
+
+   }
+
+
   refund() {
     if (this.refundForm.valid) {
       if(this.refundForm.controls['Amount'].value && this.refundForm.controls['Amount'].value > this.selectedToRefund.Amount) {
