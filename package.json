@@ -13,6 +13,8 @@
         "build-prod-stats": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod --stats-json",
         "mentom": "ng build --prod --configuration=mentom --aot=true --build-optimizer=true",
         "paynomix": "ng build --prod --configuration=paynomix --aot=true --build-optimizer=true",
+        "quivverpay": "ng build --prod --configuration=quivverpay --aot=true --build-optimizer=true",
+        "dev": "ng build --prod --configuration=dev --aot=true --build-optimizer=true",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",

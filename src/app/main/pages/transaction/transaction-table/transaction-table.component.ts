@@ -8,6 +8,7 @@ import { transactionType, transactionStatus, snackBarConfig, snackBarConfigWarn 
 import { TransactionService } from '../transaction.service';
 import * as globalConfig from '../../../../../constants/globalFunctions';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
 
 @Component({
   selector: 'app-transaction-table',
@@ -15,23 +16,23 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrls: ['./transaction-table.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [
-  trigger('detailExpandRefund', [
-    state('collapsed', style({ height: '0px', minHeight: '0' })),
-    state('expanded', style({ height: '*' })),
-    transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-  ]),
-  fuseAnimations,
-]
+    trigger('detailExpandRefund', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+    fuseAnimations,
+  ]
 })
 export class TransactionTableComponent implements OnInit {
-  public expandedRefundDetail:any;
+  public expandedRefundDetail: any;
   public transStatus = transactionStatus;
   public transType = transactionType;
   public refundForm: FormGroup;
   public selection = new SelectionModel<any>(true, []);
   public showRefund: boolean;
   private selectedToRefund: any = {};
-  public dialogRef;
+  public dialogRef: any;
   @Input() data: any;
   @ViewChild('refundDialog', { static: false }) refundDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -55,7 +56,8 @@ export class TransactionTableComponent implements OnInit {
    'TransactionType',
    'Amount', 
    'status', 
-   'InsertedOn'
+   'InsertedOn',
+   'Action'
 ]; 
 public displayedColumns : string[]= this.columnstoDisplay.slice()
 
@@ -77,6 +79,7 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
     }
   }
   masterToggle() {
+    this.showRefund = false;
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
@@ -91,19 +94,19 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
     if (this.selection.selected.length == 1 && this.selection.hasValue()) {
       this.selectedToRefund = value;
       this.showRefund = true;
-    }else{
+    } else {
       this.showRefund = false;
     }
   }
   openRefundDialog() {
     this.createRefundForm();
     this.dialogRef = this._dialog.open(this.refundDialog, { width: '600px' });
-    this.dialogRef.afterClosed().subscribe(res=>{
-      if(res){
+    this.dialogRef.afterClosed().subscribe(res => {
+      if (res) {
         this.updateList.emit(true)
       }
     })
-  }
+  } 
   createRefundForm() {
     this.refundForm = this._formBuilder.group({
       TransactionId: [this.selectedToRefund.TransactionId, Validators.required],
@@ -131,9 +134,13 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
             this.dialogRef.close();
           }
 
-        }).catch((err: HttpErrorResponse)=>(console.log));
-    } else  {
+        }).catch((err: HttpErrorResponse) => (console.log));
+    } else {
       globalConfig.validateAllFormFields(this.refundForm)
     }
+  }
+  printReceipt(obj) {
+    const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
+    dialogRef.componentInstance.data = obj;
   }
 }

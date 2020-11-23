@@ -1,3 +1,4 @@
+@import "../../../assets/variables/_variables";
 .bottomSheet{
     .overlay{
         position: absolute;
@@ -13,7 +14,7 @@
         right: 0;
         bottom: 0;
         padding: 15px;
-        background: #fdfcfc; // dynamic
+        background: #fdfcfc;
         .close-button{
             position: absolute;
             right: 0;
@@ -35,8 +36,8 @@
                     height: 30px;
                     min-width: 30px;
                     border-radius: 100%;
-                    border: 1px solid #f4511e; // dynamic
-                    color: #f4511e; // dynamic
+                    border: 1px solid $fgColor;
+                    color: $fgColor;
                     display: inline-flex;
                     margin-right: 15px;
                     align-items: center;
@@ -53,7 +54,7 @@
                 &.selected{
                     @extend :hover;
                     color: #fff;
-                    background: #f4511e; // dynamic
+                    background: $fgColor;
                 }
               
             }

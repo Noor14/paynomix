@@ -26,7 +26,10 @@
                 <mat-button-toggle class="w-50-p" [value]="1" >ACH</mat-button-toggle>
             </mat-button-toggle-group>
 
-            <app-personal-info (personalInfo)="personalInformation($event)" [resetPersonalInfo]="transactionApproved" [requiredFields]="requiredFields"></app-personal-info>
+            <app-personal-info (personalInfo)="personalInformation($event)"
+             (personalInfoFormValidation)="checkPersonalInfoFormStatus($event)" 
+             [resetPersonalInfo]="transactionApproved" [requiredFields]="requiredFields">
+            </app-personal-info>
 
         </div>
 

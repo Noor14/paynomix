@@ -1,3 +1,4 @@
+@import "../../../../../../assets/variables/_variables";
 .basicInfo{
     .mat-card{
         position: relative;
@@ -8,7 +9,7 @@
                 width: 140px;
                 height: 140px;
                 margin: auto;
-                border-color: #f4511e; // dynamic
+                border-color: $fgColor;
                 ngx-dropzone-label{
                    .mat-icon{
                        font-size: 40px;

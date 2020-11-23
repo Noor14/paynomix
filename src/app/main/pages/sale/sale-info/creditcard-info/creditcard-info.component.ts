@@ -20,6 +20,7 @@ export class CreditcardInfoComponent implements OnInit {
   @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
   @Input() data: any;
   @Input() requiredFields: any;
+  @Input() personalInfoFormValidation: FormGroup;
   @Output() resetCreditCard = new EventEmitter<any>();
   public elementsOptions: StripeElementsOptions = {
     locale: 'en',
@@ -51,10 +52,10 @@ export class CreditcardInfoComponent implements OnInit {
  
    }
  };
- public cardOptionsCVC: any ={
+ public cardOptionsCVC: any = {
   ...this.cardOptions,
   placeholder: 'CVV / CVC2 / CVV2 / CID'
- }
+ };
   public creditcardForm: FormGroup;
 
 /**
@@ -74,14 +75,31 @@ export class CreditcardInfoComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.creditcardForm = this._formBuilder.group({
-      CardholderName: ['', Validators.required],
-      Address:  ['', Validators.required],
-      ZipCode: ['', Validators.required],
+      CardholderName: [''],
+      StreetAddress:  [''],
+      ZipCode: [''],
       TransactionType: [1, Validators.required]
     });
+    if(this.requiredFields) {
+      this.applyValidation();
+    }
+  }
+  applyValidation() {
+    if (this.requiredFields && Object.keys(this.requiredFields).length) {
+      for (const key in this.requiredFields) {
+        if (this.creditcardForm.value.hasOwnProperty(key)) {
+          if (this.requiredFields[key]) {
+            this.creditcardForm.get(key).setValidators([Validators.required]);
+          } else {
+            this.creditcardForm.get(key).setValidators([]);
+          }
+          this.creditcardForm.get(key).updateValueAndValidity();
+        }
+      }
+    }
   }
   payNow() {
-    if(this.creditcardForm.valid) {
+    if(this.creditcardForm.valid && this.personalInfoFormValidation.valid) {
       this._stripeService.confirmCardPayment(this.data.SecretKey, {
         payment_method: {
           card: this.card.element
@@ -95,6 +113,7 @@ export class CreditcardInfoComponent implements OnInit {
         }) 
     } else{
       validateAllFormFields(this.creditcardForm);
+      validateAllFormFields(this.personalInfoFormValidation);
   }
   
   } 
