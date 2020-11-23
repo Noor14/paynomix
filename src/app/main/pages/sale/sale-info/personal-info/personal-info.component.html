@@ -5,11 +5,15 @@
         <mat-form-field appearance="outline">
             <mat-label>Company</mat-label>
             <input matInput formControlName="Company" [required]="requiredFields?.Company" >
+            <mat-error>
+                Company is required!
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" >
             <mat-label>Customer Name</mat-label>
-            <input matInput formControlName="CustomerName">
+            <input matInput formControlName="CustomerName" [required]="requiredFields?.CustomerName">
+            <mat-error>CustomerName is required!</mat-error>
         </mat-form-field>
 
 
@@ -31,13 +35,16 @@
                 [ngClass.gt-sm]="'pl-4'">
                 <mat-label>Phone</mat-label>
                 <input mask="(000) 000-0000" matInput formControlName="Phone" [required]="requiredFields?.Phone">
-                <mat-error *ngIf="personalInfoForm.get('Phone').hasError('required')">Phone is required!</mat-error>
+                <mat-error>Phone is required!</mat-error>
             </mat-form-field>
         </div>
 
         <mat-form-field appearance="outline">
             <mat-label>City</mat-label>
             <input matInput formControlName="City" [required]="requiredFields?.City">
+            <mat-error>
+                City is required!
+            </mat-error>
         </mat-form-field>
 
         <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="center stretch"
@@ -48,6 +55,9 @@
                 <mat-select formControlName="State" [required]="requiredFields?.State">
                     <mat-option [value]="item.name" *ngFor="let item of locationConfig?.states">{{item.name}}
                     </mat-option>
+                    <mat-error>
+                        State is required!
+                    </mat-error>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'"
@@ -56,6 +66,9 @@
                 <mat-select formControlName="Country" >
                     <mat-option [value]="item.code" *ngFor="let item of locationConfig?.countries">{{item.name}}
                     </mat-option>
+                    <mat-error>
+                        Country is required!
+                    </mat-error>
                 </mat-select>
             </mat-form-field>
         </div>
