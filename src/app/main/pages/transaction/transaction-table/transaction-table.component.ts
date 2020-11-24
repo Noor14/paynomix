@@ -2,13 +2,17 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
 import { transactionType, transactionStatus, snackBarConfig, snackBarConfigWarn } from '../../../../../constants/globalFunctions';
 import { TransactionService } from '../transaction.service';
 import * as globalConfig from '../../../../../constants/globalFunctions';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-transaction-table',
@@ -16,16 +20,16 @@ import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-
   styleUrls: ['./transaction-table.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [
-  trigger('detailExpandRefund', [
-    state('collapsed', style({ height: '0px', minHeight: '0' })),
-    state('expanded', style({ height: '*' })),
-    transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-  ]),
-  fuseAnimations,
-]
+    trigger('detailExpandRefund', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+    fuseAnimations,
+  ]
 })
 export class TransactionTableComponent implements OnInit {
-  public expandedRefundDetail:any;
+  public expandedRefundDetail: any;
   public transStatus = transactionStatus;
   public transType = transactionType;
   public refundForm: FormGroup;
@@ -34,7 +38,7 @@ export class TransactionTableComponent implements OnInit {
   private selectedToRefund: any = {};
   public dialogRef: any;
   @Input() data: any;
-  @ViewChild('refundDialog', { static: false }) refundDialog: any;
+  @ViewChild('refundDialog') refundDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   public dataSource = new MatTableDataSource<any>();
@@ -94,19 +98,19 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
     if (this.selection.selected.length == 1 && this.selection.hasValue()) {
       this.selectedToRefund = value;
       this.showRefund = true;
-    }else{
+    } else {
       this.showRefund = false;
     }
   }
   openRefundDialog() {
     this.createRefundForm();
     this.dialogRef = this._dialog.open(this.refundDialog, { width: '600px' });
-    this.dialogRef.afterClosed().subscribe(res=>{
-      if(res){
+    this.dialogRef.afterClosed().subscribe(res => {
+      if (res) {
         this.updateList.emit(true)
       }
     })
-  }
+  } 
   createRefundForm() {
     this.refundForm = this._formBuilder.group({
       TransactionId: [this.selectedToRefund.TransactionId, Validators.required],
@@ -134,8 +138,8 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
             this.dialogRef.close();
           }
 
-        }).catch((err: HttpErrorResponse)=>(console.log));
-    } else  {
+        }).catch((err: HttpErrorResponse) => (console.log));
+    } else {
       globalConfig.validateAllFormFields(this.refundForm)
     }
   }

@@ -9,9 +9,10 @@ import { AchInfoComponent } from '../sale-info/ach-info/ach-info.component';
 import { CreditcardInfoComponent } from '../sale-info/creditcard-info/creditcard-info.component';
 import { SaleService } from '../sale.service';
 import { StripeService } from 'ngx-stripe';
-import { MatDialog } from '@angular/material';
 import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
 import { SettingService } from '../../settings/settings.service';
+import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-make-sale',
   templateUrl: './make-sale.component.html',
@@ -19,9 +20,9 @@ import { SettingService } from '../../settings/settings.service';
 })
 export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('makeSale', { static: false }) makeSaleView: ElementRef;
-  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
-  @ViewChild('amount', { static: false }) amountInput: ElementRef;
+  @ViewChild('makeSale') makeSaleView: ElementRef;
+  @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild('amount') amountInput: ElementRef;
   private componentRef: ComponentRef<any>;
   public bottomSheetEnable: boolean = true;
   public bottomSheetDrawerOpen: boolean = false;
@@ -32,6 +33,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
   private selectedCardType: number = 0;
   public transactionApproved: boolean = false;
   public requiredFields: any;
+  public personalInfoFormValidation: FormGroup
   public onAmountEnter = new Subject<string>();
   public onAmountEnterSubscriber:any;
   private selectedAmount:number;
@@ -67,10 +69,13 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
       debounceTime(500),
       distinctUntilChanged())
       .subscribe(res => {
-       if (res) {
+       if (res &&  Number(res) >= 0.5) {
           this.selectedAmount = Number(res);
           this.transactionInitialize(this.selectedAmount * 100);
         }else{
+          if(res && Number(res) < 0.50) {
+            this._snackBar.open('Amount must be greater than 0.50', '', snackBarConfigWarn);
+          }
           this.selectedAmount = undefined;
           this.container.clear();
           this.payObject = {};
@@ -104,6 +109,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = data;
     this.componentRef.instance.requiredFields = this.requiredFields;
+    this.componentRef.instance.personalInfoFormValidation = this.personalInfoFormValidation;
     this.componentRef.instance.resetCreditCard && this.componentRef.instance.resetCreditCard.subscribe(res => {
       if (res) {
         this.container.clear();
@@ -189,6 +195,10 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
     } 
   }
 
+  checkPersonalInfoFormStatus(value) {
+    this.personalInfoFormValidation = value;
+  }
+
   onSelected(event: number): void {
     this.selectedLocationId = event;
     this.container.clear();
@@ -204,7 +214,6 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
         res.Response.forEach((item) => {
           obj[item.ControlName] = item.IsRequired
         })
-      //  this.componentRef.instance.requiredFields = obj;
        this.requiredFields = obj;
       }
     });

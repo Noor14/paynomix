@@ -16,8 +16,12 @@ import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/tr';
 import { environment } from 'environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
+<<<<<<< HEAD
 import { MatIconRegistry } from '@angular/material';
 import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
+=======
+import { MatIconRegistry } from "@angular/material/icon";
+>>>>>>> origin/affan-ng-updated-version
 
 @Component({
     selector   : 'app',

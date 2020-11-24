@@ -23,10 +23,10 @@ export class FuseShortcutsComponent implements OnInit, AfterViewInit, OnDestroy
     @Input()
     navigation: any;
 
-    @ViewChild('searchInput', {static: false})
+    @ViewChild('searchInput')
     searchInputField;
 
-    @ViewChild('shortcuts', {static: false})
+    @ViewChild('shortcuts')
     shortcutsEl: ElementRef;
 
     // Private

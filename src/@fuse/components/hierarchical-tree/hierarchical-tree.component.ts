@@ -18,7 +18,7 @@ interface Node {
   encapsulation: ViewEncapsulation.None
 })
 export class HierarchicalTreeComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit{
-@ViewChild(MatMenuTrigger, {static: false}) triggerMenu: MatMenuTrigger;
+@ViewChild(MatMenuTrigger) triggerMenu: MatMenuTrigger;
 public truncateTextLength = truncateTextLength;
 @Input() toggleHierarchy: boolean = false;
 @Output() menuToggle = new EventEmitter<boolean>()

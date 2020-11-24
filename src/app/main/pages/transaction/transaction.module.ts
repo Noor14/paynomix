@@ -3,14 +3,23 @@ import { CommonModule } from '@angular/common';
 import { TransactionRoutingModule } from './transaction-routing.module';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionTableComponent } from './transaction-table/transaction-table.component';
-import { MatButtonModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule, MatTableModule, MatToolbarModule } from '@angular/material';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxCurrencyModule } from "ngx-currency";
 import { ReceiptDialogModule } from '@fuse/components/receipt-dialog/receipt-dialog.module';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [TransactionListComponent, TransactionTableComponent, TransactionDetailComponent],
   entryComponents: [
@@ -32,6 +41,7 @@ import { ReceiptDialogModule } from '@fuse/components/receipt-dialog/receipt-dia
     MatCheckboxModule,
     MatToolbarModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatChipsModule,
     NgxCurrencyModule,
     ReceiptDialogModule

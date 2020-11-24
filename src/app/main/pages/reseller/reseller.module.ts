@@ -17,11 +17,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ResellerFormComponent } from './reseller-form/reseller-form.component';
 import { ResellerTableComponent } from './reseller-table/reseller-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
-import { MatTabsModule } from '@angular/material';
 import { PricingPlanModule } from '../pricing-plan/pricing-plan.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { FuseConfirmDialogModule } from '@fuse/components';
 import {NgxMaskModule} from 'ngx-mask';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
