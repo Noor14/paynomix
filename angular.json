@@ -125,6 +125,72 @@
                 }
               ]
             },
+            "magic": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4mb"
+                }
+              ],
+              "index": {
+                "input": "src/index.magic.html",
+                "output": "index.html"
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.magic.ts"
+                },
+                {
+                  "replace": "src/index.html",
+                  "with": "src/index.magic.html"
+                }
+              ]
+            },
+            "wholesale": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4mb"
+                }
+              ],
+              "index": {
+                "input": "src/index.wholesale.html",
+                "output": "index.html"
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.wholesale.ts"
+                },
+                {
+                  "replace": "src/index.html",
+                  "with": "src/index.wholesale.html"
+                }
+              ]
+            },
+            "surfside": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4mb"
+                }
+              ],
+              "index": {
+                "input": "src/index.surfside.html",
+                "output": "index.html"
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.surfside.ts"
+                },
+                {
+                  "replace": "src/index.html",
+                  "with": "src/index.surfside.html"
+                }
+              ]
+            },
             "paynomix": {
               "budgets": [
                 {
@@ -173,6 +239,15 @@
             },
             "quivverpay": {
               "browserTarget": "fuse:build:quivverpay"
+            },
+            "wholesale": {
+              "browserTarget": "fuse:build:wholesale"
+            },
+            "magic": {
+              "browserTarget": "fuse:build:magic"
+            },
+            "surfside": {
+              "browserTarget": "fuse:build:surfside"
             },
             "paynomix": {
               "browserTarget": "fuse:build:paynomix"
