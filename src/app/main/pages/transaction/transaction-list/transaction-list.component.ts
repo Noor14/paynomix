@@ -5,6 +5,8 @@ import { TransactionService } from '../transaction.service';
 import { pipe, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-transaction-list',
@@ -16,7 +18,9 @@ export class TransactionListComponent implements OnInit {
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
-
+  dateRangeForm: FormGroup;
+  dateTo = moment().format('YYYY-MM-DD');
+  dateFrom = moment().subtract(15,'d').format('YYYY-MM-DD');
   /**
      * Constructor
      *
@@ -31,12 +35,15 @@ export class TransactionListComponent implements OnInit {
     private readonly _transactionService: TransactionService,
     private readonly _userConfigService: UserConfigService,
     private readonly _resolver: ComponentFactoryResolver,
+    private readonly _formBuilder: FormBuilder,
   ) {
     // Set the private defaults
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit() {
+  this.rangeForm();
+
     this._userConfigService.userModeChange
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => this.getTransaction())
@@ -78,5 +85,13 @@ export class TransactionListComponent implements OnInit {
         }
       }).catch(() => (console.log))
   }
-
+  rangeForm() {
+    this.dateRangeForm = this._formBuilder.group({
+      FromDate: [this.dateFrom, Validators.required], 
+      ToDate: [this.dateTo, Validators.required]  
+    });
+  }
+  valueChange(value) {
+   console.log('value', value);
+  }
 }

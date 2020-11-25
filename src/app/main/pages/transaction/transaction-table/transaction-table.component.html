@@ -213,9 +213,8 @@
         [class.expanded]="expandedElement == row || expandedRefundDetail == row"
         (click)="expandedElement = expandedElement === row ? null : row; expandedRefundDetail = null"></tr>
       <tr mat-row class="example-detail-row detail-row" *matRowDef="let row; columns: ['expandedDetail']"
-      style="overflow: hidden;"> </tr>
-     
-      <tr mat-row class="example-detail-row refund-rows" *matRowDef="let row; columns: ['expandedRefundDetail']" style="overflow: hidden; visibility: hidden;"></tr>
+      style="overflow: hidden"> </tr>
+      <tr mat-row class="example-detail-row refund-rows" *matRowDef="let row; columns: ['expandedRefundDetail']" style="overflow: hidden;"></tr>
     </table>
   </div>
 </section>

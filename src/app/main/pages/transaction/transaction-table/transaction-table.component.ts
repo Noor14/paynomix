@@ -21,7 +21,7 @@ import { MatTableDataSource } from '@angular/material/table';
   encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('detailExpand', [
-      state('collapsed, void', style({ height: '0', minHeight: '0', visibility: 'hidden', })),
+      state('collapsed, void', style({ height: '0', minHeight: '0', visibility: 'hidden' })),
       state('expanded', style({ height: 'auto', minHeight: '48px', visibility: 'visible', width: '100%', 'border-bottom': '1px solid #ccc' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
       transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
