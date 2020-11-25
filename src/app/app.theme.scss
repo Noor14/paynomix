@@ -72,6 +72,73 @@ $mat-deep-red:(
     )
 );
 
+$mat-magic-red:(
+    700: #ff0000de,
+    600: #ff0000,
+    400: #f30a0a,
+    contrast:(
+        10: $dark-primary-text,
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $light-primary-text,
+        A400: $light-primary-text,
+        A700: $light-primary-text,
+    )
+);
+$mat-surfside-blue:(
+    700: #29ade4de,
+    600: #29ade4,
+    400: #73cef5,
+    contrast:(
+        10: $dark-primary-text,
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $light-primary-text,
+        A400: $light-primary-text,
+        A700: $light-primary-text,
+    )
+);
+$mat-wholesale-orange:(
+    700: #f7931ede,
+    600: #f7931e,
+    400: #ffba6b,
+    contrast:(
+        10: $dark-primary-text,
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $light-primary-text,
+        A400: $light-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
 // Generate Fuse color classes for custom palettes
 $custom_palettes: (
     fuse-white: $fuse-white,
@@ -136,6 +203,96 @@ body.theme-mentom {
         primary: $mentom-theme-primary-palette,
         accent: $mentom-theme-accent-palette,
         warn: $mentom-theme-warn-palette
+    );
+
+    @include fuse-color-classes($palettes);
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Define the magic theme
+// -----------------------------------------------------------------------------------------------------
+$magic-theme-primary-palette: mat-palette($fuse-navy);
+$magic-theme-accent-palette: mat-palette($mat-magic-red, 600, 400, 700);
+$magic-theme-warn-palette: mat-palette($mat-red);
+$magic-theme: mat-light-theme($magic-theme-primary-palette, $magic-theme-accent-palette, $magic-theme-warn-palette);
+
+// Add ".theme-yellow-light" class to the body to activate this theme.
+// Class name must start with "theme-" !!!
+body.theme-magic {
+    // Generate the Angular Material theme
+    @include angular-material-theme($magic-theme);
+
+    // Apply the theme to the Fuse Core
+    @include fuse-core-theme($magic-theme);
+
+    // Apply the theme to the user components
+    @include components-theme($magic-theme);
+
+    // Generate Fuse color classes for primary, accent and warn colors
+    $palettes: (
+        primary: $magic-theme-primary-palette,
+        accent: $magic-theme-accent-palette,
+        warn: $magic-theme-warn-palette
+    );
+
+    @include fuse-color-classes($palettes);
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Define the surfside theme
+// -----------------------------------------------------------------------------------------------------
+$surfside-theme-primary-palette: mat-palette($fuse-navy);
+$surfside-theme-accent-palette: mat-palette($mat-surfside-blue, 600, 400, 700);
+$surfside-theme-warn-palette: mat-palette($mat-red);
+$surfside-theme: mat-light-theme($surfside-theme-primary-palette, $surfside-theme-accent-palette, $surfside-theme-warn-palette);
+
+// Add ".theme-yellow-light" class to the body to activate this theme.
+// Class name must start with "theme-" !!!
+body.theme-surfside {
+    // Generate the Angular Material theme
+    @include angular-material-theme($surfside-theme);
+
+    // Apply the theme to the Fuse Core
+    @include fuse-core-theme($surfside-theme);
+
+    // Apply the theme to the user components
+    @include components-theme($surfside-theme);
+
+    // Generate Fuse color classes for primary, accent and warn colors
+    $palettes: (
+        primary: $surfside-theme-primary-palette,
+        accent: $surfside-theme-accent-palette,
+        warn: $surfside-theme-warn-palette
+    );
+
+    @include fuse-color-classes($palettes);
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Define the surfside theme
+// -----------------------------------------------------------------------------------------------------
+$wholesale-theme-primary-palette: mat-palette($fuse-navy);
+$wholesale-theme-accent-palette: mat-palette($mat-wholesale-orange, 600, 400, 700);
+$wholesale-theme-warn-palette: mat-palette($mat-red);
+$wholesale-theme: mat-light-theme($wholesale-theme-primary-palette, $wholesale-theme-accent-palette, $wholesale-theme-warn-palette);
+
+// Add ".theme-yellow-light" class to the body to activate this theme.
+// Class name must start with "theme-" !!!
+body.theme-wholesale {
+    // Generate the Angular Material theme
+    @include angular-material-theme($wholesale-theme);
+
+    // Apply the theme to the Fuse Core
+    @include fuse-core-theme($wholesale-theme);
+
+    // Apply the theme to the user components
+    @include components-theme($wholesale-theme);
+
+    // Generate Fuse color classes for primary, accent and warn colors
+    $palettes: (
+        primary: $wholesale-theme-primary-palette,
+        accent: $wholesale-theme-accent-palette,
+        warn: $wholesale-theme-warn-palette
     );
 
     @include fuse-color-classes($palettes);
