@@ -46,21 +46,16 @@
 
     </section>
       <!-- Date Range Section -->
-    <!-- <section>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-            <form [formGroup]="rangeForm" class="ml-auto">
-                <mat-form-field>
-                  <input matInput
-                         [satDatepicker]="picker2"
-                         (dateChange)="onDateChange($event)"
-                         formControlName="date">
-                  <sat-datepicker #picker2 [rangeMode]="true">
-                  </sat-datepicker>
-                  <sat-datepicker-toggle matSuffix [for]="picker2"></sat-datepicker-toggle>
-              </mat-form-field>
-               </form>
-          </div>
-    </section> -->
-   
+    <section class="mt-20" fxLayout="row" fxLayoutAlign="end center">
+        <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" >
+            <input matStartDate placeholder="Start date">
+            <input matEndDate placeholder="End date" >
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>                
+    </section>
     <ng-template #renderingContainer></ng-template>
 </section>

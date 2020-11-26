@@ -1,12 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { validator, validateAllFormFields, snackBarConfig, snackBarConfigWarn, } from '../../../../../constants/globalFunctions'
 import { UserService } from '../user.service';
 import * as globalConfig from '../../../../../constants/globalFunctions';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -39,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
       UserName: [this._userConfigService.loggedInUser.UserName, Validators.required],
       Password: ['', Validators.required],
       NewPassword: ['', [Validators.required, Validators.minLength(globalConfig.validator.minPasswordLength), Validators.pattern(validator.passwordPattern)]],
-      ConfirmPassword: ['', [Validators.required, Validators.pattern(validator.passwordPattern)]]
+      ConfirmPassword: ['', Validators.required]
     });
   }
   updatePassword(): void {

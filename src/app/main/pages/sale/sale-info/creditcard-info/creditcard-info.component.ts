@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
 import { fuseAnimations } from '@fuse/animations';
 import { StripeElementsOptions } from '@stripe/stripe-js';
 import { StripeCardNumberComponent, StripeService } from 'ngx-stripe';
 import { SaleService } from '../../sale.service';
 import { snackBarConfig , snackBarConfigWarn, validateAllFormFields} from 'constants/globalFunctions';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-creditcard-info',
@@ -17,7 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 })
 export class CreditcardInfoComponent implements OnInit {
-  @ViewChild(StripeCardNumberComponent, {static: false}) card: StripeCardNumberComponent;
+  @ViewChild(StripeCardNumberComponent) card: StripeCardNumberComponent;
   @Input() data: any;
   @Input() requiredFields: any;
   @Input() personalInfoFormValidation: FormGroup;
@@ -76,7 +76,7 @@ export class CreditcardInfoComponent implements OnInit {
   ngOnInit(): void {
     this.creditcardForm = this._formBuilder.group({
       CardholderName: [''],
-      StreetAddress:  [''],
+      Address:  [''],
       ZipCode: [''],
       TransactionType: [1, Validators.required]
     });

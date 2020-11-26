@@ -13,7 +13,7 @@ import { ResellerService } from '../reseller.service';
   styleUrls: ['./reseller-list.component.scss']
 })
 export class ResellerListComponent implements OnInit, OnDestroy {
-  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   
   public resellers: any= [];

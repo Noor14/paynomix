@@ -13,7 +13,7 @@ import { PartnerService } from '../partner.service';
   styleUrls: ['./partner-list.component.scss']
 })
 export class PartnerListComponent implements OnInit, OnDestroy {
-  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   public partners: any[] = [];
   private _unsubscribeAll: Subject<any>;

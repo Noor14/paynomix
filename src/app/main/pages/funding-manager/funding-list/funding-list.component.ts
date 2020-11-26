@@ -15,11 +15,11 @@ import { NonFundedTableComponent } from '../tabs/non-funded-table/non-funded-tab
 
 })
 export class FundingListComponent implements OnInit, OnDestroy {
-  @ViewChild('renderingContainerFunded', { read: ViewContainerRef, static: false }) 
+  @ViewChild('renderingContainerFunded', { read: ViewContainerRef }) 
   fundedContainer: ViewContainerRef;
   private fundedComponentRef: ComponentRef<any>;
 
-  @ViewChild('renderingContainerNonFunded', { read: ViewContainerRef, static: false }) 
+  @ViewChild('renderingContainerNonFunded', { read: ViewContainerRef }) 
   nonFundedContainer: ViewContainerRef;
   private nonFundedComponentRef: ComponentRef<any>;
 

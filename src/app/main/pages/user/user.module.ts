@@ -12,10 +12,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserTableComponent } from './user-table/user-table.component';
 import { NoFoundModule } from '@fuse/components/no-found/no-found.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { MatDialogModule,MatFormFieldModule, MatInputModule, MatToolbarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {NgxMaskModule} from 'ngx-mask';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [UserListComponent, UserTableComponent, ChangePasswordComponent],

@@ -71,6 +71,8 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
     this._merchantService.merchantList(this._userConfigService.getUserMode())
     .then((res: any) => {
         if(res && !res.StatusCode){
+            this.reset();
+            this.makeSaleSettingForm.controls.SaleSetting['controls'] = [];
             this.merchants = res.Response;
         }
     }).catch((err: HttpErrorResponse)=>(console.log))

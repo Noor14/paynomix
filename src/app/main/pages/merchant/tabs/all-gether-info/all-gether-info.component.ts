@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
 @Component({
   selector: 'app-all-gether-info',
