@@ -14,7 +14,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
   declarations: [
     IpBlockingComponent, 
@@ -32,7 +32,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatDividerModule,
     MatSelectModule,
-    FuseSharedModule
+    FuseSharedModule,
+    MatRadioModule
     
   ]
 })
