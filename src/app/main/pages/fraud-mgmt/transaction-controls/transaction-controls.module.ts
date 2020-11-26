@@ -12,8 +12,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDividerModule} from '@angular/material/divider';
 import { FuseSharedModule } from '@fuse/shared.module';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatDividerModule,
     MatSelectModule,
-    FuseSharedModule
+    FuseSharedModule,
+    MatRadioModule
     
   ]
 })
