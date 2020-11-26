@@ -17,8 +17,7 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class LoginComponent implements OnInit
 {
-    backgroundImage: string = '';
-
+    public backgroundImage: string = undefined;
     public appInfo = environment;
     public loginForm: FormGroup;
     public loggedIn: boolean = false
