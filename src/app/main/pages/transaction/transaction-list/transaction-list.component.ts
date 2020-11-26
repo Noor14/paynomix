@@ -7,7 +7,6 @@ import { takeUntil } from 'rxjs/operators';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 @Component({
   selector: 'app-transaction-list',
   templateUrl: './transaction-list.component.html',
@@ -15,8 +14,6 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 })
 export class TransactionListComponent implements OnInit {
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
-  @Output()
-  dateChange: EventEmitter<MatDatepickerInputEvent<any>> = new EventEmitter();
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
@@ -93,13 +90,13 @@ export class TransactionListComponent implements OnInit {
       ToDate: [this.dateTo, Validators.required]
     });
   }
-  handleDateRangeSelected(event:any) {
-    console.log('val', event);
-    // console.log('val', type);
-    console.log('va', this.dateRangeForm.value)
-  }
-  onDateChange(date: string) {
-    console.log(date)
-    this.getTransaction()
+  onClose() {
+    console.log('date')
+     this.dateRangeForm.controls['FromDate'].valueChanges.subscribe(value => {
+       console.log('vale', value);
+     });
+     this.dateRangeForm.controls['ToDate'].valueChanges.subscribe(value => {
+       console.log('value', value);
+     })
   }
 }
