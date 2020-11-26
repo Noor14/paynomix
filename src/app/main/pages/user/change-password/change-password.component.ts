@@ -39,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
       UserName: [this._userConfigService.loggedInUser.UserName, Validators.required],
       Password: ['', Validators.required],
       NewPassword: ['', [Validators.required, Validators.minLength(globalConfig.validator.minPasswordLength), Validators.pattern(validator.passwordPattern)]],
-      ConfirmPassword: ['', [Validators.required, Validators.pattern(validator.passwordPattern)]]
+      ConfirmPassword: ['', Validators.required]
     });
   }
   updatePassword(): void {
