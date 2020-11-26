@@ -12,7 +12,7 @@ export class AuthenticationComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const images: string[] = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpeg'];
+    const images: string[] = ['image1.jpg', 'image3.jpg'];
     const index = Math.floor(Math.random() * images.length);
     this.backgroundImage = images[index];
   }
