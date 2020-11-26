@@ -1,0 +1,88 @@
+<section class="plgManagement w-100-p">
+    <div class="outer-layer m-20 p-20" fxLayout="column"  >
+            <fieldset>
+                <legend>Color Themes </legend>
+                <mat-radio-group aria-label="Select an option" fxLayout="row" fxLayoutAlign="space-around center">
+                    <mat-radio-button value="1">Default Light</mat-radio-button>
+                    <mat-radio-button value="2">Yellow Light</mat-radio-button>
+                    <mat-radio-button value="3">Blue Gray Dark</mat-radio-button>
+                    <mat-radio-button value="4">Pink Dark</mat-radio-button>
+                  </mat-radio-group>
+            </fieldset>
+
+        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex.gt-sm="33" fxFlex.sm="33"  class=" ">
+                <div class="mat-card text-center p-16">
+                    <ng-container>
+                        <div class="card-content">
+                                <span class="text-secondary">
+                                    Drag and drop logo or <span class="accent-fg">Browser</span>
+                                </span>
+                                <ngx-dropzone [multiple]="false" [maxFileSize]="5242880" [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
+                                    <ngx-dropzone-label>
+                                        <mat-icon class="accent-fg">cloud_upload</mat-icon>
+                                    </ngx-dropzone-label>
+                                </ngx-dropzone>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div fxFlex.gt-sm="34" fxFlex.sm="34"  class="">
+                <div class="mat-card text-center p-16">
+                    <ng-container>
+                        <div class="card-content">
+                                <span class="text-secondary">
+                                    Drag and drop logo or <span class="accent-fg">Browser</span>
+                                </span>
+                                <ngx-dropzone [multiple]="false" [maxFileSize]="5242880" [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
+                                    <ngx-dropzone-label>
+                                        <mat-icon class="accent-fg">cloud_upload</mat-icon>
+                                    </ngx-dropzone-label>
+                                </ngx-dropzone>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div fxFlex.gt-sm="33" fxFlex.sm="33"  >
+                <div class="mat-card text-center p-16">
+                    <ng-container>
+                        <div class="card-content">
+                                <span class="text-secondary">
+                                    Drag and drop logo or <span class="accent-fg">Browser</span>
+                                </span>
+                                <ngx-dropzone [multiple]="false" [maxFileSize]="5242880" [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
+                                    <ngx-dropzone-label>
+                                        <mat-icon class="accent-fg">cloud_upload</mat-icon>
+                                    </ngx-dropzone-label>
+                                </ngx-dropzone>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div fxFlex.gt-sm="row" fxFlex.sm="row" fxFlex="column" fxLayoutAlign="space-between center" >
+            <div fxFlex.gt-sm="50" fxFlex.sm="50">
+                <fieldset>
+                    <legend>Navbar</legend>
+                    <h3 class="mt-16 mb-8">Primary background:</h3>
+                    <fuse-material-color-picker class="mb-16" formControlName="primaryBackground">
+                    </fuse-material-color-picker>
+
+                    <h3 class="mt-16 mb-8">Secondary background:</h3>
+                    <fuse-material-color-picker class="mb-16"formControlName="secondaryBackground">
+                    </fuse-material-color-picker>
+                </fieldset>
+            </div>
+            <div fxFlex.gt-sm="50" fxFlex.sm="50">
+                <fieldset>
+                    <legend>Toolbar</legend>
+                    <mat-radio-group aria-label="Select an option" fxLayout="row" fxLayoutAlign="space-around center">
+                        <mat-radio-button value="1">Default Light</mat-radio-button>
+                        <mat-radio-button value="2">Yellow Light</mat-radio-button>
+                      </mat-radio-group>
+                </fieldset>
+            </div>
+        </div>
+
+    </div>
+</section>

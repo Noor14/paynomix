@@ -13,6 +13,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule, MatSelectModule } from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
 import { FuseSharedModule } from '@fuse/shared.module';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { FuseSharedModule } from '@fuse/shared.module';
     MatButtonModule,
     MatDividerModule,
     MatSelectModule,
-    FuseSharedModule
+    FuseSharedModule,
+    MatRadioModule
     
   ]
 })
