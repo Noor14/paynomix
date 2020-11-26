@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit
 {
     public appInfo = environment;
     public loginForm: FormGroup;
-    public loggedIn: boolean = false
+    public loggedIn: boolean = false;
     /**
      * Constructor
      *
