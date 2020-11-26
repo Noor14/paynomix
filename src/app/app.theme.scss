@@ -204,7 +204,8 @@ body.theme-mentom {
         accent: $mentom-theme-accent-palette,
         warn: $mentom-theme-warn-palette
     );
-
+    $accent-variable :  mat-color($mentom-theme-accent-palette);
+    --accent: #{$accent-variable};
     @include fuse-color-classes($palettes);
 }
 
@@ -234,7 +235,8 @@ body.theme-magic {
         accent: $magic-theme-accent-palette,
         warn: $magic-theme-warn-palette
     );
-
+    $accent-variable :  mat-color($magic-theme-accent-palette);
+    --accent: #{$accent-variable};
     @include fuse-color-classes($palettes);
 }
 
@@ -264,12 +266,13 @@ body.theme-surfside {
         accent: $surfside-theme-accent-palette,
         warn: $surfside-theme-warn-palette
     );
-
+    $accent-variable :  mat-color($surfside-theme-accent-palette);
+    --accent: #{$accent-variable};
     @include fuse-color-classes($palettes);
 }
 
 // -----------------------------------------------------------------------------------------------------
-// @ Define the surfside theme
+// @ Define the wholesale theme
 // -----------------------------------------------------------------------------------------------------
 $wholesale-theme-primary-palette: mat-palette($fuse-navy);
 $wholesale-theme-accent-palette: mat-palette($mat-wholesale-orange, 600, 400, 700);
@@ -294,7 +297,8 @@ body.theme-wholesale {
         accent: $wholesale-theme-accent-palette,
         warn: $wholesale-theme-warn-palette
     );
-
+    $accent-variable :  mat-color($wholesale-theme-accent-palette);
+    --accent: #{$accent-variable};
     @include fuse-color-classes($palettes);
 }
 // -----------------------------------------------------------------------------------------------------
@@ -328,7 +332,8 @@ body.theme-default {
         accent: $default-accent-palette,
         warn: $default-warn-palette
     );
-
+    $accent-variable :  mat-color($default-accent-palette);
+    --accent: #{$accent-variable};
     @include fuse-color-classes($palettes);
 }
 
