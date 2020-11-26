@@ -67,7 +67,7 @@
         }
         hr{
             height: 1px;
-            background-color: rgba($color: $fgColor, $alpha: 0.63);
+            background-color: $fgColor;
             border: $fgColor 1px solid;
         }
     }
