@@ -22,13 +22,8 @@
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
-                        "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
-                        ],
-                        "styles": [
-                            "src/styles.scss"
-                        ],
+                        "assets": ["src/favicon.ico", "src/assets"],
+                        "styles": ["src/styles.scss"],
                         "scripts": [],
                         "showCircularDependencies": false
                     },
@@ -81,11 +76,31 @@
                                 }
                             ]
                         },
+                        "quivverpay": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.quivverpay.ts"
+                                },
+                                {
+                                    "replace": "src/index.html",
+                                    "with": "src/index.quivverpay.html"
+                                }
+                            ]
+                        },
                         "paynomix": {
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
                                     "with": "src/environments/environment.paynomix.ts"
+                                }
+                            ]
+                        },
+                        "dev": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.ts"
                                 }
                             ]
                         }
@@ -106,6 +121,9 @@
                         },
                         "mentom": {
                             "browserTarget": "fuse:build:mentom"
+                        },
+                        "quivverpay": {
+                            "browserTarget": "fuse:build:quivverpay"
                         },
                         "paynomix": {
                             "browserTarget": "fuse:build:paynomix"
@@ -128,13 +146,8 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.spec.json",
                         "karmaConfig": "karma.conf.js",
-                        "assets": [
-                            "src/favicon.ico",
-                            "src/assets"
-                        ],
-                        "styles": [
-                            "src/styles.scss"
-                        ],
+                        "assets": ["src/favicon.ico", "src/assets"],
+                        "styles": ["src/styles.scss"],
                         "scripts": []
                     }
                 },
@@ -146,9 +159,7 @@
                             "tsconfig.spec.json",
                             "e2e/tsconfig.json"
                         ],
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
+                        "exclude": ["**/node_modules/**"]
                     }
                 },
                 "e2e": {

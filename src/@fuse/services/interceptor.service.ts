@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { FuseProgressBarService } from '@fuse/components/progress-bar/progress-bar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class InterceptorService implements HttpInterceptor {
 
   constructor(
-    private readonly _router: Router
+    private readonly _router: Router,
+    private _fuseProgressBarService: FuseProgressBarService,
   ) { }
 
   intercept(
@@ -34,8 +36,11 @@ export class InterceptorService implements HttpInterceptor {
           });
       }
     }
+    this._fuseProgressBarService.show();
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
+                this._fuseProgressBarService.hide();
+
                 // Checking if it is an Authentication Error (401)
                 if (err.status === 401) {
                   // <Log the user out of your application code>
@@ -46,7 +51,7 @@ export class InterceptorService implements HttpInterceptor {
                 // If it is not an authentication error, just throw it
         return throwError(err);
       }),
-      finalize(console.log)
+      finalize(()=>this._fuseProgressBarService.hide())
 
     );
   }

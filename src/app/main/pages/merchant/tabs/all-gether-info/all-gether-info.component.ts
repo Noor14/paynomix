@@ -7,6 +7,7 @@ import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog
   styleUrls: ['./all-gether-info.component.scss']
 })
 export class AllGetherInfoComponent implements OnInit {
+  @Input() onBoardError: string;
   @Input() allInfo: any;
   @Input() step: any;
   @Output() saveAll = new EventEmitter<any>();

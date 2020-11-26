@@ -1,16 +1,12 @@
 .setting-make-sale{
-    fieldset{
-        border-radius: 3px;
-        border: 1px solid #eee;
-        form{
-            section{
-                mat-checkbox{
-                    width: 0px;
-                }
+    form{
+        section{
+            mat-checkbox{
+                width: 0px;
+                border-bottom: 1px solid #eee;
+
             }
-   
         }
+
     }
-
-
 }

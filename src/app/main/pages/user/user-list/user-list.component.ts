@@ -53,6 +53,11 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.container.clear();
       this.componentRef = this.container.createComponent(factory);
       this.componentRef.instance.data = data;
+      this.componentRef.instance.updateList.subscribe(res=>{
+        if(res){
+          this.getUsers();
+        }
+      })
   }
   getUsers(): void{
     this._userService.userList(this._userConfigService.getUserMode())

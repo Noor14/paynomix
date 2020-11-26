@@ -1,34 +1,39 @@
-<section class="mt-20">
+<section class="mt-20 userTable">
 <mat-paginator [pageSizeOptions]="[100, 150, 200, 250]"></mat-paginator>
-  <div class="table-responsive mat-card ">
+  <div class="table-responsive mat-card">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
         <!-- First Name Column -->
         <ng-container matColumnDef="FirstName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.FirstName || '--'}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.FirstName" [matTooltipPosition]="'above'"> {{row.FirstName  || '--' | truncate:truncateTextLength}} </td>
         </ng-container>
         <!-- Last Name Column -->
         <ng-container matColumnDef="LastName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.LastName || '--'}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.LastName" [matTooltipPosition]="'above'"> {{row.LastName || '--' | truncate:truncateTextLength }} </td>
         </ng-container>
     
         <!-- User Name Column -->
         <ng-container matColumnDef="Username">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> User Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.Username}}</td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Username" [matTooltipPosition]="'above'"> {{row.Username || '--' |truncate:truncateTextLength}}</td>
         </ng-container>
     
         <!-- Phone Column -->
         <ng-container matColumnDef="Phone">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
-          <td mat-cell *matCellDef="let row"> {{row.Phone || '--'}}</td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Phone" [matTooltipPosition]="'above'">
+            <ng-template [ngIf]="row?.Phone" [ngIfElse]="usersPhone" >
+              {{row.Phone | mask: '(000) 000-0000'}}
+            </ng-template> 
+            <ng-template #usersPhone >--</ng-template>
+            </td>
         </ng-container>
 
         <!-- User Role Column -->
         <ng-container matColumnDef="Role">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> User Role </th>
-          <td mat-cell *matCellDef="let row"> {{row.Role}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.Role" [matTooltipPosition]="'above'"> {{row.Role |truncate:truncateTextLength}} </td>
         </ng-container>
 
         <!-- Last Login Column -->
@@ -48,7 +53,7 @@
           </ng-template>
           </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row  (mouseenter)="actionControlOnHover = i"  (mouseleave)="actionControlOnHover = -1" 
         *matRowDef="let row; columns: displayedColumns; let i = index">
         </tr>
@@ -70,27 +75,34 @@
             <form fxLayout="column" name="form" [formGroup]="userForm">
                 <mat-form-field appearance="outline">
                     <mat-label>First Name</mat-label>
-                    <input matInput formControlName="FirstName">
+                    <input matInput formControlName="FirstName" required [maxlength]="validator?.maxName">
+                    <mat-error *ngIf="userForm.get('FirstName').hasError('required')"> First name is required</mat-error>
+                    <mat-error *ngIf="!userForm.get('FirstName').hasError('required') && userForm.get('FirstName').hasError('maxlength')"> First name should have maximum value is {{validator?.maxName}}</mat-error>
                 </mat-form-field>
-
+                
                 <mat-form-field appearance="outline">
                     <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="LastName">
+                    <input matInput formControlName="LastName" required [maxlength]="validator?.maxName">
+                    <mat-error *ngIf="userForm.get('LastName').hasError('required')"> Last name is required</mat-error>
+                    <mat-error *ngIf="!userForm.get('LastName').hasError('required') && userForm.get('LastName').hasError('maxlength')"> Last name should have maximum value is {{validator?.maxName}}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Username</mat-label>
-                    <input matInput readonly formControlName="Username">
+                    <input matInput readonly formControlName="Username" required>
+                    <mat-error>User name is required</mat-error>
                 </mat-form-field> 
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput formControlName="Email">
+                    <input type="email" matInput formControlName="Email" required>
+                    <mat-error>Email is required</mat-error>
                 </mat-form-field> 
 
                 <mat-form-field appearance="outline">
                     <mat-label>Phone</mat-label>
-                    <input matInput formControlName="Phone">
+                    <input matInput  mask="(000) 000-0000"  formControlName="Phone" required>
+                    <mat-error>Phone is required</mat-error>
                 </mat-form-field>
             </form>
         </div>
@@ -99,7 +111,7 @@
             <button mat-raised-button class="mr-8 accent-alpha-bg" aria-label="Cancel" (click)="dialogRef.close()">
                 Cancel
             </button>
-            <button mat-raised-button color="accent" aria-label="Update User" (click)="updateUser()">
+            <button mat-raised-button color="accent" aria-label="Update User" [disabled]="userForm.invalid" (click)="updateUser()">
                 Update User
             </button>
         </div>

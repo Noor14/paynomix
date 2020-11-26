@@ -39,5 +39,11 @@ export class TransactionDetailComponent implements OnInit {
       )
       .subscribe();
   }
+
+  print() {
+      
+    window.print();
+
+  }
    
 }

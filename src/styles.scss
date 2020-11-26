@@ -1,22 +1,25 @@
 // Import Fuse core library
-@import "@fuse/scss/core";
 
 // Import app.theme.scss
-@import "app/app.theme";
-
+@import "./assets/variables/_variables";
 app-pages{
     width: 100%;
     .mat-tab-group{
       .mat-tab-label-active{
-          color: #f4511e !important; //dynamic
-          background-color: rgba($color: #f4511e, $alpha: 0.05); //dynamic
+          color: $fgColor !important;
+          background-color: rgba($color: $fgColor, $alpha: 0.05);
       }
       .mat-ink-bar{
-          background-color: #f4511e !important; //dynamic
+          background-color: $fgColor !important;
       }
     }
     .mat-standard-chip{
       min-height: 26px;
+    }
+    .text-underline{
+      border-bottom: 2px solid $fgColor;
+      display: inline-block;
+      padding: 5px 0
     }
     .outer-layer{
         border: 1px solid #eee;
@@ -28,11 +31,9 @@ app-pages{
         }
     }
     .table-responsive {
-        // height:calc(100vh - 23vh);
-        overflow-x: auto;
-
+        max-height: calc(100vh - 342px);
+        overflow: auto;
         .mat-row{
-         
           &:hover{
             transform: scale(1);
             box-shadow: 0px 1px 6px 1px rgba(0, 0, 0, 0.1);
@@ -43,16 +44,16 @@ app-pages{
         .mat-cell,.mat-header-cell
           {
             padding: 5px;
-            text-align: center;
-            & *{
-             justify-content: center;
-            }
+            // text-align: center;
+            // & *{
+            //  justify-content: end;
+            // }
           }
     }
 
 }
 .accent-alpha-bg{
-    background-color: rgba($color: #f5f5f5, $alpha: 1) !important; // dynamic
+    background-color: rgba($color: #f5f5f5, $alpha: 1) !important;
 }
 
 .mat-dialog-container {

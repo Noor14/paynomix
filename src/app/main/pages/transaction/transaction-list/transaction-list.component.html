@@ -1,58 +1,66 @@
 <section class="transactionList w-100-p">
     <section fxLayout="row" fxLayoutALign="space-between center">
-        <h2>Transaction</h2>
+        <h2>Transactions</h2>
         <div class="searchBox">
           
         </div>
     </section>
     <hr />
-    <section class="transactionGrid" fxLayout="column" fxLayoutAlign="space-between center"
-    fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+    <section class="transactionGrid" fxLayout="column" fxLayoutAlign="space-between stretch"
+    fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start" >
     
         <!-- Approved Transaction -->
-        <div class="widget" fxFlex="100" fxFlex.gt-sm="33">
-            <div class="mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
-                <div class="p-16 " fxLayout="column" fxLayoutAlign="center center">
+        <div class="fuse-card auto-width" fxFlex="100" fxFlex.gt-sm="33" [ngClass.gt-sm]="'mb-0 mr-32'" [ngClass.lt-sm]="'mb-4'" [ngClass.sm]="'mb-4'">
+                <div class="px-8 py-16" fxLayout="column" fxLayoutAlign="center center">
                         <div class="h3 secondary-text">Approved</div>
                         <div class="font-size-36 font-weight-500 line-height-1 mt-8">
                             {{transactionType.Approved || 0 | currency}}
 
                         </div>
                 </div>
-            </div>
         </div>
         <!-- / Approved Transaction -->
 
         <!-- Refunds Transactions -->
-        <div class="widget" fxFlex="100" fxFlex.gt-sm="34">
-            <div class="mb-32" [ngClass.gt-sm]="'mb-0 mr-32'">
-                <div class="p-16 " fxLayout="column" fxLayoutAlign="center center">
+        <div class="fuse-card auto-width" fxFlex="100" fxFlex.gt-sm="34" [ngClass.gt-sm]="'mb-0 mr-32'" [ngClass.lt-sm]="'mb-4'" [ngClass.sm]="'mb-4'">
+                <div class="px-8 py-16" fxLayout="column" fxLayoutAlign="center center">
                         <div class="h3 secondary-text">Refunds</div>
                         <div class="font-size-36 font-weight-500 line-height-1 mt-8">
                             {{transactionType.Refunds || 0 | currency}}
 
                         </div>
                 </div>
-            </div>
         </div>
         <!-- / Refunds Transactions -->
 
         <!-- Declined Transactions -->
-        <div class="widget" fxFlex="100" fxFlex.gt-sm="33">
-            <div class="mb-32">
-                <div class="p-16" fxLayout="column" fxLayoutAlign="center center">
-                        <div class="h3 secondary-text">Declined</div>
-                        <div class="font-size-36 font-weight-500 line-height-1 mt-8">
-                                {{transactionType.Declined || 0 | currency}}
-
-                        </div>
+        <div class="fuse-card auto-width" fxFlex="100" fxFlex.gt-sm="33">
+            <div class="px-8 py-16" fxLayout="column" fxLayoutAlign="center center">
+                <div class="h3 secondary-text">Declined</div>
+                <div class="font-size-36 font-weight-500 line-height-1 mt-8">
+                        {{transactionType.Declined || 0 | currency}}
                 </div>
             </div>
-
         </div>
         <!-- / Declined Transactions -->
 
     </section>
+      <!-- Date Range Section -->
+    <!-- <section>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <form [formGroup]="rangeForm" class="ml-auto">
+                <mat-form-field>
+                  <input matInput
+                         [satDatepicker]="picker2"
+                         (dateChange)="onDateChange($event)"
+                         formControlName="date">
+                  <sat-datepicker #picker2 [rangeMode]="true">
+                  </sat-datepicker>
+                  <sat-datepicker-toggle matSuffix [for]="picker2"></sat-datepicker-toggle>
+              </mat-form-field>
+               </form>
+          </div>
+    </section> -->
    
     <ng-template #renderingContainer></ng-template>
 </section>

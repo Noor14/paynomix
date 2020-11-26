@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { locationConfig, validator } from '../../../../../../constants/globalFunctions';
+import * as globalConfig from '../../../../../../constants/globalFunctions';
 import * as moment from 'moment';
 @Component({
   selector: 'app-owner-detail',
@@ -9,8 +9,7 @@ import * as moment from 'moment';
 })
 export class OwnerDetailComponent implements OnInit {
  
-  public locationObj = locationConfig;
-  public validatorObj = validator; 
+  public globalConfig = globalConfig; 
   
   @Input() ownerDetail: any = null;
   public ownerDetailForm: FormGroup;
@@ -38,8 +37,8 @@ export class OwnerDetailComponent implements OnInit {
   createOwnerDetailForm(): void{
     this.ownerDetailForm = this._formBuilder.group({
       MerchantId: [0, Validators.required],
-      FirstName: ['', Validators.required],
-      LastName: ['', Validators.required],
+      FirstName: ['',[ Validators.required , Validators.maxLength(globalConfig.validator.maxName)]],
+      LastName: ['',[ Validators.required , Validators.maxLength(globalConfig.validator.maxName)]],
       DOB: ['', Validators.required],
       SSN: [''],
       DrivingLicense: [''],
@@ -49,9 +48,9 @@ export class OwnerDetailComponent implements OnInit {
       City: ['', Validators.required],
       Country: ['US', Validators.required],
       State: ['', Validators.required],
-      Zip: ['', [Validators.required, Validators.maxLength(validator.zipMaxLength)]],
+      Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
       Phone: ['', Validators.required],
-      Email: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+      Email: ['', [Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
       BackDocLink: [''],
       FrontDocLink: [''],
   });
@@ -61,9 +60,8 @@ export class OwnerDetailComponent implements OnInit {
       if(!this.ownerDetailForm){
         this.createOwnerDetailForm();
         this.stepThree.emit(this.ownerDetailForm);
-      }else{
-        this.ownerDetailForm.patchValue(this.ownerDetail);
       }
+        this.ownerDetailForm.patchValue(this.ownerDetail);
     }
   }
   ngAfterViewInit(): void {

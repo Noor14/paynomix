@@ -5,9 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PricingPlanService } from 'app/main/pages/pricing-plan/pricing-plan.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { snackBarConfigWarn, validator } from '../../../../../../constants/globalFunctions';
+import * as globalConfig from '../../../../../../constants/globalFunctions';
 import { MerchantService } from '../../merchant.service';
-
 @Component({
   selector: 'app-merchant-info',
   templateUrl: './merchant-info.component.html',
@@ -16,6 +15,7 @@ import { MerchantService } from '../../merchant.service';
 export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   public pricingPlans: any[] = [];
   public merchantInfoForm: FormGroup;
+  public globalConfig = globalConfig;
   @Input() merchantInfo: any = null;
   @Output() stepOne = new EventEmitter<any>();
   private _unsubscribeAll: Subject<any>;
@@ -50,12 +50,11 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, 
       if(!this.merchantInfoForm){
         this.createMerchantInfoForm();
         this.stepOne.emit(this.merchantInfoForm);
-      }else{
+      }
         if(this.merchantInfo.AccountSetupId){
           this.merchantInfoForm.controls.MerchantEmail.disable();
         }
         this.merchantInfoForm.patchValue(this.merchantInfo);
-      }
       this.getPricingPlans({ResellerId: this.merchantInfo.ResellerId});
     }
   }
@@ -91,7 +90,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, 
       distinctUntilChanged()
     )
     .subscribe(res=> {
-      if(res && res.match(validator.emailPattern) && !this.merchantInfo.MerchantEmail){
+      if(res && res.match(globalConfig.validator.emailPattern) && !this.merchantInfo.MerchantEmail){
         this.verifyMerchantExist();
       }
     });
@@ -108,14 +107,14 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, 
       if (res && !res.StatusCode) {
         if (res.Response.ismerchantnameexist) {
           this.merchantInfoForm.controls['MerchantUserName'].setErrors({'notUnique': true });
-          this._snackBar.open(res.Response.message, '', snackBarConfigWarn);
+          this._snackBar.open(res.Response.message, '', globalConfig.snackBarConfigWarn);
         }
         if (res.Response.isemailexist) {
           this.merchantInfoForm.controls['MerchantEmail'].setErrors({'notUnique': true });
-          this._snackBar.open(res.Response.message, '', snackBarConfigWarn);
+          this._snackBar.open(res.Response.message, '', globalConfig.snackBarConfigWarn);
         }
       }else{
-        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
+        this._snackBar.open(res.StatusMessage, '', globalConfig.snackBarConfigWarn)
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   }
@@ -131,7 +130,7 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, 
             if(res.Response.length){
               control.enable();
             }else{
-              this._snackBar.open('This reseller has no pricing plan yet', '', snackBarConfigWarn);
+              this._snackBar.open('This reseller has no pricing plan yet', '', globalConfig.snackBarConfigWarn);
               control.disable();
               this.merchantInfoForm.controls.PricingTitle.reset();
             }  
@@ -149,8 +148,8 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, 
   createMerchantInfoForm(): void{
     this.merchantInfoForm = this._formBuilder.group({
       AccountSetupId: [0, Validators.required],
-      MerchantUserName: ['', Validators.required],
-      MerchantEmail: [{value: '', disabled: false}, [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
+      MerchantUserName: ['', [Validators.required, Validators.maxLength(globalConfig.validator.maxFieldLength)]],
+      MerchantEmail: [{value: '', disabled: false}, [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
       PricingPlanID: [{value: '', disabled: true}, Validators.required],
       PricingTitle: ['', Validators.required],
       IpAddress: ['192.168.0.142', Validators.required]

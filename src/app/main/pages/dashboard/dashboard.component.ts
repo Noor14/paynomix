@@ -3,6 +3,7 @@ import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, On
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { environment } from 'environments/environment';
+import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TransactionTableComponent } from '../transaction/transaction-table/transaction-table.component';
@@ -19,7 +20,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public dashboardUserStats: any;
   public widgets: any;
   private _unsubscribeAll: Subject<any>;
-
+  public transactionGraphVolumeLabel: any;
+  public showBars = false;
 
   /**
   * Constructor
@@ -52,7 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           datasets  : [
               {
                   label: 'Conversion',
-                  data : [221, 428, 492, 471, 413, 344, 294]
+                  data : []
               }
           ],
           labels    : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -86,8 +88,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                       {
                           display: false,
                           ticks  : {
-                              min: 100,
-                              max: 500
+                             
                           }
                       }
                   ]
@@ -103,7 +104,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         datasets  : [
             {
                 label: 'Conversion',
-                data : [221, 428, 492, 471, 413, 344, 294]
+                data : []
             }
         ],
         labels    : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -137,8 +138,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     {
                         display: false,
                         ticks  : {
-                            min: 100,
-                            max: 500
+                          
                         }
                     }
                 ]
@@ -154,10 +154,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           datasets : [
               {
                   label: 'Visits',
-                  data : [432, 428, 327, 363, 456, 267, 231]
+                  data : []
               }
           ],
-          labels   : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          labels   : [],
           colors   : [
               {
                   borderColor    : environment.themeColor,
@@ -188,8 +188,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                       {
                           display: false,
                           ticks  : {
-                              min: 150,
-                              max: 500
+                            
                           }
                       }
                   ]
@@ -277,7 +276,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
                               display: false
                           },
                           ticks    : {
-                              fontColor: 'rgba(0,0,0,0.54)'
+                              fontColor: 'rgba(0,0,0,0.54)',
+                              min:0
                           }
                       }
                   ],
@@ -287,7 +287,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
                               tickMarkLength: 16
                           },
                           ticks    : {
-                              stepSize: 1000
+                             // stepSize: 1000
+                             min:0
                           }
                       }
                   ]
@@ -300,6 +301,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
       }
     };
+   
+    
   }
 
 ngOnDestroy(): void {
@@ -319,10 +322,27 @@ getDashboardStats(): void{
  .then((res: any) => {
      if(res && !res.StatusCode){
          this.dashboardUserStats = res.Response;
+         this.transactionGraphVolumeLabel = res.Response.Volume[0].time.map(x => moment(x).format('MMM D'));
+         if(this.dashboardUserStats.GraphViewModel.AvgTransGraph.data.length >= 0 || this.dashboardUserStats.GraphViewModel.AvgTransGraph.data == null ){
+            this.widgets.widget2.datasets[0].data =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.data
+            this.widgets.widget3.datasets[0].data =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.data
+            this.widgets.widget4.datasets[0].data =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.data
+            
+            this.widgets.widget2.datasets[0].label =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.label
+            this.widgets.widget3.datasets[0].label =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.label
+            this.widgets.widget4.datasets[0].label =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.label
+            
+            this.widgets.widget2.labels =  this.dashboardUserStats.GraphViewModel.TotalTransGraph.days
+            this.widgets.widget3.labels =  this.dashboardUserStats.GraphViewModel.SuccessfulTransGraph.days
+            this.widgets.widget4.labels =  this.dashboardUserStats.GraphViewModel.AvgTransGraph.days
+            this.showBars = true;
+         }
+        
          if(this.dashboardUserStats && this.dashboardUserStats.Transactions
              && this.dashboardUserStats.Transactions.length){
             this.renderingComponent(TransactionTableComponent, {
-              transaction: this.dashboardUserStats.Transactions
+              transaction: this.dashboardUserStats.Transactions,
+              hideCol: true
             })
           }else{
             this.renderingComponent(NoFoundComponent, {

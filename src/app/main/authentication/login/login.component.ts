@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit
 {
     public appInfo = environment;
     public loginForm: FormGroup;
-
+    public loggedIn: boolean = false
     /**
      * Constructor
      *
@@ -53,18 +53,21 @@ export class LoginComponent implements OnInit
     }
 
     login(): void{
+        this.loggedIn = true;
         if(this.loginForm.valid){
+            this._snackBar.open('Signing in', '', snackBarConfig);
             this._authenticationService.signIn(this.loginForm.value).then((res: any)=>{
                 if(res && !res.StatusCode){
-                    this._snackBar.open('Signing in', '', snackBarConfig);
                     localStorage.setItem('userInfo', JSON.stringify(res.Response));
                     this._router.navigate(['/pages/dashboard']);
                 }else{
+                    this.loggedIn = false;
                     this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
                 }
             }).catch((err: HttpErrorResponse)=>(console.log))
         }else{
             validateAllFormFields(this.loginForm)
+            this.loggedIn = false;
         }
     }
 }

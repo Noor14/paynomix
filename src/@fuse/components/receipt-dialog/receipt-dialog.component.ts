@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { transactionType } from '../../../constants/globalFunctions';
+import { environment } from '../../../environments/environment';
+import { transactionStatus, transactionType } from '../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-receipt-dialog',
@@ -9,6 +10,9 @@ import { transactionType } from '../../../constants/globalFunctions';
 })
 export class ReceiptDialogComponent implements OnInit {
   public transType = transactionType;
+  public transStatus = transactionStatus;
+  public appInfo = environment;
+
   @Input() data:any
   constructor(
     public readonly _dialogRef: MatDialogRef<any>

@@ -61,18 +61,23 @@ export class AssigneeDialogComponent implements OnInit {
       PricingPlanId: this.data.PricingPlanID,
       UserRoleId: this.data.UserRoleId
     };
+    let assignedPricingPlan = [];
     (this.selectedChips.length)?
-     this.selectedChips = this.selectedChips.map(item => {
+     assignedPricingPlan = this.selectedChips.map(item => {
        item.EntityId = item.id;
        return item = {...item, ...obj};
       }
       ) : 
-      this.selectedChips.push(obj);
+      assignedPricingPlan.push(obj);
 
-    this._pricingPlanService.assignPricingPlan(this.selectedChips)
+    this._pricingPlanService.assignPricingPlan(assignedPricingPlan)
       .then((res: any) => {
         if (res && !res.StatusCode) {
-          this._snackBar.open('Pricing Plan has been assigned successfully! ', '', snackBarConfig);
+          if(this.selectedChips.length){
+            this._snackBar.open('Pricing Plan has been assigned successfully!', '', snackBarConfig);
+          }else{
+            this._snackBar.open('Pricing Plan has been unassigned successfully!', '', snackBarConfig);
+          }
           this._dialogRef.close(true);
         } else {
           this._snackBar.open('Pricing Plan has not been assigned yet', '', snackBarConfigWarn);
