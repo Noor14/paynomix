@@ -1,26 +1,28 @@
-import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { TransactionTableComponent } from '../transaction-table/transaction-table.component';
 import { TransactionService } from '../transaction.service';
-import { pipe, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 @Component({
   selector: 'app-transaction-list',
   templateUrl: './transaction-list.component.html',
-  styleUrls: ['./transaction-list.component.scss']
+  styleUrls: ['./transaction-list.component.scss'],
 })
 export class TransactionListComponent implements OnInit {
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
+  @Output()
+  dateChange: EventEmitter<MatDatepickerInputEvent<any>> = new EventEmitter();
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
   dateRangeForm: FormGroup;
   dateTo = moment().format('YYYY-MM-DD');
-  dateFrom = moment().subtract(15,'d').format('YYYY-MM-DD');
+  dateFrom = moment().subtract(15, 'd').format('YYYY-MM-DD');
   /**
      * Constructor
      *
@@ -28,9 +30,6 @@ export class TransactionListComponent implements OnInit {
      * @param {TransactionService} _transactionService
      * @param {ComponentFactoryResolver} _resolver
      */
-
-
-
   constructor(
     private readonly _transactionService: TransactionService,
     private readonly _userConfigService: UserConfigService,
@@ -42,8 +41,7 @@ export class TransactionListComponent implements OnInit {
   }
 
   ngOnInit() {
-  this.rangeForm();
-
+    this.rangeForm();
     this._userConfigService.userModeChange
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => this.getTransaction())
@@ -55,7 +53,7 @@ export class TransactionListComponent implements OnInit {
     this.componentRef && this.componentRef.destroy();
   }
 
-   renderingComponent(type, data?) {
+  renderingComponent(type, data?) {
     const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
     this.container.clear();
     this.componentRef = this.container.createComponent(factory);
@@ -67,7 +65,11 @@ export class TransactionListComponent implements OnInit {
     });
   }
   getTransaction(): void {
-    this._transactionService.transactionList(this._userConfigService.getUserMode())
+     const obj = {
+        ...this.dateRangeForm.value,
+        ...this._userConfigService.getUserMode()
+    }
+    this._transactionService.transactionList(obj)
       .then((res: any) => {
         if (res && !res.StatusCode) {
           this.transactionType = res.Response.TotalTransaction;
@@ -87,11 +89,17 @@ export class TransactionListComponent implements OnInit {
   }
   rangeForm() {
     this.dateRangeForm = this._formBuilder.group({
-      FromDate: [this.dateFrom, Validators.required], 
-      ToDate: [this.dateTo, Validators.required]  
+      FromDate: [this.dateFrom, Validators.required],
+      ToDate: [this.dateTo, Validators.required]
     });
   }
-  valueChange(value) {
-   console.log('value', value);
+  handleDateRangeSelected(event:any) {
+    console.log('val', event);
+    // console.log('val', type);
+    console.log('va', this.dateRangeForm.value)
+  }
+  onDateChange(date: string) {
+    console.log(date)
+    this.getTransaction()
   }
 }
