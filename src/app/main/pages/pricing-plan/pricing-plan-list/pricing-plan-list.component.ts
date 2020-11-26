@@ -10,6 +10,7 @@ import { PartnerService } from '../../partner/partner.service';
 import { ResellerService } from '../../reseller/reseller.service';
 import { PricingPlanTableComponent } from '../pricing-plan-table/pricing-plan-table.component';
 import { PricingPlanService } from '../pricing-plan.service';
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 
 @Component({
   selector: 'app-pricing-plan-list',
@@ -18,7 +19,7 @@ import { PricingPlanService } from '../pricing-plan.service';
 })
 export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
 
-  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
 
   public pricingPlans: any[] = [];
@@ -36,6 +37,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     * @param {MerchantService} _merchantService
     * @param {ResellerService} _resellerService
     * @param {PartnerService} _partnerService
+    * @param {SlidingPanelService} _slidingPanelService
     * @param {ChangeDetectorRef} _cdref
     */
    
@@ -46,6 +48,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
      private readonly _resellerService: ResellerService,
      private readonly _partnerService: PartnerService,
      private readonly _resolver: ComponentFactoryResolver,
+     private readonly _slidingPanelService: SlidingPanelService,
  ) { 
            // Set the private defaults
            this._unsubscribeAll = new Subject();
@@ -59,6 +62,13 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
         this.getPricingPlanBy = this._userConfigService.getUserMode();
         this.getPricingPlans();
       });
+      const panelChangesSubscriber = this._slidingPanelService.panelChange.subscribe((res:any)=> {
+        if(res) {
+          this.getPricingPlans();
+          // this._slidingPanelService.setSlidingPanelStatus(false);
+          // panelChangesSubscriber && panelChangesSubscriber.unsubscribe();
+        }
+        })
     }
   }
 
@@ -183,5 +193,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
       }
       return object;
   }
-
+  openSlidePanel(): void{
+    this._slidingPanelService.getSidebar('slidePanel', 'PricingPlanCreateComponent').toggleOpen();
+  }
 }

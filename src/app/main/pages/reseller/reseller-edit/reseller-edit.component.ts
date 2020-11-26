@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 import { snackBarConfig } from 'constants/globalFunctions';
 import { Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -27,6 +28,7 @@ export class ResellerEditComponent implements OnInit, OnDestroy {
      * @param {MatSnackBar} _snackBar
      * @param {ChangeDetectorRef} _cdref
      * @param {Router} _router
+     * @param {SlidingPanelService} _slidingPanelService
      */
   constructor(
     private readonly _route : ActivatedRoute,
@@ -34,6 +36,7 @@ export class ResellerEditComponent implements OnInit, OnDestroy {
     private readonly _snackBar: MatSnackBar,
     private readonly _router: Router,
     private readonly _cdref: ChangeDetectorRef,
+    private readonly _slidingPanelService: SlidingPanelService
 
   ) { 
     // Set the private defaults
@@ -61,11 +64,14 @@ export class ResellerEditComponent implements OnInit, OnDestroy {
     .then((res: any) => {
       if(res && !res.StatusCode){
         this._snackBar.open('Reseller updated', '', snackBarConfig);
-        this._router.navigate(['/pages/reseller/reseller-list']);
-
+        this.closeSlidingPanel();
+        this._slidingPanelService.setSlidingPanelStatus(true);
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   
+  }
+  closeSlidingPanel(): void {
+    this._slidingPanelService.closeSlidingPanel('slidePanel').toggleOpen();
   }
 
   ngOnDestroy(): void{

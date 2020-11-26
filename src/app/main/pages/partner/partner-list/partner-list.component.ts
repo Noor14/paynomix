@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
+import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -13,7 +15,7 @@ import { PartnerService } from '../partner.service';
   styleUrls: ['./partner-list.component.scss']
 })
 export class PartnerListComponent implements OnInit, OnDestroy {
-  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   public partners: any[] = [];
   private _unsubscribeAll: Subject<any>;
@@ -24,12 +26,14 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       * @param {PartnerService} _partnerService
       * @param {UserConfigService} _userConfigService
       * @param {ComponentFactoryResolver} _resolver
+      * @param {SlidingPanelService} _slidingPanelService
       */
      
      constructor(
        private readonly _partnerService: PartnerService,
        private readonly _userConfigService: UserConfigService,
-      private readonly _resolver: ComponentFactoryResolver,
+       private readonly _resolver: ComponentFactoryResolver,
+       private readonly _slidingPanelService: SlidingPanelService,
 
    ) { 
              // Set the private defaults
@@ -39,7 +43,15 @@ export class PartnerListComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
       this._userConfigService.userModeChange
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(() => this.getPartners())
+      .subscribe(() => this.getPartners());
+
+      const panelChangesSubscriber = this._slidingPanelService.panelChange.subscribe((res:any)=> {
+      if(res) {
+        this.getPartners();
+        // this._slidingPanelService.setSlidingPanelStatus(false);
+        // panelChangesSubscriber && panelChangesSubscriber.unsubscribe();
+      }
+      })
     }
 
     ngOnDestroy(): void {
@@ -55,7 +67,7 @@ export class PartnerListComponent implements OnInit, OnDestroy {
         this.componentRef = this.container.createComponent(factory);
         this.componentRef.instance.data = data;
     }
-  
+
     getPartners(): void{
       this._partnerService.partnerList(this._userConfigService.getUserMode())
       .then((res: any) => {
@@ -74,6 +86,10 @@ export class PartnerListComponent implements OnInit, OnDestroy {
           }
         }
       }).catch((err: HttpErrorResponse)=>(console.log))
+    }
+
+    openSlidePanel(): void{
+        this._slidingPanelService.getSidebar('slidePanel', 'PartnerCreateComponent').toggleOpen();
     }
 
 }

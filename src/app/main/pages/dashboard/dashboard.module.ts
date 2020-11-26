@@ -7,7 +7,7 @@ import { TransactionModule } from '../transaction/transaction.module';
 import { ChartsModule } from 'ng2-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [DashboardComponent],
