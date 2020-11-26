@@ -13,7 +13,7 @@ import { MerchantService } from '../merchant.service';
   styleUrls: ['./merchant-list.component.scss']
 })
 export class MerchantListComponent implements OnInit, OnDestroy {
-  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
+  @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   public merchants:any[] = [];
   private _unsubscribeAll: Subject<any>;

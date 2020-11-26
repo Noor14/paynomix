@@ -7,6 +7,9 @@ export const environment = {
     hmr: false,
     mentom: false,
     paynomix: false,
+    surfside: false,
+    wholesale: false,
+    magic: false,
     apiURL: 'https://paynomix.clique.center/api/api/',//Dev Environment
     title: 'Paynomix',
     assetPathName: 'paynomix',

@@ -1,0 +1,15 @@
+export const environment = {
+    production: false,
+    hmr: false,
+    paynomix: false,
+    mentom: false,
+    surfside: false,
+    magic: false,
+    wholesale: true,
+    apiURL: 'https://api.paynomix.com:444/api/',
+    title: 'Wholesale Payments',
+    assetPathName: 'wholesale',
+    themeName: 'theme-wholesale',
+    themeColor: '#f7931e',
+    themeTransparentColor: '#f7931e99',
+};

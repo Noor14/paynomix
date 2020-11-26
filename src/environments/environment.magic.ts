@@ -1,0 +1,15 @@
+export const environment = {
+    production: false,
+    hmr: false,
+    paynomix: false,
+    mentom: false,
+    surfside: false,
+    wholesale: false,
+    magic: true,
+    apiURL: 'https://api.paynomix.com:444/api/',
+    title: 'Magic Payments',
+    assetPathName: 'magic',
+    themeName: 'theme-magic',
+    themeColor: '#ff0000',
+    themeTransparentColor: '#ff000099',
+};

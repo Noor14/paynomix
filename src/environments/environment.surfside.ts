@@ -1,0 +1,15 @@
+export const environment = {
+    production: false,
+    hmr: false,
+    paynomix: false,
+    mentom: false,
+    wholesale: false,
+    magic: false,
+    surfside: true,
+    apiURL: 'https://api.paynomix.com:444/api/',
+    title: 'Surfside Payments',
+    assetPathName: 'surfside',
+    themeName: 'theme-surfside',
+    themeColor: '#29ade4',
+    themeTransparentColor: '#29ade499',
+};

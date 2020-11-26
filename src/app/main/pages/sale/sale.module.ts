@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatFormFieldModule , MatInputModule, MatSelectModule, MatButtonToggleModule, MatButtonModule} from '@angular/material';
 import { SaleRoutingModule } from './sale-routing.module';
 import { MakeSaleComponent } from './make-sale/make-sale.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -14,6 +13,11 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { ReceiptDialogModule } from '@fuse/components/receipt-dialog/receipt-dialog.module';
 import { NgxCurrencyModule } from "ngx-currency";
 import {NgxMaskModule} from 'ngx-mask';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 @NgModule({

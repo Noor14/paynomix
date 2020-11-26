@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { environment } from 'environments/environment';
-import { MatSnackBar } from '@angular/material';
 import { snackBarConfig, snackBarConfigWarn, validateAllFormFields, validator } from '../../../../constants/globalFunctions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from '../authentication.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
     selector     : 'forgot-password',
     templateUrl  : './forgot-password.component.html',

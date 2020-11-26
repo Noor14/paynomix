@@ -26,8 +26,8 @@ export class InterceptorService implements HttpInterceptor {
             setHeaders: {
               'Content-Type': 'application/json; charset=utf-8',
               'dataType': 'json',
-              'userid': userID,
-              'authorization': token
+              'userid': `${userID}`,
+              'authorization': `${token}`
             }
         });
         if (request.url.includes('Setting/MerchantSetting')) {
