@@ -17,7 +17,6 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class LoginComponent implements OnInit
 {
-    public backgroundImage: string = undefined;
     public appInfo = environment;
     public loginForm: FormGroup;
     public loggedIn: boolean = false
@@ -52,9 +51,7 @@ export class LoginComponent implements OnInit
             Username: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
             Password: ['', Validators.required]
         });
-        const images: string[] = ['image1','image3'];
-        const index = Math.floor(Math.random() * images.length);
-        this.backgroundImage = images[index];
+    
     }
 
     login(): void{

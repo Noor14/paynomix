@@ -11,10 +11,11 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { InactiveUserComponent } from './inactive-user/inactive-user.component';
+import { AuthenticationComponent } from './authentication.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, ForgotPasswordComponent, InactiveUserComponent],
+  declarations: [LoginComponent, ForgotPasswordComponent, InactiveUserComponent, AuthenticationComponent],
   imports: [
     CommonModule,
     AuthenticationRoutingModule,
