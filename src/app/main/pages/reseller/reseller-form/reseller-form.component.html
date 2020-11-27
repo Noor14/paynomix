@@ -93,7 +93,7 @@
                     </mat-error> 
                     <mat-error
                     *ngIf="!resellerForm.get('Email').hasError('required') &&
-                            resellerForm.get('Email').hasError('email') || resellerForm.get('Email').hasError('pattern')">
+                            (resellerForm.get('Email').hasError('email') || resellerForm.get('Email').hasError('pattern'))">
                     Please enter a valid email address
                     </mat-error>
                 </mat-form-field>
