@@ -148,7 +148,9 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     return this._merchantService.merchantList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
-            return  res.Response.sort((a,b)=> a.MerchantAccountSetup.MerchantUserName.localeCompare(b.MerchantAccountSetup.MerchantUserName)).map((item: any) => {
+            return  res.Response.filter(data => data.MerchantAccountSetup).sort((a,b)=> 
+            a.MerchantAccountSetup.MerchantUserName.localeCompare(b.MerchantAccountSetup.MerchantUserName))
+            .map((item: any) => {
               return {
                 id: item.MerchantId, 
                 name: item.MerchantAccountSetup.MerchantUserName,
