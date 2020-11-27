@@ -16,6 +16,7 @@ import { SlidingPanelService } from './sliding-panel.service';
 })
 export class SlidingPanelComponent implements OnInit, OnDestroy {
 
+
   // Name
   @Input()
   name: string;
@@ -430,6 +431,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
    * @private
    */
   private _showBackdrop(): void {
+   
     // Create the backdrop element
     this._backdrop = this._renderer.createElement('div');
 
@@ -456,7 +458,8 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
 
     // Add an event listener to the overlay
     this._backdrop.addEventListener('click', () => {
-      this.close();
+     
+     // this.close();
     }
     );
 
@@ -486,7 +489,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
 
     // Once the animation is done...
     this._player.onDone(() => {
-
+     
       // If the backdrop still exists...
       if (this._backdrop) {
         // Remove the backdrop
@@ -530,7 +533,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
 
     // Add a delay so close animation can play
     setTimeout(() => {
-
+     
       // Remove the box-shadow
       this._renderer.setStyle(this._elementRef.nativeElement, 'box-shadow', 'none');
 
@@ -548,6 +551,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
    * @private
    */
   private _enableAnimations(): void {
+    
     // Return if animations already enabled
     if (this._animationsEnabled) {
       return;
@@ -596,6 +600,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
    */
   close(): void {
     if (!this.opened || this.isLockedOpen) {
+    
       return;
     }
 
@@ -622,6 +627,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
    * Toggle open/close the sidebar
    */
   toggleOpen(): void {
+    
     if (this.opened) {
       this.close();
     }
@@ -635,6 +641,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
    */
   @HostListener('mouseenter')
   onMouseEnter(): void {
+  
     // Only work if the auto trigger is enabled
     if (!this.foldedAutoTriggerOnHover) {
       return;
@@ -648,6 +655,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
    */
   @HostListener('mouseleave')
   onMouseLeave(): void {
+    
     // Only work if the auto trigger is enabled
     if (!this.foldedAutoTriggerOnHover) {
       return;
@@ -661,13 +669,14 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
    */
   fold(): void {
     // Only work if the sidebar is not folded
+    
     if (this.folded) {
       return;
     }
 
     // Enable the animations
     this._enableAnimations();
-
+   
     // Fold
     this.folded = true;
 
@@ -679,6 +688,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
    * Unfold the sidebar permanently
    */
   unfold(): void {
+    
     // Only work if the sidebar is folded
     if (!this.folded) {
       return;
@@ -698,6 +708,7 @@ export class SlidingPanelComponent implements OnInit, OnDestroy {
    * Toggle the sidebar fold/unfold permanently
    */
   toggleFold(): void {
+   
     if (this.folded) {
       this.unfold();
     }

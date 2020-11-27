@@ -34,16 +34,18 @@ export class ResellerCreateComponent implements OnInit {
   createReseller(event: any){
     this._resellerService.saveReseller(event)
     .then((res: any) => {
+      
       if(res && !res.StatusCode){
         this._snackBar.open('Reseller created', '', snackBarConfig);
         this.closeSlidingPanel();
         this._slidingPanelService.setSlidingPanelStatus(true);
-        // this._router.navigate(['/pages/reseller/reseller-list']);
+
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   
   }
   closeSlidingPanel(): void {
+  
     this._slidingPanelService.closeSlidingPanel('slidePanel').toggleOpen();
   }
 }

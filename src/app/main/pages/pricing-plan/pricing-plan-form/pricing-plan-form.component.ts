@@ -1,7 +1,9 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { validateAllFormFields, validator } from '../../../../../constants/globalFunctions';
-
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
+import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-pricing-plan-form',
   templateUrl: './pricing-plan-form.component.html',
@@ -15,12 +17,15 @@ export class PricingPlanFormComponent implements OnInit, OnChanges, AfterViewIni
   @Input() pricingPlanDetail: any = null;
     /**
      * Constructor
-     *
+     * @param {MatDialog} _dialog
+     *@param {SlidingPanelService} _slidingPanelService
      * @param {FormBuilder} _formBuilder
      */
     constructor(
       private _formBuilder: FormBuilder,
       private readonly _cdref: ChangeDetectorRef,
+      private readonly _slidingPanelService: SlidingPanelService,
+      private readonly _dialog: MatDialog,
   ) { }
   
   ngOnInit(): void{ 
@@ -71,5 +76,23 @@ export class PricingPlanFormComponent implements OnInit, OnChanges, AfterViewIni
      validateAllFormFields(this.pricngPlanForm)
     }
   }
+  openDialog(): void {
 
+  
+      const dialogRef = this._dialog.open(FuseConfirmDialogComponent, {width: '550px'});
+      
+      dialogRef.componentInstance.data={
+        title: "Confirmation",
+        message:"Are you sure you want to close this window?"
+      }
+      dialogRef.afterClosed().subscribe((result)=>{
+        
+        if (result){
+         
+         this._slidingPanelService.getSidebar('slidePanel', 'PricingPlanCreateComponent').toggleOpen();
+        }
+      })
+  
+    
+    }
 }

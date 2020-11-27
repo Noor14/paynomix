@@ -1,0 +1,120 @@
+<section class="ownerDetail">
+
+    <form fxLayout="column" fxLayoutAlign="start"
+     name="form" [formGroup]="ownerDetailForm">
+   
+    <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+        <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="FirstName" required [maxlength]="globalConfig.validator.maxName" >
+            <mat-error *ngIf="ownerDetailForm.get('FirstName').hasError('required')">First name is required!</mat-error>
+            <mat-error *ngIf="!ownerDetailForm.get('FirstName').hasError('required') && ownerDetailForm.get('FirstName').hasError('maxlength')" > First Name should have maximun length of 
+                {{globalConfig?.validator?.maxName}} </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="LastName" required [maxlength]="globalConfig.validator.maxName">
+            <mat-error *ngIf="ownerDetailForm.get('LastName').hasError('required')">Last name is required!</mat-error>
+            <mat-error *ngIf="!ownerDetailForm.get('LastName').hasError('required') && ownerDetailForm.get('LastName').hasError('maxlength')" > Last name should have maximun length of 
+                {{globalConfig?.validator?.maxName}} </mat-error>
+        </mat-form-field>
+       
+        <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+            <mat-label>DOB</mat-label>
+            <input matInput formControlName="DOB" [matDatepicker]="picker" [max]="maxDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>DOB is required!</mat-error>
+          </mat-form-field>
+    </div>
+
+    <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+        <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+            <mat-label>SSN </mat-label>
+            <input matInput mask="000-00-0000"  formControlName="SSN" >
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
+            <mat-label>Drivers License </mat-label>
+            <input matInput numberOnly formControlName="DrivingLicense" >
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+            <mat-label>DL State</mat-label>
+            <input matInput formControlName="DLState" >
+        </mat-form-field>
+    </div>
+
+    <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+        <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+            <mat-label>Street Address </mat-label>
+            <textarea matInput formControlName="Address1" required > </textarea>
+            <mat-error>Street Address is required!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+            <mat-label>Street Address Line 2</mat-label>
+            <textarea matInput formControlName="Address2" ></textarea>
+        </mat-form-field>
+    </div>
+
+    <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+        <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+            <mat-label>City </mat-label>
+            <input matInput formControlName="City"  required>
+            <mat-error> City is required!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+            <mat-label>State</mat-label>
+            <mat-select formControlName="State" required>
+                <mat-option [value]="item.name" *ngFor="let item of globalConfig?.locationConfig?.states">{{item.name}}</mat-option>
+            </mat-select>
+            <mat-error> State is required!</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+        <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+            <mat-label>Zip /Postal Code</mat-label>
+            <input matInput formControlName="Zip" numberOnly required [maxlength]="globalConfig?.validator?.zipMaxLength">
+            <mat-error *ngIf="ownerDetailForm.get('Zip').hasError('required')">
+                Postal Code is required!
+            </mat-error>
+            <mat-error *ngIf="!ownerDetailForm.get('Zip').hasError('required') &&
+                            ownerDetailForm.get('Zip').hasError('maxLength')">
+                            Postal Code should have maximun length of 
+                            {{globalConfig?.validator?.zipMaxLength}} 
+                </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
+            <mat-label>Owner's Email</mat-label>
+            <input nospace matInput type="email" formControlName="Email" >
+            <mat-error *ngIf="ownerDetailForm.get('Email').hasError('email') ||
+                                ownerDetailForm.get('Email').hasError('pattern')">
+            Please enter valid email
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+            <mat-label>Owner's Phone </mat-label>
+<<<<<<< HEAD
+            <input matInput mask= '(000) 000-0000' formControlName="Phone" required >
+=======
+            <input mask="(000) 000-0000" matInput formControlName="Phone" required >
+>>>>>>> 5bf8e5ae6ee7f0459d4db35f892e5e5226773be0
+            <mat-error> Owner's Phone is required!</mat-error>
+        </mat-form-field>
+    </div>
+
+
+    <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch">
+        <button mat-raised-button matStepperPrevious class="my-4 accent-alpha-bg" [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
+        aria-label="Previous">
+        Previous
+        </button>
+        <button mat-raised-button matStepperNext class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
+            aria-label="Next" [disabled]="ownerDetailForm.invalid">
+        Next
+        </button>
+    </div>
+
+  </form>
+</section>

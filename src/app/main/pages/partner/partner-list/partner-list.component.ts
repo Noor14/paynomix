@@ -89,6 +89,7 @@ export class PartnerListComponent implements OnInit, OnDestroy {
     }
 
     openSlidePanel(): void{
+     
         this._slidingPanelService.getSidebar('slidePanel', 'PartnerCreateComponent').toggleOpen();
     }
 

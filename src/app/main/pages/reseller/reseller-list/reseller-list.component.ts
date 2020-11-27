@@ -87,6 +87,7 @@ export class ResellerListComponent implements OnInit, OnDestroy {
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
   openSlidePanel(): void{
+  
     this._slidingPanelService.getSidebar('slidePanel', 'ResellerCreateComponent').toggleOpen();
 }
 

@@ -25,7 +25,7 @@ export class OwnerDetailComponent implements OnInit {
     private _formBuilder: FormBuilder,
    
 ) { 
-  this.maxDate = new Date();
+
 }
 
   ngOnInit(): void {

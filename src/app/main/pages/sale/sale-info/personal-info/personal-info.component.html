@@ -1,0 +1,78 @@
+<section class="personal-info">
+
+    <form fxLayout="column" fxLayoutAlign="center stretch" name="form" [formGroup]="personalInfoForm">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Company</mat-label>
+            <input matInput formControlName="Company" [required]="requiredFields?.Company" >
+            <mat-error>
+                Company is required!
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" >
+            <mat-label>Customer Name</mat-label>
+            <input matInput formControlName="CustomerName" [required]="requiredFields?.CustomerName">
+            <mat-error>CustomerName is required!</mat-error>
+        </mat-form-field>
+
+
+        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="center stretch"
+            fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center">
+            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'"
+                [ngClass.gt-sm]="'pr-4'">
+                <mat-label> E-mail</mat-label>
+                <input matInput formControlName="Email" type="email" [required]="requiredFields?.Email">
+                <mat-error
+                    *ngIf="!personalInfoForm.get('Email').hasError('required') && (personalInfoForm.get('Email').hasError('email') || personalInfoForm.get('Email').hasError('pattern'))">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="personalInfoForm.get('Email').hasError('required')">
+                    Email is required!
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'"
+                [ngClass.gt-sm]="'pl-4'">
+                <mat-label>Phone</mat-label>
+                <input mask="(000) 000-0000" matInput formControlName="Phone" [required]="requiredFields?.Phone">
+                <mat-error>Phone is required!</mat-error>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="City" [required]="requiredFields?.City">
+            <mat-error>
+                City is required!
+            </mat-error>
+        </mat-form-field>
+
+        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="center stretch"
+            fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center">
+            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'"
+                [ngClass.gt-sm]="'pr-4'">
+                <mat-label>States</mat-label>
+                <mat-select formControlName="State" [required]="requiredFields?.State">
+                    <mat-option [value]="item.name" *ngFor="let item of locationConfig?.states">{{item.name}}
+                    </mat-option>
+                    <mat-error>
+                        State is required!
+                    </mat-error>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'"
+                [ngClass.gt-sm]="'pl-4'">
+                <mat-label>Country</mat-label>
+                <mat-select formControlName="Country" >
+                    <mat-option [value]="item.code" *ngFor="let item of locationConfig?.countries">{{item.name}}
+                    </mat-option>
+                    <mat-error>
+                        Country is required!
+                    </mat-error>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+    </form>
+
+</section>

@@ -56,6 +56,7 @@ export class PartnerEditComponent implements OnInit, OnDestroy {
   }
 
   updatePartner(event: any){
+   
     this._partnerService.savePartner(event)
     .then((res: any) => {
       if(res && !res.StatusCode){
@@ -67,7 +68,8 @@ export class PartnerEditComponent implements OnInit, OnDestroy {
   
   }
   closeSlidingPanel(): void {
-    this._slidingPanelService.closeSlidingPanel('slidePanel').toggleOpen();
+   
+    this._router.navigate(["/pages/partner/partner-list"])
   }
 
   ngOnDestroy(): void{

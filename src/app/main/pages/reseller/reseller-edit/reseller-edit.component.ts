@@ -71,7 +71,7 @@ export class ResellerEditComponent implements OnInit, OnDestroy {
   
   }
   closeSlidingPanel(): void {
-    this._slidingPanelService.closeSlidingPanel('slidePanel').toggleOpen();
+    this._router.navigate(["/pages/reseller/reseller-list"])
   }
 
   ngOnDestroy(): void{
