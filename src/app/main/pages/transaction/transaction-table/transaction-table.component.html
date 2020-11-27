@@ -3,7 +3,9 @@
     <button (click)="openRefundDialog()" *ngIf="showRefund"  mat-raised-button class="accent">
       Refund(s)
     </button>
-    <mat-paginator [pageSizeOptions]="[100, 150, 200, 250]" class="ml-auto"></mat-paginator>
+    <mat-paginator [pageSize]="100" (page)="changePage($event)" 
+    [length]="data?.transactionCount" [pageSizeOptions]="[100, 150, 200, 250]" class="ml-auto">
+   </mat-paginator>
   </div>
  
 

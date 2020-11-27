@@ -64,7 +64,7 @@ export class TransactionTableComponent implements OnInit {
    'Action'
 ]; 
 public displayedColumns : string[]= this.columnstoDisplay.slice()
-
+@Output() getTransaction = new EventEmitter<any>();
   constructor(
     private readonly _dialog: MatDialog,
     private readonly _formBuilder: FormBuilder,
@@ -111,6 +111,14 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
       }
     })
   } 
+
+  changePage(event){
+    if(event.previousPageIndex < event.pageIndex){
+     this.getTransaction.emit(++event.pageIndex);
+    }
+  }
+
+
   createRefundForm() {
     this.refundForm = this._formBuilder.group({
       TransactionId: [this.selectedToRefund.TransactionId, Validators.required],

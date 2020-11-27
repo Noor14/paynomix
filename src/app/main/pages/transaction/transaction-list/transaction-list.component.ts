@@ -16,7 +16,11 @@ export class TransactionListComponent implements OnInit {
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
-
+  private transactions: any[] = [];
+  private paging: any = {
+    RecordLimit: 100,
+    PageNo: 1
+  }
   /**
      * Constructor
      *
@@ -58,15 +62,29 @@ export class TransactionListComponent implements OnInit {
         this.getTransaction();
       }
     });
+    this.componentRef.instance.getTransaction.subscribe(res => {
+      if (res) {
+        this.paging.PageNo = res;
+        this.getTransaction();
+      }
+    });
   }
   getTransaction(): void {
-    this._transactionService.transactionList(this._userConfigService.getUserMode())
+    const obj = {
+      ...this.paging,
+      ...this._userConfigService.getUserMode()
+    };
+    this._transactionService.transactionList(obj)
       .then((res: any) => {
         if (res && !res.StatusCode) {
           this.transactionType = res.Response.TotalTransaction;
-          if (res.Response && res.Response.Transactions.length) {
+          if (res.Response && 
+            res.Response.Transactions && 
+            res.Response.Transactions.length) {
+            this.transactions.push(...res.Response.Transactions)
             this.renderingComponent(TransactionTableComponent, {
-              transaction: res.Response.Transactions
+              transaction: this.transactions,
+              transactionCount: res.Response.TotalTransactionCount
             });
           } else {
             this.renderingComponent(NoFoundComponent, {
