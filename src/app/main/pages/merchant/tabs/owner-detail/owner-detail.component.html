@@ -85,11 +85,12 @@
                             {{globalConfig?.validator?.zipMaxLength}} 
                 </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
+        <mat-form-field appearance="outline" fxFlex.gt-sm="34" required fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
             <mat-label>Owner's Email</mat-label>
+            <mat-error *ngIf="ownerDetailForm.get('Email').hasError('required')">Email is required!</mat-error>
             <input nospace matInput type="email" formControlName="Email" >
-            <mat-error *ngIf="ownerDetailForm.get('Email').hasError('email') ||
-                                ownerDetailForm.get('Email').hasError('pattern')">
+            <mat-error *ngIf="!ownerDetailForm.get('Email').hasError('required') && (ownerDetailForm.get('Email').hasError('email') ||
+                                ownerDetailForm.get('Email').hasError('pattern'))">
             Please enter valid email
             </mat-error>
         </mat-form-field>
