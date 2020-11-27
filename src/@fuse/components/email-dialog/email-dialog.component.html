@@ -22,7 +22,7 @@
                 </mat-error>
                 <mat-error
                     *ngIf="!emailForm.get('SendTo').hasError('required') &&
-                            emailForm.get('SendTo').hasError('email') || emailForm.get('SendTo').hasError('pattern')">
+                            (emailForm.get('SendTo').hasError('email') || emailForm.get('SendTo').hasError('pattern'))">
                     Please enter a valid email address
                 </mat-error> 
             </mat-form-field> 
