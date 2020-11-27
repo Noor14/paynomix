@@ -27,17 +27,17 @@
             <mat-list>
                 <mat-list-item>
                    <h4 matLine>Compnay Name</h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantAccountSetup?.MerchantUserName || '--'}}</h4>
+                   <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantAccountSetup?.MerchantUserName || '--'}}</h4>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item>
                     <h4 matLine>Merchant Email </h4>
-                    <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantAccountSetup?.MerchantEmail || '--'}}</h4>
+                    <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantAccountSetup?.MerchantEmail || '--'}}</h4>
                  </mat-list-item>
                  <mat-divider></mat-divider>
                  <mat-list-item>
                     <h4 matLine>Pricing Plan</h4>
-                    <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantAccountSetup?.PricingTitle || '--'}}</h4>
+                    <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantAccountSetup?.PricingTitle || '--'}}</h4>
                  </mat-list-item>
                  <mat-divider></mat-divider>
              </mat-list>
@@ -53,37 +53,37 @@
            <mat-list>
                <mat-list-item>
                   <h4 matLine>DBA - Statement Descriptor</h4>
-                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.Descriptor || '--'}}</h4>
+                  <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.Descriptor || '--'}}</h4>
                </mat-list-item>
                <mat-divider></mat-divider>
                <mat-list-item>
                    <h4 matLine>Tax ID </h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.TaxIDNo || '--'}}</h4>
+                   <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.TaxIDNo || '--'}}</h4>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item>
                   <h4 matLine>Business Type (e.g. LLC)</h4>
-                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.BusinessType || '--'}}</h4>
+                  <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.BusinessType || '--'}}</h4>
                </mat-list-item>
                <mat-divider></mat-divider>
                <mat-list-item>
                   <h4 matLine>Years in Business</h4>
-                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.YearsInBusiness || '--'}}</h4>
+                  <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.YearsInBusiness || '--'}}</h4>
                </mat-list-item>
                <mat-divider></mat-divider>
                <mat-list-item>
                   <h4 matLine>Website </h4>
-                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.WebSite || '--'}}</h4>
+                  <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.WebSite || '--'}}</h4>
                </mat-list-item>
                <mat-divider></mat-divider>
                <mat-list-item>
                   <h4 matLine>Currently Accept Credit Cards</h4>
-                  <h4 class="text-bold" fxFlex="1 0 auto">{{(allInfo?.MerchantBusiness?.AcceptCreditCards)? 'Yes': 'No'}}</h4>
+                  <h4 class="text-bold text-right" fxFlex="1 0 auto">{{(allInfo?.MerchantBusiness?.AcceptCreditCards)? 'Yes': 'No'}}</h4>
                </mat-list-item>
                <mat-divider></mat-divider>
                <mat-list-item>
                   <h4 matLine>Business Phone </h4>
-                  <h4 class="text-bold" fxFlex="1 0 auto">
+                  <h4 class="text-bold text-right" fxFlex="1 0 auto">
                      <ng-template [ngIf]="allInfo?.MerchantBusiness?.BusinessPhone" [ngIfElse]="businessPhone">
                         {{allInfo?.MerchantBusiness?.BusinessPhone | mask: '(000) 000-0000'}}
                      </ng-template>
@@ -93,12 +93,12 @@
                <mat-divider></mat-divider>
                <mat-list-item>
                   <h4 matLine>Fax </h4>
-                  <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.Fax || '--'}}</h4>
+                  <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantBusiness?.Fax || '--'}}</h4>
                </mat-list-item>
                <mat-divider></mat-divider>
                <mat-list-item>
                   <h4 matLine>Business Address </h4>
-                  <h4 class="text-bold" fxFlex="1 0 auto">
+                  <h4 class="text-bold text-right" fxFlex="1 0 auto">
                       <ng-container *ngIf="allInfo?.MerchantBusiness?.BusinessAddress">{{allInfo?.MerchantBusiness?.BusinessAddress + ','}} </ng-container>
                       <ng-container *ngIf="allInfo?.MerchantBusiness?.BusinessAddress1">{{allInfo?.MerchantBusiness?.BusinessAddress1 + ','}} </ng-container>
                       <ng-container *ngIf="allInfo?.MerchantBusiness?.BusinessCity">{{allInfo?.MerchantBusiness?.BusinessCity + ','}} </ng-container>
@@ -121,17 +121,17 @@
             <mat-list>
                 <mat-list-item>
                    <h4 matLine>First Name</h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.FirstName || '--'}}</h4>
+                   <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.FirstName || '--'}}</h4>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item>
                     <h4 matLine>Last Name</h4>
-                    <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.LastName || '--'}}</h4>
+                    <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.LastName || '--'}}</h4>
                  </mat-list-item>
                  <mat-divider></mat-divider>
                  <mat-list-item>
                    <h4 matLine>DOB</h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">
+                   <h4 class="text-bold text-right" fxFlex="1 0 auto">
                      <ng-template [ngIf]="allInfo?.DOB" [ngIfElse]="other">
                         {{allInfo?.DOB | date : 'mediumDate'}}
                       </ng-template>
@@ -141,7 +141,7 @@
                 <mat-divider></mat-divider>
                 <mat-list-item>
                    <h4 matLine>SSN</h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">
+                   <h4 class="text-bold text-right" fxFlex="1 0 auto">
                      <ng-template [ngIf]="allInfo?.SSN" [ngIfElse]="ssn">
                         {{allInfo?.SSN | mask: '000-00-0000' }}
                       </ng-template>
@@ -151,17 +151,17 @@
                 <mat-divider></mat-divider>
                 <mat-list-item>
                    <h4 matLine>Drivers License </h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.DrivingLicense || '--'}}</h4>
+                   <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.DrivingLicense || '--'}}</h4>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item>
                    <h4 matLine>DL State  </h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.DLState || '--'}}</h4>
+                   <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.DLState || '--'}}</h4>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item>
                    <h4 matLine> Address </h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">
+                   <h4 class="text-bold text-right" fxFlex="1 0 auto">
                       <ng-container *ngIf="allInfo?.Address1"> {{allInfo?.Address1 + ',' }} </ng-container>
                        <ng-container *ngIf="allInfo?.Address2"> {{allInfo?.Address2 + ',' }} </ng-container>
                        <ng-container *ngIf="allInfo?.City">{{allInfo?.City + ',' }} </ng-container>
@@ -172,12 +172,12 @@
                 <mat-divider></mat-divider>
                 <mat-list-item>
                    <h4 matLine>Email </h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.Email || '--'}}</h4>
+                   <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.Email || '--'}}</h4>
                 </mat-list-item>
                 <mat-divider></mat-divider>
                 <mat-list-item>
                    <h4 matLine>Owner's Phone </h4>
-                   <h4 class="text-bold" fxFlex="1 0 auto">
+                   <h4 class="text-bold text-right" fxFlex="1 0 auto">
                       <ng-template [ngIf]="allInfo?.Phone" [ngIfElse]="ownersPhone">
                         {{allInfo?.Phone | mask: '(000) 000-0000'}}
                       </ng-template>
@@ -198,17 +198,17 @@
        <mat-list>
            <mat-list-item>
               <h4 matLine>Bank Account Type </h4>
-              <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBankAccount?.BankAccountType || '--'}}</h4>
+              <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantBankAccount?.BankAccountType || '--'}}</h4>
            </mat-list-item>
            <mat-divider></mat-divider>
            <mat-list-item>
                <h4 matLine>Bank Routing Number</h4>
-               <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBankAccount?.RoutingNumber || '--'}}</h4>
+               <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantBankAccount?.RoutingNumber || '--'}}</h4>
             </mat-list-item>
             <mat-divider></mat-divider>
             <mat-list-item>
               <h4 matLine>Bank Account Number</h4>
-              <h4 class="text-bold" fxFlex="1 0 auto">{{allInfo?.MerchantBankAccount?.AccountNumber || '--'}}</h4>
+              <h4 class="text-bold text-right" fxFlex="1 0 auto">{{allInfo?.MerchantBankAccount?.AccountNumber || '--'}}</h4>
            </mat-list-item>
            <mat-divider></mat-divider>
        </mat-list>

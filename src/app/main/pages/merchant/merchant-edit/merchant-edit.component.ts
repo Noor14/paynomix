@@ -13,7 +13,7 @@ import { MerchantService } from '../merchant.service';
   styleUrls: ['./merchant-edit.component.scss']
 })
 export class MerchantEditComponent implements OnInit, OnDestroy {
-
+  public onBoardError: string = undefined;
   public merchantDetail: any = {};
   private _unsubscribeAll: Subject<any>;
  /**
@@ -64,7 +64,8 @@ export class MerchantEditComponent implements OnInit, OnDestroy {
         this._snackBar.open('Merchant updated', '', snackBarConfig);
         this._router.navigate(['/pages/merchant/merchant-list']);
       }else{
-        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn)
+        this.onBoardError = `${res.StatusMessage} ${res.Response}`;
+        this._snackBar.open(this.onBoardError, '', snackBarConfigWarn);
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   }
