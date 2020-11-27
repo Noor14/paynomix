@@ -9,71 +9,6 @@
         </mat-toolbar-row>
     </mat-toolbar>
 
-
-
-    <ng-template #singleInput [ngIf]="data.isSingleInput == true" [ngIfElse]="multiInput">
-    
-      
-  
-        <div mat-dialog-content class="p-24 m-0">
-            <div fxLayout="row" fxLayoutAlign="end" class="Cursorpointer">
-                <button mat-icon-button  aria-label="CC" (click)="showCC = true" *ngIf="!showCC">Cc</button>
-                <button mat-icon-button  aria-label="BCC" (click)="showBCC = true" *ngIf="!showBCC ">Bcc</button>
-            </div> 
-            <form name="reciptForm" fxLayout="column"  [formGroup]="reciptForm">
-
-            <mat-form-field appearance="outline">
-                <mat-label>To</mat-label>
-                <input type="email" matInput formControlName="To" required> 
-                <mat-error *ngIf="reciptForm.get('To').hasError('required')">
-                    Email is required!
-                </mat-error>
-                <mat-error
-                    *ngIf="!reciptForm.get('To').hasError('required') &&
-                    reciptForm.get('To').hasError('email') || reciptForm.get('To').hasError('pattern')">
-                    Please enter a valid email address
-                </mat-error> 
-            </mat-form-field> 
-            <mat-form-field appearance="outline" *ngIf="showCC">
-                <mat-label>CC</mat-label>
-                <input type="email" matInput formControlName="Cc" >  
-                <mat-error
-                *ngIf="reciptForm.get('Cc').hasError('email') || reciptForm.get('Cc').hasError('pattern')">
-                Please enter a valid email address
-            </mat-error> 
-            </mat-form-field> 
-            <mat-form-field appearance="outline" *ngIf="showBCC">
-                <mat-label>Bcc</mat-label>
-                <input  type="email" matInput formControlName="Bcc">  
-                <mat-error
-                *ngIf="reciptForm.get('Bcc').hasError('email') || reciptForm.get('Bcc').hasError('pattern')">
-                Please enter a valid email address
-            </mat-error> 
-            </mat-form-field>
-
-
-        </form>
-            <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
-            <button mat-raised-button
-            class="mr-8 accent-alpha-bg"
-            aria-label="Cancel" (click)="dialogRef.close()">
-                Cancel
-            </button>    
-            <button mat-raised-button
-            color="accent"
-            aria-label="email"
-            (click)="sendreciptEmail();"
-            >
-                Send
-            </button>
-        </div>
-        </div>
-    
-    
-    </ng-template>
-    
-
-    <ng-template #multiInput >
     <div mat-dialog-content class="p-24">
         <div fxLayout="row" fxLayoutAlign="end" class="Cursorpointer">
             <button mat-icon-button  aria-label="CC" (click)="showCC = true" *ngIf="!showCC">Cc</button>
@@ -82,7 +17,7 @@
         <form name="emailForm" fxLayout="column"  [formGroup]="emailForm">
             <mat-form-field appearance="outline">
                 <mat-label>To</mat-label>
-                <input type="email" matInput formControlName="SendTo" required> 
+                <input [readonly]="!data.isSingleInput" type="email" matInput formControlName="SendTo" required> 
                 <mat-error *ngIf="emailForm.get('SendTo').hasError('required')">
                     Email is required!
                 </mat-error>
@@ -108,24 +43,28 @@
                 Please enter a valid email address
             </mat-error> 
             </mat-form-field> 
-            <mat-form-field appearance="outline">
-            <mat-label>Subject</mat-label>
-            <input matInput formControlName="Subject" readonly required>  
-            <mat-error>Subject is required</mat-error>
-            </mat-form-field>  
-            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                <mat-label>Message</mat-label>
-                <textarea matInput rows="5" readonly>
-          Hello,
+         
+            <ng-template #multiInput [ngIf]="!data.isSingleInput" >
+                <mat-form-field appearance="outline">
+                    <mat-label>Subject</mat-label>
+                    <input matInput formControlName="Subject" readonly required>  
+                    <mat-error>Subject is required</mat-error>
+                    </mat-form-field>  
+                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                        <mat-label>Message</mat-label>
+                        <textarea matInput rows="5" readonly>
+                  Hello,
+            
+                  Thank you for signing up on {{appInfo?.title}} Inc. You’re almost ready to go! 
+                  Please fill out your application to complete the boarding process by
+                  clicking the following link.
+                  Launch Application
+                  We appreciate the opportunity to work with you.
+                  {{appInfo?.title}} Team.
+                        </textarea> 
+                    </mat-form-field>
+            </ng-template>
 
-          Thank you for signing up on {{appInfo?.title}} Inc. You’re almost ready to go! 
-          Please fill out your application to complete the boarding process by
-          clicking the following link.
-          Launch Application
-          We appreciate the opportunity to work with you.
-          {{appInfo?.title}} Team.
-                </textarea> 
-            </mat-form-field>
 
         </form>
     </div>
@@ -134,10 +73,14 @@
         <button mat-raised-button class="mr-8 accent-alpha-bg" aria-label="CLOSE" (click)="_dialogRef.close()">
             Close
         </button>    
-        <button mat-raised-button color="accent" class="save-button" aria-label="SAVE" [disabled]="emailForm.invalid" (click)="sendEmail()">
+        <button mat-raised-button color="accent" class="save-button" aria-label="SAVE" 
+        [disabled]="emailForm.invalid" 
+        (click)="sendEmail()">
             Send
         </button>
     </div>
-</ng-template>
+
 </div>
+
+
 

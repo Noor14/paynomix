@@ -19,7 +19,6 @@ export class EmailDialogComponent implements OnInit {
  public showCC : boolean = false;
  public showBCC : boolean = false;
  public appInfo= environment
-public  reciptForm: FormGroup;
    /**
      * Constructor
      *
@@ -35,16 +34,21 @@ public  reciptForm: FormGroup;
     ) { }
  
   ngOnInit() {
-console.log(this.data)
-if(this.data.isSingleInput == true){
-    this.createReciptForm();
-}else{
+
     this.createEmailForm();
-}
 
  
   }
   createEmailForm(): void{
+
+    if(this.data.isSingleInput){
+    this.emailForm = this._formBuilder.group({
+        SendTo: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]], 
+        Bcc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+        Cc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+    });
+}
+    else{
     this.emailForm = this._formBuilder.group({
         PartnerId: ['', Validators.required],
         SendTo: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]], 
@@ -54,22 +58,22 @@ if(this.data.isSingleInput == true){
         BodyContent: ['', Validators.required],
         MerchantName: ['', Validators.required],
     });
+}
     if(this.data) { 
       this.emailForm.patchValue(this.data);
     }
   }
 
-  createReciptForm(): void{
-    this.reciptForm = this._formBuilder.group({
-        To: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
-        Cc:[''],
-        Bcc: ['']
-    });
-   
+  sendEmail(){
+      if(this.data.isSingleInput){
+        this.sendreciptEmail()
+      }
+      else{
+        this.sendMerchantEmail()
+      }
   }
 
-  
-  sendEmail(){
+  sendMerchantEmail(){
     if(this.emailForm.valid){ 
       this._settingService.sendEmail(this.emailForm.value)
       .then((res:any) => {
@@ -80,26 +84,23 @@ if(this.data.isSingleInput == true){
       validateAllFormFields(this.emailForm)
     }
   }
+
   sendreciptEmail(){
       const obj = {
         "TransactionID": this.data.TransactionId,
         "MerchantID": this.data.MerchantId,
-        "To": this.reciptForm.value.To,  
-        "Cc": this.reciptForm.value.Cc,  
-        "Bcc": this.reciptForm.value.Bcc,  
+        "To": this.emailForm.value.SendTo,  
+        "Cc": this.emailForm.value.Cc,  
+        "Bcc": this.emailForm.value.Bcc,  
         "TemplateTypeID": "1"
       }
-      if(this.reciptForm.valid){ 
+      if(this.emailForm.valid){ 
         this._settingService.sendRecipt(obj)
         .then((res:any) => {
           this._snackBar.open(res.StatusMessage, '', snackBarConfig);
           this._dialogRef.close();
         }).catch((err: HttpErrorResponse)=>(console.log));
-      }else{
-        validateAllFormFields(this.emailForm)
       }
-
-
   }
 
 }

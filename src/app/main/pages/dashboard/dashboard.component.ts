@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
+import * as Chart from 'chart.js';
 import { environment } from 'environments/environment';
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
@@ -15,7 +16,7 @@ import { DashboardService } from './dashboard.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild('renderingContainer', { read: ViewContainerRef, static: false }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   public dashboardUserStats: any;
   public widgets: any;
@@ -65,6 +66,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
               }
           ],
           options   : {
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var value = data.datasets[0].data[tooltipItem.index];
+                        if (parseInt(value) >= 1000) {
+                          return "Amount: " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                      } else {
+                          return "Amount: " + value;
+                      }
+                    }
+                } // end callbacks:
+              },
               spanGaps           : false,
               legend             : {
                   display: false
@@ -88,7 +101,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
                       {
                           display: false,
                           ticks  : {
-                             
+                            userCallback: function(value, index, values) {
+                                value = value.toString();
+                                value = value.split(/(?=(?:...)*$)/);
+                                value = value.join(',');
+                                return value;
+                            }
                           }
                       }
                   ]
@@ -115,6 +133,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
             }
         ],
         options   : {
+            tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var value = data.datasets[0].data[tooltipItem.index];
+                    if (parseInt(value) >= 1000) {
+                      return "Transactions: " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  } else {
+                      return "Transactions: " + value;
+                  }
+                }
+            } // end callbacks:
+          },
             spanGaps           : false,
             legend             : {
                 display: false
@@ -138,7 +168,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     {
                         display: false,
                         ticks  : {
-                          
+                            userCallback: function(value, index, values) {
+                                value = value.toString();
+                                value = value.split(/(?=(?:...)*$)/);
+                                value = value.join(',');
+                                return value;
+                            }
                         }
                     }
                 ]
@@ -165,6 +200,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
               }
           ],
           options  : {
+            tooltips: {
+                callbacks: {
+                      label: function(tooltipItem, data) {
+                          var value = data.datasets[0].data[tooltipItem.index];
+                          if (parseInt(value) >= 1000) {
+                            return "Transactions: " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        } else {
+                            return "Transactions: " + value;
+                        }
+                      }
+                } // end callbacks:
+              },
               spanGaps           : false,
               legend             : {
                   display: false
@@ -188,7 +235,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
                       {
                           display: false,
                           ticks  : {
-                            
+                            userCallback: function(value, index, values) {
+                                value = value.toString();
+                                value = value.split(/(?=(?:...)*$)/);
+                                value = value.join(',');
+                                return value;
+                            }
                           }
                       }
                   ]
@@ -245,6 +297,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
               }
           ],
           options  : {
+            
               spanGaps           : false,
               legend             : {
                   display: false
@@ -253,8 +306,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
               tooltips           : {
                   position : 'nearest',
                   mode     : 'index',
-                  intersect: false
-              },
+                  intersect: false,
+                  callbacks: {
+                    // this callback is used to create the tooltip label
+                    label: function(tooltipItem, data) {
+                      // get the data label and data value to display
+                      // convert the data value to local string so it uses a comma seperated number
+                      var dataLabel = data.datasets[tooltipItem.datasetIndex].label;
+                      var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].toLocaleString();
+            
+                      // make this isn't a multi-line label (e.g. [["label 1 - line 1, "line 2, ], [etc...]])
+                      if (Chart.helpers.isArray(dataLabel)) {
+                        // show value on first line of multiline label
+                        // need to clone because we are changing the value
+                        dataLabel = dataLabel.slice();
+                        dataLabel[0] += value;
+                      } else {
+                        dataLabel += value;
+                      }
+            
+                      // return the text to display on the tooltip
+                      return dataLabel;
+                    }
+
+              }
+            },
               layout             : {
                   padding: {
                       left : 24,
@@ -287,6 +363,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
                               tickMarkLength: 16
                           },
                           ticks    : {
+                            callback: function(value, index, values) {
+                                return value.toLocaleString("en-US",{style:"currency", currency:"USD"});
+                              },
                              // stepSize: 1000
                              min:0
                           }
@@ -298,6 +377,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
                       propagate: false
                   }
               }
+
+              
           }
       }
     };
@@ -354,5 +435,9 @@ getDashboardStats(): void{
      }
  }).catch((err: HttpErrorResponse)=>(console.log))
 }
+
+
+
+
 
 }

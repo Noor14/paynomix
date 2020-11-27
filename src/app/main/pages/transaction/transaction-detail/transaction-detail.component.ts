@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { transactionStatus, transactionType } from '../../../../../constants/globalFunctions';
+import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-import { MatDialog } from '@angular/material';
-import { takeUntil, map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { TransactionService } from '../transaction.service';
 import { ReceiptDialogComponent } from '@fuse/components/receipt-dialog/receipt-dialog.component';
 import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
