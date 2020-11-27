@@ -1,13 +1,13 @@
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 
-export function validateAllFormFields(formGroup: FormGroup) {         
-    Object.keys(formGroup.controls).forEach(field => {  
-      const control = formGroup.get(field);            
-      if (control instanceof FormControl) {             
-        control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {        
-        this.validateAllFormFields(control);            
-      }
+export function validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+        const control = formGroup.get(field);
+        if (control instanceof FormControl) {
+            control.markAsTouched({ onlySelf: true });
+        } else if (control instanceof FormGroup) {
+            this.validateAllFormFields(control);
+        }
     });
 };
 export const snackBarConfig: any = {
@@ -17,41 +17,49 @@ export const snackBarConfig: any = {
     panelClass: 'fuse-navy-50'
 };
 export const snackBarConfigWarn = {
-  ...snackBarConfig,
-  panelClass: 'warn'
+    ...snackBarConfig,
+    panelClass: 'warn'
 };
-export function validateRequiredControl(control: AbstractControl, isRequired: boolean){
-    if(isRequired && !control.value){
-        return {required:  true}
+export function validateRequiredControl(control: AbstractControl, isRequired: boolean) {
+    if (isRequired && !control.value) {
+        return { required: true }
     }
 
 }
 
 export enum authRole {
-admin = 1,
-merchant,
-partner,
-reseller,
-customer
+    admin = 1,
+    merchant,
+    partner,
+    reseller,
+    customer
 }
-export enum transactionType{
-CreditCardVoid,
-CreditCardSale,
-CreditCardAuth,
-CreditCardFund,
-CreditCardRefund,
-CreditCardCapture,
-ACHDebit,
-ACHRefund,
-ACHVoid,
+export enum transactionType {
+    CreditCardVoid,
+    CreditCardSale,
+    CreditCardAuth,
+    CreditCardFund,
+    CreditCardRefund,
+    CreditCardCapture,
+    ACHDebit,
+    ACHRefund,
+    ACHVoid,
 }
-export enum transactionStatus{
-declined,
-approved,
-pending,
-funded,
-error,
-init
+export enum transactionStatus {
+    declined,
+    approved,
+    pending,
+    funded,
+    error,
+    init
+}
+export enum FraudType {
+    country = 1,
+    ip,
+    domain,
+    velocity,
+    restrict_trans_source,
+    proxy
 }
 
 export const locationConfig =
@@ -293,24 +301,24 @@ export const locationConfig =
             name: 'Wyoming',
             abbreviation: 'WY'
         }
-      ],
+    ],
     countries: [{
         code: 'US',
         name: 'United States'
     }]
-} 
+}
 export const truncateTextLength = 25;
 
 export const validator = {
-  emailPattern : /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/,
-  number : /^[0-9]+$/,
-  zipMaxLength: 5,
-  accMaxLength: 17,
-  maxPercentage: 100,
-  maxRoutingNo: 9,
-  minRoutingNo: 9,
-  maxName: 25,
-  maxFieldLength:35,
-  passwordPattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$.!%*#?&])[A-Za-z\d@$!%*.#?&]{0,}$/,
-  minPasswordLength: 8
+    emailPattern: /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/,
+    number: /^[0-9]+$/,
+    zipMaxLength: 5,
+    accMaxLength: 17,
+    maxPercentage: 100,
+    maxRoutingNo: 9,
+    minRoutingNo: 9,
+    maxName: 25,
+    maxFieldLength: 35,
+    passwordPattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$.!%*#?&])[A-Za-z\d@$!%*.#?&]{0,}$/,
+    minPasswordLength: 8
 };
