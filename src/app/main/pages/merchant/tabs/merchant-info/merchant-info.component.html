@@ -21,7 +21,7 @@
                 </mat-error>
                 <mat-error
                     *ngIf="!merchantInfoForm.get('MerchantEmail').hasError('required') &&
-                            merchantInfoForm.get('MerchantEmail').hasError('email') || merchantInfoForm.get('MerchantEmail').hasError('pattern')">
+                            (merchantInfoForm.get('MerchantEmail').hasError('email') || merchantInfoForm.get('MerchantEmail').hasError('pattern'))">
                     Please enter a valid email address
                 </mat-error>
             </mat-form-field>
