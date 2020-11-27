@@ -63,6 +63,7 @@ export class TransactionTableComponent implements OnInit {
    'InsertedOn',
    'Action'
 ]; 
+// @ViewChild(MatPaginator) paginator: MatPaginator;
 public displayedColumns : string[]= this.columnstoDisplay.slice()
 @Output() getTransaction = new EventEmitter<any>();
   constructor(
