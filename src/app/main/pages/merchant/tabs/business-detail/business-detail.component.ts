@@ -39,7 +39,7 @@ export class BusinessDetailComponent implements OnInit, AfterViewInit, OnChanges
       YearsInBusiness:  [''],
       WebSite: ['', Validators.required],
       AcceptCreditCards: ['', Validators.required],
-      BusinessPhone:  [''],
+      BusinessPhone:  ['', Validators.required],
       Fax:  [''],
       BusinessAddress:  [''],
       BusinessAddress1:  [''],
