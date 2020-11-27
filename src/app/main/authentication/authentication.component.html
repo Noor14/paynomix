@@ -1,9 +1,6 @@
 <section class="auth h-100-p" fxLayout="row" fxLayoutAlign="center center">
    <router-outlet></router-outlet>
-    <div fxFlex="50" class="h-100-p" fxHide.lt-lg [ngStyle]="{
-        'background-image': 'url(assets/images/' + backgroundImage + ')',
-        'background-size': 'cover',
-        'background-repeat': 'no-repeat'
-        }">
+    <div fxFlex="50" class="h-100-p" fxHide.lt-lg >
+        <img class="w-100-p h-100-p" src="assets/images/{{backgroundImage}}" alt="img">
     </div>
 </section>
