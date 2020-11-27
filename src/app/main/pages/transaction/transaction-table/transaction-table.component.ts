@@ -13,7 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
 @Component({
   selector: 'app-transaction-table',
   templateUrl: './transaction-table.component.html',
@@ -127,6 +127,17 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
       Reason: ['requested_by_customer', Validators.required],
     });
   }
+
+ 
+
+  openemailDialog(x) {
+    const dialogRef = this._dialog.open(EmailDialogComponent, {width: '550px'});
+    x.isSingleInput = true
+    dialogRef.componentInstance.data = x ;
+
+   }
+
+
   refund() {
     if (this.refundForm.valid) {
       if(this.refundForm.controls['Amount'].value && this.refundForm.controls['Amount'].value > this.selectedToRefund.Amount) {

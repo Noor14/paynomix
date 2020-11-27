@@ -34,9 +34,21 @@ export class EmailDialogComponent implements OnInit {
     ) { }
  
   ngOnInit() {
+
     this.createEmailForm();
+
+ 
   }
   createEmailForm(): void{
+
+    if(this.data.isSingleInput){
+    this.emailForm = this._formBuilder.group({
+        SendTo: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]], 
+        Bcc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+        Cc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+    });
+}
+    else{
     this.emailForm = this._formBuilder.group({
         PartnerId: ['', Validators.required],
         SendTo: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]], 
@@ -46,12 +58,22 @@ export class EmailDialogComponent implements OnInit {
         BodyContent: ['', Validators.required],
         MerchantName: ['', Validators.required],
     });
+}
     if(this.data) { 
       this.emailForm.patchValue(this.data);
     }
   }
-  
+
   sendEmail(){
+      if(this.data.isSingleInput){
+        this.sendreciptEmail()
+      }
+      else{
+        this.sendMerchantEmail()
+      }
+  }
+
+  sendMerchantEmail(){
     if(this.emailForm.valid){ 
       this._settingService.sendEmail(this.emailForm.value)
       .then((res:any) => {
@@ -62,4 +84,23 @@ export class EmailDialogComponent implements OnInit {
       validateAllFormFields(this.emailForm)
     }
   }
+
+  sendreciptEmail(){
+      const obj = {
+        "TransactionID": this.data.TransactionId,
+        "MerchantID": this.data.MerchantId,
+        "To": this.emailForm.value.SendTo,  
+        "Cc": this.emailForm.value.Cc,  
+        "Bcc": this.emailForm.value.Bcc,  
+        "TemplateTypeID": "1"
+      }
+      if(this.emailForm.valid){ 
+        this._settingService.sendRecipt(obj)
+        .then((res:any) => {
+          this._snackBar.open(res.StatusMessage, '', snackBarConfig);
+          this._dialogRef.close();
+        }).catch((err: HttpErrorResponse)=>(console.log));
+      }
+  }
+
 }
