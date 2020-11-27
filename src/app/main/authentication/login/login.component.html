@@ -1,67 +1,63 @@
-<section class="login" fxLayout="column">
+<section class="login-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
 
-    <div class="login-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+    <div class="login-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
 
-        <div class="login-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+        <div class="logo">
+            <img src="assets/images/{{appInfo?.assetPathName}}-logos/logo.svg">
+        </div>
 
-            <div class="logo">
-                <img src="assets/images/{{appInfo?.assetPathName}}-logos/logo.svg">
+        <div class="title">SIGN IN</div>
+        <div class="sub-title">Use Your {{appInfo?.title}} Account</div>
+
+        <form name="loginForm" [formGroup]="loginForm" novalidate (ngSubmit)="login()">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input nospace matInput type="email"formControlName="Username">
+                <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                <mat-error *ngIf="loginForm.get('Username').hasError('required')">
+                    Email is required
+                </mat-error>
+                <mat-error
+                    *ngIf="!loginForm.get('Username').hasError('required') &&
+                            loginForm.get('Username').hasError('email') || loginForm.get('Username').hasError('pattern')">
+                    Please enter a valid email address
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input nospace matInput type="password" formControlName="Password">
+                <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                <mat-error *ngIf="loginForm.get('Password').hasError('required')">
+                    Password is required
+                </mat-error>
+            </mat-form-field>
+
+            <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
+                 fxLayoutAlign="space-between center">
+                <mat-checkbox class="remember-me" aria-label="Remember Me">
+                    Remember Me
+                </mat-checkbox>
+
+                <a class="forgot-password" [routerLink]="'/forgot-password'">
+                    Forgot Password?
+                </a>
             </div>
 
-            <div class="title">SIGN IN</div>
-            <div class="sub-title">Use Your {{appInfo?.title}} Account</div>
+            <button mat-raised-button color="accent" 
+            class="submit-button" aria-label="LOG IN"
+                    type="submit" [disabled]="loggedIn || loginForm.invalid">
+               LOGIN
+           </button>
 
-            <form name="loginForm" [formGroup]="loginForm" novalidate (ngSubmit)="login()">
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input nospace matInput type="email"formControlName="Username">
-                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
-                    <mat-error *ngIf="loginForm.get('Username').hasError('required')">
-                        Email is required
-                    </mat-error>
-                    <mat-error
-                        *ngIf="!loginForm.get('Username').hasError('required') &&
-                                loginForm.get('Username').hasError('email') || loginForm.get('Username').hasError('pattern')">
-                        Please enter a valid email address
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Password</mat-label>
-                    <input nospace matInput type="password" formControlName="Password">
-                    <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
-                    <mat-error *ngIf="loginForm.get('Password').hasError('required')">
-                        Password is required
-                    </mat-error>
-                </mat-form-field>
-
-                <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
-                     fxLayoutAlign="space-between center">
-                    <mat-checkbox class="remember-me" aria-label="Remember Me">
-                        Remember Me
-                    </mat-checkbox>
-
-                    <a class="forgot-password" [routerLink]="'/forgot-password'">
-                        Forgot Password?
-                    </a>
-                </div>
-
-                <button mat-raised-button color="accent" 
-                class="submit-button" aria-label="LOG IN"
-                        type="submit" [disabled]="loggedIn || loginForm.invalid">
-                   LOGIN
-               </button>
-
-            </form>
+        </form>
 
 
-            <!-- <div class="register" fxLayout="column" fxLayoutAlign="center center">
-                <span class="text">Don't have an account?</span>
-                <a class="link" [routerLink]="'/pages/auth/register'">Create an account</a>
-            </div> -->
-
-        </div>
+        <!-- <div class="register" fxLayout="column" fxLayoutAlign="center center">
+            <span class="text">Don't have an account?</span>
+            <a class="link" [routerLink]="'/pages/auth/register'">Create an account</a>
+        </div> -->
 
     </div>
 

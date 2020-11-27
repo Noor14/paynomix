@@ -15,10 +15,13 @@ import { GeneralSettingComponent } from './tabs/general-setting/general-setting.
 import { MakeSaleSettingComponent } from './tabs/general-setting/general-tabs/make-sale-setting/make-sale-setting.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ApiKeyComponent } from './tabs/api-key/api-key.component';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { PlgManagementComponent } from './tabs/plg-management/plg-management.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { FuseMaterialColorPickerModule } from '@fuse/components/material-color-picker/material-color-picker.module';
 
 @NgModule({
-  declarations: [SettingsComponent, BasicInfoComponent, GeneralSettingComponent, MakeSaleSettingComponent, ApiKeyComponent],
+  declarations: [SettingsComponent, BasicInfoComponent, GeneralSettingComponent, MakeSaleSettingComponent, ApiKeyComponent, PlgManagementComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,
@@ -31,7 +34,9 @@ import {MatListModule} from '@angular/material/list';
     MatFormFieldModule,
     NgxDropzoneModule,
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRadioModule,
+    FuseMaterialColorPickerModule
   ]
 })
 export class SettingsModule { }

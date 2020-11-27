@@ -6,15 +6,15 @@ import { CountryOriginComponent } from './country-origin/country-origin.componen
 import { ProxyBlockingComponent } from './proxy-blocking/proxy-blocking.component';
 import { TransactionControlsComponent } from './transaction-controls.component';
 import { TransactionControlsRoutingModule } from './transaction-controls-routing.module';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
   declarations: [
     IpBlockingComponent, 
@@ -32,7 +32,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatDividerModule,
     MatSelectModule,
-    FuseSharedModule
+    FuseSharedModule,
+    MatRadioModule
     
   ]
 })

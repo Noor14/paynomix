@@ -80,7 +80,7 @@
                     </mat-error> 
                     <mat-error
                     *ngIf="!partnerForm.get('Email').hasError('required') &&
-                            partnerForm.get('Email').hasError('email') || partnerForm.get('Email').hasError('pattern')">
+                            (partnerForm.get('Email').hasError('email') || partnerForm.get('Email').hasError('pattern'))">
                     Please enter a valid email address
                 </mat-error>
                 </mat-form-field>

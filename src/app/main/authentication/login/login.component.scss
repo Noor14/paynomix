@@ -1,92 +1,88 @@
 @import "src/@fuse/scss/fuse";
-
-login {
+login{
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("/assets/images/backgrounds/dark-material-bg.jpg") no-repeat;
-    background-size: cover;
-    .login {
-        .login-form-wrapper {
-            .login-form {
-                background-color: #FFFFFF;
-                width: 384px;
-                max-width: 384px;
-                padding: 32px;
-                text-align: center;
-                @include mat-elevation(16);
-
-                @include media-breakpoint('xs') {
-                    padding: 24px;
-                    width: 100%;
-                }
-
-                .logo {
-                    width: 80px;
-                    margin: 32px auto;
-                    img{
-                        width: 100%;
-                    }
-                }
-
-                .title {
-                    font-size: 20px;
-                    margin: 16px 0 5px 0;
-                }
-                .sub-title{
-                    margin-bottom: 25px;
-                }
-
-                form {
-                    width: 100%;
-                    text-align: left;
-
-                    mat-form-field {
-                        width: 100%;
-                    }
-
-                    mat-checkbox {
-                        margin: 0;
-                    }
-
-                    .remember-forgot-password {
-                        font-size: 13px;
-                        margin-top: 8px;
-
-                        .remember-me {
-                            margin-bottom: 16px
-                        }
-
-                        .forgot-password {
-                            font-size: 13px;
-                            font-weight: 600;
-                            margin-bottom: 16px
-                        }
-                    }
-
-                    .submit-button {
-                        width: 220px;
-                        margin: 16px auto;
-                        display: block;
-
-                        @include media-breakpoint('xs') {
-                            width: 90%;
-                        }
-                    }
-                }
-
-                .register {
-                    margin: 32px auto 24px auto;
-                    font-weight: 600;
-
-                    .text {
-                        margin-right: 8px;
-                    }
-                }
-
+    .login-form-wrapper {
+        .login-form {
+            background-color: #FFFFFF;
+            width: 384px;
+            max-width: 384px;
+            padding: 32px;
+            text-align: center;
+            @include mat-elevation(16);
+    
+            @include media-breakpoint('xs') {
+                padding: 24px;
+                width: 100%;
             }
+    
+            .logo {
+                width: 80px;
+                margin: 32px auto;
+                img{
+                    width: 100%;
+                }
+            }
+    
+            .title {
+                font-size: 20px;
+                margin: 16px 0 5px 0;
+            }
+            .sub-title{
+                margin-bottom: 25px;
+            }
+    
+            form {
+                width: 100%;
+                text-align: left;
+    
+                mat-form-field {
+                    width: 100%;
+                }
+    
+                mat-checkbox {
+                    margin: 0;
+                }
+    
+                .remember-forgot-password {
+                    font-size: 13px;
+                    margin-top: 8px;
+    
+                    .remember-me {
+                        margin-bottom: 16px
+                    }
+    
+                    .forgot-password {
+                        font-size: 13px;
+                        font-weight: 600;
+                        margin-bottom: 16px
+                    }
+                }
+    
+                .submit-button {
+                    width: 220px;
+                    margin: 16px auto;
+                    display: block;
+    
+                    @include media-breakpoint('xs') {
+                        width: 90%;
+                    }
+                }
+            }
+    
+            .register {
+                margin: 32px auto 24px auto;
+                font-weight: 600;
+    
+                .text {
+                    margin-right: 8px;
+                }
+            }
+    
         }
     }
-    
 }
+

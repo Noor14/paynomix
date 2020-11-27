@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit
 {
     public appInfo = environment;
     public loginForm: FormGroup;
-    public loggedIn: boolean = false
+    public loggedIn: boolean = false;
     /**
      * Constructor
      *
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit
     {
     }
 
+
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit
             Username: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]],
             Password: ['', Validators.required]
         });
+    
     }
 
     login(): void{
