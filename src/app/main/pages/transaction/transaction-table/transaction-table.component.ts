@@ -130,10 +130,10 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
 
  
 
-  openemailDialog(x) {
+  openEmailDialog(obj) {
     const dialogRef = this._dialog.open(EmailDialogComponent, {width: '550px'});
-    x.isSingleInput = true
-    dialogRef.componentInstance.data = x ;
+    obj.isSingleInput = true
+    dialogRef.componentInstance.data = obj ;
 
    }
 

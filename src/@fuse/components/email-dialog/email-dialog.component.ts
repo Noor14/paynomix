@@ -34,43 +34,29 @@ export class EmailDialogComponent implements OnInit {
     ) { }
  
   ngOnInit() {
-
     this.createEmailForm();
-
- 
   }
   createEmailForm(): void{
-
-    if(this.data.isSingleInput){
     this.emailForm = this._formBuilder.group({
-        SendTo: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]], 
-        Bcc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
-        Cc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+      SendTo: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]], 
+      Bcc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
+      Cc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
     });
-}
-    else{
-    this.emailForm = this._formBuilder.group({
-        PartnerId: ['', Validators.required],
-        SendTo: ['', [Validators.required, Validators.email, Validators.pattern(validator.emailPattern)]], 
-        Bcc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
-        Cc: ['', [Validators.email, Validators.pattern(validator.emailPattern)]],
-        Subject: ['', Validators.required],
-        BodyContent: ['', Validators.required],
-        MerchantName: ['', Validators.required],
-    });
-}
+    if(!this.data.isSingleInput){
+      this.emailForm.addControl('PartnerId', this._formBuilder.control('', [Validators.required]))
+      this.emailForm.addControl('Subject', this._formBuilder.control('', [Validators.required]))
+      this.emailForm.addControl('BodyContent', this._formBuilder.control('', [Validators.required]))
+      this.emailForm.addControl('MerchantName', this._formBuilder.control('', [Validators.required]))
+    }
     if(this.data) { 
       this.emailForm.patchValue(this.data);
     }
   }
 
   sendEmail(){
-      if(this.data.isSingleInput){
-        this.sendreciptEmail()
-      }
-      else{
-        this.sendMerchantEmail()
-      }
+  (this.data.isSingleInput)? 
+  this.sendReceiptEmail() :
+  this.sendMerchantEmail();
   }
 
   sendMerchantEmail(){
@@ -85,21 +71,23 @@ export class EmailDialogComponent implements OnInit {
     }
   }
 
-  sendreciptEmail(){
-      const obj = {
-        "TransactionID": this.data.TransactionId,
-        "MerchantID": this.data.MerchantId,
-        "To": this.emailForm.value.SendTo,  
-        "Cc": this.emailForm.value.Cc,  
-        "Bcc": this.emailForm.value.Bcc,  
-        "TemplateTypeID": "1"
-      }
-      if(this.emailForm.valid){ 
-        this._settingService.sendRecipt(obj)
+  sendReceiptEmail(){
+      if(this.emailForm.valid){
+        const obj = {
+          TransactionID: this.data.TransactionId,
+          MerchantID: this.data.MerchantId,
+          To: this.emailForm.value.SendTo,  
+          Cc: this.emailForm.value.Cc,  
+          Bcc: this.emailForm.value.Bcc,  
+          TemplateTypeID: 1
+        }
+        this._settingService.sendReceipt(obj)
         .then((res:any) => {
           this._snackBar.open(res.StatusMessage, '', snackBarConfig);
           this._dialogRef.close();
         }).catch((err: HttpErrorResponse)=>(console.log));
+      }else{
+        validateAllFormFields(this.emailForm)
       }
   }
 

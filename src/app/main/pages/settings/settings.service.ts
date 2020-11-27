@@ -30,7 +30,7 @@ export class SettingService extends BaseService {
         const url = `${environment.apiURL}setting/sendEmail`
         return this.post(url, data);
      } 
-     sendRecipt(data) {
+     sendReceipt(data) {
         const url = `${environment.apiURL}Transaction/SendReceipt`
         return this.post(url, data);
      } 

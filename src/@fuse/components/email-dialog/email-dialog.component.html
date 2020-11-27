@@ -2,7 +2,10 @@
 <div class="dialog-content-wrapper">
     <mat-toolbar class="mat-accent">
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
-            <span class="title"> {{(data.isSingleInput == true) ? 'Email Transaction Details' : 'Send Merchant Link'}} </span>
+            <span class="title">
+                <ng-template [ngIf]="(data.isSingleInput)" [ngIfElse]="merchant">Email Transaction Details</ng-template>
+                <ng-template #merchant>Send Merchant Link</ng-template>
+            </span>
             <button mat-icon-button  aria-label="Close dialog" (click)="_dialogRef.close()">
                 <mat-icon>close</mat-icon>
             </button>
@@ -44,7 +47,7 @@
             </mat-error> 
             </mat-form-field> 
          
-            <ng-template #multiInput [ngIf]="!data.isSingleInput" >
+            <ng-template [ngIf]="!data.isSingleInput" >
                 <mat-form-field appearance="outline">
                     <mat-label>Subject</mat-label>
                     <input matInput formControlName="Subject" readonly required>  
