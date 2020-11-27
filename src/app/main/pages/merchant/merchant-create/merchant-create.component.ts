@@ -40,7 +40,7 @@ public onBoardError: string = undefined;
         this._snackBar.open('Merchant created', '', snackBarConfig);
         this.openDialog(res.Response);        
       }else{
-        this.onBoardError = `${res.StatusMessage} ${res.Response}`;
+        this.onBoardError = (res.Response)? `${res.StatusMessage}: ${res.Response}`: res.StatusMessage;
         this._snackBar.open(this.onBoardError, '', snackBarConfigWarn)
       }
   }).catch((err: HttpErrorResponse)=>(console.log))

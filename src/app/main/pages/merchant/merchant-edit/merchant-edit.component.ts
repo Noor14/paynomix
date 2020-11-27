@@ -58,13 +58,14 @@ export class MerchantEditComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.complete();
   }
   updateMerchant(event: any): void{
+    this.onBoardError = undefined;
     this._merchantService.saveMerchant(event)
     .then((res: any) => {
       if(res && !res.StatusCode){
         this._snackBar.open('Merchant updated', '', snackBarConfig);
         this._router.navigate(['/pages/merchant/merchant-list']);
       }else{
-        this.onBoardError = `${res.StatusMessage} ${res.Response}`;
+        this.onBoardError = (res.Response)? `${res.StatusMessage}: ${res.Response}`: res.StatusMessage;
         this._snackBar.open(this.onBoardError, '', snackBarConfigWarn);
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
