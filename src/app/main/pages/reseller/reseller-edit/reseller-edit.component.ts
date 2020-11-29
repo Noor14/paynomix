@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { snackBarConfig } from 'constants/globalFunctions';
@@ -33,7 +33,6 @@ export class ResellerEditComponent implements OnInit, OnDestroy {
     private readonly _resellerService: ResellerService,
     private readonly _snackBar: MatSnackBar,
     private readonly _router: Router,
-    private readonly _cdref: ChangeDetectorRef,
 
   ) { 
     // Set the private defaults
@@ -42,7 +41,6 @@ export class ResellerEditComponent implements OnInit, OnDestroy {
 
   
   ngOnInit(): void {
-    this._cdref.detectChanges();
     this._route.paramMap
     .pipe(
       takeUntil(this._unsubscribeAll),

@@ -3,8 +3,8 @@
     <button (click)="openRefundDialog()" *ngIf="showRefund"  mat-raised-button class="accent">
       Refund(s)
     </button>
-    <mat-paginator #paginator [pageSize]="100" (page)="changePage($event)" 
-    [length]="data?.transactionCount" [pageSizeOptions]="[100, 150, 200, 250]" class="ml-auto">
+    <mat-paginator [pageSize]="100" (page)="changePage($event)" 
+    [length]="recordCount" [pageSizeOptions]="[100, 150, 200, 250]" class="ml-auto">
    </mat-paginator>
   </div>
  
@@ -218,7 +218,7 @@
           </ng-template>
         </td>
       </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row (mouseenter)="actionControlOnHover = i" (mouseleave)="actionControlOnHover = -1"
         *matRowDef="let row; columns: displayedColumns; let i = dataIndex"
         [class.expanded]="expandedRefundDetail == row"

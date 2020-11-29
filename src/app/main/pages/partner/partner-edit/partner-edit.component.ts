@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { snackBarConfig } from 'constants/globalFunctions';
@@ -23,7 +23,6 @@ export class PartnerEditComponent implements OnInit, OnDestroy {
      * @param {PartnerService} _partnerService
      * @param {ActivatedRoute} _route
      * @param {MatSnackBar} _snackBar
-     * @param {ChangeDetectorRef} _cdref
      * @param {Router} _router
      */
   constructor(
@@ -31,15 +30,12 @@ export class PartnerEditComponent implements OnInit, OnDestroy {
     private readonly _partnerService: PartnerService,
     private readonly _snackBar: MatSnackBar,
     private readonly _router: Router,
-    private readonly _cdref: ChangeDetectorRef,
-
   ) { 
     // Set the private defaults
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
-    this._cdref.detectChanges();
     this._route.paramMap
     .pipe(
       takeUntil(this._unsubscribeAll),

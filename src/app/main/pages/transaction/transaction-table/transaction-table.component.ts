@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { transactionType, transactionStatus, snackBarConfig, snackBarConfigWarn } from '../../../../../constants/globalFunctions';
@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
+import { UserConfigService } from '@fuse/services/user.config.service';
 @Component({
   selector: 'app-transaction-table',
   templateUrl: './transaction-table.component.html',
@@ -28,7 +29,7 @@ import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog
     fuseAnimations,
   ]
 })
-export class TransactionTableComponent implements OnInit {
+export class TransactionTableComponent implements OnInit, AfterViewInit {
   public expandedRefundDetail: any;
   public transStatus = transactionStatus;
   public transType = transactionType;
@@ -37,6 +38,7 @@ export class TransactionTableComponent implements OnInit {
   public showRefund: boolean;
   private selectedToRefund: any = {};
   public dialogRef: any;
+  public recordCount: number = 0;
   @Input() data: any;
   @ViewChild('refundDialog') refundDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -64,13 +66,14 @@ export class TransactionTableComponent implements OnInit {
    'Action'
 ]; 
 // @ViewChild(MatPaginator) paginator: MatPaginator;
-public displayedColumns : string[]= this.columnstoDisplay.slice()
-@Output() getTransaction = new EventEmitter<any>();
+public displayedColumns : string[]= this.columnstoDisplay.slice();
   constructor(
     private readonly _dialog: MatDialog,
     private readonly _formBuilder: FormBuilder,
     private readonly _transactionService: TransactionService,
     private readonly _snackBar: MatSnackBar,
+    private readonly _userConfigService: UserConfigService,
+
   ) { }
 
   ngOnInit(): void {
@@ -81,8 +84,14 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
       if(this.data.hideCol && this.displayedColumns.length){
         this.displayedColumns = this.displayedColumns.slice(2);
       }
+     
     }
   }
+
+  ngAfterViewInit(): void{
+    setTimeout(() =>  this.recordCount = this.data.transactionCount, 0);
+  }
+
   masterToggle() {
     this.showRefund = false;
     this.isAllSelected() ?
@@ -114,9 +123,22 @@ public displayedColumns : string[]= this.columnstoDisplay.slice()
   } 
 
   changePage(event){
-    if(event.previousPageIndex < event.pageIndex){
-     this.getTransaction.emit(++event.pageIndex);
-    }
+    const obj = {
+      RecordLimit: 100,
+      PageNo: ++event.pageIndex,
+      ...this._userConfigService.getUserMode()
+    };
+    this._transactionService.transactionList(obj)
+    .then((res: any) => {
+      if (res && !res.StatusCode) {
+        if (res.Response && 
+          res.Response.Transactions && 
+          res.Response.Transactions.length) {
+          this.dataSource = res.Response.Transactions;
+        }
+      }
+    }).catch(() => (console.log))
+    
   }
 
 

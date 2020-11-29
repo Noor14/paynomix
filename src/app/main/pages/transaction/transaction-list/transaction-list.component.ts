@@ -16,11 +16,7 @@ export class TransactionListComponent implements OnInit {
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
-  private transactions: any[] = [];
-  private paging: any = {
-    RecordLimit: 100,
-    PageNo: 1
-  }
+
   /**
      * Constructor
      *
@@ -62,39 +58,37 @@ export class TransactionListComponent implements OnInit {
         this.getTransaction();
       }
     });
-    this.componentRef.instance.getTransaction.subscribe(res => {
-      if (res) {
-        this.paging.PageNo = res;
-        this.getTransaction();
-      }
-    });
   }
   getTransaction(): void {
     const obj = {
-      ...this.paging,
+      RecordLimit: 100,
+      PageNo: 1,
       ...this._userConfigService.getUserMode()
     };
+    this.trasactionList(obj);
+  }
+
+  trasactionList(obj){
     this._transactionService.transactionList(obj)
-      .then((res: any) => {
-        if (res && !res.StatusCode) {
-          this.transactionType = res.Response.TotalTransaction;
-          if (res.Response && 
-            res.Response.Transactions && 
-            res.Response.Transactions.length) {
-            this.transactions.push(...res.Response.Transactions)
-            this.renderingComponent(TransactionTableComponent, {
-              transaction: this.transactions,
-              transactionCount: res.Response.TotalTransactionCount
-            });
-          } else {
-            this.renderingComponent(NoFoundComponent, {
-              icon: 'no-transaction',
-              text: 'No Transaction Found',
-              subText: "You Haven't made any Transaction yet"
-            });
-          }
+    .then((res: any) => {
+      if (res && !res.StatusCode) {
+        this.transactionType = res.Response.TotalTransaction;
+        if (res.Response && 
+          res.Response.Transactions && 
+          res.Response.Transactions.length) {
+          this.renderingComponent(TransactionTableComponent, {
+            transaction: res.Response.Transactions,
+            transactionCount: res.Response.TotalTransactionCount
+          });
+        } else {
+          this.renderingComponent(NoFoundComponent, {
+            icon: 'no-transaction',
+            text: 'No Transaction Found',
+            subText: "You Haven't made any Transaction yet"
+          });
         }
-      }).catch(() => (console.log))
+      }
+    }).catch(() => (console.log))
   }
 
 }
