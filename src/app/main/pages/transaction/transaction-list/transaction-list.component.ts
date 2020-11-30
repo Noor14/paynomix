@@ -2,11 +2,12 @@ import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Ev
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { TransactionTableComponent } from '../transaction-table/transaction-table.component';
 import { TransactionService } from '../transaction.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { pairwise, startWith, takeUntil } from 'rxjs/operators';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { MatDatepicker } from '@angular/material/datepicker/datepicker';
 @Component({
   selector: 'app-transaction-list',
   templateUrl: './transaction-list.component.html',
@@ -14,10 +15,12 @@ import * as moment from 'moment';
 })
 export class TransactionListComponent implements OnInit {
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild('picker') datePicker: MatDatepicker<any>;
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
   dateRangeForm: FormGroup;
+  public subscriptions: Subscription
   dateTo = moment().format('YYYY-MM-DD');
   dateFrom = moment().subtract(15, 'd').format('YYYY-MM-DD');
   /**
@@ -66,6 +69,9 @@ export class TransactionListComponent implements OnInit {
         ...this.dateRangeForm.value,
         ...this._userConfigService.getUserMode()
     }
+    if(this.subscriptions) {
+      this.subscriptions.unsubscribe();
+    }
     this._transactionService.transactionList(obj)
       .then((res: any) => {
         if (res && !res.StatusCode) {
@@ -90,13 +96,9 @@ export class TransactionListComponent implements OnInit {
       ToDate: [this.dateTo, Validators.required]
     });
   }
-  onClose() {
-    console.log('date')
-     this.dateRangeForm.controls['FromDate'].valueChanges.subscribe(value => {
-       console.log('vale', value);
-     });
-     this.dateRangeForm.controls['ToDate'].valueChanges.subscribe(value => {
-       console.log('value', value);
-     })
+  dateRangeChange(dateRangeStart: HTMLInputElement, dateRangeEnd: HTMLInputElement) {
+   if(dateRangeStart.value && dateRangeEnd.value) {
+     this.getTransaction();
+   }
   }
 }
