@@ -45,8 +45,7 @@ import { MatSelect, MatSelectModule } from '@angular/material/select';
     MatNativeDateModule,
     MatChipsModule,
     NgxCurrencyModule,
-    ReceiptDialogModule,
-    MatSelectModule
+    ReceiptDialogModule
   ]
 })
 export class TransactionModule { }
