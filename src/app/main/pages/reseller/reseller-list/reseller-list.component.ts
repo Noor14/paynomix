@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -25,6 +26,7 @@ export class ResellerListComponent implements OnInit, OnDestroy {
      *
      * @param {ResellerService} _resellerService
      * @param {UserConfigService} _userConfigService
+     * @param {SlidingPanelService} _slidingPanelService
      * @param {ComponentFactoryResolver} _resolver
      */
     
@@ -32,6 +34,7 @@ export class ResellerListComponent implements OnInit, OnDestroy {
       private readonly _resellerService: ResellerService,
       private readonly _userConfigService: UserConfigService,
       private readonly _resolver: ComponentFactoryResolver,
+      private readonly _slidingPanelService: SlidingPanelService,
   ) { 
             // Set the private defaults
             this._unsubscribeAll = new Subject();
@@ -40,7 +43,15 @@ export class ResellerListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
-    .subscribe(() => this.getResellers())
+    .subscribe(() => this.getResellers());
+
+    const panelChangesSubscriber = this._slidingPanelService.panelChange.subscribe((res: any) => {
+      if (res) {
+        this.getResellers()
+        // this._slidingPanelService.setSlidingPanelStatus(false);
+        // panelChangesSubscriber && panelChangesSubscriber.unsubscribe();
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -75,5 +86,9 @@ export class ResellerListComponent implements OnInit, OnDestroy {
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
+  openSlidePanel(): void{
+  
+    this._slidingPanelService.getSidebar('slidePanel', 'ResellerCreateComponent').toggleOpen();
+}
 
 }

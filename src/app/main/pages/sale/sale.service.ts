@@ -26,5 +26,10 @@ export class SaleService extends BaseService {
         const url = `${environment.apiURL}Transaction/GetTransactionById/${id}`;
         return this.get(url);
     }
+    getIPAddress()
+    {
+        return this.get("http://api.ipify.org/?format=json");
+        
+    }
    
 }

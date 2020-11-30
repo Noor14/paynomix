@@ -16,7 +16,8 @@ import { locale as navigationEnglish } from 'app/navigation/i18n/en';
 import { locale as navigationTurkish } from 'app/navigation/i18n/tr';
 import { environment } from 'environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from "@angular/material/icon";
+import { MatIconRegistry } from '@angular/material/icon';
+import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 
 @Component({
     selector   : 'app',
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit, OnDestroy
         @Inject(DOCUMENT) private document: any,
         private _fuseConfigService: FuseConfigService,
         private _fuseNavigationService: FuseNavigationService,
+        private _slidingPanelService: SlidingPanelService,
         private _fuseSidebarService: FuseSidebarService,
         private _fuseSplashScreenService: FuseSplashScreenService,
         private _fuseTranslationLoaderService: FuseTranslationLoaderService,

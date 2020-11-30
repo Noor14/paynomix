@@ -33,6 +33,7 @@ import { MatTabsModule } from '@angular/material/tabs';
   ],
   entryComponents: [
     ResellerTableComponent,
+    ResellerCreateComponent
   ],
   imports: [
     CommonModule,

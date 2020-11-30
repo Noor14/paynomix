@@ -31,7 +31,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     PartnerFormComponent, 
     PartnerTableComponent,
   ],
-  entryComponents:[PartnerTableComponent],
+  entryComponents:[PartnerTableComponent, PartnerCreateComponent],
   imports: [
     CommonModule,
     PartnerRoutingModule,
