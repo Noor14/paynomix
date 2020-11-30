@@ -87,7 +87,7 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
         return;
       }
       else if (rejectedFile.reason == 'type') {
-        this._snackBar.open('Only files with the following extensions are allowed: png jpg jpeg', '', snackBarConfigWarn);
+        this._snackBar.open('The image file format is not supported. Supported formats are: png jpg/jpeg', '', snackBarConfigWarn);
         return;
       }
     } else {

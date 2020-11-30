@@ -56,11 +56,30 @@
                 }  
                 }
             }
+        }  
+}
+
+tr{
+    &.expanded + .example-detail-row{
+        &.detail-row {
+            min-height: auto !important;
         }
-         
-     
-   
-       
+        }
+  
+    &.example-detail-row{
+        min-height: auto !important;
+        height: auto !important;
+    }
+//     &:not(.expanded) + .example-detail-row {
+//     &.detail-row {
+//         display: none; 
+//         min-height: 0px !important;
+//     }
+//     &.refund-rows { 
+//         display: none;
+//         min-height: 0px !important;
+//     }     
+// }
 }
 
 

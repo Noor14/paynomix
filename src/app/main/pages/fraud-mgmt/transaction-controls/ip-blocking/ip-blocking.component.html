@@ -30,20 +30,22 @@
                  <fieldset>
                     <legend class="accent-fg">IP Blocking </legend>
                     <div fxFlex="column" >
-                        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column"  >
-                            <div fxFlex.gt-sm="10" fxFlex.sm="10">
-                                <label >Status : </label>
+                        <form [formGroup]="ipBlocking">
+                            <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column"  >
+                                <div fxFlex.gt-sm="10" fxFlex.sm="10">
+                                    <label >Status : </label>
+                                </div>
+                                <div fxFlex.gt-sm="60" fxFlex.sm="60">
+                                    <mat-radio-group fxLayout="column" fxLayoutAlign="start start" formControlName="position">
+                                        <mat-radio-button class="mb-12" value="above">Active</mat-radio-button>
+                                        <mat-radio-button class="mb-12" value="below">In Active</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div fxFlex.gt-sm="30" fxFlex.sm="30"  fxLayout="column" fxLayoutAlign="end start">
+                                    <button mat-raised-button color="accent">Save</button>
+                                </div>
                             </div>
-                            <div fxFlex.gt-sm="60" fxFlex.sm="60">
-                                <mat-radio-group fxLayout="column" fxLayoutAlign="start start" formControlName="position">
-                                    <mat-radio-button class="mb-12" value="above">Active</mat-radio-button>
-                                    <mat-radio-button class="mb-12" value="below">In Active</mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                            <div fxFlex.gt-sm="30" fxFlex.sm="30"  fxLayout="column" fxLayoutAlign="end start">
-                                <button mat-raised-button color="accent">Save</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </fieldset>
                 <mat-divider></mat-divider>
@@ -51,24 +53,31 @@
                 <fieldset>
                     <legend class="accent-fg">Add New IP </legend>
                     <div fxFlex="column" >
-                        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column"  fxLayoutAlign="start center" >
-                            <div fxFlex.gt-sm="10" fxFlex.sm="10">
-                                <label >IP Address </label>
+                        <form [formGroup]="ipBlocking">
+                            <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column"  fxLayoutAlign="start center" >
+                                <div fxFlex.gt-sm="10" fxFlex.sm="10">
+                                    <label >IP Address </label>
+                                </div>
+                                <div fxFlex.gt-sm="60" fxFlex.sm="60">
+                                    <mat-form-field >
+                                        <input matInput placeholder="IP Address" formControlName="FraudDescription">
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex.gt-sm="20" fxFlex.sm="20">
+                                    <mat-checkbox class="mx-12">Active</mat-checkbox>
+                                </div>
+                                <div fxFlex.gt-sm="30" fxFlex.sm="30"  fxLayout="column" fxLayoutAlign="end start">
+                                    <button mat-raised-button color="accent" (click)="addIP()"> ADD IP</button>
+                                </div>
                             </div>
-                            <div fxFlex.gt-sm="60" fxFlex.sm="60">
-                                <mat-form-field  formControlName="position" >
-                                    <input matInput placeholder="IP Address">
-                                </mat-form-field>
-                            </div>
-                            <div fxFlex.gt-sm="30" fxFlex.sm="30"  fxLayout="column" fxLayoutAlign="end start">
-                                <button mat-raised-button color="accent"> ADD IP</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </fieldset>            
                 <mat-divider></mat-divider>
             </div>
         </div>
+        <!-- table  -->
+            <app-ip-blocking-table [data]="data"></app-ip-blocking-table>
     </div>
 </section>
 

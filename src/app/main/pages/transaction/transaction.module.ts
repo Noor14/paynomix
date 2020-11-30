@@ -20,6 +20,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [TransactionListComponent, TransactionTableComponent, TransactionDetailComponent],
   entryComponents: [
@@ -45,7 +46,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatChipsModule,
     NgxCurrencyModule,
     ReceiptDialogModule
-
   ]
 })
 export class TransactionModule { }
