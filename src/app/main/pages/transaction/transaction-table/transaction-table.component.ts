@@ -74,7 +74,7 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
     private readonly _transactionService: TransactionService,
     private readonly _snackBar: MatSnackBar,
     private readonly _userConfigService: UserConfigService,
-    private router: Router
+    public router: Router,
 
   ) { }
 
