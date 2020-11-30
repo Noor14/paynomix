@@ -63,14 +63,35 @@ export class TransactionListComponent implements OnInit {
       }
     });
   }
+  
+  
   getTransaction(): void {
     const obj = {
-      RecordLimit: 100,
-      PageNo: 1,
-      ...this._userConfigService.getUserMode()
-    };
-    this.trasactionList(obj);
-  }
+       ...this.dateRangeForm.value,
+       ...this._userConfigService.getUserMode(),
+       RecordLimit: 100,
+       PageNo: 1,
+   }
+   this._transactionService.transactionList(obj)
+     .then((res: any) => {
+       if (res && !res.StatusCode) {
+         this.transactionType = res.Response.TotalTransaction;
+         if (res.Response && res.Response.Transactions.length) {
+           this.renderingComponent(TransactionTableComponent, {
+            transaction: res.Response.Transactions,
+            transactionCount: res.Response.TotalTransactionCount
+           });
+         } else {
+           this.renderingComponent(NoFoundComponent, {
+             icon: 'no-transaction',
+             text: 'No Transaction Found',
+             subText: "You Haven't made any Transaction yet"
+           });
+         }
+       }
+     }).catch(() => (console.log))
+ }
+
 
   trasactionList(obj){
     this._transactionService.transactionList(obj)

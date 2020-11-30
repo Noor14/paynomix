@@ -15,6 +15,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-transaction-table',
   templateUrl: './transaction-table.component.html',
@@ -73,6 +74,7 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
     private readonly _transactionService: TransactionService,
     private readonly _snackBar: MatSnackBar,
     private readonly _userConfigService: UserConfigService,
+    private router: Router
 
   ) { }
 
