@@ -54,8 +54,7 @@
                 <mat-label>Enter a date range</mat-label>
                 <mat-date-range-input [rangePicker]="picker" >
                     <input matStartDate placeholder="Start date" formControlName="FromDate" #dateRangeStart>
-                    <input matEndDate placeholder="End date" formControlName="ToDate" #dateRangeEnd
-                    (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)" >
+                    <input matEndDate placeholder="End date" formControlName="ToDate" #dateRangeEnd (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)">
                 </mat-date-range-input>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker ></mat-date-range-picker>

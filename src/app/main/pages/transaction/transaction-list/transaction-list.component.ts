@@ -20,7 +20,6 @@ export class TransactionListComponent implements OnInit {
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
   dateRangeForm: FormGroup;
-  public subscriptions: Subscription
   dateTo = moment().format('YYYY-MM-DD');
   dateFrom = moment().subtract(15, 'd').format('YYYY-MM-DD');
   /**
@@ -68,9 +67,6 @@ export class TransactionListComponent implements OnInit {
      const obj = {
         ...this.dateRangeForm.value,
         ...this._userConfigService.getUserMode()
-    }
-    if(this.subscriptions) {
-      this.subscriptions.unsubscribe();
     }
     this._transactionService.transactionList(obj)
       .then((res: any) => {
