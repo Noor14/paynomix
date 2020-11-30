@@ -33,13 +33,13 @@ export class AssigneeDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   // this.selectedChips = this.data.AssigneeList && this.data.AssigneeList.filter((obj) =>
-     // obj.pricingPlanIds && obj.pricingPlanIds.indexOf(this.data.PricingPlanID) >= 0
-    //)
-    //if (this.selectedChips && this.selectedChips.length) {
-      //const list = this.selectedChips.map(item => item.id)
-      //this.selectedAssignee.setValue(list);
-    //}
+   this.selectedChips = this.data.AssigneeList && this.data.AssigneeList.filter((obj) =>
+     obj.pricingPlanIds && obj.pricingPlanIds.indexOf(this.data.PricingPlanID) >= 0
+    )
+    if (this.selectedChips && this.selectedChips.length) {
+      const list = this.selectedChips.map(item => item.id)
+      this.selectedAssignee.setValue(list);
+    }
   }
 
   onChange() {
