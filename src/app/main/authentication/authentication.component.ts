@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authentication',
@@ -9,7 +10,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class AuthenticationComponent implements OnInit {
   public backgroundImage: string = undefined;
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
     const images: string[] = ['image1.jpg', 'image3.jpg'];
