@@ -103,8 +103,10 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected == numRows;
+    //console.log(this.dataSource.data);
+    //const numRows = this.dataSource.data.;
+    //return numSelected == numRows.length;
+    return numSelected;
   }
   selectRefundElement(value) {
     if (this.selection.selected.length == 1 && this.selection.hasValue()) {
