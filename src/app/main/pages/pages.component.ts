@@ -22,7 +22,9 @@ export class PagesComponent implements OnInit, OnDestroy {
      (UserRoleId === authRole.reseller) ? 'ResellerId' : 
      (UserRoleId === authRole.customer) ? 'CustomerId' : 'DemoCustomerId';
      const obj = {
-      [userRole] : EntityId
+      [userRole] : EntityId,
+      EntityId: EntityId,
+      UserRoleId : UserRoleId
      }
     if(EntityId){
        this._userConfigService.setUserMode(obj)
