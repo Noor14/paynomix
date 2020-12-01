@@ -28,7 +28,7 @@
         </ng-container>
 
         <!-- Phone Column -->
-        <ng-container matColumnDef="Phone">
+        <!-- <ng-container matColumnDef="Phone">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
           <td mat-cell *matCellDef="let row" [matTooltip]="row?.Phone" [matTooltipPosition]="'above'">
             <ng-template [ngIf]="row?.Phone" [ngIfElse]="merchantPhone">
@@ -36,7 +36,7 @@
             </ng-template> 
             <ng-template #merchantPhone>--</ng-template>
           </td>
-        </ng-container>
+        </ng-container> -->
 
         <!-- PricingPlan Column -->
         <ng-container matColumnDef="PricingTitle">
@@ -47,7 +47,7 @@
         <!--  Boarded Date  Column -->
         <ng-container matColumnDef="BoardedDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Boarded Date </th>
-          <td mat-cell *matCellDef="let row" [matTooltip]="row?.BoardedDate | date: 'medium'" [matTooltipPosition]="'above'"> {{row.BoardedDate | date: 'medium'}} </td>
+          <td mat-cell *matCellDef="let row" [matTooltip]="row?.BoardedDate | date: 'MM/dd/yyyy'" [matTooltipPosition]="'above'"> {{row.BoardedDate | date: 'MM/dd/yyyy'}} </td>
         </ng-container>
           <!--   Status  Column -->
         <ng-container matColumnDef="BoardingStatus">

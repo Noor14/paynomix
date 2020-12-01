@@ -1,4 +1,4 @@
-import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { TransactionTableComponent } from '../transaction-table/transaction-table.component';
 import { TransactionService } from '../transaction.service';
@@ -84,7 +84,7 @@ export class TransactionListComponent implements OnInit {
           this.renderingComponent(NoFoundComponent, {
             icon: 'no-transaction',
             text: 'No Transaction Found',
-            subText: "You Haven't made any Transaction yet"
+            subText: "You haven’t made any transaction"
           });
         }
       }
