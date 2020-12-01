@@ -3,7 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
-import { snackBarConfig } from 'constants/globalFunctions';
+import { snackBarConfig, snackBarConfigWarn } from 'constants/globalFunctions';
 import { PricingPlanService } from '../pricing-plan.service';
 
 @Component({
@@ -33,11 +33,14 @@ export class PricingPlanCreateComponent implements OnInit {
   createPricingPlan(event: any){
     this._pricingPlanService.savePricingPlan(event)
     .then((res: any) => {
-      if(res && !res.StatusCode){
+      if(!res.StatusCode){
         this._snackBar.open('Pricing plan created', '', snackBarConfig);
         this.closeSlidingPanel();
         this._slidingPanelService.setSlidingPanelStatus(true);
+      }else{
+        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
       }
+      
   }).catch((err: HttpErrorResponse)=>(console.log))
   
   }
