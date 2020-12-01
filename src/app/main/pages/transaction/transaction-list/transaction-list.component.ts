@@ -85,7 +85,7 @@ export class TransactionListComponent implements OnInit {
            this.renderingComponent(NoFoundComponent, {
              icon: 'no-transaction',
              text: 'No Transaction Found',
-             subText: "You Haven't made any Transaction yet"
+             subText: "You Haven't made any Transaction"
            });
          }
        }
