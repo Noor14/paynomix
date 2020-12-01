@@ -103,7 +103,6 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    //console.log(this.dataSource.data);
     //const numRows = this.dataSource.data.;
     //return numSelected == numRows.length;
     return numSelected;
