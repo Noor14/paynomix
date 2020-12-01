@@ -1,47 +1,99 @@
-<section class="country-origin w-100-p">
-    <div class="outer-layer m-20 p-20">
-                <h2 >Country Origin Blocking IP</h2>
-                <hr />
-                <div class="mat-card p-20 ">
-                    <p>
-                        Country of Origin Blocking by IP <br>
-                        This allows you to block transactions originating from selected countries. The country of origin is determined by the IP address of the user.
+<section class="countryOrigin w-100-p">
+    <div fxFlex="column">
+              
+        <div class="mat-card">
+            <div class="p-20">
+                <form [formGroup]="countryoriginForm">
+                <fieldset  fxLayout="column">
+                    <legend class="accent-fg mx-4">Country Origin Blocking IP</legend>
+                    <div fxFlex="column" >
+                        <p>
+                            Country of Origin Blocking by IP <br>
+                            This allows you to block transactions originating from selected countries. The country of origin is determined by the IP address of the user.
+                        </p>
+                        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column"  fxLayoutAlign="start" >
+                            <mat-radio-group fxLayout="column" fxLayoutAlign="start start" formControlName="BlockOrigin">
+                                <mat-radio-button class="mb-12" value="1">Active</mat-radio-button>
+                                <mat-radio-button class="mb-12" value="0">inActive</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </div>
+                    <div fxFlex="column" >
+                        <p>
+                            Country of Origin Blocking by IP <br>
+                            This allows you to block transactions originating from selected countries. The country of origin is determined by the IP address of the user.
+                        </p>
+                        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" >
+                            <div fxFlex.gt-sm="40" fxFlex="40" fxLayout="column">
+                            
+                            
+                                <fieldset  fxLayout="column">
+                                    <legend class="accent-fg mx-4">
+                                        Available Countries</legend>
+                                   
+                           
+                                <mat-list role="list" class="matListHeight">
+                                    <mat-list-item role="listitem"
+                                    *ngFor="let item of list1" 
+                                    [class.accent]="item.selected"
+                                    (click)="toggleSelection(item, 1)"
+                                    >{{item.name}}
+                                        <mat-divider></mat-divider>
+                                    </mat-list-item>
                         
-                    </p>
-                </div>
-        <div class="mat-card mt-20">
-            <div class="outer-layer p-20" fxLayout="column" fxLayoutAlign="space-around start">
-                <h3 class="accent-fg">Lock Control</h3>
-                <hr>
-                <section   fxLayout="row" fxLayoutAlign="center center" >
-                    <label >Lock : </label>
-                    <mat-checkbox class="mx-12">Merchant</mat-checkbox>
-                </section>
-                <div class="my-20" fxFlex="100" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="row" fxLayoutAlign="center center">
-                    <button mat-raised-button color="accent">
-                        Submit
-                    </button>
-                </div>
-                <mat-divider></mat-divider>
-                <h3 class="accent-fg">Add IP Address Or Domain Source </h3>
-                <hr>
-                <section class="">
-                    <label >IP Address Or Domain</label>
-                    <mat-form-field appearance="outline">
-                        <input matInput placeholder="Placeholder">
-                    </mat-form-field>
-                </section>
-                <div class="my-20"fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="row" fxLayoutAlign="center center" >
-                    <button mat-raised-button color="accent">Add</button>
-                </div>
-                <mat-divider></mat-divider>
-                <h3 class="accent-fg">Restricted Transaction Source </h3>
-                <hr>
-                <section class="">
-                    <mat-form-field appearance="outline">
-                        <input matInput placeholder="Placeholder">
-                    </mat-form-field>
-                </section>
+                                  </mat-list>
+                                </fieldset>
+
+                            </div>
+                            <div fxFlex.gt-sm="20" fxFlex="20"  fxLayout="column" fxLayoutAlign="space-around center">
+                                <button mat-raised-button color="accent" (click)="moveSelected('right')">Add </button>
+                                
+                                <button mat-raised-button color="accent" (click)="moveSelected('left')">Remove</button>
+                            </div>
+                            <div fxFlex.gt-sm="40" fxFlex="40"  fxLayout="column">
+                                <fieldset  fxLayout="column">
+                                    <legend class="accent-fg mx-4">
+                                        Selected Countries</legend>
+                                   
+                           
+                                <mat-list role="list" class="matListHeight">
+                                    <mat-list-item role="listitem"
+                                    *ngFor="let item of list2" 
+                                    [class.accent]="item.selected"
+                                    (click)="toggleSelection(item, 2)"
+                                    >{{item.name}}
+                                        <mat-divider></mat-divider>
+                                    </mat-list-item>
+                                  </mat-list>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </div>
+                    <div fxFlex="column" >
+                        <p>
+                            When a transaction origionates in a country in the selected countires list above <br><br>
+                            If you choose Reject, then rest of the countries in the Available Countries list will be allowed to process transaction.<br>
+                            If you choose Accept, then rest of the countries in the Available Countries list will be rejected to process transaction.
+                        </p>
+                        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column"  fxLayoutAlign="start" >
+                            <mat-radio-group fxLayout="column" fxLayoutAlign="start start" formControlName="ListedCountryAllowOrBlock">
+                                <mat-radio-button class="mb-12" value="above">Reject the transactions</mat-radio-button>
+                                <mat-radio-button class="mb-12" value="below">Accept the transactions</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </div>
+        
+                    <div fxFlex="column" >
+                        <div fxLayout="column" class="mt-16"  fxLayoutAlign="center center">
+                            <button mat-raised-button color="accent"
+                            (click)="saveSettings()">Save</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
              </div>
         </div>
     </div>

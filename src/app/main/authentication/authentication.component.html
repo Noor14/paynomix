@@ -1,6 +1,9 @@
 <section class="auth h-100-p" fxLayout="row" fxLayoutAlign="center center">
    <router-outlet></router-outlet>
-    <div fxFlex="50" class="h-100-p" fxHide.lt-lg >
-        <img class="w-100-p h-100-p" src="assets/images/{{backgroundImage}}" alt="img">
+    <div
+    *ngIf="(router.url === '/login' ||router.url === '/forgot-password' )"
+    fxFlex="50" class="h-100-p" fxHide.lt-lg >
+<img class="w-100-p h-100-p" src="assets/images/{{backgroundImage}}" 
+alt="img">
     </div>
 </section>

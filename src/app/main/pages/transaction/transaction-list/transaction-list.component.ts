@@ -84,8 +84,8 @@ export class TransactionListComponent implements OnInit {
          } else {
            this.renderingComponent(NoFoundComponent, {
              icon: 'no-transaction',
-             text: 'No Transaction Found',
-             subText: "You Haven't made any Transaction"
+             text: 'No Transactions Found',
+             subText: "You haven’t made any transaction"
            });
          }
        }
@@ -108,8 +108,8 @@ export class TransactionListComponent implements OnInit {
         } else {
           this.renderingComponent(NoFoundComponent, {
             icon: 'no-transaction',
-            text: 'No Transaction Found',
-            subText: "You Haven't made any Transaction"
+            text: 'No Transactions Found',
+            subText: "You haven’t made any transaction"
           });
         }
       }

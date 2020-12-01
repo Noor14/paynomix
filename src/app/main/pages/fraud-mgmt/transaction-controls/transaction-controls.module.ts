@@ -15,7 +15,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatDividerModule,
     MatSelectModule,
     FuseSharedModule,
-    MatRadioModule
+    MatRadioModule,
+    MatListModule
     
   ]
 })

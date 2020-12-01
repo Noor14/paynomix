@@ -11,6 +11,7 @@ import { FraudMgmtRoutingModule } from './fraud-mgmt-routing.module';
     CommonModule,
     FraudMgmtRoutingModule,
     MatRadioModule
+    
   ]
 })
 export class FraudMgmtModule { }
