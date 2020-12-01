@@ -13,6 +13,10 @@ export class FraudMgmtService extends BaseService {
         const url = `${environment.apiURL}/Fraud`;
         return this.post(url, obj);
        }
+      updateCountrySettings(obj : any) {
+        const url = `${environment.apiURL}/Fraud/Update`;
+        return this.post(url, obj);
+       }
 
       getCountrySettings(obj : any) {
         const url = `${environment.apiURL}/Fraud/Search`;
