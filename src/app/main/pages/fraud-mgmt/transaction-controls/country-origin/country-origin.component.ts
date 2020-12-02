@@ -22,7 +22,7 @@ export class CountryOriginComponent implements OnInit {
     selectedCountries = [];
     checkForUserRole: any;
     roleObject: any;
-    RemoveArr: any;
+    RemoveArr = [];
 
    
 
@@ -60,9 +60,10 @@ export class CountryOriginComponent implements OnInit {
   public moveSelected(direction) {
 
 
-    if (direction === 'left') {
-      this.selectedCountries.map((item: any) => {
+    if (direction === 'remove') {
+     this.RemoveArr =  this.selectedCountries.map((item: any) => {
             return {
+                "FraudId":item.FraudId,
                 "FraudDescription":item.name,
                 "IsActive":false,
                 ...this.roleObject
@@ -85,34 +86,29 @@ export class CountryOriginComponent implements OnInit {
         }
       });
       this.AllCountries = this.AllCountries.filter(i => !i.IsActive);
-    
-
     }
   }
 
-  public moveAll(direction) {
-    if (direction === 'left') {
-      this.AllCountries = [...this.AllCountries, ...this.selectedCountries];
-      this.selectedCountries = [];
-    } else {
-      this.selectedCountries = [...this.selectedCountries, ...this.AllCountries];
-      this.AllCountries = [];
-    }
-  }
 
   saveSettings(){
-
-    if(this.selectedCountries.hasOwnProperty('IsActive') == false){
-        this._pricingPlanService.updateCountrySettings(this.selectedCountries).then((res: any) => {
-            if(!res.StatusCode){
-              this._snackBar.open(res.StatusMessage, '', snackBarConfig);
-            }else{
-              this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
-            }
-    })
-}
+    if(this.RemoveArr.length > 0 ){
+        const obj = {...this.RemoveArr,
+            ...this.countryoriginForm
+        }
+        this._pricingPlanService.updateCountrySettings(obj).then((res: any) => {
+                if(!res.StatusCode){
+                  this._snackBar.open(res.StatusMessage, '', snackBarConfig);
+                }else{
+                  this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
+                }
+        })
+    }
     else{
-        this._pricingPlanService.saveCountrySettings(this.selectedArr).then((res: any) => {
+        const obj = {...this.selectedArr,
+            ...this.countryoriginForm
+        }
+
+        this._pricingPlanService.saveCountrySettings(obj).then((res: any) => {
             if(!res.StatusCode){
               this._snackBar.open(res.StatusMessage, '', snackBarConfig);
             }else{
@@ -122,31 +118,30 @@ export class CountryOriginComponent implements OnInit {
   };
 }
 getSettings(){
-   var intersections = [];
-    this._pricingPlanService.getCountrySettings(this.roleObject).then((res: any) => {
+    const settings = {
+        IsActive : true,
+        ...this.roleObject
+    }
+    this._pricingPlanService.getCountrySettings(settings).then((res: any) => {
       if(!res.StatusCode){
-        debugger;
-       res.Response.map((item: any) => {
-          this.AllCountries.filter(
-            (obj: any) => {
-debugger;
-   if(obj.name == item.FraudDescription)
-   {
-       let dumy = {
-           'name' : item.FraudDescription,
-           IsActive : true
-       }
-    this.selectedCountries.push(dumy)
-   
-   }
-            })
-          })
-console.log("this.selectedCountries", this.selectedCountries)
+       res.Response.map((item: any) => {this.AllCountries.filter((obj: any) => 
+        {
+         if(obj.name == item.FraudDescription)
+             {
+                let dumy = { 
+                FraudId:item.FraudId,
+                name : item.FraudDescription,
+                IsActive : true
+            }
+                this.selectedCountries.push(dumy)
+              }
+        })
+        })
         }
       else
-      {
+        {
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
-      }
+        }
   });
 }
 

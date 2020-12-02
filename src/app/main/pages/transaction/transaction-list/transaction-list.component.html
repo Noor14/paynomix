@@ -57,8 +57,20 @@
                     <input matEndDate placeholder="End date" formControlName="ToDate" #dateRangeEnd (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)">
                 </mat-date-range-input>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker ></mat-date-range-picker>
+                <mat-date-range-picker #picker 
+                (opened)="onOpen()"
+                ></mat-date-range-picker>
             </mat-form-field>
+            <div style="display: none">
+                <div class="datepicker-footer" #datepickerFooter>
+                    <button class="datePickerbtn"
+                    *ngFor="let range of ranges"
+                    mat-raised-button  (click)="setRange(range.key)">{{range.label}}</button>
+                </div>
+            </div>
+
+
+
         </form>
     </section>
     <ng-template #renderingContainer></ng-template>

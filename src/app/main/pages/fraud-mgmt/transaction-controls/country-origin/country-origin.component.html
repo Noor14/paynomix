@@ -47,9 +47,9 @@
 
                             </div>
                             <div fxFlex.gt-sm="20" fxFlex="20"  fxLayout="column" fxLayoutAlign="space-around center">
-                                <button mat-raised-button color="accent" (click)="moveSelected('right')">Add </button>
+                                <button mat-raised-button color="accent" (click)="moveSelected('add')">Add </button>
                                 
-                                <button mat-raised-button color="accent" (click)="moveSelected('left')">Remove</button>
+                                <button mat-raised-button color="accent" (click)="moveSelected('remove')">Remove</button>
                             </div>
                             <div fxFlex.gt-sm="40" fxFlex="40"  fxLayout="column">
                                 <fieldset  fxLayout="column">
@@ -79,8 +79,8 @@
                         </p>
                         <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column"  fxLayoutAlign="start" >
                             <mat-radio-group fxLayout="column" fxLayoutAlign="start start" formControlName="ListedCountryAllowOrBlock">
-                                <mat-radio-button class="mb-12" value="above">Reject the transactions</mat-radio-button>
-                                <mat-radio-button class="mb-12" value="below">Accept the transactions</mat-radio-button>
+                                <mat-radio-button class="mb-12" value="0">Reject the transactions</mat-radio-button>
+                                <mat-radio-button class="mb-12" value="1">Accept the transactions</mat-radio-button>
                             </mat-radio-group>
                         </div>
                         <mat-divider></mat-divider>
