@@ -1,7 +1,45 @@
 <section class="merchantList w-100-p">
   <section fxLayout="row" fxLayoutALign="space-between center">
       <h2>Merchants</h2>
-      <div class="searchBox">
+      <div class="searchBox" fxLayoutAlign="end end">
+        <mat-toolbar>
+            <button mat-icon-button 
+                    [matMenuTriggerFor]="myMenu">
+                    <mat-icon>more_vert</mat-icon>
+            </button>
+            <span>Search Merchant {{selectedMenu}}</span>
+          </mat-toolbar>
+        <mat-menu #myMenu="matMenu" >
+                <form fxLayout="column" fxLayoutAlign="start" name="form" [formGroup]="merchantSearchForm" (click)="stopPropagation($event)">
+                
+                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                        <mat-label>Company Name</mat-label>
+                        <input matInput formControlName="MerchantUserName"  [maxlength]="globalConfig?.validator?.maxFieldLength">
+                    </mat-form-field>
+        
+                
+                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                        <mat-label>Reseller Name</mat-label>
+                        <input matInput formControlName="ResellerName"  [maxlength]="globalConfig?.validator?.maxFieldLength">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="Email"  [maxlength]="globalConfig?.validator?.maxFieldLength">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                        <mat-label>Pricing Title</mat-label>
+                        <input matInput formControlName="PricingTitle"  [maxlength]="globalConfig?.validator?.maxFieldLength">
+                    </mat-form-field>
+
+                <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
+                    aria-label="Submit"  (click)="search()">
+                Search
+                </button>
+                
+            </form>
+        </mat-menu>
         
       </div>
   </section>
