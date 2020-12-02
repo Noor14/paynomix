@@ -18,8 +18,8 @@ export class CountryOriginComponent implements OnInit {
     public countryoriginForm: FormGroup;
     public globalConfig = globalConfig;
     public selectedArr = [];
-    list1 = globalConfig.Countries.countries;
-    list2 = [];
+    AllCountries = globalConfig.Countries.countries;
+    selectedCountries = [];
     checkForUserRole: any;
     roleObject: any;
     RemoveArr: any;
@@ -54,29 +54,26 @@ export class CountryOriginComponent implements OnInit {
   }
 
   public toggleSelection(item, list) {
-    item.selected = !item.selected;
+    item.IsActive = !item.IsActive;
   }
 
   public moveSelected(direction) {
 
-   
 
     if (direction === 'left') {
-        this.RemoveArr = this.list2.map((item: any) => {
+      this.selectedCountries.map((item: any) => {
             return {
                 "FraudDescription":item.name,
                 "IsActive":false,
                 ...this.roleObject
             }
           });
-        
-         this.list2 = this.list2.filter(i => !i.selected);
+    this.selectedCountries = this.AllCountries.filter(i => i.IsActive);
         
     } else {
-      this.list1.forEach(item => {
-        if (item.selected) {
-          this.list2.push(item);
-
+      this.AllCountries.forEach(item => {
+        if (item.IsActive) {
+          this.selectedCountries.push(item);
           this.selectedArr.push(
             {
                 "FraudDescription": item.name,
@@ -87,7 +84,7 @@ export class CountryOriginComponent implements OnInit {
 
         }
       });
-      this.list1 = this.list1.filter(i => !i.selected);
+      this.AllCountries = this.AllCountries.filter(i => !i.IsActive);
     
 
     }
@@ -95,19 +92,18 @@ export class CountryOriginComponent implements OnInit {
 
   public moveAll(direction) {
     if (direction === 'left') {
-      this.list1 = [...this.list1, ...this.list2];
-      this.list2 = [];
+      this.AllCountries = [...this.AllCountries, ...this.selectedCountries];
+      this.selectedCountries = [];
     } else {
-      this.list2 = [...this.list2, ...this.list1];
-      this.list1 = [];
+      this.selectedCountries = [...this.selectedCountries, ...this.AllCountries];
+      this.AllCountries = [];
     }
   }
 
-
   saveSettings(){
 
-    if(this.RemoveArr.hasOwnProperty('IsActive') == false){
-        this._pricingPlanService.updateCountrySettings(this.RemoveArr).then((res: any) => {
+    if(this.selectedCountries.hasOwnProperty('IsActive') == false){
+        this._pricingPlanService.updateCountrySettings(this.selectedCountries).then((res: any) => {
             if(!res.StatusCode){
               this._snackBar.open(res.StatusMessage, '', snackBarConfig);
             }else{
@@ -126,16 +122,29 @@ export class CountryOriginComponent implements OnInit {
   };
 }
 getSettings(){
+   var intersections = [];
     this._pricingPlanService.getCountrySettings(this.roleObject).then((res: any) => {
       if(!res.StatusCode){
-        this.list2 = res.Response.map((item: any) => {
-            
-            return {
-              "name": item.FraudDescription, 
-              "isActive": item.IsActive,
-            };
-          });
-      }else{
+        debugger;
+       res.Response.map((item: any) => {
+          this.AllCountries.filter(
+            (obj: any) => {
+debugger;
+   if(obj.name == item.FraudDescription)
+   {
+       let dumy = {
+           'name' : item.FraudDescription,
+           IsActive : true
+       }
+    this.selectedCountries.push(dumy)
+   
+   }
+            })
+          })
+console.log("this.selectedCountries", this.selectedCountries)
+        }
+      else
+      {
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
       }
   });

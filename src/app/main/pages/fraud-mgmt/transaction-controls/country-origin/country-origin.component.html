@@ -35,8 +35,8 @@
                            
                                 <mat-list role="list" class="matListHeight">
                                     <mat-list-item role="listitem"
-                                    *ngFor="let item of list1" 
-                                    [class.accent]="item.selected"
+                                    *ngFor="let item of AllCountries" 
+                                    [class.accent]="item.IsActive"
                                     (click)="toggleSelection(item, 1)"
                                     >{{item.name}}
                                         <mat-divider></mat-divider>
@@ -59,8 +59,8 @@
                            
                                 <mat-list role="list" class="matListHeight">
                                     <mat-list-item role="listitem"
-                                    *ngFor="let item of list2" 
-                                    [class.accent]="item.selected"
+                                    *ngFor="let item of selectedCountries" 
+                                    [class.accent]="item.IsActive"
                                     (click)="toggleSelection(item, 2)"
                                     >{{item.name}}
                                         <mat-divider></mat-divider>
