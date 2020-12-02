@@ -86,7 +86,7 @@ export class MerchantListComponent implements OnInit, OnDestroy {
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
-  search(event){
+  search(){
     
     var searchParam = {'MerchantUserName':'','ResellerName':'','Email':'','PricingTitle':''};
     if(this.merchantSearchForm.value.MerchantUserName!='')
