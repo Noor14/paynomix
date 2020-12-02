@@ -300,6 +300,7 @@ export const locationConfig =
     }]
 } 
 export const truncateTextLength = 25;
+export const dateFormat = 'MM/dd/yyyy HH:mm:ss a';
 
 export const validator = {
   emailPattern : /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/,

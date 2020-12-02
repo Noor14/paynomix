@@ -22,6 +22,7 @@ export class CountryOriginComponent implements OnInit {
     list2 = [];
     checkForUserRole: any;
     roleObject: any;
+    RemoveArr: any;
 
    
 
@@ -54,8 +55,6 @@ export class CountryOriginComponent implements OnInit {
 
   public toggleSelection(item, list) {
     item.selected = !item.selected;
-
-    
   }
 
   public moveSelected(direction) {
@@ -63,14 +62,16 @@ export class CountryOriginComponent implements OnInit {
    
 
     if (direction === 'left') {
-      this.list2.forEach(item => {
-        if (item.selected) {
-          this.list1.push(item);
-        }
-      });
-      this.list2 = this.list2.filter(i => !i.selected);
-      this.selectedArr = this.list2
-
+        this.RemoveArr = this.list2.map((item: any) => {
+            return {
+                "FraudDescription":item.name,
+                "IsActive":false,
+                ...this.roleObject
+            }
+          });
+        
+         this.list2 = this.list2.filter(i => !i.selected);
+        
     } else {
       this.list1.forEach(item => {
         if (item.selected) {
@@ -104,21 +105,34 @@ export class CountryOriginComponent implements OnInit {
 
 
   saveSettings(){
-    this._pricingPlanService.saveCountrySettings(this.selectedArr).then((res: any) => {
-      if(!res.StatusCode){
-        this._snackBar.open(res.StatusMessage, '', snackBarConfig);
-      }else{
-        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
-      }
-  });
+
+    if(this.RemoveArr.hasOwnProperty('IsActive') == false){
+        this._pricingPlanService.updateCountrySettings(this.RemoveArr).then((res: any) => {
+            if(!res.StatusCode){
+              this._snackBar.open(res.StatusMessage, '', snackBarConfig);
+            }else{
+              this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
+            }
+    })
+}
+    else{
+        this._pricingPlanService.saveCountrySettings(this.selectedArr).then((res: any) => {
+            if(!res.StatusCode){
+              this._snackBar.open(res.StatusMessage, '', snackBarConfig);
+            }else{
+              this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
+            }
+          })
+  };
 }
 getSettings(){
     this._pricingPlanService.getCountrySettings(this.roleObject).then((res: any) => {
       if(!res.StatusCode){
         this.list2 = res.Response.map((item: any) => {
+            
             return {
               "name": item.FraudDescription, 
-              "selected": true
+              "isActive": item.IsActive,
             };
           });
       }else{
