@@ -1,18 +1,19 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MerchantTableComponent } from '../merchant-table/merchant-table.component';
 import { MerchantService } from '../merchant.service';
-import { MatMenuModule } from '@angular/material/menu';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import * as globalConfig from '../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-merchant-list',
   templateUrl: './merchant-list.component.html',
-  styleUrls: ['./merchant-list.component.scss']
+  styleUrls: ['./merchant-list.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MerchantListComponent implements OnInit, OnDestroy {
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
@@ -20,7 +21,7 @@ export class MerchantListComponent implements OnInit, OnDestroy {
   public merchants:any[] = [];
   public merchantSearchForm: FormGroup;
   private _unsubscribeAll: Subject<any>;
-
+  public globalConfig = globalConfig;
     /**
     * Constructor
     *
@@ -87,7 +88,7 @@ export class MerchantListComponent implements OnInit, OnDestroy {
   }
 
   search(){
-    
+
     var searchParam = {'MerchantUserName':'','ResellerName':'','Email':'','PricingTitle':''};
     if(this.merchantSearchForm.value.MerchantUserName!='')
     {
@@ -144,9 +145,11 @@ export class MerchantListComponent implements OnInit, OnDestroy {
   }
   
 
-  stopPropagation(event){
+  stopPropagation($event){
+    if($event.toElement.textContent !== " Search "){
+      $event.stopPropagation();
+    }
     
-    event.stopPropagation();
   }
 
 
