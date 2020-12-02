@@ -25,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { IpAddressComponent } from './ip-blocking/ip-address/ip-address.component';
 import { IpBlockingStatusComponent } from './ip-blocking/ip-blocking-status/ip-blocking-status.component';
 import { LockControlsComponent } from './ip-blocking/lock-controls/lock-controls.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
