@@ -7,7 +7,7 @@
                     [matMenuTriggerFor]="myMenu">
                     <mat-icon>more_vert</mat-icon>
             </button>
-            <span>Search Merchant {{selectedMenu}}</span>
+            <span>Search Merchant</span>
           </mat-toolbar>
         <mat-menu #myMenu="matMenu" >
                 <form fxLayout="column" fxLayoutAlign="start" name="form" [formGroup]="merchantSearchForm" (click)="stopPropagation($event)">
