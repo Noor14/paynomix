@@ -19,6 +19,7 @@ export class TransactionListComponent implements OnInit {
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
+  
   dateRangeForm: FormGroup;
   dateTo = moment().format('YYYY-MM-DD');
   dateFrom = moment().subtract(15, 'd').format('YYYY-MM-DD');
@@ -57,6 +58,7 @@ export class TransactionListComponent implements OnInit {
     this.container.clear();
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.data = data;
+    this.componentRef.instance.dateRange = { FromDate:moment(this.dateRangeForm.value.FromDate).format("MM-DD-YYYY"), ToDate: moment(this.dateRangeForm.value.ToDate).format("MM-DD-YYYY")}
     this.componentRef.instance.updateList.subscribe(res => {
       if (res) {
         this.getTransaction();

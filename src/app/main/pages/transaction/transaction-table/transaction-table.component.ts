@@ -42,6 +42,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public dialogRef: any;
   public recordCount: number = 0;
   @Input() data: any;
+  @Input() dateRange:any
   @ViewChild('refundDialog') refundDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -127,8 +128,10 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
   } 
 
   changePage(event){
+    //console.log(event);
     const obj = {
-      RecordLimit: 100,
+      ...this.dateRange,
+      RecordLimit: event.pageSize,
       PageNo: ++event.pageIndex,
       ...this._userConfigService.getUserMode()
     };

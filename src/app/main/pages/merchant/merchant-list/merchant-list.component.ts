@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MerchantTableComponent } from '../merchant-table/merchant-table.component';
 import { MerchantService } from '../merchant.service';
-import { MatMenuModule } from '@angular/material/menu';
+//import { MatMenuModule } from '@angular/material/menu';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -86,68 +86,68 @@ export class MerchantListComponent implements OnInit, OnDestroy {
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
-  search(){
+  // search(){
     
-    var searchParam = {'MerchantUserName':'','ResellerName':'','Email':'','PricingTitle':''};
-    if(this.merchantSearchForm.value.MerchantUserName!='')
-    {
-      searchParam.MerchantUserName =this.merchantSearchForm.value.MerchantUserName; 
-    }
-    else
-    {
-      delete searchParam.MerchantUserName;
-    }
-    if(this.merchantSearchForm.value.ResellerName!='')
-    {
-      searchParam.ResellerName =this.merchantSearchForm.value.ResellerName; 
-    }
-    else
-    {
-      delete searchParam.ResellerName;
-    }
-    if(this.merchantSearchForm.value.Email!='')
-    {
-      searchParam.Email =this.merchantSearchForm.value.Email; 
-    }
-    else
-    {
-      delete searchParam.Email;
-    }
-    if(this.merchantSearchForm.value.PricingTitle!='')
-    {
-      searchParam.PricingTitle =this.merchantSearchForm.value.PricingTitle; 
-    }
-    else
-    {
-      delete searchParam.PricingTitle;
-    }
+  //   var searchParam = {'MerchantUserName':'','ResellerName':'','Email':'','PricingTitle':''};
+  //   if(this.merchantSearchForm.value.MerchantUserName!='')
+  //   {
+  //     searchParam.MerchantUserName =this.merchantSearchForm.value.MerchantUserName; 
+  //   }
+  //   else
+  //   {
+  //     delete searchParam.MerchantUserName;
+  //   }
+  //   if(this.merchantSearchForm.value.ResellerName!='')
+  //   {
+  //     searchParam.ResellerName =this.merchantSearchForm.value.ResellerName; 
+  //   }
+  //   else
+  //   {
+  //     delete searchParam.ResellerName;
+  //   }
+  //   if(this.merchantSearchForm.value.Email!='')
+  //   {
+  //     searchParam.Email =this.merchantSearchForm.value.Email; 
+  //   }
+  //   else
+  //   {
+  //     delete searchParam.Email;
+  //   }
+  //   if(this.merchantSearchForm.value.PricingTitle!='')
+  //   {
+  //     searchParam.PricingTitle =this.merchantSearchForm.value.PricingTitle; 
+  //   }
+  //   else
+  //   {
+  //     delete searchParam.PricingTitle;
+  //   }
  
-    this._merchantService.merchantList(searchParam)
-    .then((res: any) => {
-      if(res && !res.StatusCode){
-        if(res.Response && res.Response.length){
-          this.merchants = res.Response;
-          this.renderingComponent(MerchantTableComponent,{
-            merchants: this.merchants,
-          })
-        }else{
-          this.renderingComponent(NoFoundComponent, {
-            icon: 'no-pricing-plan',
-            text: 'No merchant found',
-            subText: "You haven't made any Merchant"
-          });
-        }
+  //   this._merchantService.merchantList(searchParam)
+  //   .then((res: any) => {
+  //     if(res && !res.StatusCode){
+  //       if(res.Response && res.Response.length){
+  //         this.merchants = res.Response;
+  //         this.renderingComponent(MerchantTableComponent,{
+  //           merchants: this.merchants,
+  //         })
+  //       }else{
+  //         this.renderingComponent(NoFoundComponent, {
+  //           icon: 'no-pricing-plan',
+  //           text: 'No merchant found',
+  //           subText: "You haven't made any Merchant"
+  //         });
+  //       }
         
-      }
+  //     }
        
-    }).catch((err: HttpErrorResponse)=>(console.log))
-  }
+  //   }).catch((err: HttpErrorResponse)=>(console.log))
+  // }
   
 
-  stopPropagation(event){
+  // stopPropagation(event){
     
-    event.stopPropagation();
-  }
+  //   event.stopPropagation();
+  // }
 
 
 }
