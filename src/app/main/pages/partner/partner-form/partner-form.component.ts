@@ -81,9 +81,7 @@ if(!this.partnerDetail){
     message:"Are you sure you want to close this window?"
   }
   dialogRef.afterClosed().subscribe((result)=>{
-    
     if (result){
-     
      this._slidingPanelService.getSidebar('slidePanel', 'PartnerCreateComponent').toggleOpen();
     }
   })
