@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
-import { transactionType, transactionStatus, snackBarConfig, snackBarConfigWarn } from '../../../../../constants/globalFunctions';
+import { transactionType, transactionStatus, snackBarConfig, snackBarConfigWarn,dateFormat } from '../../../../../constants/globalFunctions';
 import { TransactionService } from '../transaction.service';
 import * as globalConfig from '../../../../../constants/globalFunctions';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -34,6 +34,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public expandedRefundDetail: any;
   public transStatus = transactionStatus;
   public transType = transactionType;
+  public dateFormat = dateFormat;
   public refundForm: FormGroup;
   public selection = new SelectionModel<any>(true, []);
   public showRefund: boolean;
@@ -41,6 +42,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public dialogRef: any;
   public recordCount: number = 0;
   @Input() data: any;
+  @Input() dateRange:any
   @ViewChild('refundDialog') refundDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -126,8 +128,10 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
   } 
 
   changePage(event){
+    //console.log(event);
     const obj = {
-      RecordLimit: 100,
+      ...this.dateRange,
+      RecordLimit: event.pageSize,
       PageNo: ++event.pageIndex,
       ...this._userConfigService.getUserMode()
     };

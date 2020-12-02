@@ -61,7 +61,9 @@ import { LockControlsComponent } from './ip-blocking/lock-controls/lock-controls
     MatSelectModule,
     FuseSharedModule,
     MatRadioModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    MatListModule
+
   ]
 })
 export class TransactionControlsModule { }

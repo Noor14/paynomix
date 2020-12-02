@@ -6,6 +6,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MerchantTableComponent } from '../merchant-table/merchant-table.component';
 import { MerchantService } from '../merchant.service';
+//import { MatMenuModule } from '@angular/material/menu';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-merchant-list',
@@ -16,6 +18,7 @@ export class MerchantListComponent implements OnInit, OnDestroy {
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   public merchants:any[] = [];
+  public merchantSearchForm: FormGroup;
   private _unsubscribeAll: Subject<any>;
 
     /**
@@ -23,10 +26,11 @@ export class MerchantListComponent implements OnInit, OnDestroy {
     *
     * @param {MerchantService} _merchantService
     * @param {UserConfigService} _userConfigService
-    *  @param {ComponentFactoryResolver} _resolver
+    * @param {ComponentFactoryResolver} _resolver
     */
    
    constructor(
+     private readonly _formBuilder: FormBuilder,
      private readonly _merchantService: MerchantService,
      private readonly _userConfigService: UserConfigService,
      private readonly _resolver: ComponentFactoryResolver
@@ -36,9 +40,17 @@ export class MerchantListComponent implements OnInit, OnDestroy {
  }
 
   ngOnInit(): void {
+    
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(() => this.getMerchants());
+    this.merchantSearchForm = this._formBuilder.group({
+      MerchantUserName: [''],
+      ResellerName: [''],
+      Email: [''],
+      PricingTitle: [''],
+     });
+    
   }
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
@@ -53,7 +65,7 @@ export class MerchantListComponent implements OnInit, OnDestroy {
       this.componentRef.instance.data = data;
   }
 
-  getMerchants(): void{
+  getMerchants(){
     this._merchantService.merchantList(this._userConfigService.getUserMode())
     .then((res: any) => {
       if(res && !res.StatusCode){
@@ -73,6 +85,69 @@ export class MerchantListComponent implements OnInit, OnDestroy {
        
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
+
+  // search(){
+    
+  //   var searchParam = {'MerchantUserName':'','ResellerName':'','Email':'','PricingTitle':''};
+  //   if(this.merchantSearchForm.value.MerchantUserName!='')
+  //   {
+  //     searchParam.MerchantUserName =this.merchantSearchForm.value.MerchantUserName; 
+  //   }
+  //   else
+  //   {
+  //     delete searchParam.MerchantUserName;
+  //   }
+  //   if(this.merchantSearchForm.value.ResellerName!='')
+  //   {
+  //     searchParam.ResellerName =this.merchantSearchForm.value.ResellerName; 
+  //   }
+  //   else
+  //   {
+  //     delete searchParam.ResellerName;
+  //   }
+  //   if(this.merchantSearchForm.value.Email!='')
+  //   {
+  //     searchParam.Email =this.merchantSearchForm.value.Email; 
+  //   }
+  //   else
+  //   {
+  //     delete searchParam.Email;
+  //   }
+  //   if(this.merchantSearchForm.value.PricingTitle!='')
+  //   {
+  //     searchParam.PricingTitle =this.merchantSearchForm.value.PricingTitle; 
+  //   }
+  //   else
+  //   {
+  //     delete searchParam.PricingTitle;
+  //   }
+ 
+  //   this._merchantService.merchantList(searchParam)
+  //   .then((res: any) => {
+  //     if(res && !res.StatusCode){
+  //       if(res.Response && res.Response.length){
+  //         this.merchants = res.Response;
+  //         this.renderingComponent(MerchantTableComponent,{
+  //           merchants: this.merchants,
+  //         })
+  //       }else{
+  //         this.renderingComponent(NoFoundComponent, {
+  //           icon: 'no-pricing-plan',
+  //           text: 'No merchant found',
+  //           subText: "You haven't made any Merchant"
+  //         });
+  //       }
+        
+  //     }
+       
+  //   }).catch((err: HttpErrorResponse)=>(console.log))
+  // }
+  
+
+  // stopPropagation(event){
+    
+  //   event.stopPropagation();
+  // }
 
 
 }
