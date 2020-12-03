@@ -20,7 +20,7 @@
                                 checked="ipBlocking?.value?.IsActive">Active</mat-checkbox>
                         </div>
                         <div fxFlex.gt-sm="30" fxFlex.sm="30" fxLayout="column" fxLayoutAlign="end start">
-                            <button mat-raised-button color="accent" type="submit" (click)="addIpAddress()"> ADD
+                            <button mat-raised-button color="accent" type="submit" (click)="addIpAddress()" [disabled]="disableForms"> ADD
                                 IP</button>
                         </div>
                     </div>

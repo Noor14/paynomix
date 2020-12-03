@@ -19,7 +19,8 @@ export class IpBlockingComponent implements OnInit {
   private componentRef: ComponentRef<any>;
   public data:any;
   public lockingDetails: any;
-  public updateIpAddress:any
+  public updateIpAddress:any;
+  public disableForms:any
   @Input() fraudType : any;
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
 
@@ -77,6 +78,7 @@ export class IpBlockingComponent implements OnInit {
       if(res && !res.StatusCode) {
        this.lockingDetails = res.Response[0];
        this._overlayLockService.getOverLay('overlay').toggleOpen();
+       this.disableForms = true;
       }
     })
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserConfigService } from '@fuse/services/user.config.service';
@@ -11,8 +11,9 @@ import * as globalConfig from '../../../../../../../constants/globalFunctions';
   styleUrls: ['./ip-blocking-status.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class IpBlockingStatusComponent implements OnInit {
+export class IpBlockingStatusComponent implements OnInit, OnChanges {
   public ipBlockingStatusForm: FormGroup;
+  @Input() disableForms:any 
 
   constructor(
     private readonly _formBuilder: FormBuilder,
@@ -20,6 +21,11 @@ export class IpBlockingStatusComponent implements OnInit {
     private readonly _transactionControlsService: TransactionControlsService,
     private readonly _snackBar: MatSnackBar,
   ) { }
+  ngOnChanges(): void {
+    if(this.disableForms) {
+      this.ipBlockingStatusForm.disable();
+    }
+  }
 
   ngOnInit(): void {
     this.createIpBlockingForm();
