@@ -76,7 +76,7 @@ export class IpBlockingComponent implements OnInit {
     .then((res:any)=> {
       if(res && !res.StatusCode) {
        this.lockingDetails = res.Response[0];
-       this._overlayLockService.getOverLay('overlay').toggleOpen();
+      //  this._overlayLockService.getOverLay('overlay').toggleOpen();
       }
     })
   }
