@@ -23,6 +23,7 @@ import { FuseConfirmDialogModule } from '@fuse/components';
 import {NgxMaskModule} from 'ngx-mask';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { MatMenuModule} from '@angular/material/menu';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MatMenuModule} from '@angular/material/menu';
     NoFoundModule,
     NgxCurrencyModule,
     MatMenuModule,
+    MatToolbarModule,
     NgxMaskModule.forRoot()
   ]
 })

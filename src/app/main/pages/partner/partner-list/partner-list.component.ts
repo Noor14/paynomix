@@ -9,6 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 import { PartnerTableComponent } from '../partner-table/partner-table.component';
 import { PartnerService } from '../partner.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import * as globalConfig from '../../../../../constants/globalFunctions';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class PartnerListComponent implements OnInit, OnDestroy {
   public partners: any[] = [];
   private _unsubscribeAll: Subject<any>;
   public partnerSearchForm: FormGroup;
+  public globalConfig = globalConfig;
   
       /**
       * Constructor
