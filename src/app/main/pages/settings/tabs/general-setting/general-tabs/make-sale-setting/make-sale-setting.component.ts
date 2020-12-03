@@ -73,8 +73,7 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
         if(res && !res.StatusCode){
             this.reset();
             this.makeSaleSettingForm.controls.SaleSetting['controls'] = [];
-            this.merchants =  res.Response.filter(data => data.MerchantAccountSetup).sort((a,b)=> 
-            a.MerchantAccountSetup.MerchantUserName.localeCompare(b.MerchantAccountSetup.MerchantUserName))
+            this.merchants = res.Response;
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
@@ -98,8 +97,7 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
     this.makeSaleSettingForm.controls.LocationId.disable();
     this._saleService.locationList(obj).then((res: any)=>{
       if(res && !res.StatusCode){
-            this.locations =  res.Response.sort((a,b)=> 
-            a.Displayname.localeCompare(b.Displayname));
+        this.locations = res.Response;
         this.makeSaleSettingForm.controls.LocationId.enable();
       }
     })

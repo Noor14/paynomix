@@ -1,4 +1,4 @@
-import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ElementRef, EventEmitter, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { TransactionTableComponent } from '../transaction-table/transaction-table.component';
 import { TransactionService } from '../transaction.service';
@@ -16,6 +16,8 @@ import { MatDatepicker } from '@angular/material/datepicker/datepicker';
 export class TransactionListComponent implements OnInit {
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
   @ViewChild('picker') datePicker: MatDatepicker<any>;
+  @ViewChild('datepickerFooter', {static: false}) datepickerFooter: ElementRef;
+
   private componentRef: ComponentRef<any>;
   private _unsubscribeAll: Subject<any>;
   public transactionType: any = {};
@@ -23,6 +25,25 @@ export class TransactionListComponent implements OnInit {
   dateRangeForm: FormGroup;
   dateTo = moment().format('YYYY-MM-DD');
   dateFrom = moment().subtract(15, 'd').format('YYYY-MM-DD');
+
+
+  
+ 
+
+  public ranges: Array<{key: string, label: string}> = [
+    {key: 'today', label: 'Today'},
+    {key: 'yesterday', label: 'Yesterday'},
+    {key: 'thisweek', label: 'This Week'},
+    {key: 'lastweek', label: 'Last Week'},
+    {key: 'thismonth', label: 'This Month'},
+    {key: 'lastmonth', label: 'Last Month'},
+    {key: 'last60', label: 'Last 60 Days'},
+    {key: 'last90', label: 'Last 90 Days'},
+    {key: 'thisyear', label: 'This Year'},
+];
+dateToFooter = moment();
+dateFromFooter = moment();
+
   /**
      * Constructor
      *
@@ -39,6 +60,9 @@ export class TransactionListComponent implements OnInit {
     // Set the private defaults
     this._unsubscribeAll = new Subject();
   }
+
+
+  
 
   ngOnInit() {
     this.rangeForm();
@@ -124,11 +148,90 @@ export class TransactionListComponent implements OnInit {
     });
   }
   dateRangeChange(dateRangeStart: HTMLInputElement, dateRangeEnd: HTMLInputElement) {
-    
-   if(dateRangeStart.value && dateRangeEnd.value) {
-    this.dateRangeForm.value.FromDate = moment(dateRangeStart.value).format("MM-DD-YYYY");
-    this.dateRangeForm.value.ToDate= moment(dateRangeEnd.value).format("MM-DD-YYYY ");
+    console.log(this.dateRangeForm.value);
+    if(dateRangeStart.value && dateRangeEnd.value) {
+     this.dateRangeForm.value.FromDate = moment(dateRangeStart.value).format("MM-DD-YYYY");
+     this.dateRangeForm.value.ToDate= moment(dateRangeEnd.value).format("MM-DD-YYYY ");
      this.getTransaction();
    }
   }
+
+  onOpen() {
+    const matCalendar = 
+    document.getElementsByClassName('mat-calendar-content')[0] as HTMLElement;
+    matCalendar.appendChild(this.datepickerFooter.nativeElement);
+}
+
+
+setRange(range: string) {
+    this.dateToFooter = moment();
+    this.dateFromFooter = moment();
+    let obj;
+    switch (range) {
+        case 'today':
+            obj = {
+                FromDate: this.dateFromFooter.format('YYYY-MM-DD'),
+                ToDate: this.dateFromFooter.format('YYYY-MM-DD')
+            }
+            break;
+            case 'yesterday':
+                obj = {
+                    FromDate: this.dateFromFooter.subtract(1,'d').format('YYYY-MM-DD'),
+                    ToDate:  this.dateToFooter.subtract(1,'d').format('YYYY-MM-DD')
+                      }
+                break;
+        case 'thisweek':
+            obj = {
+                FromDate: this.dateFromFooter.weekday(1).format('YYYY-MM-DD'),
+                ToDate: this.dateToFooter.weekday(7).format('YYYY-MM-DD')
+                  }
+                break;
+        case 'lastweek':
+            obj = {
+                FromDate: this.dateFromFooter.day(-7).weekday(1).format('YYYY-MM-DD'),
+                ToDate: this.dateToFooter.day(-7).weekday(7).format('YYYY-MM-DD')
+            }
+            break;
+        case 'thismonth':
+            obj = {
+                FromDate: this.dateFromFooter.startOf('month').format('YYYY-MM-DD'),
+                ToDate: this.dateToFooter.endOf('month').format('YYYY-MM-DD')
+            }
+            break;
+        case 'lastmonth':
+            obj = {
+                FromDate: this.dateFromFooter.subtract(1,'month').startOf('month').format('YYYY-MM-DD'),
+                ToDate: this.dateToFooter.subtract(1,'month').endOf('month').format('YYYY-MM-DD')
+            }
+            break;    
+        case 'last60':
+            obj = {
+                FromDate: this.dateFromFooter.subtract(60,'d').format('YYYY-MM-DD'),
+                ToDate: this.dateToFooter.format('YYYY-MM-DD')   
+                  }
+            break;        
+        case 'last90':
+            obj = {
+                FromDate: this.dateFromFooter.subtract(90,'d').format('YYYY-MM-DD'),
+                ToDate:this.dateToFooter.format('YYYY-MM-DD')
+                  }
+            break;
+        case 'thisyear':
+            obj = {
+                FromDate: this.dateFromFooter.startOf('year').format('YYYY-MM-DD'),
+                ToDate: this.dateToFooter.endOf('year').format('YYYY-MM-DD')
+            }
+            break;
+
+    }
+    this.dateRangeForm.patchValue(obj);
+    this.getTransaction();
+    this.datePicker.close();
+
+}
+
+
+
+
+
 }

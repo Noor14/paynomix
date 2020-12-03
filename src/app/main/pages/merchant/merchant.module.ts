@@ -30,8 +30,9 @@ import { EmailDialogModule } from '@fuse/components/email-dialog/email-dialog.mo
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatChipsModule} from '@angular/material/chips';
 import {NgxMaskModule} from 'ngx-mask';
-
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {OverlayModule} from '@angular/cdk/overlay';
 @NgModule({
   declarations: [MerchantListComponent, MerchantCreateComponent, MerchantEditComponent, MerchantInfoComponent, BusinessDetailComponent, OwnerDetailComponent, BankAccountComponent, AllGetherInfoComponent, MerchantFormComponent, MerchantTableComponent],
   entryComponents: [MerchantTableComponent],
@@ -56,7 +57,10 @@ import {NgxMaskModule} from 'ngx-mask';
     EmailDialogModule,
     MatTooltipModule,
     MatChipsModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    MatToolbarModule,
+    FlexLayoutModule,
+    OverlayModule
 
   ]
 })
