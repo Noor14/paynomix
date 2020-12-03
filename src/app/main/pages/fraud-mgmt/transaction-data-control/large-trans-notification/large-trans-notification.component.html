@@ -1,14 +1,12 @@
 <section class="largeTransNotification w-100-p">
-    <div class="outer-layer m-20 p-20" >
+    <div class="outer-layer m-20 px-20" >
         <h2 >Large Transaction Notification </h2>
         <hr />
-        <div class="mat-card p-20">
-            <p>
-                When transactions meet or exceed a specified dollar amount you can be notified by email.
-            </p>
-        </div>
-        <div class="mat-card mt-20">
-                <fieldset class="my-4">
+        <p>
+            When transactions meet or exceed a specified dollar amount you can be notified by email.
+        </p>
+        <div class=" mt-20">
+                <fieldset class="my-4 mx-0">
                     <legend class="accent-fg">Lock Control</legend>
                     <div fxLayout="column" fxLayoutAlign="start">
                         <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
@@ -23,9 +21,9 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="my-4">
+                <fieldset class="my-4 mx-0">
                     <legend class="accent-fg">Notification</legend>
-                    <div fxLayout="column" fxLayoutAlign="start">
+                    <form fxLayout="column" fxLayoutAlign="start" [formGroup]="notificationForm">
                         <div class="py-8" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                             <div fxFlex.gt-sm="100" fxFlex.sm="100" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                                 <mat-label>Status:</mat-label>
@@ -39,7 +37,7 @@
                         <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                                 <mat-label>Transaction Exceeding</mat-label>
-                                <input matInput  currencyMask [options]="{ align: 'left', prefix: '' }"  required>
+                                <input matInput formControlName="TransExceeding"  currencyMask [options]="{ align: 'left', prefix: '' }"  required>
                                 <mat-hint>Transaction Exceeding amount</mat-hint>
                                 <mat-error>Transaction Exceeding amount is required!</mat-error>
                                
@@ -47,7 +45,7 @@
             
                             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.xs]="'mt-20'" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                                 <mat-label>Email</mat-label>
-                                <input matInput  required>
+                                <input matInput formControlName="Email" required>
                                 <mat-hint> Notification Email</mat-hint>
                                 <mat-error>Email is required!</mat-error>
                             </mat-form-field>
@@ -57,7 +55,7 @@
                             Save
                             </button>
                         </div>
-                    </div>
+                    </form>
                 </fieldset>
         </div>
      

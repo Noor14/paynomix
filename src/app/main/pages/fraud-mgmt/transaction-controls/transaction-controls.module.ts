@@ -26,7 +26,7 @@ import { IpAddressComponent } from './ip-blocking/ip-address/ip-address.componen
 import { IpBlockingStatusComponent } from './ip-blocking/ip-blocking-status/ip-blocking-status.component';
 import { MatListModule } from '@angular/material/list';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { LockControlsComponent } from '../common-components/lock-controls/lock-controls.component';
+import { LockControlsModule } from '../common-components/lock-controls/lock-controls.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,6 @@ import { LockControlsComponent } from '../common-components/lock-controls/lock-c
     ProxyBlockingComponent, 
     TransactionControlsComponent,
     IpBlockingTableComponent,
-    LockControlsComponent,
     IpAddressComponent,
     IpBlockingStatusComponent,
   ],
@@ -44,7 +43,6 @@ import { LockControlsComponent } from '../common-components/lock-controls/lock-c
     IpBlockingTableComponent,
     IpAddressComponent,
     IpBlockingStatusComponent,
-    LockControlsComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +63,9 @@ import { LockControlsComponent } from '../common-components/lock-controls/lock-c
     MatRadioModule,
     NgxMaskModule.forRoot(),
     MatListModule,
-    OverlayModule
+    OverlayModule,
+    LockControlsModule
+
 
   ]
 })
