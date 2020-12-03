@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MatRadioModule} from '@angular/material/radio';
 
 import { FraudMgmtRoutingModule } from './fraud-mgmt-routing.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -10,8 +11,8 @@ import { FraudMgmtRoutingModule } from './fraud-mgmt-routing.module';
   imports: [
     CommonModule,
     FraudMgmtRoutingModule,
-    MatRadioModule
-    
+    MatRadioModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class FraudMgmtModule { }

@@ -67,6 +67,13 @@ app-pages{
       }
   }
 }
+fieldset{
+  border-radius: 5px;
+  border:1px solid rgba(0,0,0,.12);
+  legend{
+      padding: 0 5px;
+  }
+}
 
 
 .mat-datepicker-content {

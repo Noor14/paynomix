@@ -15,7 +15,17 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import {MatListModule} from '@angular/material/list';
+import { IpBlockingTableComponent } from './ip-blocking/ip-blocking-table/ip-blocking-table.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { IpAddressComponent } from './ip-blocking/ip-address/ip-address.component';
+import { IpBlockingStatusComponent } from './ip-blocking/ip-blocking-status/ip-blocking-status.component';
+import { LockControlsComponent } from './ip-blocking/lock-controls/lock-controls.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -23,11 +33,27 @@ import {MatListModule} from '@angular/material/list';
     RestrictedTransactionComponent, 
     CountryOriginComponent, 
     ProxyBlockingComponent, 
-    TransactionControlsComponent],
+    TransactionControlsComponent,
+    IpBlockingTableComponent,
+    LockControlsComponent,
+    IpAddressComponent,
+    IpBlockingStatusComponent,
+  ],
+  entryComponents:[
+    IpBlockingTableComponent,
+    IpAddressComponent,
+    IpBlockingStatusComponent,
+    LockControlsComponent
+  ],
   imports: [
     CommonModule,
     TransactionControlsRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTooltipModule,
     MatTabsModule,
+    MatIconModule,
     MatInputModule,
     MatFormFieldModule ,
     MatCheckboxModule,
@@ -36,8 +62,9 @@ import {MatListModule} from '@angular/material/list';
     MatSelectModule,
     FuseSharedModule,
     MatRadioModule,
+    NgxMaskModule.forRoot(),
     MatListModule
-    
+
   ]
 })
 export class TransactionControlsModule { }

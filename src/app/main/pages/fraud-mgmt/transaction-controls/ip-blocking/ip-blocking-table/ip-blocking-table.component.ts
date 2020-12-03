@@ -1,13 +1,18 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { fuseAnimations } from '@fuse/animations';
+import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
 import { truncateTextLength } from 'constants/globalFunctions';
 
 @Component({
   selector: 'app-ip-blocking-table',
   templateUrl: './ip-blocking-table.component.html',
-  styleUrls: ['./ip-blocking-table.component.scss']
+  styleUrls: ['./ip-blocking-table.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  animations   : fuseAnimations
 })
 export class IpBlockingTableComponent implements OnInit {
   public truncateTextLength = truncateTextLength ;
@@ -15,23 +20,35 @@ export class IpBlockingTableComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
+  @Output() update = new EventEmitter<any>();
   public actionControlOnHover = -1;
-  public displayedColumns: string[] =  ['PartnerName', 'DBAName', 'ContactPerson'];
+  public displayedColumns: string[] =  ['FraudType', 'FraudDescription', 'IsActive'];
    /**
      * Constructor
-     *
-     * @param {ResellerService} _resellerService
      * @param {MatSnackBar} _snackBar
-     * @param {MatDialog} _dialog
      */
-  constructor() {
+  constructor(
+    private readonly _dialog: MatDialog,
+  ) {
    }
 
   ngOnInit(): void{
     if(this.data){
-      this.dataSource.data = this.data;
+      this.dataSource.data = this.data.ipAddress;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
   }
+  openDialog(obj) {
+    const dialogRef = this._dialog.open(FuseConfirmDialogComponent, {width: '550px'});
+    dialogRef.componentInstance.data={
+      title: "Confirmation",
+      message:"Are you sure you want to Delete this Ip Address?"
+    }
+    dialogRef.afterClosed().subscribe((result)=>{
+      if (result){
+        this.update.emit(obj);
+      }
+    })
+   }
 }
