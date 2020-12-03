@@ -102,19 +102,19 @@ export const navigation: FuseNavigation[] = [
                         svgIcon     : 'transaction-control',
                         url      : '/pages/fraud-mgmt/transaction-control'
                     },
-                    {
-                        id       : 'velocityCtrl',
-                        title    : 'Velocity Controls',
-                        type     : 'item',
-                        svgIcon     : 'velocity-control',
-                        url      : '/pages/fraud-mgmt/velocity-control'
-                    },
+                    // {
+                    //     id       : 'velocityCtrl',
+                    //     title    : 'Velocity Controls',
+                    //     type     : 'item',
+                    //     svgIcon     : 'velocity-control',
+                    //     url      : '/pages/fraud-mgmt/velocity-control'
+                    // },
                     {
                         id       : 'transDataCtrl',
                         title    : 'Transaction Data Controls',
                         type     : 'item',
                         svgIcon     : 'verification',
-                        url      : '/pages/fraud-mgmt/trans-data-control'
+                        url      : '/pages/fraud-mgmt/transaction-data-control'
                     },
                  
                ]

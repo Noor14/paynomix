@@ -19,9 +19,16 @@ import { MatListModule } from '@angular/material/list';
 import { PlgManagementComponent } from './tabs/plg-management/plg-management.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { FuseMaterialColorPickerModule } from '@fuse/components/material-color-picker/material-color-picker.module';
+import { PlgTableComponent } from './tabs/plg-management/plg-table/plg-table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
-  declarations: [SettingsComponent, BasicInfoComponent, GeneralSettingComponent, MakeSaleSettingComponent, ApiKeyComponent, PlgManagementComponent],
+  declarations: [SettingsComponent, BasicInfoComponent, GeneralSettingComponent, MakeSaleSettingComponent, ApiKeyComponent, PlgManagementComponent, PlgTableComponent],
+  entryComponents:[PlgTableComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,
@@ -36,7 +43,12 @@ import { FuseMaterialColorPickerModule } from '@fuse/components/material-color-p
     MatListModule,
     MatCheckboxModule,
     MatRadioModule,
-    FuseMaterialColorPickerModule
+    FuseMaterialColorPickerModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class SettingsModule { }

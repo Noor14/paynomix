@@ -1,22 +1,25 @@
 <section class="plgManagement w-100-p">
-    <div class="outer-layer m-20 p-20" fxLayout="column"  >
-            <fieldset>
-                <legend>Color Themes </legend>
-                <mat-radio-group aria-label="Select an option" fxLayout="row" fxLayoutAlign="space-around center">
-                    <mat-radio-button value="1">Default Light</mat-radio-button>
-                    <mat-radio-button value="2">Yellow Light</mat-radio-button>
-                    <mat-radio-button value="3">Blue Gray Dark</mat-radio-button>
-                    <mat-radio-button value="4">Pink Dark</mat-radio-button>
-                  </mat-radio-group>
-            </fieldset>
+    <div class="outer-layer m-20 p-20" fxLayout="column" [formGroup]="plgManagmentForm" >
+        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                <mat-label>Select Partner </mat-label>
+                <mat-select  formControlName="PartnerName">
+                    <mat-option  value="abc">value</mat-option>
+                </mat-select>
+            </mat-form-field>
 
-        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxFlex.gt-sm="33" fxFlex.sm="33"  class=" ">
+            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                <mat-label> Website Url</mat-label>
+                <input matInput formControlName="WebsiteUrl"type="url" >
+            </mat-form-field>
+        </div>
+        <div class="mb-8" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+            <div fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="['pr-4','pb-8']" [ngClass.gt-sm]="['pr-8','pb-8']">
                 <div class="mat-card text-center p-16">
                     <ng-container>
                         <div class="card-content">
                                 <span class="text-secondary">
-                                    Drag and drop logo or <span class="accent-fg">Browser</span>
+                                    Drag and drop Main Logo or <span class="accent-fg">Browse</span>
                                 </span>
                                 <ngx-dropzone [multiple]="false" [maxFileSize]="5242880" [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
                                     <ngx-dropzone-label>
@@ -27,12 +30,12 @@
                     </ng-container>
                 </div>
             </div>
-            <div fxFlex.gt-sm="34" fxFlex.sm="34"  class="">
+            <div fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['px-8','pb-8']" [ngClass.gt-sm]="['px-8','pb-8']" >
                 <div class="mat-card text-center p-16">
                     <ng-container>
                         <div class="card-content">
                                 <span class="text-secondary">
-                                    Drag and drop logo or <span class="accent-fg">Browser</span>
+                                    Drag and drop Sidebar Logo or <span class="accent-fg">Browse</span>
                                 </span>
                                 <ngx-dropzone [multiple]="false" [maxFileSize]="5242880" [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
                                     <ngx-dropzone-label>
@@ -43,12 +46,12 @@
                     </ng-container>
                 </div>
             </div>
-            <div fxFlex.gt-sm="33" fxFlex.sm="33"  >
+            <div fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="['pl-8','pb-8']" [ngClass.gt-sm]="['pl-8','pb-8']">
                 <div class="mat-card text-center p-16">
                     <ng-container>
                         <div class="card-content">
                                 <span class="text-secondary">
-                                    Drag and drop logo or <span class="accent-fg">Browser</span>
+                                    Drag and drop Fav or <span class="accent-fg">Browse</span>
                                 </span>
                                 <ngx-dropzone [multiple]="false" [maxFileSize]="5242880" [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
                                     <ngx-dropzone-label>
@@ -60,29 +63,58 @@
                 </div>
             </div>
         </div>
-        <div fxFlex.gt-sm="row" fxFlex.sm="row" fxFlex="column" fxLayoutAlign="space-between center" >
-            <div fxFlex.gt-sm="50" fxFlex.sm="50">
-                <fieldset>
-                    <legend>Navbar</legend>
-                    <h3 class="mt-16 mb-8">Primary background:</h3>
-                    <fuse-material-color-picker class="mb-16" formControlName="primaryBackground">
-                    </fuse-material-color-picker>
 
-                    <h3 class="mt-16 mb-8">Secondary background:</h3>
-                    <fuse-material-color-picker class="mb-16"formControlName="secondaryBackground">
-                    </fuse-material-color-picker>
+        <fieldset class=" my-4">
+            <legend class="accent-fg">Themes Color</legend>
+            <mat-radio-group aria-label="Select an option" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto" formControlName="ThemeColor">
+
+                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="['pr-4','py-4']" [ngClass.gt-sm]="['pr-4','py-4']" value="1">Default Light</mat-radio-button>
+
+                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="'p-8'" [ngClass.gt-sm]="['p-4']" value="2">Yellow Light</mat-radio-button>
+
+                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="'p-8'" [ngClass.gt-sm]="['p-4']" value="3">Blue Gray Dark</mat-radio-button>
+
+                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="['pr-4','py-4']" [ngClass.gt-sm]="['pr-4','py-4']" value="4">Pink Dark</mat-radio-button>
+              </mat-radio-group>
+        </fieldset>
+
+        <div class=" my-4" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="space-between start" fxLayoutAlign.gt-sm="space-between start">
+            <div  fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="['my-8','pr-4']" [ngClass.gt-sm]="['my-8','pr-4']" >
+                <fieldset >
+                    <legend class="accent-fg">Navbar</legend>
+                    <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between start"> 
+                        <div fxFlex.gt-sm="50" fxFlex.sm="50">
+                            <span>Primary background:</span>
+                            <fuse-material-color-picker class="ml-16"  formControlName="primaryBackground">
+                            </fuse-material-color-picker>
+                        </div>
+                        <div fxFlex.gt-sm="50" fxFlex.sm="50">
+                            <span>Secondary background:</span>
+                            <fuse-material-color-picker class="ml-16" formControlName="secondaryBackground">
+                            </fuse-material-color-picker>
+                        </div>
+                    </div>
                 </fieldset>
             </div>
-            <div fxFlex.gt-sm="50" fxFlex.sm="50">
+            <div  fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="['my-8','pl-4']" [ngClass.gt-sm]="['pl-4','my-4']">
                 <fieldset>
-                    <legend>Toolbar</legend>
-                    <mat-radio-group aria-label="Select an option" fxLayout="row" fxLayoutAlign="space-around center">
-                        <mat-radio-button value="1">Default Light</mat-radio-button>
-                        <mat-radio-button value="2">Yellow Light</mat-radio-button>
+                    <legend class="accent-fg">Toolbar</legend>
+                    <mat-radio-group aria-label="Select an option" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between start"  formControlName="Toolbar">
+                        <mat-radio-button class="my-8" fxFlex.gt-sm="50" fxFlex.sm="50" value="1">Default Light</mat-radio-button>
+                        <mat-radio-button class="my-8" fxFlex.gt-sm="50" fxFlex.sm="50" value="2">Yellow Light</mat-radio-button>
                       </mat-radio-group>
                 </fieldset>
             </div>
         </div>
-
+        <div class=" my-8" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
+            <button mat-raised-button class="my-4 accent-alpha-bg " [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
+            aria-label="Cancel">
+            Cancel
+            </button>
+            <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="save">
+            Save
+            </button>
+        </div>
+        <ng-template #renderingContainer></ng-template>
     </div>
 </section>

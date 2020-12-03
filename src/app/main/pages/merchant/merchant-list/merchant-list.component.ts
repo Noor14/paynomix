@@ -6,8 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MerchantTableComponent } from '../merchant-table/merchant-table.component';
 import { MerchantService } from '../merchant.service';
-import { MatMenuModule } from '@angular/material/menu';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-merchant-list',

@@ -10,6 +10,10 @@ const routes: Routes = [
   {
       path: 'transaction-control',
       loadChildren: () => import('./transaction-controls/transaction-controls.module').then(m => m.TransactionControlsModule),
+  },
+  {
+    path: 'transaction-data-control',
+    loadChildren: () => import('./transaction-data-control/transaction-data-control.module').then(m => m.TransactionDataControlModule)
   }
 ];
 
