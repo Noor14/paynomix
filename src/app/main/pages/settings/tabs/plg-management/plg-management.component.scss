@@ -1,9 +1,8 @@
 @import "../../../../../../assets/variables/_variables";
 
 .plgManagement{
-    legend{
-        padding: 0 5px;
-    }.mat-card{
+   
+   .mat-card{
         position: relative;
         .card-content{
             opacity: 0.7;
@@ -23,4 +22,5 @@
             }
         }
     }
+    
 }
