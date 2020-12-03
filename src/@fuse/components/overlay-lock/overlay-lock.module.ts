@@ -6,6 +6,7 @@ import { OverlayLockComponent } from './overlay-lock.component';
 
 @NgModule({
   declarations: [OverlayLockComponent],
+  exports: [OverlayLockComponent],
   imports: [
     CommonModule
   ]

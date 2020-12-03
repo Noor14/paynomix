@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserConfigService } from '@fuse/services/user.config.service';
-import { TransactionControlsService } from '../../transaction-controls.service';
-import * as globalConfig from '../../../../../../../constants/globalFunctions';
+import * as globalConfig from '../../../../../../constants/globalFunctions';
+import { TransactionControlsService } from '../../transaction-controls/transaction-controls.service';
 
 @Component({
   selector: 'app-lock-controls',
@@ -31,11 +31,10 @@ export class LockControlsComponent implements OnInit {
   }
   lockSettings(): any {
     if (this.lockControlForm.valid) {
-      const checkForUserRole = this._userConfigService.getUserMode();
-      const roleObject = (checkForUserRole) ? checkForUserRole : { EntityId: 0, UserRoleId: 1 }
+      const UserRole = this._userConfigService.getUserMode();
       const obj = {
         ...this.lockControlForm.value,
-        ...roleObject
+        ...UserRole
       }
     this._transactionControlsService.lockControls(obj).then((res:any)=>{
       if (res && !res.StatusCode) { 

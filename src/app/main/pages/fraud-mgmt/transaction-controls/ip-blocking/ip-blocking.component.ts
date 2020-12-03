@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
+import { FraudMgmtService } from '../../fraud-mgmt.service';
 import { TransactionControlsService } from '../transaction-controls.service';
 import { IpBlockingTableComponent } from './ip-blocking-table/ip-blocking-table.component';
 
@@ -17,6 +18,7 @@ export class IpBlockingComponent implements OnInit {
   private componentRef: ComponentRef<any>;
   public data:any;
   public updateIpAddress:any
+  @Input() fraudType : any;
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
 
 
@@ -32,10 +34,14 @@ export class IpBlockingComponent implements OnInit {
     private readonly _userConfigService: UserConfigService,
     private readonly _transactionControlsService: TransactionControlsService,
     private readonly _resolver: ComponentFactoryResolver,
+    private readonly _fraudManagementService: FraudMgmtService,
   ) { }
 
   ngOnInit() {
-    this._userConfigService.userModeChange.subscribe(() => this.getIpAddress())
+    this._userConfigService.userModeChange.subscribe(() => this.getIpAddress());
+    if(this.fraudType) {
+      this.getLockSettings(this.fraudType)
+    }
   }
   getIpAddress(): any {
     const userRole  = this._userConfigService.getUserMode()
@@ -61,6 +67,14 @@ export class IpBlockingComponent implements OnInit {
           }
         }
       }).catch((err: HttpErrorResponse) => (console.log))
+  }
+  getLockSettings(obj?) : any {
+    this._fraudManagementService.lockSettings({...this._userConfigService.getUserMode(), FraudType: obj})
+    .then((res:any)=> {
+      if(res && !res.StatusCode) {
+        console.log('lock res', res)
+      }
+    })
   }
   renderingComponent(type, data?) {
     const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);

@@ -6,7 +6,6 @@ import { FraudMgmtRoutingModule } from './fraud-mgmt-routing.module';
 
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     FraudMgmtRoutingModule,
