@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -16,6 +16,7 @@ import { FraudMgmtService } from '../../fraud-mgmt.service';
 })
 export class CountryOriginComponent implements OnInit {
     public countryoriginForm: FormGroup;
+    @Input() fraudType : any;
     public globalConfig = globalConfig;
     public selectedArr = [];
     list1 = globalConfig.Countries.countries;

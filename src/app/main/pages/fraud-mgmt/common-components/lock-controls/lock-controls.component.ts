@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserConfigService } from '@fuse/services/user.config.service';
-import { TransactionControlsService } from '../../transaction-controls.service';
-import * as globalConfig from '../../../../../../../constants/globalFunctions';
+import * as globalConfig from '../../../../../../constants/globalFunctions';
+import { TransactionControlsService } from '../../transaction-controls/transaction-controls.service';
 
 @Component({
   selector: 'app-lock-controls',

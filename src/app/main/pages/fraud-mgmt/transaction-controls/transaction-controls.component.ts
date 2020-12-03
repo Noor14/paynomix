@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { UserConfigService } from '@fuse/services/user.config.service';
+import { FraudMgmtService } from '../fraud-mgmt.service';
 
 @Component({
   selector: 'app-transaction-controls',
@@ -7,10 +9,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class TransactionControlsComponent implements OnInit {
-
-  constructor() { }
+ public fraudType:any
+  constructor(
+    private readonly _fraudManagementService: FraudMgmtService,
+    private readonly _userConfigService: UserConfigService,
+  ) { }
 
   ngOnInit() {
   }
-
+ 
 }

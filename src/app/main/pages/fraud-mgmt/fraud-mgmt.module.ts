@@ -7,7 +7,6 @@ import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     FraudMgmtRoutingModule,

@@ -22,5 +22,8 @@ export class FraudMgmtService extends BaseService {
         const url = `${environment.apiURL}/Fraud/Search`;
         return this.post(url, obj);
        }
-      
+       lockSettings(obj:any) {
+        const url = `${environment.apiURL}Fraud/GetLockSettings`;
+        return this.post(url, obj);
+      }
     }
