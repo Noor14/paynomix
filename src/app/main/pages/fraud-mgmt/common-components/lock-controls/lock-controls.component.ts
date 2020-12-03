@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserConfigService } from '@fuse/services/user.config.service';
@@ -11,22 +11,27 @@ import { TransactionControlsService } from '../../transaction-controls/transacti
   styleUrls: ['./lock-controls.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LockControlsComponent implements OnInit {
+export class LockControlsComponent implements OnInit, OnChanges {
   public lockControlForm: FormGroup;
+  @Input() lockingDetails:any
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _userConfigService: UserConfigService,
     private readonly _transactionControlsService: TransactionControlsService,
     private readonly _snackBar: MatSnackBar,
-  ) { }
-
+  ) { } 
   ngOnInit(): void {
     this.createLockControlForm();
   }
+  ngOnChanges(): void {
+    if(this.lockingDetails) {
+      this.lockControlForm.patchValue(this.lockingDetails);
+    }
+  }
   createLockControlForm(): void {
     this.lockControlForm = this._formBuilder.group({
-      IsActive: ['', Validators.required],
-      FraudType: [2, Validators.required],
+      IsActive: [false, Validators.required],
+      FraudTypeId: [2, Validators.required],
     })
   }
   lockSettings(): any {
@@ -39,7 +44,7 @@ export class LockControlsComponent implements OnInit {
     this._transactionControlsService.lockControls(obj).then((res:any)=>{
       if (res && !res.StatusCode) { 
         this._snackBar.open('Settings have been saved successfully', '', globalConfig.snackBarConfig);
-        this.lockControlForm.reset();
+        this.lockControlForm.controls['IsActive'].reset();
       }
     })
     } else  {

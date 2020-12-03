@@ -25,8 +25,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { IpAddressComponent } from './ip-blocking/ip-address/ip-address.component';
 import { IpBlockingStatusComponent } from './ip-blocking/ip-blocking-status/ip-blocking-status.component';
 import { MatListModule } from '@angular/material/list';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { LockControlsModule } from '../common-components/lock-controls/lock-controls.module';
+import { LockControlsComponent } from '../common-components/lock-controls/lock-controls.component';
+import { OverlayLockModule } from '@fuse/components/overlay-lock/overlay-lock.module';
+import { lockControlsModule } from '../common-components/lock-controls/lock-controls.module';
 
 @NgModule({
   declarations: [
@@ -40,9 +41,7 @@ import { LockControlsModule } from '../common-components/lock-controls/lock-cont
     IpBlockingStatusComponent,
   ],
   entryComponents:[
-    IpBlockingTableComponent,
-    IpAddressComponent,
-    IpBlockingStatusComponent,
+    IpBlockingTableComponent
   ],
   imports: [
     CommonModule,
@@ -63,10 +62,8 @@ import { LockControlsModule } from '../common-components/lock-controls/lock-cont
     MatRadioModule,
     NgxMaskModule.forRoot(),
     MatListModule,
-    OverlayModule,
-    LockControlsModule
-
-
+    OverlayLockModule,
+    lockControlsModule
   ]
 })
 export class TransactionControlsModule { }

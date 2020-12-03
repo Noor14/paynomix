@@ -1,6 +1,6 @@
 @import "src/@fuse/scss/fuse";
 
-app-sliding-panel {
+app-overlay-lock {
     display: flex;
     flex-direction: column;
     flex: 1 0 auto;
@@ -62,4 +62,13 @@ app-sliding-panel {
     right: 0;
     z-index: 999;
     opacity: 0;
+}
+.text-Center {
+    left: 0;
+    line-height: 200px;
+    margin-top: -100px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 100%;
 }
