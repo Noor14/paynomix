@@ -8,21 +8,7 @@
             </p>
         </div>
         <div class="mat-card mt-20">
-                <fieldset class="my-4">
-                    <legend class="accent-fg">Lock Control</legend>
-                    <div fxLayout="column" fxLayoutAlign="start">
-                        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                            <div fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                                <mat-label>Lock:</mat-label>
-                                <mat-checkbox [ngClass.sm]="'pl-16'" [ngClass.gt-sm]="'pl-16'" >Merchants</mat-checkbox>
-                            </div>
-            
-                            <div fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                                <button mat-raised-button color="accent">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
+            <app-lock-controls ></app-lock-controls>
                 <fieldset class="my-4">
                     <legend class="accent-fg">Notification</legend>
                     <div fxLayout="column" fxLayoutAlign="start">

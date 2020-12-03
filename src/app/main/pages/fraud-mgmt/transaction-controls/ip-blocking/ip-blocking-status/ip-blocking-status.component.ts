@@ -26,7 +26,7 @@ export class IpBlockingStatusComponent implements OnInit {
   }
   createIpBlockingForm(): void {
     this.ipBlockingStatusForm = this._formBuilder.group({
-      Status: ['', Validators.required],
+      IsActive: ['', Validators.required],
       FraudType: [2, Validators.required],
     })
   }
@@ -41,7 +41,7 @@ export class IpBlockingStatusComponent implements OnInit {
       this._transactionControlsService.ipBlockingStatus(obj).then((res:any)=>{
         if (res && !res.StatusCode) { 
           this._snackBar.open('Ip Blocking status set Successfully!', '', globalConfig.snackBarConfig);
-          this.ipBlockingStatusForm.reset();
+          this.ipBlockingStatusForm.controls['IsActive'].reset();
         }
       })
      } else {

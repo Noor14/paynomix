@@ -60,7 +60,7 @@ export class OverlayLockService {
    * @param rendringComponent
    * @returns {OverlayLockComponent}
    */
-  getSidebar(key, componentName, data?): OverlayLockComponent {
+  getOverLay(key, componentName?, data?): OverlayLockComponent {
 
     // Check if the sidebar exists
     if (!this._registry[key]) {

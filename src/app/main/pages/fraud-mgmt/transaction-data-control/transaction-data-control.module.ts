@@ -15,6 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { lockControlsModule } from '../common-components/lock-controls/lock-controls.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     MatRadioModule,
     MatListModule,
     NgxCurrencyModule,
+    lockControlsModule
   ]
 })
 export class TransactionDataControlModule { }
