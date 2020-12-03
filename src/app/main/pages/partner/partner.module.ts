@@ -22,6 +22,7 @@ import { MatTooltipModule} from '@angular/material/tooltip';
 import { FuseConfirmDialogModule } from '@fuse/components';
 import {NgxMaskModule} from 'ngx-mask';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
     FuseConfirmDialogModule,
     NoFoundModule,
     NgxCurrencyModule,
+    MatMenuModule,
     NgxMaskModule.forRoot()
   ]
 })
