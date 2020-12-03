@@ -18,11 +18,11 @@ export class CountryOriginComponent implements OnInit {
     public countryoriginForm: FormGroup;
     public globalConfig = globalConfig;
     public selectedArr = [];
-    list1 = globalConfig.Countries.countries;
-    list2 = [];
+    AllCountries = globalConfig.Countries.countries;
+    selectedCountries = [];
     checkForUserRole: any;
     roleObject: any;
-    RemoveArr: any;
+    RemoveArr = [];
 
    
 
@@ -54,29 +54,27 @@ export class CountryOriginComponent implements OnInit {
   }
 
   public toggleSelection(item, list) {
-    item.selected = !item.selected;
+    item.IsActive = !item.IsActive;
   }
 
   public moveSelected(direction) {
 
-   
 
-    if (direction === 'left') {
-        this.RemoveArr = this.list2.map((item: any) => {
+    if (direction === 'remove') {
+     this.RemoveArr =  this.selectedCountries.map((item: any) => {
             return {
+                "FraudId":item.FraudId,
                 "FraudDescription":item.name,
                 "IsActive":false,
                 ...this.roleObject
             }
           });
-        
-         this.list2 = this.list2.filter(i => !i.selected);
+    this.selectedCountries = this.AllCountries.filter(i => i.IsActive);
         
     } else {
-      this.list1.forEach(item => {
-        if (item.selected) {
-          this.list2.push(item);
-
+      this.AllCountries.forEach(item => {
+        if (item.IsActive) {
+          this.selectedCountries.push(item);
           this.selectedArr.push(
             {
                 "FraudDescription": item.name,
@@ -87,36 +85,30 @@ export class CountryOriginComponent implements OnInit {
 
         }
       });
-      this.list1 = this.list1.filter(i => !i.selected);
-    
-
-    }
-  }
-
-  public moveAll(direction) {
-    if (direction === 'left') {
-      this.list1 = [...this.list1, ...this.list2];
-      this.list2 = [];
-    } else {
-      this.list2 = [...this.list2, ...this.list1];
-      this.list1 = [];
+      this.AllCountries = this.AllCountries.filter(i => !i.IsActive);
     }
   }
 
 
   saveSettings(){
-
-    if(this.RemoveArr.hasOwnProperty('IsActive') == false){
-        this._pricingPlanService.updateCountrySettings(this.RemoveArr).then((res: any) => {
-            if(!res.StatusCode){
-              this._snackBar.open(res.StatusMessage, '', snackBarConfig);
-            }else{
-              this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
-            }
-    })
-}
+    if(this.RemoveArr.length > 0 ){
+        const obj = {...this.RemoveArr,
+            ...this.countryoriginForm
+        }
+        this._pricingPlanService.updateCountrySettings(obj).then((res: any) => {
+                if(!res.StatusCode){
+                  this._snackBar.open(res.StatusMessage, '', snackBarConfig);
+                }else{
+                  this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
+                }
+        })
+    }
     else{
-        this._pricingPlanService.saveCountrySettings(this.selectedArr).then((res: any) => {
+        const obj = {...this.selectedArr,
+            ...this.countryoriginForm
+        }
+
+        this._pricingPlanService.saveCountrySettings(obj).then((res: any) => {
             if(!res.StatusCode){
               this._snackBar.open(res.StatusMessage, '', snackBarConfig);
             }else{
@@ -126,18 +118,30 @@ export class CountryOriginComponent implements OnInit {
   };
 }
 getSettings(){
-    this._pricingPlanService.getCountrySettings(this.roleObject).then((res: any) => {
+    const settings = {
+        IsActive : true,
+        ...this.roleObject
+    }
+    this._pricingPlanService.getCountrySettings(settings).then((res: any) => {
       if(!res.StatusCode){
-        this.list2 = res.Response.map((item: any) => {
-            
-            return {
-              "name": item.FraudDescription, 
-              "isActive": item.IsActive,
-            };
-          });
-      }else{
+       res.Response.map((item: any) => {this.AllCountries.filter((obj: any) => 
+        {
+         if(obj.name == item.FraudDescription)
+             {
+                let dumy = { 
+                FraudId:item.FraudId,
+                name : item.FraudDescription,
+                IsActive : true
+            }
+                this.selectedCountries.push(dumy)
+              }
+        })
+        })
+        }
+      else
+        {
         this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
-      }
+        }
   });
 }
 
