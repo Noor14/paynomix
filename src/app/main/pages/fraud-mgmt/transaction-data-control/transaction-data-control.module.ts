@@ -14,6 +14,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { FuseSharedModule } from '@fuse/shared.module';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 
 @NgModule({
@@ -34,8 +35,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
     FuseSharedModule,
     MatRadioModule,
     MatListModule,
-    
-
+    NgxCurrencyModule,
   ]
 })
 export class TransactionDataControlModule { }

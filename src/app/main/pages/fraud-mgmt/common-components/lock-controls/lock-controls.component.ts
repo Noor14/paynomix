@@ -31,11 +31,10 @@ export class LockControlsComponent implements OnInit {
   }
   lockSettings(): any {
     if (this.lockControlForm.valid) {
-      const checkForUserRole = this._userConfigService.getUserMode();
-      const roleObject = (checkForUserRole) ? checkForUserRole : { EntityId: 0, UserRoleId: 1 }
+      const UserRole = this._userConfigService.getUserMode();
       const obj = {
         ...this.lockControlForm.value,
-        ...roleObject
+        ...UserRole
       }
     this._transactionControlsService.lockControls(obj).then((res:any)=>{
       if (res && !res.StatusCode) { 

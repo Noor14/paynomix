@@ -69,8 +69,6 @@ export class IpBlockingComponent implements OnInit {
       }).catch((err: HttpErrorResponse) => (console.log))
   }
   getLockSettings(obj?) : any {
-    const val =  this._userConfigService.loggedInUser();
-    console.log('role', val)
     this._fraudManagementService.lockSettings({...this._userConfigService.getUserMode(), FraudType: obj})
     .then((res:any)=> {
       if(res && !res.StatusCode) {
