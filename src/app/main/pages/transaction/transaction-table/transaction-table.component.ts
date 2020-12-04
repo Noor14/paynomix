@@ -141,7 +141,7 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
         if (res.Response && 
           res.Response.Transactions && 
           res.Response.Transactions.length) {
-          this.dataSource = res.Response.Transactions;
+            this.dataSource.data = res.Response.Transactions;
         }
       }
     }).catch(() => (console.log))
