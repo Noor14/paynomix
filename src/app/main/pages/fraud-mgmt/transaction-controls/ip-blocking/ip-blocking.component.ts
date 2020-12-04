@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { OverlayLockService } from '@fuse/components/overlay-lock/overlay-lock.service';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Subject } from 'rxjs';
 import { FraudMgmtService } from '../../fraud-mgmt.service';
@@ -17,7 +18,9 @@ export class IpBlockingComponent implements OnInit {
   private _unsubscribeAll: Subject<any>;
   private componentRef: ComponentRef<any>;
   public data:any;
-  public updateIpAddress:any
+  public lockingDetails: any;
+  public updateIpAddress:any;
+  public disableForms:any
   @Input() fraudType : any;
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
 
@@ -35,6 +38,7 @@ export class IpBlockingComponent implements OnInit {
     private readonly _transactionControlsService: TransactionControlsService,
     private readonly _resolver: ComponentFactoryResolver,
     private readonly _fraudManagementService: FraudMgmtService,
+    private readonly _overlayLockService: OverlayLockService,
   ) { }
 
   ngOnInit() {
@@ -69,10 +73,12 @@ export class IpBlockingComponent implements OnInit {
       }).catch((err: HttpErrorResponse) => (console.log))
   }
   getLockSettings(obj?) : any {
-    this._fraudManagementService.lockSettings({...this._userConfigService.getUserMode(), FraudType: obj})
+    this._fraudManagementService.lockSettings({...this._userConfigService.getUserMode(), FraudTypeId: obj})
     .then((res:any)=> {
       if(res && !res.StatusCode) {
-        console.log('lock res', res)
+       this.lockingDetails = res.Response[0];
+       this._overlayLockService.getOverLay('overlay').toggleOpen();
+       this.disableForms = true;
       }
     })
   }

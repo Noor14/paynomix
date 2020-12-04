@@ -1,6 +1,7 @@
 <section class="transactionControls w-100-p">
     <mat-tab-group mat-align-tabs="start">
         <mat-tab label="IP Blocking">
+            <app-overlay-lock name="overlay" position="right" ></app-overlay-lock>
             <app-ip-blocking [fraudType]="2"></app-ip-blocking>
         </mat-tab>
         <!-- <mat-tab label="Restricted Transaction Source">

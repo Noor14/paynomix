@@ -8,11 +8,11 @@
             </p>
         </div>
         <!-- lock controls -->
-        <app-lock-controls></app-lock-controls>
+        <app-lock-controls [disableForms]="disableForms" [lockingDetails]="lockingDetails"></app-lock-controls>
         <!-- ip-blocking-status -->
-         <app-ip-blocking-status></app-ip-blocking-status>
+         <app-ip-blocking-status [disableForms]="disableForms"></app-ip-blocking-status>
          <!-- app-ip-address -->
-         <app-ip-address [updateIpAddress]="updateIpAddress" (updateList)="updateList()"></app-ip-address>
+         <app-ip-address [updateIpAddress]="updateIpAddress" [disableForms]="disableForms" (updateList)="updateList()"></app-ip-address>
         <!-- table -->
         <ng-template #renderingContainer></ng-template>
     </div>

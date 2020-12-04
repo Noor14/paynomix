@@ -14,6 +14,7 @@ export class IpAddressComponent implements OnInit, OnChanges {
   public ipAddressForm: FormGroup;
   @Output() updateList = new EventEmitter<any>();
   @Input() updateIpAddress: any;
+  @Input() disableForms: any;
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _snackBar: MatSnackBar,
@@ -32,6 +33,9 @@ export class IpAddressComponent implements OnInit, OnChanges {
         ...this.updateIpAddress
       }]
       this.updateIp(this.updateIpAddress)
+    }
+    if(this.disableForms) {
+      this.ipAddressForm.disable();
     }
   }
   createIpAddressForm(): void {

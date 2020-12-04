@@ -30,7 +30,7 @@
              <mat-icon>edit</mat-icon> 
              </button> -->
              <button mat-icon-button matTooltip="delete" aria-label="delete"   
-             (click)="openDialog(row)">
+             (click)="openDialog(row)" [disabled]="disableForms">
              <mat-icon>delete</mat-icon> 
              </button> 
             </div>

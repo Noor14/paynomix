@@ -99,8 +99,7 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       }).catch((err: HttpErrorResponse)=>(console.log))
     }
 
-    openSlidePanel(): void{
-     
+    openSlidePanel(): void{ 
         this._slidingPanelService.getSidebar('slidePanel', 'PartnerCreateComponent').toggleOpen();
     }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,6 +20,7 @@ export class IpBlockingTableComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
+  @Input() disableForms: boolean;
   @Output() update = new EventEmitter<any>();
   public actionControlOnHover = -1;
   public displayedColumns: string[] =  ['FraudType', 'FraudDescription', 'IsActive'];
