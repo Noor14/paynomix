@@ -1,21 +1,21 @@
 <section class="ipBlockingStatus">
     <fieldset class="my-4 mx-0">
         <legend class="accent-fg">IP Blocking </legend>
-        
             <form fxLayout="column" fxLayoutAlign="start" [formGroup]="ipBlockingStatusForm">
                 <div class="py-8" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                     <div fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                         <mat-label>Status:</mat-label>
                             <mat-radio-group [ngClass.sm]="'pl-16'" [ngClass.gt-sm]="'pl-16'"   formControlName="IsActive">
-                                <mat-radio-button [ngClass.sm]="'mx-16'" [ngClass.gt-sm]="'mx-16'" value="true">Active</mat-radio-button>
-                                <mat-radio-button [ngClass.sm]="'mx-16'" [ngClass.gt-sm]="'mx-16'" value="false">In Active</mat-radio-button>
+                                <mat-radio-button [ngClass.sm]="'mb-8'" [ngClass.gt-sm]="'mx-16'" value="true">Active</mat-radio-button>
+                                <mat-radio-button [ngClass.sm]="'mb-8'" [ngClass.gt-sm]="'mx-16'" value="false">Inactive</mat-radio-button>
                             </mat-radio-group>
                     </div>
                     <div fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                        <button mat-raised-button color="accent" (click)="ipBlockingStatus()">Save</button>
+                        <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
+                            <button mat-raised-button color="accent" (click)="ipBlockingStatus()">Save</button>
+                        </div>
                     </div>
                 </div>
             </form>
-       
     </fieldset>
 </section>

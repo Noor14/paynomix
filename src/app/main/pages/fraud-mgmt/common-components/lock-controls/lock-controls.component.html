@@ -11,7 +11,9 @@
                     </div>
                 
                     <div fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                        <button mat-raised-button color="accent" (click)="lockSettings()" >Save</button>
+                        <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center start" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
+                            <button mat-raised-button color="accent" (click)="lockSettings()" >Save</button>
+                        </div>
                     </div>
                 </div>
             </div>

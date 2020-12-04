@@ -10,7 +10,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDividerModule } from '@angular/material/divider';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,10 +22,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { IpAddressComponent } from './ip-blocking/ip-address/ip-address.component';
-import { IpBlockingStatusComponent } from './ip-blocking/ip-blocking-status/ip-blocking-status.component';
 import { MatListModule } from '@angular/material/list';
 import { OverlayLockModule } from '@fuse/components/overlay-lock/overlay-lock.module';
 import { lockControlsModule } from '../common-components/lock-controls/lock-controls.module';
+import { CountryBlockingIpComponent } from './country-origin/country-blocking-ip/country-blocking-ip.component';
+import { ipBlockingStatusModule } from '../common-components/ip-blocking-status/ip-blocking-status.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { lockControlsModule } from '../common-components/lock-controls/lock-cont
     TransactionControlsComponent,
     IpBlockingTableComponent,
     IpAddressComponent,
-    IpBlockingStatusComponent,
+    CountryBlockingIpComponent,
   ],
   entryComponents:[
     IpBlockingTableComponent
@@ -55,14 +55,14 @@ import { lockControlsModule } from '../common-components/lock-controls/lock-cont
     MatFormFieldModule ,
     MatCheckboxModule,
     MatButtonModule,
-    MatDividerModule,
     MatSelectModule,
     FuseSharedModule,
     MatRadioModule,
     NgxMaskModule.forRoot(),
     MatListModule,
     OverlayLockModule,
-    lockControlsModule
+    lockControlsModule,
+    ipBlockingStatusModule
   ]
 })
 export class TransactionControlsModule { }

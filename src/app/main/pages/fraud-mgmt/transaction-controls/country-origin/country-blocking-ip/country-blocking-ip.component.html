@@ -1,0 +1,54 @@
+<section class="countryBlockingIp w-100-p">
+    <fieldset class="my-4 mx-0">
+        <legend class="accent-fg">Country Selection</legend>
+        <form [formGroup]="countryoriginForm">
+            <div fxLayout="column" fxLayoutAlign="start">
+                <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                    <fieldset  fxFlex.gt-sm="40" fxFlex.sm="40" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                        <legend class="accent-fg">Available Countries</legend>
+                        <mat-list role="list" class="matListHeight">
+                            <mat-list-item role="listitem" *ngFor="let item of AllCountries" 
+                            [class.accent]="item.IsActive"(click)="toggleSelection(item, 1)" >
+                            {{item.name}}
+                            </mat-list-item>
+                        </mat-list>
+                    </fieldset>
+                    <div fxFlex.gt-sm="20" fxFlex.sm="20" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-16', 'pl-16']">
+                        <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="column" fxLayoutAlign.gt-sm="center stretch" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
+                            <button class="my-8" mat-raised-button color="accent" (click)="moveSelected('add')">
+                                Add<mat-icon>navigate_next</mat-icon>
+                            </button>
+                            
+                            <button class="my-8" mat-raised-button color="accent" (click)="moveSelected('remove')"> <mat-icon>navigate_before</mat-icon>Remove
+                            </button>
+                        </div>
+                        
+                        
+                    </div>
+                    <fieldset  fxFlex.gt-sm="40" fxFlex.sm="40" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                        <legend class="accent-fg">Selected Selection</legend>
+                        <mat-list role="list" class="matListHeight">
+                            <mat-list-item role="listitem" *ngFor="let item of selectedCountries" [class.accent]="item.IsActive"
+                                (click)="toggleSelection(item, 2)">{{item.name}}
+                            </mat-list-item>
+                        </mat-list>
+                    </fieldset>
+                </div>
+                <p>
+                    When a transaction origionates in a country in the selected countires list above.
+                </p>
+                <mat-radio-group fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'" formControlName="ListedCountryAllowOrBlock">
+                    <mat-radio-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-0'" value="0" >Reject the transactions
+                    </mat-radio-button>
+                    <mat-radio-button class="my-4" [ngClass.sm]="'ml-16'" [ngClass.gt-sm]="'ml-16'"  value="1">Accept the transactions
+                    </mat-radio-button>
+                </mat-radio-group>
+                <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
+                    <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="Submit" (click)="saveSettings()">
+                    Submit
+                    </button>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</section>
