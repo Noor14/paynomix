@@ -1,5 +1,5 @@
 <section class="ip-blocking w-100-p" >
-    <div class="outer-layer m-20 px-20">
+    <div class="outer-layer m-20 px-20 pb-20">
         <h2>IP Blocking </h2>
         <hr />
         <p>
@@ -7,7 +7,7 @@
         </p>
        
         <!-- lock controls -->
-        <app-lock-controls [lockingDetails]="lockingDetails"></app-lock-controls>
+        <app-lock-controls [lockingDetails]="lockingDetails" [fraudTypeLock]="fraudTypeLock"></app-lock-controls>
         <!-- ip-blocking-status -->
         <app-ip-blocking-status></app-ip-blocking-status>
         <!-- app-ip-address -->

@@ -14,6 +14,7 @@ import { TransactionControlsService } from '../../transaction-controls/transacti
 export class LockControlsComponent implements OnInit, OnChanges {
   public lockControlForm: FormGroup;
   @Input() lockingDetails:any
+  @Input() fraudTypeLock :any
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _userConfigService: UserConfigService,
@@ -27,11 +28,16 @@ export class LockControlsComponent implements OnInit, OnChanges {
     if(this.lockingDetails) {
       this.lockControlForm.patchValue(this.lockingDetails);
     }
+    if(this.fraudTypeLock) {
+      console.log(this.fraudTypeLock);
+      this.lockControlForm.value.FraudTypeId = this.fraudTypeLock;
+      this.lockControlForm.controls['FraudTypeId'].setValue(this.fraudTypeLock);
+    }
   }
   createLockControlForm(): void {
     this.lockControlForm = this._formBuilder.group({
       IsActive: [false, Validators.required],
-      FraudTypeId: [2, Validators.required],
+      FraudTypeId: [this.fraudTypeLock, Validators.required],
     })
   }
   lockSettings(): any {

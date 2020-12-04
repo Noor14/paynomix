@@ -19,7 +19,8 @@ export class IpBlockingComponent implements OnInit {
   private componentRef: ComponentRef<any>;
   public data:any;
   public lockingDetails: any;
-  public updateIpAddress:any
+  public updateIpAddress:any;
+  public fraudTypeLock : any;
   @Input() fraudType : any;
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
 
@@ -43,13 +44,16 @@ export class IpBlockingComponent implements OnInit {
   ngOnInit() {
     this._userConfigService.userModeChange.subscribe(() => this.getIpAddress());
     if(this.fraudType) {
-      this.getLockSettings(this.fraudType)
+      this.fraudTypeLock = this.fraudType
+      console.log()
+      this.getLockSettings(this.fraudTypeLock)
+
     }
   }
   getIpAddress(): any {
     const userRole  = this._userConfigService.getUserMode()
     const obj = {
-      FraudType: 2,
+      FraudType: this.fraudTypeLock,
       IsActive: true,
       ...userRole
     }
