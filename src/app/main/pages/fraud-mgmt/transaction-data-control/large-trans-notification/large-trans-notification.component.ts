@@ -57,7 +57,6 @@ export class LargeTransNotificationComponent implements OnInit {
         }
       })
 
-
     } else {
       validateAllFormFields(this.largeTransactionForm)
     }
