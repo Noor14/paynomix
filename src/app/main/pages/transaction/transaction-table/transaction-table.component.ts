@@ -46,6 +46,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public dataSource = new MatTableDataSource<any>();
   @Output() updateList = new EventEmitter<boolean>();
   public actionControlOnHover = -1;
+  toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   private columnstoDisplay: string[] = [
     'Icon',
     'Select',

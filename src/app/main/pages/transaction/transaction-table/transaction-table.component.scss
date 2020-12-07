@@ -25,10 +25,21 @@
                                 overflow: visible;
                             }
                         }
+                        &.expandedDetail {
+                            & + * + .detail-row{
+                                min-height: auto;
+                                overflow: visible;
+                            }
+                        }
                         &:not(.expanded){
                             & + .refund-row{
                                display: none;
                             }
+                        }
+                        &:not(.expandedDetail){
+                            & + * + .detail-row{
+                                display: none;
+                             }   
                         }
                         td{
                             &:nth-child(2){
