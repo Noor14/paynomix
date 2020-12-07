@@ -27,6 +27,7 @@ import { OverlayLockModule } from '@fuse/components/overlay-lock/overlay-lock.mo
 import { lockControlsModule } from '../common-components/lock-controls/lock-controls.module';
 import { CountryBlockingIpComponent } from './country-origin/country-blocking-ip/country-blocking-ip.component';
 import { ipBlockingStatusModule } from '../common-components/ip-blocking-status/ip-blocking-status.module';
+import { CountryStatusModule } from '../common-components/country-status/country-status.module';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ipBlockingStatusModule } from '../common-components/ip-blocking-status/
     MatListModule,
     OverlayLockModule,
     lockControlsModule,
-    ipBlockingStatusModule
+    ipBlockingStatusModule,
+    CountryStatusModule
   ]
 })
 export class TransactionControlsModule { }

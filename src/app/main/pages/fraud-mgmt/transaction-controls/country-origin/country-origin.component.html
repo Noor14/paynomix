@@ -6,12 +6,12 @@
             Country of Origin Blocking by IP <br>
             This allows you to block transactions originating from selected countries. The country of origin is determined by the IP address of the user.
         </p>
-       
+        <!-- <app-overlay-lock name="overlay-country" position="right"></app-overlay-lock> -->
         <!-- lock controls -->
-        <app-lock-controls></app-lock-controls>
+        <app-lock-controls [lockingDetails]="lockingDetails" [fraudTypeLock]="fraudTypeLock"></app-lock-controls>
 
         <!-- ip-blocking-status -->
-        <app-ip-blocking-status></app-ip-blocking-status>
+        <app-country-status> </app-country-status>
 
          <!-- app-ip-address -->
          <p>
