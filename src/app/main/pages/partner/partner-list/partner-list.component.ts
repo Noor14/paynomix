@@ -80,7 +80,12 @@ export class PartnerListComponent implements OnInit, OnDestroy {
     }
 
     getPartners(): void{
-      this._partnerService.partnerList(this._userConfigService.getUserMode())
+      const obj = {
+        ...this._userConfigService.getUserMode(),
+        RecordLimit: 100,
+        PageNo: 1,
+    }
+      this._partnerService.partnerList(obj)
       .then((res: any) => {
         if(res && !res.StatusCode){
           if(res.Response && res.Response.length){
