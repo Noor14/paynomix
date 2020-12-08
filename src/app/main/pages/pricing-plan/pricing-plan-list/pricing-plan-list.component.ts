@@ -174,9 +174,9 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
 
 
   assignPlan(obj: any): any{
+    
     const object:any = {};
-    if(!obj || (obj
-      && !Object.keys(obj).length)){
+    if(!obj || (obj.UserRoleId==1) ){
         object.AssignTo = 'Partner';
         object.UserRoleId = authRole.partner;
         this.getPartners(obj).then(res => object.AssigneeList = res);
