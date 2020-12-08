@@ -44,8 +44,10 @@
               
                 <mat-radio-group [ngClass.sm]="'pl-16'" [ngClass.gt-sm]="'pl-16'"   
                 formControlName="IsAllow">
-                    <mat-radio-button [ngClass.sm]="'mb-8'" [ngClass.gt-sm]="'mx-16'" value="true">Reject the transactions</mat-radio-button>
-                    <mat-radio-button [ngClass.sm]="'mb-8'" [ngClass.gt-sm]="'mx-16'" value="false">Accept the transactions</mat-radio-button>
+                    <mat-radio-button [ngClass.sm]="'mb-8'" [ngClass.gt-sm]="'mx-16'" 
+                    value="false">Reject the transactions</mat-radio-button>
+                    <mat-radio-button [ngClass.sm]="'mb-8'" [ngClass.gt-sm]="'mx-16'" 
+                    value="true">Accept the transactions</mat-radio-button>
                 </mat-radio-group>
 
                 <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
@@ -53,6 +55,7 @@
                     [ngClass.sm]="'ml-4'" 
                     [ngClass.gt-sm]="'ml-4'" 
                     color="accent" aria-label="Submit" 
+                    (click)="CountryAllowStatus()"
                     >
                     <!-- (click)="saveSettings()" -->
                     Submit

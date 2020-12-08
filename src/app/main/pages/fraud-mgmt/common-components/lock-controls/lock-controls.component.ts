@@ -41,7 +41,8 @@ export class LockControlsComponent implements OnInit, OnChanges {
   }
   lockSettings(): any {
     if (this.lockControlForm.valid) {
-      const UserRole = this._userConfigService.getUserMode(); 
+      const UserRole = this._userConfigService.getUserMode();
+      this.lockingDetails.IsActive = this.lockControlForm.value.IsActive; 
       let obj = {
         ...this.lockControlForm.value,
         ...UserRole,

@@ -42,9 +42,9 @@ export class IpBlockingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._userConfigService.userModeChange.subscribe(() => this.getIpAddress());
-    if(this.fraudType) {
-      this.getLockSettings(this.fraudType)
+    if(this.fraudType == 2) {
+        this._userConfigService.userModeChange.subscribe(() => this.getIpAddress());
+        this.getLockSettings(this.fraudType)
     }
   }
   getIpAddress(): any {

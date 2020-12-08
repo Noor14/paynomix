@@ -36,13 +36,14 @@ export class CountryBlockingIpComponent implements OnInit {
   ngOnInit(): void {
     const checkForUserRole = this._userConfigService.getUserMode();
     this.roleObject = (checkForUserRole) ? checkForUserRole : { EntityId: 0, UserRoleId: 1 }
-this.getSettings();
+    this.createCOForm();
+    this.getSettings();
   }
 
 
   createCOForm(): void{
     this.countryoriginForm = this._formBuilder.group({
-      IsAllow: [''],
+      IsAllow: ['']
   });
   
   }
@@ -149,7 +150,7 @@ getSettings(){
 }
 
 
-ipBlockingStatus(): any {
+CountryAllowStatus(): any {
     if(this.countryoriginForm.valid) {
      const checkForUserRole = this._userConfigService.getUserMode();
      const roleObject = (checkForUserRole) ? checkForUserRole : { EntityId: 0, UserRoleId: 1 }
