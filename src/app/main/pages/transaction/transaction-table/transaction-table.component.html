@@ -3,6 +3,11 @@
     <button (click)="openRefundDialog()" *ngIf="showRefund"  mat-raised-button class="accent">
       Refund(s)
     </button>
+    <mat-select #mySel placeholder="Detail Options" multiple class="customSelect">
+      <!-- <mat-option (click)="toggleAllSelection()" [value]="0">All</mat-option> -->
+      <mat-option *ngFor="let topping of toppingList" [value]="topping" (onSelectionChange)="change($event.source)">
+        {{topping}}</mat-option>
+    </mat-select>
     <mat-paginator *ngIf="router.url != '/pages/dashboard'" [pageSize]="100" (page)="changePage($event)" 
     [length]="recordCount" [pageSizeOptions]="[100, 150, 200, 250]" class="ml-auto">
    </mat-paginator>
@@ -11,6 +16,25 @@
 
   <div class="table-responsive mat-card">
       <table mat-table [dataSource]="dataSource" matSort class="w-100-p" multiTemplateDataRows>
+
+        <!-- Expanded Details -->
+      <ng-container matColumnDef="expandedRowDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <div [@detailExpand]="element == expandedRowDetail ? 'expanded' : 'collapsed'"
+            *ngIf="expandedRowDetail && (AuthCode || Bin || AVSDetail || EntryType || Type|| DocNo)">
+            <div class="ml-51" fxLayout="row wrap p-4" fxLayoutAlign="start center">
+                <div class="p-5" fxFlex="33%" *ngIf="AuthCode" [style.display]="AuthCode ? 'block': 'none'"><b>AuthCode:</b> {{element.AuthCode ? element.AuthCode:' ---'}}</div>
+                <div class="p-5" fxFlex="33%" *ngIf="Bin" [style.display]="Bin ? 'block': 'none'"><b>Bin: </b> {{element.Bin ? element.Bin:' ---'}}</div>
+                <div class="p-5" fxFlex="33%" *ngIf="AVSDetail" [style.display]="AVSDetail ? 'block': 'none'"><b>AVSDetail:</b> {{element.AVSDetail ? element.AVSDetail:' ---'}}</div>
+                <div class="p-5" fxFlex="33%" *ngIf="EntryType" [style.display]="EntryType ? 'block': 'none'"><b>Entry Type: </b>{{element.EntryType ? element.EntryType:' ---'}}</div>
+                <div class="p-5" fxFlex="33%" *ngIf="Type" [style.display]="Type ? 'block': 'none'"><b>Type: </b> {{element.PaymentType ? element.PaymentType:' ---'}}</div>
+                <div class="p-5" fxFlex="33%" *ngIf="DocNo" [style.display]="DocNo ? 'block': 'none'"><b>Doc No#: </b> {{element.InvoiceNo ? element.InvoiceNo:' ---' }}</div>
+             </div>
+          </div>
+
+        </td>
+      </ng-container>
+
        
 
         <!-- Refund Table -->
@@ -101,7 +125,7 @@
           <ng-container matColumnDef="Icon">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let row">
-              <button mat-icon-button *ngIf="row?.Refund?.length" (click)=" 
+              <button mat-icon-button *ngIf="row?.Refund?.length"  (click)=" $event.stopPropagation();
               expandedRefundDetail = expandedRefundDetail === row ? null : row; 
               expandedElement = null;">
                 <mat-icon class="accent-fg">
@@ -222,9 +246,11 @@
       <tr mat-row (mouseenter)="actionControlOnHover = i" (mouseleave)="actionControlOnHover = -1"
         *matRowDef="let row; columns: displayedColumns; let i = dataIndex"
         [class.expanded]="expandedRefundDetail == row"
-        >
+        (click)="expandedRowDetail = expandedRowDetail === row ? null : row; expandedRefundDetail = null"
+        [class.expandedDetail]="expandedRowDetail == row">
       </tr>
       <tr mat-row class="refund-row" *matRowDef="let row; columns: ['expandedRefundDetail']"></tr>
+      <tr mat-row class="detail-row" *matRowDef="let row; columns: ['expandedRowDetail']"></tr>
     </table>
   </div>
 </section>
