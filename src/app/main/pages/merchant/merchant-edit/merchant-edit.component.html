@@ -1,5 +1,5 @@
 <section class="merchantEdit w-100-p">
-    <h2>Edit Merchant</h2>
+    <h2>Edit Merchant | {{merchantDetail?.MerchantAccountSetup?.MerchantUserName}}</h2>
     <hr />
     <app-merchant-form [onBoardError]="onBoardError" [merchantDetail]="merchantDetail" (submitForm)="updateMerchant($event)"></app-merchant-form>
 </section>

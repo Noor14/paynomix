@@ -27,6 +27,7 @@ export class CountryBlockingIpComponent implements OnInit {
     private readonly _snackBar: MatSnackBar,
     private readonly _router: Router,
     private readonly _userConfigService: UserConfigService,
+    private readonly _transactionControlsService: TransactionControlsService
 
 
 
@@ -41,7 +42,7 @@ this.getSettings();
 
   createCOForm(): void{
     this.countryoriginForm = this._formBuilder.group({
-      ListedCountryAllowOrBlock: [''],
+      IsAllow: [''],
   });
   
   }
@@ -146,6 +147,28 @@ getSettings(){
         }
   });
 }
+
+
+ipBlockingStatus(): any {
+    if(this.countryoriginForm.valid) {
+     const checkForUserRole = this._userConfigService.getUserMode();
+     const roleObject = (checkForUserRole) ? checkForUserRole : { EntityId: 0, UserRoleId: 1 }
+     const obj = {
+       ...this.countryoriginForm.value,
+       ...roleObject
+     }
+     this._transactionControlsService.ipBlockingStatus(obj).then((res:any)=>{
+       if (res && !res.StatusCode) { 
+         this._snackBar.open('Status set Successfully!', '', globalConfig.snackBarConfig);
+       //  this.countryoriginForm.controls['IsActive'].reset();
+       }
+     })
+    } else {
+        
+    }
+ }
+
+
 
 
 }

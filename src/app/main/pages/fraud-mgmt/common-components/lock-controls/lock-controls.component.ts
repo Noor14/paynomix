@@ -52,7 +52,7 @@ export class LockControlsComponent implements OnInit, OnChanges {
     this._transactionControlsService.lockControls(obj).then((res:any)=>{
       if (res && !res.StatusCode) { 
         this._snackBar.open('Settings have been saved successfully', '', globalConfig.snackBarConfig);
-        this.lockControlForm.controls['IsActive'].reset();
+    //    this.lockControlForm.controls['IsActive'].reset();
       }
     })
     } else  {

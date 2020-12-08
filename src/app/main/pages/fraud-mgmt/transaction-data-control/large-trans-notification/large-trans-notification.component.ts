@@ -4,6 +4,9 @@ import { TransactionDataControlsService } from '../transaction-data-controls.ser
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { snackBarConfig,snackBarConfigWarn,validateAllFormFields } from 'constants/globalFunctions';
+import { FraudMgmtService } from '../../fraud-mgmt.service';
+import { OverlayLockService } from '@fuse/components/overlay-lock/overlay-lock.service';
+import * as globalConfig from '../../../../../../constants/globalFunctions';
 
 @Component({
   selector: 'app-large-trans-notification',
@@ -12,18 +15,32 @@ import { snackBarConfig,snackBarConfigWarn,validateAllFormFields } from 'constan
 })
 export class LargeTransNotificationComponent implements OnInit {
   public largeTransactionForm: FormGroup;
+
+  @Input() fraudType : any;
   public disableForms: any;
+    lockingDetails: any;
+    fraudTypeLock: any;
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _transactionDataControlsService: TransactionDataControlsService,
     private readonly _userConfigService: UserConfigService,
+    private readonly _fraudManagementService: FraudMgmtService,
+    private readonly _overlayLockService : OverlayLockService,
     private readonly _snackBar: MatSnackBar,
     
   ) { }
 
   ngOnInit(): void {
     this.createlargeTransactionForm()
+    
+  
   }
+
+
+
+
+
+
 
   ngOnChanges(): void {
     if(this.disableForms) {
@@ -34,7 +51,7 @@ export class LargeTransNotificationComponent implements OnInit {
   createlargeTransactionForm(): void {
     this.largeTransactionForm = this._formBuilder.group({
       TransactionAmount: [0, Validators.required],
-      Email: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email, Validators.pattern(globalConfig.validator.emailPattern)]],
       Status: [true, Validators.required]
     })
   }

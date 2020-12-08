@@ -21,6 +21,7 @@ export class CountryOriginComponent implements OnInit {
   public updateIpAddress:any;
   public fraudTypeLock : any;
   @Input() fraudType : any;
+    disableForms: boolean;
    
 
   constructor(
@@ -40,13 +41,13 @@ export class CountryOriginComponent implements OnInit {
     }
   }
 
-  getLockSettings(obj?) : any 
-  {
+  getLockSettings(obj?) : any {
     this._fraudManagementService.lockSettings({...this._userConfigService.getUserMode(), FraudTypeId: obj})
     .then((res:any)=> {
       if(res && !res.StatusCode) {
        this.lockingDetails = res.Response[0];
-     //  this._overlayLockService.getOverLay('overlay-country').toggleOpen();
+       this._overlayLockService.getOverLay('overlay-country').toggleOpen();
+       this.disableForms = true;
       }
     })
   }

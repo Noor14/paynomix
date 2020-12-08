@@ -8,7 +8,7 @@
             </p>
         </div>
         <div class="mat-card mt-20">
-            <app-lock-controls ></app-lock-controls>
+            <!-- <app-lock-controls [disableForms]="disableForms" [lockingDetails]="lockingDetails"></app-lock-controls> -->
              <form [formGroup]="largeTransactionForm">
                 <fieldset class="my-4">
                     <legend class="accent-fg">Notification</legend>
@@ -34,13 +34,22 @@
             
                             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.xs]="'mt-20'" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'" >
                                 <mat-label>Email</mat-label>
-                                <input matInput formControlName="Email"  required>
+                                <input matInput formControlName="Email" name="Email"  required>
                                 <mat-hint> Notification Email</mat-hint>
                                 <mat-error>Email is required!</mat-error>
+                                <mat-error
+                                *ngIf="!largeTransactionForm.get('Email').hasError('required') &&
+                                        (largeTransactionForm.get('Email').hasError('email') || largeTransactionForm.get('Email').hasError('pattern'))">
+                                Please enter a valid email address
+                            </mat-error>
+
+
                             </mat-form-field>
                         </div>
                         <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
-                            <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="Save" [disabled]="disableForms" type="submit" (click)="addlargeNotification()">
+                            <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="Save"
+                            [disabled]="largeTransactionForm.invalid"
+                             type="submit" (click)="addlargeNotification()">
                                 Save
                             </button>
                         </div>
