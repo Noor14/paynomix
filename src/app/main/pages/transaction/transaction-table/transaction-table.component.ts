@@ -15,6 +15,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
 @Component({
   selector: 'app-transaction-table',
   templateUrl: './transaction-table.component.html',
@@ -59,6 +61,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public EntryType = false;
   public Type = false;
   public DocNo = false;
+  public allSelected = false;
   public expandedRowDetail: any;
 
   private columnstoDisplay: string[] = [
@@ -81,6 +84,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
    'Action'
 ]; 
 // @ViewChild(MatPaginator) paginator: MatPaginator;
+@ViewChild('mySel') skillSel: MatSelect;
 public displayedColumns : string[]= this.columnstoDisplay.slice();
   constructor(
     private readonly _dialog: MatDialog,
@@ -166,15 +170,12 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
     });
   }
 
- 
-
   openEmailDialog(obj) {
     const dialogRef = this._dialog.open(EmailDialogComponent, {width: '550px'});
     obj.isSingleInput = true
     dialogRef.componentInstance.data = obj ;
 
    }
-
 
   refund() {
     if (this.refundForm.valid) {
@@ -204,41 +205,6 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
     const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
     dialogRef.componentInstance.data = obj;
   }
-
-  detailList(value) {
-    console.log(value);
-    if(value.length) {
-      const val =  value.shift();
-      console.log(val);
-    }
-    // switch (value.length - 1.value) {
-    //   case 'Auth Code':
-    //     console.log('1')
-    //     this.AuthCodecheck = true;
-    //     break;
-    //   case 'Bin':
-    //     console.log('2');
-    //     this.Bincheck = true;
-    //     break;
-    //   case 'AVS Detail':
-    //     console.log('3');
-    //     this.AVSDetail = true;
-    //     break;
-    //   case 'Entry Type':
-    //     console.log('4');
-    //     this.EntryTypecheckcheck = true;
-    //     break;
-    //   case 'Type':
-    //     console.log('5');
-    //     this.Typecheck = true;
-    //     break;
-    //   case 'Doc No#':
-    //     console.log('6  ');
-    //     this.DocNocheck = true;
-    //     break;
-
-    // }
-  }
   change(val) {
       switch (val.value) {
         case 'AuthCode':
@@ -260,5 +226,15 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
           this.DocNo = val._selected;
           break;
       }
+  }
+  toggleAllSelection() {
+    this.allSelected = !this.allSelected;  // to control select-unselect
+      
+    if (this.allSelected) {
+      this.skillSel.options.forEach( (item : MatOption) => item.select());
+    } else {
+      this.skillSel.options.forEach( (item : MatOption) => {item.deselect()});
+    }
+    this.skillSel.close();
   }
 }

@@ -3,7 +3,8 @@
     <button (click)="openRefundDialog()" *ngIf="showRefund" mat-raised-button class="accent">
       Refund(s)
     </button>
-    <mat-select placeholder="Detail Options" multiple class="customSelect">
+    <mat-select #mySel placeholder="Detail Options" multiple class="customSelect">
+      <!-- <mat-option (click)="toggleAllSelection()" [value]="0">All</mat-option> -->
       <mat-option *ngFor="let topping of toppingList" [value]="topping" (onSelectionChange)="change($event.source)">
         {{topping}}</mat-option>
     </mat-select>
@@ -17,7 +18,7 @@
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p" multiTemplateDataRows>
 
       <!-- Expanded Details -->
-      <ng-container matColumnDef="expandedDetail">
+      <ng-container matColumnDef="expandedRowDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
           <div [@detailExpand]="element == expandedRowDetail ? 'expanded' : 'collapsed'"
             *ngIf="expandedRowDetail && (AuthCode || Bin || AVSDetail || EntryType || Type|| DocNo)">
@@ -120,7 +121,7 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row">
           <button mat-icon-button *ngIf="row?.Refund?.length" (click)="$event.stopPropagation(); 
-              expandedRefundDetail = expandedRefundDetail === row ? null : row; expandedDetail = null">
+              expandedRefundDetail = expandedRefundDetail === row ? null : row; expandedRowDetail = null">
             <mat-icon class="accent-fg">
               <ng-container *ngIf="expandedRefundDetail === row; else otherIcon">
                 remove
@@ -239,7 +240,7 @@
         [class.expandedDetail]="expandedRowDetail == row">
       </tr>
       <tr mat-row class="refund-row" *matRowDef="let row; columns: ['expandedRefundDetail']"></tr>
-      <tr mat-row class="detail-row" *matRowDef="let row; columns: ['expandedDetail']"></tr>
+      <tr mat-row class="detail-row" *matRowDef="let row; columns: ['expandedRowDetail']"></tr>
     </table>
   </div>
 </section>
