@@ -55,15 +55,17 @@
                     </mat-form-field>  
                     <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                         <mat-label>Message</mat-label>
-                        <textarea matInput rows="5" readonly>
-                  Hello,
-            
-                  Thank you for signing up on {{appInfo?.title}} Inc. You’re almost ready to go! 
-                  Please fill out your application to complete the boarding process by
-                  clicking the following link.
-                  Launch Application
-                  We appreciate the opportunity to work with you.
-                  {{appInfo?.title}} Team.
+                    <textarea matInput rows="5" readonly>
+Hello,
+
+Thank you for signing up on {{appInfo?.title}} Inc. You’re almost ready to go! 
+Please fill out your application to complete the boarding process by
+clicking the following link.
+
+Launch Application
+
+We appreciate the opportunity to work with you.
+{{appInfo?.title}} Team.
                         </textarea> 
                     </mat-form-field>
             </ng-template>

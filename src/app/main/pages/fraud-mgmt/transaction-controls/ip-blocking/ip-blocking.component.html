@@ -1,17 +1,18 @@
 <section class="ip-blocking w-100-p" >
-    <div class="outer-layer m-20 px-20 pb-20">
+    <div class="outer-layer m-20 p-20" fxLayout="column">
         <h2>IP Blocking </h2>
         <hr />
-        <p>
-            Users coming from specific IP addresses or subnets can be blocked
-        </p>
-       
+        <div class="mat-card p-20 ">
+            <p>
+                Users coming from specific IP addresses or subnets can be blocked
+            </p>
+        </div>
         <!-- lock controls -->
-        <app-lock-controls [lockingDetails]="lockingDetails" [fraudTypeLock]="fraudTypeLock"></app-lock-controls>
+        <app-lock-controls [disableForms]="disableForms" [lockingDetails]="lockingDetails"></app-lock-controls>
         <!-- ip-blocking-status -->
-        <app-ip-blocking-status></app-ip-blocking-status>
-        <!-- app-ip-address -->
-        <app-ip-address [updateIpAddress]="updateIpAddress" (updateList)="updateList()"></app-ip-address>
+         <app-ip-blocking-status [disableForms]="disableForms"></app-ip-blocking-status>
+         <!-- app-ip-address -->
+         <app-ip-address [updateIpAddress]="updateIpAddress" [disableForms]="disableForms" (updateList)="updateList()"></app-ip-address>
         <!-- table -->
         <ng-template #renderingContainer></ng-template>
     </div>

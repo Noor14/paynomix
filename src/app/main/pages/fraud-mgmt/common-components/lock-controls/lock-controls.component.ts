@@ -14,7 +14,7 @@ import { TransactionControlsService } from '../../transaction-controls/transacti
 export class LockControlsComponent implements OnInit, OnChanges {
   public lockControlForm: FormGroup;
   @Input() lockingDetails:any
-  @Input() fraudTypeLock :any
+  @Input() disableForms:any
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _userConfigService: UserConfigService,
@@ -28,29 +28,31 @@ export class LockControlsComponent implements OnInit, OnChanges {
     if(this.lockingDetails) {
       this.lockControlForm.patchValue(this.lockingDetails);
     }
-    if(this.fraudTypeLock) {
-      console.log(this.fraudTypeLock);
-      this.lockControlForm.value.FraudTypeId = this.fraudTypeLock;
-      this.lockControlForm.controls['FraudTypeId'].setValue(this.fraudTypeLock);
+    if(this.disableForms) {
+      this.lockControlForm.disable();
     }
   }
   createLockControlForm(): void {
     this.lockControlForm = this._formBuilder.group({
+      FraudSettingId: [0, Validators.required],
       IsActive: [false, Validators.required],
-      FraudTypeId: [this.fraudTypeLock, Validators.required],
+      FraudTypeId: [2, Validators.required],
     })
   }
   lockSettings(): any {
     if (this.lockControlForm.valid) {
-      const UserRole = this._userConfigService.getUserMode();
-      const obj = {
+      const UserRole = this._userConfigService.getUserMode(); 
+      let obj = {
         ...this.lockControlForm.value,
-        ...UserRole
+        ...UserRole,
+      }
+      if(this.lockingDetails) {
+        obj =  {...obj, ...this.lockingDetails}
       }
     this._transactionControlsService.lockControls(obj).then((res:any)=>{
       if (res && !res.StatusCode) { 
         this._snackBar.open('Settings have been saved successfully', '', globalConfig.snackBarConfig);
-        // this.lockControlForm.controls['IsActive'].reset();
+        this.lockControlForm.controls['IsActive'].reset();
       }
     })
     } else  {

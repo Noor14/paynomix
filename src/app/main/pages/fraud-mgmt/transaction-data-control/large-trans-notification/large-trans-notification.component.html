@@ -1,49 +1,52 @@
 <section class="largeTransNotification w-100-p">
-    <div class="outer-layer m-20 px-20" >
+    <div class="outer-layer m-20 p-20" >
         <h2 >Large Transaction Notification </h2>
         <hr />
-        <p>
-            When transactions meet or exceed a specified dollar amount you can be notified by email.
-        </p>
-        <div class=" mt-20">
+        <div class="mat-card p-20">
+            <p>
+                When transactions meet or exceed a specified dollar amount you can be notified by email.
+            </p>
+        </div>
+        <div class="mat-card mt-20">
             <app-lock-controls ></app-lock-controls>
+             <form [formGroup]="largeTransactionForm">
+                <fieldset class="my-4">
+                    <legend class="accent-fg">Notification</legend>
+                    <div fxLayout="column" fxLayoutAlign="start">
+                        <div class="py-8" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                            <div fxFlex.gt-sm="100" fxFlex.sm="100" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+                                <mat-label>Status:</mat-label>
+                                <mat-radio-group [ngClass.sm]="'pl-16'" [ngClass.gt-sm]="'pl-16'"   formControlName="Status">
+                                    <mat-radio-button [ngClass.sm]="'mx-16'" [ngClass.gt-sm]="'mx-16'" value="true">Active</mat-radio-button>
+                                    <mat-radio-button [ngClass.sm]="'mx-16'" [ngClass.gt-sm]="'mx-16'" value="false">In Active</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+
+                        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'" >
+                                <mat-label>Transaction Exceeding</mat-label>
+                                <input matInput  currencyMask [options]="{ align: 'left', prefix: '' }"  required formControlName="TransactionAmount">
+                                <mat-hint>Transaction Exceeding amount</mat-hint>
+                                <mat-error>Transaction Exceeding amount is required!</mat-error>
+                               
+                            </mat-form-field>
             
-            <fieldset class="my-4">
-                <legend class="accent-fg">Notification</legend>
-                <form fxLayout="column" fxLayoutAlign="start" [formGroup]="notificationForm">
-                    <div class="py-8" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                        <div fxFlex.gt-sm="100" fxFlex.sm="100" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                            <mat-label>Status:</mat-label>
-                            <mat-radio-group [ngClass.sm]="'pl-16'" [ngClass.gt-sm]="'pl-16'"   formControlName="position">
-                                <mat-radio-button [ngClass.sm]="'mx-16'" [ngClass.gt-sm]="'mx-16'" value="above">Active</mat-radio-button>
-                                <mat-radio-button [ngClass.sm]="'mx-16'" [ngClass.gt-sm]="'mx-16'" value="below">In Active</mat-radio-button>
-                            </mat-radio-group>
+                            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.xs]="'mt-20'" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'" >
+                                <mat-label>Email</mat-label>
+                                <input matInput formControlName="Email"  required>
+                                <mat-hint> Notification Email</mat-hint>
+                                <mat-error>Email is required!</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
+                            <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="Save" [disabled]="disableForms" type="submit" (click)="addlargeNotification()">
+                                Save
+                            </button>
                         </div>
                     </div>
-
-                    <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                        <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
-                            <mat-label>Transaction Exceeding</mat-label>
-                            <input matInput formControlName="TransExceeding"  currencyMask [options]="{ align: 'left', prefix: '' }"  required>
-                            <mat-hint>Transaction Exceeding amount</mat-hint>
-                            <mat-error>Transaction Exceeding amount is required!</mat-error>
-                            
-                        </mat-form-field>
-        
-                        <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.xs]="'mt-20'" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                            <mat-label>Email</mat-label>
-                            <input matInput formControlName="Email" required>
-                            <mat-hint> Notification Email</mat-hint>
-                            <mat-error>Email is required!</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
-                        <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="Save" >
-                        Save
-                        </button>
-                    </div>
-                </form>
-            </fieldset>
+                </fieldset>
+            </form>   
         </div>
      
     </div>

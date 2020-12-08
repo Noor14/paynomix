@@ -40,7 +40,7 @@ export class MerchantTableComponent implements OnInit {
   }
 
   ngAfterViewInit(): void{
-    setTimeout(() =>  this.recordCount = 2000, 0);
+    setTimeout(() =>  this.recordCount = 100, 0);
   }
 
   openDialog(obj) {
@@ -65,7 +65,7 @@ export class MerchantTableComponent implements OnInit {
     .then((res: any) => {
       if (res && !res.StatusCode) {
         if (res.Response ) {
-          this.dataSource = res.Response;
+          this.dataSource.data = res.Response;
         }
       }
     }).catch(() => (console.log))

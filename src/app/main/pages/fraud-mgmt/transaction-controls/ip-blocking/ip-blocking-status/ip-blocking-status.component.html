@@ -1,0 +1,26 @@
+<div class="mat-card mt-20">
+    <div class="outer-layer p-20" fxLayout="column">
+        <fieldset>
+            <legend class="accent-fg">IP Blocking </legend>
+            <div fxFlex="column">
+                <form [formGroup]="ipBlockingStatusForm">
+                    <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column">
+                        <div fxFlex.gt-sm="10" fxFlex.sm="10">
+                            <label>Status : </label>
+                        </div>
+                        <div fxFlex.gt-sm="60" fxFlex.sm="60">
+                            <mat-radio-group fxLayout="column" fxLayoutAlign="start start" formControlName="IsActive">
+                                <mat-radio-button class="mb-12" value="true">Active</mat-radio-button>
+                                <mat-radio-button class="mb-12" value="false">In Active</mat-radio-button>
+                            </mat-radio-group>
+                            <!-- <mat-error *ngIf="ipBlockingStatusForm.invalid">Status is Required!</mat-error> -->
+                        </div>
+                        <div fxFlex.gt-sm="30" fxFlex.sm="30" fxLayout="column" fxLayoutAlign="end start">
+                            <button mat-raised-button color="accent" (click)="ipBlockingStatus()" [disabled]="disableForms">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+    </div>
+</div>

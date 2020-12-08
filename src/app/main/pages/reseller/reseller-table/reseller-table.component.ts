@@ -9,6 +9,8 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
 import { snackBarConfig, truncateTextLength } from '../../../../../constants/globalFunctions';
 import { SettingService } from '../../settings/settings.service';
+import { UserConfigService } from '@fuse/services/user.config.service';
+import { ResellerService } from '../reseller.service';
 
 @Component({
   selector: 'app-reseller-table',
@@ -22,6 +24,7 @@ export class ResellerTableComponent implements OnInit  {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @Input() data: any;
+  public recordCount: number = 0;
   public actionControlOnHover = -1;
   public displayedColumns: string[] = ['PartnerName', 'ResellerName', 'ContactPerson', 'Email', 'TelephoneNumber'];
    /**
@@ -35,6 +38,8 @@ export class ResellerTableComponent implements OnInit  {
     private readonly _dialog: MatDialog,
     private readonly _snackBar: MatSnackBar,
     private readonly _settingService: SettingService,
+    private readonly _userConfigService: UserConfigService,
+    private readonly _resellerService: ResellerService,
 
   ) { }
 
@@ -68,5 +73,26 @@ export class ResellerTableComponent implements OnInit  {
   }).catch((err: HttpErrorResponse)=>(console.log));
 
 }
+ngAfterViewInit(): void{
+  setTimeout(() =>  this.recordCount = 100, 0);
+}
+
+  changePage(event){ 
+    const obj = {
+      RecordLimit: event.pageSize,
+      PageNo: ++event.pageIndex,
+      ...this._userConfigService.getUserMode()
+    };
+    this._resellerService.resellerList(obj)
+    .then((res: any) => {
+      if (res && !res.StatusCode) {
+        if (res.Response ) {
+          this.dataSource.data = res.Response;
+        }
+      }
+    }).catch(() => (console.log))
+
+
+  }
 
 }

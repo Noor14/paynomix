@@ -92,8 +92,8 @@ export const navigation: FuseNavigation[] = [
                 id       : 'fraud_mgmt',
                 title    : 'Fraud Managment',
                 type     : 'collapsable',
-                svgIcon     : 'fraud',
-                roles    :    Object.values(authRole).filter(item => typeof item === 'number'),
+                svgIcon  : 'fraud',
+                roles    : Object.values(authRole).filter(item => typeof item === 'number'),
                 children : [
                     {
                         id       : 'transCtrl',

@@ -1,4 +1,4 @@
-<mat-paginator [pageSizeOptions]="[100, 150, 200, 250]"></mat-paginator>    
+<mat-paginator [pageSize]="100" [pageSizeOptions]="[100, 150, 200, 250]" [length]="recordCount" (page)="changePage($event)"></mat-paginator>    
 <section class="partnerTable table-responsive mat-card">
     <table mat-table [dataSource]="dataSource" matSort class="w-100-p">
       
