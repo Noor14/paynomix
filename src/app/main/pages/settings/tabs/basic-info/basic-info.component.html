@@ -28,6 +28,28 @@
             <form fxLayout="column" fxLayoutAlign="start"
              name="form" [formGroup]="basicInfoForm"> 
 
+
+             <div *ngIf="CurrentUser == 2 || CurrentUser == 4"
+              fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                <mat-form-field appearance="outline" 
+             fxFlex="100" >
+                    <mat-label>Partner</mat-label>
+                    <input matInput value="PartnerName" [disabled]="true">
+                </mat-form-field>           
+            </div>
+
+            <div
+            *ngIf="CurrentUser == 2 "
+            fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                <mat-form-field appearance="outline" 
+             fxFlex="100" >
+                    <mat-label>Reseller</mat-label>
+                    <input matInput value="ResellerName" [disabled]="true">
+                </mat-form-field>           
+            </div>
+
+
+             
                 <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                     <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
                         <mat-label>First name</mat-label>
@@ -41,6 +63,18 @@
                         <mat-error>Last Name is required!</mat-error>
                     </mat-form-field>
                 </div>
+
+                <div
+               
+                fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+                    <mat-form-field appearance="outline" 
+                 fxFlex="100" >
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="Email"   [disabled]="true">
+                    </mat-form-field>               
+                </div>
+    
+
                 <div fxFlex="1 0 auto">
                     <mat-form-field appearance="outline" fxFlex="100">
                         <mat-label>Address</mat-label>
@@ -49,12 +83,7 @@
                     </mat-form-field>
                 </div>
       
-                <div fxFlex="1 0 auto">
-                    <mat-form-field appearance="outline" fxFlex="100">
-                        <mat-label>Address 2</mat-label>
-                        <textarea  matInput formControlName="Address2"></textarea>
-                    </mat-form-field>
-                </div>
+    
 
                 <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                     <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">

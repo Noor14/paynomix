@@ -49,6 +49,8 @@ this.getSettings();
   public toggleSelection(item, list) {
     item.IsActive = !item.IsActive;
 
+   
+
   }
   public moveSelected(direction) {
 
@@ -66,7 +68,6 @@ this.getSettings();
     } else {
       this.AllCountries.forEach(item => {
         if (item.IsActive) {
-          this.selectedCountries.push(item);
           this.selectedArr.push(
             {
                 "FraudDescription": item.name,
@@ -79,7 +80,7 @@ this.getSettings();
         }
       });
      this.AddCountry(this.selectedArr);
-     this.selectedArr =[]
+     this.selectedArr =[];
     }
   }
 

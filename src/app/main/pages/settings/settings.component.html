@@ -1,6 +1,6 @@
 <section class="settings w-100-p">
     <mat-tab-group mat-align-tabs="start">
-        <mat-tab label="Basic Information" *ngIf="basicInfoVisibility">
+        <mat-tab label="{{(userType == 1)? 'Basic Information' : (userType == 2)? 'Merchant Information' : (userType == 3)? 'Partner Information' : 'Reseller Information'}}" *ngIf="basicInfoVisibility">
             <app-basic-info></app-basic-info>
         </mat-tab>
         <mat-tab label="Make A Sale">

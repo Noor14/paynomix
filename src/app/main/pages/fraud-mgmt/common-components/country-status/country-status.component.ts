@@ -39,8 +39,8 @@ export class CountryStatusComponent implements OnInit {
       }
       this._transactionControlsService.ipBlockingStatus(obj).then((res:any)=>{
         if (res && !res.StatusCode) { 
-          this._snackBar.open('Country Origin Status set Successfully!', '', snackBarConfig);
-          this.countryForm.controls['IsActive'].reset();
+          this._snackBar.open('Status set Successfully!', '', snackBarConfig);
+      
         }
       })
      } else {

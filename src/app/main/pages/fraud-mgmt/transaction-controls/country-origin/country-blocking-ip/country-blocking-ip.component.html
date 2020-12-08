@@ -27,10 +27,11 @@
                         
                     </div>
                     <fieldset  fxFlex.gt-sm="40" fxFlex.sm="40" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                        <legend class="accent-fg">Selected Selection</legend>
+                        <legend class="accent-fg">Selected Countries</legend>
                         <mat-list role="list" class="matListHeight">
-                            <mat-list-item role="listitem" *ngFor="let item of selectedCountries" [class.accent]="item.IsActive"
-                                (click)="toggleSelection(item, 2)">{{item.name}}
+                            <mat-list-item role="listitem" *ngFor="let item of selectedCountries" 
+                                >{{item.name}}
+                                 <!-- (click)="toggleSelection(item, 2)" -->
                             </mat-list-item>
                         </mat-list>
                     </fieldset>
@@ -48,7 +49,12 @@
                 </mat-radio-group>
 
                 <div fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
-                    <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="Submit" (click)="saveSettings()">
+                    <button mat-raised-button class="my-4" 
+                    [ngClass.sm]="'ml-4'" 
+                    [ngClass.gt-sm]="'ml-4'" 
+                    color="accent" aria-label="Submit" 
+                    >
+                    <!-- (click)="saveSettings()" -->
                     Submit
                     </button>
                 </div>

@@ -46,7 +46,8 @@
                 </button>
 
             </mat-menu>
-
+            <div class="toolbar-separator"></div>
+          <span class="usertype">{{(userType == 1) ? 'Admin' :(userType == 2) ? 'Merchant' : (userType ==3) ? 'Partner' : 'Reseller' }}</span>
             <div class="toolbar-separator"></div>
             <button mat-icon-button class="searchIcon" (click)="toggleHierarchyTree()">
                 <mat-icon class="s-24 secondary-text">search</mat-icon>

@@ -12,12 +12,18 @@ import { takeUntil } from 'rxjs/operators';
 export class SettingsComponent implements OnInit, OnDestroy {
    public basicInfoVisibility: boolean = false;
    private _unsubscribeAll: Subject<any>;
+   userType: any;
 
    constructor(private readonly _userConfigService:  UserConfigService) {
     this._unsubscribeAll = new Subject();
    }
 
    ngOnInit(): void {
+
+
+    this.userType =   this._userConfigService.loggedInUser.UserRoleId;
+
+
     this._userConfigService.userModeChange
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe((res) => {

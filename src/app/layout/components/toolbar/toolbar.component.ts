@@ -32,6 +32,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
 
     // Private
     private _unsubscribeAll: Subject<any>;
+    userType: any;
 
     /**
      * Constructor
@@ -116,7 +117,9 @@ export class ToolbarComponent implements OnInit, OnDestroy
                 this.hiddenNavbar = settings.layout.navbar.hidden === true;
             });
             //set userName
+
         this.userName = this._userConfigService.loggedInUser.UserName
+        this.userType =   this._userConfigService.loggedInUser.UserRoleId
         // Set the selected language from default languages
         this.selectedLanguage = _.find(this.languages, {id: this._translateService.currentLang});
     }
