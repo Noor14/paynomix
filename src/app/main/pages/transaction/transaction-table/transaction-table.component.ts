@@ -21,6 +21,12 @@ import { UserConfigService } from '@fuse/services/user.config.service';
   styleUrls: ['./transaction-table.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [
+    trigger('detailExpand', [
+      state('collapsed, void', style({ height: '0', minHeight: '0', visibility: 'hidden' })),
+      state('expanded', style({ height: 'auto', minHeight: '48px', visibility: 'visible', width: '100%', 'border-bottom': '1px solid #ccc' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+    ]),
     trigger('detailExpandRefund', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
@@ -46,7 +52,15 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public dataSource = new MatTableDataSource<any>();
   @Output() updateList = new EventEmitter<boolean>();
   public actionControlOnHover = -1;
-  toppingList = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  toppingList = ['AuthCode', 'Bin', 'AVSDetail', 'EntryType', 'Type', 'DocNo'];
+  public AuthCode = false;
+  public Bin = false;
+  public AVSDetail = false;
+  public EntryType = false;
+  public Type = false;
+  public DocNo = false;
+  public expandedRowDetail: any;
+
   private columnstoDisplay: string[] = [
     'Icon',
     'Select',
@@ -189,5 +203,62 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
   printReceipt(obj) {
     const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
     dialogRef.componentInstance.data = obj;
+  }
+
+  detailList(value) {
+    console.log(value);
+    if(value.length) {
+      const val =  value.shift();
+      console.log(val);
+    }
+    // switch (value.length - 1.value) {
+    //   case 'Auth Code':
+    //     console.log('1')
+    //     this.AuthCodecheck = true;
+    //     break;
+    //   case 'Bin':
+    //     console.log('2');
+    //     this.Bincheck = true;
+    //     break;
+    //   case 'AVS Detail':
+    //     console.log('3');
+    //     this.AVSDetail = true;
+    //     break;
+    //   case 'Entry Type':
+    //     console.log('4');
+    //     this.EntryTypecheckcheck = true;
+    //     break;
+    //   case 'Type':
+    //     console.log('5');
+    //     this.Typecheck = true;
+    //     break;
+    //   case 'Doc No#':
+    //     console.log('6  ');
+    //     this.DocNocheck = true;
+    //     break;
+
+    // }
+  }
+  change(val) {
+      switch (val.value) {
+        case 'AuthCode':
+          this.AuthCode = val._selected;
+          break;
+        case 'Bin':
+          this.Bin = val._selected;
+          break;
+        case 'AVSDetail':
+          this.AVSDetail = val._selected;
+          break;
+        case 'EntryType':
+          this.EntryType = val._selected;
+          break;
+        case 'Type':
+          this.Type = val._selected;
+          break;
+        case 'DocNo':
+          this.DocNo = val._selected;
+          break;
+      }
   }
 }
