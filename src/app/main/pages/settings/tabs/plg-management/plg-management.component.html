@@ -5,7 +5,7 @@
             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'"
                 [ngClass.gt-sm]="'pr-4'">
                 <mat-label>Select Partner </mat-label>
-                <mat-select formControlName="PartnerName">
+                <mat-select formControlName="PartnerID">
                     <mat-option [value]="item.PartnerId" *ngFor="let item of partners">{{item.PartnerName}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -13,7 +13,7 @@
             <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'"
                 [ngClass.gt-sm]="'pl-4'">
                 <mat-label> Website Url</mat-label>
-                <input matInput formControlName="WebsiteUrl" type="url">
+                <input matInput formControlName="DomainName" type="url">
             </mat-form-field>
         </div>
         <div class="mb-8" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch"
@@ -25,7 +25,7 @@
                             <span class="text-secondary">
                                 Drag and drop Main Logo or <span class="accent-fg">Browse</span>
                             </span>
-                            <ngx-dropzone [multiple]="false" (change)="onFileSelect($event,logoImage)" [maxFileSize]="5242880"
+                            <ngx-dropzone [multiple]="false" (change)="onFileSelect($event,'logoImage')" [maxFileSize]="5242880"
                                 [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
                                 <ngx-dropzone-label>
                                     <mat-icon class="accent-fg">cloud_upload</mat-icon>
@@ -35,12 +35,12 @@
                     </ng-container>
                     <ngx-dropzone-image-preview *ngIf="(logoImage | json) != ({} | json) && !logoImage.FilePath"
                         ngProjectAs="ngx-dropzone-preview" [file]="logoImage" [removable]="true"
-                        (removed)="onFileRemove(logoImage)">
+                        (removed)="onFileRemove('logoImage')">
                     </ngx-dropzone-image-preview>
                     <ng-container *ngIf="logoImage && logoImage.FilePath">
                         <div class="uploadedFile">
                             <img [src]="logoImage.FilePath" alt="img">
-                            <mat-icon class="resetImageIcon" (click)="onFileRemove(logoImage)">close</mat-icon>
+                            <mat-icon class="resetImageIcon" (click)="onFileRemove('logoImage')">close</mat-icon>
                         </div>
                     </ng-container>
                 </div>
@@ -52,7 +52,7 @@
                             <span class="text-secondary">
                                 Drag and drop Sidebar Logo or <span class="accent-fg">Browse</span>
                             </span>
-                            <ngx-dropzone [multiple]="false" (change)="onFileSelect($event,splashScreenImage)" [maxFileSize]="5242880"
+                            <ngx-dropzone [multiple]="false" (change)="onFileSelect($event, 'splashScreenImage')" [maxFileSize]="5242880"
                             [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
                             <ngx-dropzone-label>
                                 <mat-icon class="accent-fg">cloud_upload</mat-icon>
@@ -62,12 +62,12 @@
                     </ng-container>
                     <ngx-dropzone-image-preview *ngIf="(splashScreenImage | json) != ({} | json) && !splashScreenImage.FilePath"
                     ngProjectAs="ngx-dropzone-preview" [file]="splashScreenImage" [removable]="true"
-                    (removed)="onFileRemove(splashScreenImage)">
+                    (removed)="onFileRemove('splashScreenImage')">
                 </ngx-dropzone-image-preview>
                 <ng-container *ngIf="splashScreenImage && splashScreenImage.FilePath">
                     <div class="uploadedFile">
                         <img [src]="splashScreenImage.FilePath" alt="img">
-                        <mat-icon class="resetImageIcon" (click)="onFileRemove(splashScreenImage)">close</mat-icon>
+                        <mat-icon class="resetImageIcon" (click)="onFileRemove('splashScreenImage')">close</mat-icon>
                     </div>
                 </ng-container>
                 </div>
@@ -111,8 +111,9 @@
             </mat-radio-group>
         </fieldset>
 
+        <!-- Layouts -->
         <div class=" my-4" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch"
-            fxLayoutAlign.sm="space-between start" fxLayoutAlign.gt-sm="space-between start">
+            fxLayoutAlign.sm="space-between start" fxLayoutAlign.gt-sm="space-between start" formGroupName="layout">
             <div fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="['my-8','pr-4']" [ngClass.gt-sm]="['my-8','pr-4']">
                 <fieldset formGroupName="navbar">
                     <legend class="accent-fg">Navbar</legend>
@@ -153,7 +154,7 @@
                 Cancel
             </button>
             <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent"
-                aria-label="save">
+                aria-label="save" (click)="saveLayouts()">
                 Save
             </button>
         </div>

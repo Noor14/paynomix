@@ -36,6 +36,14 @@ export class SettingService extends BaseService {
      } 
     resendCredentials(obj: any): any{
         const url = `${environment.apiURL}Setting/resendemail`;
-         return this.post(url, obj);
+        return this.post(url, obj);
+    }
+    plgManager(obj: any):any {
+        const url = `${environment.apiURL}Setting/CreatePLG`;
+        return this.post(url, obj);
+    }
+    getPlgManager(obj: any):any {
+        const url = `${environment.apiURL}Setting/GetPLG`;
+        return this.post(url, obj);
     }
 }

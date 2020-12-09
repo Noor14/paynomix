@@ -1,15 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoFoundComponent } from '@fuse/components/no-found/no-found.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { PartnerService } from 'app/main/pages/partner/partner.service';
-import { snackBarConfigWarn } from 'constants/globalFunctions';
+import { snackBarConfig, snackBarConfigWarn } from 'constants/globalFunctions';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PlgTableComponent } from './plg-table/plg-table.component';
-
+import * as globalConfig from '../../../../../../constants/globalFunctions';
+import { SettingService } from '../../settings.service';
 
 @Component({
   selector: 'app-plg-management',
@@ -22,10 +23,10 @@ export class PlgManagementComponent implements OnInit {
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   public partners: any[] = [];
+  public plg: any[] = [];
   private _unsubscribeAll: Subject<any>;
-  public userImage: any = {};
   public logoImage: any = {};
-  public splashScreenImage:any = {};
+  public splashScreenImage: any = {};
   /**
    * Constructor
    *
@@ -39,6 +40,7 @@ export class PlgManagementComponent implements OnInit {
     private readonly _resolver: ComponentFactoryResolver,
     private readonly _formBuilder: FormBuilder,
     private readonly _snackBar: MatSnackBar,
+    private readonly _settingService: SettingService,
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -46,7 +48,9 @@ export class PlgManagementComponent implements OnInit {
   ngOnInit() {
     this._userConfigService.userModeChange
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe(() => this.getPartners())
+      .subscribe(() => this.getPlg()
+      )
+    this.getPartners()
     this.createPlgManagementForm();
   }
   renderingComponent(type, data?) {
@@ -58,41 +62,40 @@ export class PlgManagementComponent implements OnInit {
 
   createPlgManagementForm(): void {
     this.plgManagmentForm = this._formBuilder.group({
-      PartnerName     : [''],
-      DomainName      : [''],
-      colorTheme      : [''],
-      customScrollbars: [''],
-      PartnerID       :[''],
-      layout          : this._formBuilder.group({
-          style    : [''],
-          width    : [''],
-          navbar   : this._formBuilder.group({
-              primaryBackground  : [''],
-              secondaryBackground: [''],
-              folded             : [''],
-              hidden             : [''],
-              position           : [''],
-              variant            : ['']
-          }),
-          toolbar  : this._formBuilder.group({
-              background           : [''],
-              customBackgroundColor: [''],
-              hidden               : [''],
-              position             : ['']
-          }),
-          footer   : this._formBuilder.group({
-              background           : [''],
-              customBackgroundColor: [''],
-              hidden               : [''],
-              position             : ['']
-          }),
-          sidepanel: this._formBuilder.group({
-              hidden  : [''],
-              position: ['']
-          })
+      DomainName: ['', Validators.required],
+      colorTheme: ['', Validators.required],
+      customScrollbars: [true, Validators.required],
+      PartnerID: ['', Validators.required],
+      layout: this._formBuilder.group({
+        style: [''],
+        width: [''],
+        navbar: this._formBuilder.group({
+          primaryBackground: [''],
+          secondaryBackground: [''],
+          folded: [false, Validators.required],
+          hidden: [false,  Validators.required],
+          position: [''],
+          variant: ['']
+        }),
+        toolbar: this._formBuilder.group({
+          background: [''],
+          customBackgroundColor: [true, Validators.required],
+          hidden: [false, Validators.required],
+          position: ['']
+        }),
+        footer: this._formBuilder.group({
+          background: [''],
+          customBackgroundColor: [false, Validators.required],
+          hidden: [true, Validators.required],
+          position: ['']
+        }),
+        sidepanel: this._formBuilder.group({
+          hidden: [true, Validators.required],
+          position: ['']
+        })
       })
-  })
-}
+    })
+  }
   onFileSelect(event, value): any {
     if (event.rejectedFiles.length) {
       let rejectedFile = event.rejectedFiles.pop();
@@ -105,30 +108,31 @@ export class PlgManagementComponent implements OnInit {
         return;
       }
     } else {
-      if(value == 'logoImage') {
+      if (value == 'logoImage') {
         this.logoImage = event.addedFiles.pop();
-      } else if(value == 'splashScreenImage') {
+        this.convertFile(this.logoImage, value)
+      } else if (value == 'splashScreenImage') {
         this.splashScreenImage = event.addedFiles.pop();
+        this.convertFile(this.splashScreenImage, value)
       }
-      this.convertFile(this.logoImage, value)
     }
   }
   async convertFile(file, value?) {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      if(value == 'logoImage') {
-        this.logoImage.FileName = file.name;
-        this.logoImage.FileType = file.type;
-        this.logoImage.FileExtension = file.type;
-        this.logoImage.FileValue = (reader as any).result.split(',').pop();
-      } else if(value == 'splashScreenImage') {
-        this.splashScreenImage.FileName = file.name;
-        this.splashScreenImage.FileType = file.type;
-        this.splashScreenImage.FileExtension = file.type;
-        this.splashScreenImage.FileValue = (reader as any).result.split(',').pop();
+      if (value == 'logoImage') {
+        this.logoImage.filename = file.name;
+        this.logoImage.filetype = file.type;
+        this.logoImage.fileextension = file.type;
+        this.logoImage.value = (reader as any).result.split(',').pop();
+      } else if (value == 'splashScreenImage') {
+        this.splashScreenImage.filename = file.name;
+        this.splashScreenImage.filetype = file.type;
+        this.splashScreenImage.fileextension = file.type;
+        this.splashScreenImage.value = (reader as any).result.split(',').pop();
       }
-    
+
     }
   }
   getPartners(): void {
@@ -150,11 +154,48 @@ export class PlgManagementComponent implements OnInit {
         }
       }).catch((err: HttpErrorResponse) => (console.log))
   }
+  getPlg(): void {
+    this._settingService.getPlgManager(this._userConfigService.getUserMode())
+      .then((res: any) => {
+        if (res && !res.StatusCode) {
+          if (res.Response && res.Response.length) {
+            this.plg = res.Response;
+            this.renderingComponent(PlgTableComponent, {
+              partners: this.plg,
+            })
+          } else {
+            this.renderingComponent(NoFoundComponent, {
+              icon: 'no-pricing-plan',
+              text: 'No partner found',
+              subText: "You Haven't made any Partner yet"
+            });
+          }
+        }
+      }).catch((err: HttpErrorResponse) => (console.log))
+  }
   onFileRemove(value) {
-    if(value == 'splashScreenImage') {
+    if (value == 'splashScreenImage') {
       this.splashScreenImage = {};
-    } else if(value == "logoImage") {
+    } else if (value == "logoImage") {
       this.logoImage = {};
+    }
+  }
+  saveLayouts() {
+    if (this.plgManagmentForm.valid) {
+      const obj = {
+        logoImage: {...this.logoImage},
+        splashScreenImage: {...this.splashScreenImage},
+        ...this.plgManagmentForm.value,
+      }
+      this._settingService.plgManager(obj).then((res: any) => {
+       if(res && !res.StatusCode) {
+        this._snackBar.open('Theme settings have been saved successfully!', '', snackBarConfig);
+       } else {
+        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
+       }
+      })
+    } else {
+      globalConfig.validateAllFormFields(this.plgManagmentForm);
     }
   }
 }
