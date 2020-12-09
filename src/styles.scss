@@ -88,3 +88,16 @@ fieldset{
 tr.mat-row, tr.mat-footer-row {
   height: 52px !important;
 }
+.mat-menu-panel {
+    min-width: 130px;
+    max-width: 360px !important;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 48px);
+    border-radius: 4px;
+    outline: 0;
+    min-height: 64px;
+  
+}
+.mat-menu-panel.mat-menu-class { 
+  width: 300px; }

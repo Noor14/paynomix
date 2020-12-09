@@ -23,6 +23,7 @@ export class ResellerFormComponent implements OnInit, OnDestroy, OnChanges {
   @Output() submitForm = new EventEmitter<any>();
   @Input() resellerDetail: any = null;
   private _unsubscribeAll: Subject<any>;
+  public userType: any;
 
     /**
      * Constructor
@@ -52,6 +53,8 @@ export class ResellerFormComponent implements OnInit, OnDestroy, OnChanges {
     .pipe(takeUntil(this._unsubscribeAll))
     .subscribe(() => this.getPartners())
     this.createResellerForm()
+    this.userType =   this._userConfigService.loggedInUser.UserRoleId
+   
  }
 
 
@@ -100,6 +103,10 @@ getPartners(): void{
   .then((res: any) => {
       if(res && !res.StatusCode){
           this.partners = res.Response;
+          if(this.userType == 3){
+            this.resellerForm.get('PartnerId').patchValue(res.Response[0].PartnerId); 
+            this.resellerForm.controls.PartnerId.disable();
+        } 
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   }
