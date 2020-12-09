@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-proxy-blocking',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./proxy-blocking.component.scss']
 })
 export class ProxyBlockingComponent implements OnInit {
-
+@Input() fraudType : any
   constructor() { }
 
   ngOnInit() {

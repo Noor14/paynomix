@@ -29,7 +29,7 @@ export class OwnerDetailComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    debugger;
+
     this.createOwnerDetailForm()
     
     

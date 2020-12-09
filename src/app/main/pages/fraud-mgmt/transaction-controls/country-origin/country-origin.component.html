@@ -1,101 +1,25 @@
-<section class="countryOrigin w-100-p">
-    <div fxFlex="column">
-              
-        <div class="mat-card">
-            <div class="p-20">
-                <form [formGroup]="countryoriginForm">
-                <fieldset  fxLayout="column">
-                    <legend class="accent-fg mx-4">Country Origin Blocking IP</legend>
-                    <div fxFlex="column" >
-                        <p>
-                            Country of Origin Blocking by IP <br>
-                            This allows you to block transactions originating from selected countries. The country of origin is determined by the IP address of the user.
-                        </p>
-                        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column"  fxLayoutAlign="start" >
-                            <mat-radio-group fxLayout="column" fxLayoutAlign="start start" formControlName="BlockOrigin">
-                                <mat-radio-button class="mb-12" value="1">Active</mat-radio-button>
-                                <mat-radio-button class="mb-12" value="0">inActive</mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                        <mat-divider></mat-divider>
-                    </div>
-                    <div fxFlex="column" >
-                        <p>
-                            Country of Origin Blocking by IP <br>
-                            This allows you to block transactions originating from selected countries. The country of origin is determined by the IP address of the user.
-                        </p>
-                        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" >
-                            <div fxFlex.gt-sm="40" fxFlex="40" fxLayout="column">
-                            
-                            
-                                <fieldset  fxLayout="column">
-                                    <legend class="accent-fg mx-4">
-                                        Available Countries</legend>
-                                   
-                           
-                                <mat-list role="list" class="matListHeight">
-                                    <mat-list-item role="listitem"
-                                    *ngFor="let item of AllCountries" 
-                                    [class.accent]="item.IsActive"
-                                    (click)="toggleSelection(item, 1)"
-                                    >{{item.name}}
-                                        <mat-divider></mat-divider>
-                                    </mat-list-item>
-                        
-                                  </mat-list>
-                                </fieldset>
+<section class="countryOrigin w-100-p" >
+    <div class="outer-layer m-20 px-20 pb-20">
+        <h2>Country Origin Blocking IP</h2>
+        <hr />
+        <p>
+            Country of Origin Blocking by IP <br>
+            This allows you to block transactions originating from selected countries. The country of origin is determined by the IP address of the user.
+        </p>
+        <!-- <app-overlay-lock name="overlay-country" position="right"></app-overlay-lock> -->
+        <!-- lock controls -->
+        <app-lock-controls [disableForms]="disableForms" [lockingDetails]="lockingDetails"></app-lock-controls>
 
-                            </div>
-                            <div fxFlex.gt-sm="20" fxFlex="20"  fxLayout="column" fxLayoutAlign="space-around center">
-                                <button mat-raised-button color="accent" (click)="moveSelected('add')">Add </button>
-                                
-                                <button mat-raised-button color="accent" (click)="moveSelected('remove')">Remove</button>
-                            </div>
-                            <div fxFlex.gt-sm="40" fxFlex="40"  fxLayout="column">
-                                <fieldset  fxLayout="column">
-                                    <legend class="accent-fg mx-4">
-                                        Selected Countries</legend>
-                                   
-                           
-                                <mat-list role="list" class="matListHeight">
-                                    <mat-list-item role="listitem"
-                                    *ngFor="let item of selectedCountries" 
-                                    [class.accent]="item.IsActive"
-                                    (click)="toggleSelection(item, 2)"
-                                    >{{item.name}}
-                                        <mat-divider></mat-divider>
-                                    </mat-list-item>
-                                  </mat-list>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <mat-divider></mat-divider>
-                    </div>
-                    <div fxFlex="column" >
-                        <p>
-                            When a transaction origionates in a country in the selected countires list above <br><br>
-                            If you choose Reject, then rest of the countries in the Available Countries list will be allowed to process transaction.<br>
-                            If you choose Accept, then rest of the countries in the Available Countries list will be rejected to process transaction.
-                        </p>
-                        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column"  fxLayoutAlign="start" >
-                            <mat-radio-group fxLayout="column" fxLayoutAlign="start start" formControlName="ListedCountryAllowOrBlock">
-                                <mat-radio-button class="mb-12" value="0">Reject the transactions</mat-radio-button>
-                                <mat-radio-button class="mb-12" value="1">Accept the transactions</mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                        <mat-divider></mat-divider>
-                    </div>
-        
-                    <div fxFlex="column" >
-                        <div fxLayout="column" class="mt-16"  fxLayoutAlign="center center">
-                            <button mat-raised-button color="accent"
-                            (click)="saveSettings()">Save</button>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
-             </div>
-        </div>
+        <!-- ip-blocking-status -->
+        <app-country-status> </app-country-status>
+
+         <!-- app-ip-address -->
+         <p>
+            To select a country, click on the country from the All Counties list and click Add button. <br>
+            To remove a country that has already been selected, click on the country from the Selected Countries list and click Remove button.
+         </p>
+         <app-country-blocking-ip></app-country-blocking-ip>
+
     </div>
 </section>
 

@@ -24,6 +24,7 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
   public globalConfig = globalConfig;
   private _unsubscribeAll: Subject<any>;
   public userImage: any = {};
+    CurrentUser: any;
   /**
   * Constructor
   *
@@ -48,14 +49,14 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
     this.basicInfoForm = this._formBuilder.group({
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
-      Address1: ['', Validators.required],
-      Address2: [''],
+      Email: [''],
       City: ['', Validators.required],
+      Address1: ['', Validators.required],
       State: ['', Validators.required],
       Zip: ['', [Validators.required, Validators.maxLength(globalConfig.validator.zipMaxLength)]],
       Country: ['', Validators.required]
     });
-
+    this.CurrentUser = this._userConfigService.loggedInUser.UserRoleId
     this._userConfigService.userModeChange
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => this.getBasicDetail());

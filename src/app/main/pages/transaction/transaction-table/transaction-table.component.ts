@@ -16,14 +16,22 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EmailDialogComponent } from '@fuse/components/email-dialog/email-dialog.component';
 import { UserConfigService } from '@fuse/services/user.config.service';
 import { Router } from '@angular/router';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
 @Component({
   selector: 'app-transaction-table',
   templateUrl: './transaction-table.component.html',
   styleUrls: ['./transaction-table.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [
+    trigger('detailExpand', [
+      state('collapsed, void', style({ height: '0', minHeight: '0', visibility: 'hidden' })),
+      state('expanded', style({ height: 'auto', minHeight: '48px', visibility: 'visible', width: '100%', 'border-bottom': '1px solid #ccc' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+    ]),
     trigger('detailExpandRefund', [
-      state('collapsed', style({ height: 'auto', minHeight: 'auto' })),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
@@ -43,6 +51,16 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public recordCount: number = 0;
   @Input() data: any;
   @Input() dateRange:any
+  toppingList = ['AuthCode', 'Bin', 'AVSDetail', 'EntryType', 'Type', 'DocNo'];
+  public AuthCode = false;
+  public Bin = false;
+  public AVSDetail = false;
+  public EntryType = false;
+  public Type = false;
+  public DocNo = false;
+  public allSelected = false;
+  public expandedRowDetail: any;  
+  @ViewChild('mySel') skillSel: MatSelect;
   @ViewChild('refundDialog') refundDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -141,7 +159,7 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
         if (res.Response && 
           res.Response.Transactions && 
           res.Response.Transactions.length) {
-          this.dataSource = res.Response.Transactions;
+            this.dataSource.data = res.Response.Transactions;
         }
       }
     }).catch(() => (console.log))
@@ -196,4 +214,36 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
     const dialogRef = this._dialog.open(ReceiptDialogComponent, { width: '400px' });
     dialogRef.componentInstance.data = obj;
   }
+  change(val) {
+    switch (val.value) {
+      case 'AuthCode':
+        this.AuthCode = val._selected;
+        break;
+      case 'Bin':
+        this.Bin = val._selected;
+        break;
+      case 'AVSDetail':
+        this.AVSDetail = val._selected;
+        break;
+      case 'EntryType':
+        this.EntryType = val._selected;
+        break;
+      case 'Type':
+        this.Type = val._selected;
+        break;
+      case 'DocNo':
+        this.DocNo = val._selected;
+        break;
+    }
+}
+toggleAllSelection() {
+  this.allSelected = !this.allSelected;  // to control select-unselect
+    
+  if (this.allSelected) {
+    this.skillSel.options.forEach( (item : MatOption) => item.select());
+  } else {
+    this.skillSel.options.forEach( (item : MatOption) => {item.deselect()});
+  }
+  this.skillSel.close();
+}
 }

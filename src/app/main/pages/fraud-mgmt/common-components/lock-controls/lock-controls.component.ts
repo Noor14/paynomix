@@ -41,7 +41,8 @@ export class LockControlsComponent implements OnInit, OnChanges {
   }
   lockSettings(): any {
     if (this.lockControlForm.valid) {
-      const UserRole = this._userConfigService.getUserMode(); 
+      const UserRole = this._userConfigService.getUserMode();
+      this.lockingDetails.IsActive = this.lockControlForm.value.IsActive; 
       let obj = {
         ...this.lockControlForm.value,
         ...UserRole,
@@ -52,7 +53,7 @@ export class LockControlsComponent implements OnInit, OnChanges {
     this._transactionControlsService.lockControls(obj).then((res:any)=>{
       if (res && !res.StatusCode) { 
         this._snackBar.open('Settings have been saved successfully', '', globalConfig.snackBarConfig);
-        this.lockControlForm.controls['IsActive'].reset();
+    //    this.lockControlForm.controls['IsActive'].reset();
       }
     })
     } else  {

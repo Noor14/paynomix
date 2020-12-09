@@ -54,6 +54,16 @@ error,
 init
 }
 
+export enum fraudTypes{
+country = 1,
+ip,
+domain,
+velocity,
+restrict_trans_source,
+proxy
+}
+
+
 export const locationConfig =
 {
     states: [

@@ -8,10 +8,11 @@
             <app-restricted-transaction></app-restricted-transaction>
         </mat-tab> -->
         <mat-tab label="Country Of Origin Blocking IP">
+            <app-overlay-lock name="overlay-country" position="right" ></app-overlay-lock>
             <app-country-origin [fraudType]="1"></app-country-origin>
         </mat-tab>
-        <mat-tab label="Proxy Blocking">
-            <app-proxy-blocking></app-proxy-blocking>
-        </mat-tab>
+        <!-- <mat-tab label="Proxy Blocking">
+            <app-proxy-blocking [fraudType]="6"></app-proxy-blocking>
+        </mat-tab> -->
     </mat-tab-group>
 </section>

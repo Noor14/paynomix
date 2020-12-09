@@ -68,7 +68,12 @@ export class ResellerListComponent implements OnInit, OnDestroy {
       this.componentRef.instance.data = data;
   }
   getResellers(): void{
-    this._resellerService.resellerList(this._userConfigService.getUserMode())
+    const obj = {
+      ...this._userConfigService.getUserMode(),
+      RecordLimit: 100,
+      PageNo: 1,
+    }
+    this._resellerService.resellerList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
           if(res.Response && res.Response.length){

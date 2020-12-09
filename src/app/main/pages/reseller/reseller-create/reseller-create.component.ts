@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
-import { snackBarConfig } from 'constants/globalFunctions';
+import { snackBarConfig,snackBarConfigWarn } from 'constants/globalFunctions';
 import { ResellerService } from '../reseller.service';
 
 @Component({
@@ -40,6 +40,8 @@ export class ResellerCreateComponent implements OnInit {
         this.closeSlidingPanel();
         this._slidingPanelService.setSlidingPanelStatus(true);
 
+      }else{
+        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
   

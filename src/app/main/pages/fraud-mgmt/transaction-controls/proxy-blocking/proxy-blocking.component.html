@@ -1,50 +1,23 @@
-<section class="proxy-blocking w-100-p">
-    <div class="outer-layer m-20 p-20">
+<section class="proxyBlocking w-100-p">
+    <div class="outer-layer m-20 px-20 pb-20">
         <h2 >Proxy Blocking </h2>
         <hr />
-        <div class="mat-card p-20 ">
-            <p>
-                Proxy Blocking controls whether transactions originating from proxy servers and computers to be known sources of fraud are blocked. When the gateway is aware of proxy servers that are known sources of fraud, the IP addresses are added to our base level of blocked IPs.
-            </p>
-            <p>
-                Proxy servers act as an intermediate and are used to hide the true source of a transaction. Such servers are legitimately used to surf the internet anonymously, but they are also frequently used to commit online fraud. Some proxy servers are from commercial services, but most are home computers or business systems that been compromised and are being used without the owner’s knowledge.
-            </p>
-            <p>
-                By activating this option you are agreeing to have all transactions blocked/declined that originate from any IP on the base list. Transactions that are declined due to this settings will be declined with the message “Declined IP from blocked Proxy server”. 
+        <p>
+            Proxy Blocking controls whether transactions originating from proxy servers and computers to be known sources of fraud are blocked. When the gateway is aware of proxy servers that are known sources of fraud, the IP addresses are added to our base level of blocked IPs.
+        </p>
+        <p>
+            Proxy servers act as an intermediate and are used to hide the true source of a transaction. Such servers are legitimately used to surf the internet anonymously, but they are also frequently used to commit online fraud. Some proxy servers are from commercial services, but most are home computers or business systems that been compromised and are being used without the owner’s knowledge.
+        </p>
+        <p>
+            By activating this option you are agreeing to have all transactions blocked/declined that originate from any IP on the base list. Transactions that are declined due to this settings will be declined with the message “Declined IP from blocked Proxy server”. 
 
-                This list cannot be modified, if you have this feature active and want to accept transactions from a blocked IP then you must set the feature to Inactive.
-            </p>
-        </div>
-       
-        <div class="mat-card mt-20">
-            <div class="outer-layer p-20" fxLayout="column" fxLayoutAlign="space-around start">
-            <h3 class="accent-fg">Lock Control</h3>
-            <hr>
-            <section  fxLayout="row" fxLayoutAlign="center center" >
-                <label >Lock : </label>
-                <mat-checkbox class="mx-12">Merchant</mat-checkbox>
-            </section>
-            <div class="my-20" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="row" fxLayoutAlign="center center">
-                <button mat-raised-button color="accent">
-                    Submit
-                </button>
-            </div>
-            <mat-divider></mat-divider>
-            <h3 class="accent-fg">Proxy Blocking </h3>
-            <hr>
-            <section class="">
-                <label >status :</label>
-                <mat-checkbox class="mx-12">Active</mat-checkbox>
-                <mat-checkbox class="mx-12">In Active</mat-checkbox>
-            </section>
-            <div class="my-20"fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="row" fxLayoutAlign="center center" >
-                <button mat-raised-button color="accent">
-                    Update
-                </button>
-            </div>
-            <mat-divider></mat-divider>
-        </div>
-        </div>
+            This list cannot be modified, if you have this feature active and want to accept transactions from a blocked IP then you must set the feature to Inactive.
+        </p>
+        <!-- lock controls -->
+        <app-lock-controls></app-lock-controls>
+
+        <!-- ip-blocking-status -->
+        <app-ip-blocking-status></app-ip-blocking-status>
     </div>
 </section>
 

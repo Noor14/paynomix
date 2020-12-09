@@ -37,6 +37,7 @@ export class PricingPlanTableComponent implements OnInit {
   }
 
   openDialog(PricingPlanID) {
+    //console.log(this.data.assignPricingPlan);
     const dialogRef = this._dialog.open(AssigneeDialogComponent, {width: '550px'});
     dialogRef.componentInstance.data ={...this.data.assignPricingPlan, PricingPlanID};
     dialogRef.afterClosed().subscribe(result => {

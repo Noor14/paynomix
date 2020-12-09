@@ -8,6 +8,9 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PartnerTableComponent } from '../partner-table/partner-table.component';
 import { PartnerService } from '../partner.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import * as globalConfig from '../../../../../constants/globalFunctions';
+
 
 @Component({
   selector: 'app-partner-list',
@@ -19,6 +22,8 @@ export class PartnerListComponent implements OnInit, OnDestroy {
   private componentRef: ComponentRef<any>;
   public partners: any[] = [];
   private _unsubscribeAll: Subject<any>;
+  public partnerSearchForm: FormGroup;
+  public globalConfig = globalConfig;
   
       /**
       * Constructor
@@ -30,6 +35,7 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       */
      
      constructor(
+       private readonly _formBuilder: FormBuilder,
        private readonly _partnerService: PartnerService,
        private readonly _userConfigService: UserConfigService,
        private readonly _resolver: ComponentFactoryResolver,
@@ -52,7 +58,12 @@ export class PartnerListComponent implements OnInit, OnDestroy {
         // panelChangesSubscriber && panelChangesSubscriber.unsubscribe();
       }
       })
-    }
+      this.partnerSearchForm = this._formBuilder.group({
+         PartnerName: [''],
+         DBAName: [''],
+         Email: [''],
+        });
+      }
 
     ngOnDestroy(): void {
       // Unsubscribe from all subscriptions
@@ -69,7 +80,12 @@ export class PartnerListComponent implements OnInit, OnDestroy {
     }
 
     getPartners(): void{
-      this._partnerService.partnerList(this._userConfigService.getUserMode())
+      const obj = {
+        ...this._userConfigService.getUserMode(),
+        RecordLimit: 100,
+        PageNo: 1,
+    }
+      this._partnerService.partnerList(obj)
       .then((res: any) => {
         if(res && !res.StatusCode){
           if(res.Response && res.Response.length){
@@ -90,6 +106,60 @@ export class PartnerListComponent implements OnInit, OnDestroy {
 
     openSlidePanel(): void{ 
         this._slidingPanelService.getSidebar('slidePanel', 'PartnerCreateComponent').toggleOpen();
+    }
+
+    search(){
+
+      var searchParam = {'PartnerName':'','DBAName':'','Email':''};
+      if(this.partnerSearchForm.value.PartnerName!='')
+      {
+        searchParam.PartnerName =this.partnerSearchForm.value.PartnerName; 
+      }
+      else
+      {
+        delete searchParam.PartnerName;
+      }
+      if(this.partnerSearchForm.value.DBAName!='')
+      {
+        searchParam.DBAName =this.partnerSearchForm.value.DBAName; 
+      }
+      else
+      {
+        delete searchParam.DBAName;
+      }
+      if(this.partnerSearchForm.value.Email!='')
+      {
+        searchParam.Email =this.partnerSearchForm.value.Email; 
+      }
+      else
+      {
+        delete searchParam.Email;
+      }
+      
+      this._partnerService.partnerList(searchParam)
+      .then((res: any) => {
+        if(res && !res.StatusCode){
+          if(res.Response && res.Response.length){
+            this.partners = res.Response;
+            this.renderingComponent(PartnerTableComponent,{
+              partners: this.partners,
+            })
+          }else{
+            this.renderingComponent(NoFoundComponent, {
+              icon: 'no-pricing-plan',
+              text: 'No partner found',
+              subText: "You haven't made any Partner"
+            });
+          }
+        }
+      }).catch((err: HttpErrorResponse)=>(console.log))
+    }
+
+    stopPropagation($event){
+      if($event.toElement.textContent !== " Search "){
+        $event.stopPropagation();
+      }
+      
     }
 
 }

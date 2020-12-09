@@ -67,7 +67,12 @@ export class MerchantListComponent implements OnInit, OnDestroy {
   }
 
   getMerchants(){
-    this._merchantService.merchantList(this._userConfigService.getUserMode())
+    const obj = {
+      ...this._userConfigService.getUserMode(),
+      RecordLimit: 100,
+      PageNo: 1,
+  }
+    this._merchantService.merchantList(obj)
     .then((res: any) => {
       if(res && !res.StatusCode){
         if(res.Response && res.Response.length){
