@@ -20,17 +20,16 @@
                                 Add<mat-icon>navigate_next</mat-icon>
                             </button>
                             
-                            <button class="my-8" mat-raised-button color="accent" (click)="moveSelected('remove')"> <mat-icon>navigate_before</mat-icon>Remove
+                            <button class="my-8" [disabled]= "!selectedremovedCountries.length" mat-raised-button color="accent" (click)="moveSelected('remove')"> <mat-icon>navigate_before</mat-icon>Remove
                             </button>
                         </div>
-                        
                         
                     </div>
                     <fieldset  fxFlex.gt-sm="40" fxFlex.sm="40" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                         <legend class="accent-fg">Selected Countries</legend>
-                        <mat-list role="list" class="matListHeight">
-                            <mat-list-item role="listitem" *ngFor="let item of selectedCountries" 
-                                >{{item.name}}
+                        <mat-list role="list"   class="matListHeight">
+                            <mat-list-item role="listitem"   *ngFor="let item of selectedCountries" 
+                            (click)="toggleSelection(item, 2)" [class.accent]="!item.IsActive" >{{item.name}}
                                  <!-- (click)="toggleSelection(item, 2)" -->
                             </mat-list-item>
                         </mat-list>
