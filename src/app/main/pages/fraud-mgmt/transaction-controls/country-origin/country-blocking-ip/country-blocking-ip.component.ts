@@ -19,6 +19,7 @@ export class CountryBlockingIpComponent implements OnInit {
     public selectedArr = [];
     AllCountries = globalConfig.Countries.countries;
     selectedCountries = [];
+   public selectedremovedCountries = []
     roleObject: any;
 
   constructor(
@@ -49,24 +50,24 @@ export class CountryBlockingIpComponent implements OnInit {
   }
 
   public toggleSelection(item, list) {
+   
     item.IsActive = !item.IsActive;
+    if(list ==2){
+      const hasValue = Object.values(this.selectedremovedCountries).includes(item);
+      !hasValue ? this.selectedremovedCountries.push(item): this.selectedremovedCountries.splice(this.selectedremovedCountries.indexOf(item), 1)
+  
+    }
 
    
 
   }
   public moveSelected(direction) {
-
-    if (direction === 'remove') {
-     this.RemoveArr =  this.selectedCountries.map((item: any) => {
-            return {
-                "FraudId":item.FraudId,
-                "FraudDescription":item.name,
-                "IsActive":false
-            }
-          });
-    if(this.RemoveArr.length){
-        this.removeCountry(this.RemoveArr);
-    }
+   
+    if (direction === 'remove' &&  this.selectedremovedCountries.length > 0) {
+     
+  
+        this.removeCountry(this.selectedremovedCountries);
+   
     } else {
       this.AllCountries.forEach(item => {
         if (item.IsActive) {
@@ -104,6 +105,8 @@ export class CountryBlockingIpComponent implements OnInit {
   };
 
   removeCountry(obj){
+    
+    this.selectedremovedCountries = [];
   let objN = [...obj]
     this._FraudMgmtService.updateCountrySettings(objN).then((res: any) => {
                 if(!res.StatusCode)
