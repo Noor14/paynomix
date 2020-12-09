@@ -17,8 +17,8 @@
                             <div fxFlex.gt-sm="100" fxFlex.sm="100" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
                                 <mat-label>Status:</mat-label>
                                 <mat-radio-group [ngClass.sm]="'pl-16'" [ngClass.gt-sm]="'pl-16'"   formControlName="Status">
-                                    <mat-radio-button [ngClass.sm]="'mx-16'" [ngClass.gt-sm]="'mx-16'" value="true">Active</mat-radio-button>
-                                    <mat-radio-button [ngClass.sm]="'mx-16'" [ngClass.gt-sm]="'mx-16'" value="false">In Active</mat-radio-button>
+                                    <mat-radio-button [ngClass.sm]="'mx-16'" [ngClass.gt-sm]="'mx-16'" [value]="true">Active</mat-radio-button>
+                                    <mat-radio-button [ngClass.sm]="'mx-16'" [ngClass.gt-sm]="'mx-16'" [value]="false">In Active</mat-radio-button>
                                 </mat-radio-group>
                             </div>
                         </div>

@@ -43,7 +43,7 @@ export class CountryBlockingIpComponent implements OnInit {
 
   createCOForm(): void{
     this.countryoriginForm = this._formBuilder.group({
-      IsAllow: ['']
+      IsAllow: []
   });
   
   }
@@ -155,6 +155,7 @@ CountryAllowStatus(): any {
      const checkForUserRole = this._userConfigService.getUserMode();
      const roleObject = (checkForUserRole) ? checkForUserRole : { EntityId: 0, UserRoleId: 1 }
      const obj = {
+        FraudType: 1,
        ...this.countryoriginForm.value,
        ...roleObject
      }

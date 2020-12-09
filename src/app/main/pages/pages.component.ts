@@ -16,7 +16,7 @@ export class PagesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getHierarchy();
-    const {EntityId, UserRoleId, UserName} = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
+    const {EntityId, UserRoleId, Username} = localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo'))
     const userRole =  (UserRoleId === authRole.merchant) ? 'MerchantId' : 
      (UserRoleId === authRole.partner) ? 'PartnerId' : 
      (UserRoleId === authRole.reseller) ? 'ResellerId' : 
@@ -27,7 +27,7 @@ export class PagesComponent implements OnInit, OnDestroy {
       UserRoleId : UserRoleId
      }
     this._userConfigService.setUserMode(obj)
-    this._userConfigService.loggedInUser = { UserName, ...obj }
+    this._userConfigService.loggedInUser = { Username, ...obj }
 
   }
   getHierarchy() {

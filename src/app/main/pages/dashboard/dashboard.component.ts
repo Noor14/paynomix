@@ -70,11 +70,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 callbacks: {
                     label: function(tooltipItem, data) {
                         var value = data.datasets[0].data[tooltipItem.index];
-                        if (parseInt(value) >= 1000) {
-                          return "Amount: " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                      } else {
-                          return "Amount: " + value;
-                      }
+                        return "Amount: " + value.toLocaleString("en-US",{style:"currency", currency:"USD"});
                     }
                 } // end callbacks:
               },
@@ -101,12 +97,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                       {
                           display: false,
                           ticks  : {
-                            userCallback: function(value, index, values) {
-                                value = value.toString();
-                                value = value.split(/(?=(?:...)*$)/);
-                                value = value.join(',');
-                                return value;
-                            }
+                           
                           }
                       }
                   ]
@@ -134,16 +125,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ],
         options   : {
             tooltips: {
-            callbacks: {
-                label: function(tooltipItem, data) {
-                    var value = data.datasets[0].data[tooltipItem.index];
-                    if (parseInt(value) >= 1000) {
-                      return "Transactions: " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                  } else {
-                      return "Transactions: " + value;
-                  }
-                }
-            } // end callbacks:
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var value = data.datasets[0].data[tooltipItem.index];
+                        
+                          return "Amount: " + value.toLocaleString("en-US",{style:"currency", currency:"USD"});
+                      
+                    }
+                } // end callbacks:
           },
             spanGaps           : false,
             legend             : {
@@ -168,12 +157,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     {
                         display: false,
                         ticks  : {
-                            userCallback: function(value, index, values) {
-                                value = value.toString();
-                                value = value.split(/(?=(?:...)*$)/);
-                                value = value.join(',');
-                                return value;
-                            }
+                            
                         }
                     }
                 ]
