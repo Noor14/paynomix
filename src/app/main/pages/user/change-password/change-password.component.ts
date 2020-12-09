@@ -36,7 +36,7 @@ export class ChangePasswordComponent implements OnInit {
 
   createChangePasswordForm(): void {
     this.changePasswordForm = this._formBuilder.group({
-      UserName: [this._userConfigService.loggedInUser.UserName, Validators.required],
+      Username: [this._userConfigService.loggedInUser.Username, Validators.required],
       Password: ['', Validators.required],
       NewPassword: ['', [Validators.required, Validators.minLength(globalConfig.validator.minPasswordLength), Validators.pattern(validator.passwordPattern)]],
       ConfirmPassword: ['', Validators.required]

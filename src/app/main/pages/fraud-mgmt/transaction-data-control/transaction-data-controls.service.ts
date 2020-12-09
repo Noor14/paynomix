@@ -31,4 +31,9 @@ export class TransactionDataControlsService extends BaseService {
     const url = `${environment.apiURL}Fraud/Update`;
     return this.post(url, obj);
   }
+
+  searchLargeTransaction(obj:any) {
+    const url = `${environment.apiURL}Fraud/SearchLargeTransaction`;
+    return this.post(url, obj);
+  }
 }

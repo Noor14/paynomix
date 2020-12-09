@@ -60,8 +60,13 @@ export class LoginComponent implements OnInit
             this._snackBar.open('Signing in', '', snackBarConfig);
             this._authenticationService.signIn(this.loginForm.value).then((res: any)=>{
                 if(res && !res.StatusCode){
-                    localStorage.setItem('userInfo', JSON.stringify(res.Response));
-                    this._router.navigate(['/pages/dashboard']);
+                    if(res.Response.IsActive){
+                        localStorage.setItem('userInfo', JSON.stringify(res.Response));
+                        this._router.navigate(['/pages/dashboard']);
+                    }else{
+                        this._router.navigate(['inActive']);
+                    }
+                  
                 }else{
                     this.loggedIn = false;
                     this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);

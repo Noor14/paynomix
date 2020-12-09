@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       {path: 'login', component: LoginComponent},
       {path: 'forgot-password', component: ForgotPasswordComponent},
-      {path: 'inactive', component: InactiveUserComponent},
+      {path: 'inActive', component: InactiveUserComponent},
       { path: '**', redirectTo: 'login' }
     ]
  }

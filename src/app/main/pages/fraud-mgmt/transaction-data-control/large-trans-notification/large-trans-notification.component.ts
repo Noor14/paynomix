@@ -32,11 +32,29 @@ export class LargeTransNotificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.createlargeTransactionForm()
-    
+    this.searchLargeTransaction();
   
   }
 
+  searchLargeTransaction(){
 
+    const checkForUserRole = this._userConfigService.getUserMode();
+    const roleObject = (checkForUserRole) ? checkForUserRole : { EntityId: 0, UserRoleId: 1 }
+    const obj = {
+      ...roleObject
+    }
+    
+    this._transactionDataControlsService.searchLargeTransaction(obj).then((res: any) => {
+      if (res && !res.StatusCode) {
+     
+        this.largeTransactionForm.patchValue(res.Response);
+      } else {
+        this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
+      }
+    })
+
+
+  }
 
 
 
