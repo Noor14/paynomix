@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 import { UserConfigService } from '@fuse/services/user.config.service';
@@ -18,6 +18,7 @@ interface Node {
   encapsulation: ViewEncapsulation.None
 })
 export class HierarchicalTreeComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit{
+@ViewChild('autofocus') public elementRef : ElementRef;
 @ViewChild(MatMenuTrigger) triggerMenu: MatMenuTrigger;
 public truncateTextLength = truncateTextLength;
 @Input() toggleHierarchy: boolean = false;
@@ -38,6 +39,7 @@ public truncateTextLength = truncateTextLength;
   hasChild = (_: number, node: Node) => !!node.children && node.children.length > 0;
 
   ngOnInit() {
+    
    this.hierarchySubscriber = this._userConfigService.getUserHierarchy.subscribe(res=> {
       if(res){
         this.dataSource.data = res;
@@ -45,11 +47,13 @@ public truncateTextLength = truncateTextLength;
         Object.keys(this.dataSource.data).forEach(x => {
           this.setParent(this.dataSource.data[x], null);
         });
+       
       }
     })
   }
   ngAfterViewInit(): void {
-   this.searchSubscriber = this.searchBy.pipe(
+     
+    this.searchSubscriber = this.searchBy.pipe(
       debounceTime(500),
       distinctUntilChanged())
       .subscribe(value => {
@@ -73,12 +77,19 @@ public truncateTextLength = truncateTextLength;
   ngOnChanges(){
       if(this.toggleHierarchy){
         this.triggerMenu.openMenu();
+      
       }
   }
   menuClosed(){
     this.menuToggle.emit(false);
   }
- 
+
+  menuOpened() 
+  {
+      this.elementRef.nativeElement.focus();
+        this.elementRef.nativeElement.click();
+  }
+
   selectUserMode(node): void{
     this.selectedNode = node;
     this.triggerMenu.closeMenu();
