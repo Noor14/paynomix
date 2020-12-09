@@ -19,6 +19,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { SlidingPanelService } from '@fuse/components/sliding-panel/sliding-panel.service';
 
+
 @Component({
     selector   : 'app',
     templateUrl: './app.component.html',
@@ -28,6 +29,8 @@ export class AppComponent implements OnInit, OnDestroy
 {
     fuseConfig: any;
     navigation: any;
+
+   
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -56,6 +59,7 @@ export class AppComponent implements OnInit, OnDestroy
         private _platform: Platform,
         private _matIconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer
+      
     )
     {
         this._matIconRegistry
@@ -167,7 +171,14 @@ export class AppComponent implements OnInit, OnDestroy
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();
+
+        
+
+
+
+
     }
+
 
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
