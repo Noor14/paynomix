@@ -1,63 +1,90 @@
 <section class="plgManagement w-100-p">
-    <div class="outer-layer m-20 p-20" fxLayout="column" [formGroup]="plgManagmentForm" >
-        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+    <div class="outer-layer m-20 p-20" fxLayout="column" [formGroup]="plgManagmentForm">
+        <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch"
+            fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'"
+                [ngClass.gt-sm]="'pr-4'">
                 <mat-label>Select Partner </mat-label>
-                <mat-select  formControlName="PartnerName">
-                    <mat-option  value="abc">value</mat-option>
+                <mat-select formControlName="PartnerID">
+                    <mat-option [value]="item.PartnerId" *ngFor="let item of partners">{{item.PartnerName}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
+            <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'"
+                [ngClass.gt-sm]="'pl-4'">
                 <mat-label>Custom URL</mat-label>
-                <input matInput formControlName="WebsiteUrl" type="url" >
+                <input matInput formControlName="DomainName" type="url" >
             </mat-form-field>
         </div>
-        <div class="mb-8" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
+        <div class="mb-8" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch"
+            fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
             <div fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="['pr-4','pb-8']" [ngClass.gt-sm]="['pr-8','pb-8']">
                 <div class="mat-card text-center p-16">
-                    <ng-container>
+                    <ng-container *ngIf="(logoImage | json) == ({} | json)">
                         <div class="card-content">
-                                <span class="text-secondary">
-                                    Drag and drop Main Logo or <span class="accent-fg">Browse</span>
-                                </span>
-                                <ngx-dropzone [multiple]="false" [maxFileSize]="5242880" [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
-                                    <ngx-dropzone-label>
-                                        <mat-icon class="accent-fg">cloud_upload</mat-icon>
-                                    </ngx-dropzone-label>
-                                </ngx-dropzone>
+                            <span class="text-secondary">
+                                Drag and drop Main Logo or <span class="accent-fg">Browse</span>
+                            </span>
+                            <ngx-dropzone [multiple]="false" (change)="onFileSelect($event,'logoImage')" [maxFileSize]="5242880"
+                                [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
+                                <ngx-dropzone-label>
+                                    <mat-icon class="accent-fg">cloud_upload</mat-icon>
+                                </ngx-dropzone-label>
+                            </ngx-dropzone>
+                        </div>
+                    </ng-container>
+                    <ngx-dropzone-image-preview *ngIf="(logoImage | json) != ({} | json) && !logoImage.FilePath"
+                        ngProjectAs="ngx-dropzone-preview" [file]="logoImage" [removable]="true"
+                        (removed)="onFileRemove('logoImage')">
+                    </ngx-dropzone-image-preview>
+                    <ng-container *ngIf="logoImage && logoImage.FilePath">
+                        <div class="uploadedFile">
+                            <img [src]="logoImage.FilePath" alt="img">
+                            <mat-icon class="resetImageIcon" (click)="onFileRemove('logoImage')">close</mat-icon>
                         </div>
                     </ng-container>
                 </div>
             </div>
-            <div fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['px-8','pb-8']" [ngClass.gt-sm]="['px-8','pb-8']" >
+            <div fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['px-8','pb-8']" [ngClass.gt-sm]="['px-8','pb-8']">
                 <div class="mat-card text-center p-16">
-                    <ng-container>
+                    <ng-container *ngIf="(splashScreenImage | json) == ({} | json)">
                         <div class="card-content">
-                                <span class="text-secondary">
-                                    Drag and drop Sidebar Logo or <span class="accent-fg">Browse</span>
-                                </span>
-                                <ngx-dropzone [multiple]="false" [maxFileSize]="5242880" [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
-                                    <ngx-dropzone-label>
-                                        <mat-icon class="accent-fg">cloud_upload</mat-icon>
-                                    </ngx-dropzone-label>
-                                </ngx-dropzone>
+                            <span class="text-secondary">
+                                Drag and drop Sidebar Logo or <span class="accent-fg">Browse</span>
+                            </span>
+                            <ngx-dropzone [multiple]="false" (change)="onFileSelect($event, 'splashScreenImage')" [maxFileSize]="5242880"
+                            [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
+                            <ngx-dropzone-label>
+                                <mat-icon class="accent-fg">cloud_upload</mat-icon>
+                            </ngx-dropzone-label>
+                        </ngx-dropzone>
                         </div>
                     </ng-container>
+                    <ngx-dropzone-image-preview *ngIf="(splashScreenImage | json) != ({} | json) && !splashScreenImage.FilePath"
+                    ngProjectAs="ngx-dropzone-preview" [file]="splashScreenImage" [removable]="true"
+                    (removed)="onFileRemove('splashScreenImage')">
+                </ngx-dropzone-image-preview>
+                <ng-container *ngIf="splashScreenImage && splashScreenImage.FilePath">
+                    <div class="uploadedFile">
+                        <img [src]="splashScreenImage.FilePath" alt="img">
+                        <mat-icon class="resetImageIcon" (click)="onFileRemove('splashScreenImage')">close</mat-icon>
+                    </div>
+                </ng-container>
                 </div>
             </div>
             <div fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="['pl-8','pb-8']" [ngClass.gt-sm]="['pl-8','pb-8']">
                 <div class="mat-card text-center p-16">
                     <ng-container>
                         <div class="card-content">
-                                <span class="text-secondary">
-                                    Drag and drop Fav or <span class="accent-fg">Browse</span>
-                                </span>
-                                <ngx-dropzone [multiple]="false" [maxFileSize]="5242880" [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
-                                    <ngx-dropzone-label>
-                                        <mat-icon class="accent-fg">cloud_upload</mat-icon>
-                                    </ngx-dropzone-label>
-                                </ngx-dropzone>
+                            <span class="text-secondary">
+                                Drag and drop Fav or <span class="accent-fg">Browse</span>
+                            </span>
+                            <ngx-dropzone [multiple]="false" [maxFileSize]="5242880"
+                                [accept]="'image/png, image/jpg, image/jpeg'" class="mt-8">
+                                <ngx-dropzone-label>
+                                    <mat-icon class="accent-fg">cloud_upload</mat-icon>
+                                </ngx-dropzone-label>
+                            </ngx-dropzone>
                         </div>
                     </ng-container>
                 </div>
@@ -66,26 +93,35 @@
 
         <fieldset class=" my-4">
             <legend class="accent-fg">Themes Color</legend>
-            <mat-radio-group aria-label="Select an option" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto" formControlName="ThemeColor">
+            <mat-radio-group aria-label="Select an option" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column"
+                fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center"
+                fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto" formControlName="colorTheme">
 
-                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="['pr-4','py-4']" [ngClass.gt-sm]="['pr-4','py-4']" value="1">Default Light</mat-radio-button>
+                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="['pr-4','py-4']"
+                    [ngClass.gt-sm]="['pr-4','py-4']" value="theme-default">Default Light</mat-radio-button>
 
-                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="'p-8'" [ngClass.gt-sm]="['p-4']" value="2">Yellow Light</mat-radio-button>
+                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="'p-8'" [ngClass.gt-sm]="['p-4']"
+                    value="theme-yellow-light">Yellow Light</mat-radio-button>
 
-                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="'p-8'" [ngClass.gt-sm]="['p-4']" value="3">Blue Gray Dark</mat-radio-button>
+                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="'p-8'" [ngClass.gt-sm]="['p-4']"
+                    value="theme-blue-gray-dark">Blue Gray Dark</mat-radio-button>
 
-                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="['pr-4','py-4']" [ngClass.gt-sm]="['pr-4','py-4']" value="4">Pink Dark</mat-radio-button>
-              </mat-radio-group>
+                <mat-radio-button fxFlex.gt-sm="25" fxFlex.sm="25" [ngClass.sm]="['pr-4','py-4']"
+                    [ngClass.gt-sm]="['pr-4','py-4']" value="theme-pink-dark">Pink Dark</mat-radio-button>
+            </mat-radio-group>
         </fieldset>
 
-        <div class=" my-4" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutAlign.sm="space-between start" fxLayoutAlign.gt-sm="space-between start">
-            <div  fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="['my-8','pr-4']" [ngClass.gt-sm]="['my-8','pr-4']" >
-                <fieldset >
+        <!-- Layouts -->
+        <div class=" my-4" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start stretch"
+            fxLayoutAlign.sm="space-between start" fxLayoutAlign.gt-sm="space-between start" formGroupName="layout">
+            <div fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="['my-8','pr-4']" [ngClass.gt-sm]="['my-8','pr-4']">
+                <fieldset formGroupName="navbar">
                     <legend class="accent-fg">Navbar</legend>
-                    <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between start"> 
+                    <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start start"
+                        fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between start" >
                         <div fxFlex.gt-sm="50" fxFlex.sm="50">
                             <span>Primary background:</span>
-                            <fuse-material-color-picker class="ml-16"  formControlName="primaryBackground">
+                            <fuse-material-color-picker class="ml-16" formControlName="primaryBackground">
                             </fuse-material-color-picker>
                         </div>
                         <div fxFlex.gt-sm="50" fxFlex.sm="50">
@@ -96,23 +132,30 @@
                     </div>
                 </fieldset>
             </div>
-            <div  fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="['my-8','pl-4']" [ngClass.gt-sm]="['pl-4','my-4']">
-                <fieldset>
+            <div fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="['my-8','pl-4']" [ngClass.gt-sm]="['pl-4','my-4']">
+                <fieldset formGroupName="toolbar">
                     <legend class="accent-fg">Toolbar</legend>
-                    <mat-radio-group aria-label="Select an option" fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between start"  formControlName="Toolbar">
-                        <mat-radio-button class="my-8" fxFlex.gt-sm="50" fxFlex.sm="50" value="1">Default Light</mat-radio-button>
-                        <mat-radio-button class="my-8" fxFlex.gt-sm="50" fxFlex.sm="50" value="2">Yellow Light</mat-radio-button>
-                      </mat-radio-group>
+                    <mat-radio-group aria-label="Select an option" fxLayout.sm="row" fxLayout.gt-sm="row"
+                        fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.sm="space-between center"
+                        fxLayoutAlign.gt-sm="space-between start" formControlName="background">
+                        <mat-radio-button class="my-8" fxFlex.gt-sm="50" fxFlex.sm="50" value="1">Default Light
+                        </mat-radio-button>
+                        <mat-radio-button class="my-8" fxFlex.gt-sm="50" fxFlex.sm="50" value="2">Yellow Light
+                        </mat-radio-button>
+                    </mat-radio-group>
                 </fieldset>
             </div>
         </div>
-        <div class=" my-8" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch" [ngClass.sm]="'mt-24'">
+        <div class=" my-8" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="center center" fxLayout="column" fxLayoutAlign="space-between stretch"
+            [ngClass.sm]="'mt-24'">
             <button mat-raised-button class="my-4 accent-alpha-bg " [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'"
-            aria-label="Cancel">
-            Cancel
+                aria-label="Cancel">
+                Cancel
             </button>
-            <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="save">
-            Save
+            <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent"
+                aria-label="save" (click)="saveLayouts()">
+                Save
             </button>
         </div>
         <ng-template #renderingContainer></ng-template>

@@ -3,11 +3,16 @@
     <button (click)="openRefundDialog()" *ngIf="showRefund"  mat-raised-button class="accent">
       Refund(s)
     </button>
-    <mat-select #mySel placeholder="Detail Options" multiple class="customSelect">
-      <!-- <mat-option (click)="toggleAllSelection()" [value]="0">All</mat-option> -->
-      <mat-option *ngFor="let topping of toppingList" [value]="topping" (onSelectionChange)="change($event.source)">
-        {{topping}}</mat-option>
-    </mat-select>
+      <mat-select multiple class="outer-layer boxStyle1" (selectionChange)="statusChange($event)">
+        <!-- <mat-option (click)="toggleAllSelection()" [value]="0">All</mat-option> -->
+        <mat-option *ngFor="let status of statusList" [value]="status.Value" >
+          {{status.Key}}</mat-option>
+      </mat-select>
+      <mat-select #mySel placeholder="Detail Options" multiple class="outer-layer boxStyle">
+        <!-- <mat-option (click)="toggleAllSelection()" [value]="0">All</mat-option> -->
+        <mat-option *ngFor="let topping of toppingList" [value]="topping" (onSelectionChange)="change($event.source)">
+          {{topping}}</mat-option>
+      </mat-select>
     <mat-paginator *ngIf="router.url != '/pages/dashboard'" [pageSize]="100" (page)="changePage($event)" 
     [length]="recordCount" [pageSizeOptions]="[100, 150, 200, 250]" class="ml-auto">
    </mat-paginator>

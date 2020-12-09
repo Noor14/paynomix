@@ -70,9 +70,8 @@
         } 
 }
 .customSelect {
-    width: 13% !important;
     padding-left: 10px;
-    border-bottom: 1px solid rgb(0 0 0 / 54%);
+    margin-top: 10px;
 }
 .ml-51{
   margin-left: 50px;
@@ -80,4 +79,20 @@
 .p-5 {
     padding: 5px;
 }
+.outer-layer {
+    &.boxStyle1 {
+        width: 5% !important;
+        border-radius: 5px !important;
+        padding: 8px !important;
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    &.boxStyle {
+        width: 15% !important;
+        border-radius: 5px !important;
+        padding: 8px !important;
+        background-color: rgba(0, 0, 0, 0.04);
+        margin-left: 10px;
+      }
+}
+
 

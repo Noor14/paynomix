@@ -88,15 +88,21 @@ dateFromFooter = moment();
         this.getTransaction();
       }
     });
+    this.componentRef.instance.statusChanges.subscribe(res => {
+      if (res) {
+        this.getTransaction(res);
+      }
+    });
   }
   
   
-  getTransaction(): void {
+  getTransaction(val?): void {
     const obj = {
        ...this.dateRangeForm.value,
        ...this._userConfigService.getUserMode(),
        RecordLimit: 100,
        PageNo: 1,
+       ...val
    }
    this._transactionService.transactionList(obj)
      .then((res: any) => {
