@@ -16,7 +16,7 @@
               </div>
               </mat-toolbar>
            
-          <mat-menu #myMenu="matMenu"  >
+          <mat-menu class="mat-menu-class" #myMenu="matMenu"  >
                   <form   fxLayout="column" class = "p-20" fxLayoutAlign="start" name="form" [formGroup]="merchantSearchForm" (click)= "stopPropagation($event)">
                   
                       <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">

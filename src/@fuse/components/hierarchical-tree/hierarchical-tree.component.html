@@ -4,6 +4,7 @@
       {{selectedNode?.title | truncate : truncateTextLength }}
     </span>
   </div>
+  
     <mat-menu #tree="matMenu" class="tree-panel" (closed)= menuClosed()>
         <div class="searching">
             <mat-form-field appearance="outline" (click)="$event.stopPropagation()">

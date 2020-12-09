@@ -6,14 +6,17 @@
       </div>
         <div  fxFlex= "30"  fxLayoutAlign="end center">
           <mat-toolbar>
+            <div [matMenuTriggerFor]="myMenu">
               <button mat-icon-button 
-                      [matMenuTriggerFor]="myMenu">
+                     >
                       <mat-icon>search</mat-icon>
               </button>
               <span>Search Partner</span>
+            </div>
             </mat-toolbar>
+          
            
-          <mat-menu #myMenu="matMenu">
+          <mat-menu class="mat-menu-class" #myMenu="matMenu">
                   <form   fxLayout="column" class = "p-20" fxLayoutAlign="start" name="form" [formGroup]="partnerSearchForm" (click)= "stopPropagation($event)">
                   
                       <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
@@ -31,15 +34,14 @@
                           <mat-label>Email</mat-label>
                           <input matInput formControlName="Email"  [maxlength]="globalConfig?.validator?.maxFieldLength">
                       </mat-form-field>
-  
-                      <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
-                      aria-label="Clear" (click) = "partnerSearchForm.reset();">
-                  Clear
-                  </button>
                   <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
                    aria-label="Submit" (click)="search();" >
                   Search
                   </button>
+                  <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
+                  aria-label="Clear" (click) = "partnerSearchForm.reset();">
+              Clear
+              </button>
                 </form>
    
           </mat-menu>
