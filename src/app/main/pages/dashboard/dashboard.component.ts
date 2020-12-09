@@ -67,6 +67,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
           ],
           options   : {
             tooltips: {
+                position: "nearest",
+
                 callbacks: {
                     label: function(tooltipItem, data) {
                         var value = data.datasets[0].data[tooltipItem.index];
@@ -84,7 +86,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                       top   : 24,
                       left  : 16,
                       right : 16,
-                      bottom: 16
+                      bottom: 25 
                   }
               },
               scales             : {
@@ -125,6 +127,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ],
         options   : {
             tooltips: {
+                position: "nearest",
                 callbacks: {
                     label: function(tooltipItem, data) {
                         var value = data.datasets[0].data[tooltipItem.index];
@@ -144,7 +147,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     top   : 24,
                     left  : 16,
                     right : 16,
-                    bottom: 16
+                    bottom: 25 
                 }
             },
             scales             : {
@@ -184,6 +187,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
               }
           ],
           options  : {
+            position: "nearest",
             tooltips: {
                 callbacks: {
                       label: function(tooltipItem, data) {
@@ -206,7 +210,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
                       top   : 24,
                       left  : 16,
                       right : 16,
-                      bottom: 16
+                      bottom: 25 
                   }
               },
               scales             : {
@@ -318,7 +322,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
               layout             : {
                   padding: {
                       left : 24,
-                      right: 32
+                      right: 32,
                   }
               },
               elements           : {
