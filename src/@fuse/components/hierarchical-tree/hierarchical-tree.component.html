@@ -1,5 +1,5 @@
 <section class="hierarchy">
-    <div [matMenuTriggerFor]="tree" #triggerMenu class="ml-16 selectedMode">
+    <div [matMenuTriggerFor]="tree" #triggerMenu (menuOpened)="menuOpened()" class="ml-16 selectedMode">
       <span [matTooltip]="selectedNode?.title" [matTooltipPosition]="'below'" >
       {{selectedNode?.title | truncate : truncateTextLength }}
     </span>
@@ -9,7 +9,7 @@
         <div class="searching">
             <mat-form-field appearance="outline" (click)="$event.stopPropagation()">
                 <mat-label>Search</mat-label>
-                <input matInput [ngModel]="searchingText" (ngModelChange)="searchBy.next($event)">
+                <input matInput #autofocus autofocus autocomplete="off" [ngModel]="searchingText" (ngModelChange)="searchBy.next($event)" >
             </mat-form-field>
             <hr />
         </div>
@@ -21,7 +21,7 @@
               <li class="mat-tree-node">
                 <!-- use a disabled button to provide padding for tree leaf -->
                 <button mat-icon-button disabled></button>
-                <button mat-button [ngClass]="{'active': node.key == selectedNode.key}" (click)="selectUserMode(node)" 
+                <button mat-button [ngClass]="{'active': node.key === selectedNode.key}" (click)="selectUserMode(node)" 
                 [matTooltip]="node.title" [matTooltipPosition]="'after'">
                 {{node.title | truncate : truncateTextLength }}
                 </button> 
@@ -34,16 +34,24 @@
                 <div class="mat-tree-node">
                   <button mat-icon-button matTreeNodeToggle 
                           [attr.aria-label]="'Toggle ' + node.title">
-                    <mat-icon class="mat-icon-rtl-mirror">
+                         
+                    <ng-template [ngIf]="searchingText " [ngIfElse]="rightIcon">
+                      <mat-icon class="mat-icon-rtl-mirror">
+                   expand_more
+                      </mat-icon>
+                   </ng-template>
+                   <ng-template #rightIcon>
+                     <mat-icon class="mat-icon-rtl-mirror">
                       {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                     </mat-icon>
+                </ng-template>
                  </button>
-                 <button mat-button [ngClass]="{'active': node.key == selectedNode.key}" (click)="selectUserMode(node)" 
-                 [matTooltip]="node.title" [matTooltipPosition]="'after'">
+                 <button mat-button (click)="selectUserMode(node)" 
+                 [matTooltip]="node.title" [matTooltipPosition]="'after'" >
                  {{node.title | truncate : truncateTextLength }}
                 </button>
                 </div>
-                <ul [class.hierarchy-tree-invisible]="!treeControl.isExpanded(node) && !searchingText" [ngClass]="treeControl.isExpanded(node) ? 'expanded' : 'collapsed'">
+                <ul [class.hierarchy-tree-invisible]="!treeControl.isExpanded(node) && !searchingText" [ngClass]="treeControl.isExpanded(node) ? 'expanded active' : 'collapsed'">
                   <ng-container matTreeNodeOutlet></ng-container>
                 </ul>
               </li>
