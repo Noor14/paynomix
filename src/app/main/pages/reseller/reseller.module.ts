@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ResellerRoutingModule } from './reseller-routing.module';
 import { ResellerListComponent } from './reseller-list/reseller-list.component';
 import { MatTableModule } from '@angular/material/table';
@@ -22,6 +21,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { FuseConfirmDialogModule } from '@fuse/components';
 import {NgxMaskModule} from 'ngx-mask';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule} from '@angular/material/menu';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     PricingPlanModule,
     MatTooltipModule,
     FuseConfirmDialogModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    MatMenuModule,
+    MatToolbarModule
   ]
 })
 export class ResellerModule { }
