@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
-import { transactionType, transactionStatus, snackBarConfig, snackBarConfigWarn,dateFormat } from '../../../../../constants/globalFunctions';
+import { transactionType, transactionStatus, snackBarConfig, snackBarConfigWarn, dateFormat } from '../../../../../constants/globalFunctions';
 import { TransactionService } from '../transaction.service';
 import * as globalConfig from '../../../../../constants/globalFunctions';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -50,8 +50,22 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public dialogRef: any;
   public recordCount: number = 0;
   @Input() data: any;
-  @Input() dateRange:any
+  @Input() dateRange: any
   toppingList = ['AuthCode', 'Bin', 'AVSDetail', 'EntryType', 'Type', 'DocNo'];
+  statusList = [
+    {
+      Key: 'Approved',
+      Value: 0
+    },
+    {
+      Key: 'Decline',
+      Value: 1
+    },
+    {
+      Key: 'Pending',
+      Value: 2
+    }
+  ];
   public AuthCode = false;
   public Bin = false;
   public AVSDetail = false;
@@ -59,13 +73,14 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public Type = false;
   public DocNo = false;
   public allSelected = false;
-  public expandedRowDetail: any;  
+  public expandedRowDetail: any;
   @ViewChild('mySel') skillSel: MatSelect;
   @ViewChild('refundDialog') refundDialog: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   public dataSource = new MatTableDataSource<any>();
   @Output() updateList = new EventEmitter<boolean>();
+  @Output() statusChanges = new EventEmitter<any>();
   public actionControlOnHover = -1;
   private columnstoDisplay: string[] = [
     'Icon',
@@ -78,16 +93,16 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
     'Status',
     'CardholderName'
   ];
- public RefundDisplayedColumns: string[] = [
-   'TransactionId',
-   'TransactionType',
-   'Amount', 
-   'status', 
-   'InsertedOn',
-   'Action'
-]; 
-// @ViewChild(MatPaginator) paginator: MatPaginator;
-public displayedColumns : string[]= this.columnstoDisplay.slice();
+  public RefundDisplayedColumns: string[] = [
+    'TransactionId',
+    'TransactionType',
+    'Amount',
+    'status',
+    'InsertedOn',
+    'Action'
+  ];
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
+  public displayedColumns: string[] = this.columnstoDisplay.slice();
   constructor(
     private readonly _dialog: MatDialog,
     private readonly _formBuilder: FormBuilder,
@@ -103,15 +118,15 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
       this.dataSource.data = this.data.transaction;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      if(this.data.hideCol && this.displayedColumns.length){
+      if (this.data.hideCol && this.displayedColumns.length) {
         this.displayedColumns = this.displayedColumns.slice(2);
       }
-     
+
     }
   }
 
-  ngAfterViewInit(): void{
-    setTimeout(() =>  this.recordCount = this.data.transactionCount, 0);
+  ngAfterViewInit(): void {
+    setTimeout(() => this.recordCount = this.data.transactionCount, 0);
   }
 
   masterToggle() {
@@ -143,10 +158,8 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
         this.updateList.emit(true)
       }
     })
-  } 
-
-  changePage(event){
-    //console.log(event);
+  }
+  changePage(event) {
     const obj = {
       ...this.dateRange,
       RecordLimit: event.pageSize,
@@ -154,47 +167,40 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
       ...this._userConfigService.getUserMode()
     };
     this._transactionService.transactionList(obj)
-    .then((res: any) => {
-      if (res && !res.StatusCode) {
-        if (res.Response && 
-          res.Response.Transactions && 
-          res.Response.Transactions.length) {
+      .then((res: any) => {
+        if (res && !res.StatusCode) {
+          if (res.Response &&
+            res.Response.Transactions &&
+            res.Response.Transactions.length) {
             this.dataSource.data = res.Response.Transactions;
+          }
         }
-      }
-    }).catch(() => (console.log))
-    
+      }).catch(() => (console.log))
+
   }
-
-
   createRefundForm() {
     this.refundForm = this._formBuilder.group({
       TransactionId: [this.selectedToRefund.TransactionId, Validators.required],
-      TransactionAmount: [{value: this.selectedToRefund.Amount, disabled: this.selectedToRefund.Amount}, Validators.required],
+      TransactionAmount: [{ value: this.selectedToRefund.Amount, disabled: this.selectedToRefund.Amount }, Validators.required],
       Amount: ['', Validators.required],
       Reason: ['requested_by_customer', Validators.required],
     });
   }
-
- 
-
   openEmailDialog(obj) {
-    const dialogRef = this._dialog.open(EmailDialogComponent, {width: '550px'});
+    const dialogRef = this._dialog.open(EmailDialogComponent, { width: '550px' });
     obj.isSingleInput = true
-    dialogRef.componentInstance.data = obj ;
+    dialogRef.componentInstance.data = obj;
 
-   }
-
-
+  }
   refund() {
     if (this.refundForm.valid) {
-      if(this.refundForm.controls['Amount'].value && this.refundForm.controls['Amount'].value > this.selectedToRefund.Amount) {
+      if (this.refundForm.controls['Amount'].value && this.refundForm.controls['Amount'].value > this.selectedToRefund.Amount) {
         this.refundForm.controls.Amount.setErrors({
           amountExceed: true
         })
         return;
       }
-      this._transactionService.refundTransaction({...this.refundForm.value, TransactionAmount:this.selectedToRefund.Amount})
+      this._transactionService.refundTransaction({ ...this.refundForm.value, TransactionAmount: this.selectedToRefund.Amount })
         .then((res: any) => {
           if (res && !res.StatusCode) {
             this._snackBar.open('Amount refunded successfully', '', snackBarConfig);
@@ -235,15 +241,23 @@ public displayedColumns : string[]= this.columnstoDisplay.slice();
         this.DocNo = val._selected;
         break;
     }
-}
-toggleAllSelection() {
-  this.allSelected = !this.allSelected;  // to control select-unselect
-    
-  if (this.allSelected) {
-    this.skillSel.options.forEach( (item : MatOption) => item.select());
-  } else {
-    this.skillSel.options.forEach( (item : MatOption) => {item.deselect()});
   }
-  this.skillSel.close();
-}
+  statusChange(val) {
+    if(val.value.length) {
+      const obj = {
+        Statuses: val.value
+      }
+    this.statusChanges.emit(obj)
+    }
+  }
+  toggleAllSelection() {
+    this.allSelected = !this.allSelected;  // to control select-unselect
+
+    if (this.allSelected) {
+      this.skillSel.options.forEach((item: MatOption) => item.select());
+    } else {
+      this.skillSel.options.forEach((item: MatOption) => { item.deselect() });
+    }
+    this.skillSel.close();
+  }
 }
