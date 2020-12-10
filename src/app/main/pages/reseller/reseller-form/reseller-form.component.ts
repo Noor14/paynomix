@@ -105,8 +105,8 @@ getPartners(): void{
       if(res && !res.StatusCode){
           this.partners = res.Response;
           if(this.userType == 3){
-            this.resellerForm.get('PartnerId').patchValue(res.Response[0].PartnerId); 
-            this.resellerForm.controls.PartnerId.disable();
+            this.resellerForm.get('PartnerId').patchValue(res.Response[0].PartnerId)
+            
         } 
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
