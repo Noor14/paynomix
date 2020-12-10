@@ -225,7 +225,7 @@
                 Previous
             </button>
             <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
-                aria-label="Next" (click)="submit()">
+                aria-label="Next" [disabled]="btnclick" (click)="submit()">
                 Submit
             </button>
         </div>

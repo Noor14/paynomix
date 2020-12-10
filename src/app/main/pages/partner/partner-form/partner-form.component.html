@@ -136,7 +136,7 @@
                 <button mat-raised-button class="my-4 accent-alpha-bg " [ngClass.sm]="'mr-4'" [ngClass.gt-sm]="'mr-4'" aria-label="Cancel" (mousedown) = "openDialog()">
                 Cancel
                 </button>
-                <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="Submit" [disabled]="partnerForm.invalid" (click)="submit()">
+                <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" aria-label="Submit" [disabled]="partnerForm.invalid || btnclick" (click)="submit()">
                 Submit
                 </button>
             </div>

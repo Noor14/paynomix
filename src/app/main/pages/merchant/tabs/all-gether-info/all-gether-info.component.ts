@@ -11,7 +11,7 @@ export class AllGetherInfoComponent implements OnInit {
   @Input() allInfo: any;
   @Input() step: any;
   @Output() saveAll = new EventEmitter<any>();
-
+  public btnclick :boolean;
   constructor(private readonly _dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -22,6 +22,10 @@ export class AllGetherInfoComponent implements OnInit {
   }
   submit(){
      this.saveAll.emit();
+     this.btnclick = true
+    setTimeout(() => {
+      this.btnclick = false;
+          }, 5000);
   }
 
   openDialog(obj) {

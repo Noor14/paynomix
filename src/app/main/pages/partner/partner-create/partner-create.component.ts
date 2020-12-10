@@ -13,7 +13,6 @@ import { PartnerService } from '../partner.service';
 })
 export class PartnerCreateComponent implements OnInit {
 
-
      /**
      * Constructor
      *
@@ -35,7 +34,6 @@ export class PartnerCreateComponent implements OnInit {
       this._partnerService.savePartner(event)
       .then((res: any) => {
         if(res && !res.StatusCode){
-          
           this._snackBar.open('Partner created', '', snackBarConfig);
           this.closeSlidingPanel();
           this._slidingPanelService.setSlidingPanelStatus(true);
@@ -47,7 +45,6 @@ export class PartnerCreateComponent implements OnInit {
     
     }
     closeSlidingPanel(): void {
-      
       this._slidingPanelService.closeSlidingPanel('slidePanel').toggleOpen();
     }
 
