@@ -14,12 +14,25 @@ export const snackBarConfig: any = {
     duration: 3000,
     verticalPosition: 'top',
     horizontalPosition: 'right',
-    panelClass: 'fuse-navy-50'
+    panelClass: 'green-600'
+    
+
 };
 export const snackBarConfigWarn = {
   ...snackBarConfig,
   panelClass: 'warn'
 };
+export const snackBarConfigwarning = {
+    ...snackBarConfig,
+    panelClass: 'orange-800'
+
+  };
+
+export const snackBarConfiglogin = {
+    ...snackBarConfig,
+    panelClass: 'fuse-navy-50'
+
+  };
 export function validateRequiredControl(control: AbstractControl, isRequired: boolean){
     if(isRequired && !control.value){
         return {required:  true}
@@ -314,7 +327,7 @@ export const dateFormat = 'MM/dd/yyyy HH:mm:ss a';
 
 export const validator = {
   emailPattern : /^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/,
-  number : /^[0-9]+$/,
+  number : /^[v0-9]+$/,
   zipMaxLength: 5,
   accMaxLength: 17,
   maxPercentage: 100,

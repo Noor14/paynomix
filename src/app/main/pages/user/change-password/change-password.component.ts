@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserConfigService } from '@fuse/services/user.config.service';
-import { validator, validateAllFormFields, snackBarConfig, snackBarConfigWarn, } from '../../../../../constants/globalFunctions'
+import { validator, validateAllFormFields, snackBarConfig, snackBarConfigWarn, snackBarConfiglogin } from '../../../../../constants/globalFunctions'
 import { UserService } from '../user.service';
 import * as globalConfig from '../../../../../constants/globalFunctions';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -66,7 +66,7 @@ export class ChangePasswordComponent implements OnInit {
   }
   logout(): void {
     localStorage.clear();
-    this._snackBar.open('logout successfully!', '', snackBarConfig);
+    this._snackBar.open('logout successfully!', '', snackBarConfiglogin);
     this._router.navigate(['/login']);
   }
 }

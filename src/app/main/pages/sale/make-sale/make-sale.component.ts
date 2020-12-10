@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewChecked, AfterViewInit, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserConfigService } from '@fuse/services/user.config.service';
-import { snackBarConfigWarn } from '../../../../../constants/globalFunctions';
+import { snackBarConfigWarn, snackBarConfigwarning } from '../../../../../constants/globalFunctions';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, takeUntil, tap } from 'rxjs/operators';
 import { AchInfoComponent } from '../sale-info/ach-info/ach-info.component';
@@ -74,7 +74,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
           this.transactionInitialize(this.selectedAmount * 100);
         }else{
           if(res && Number(res) < 0.50) {
-            this._snackBar.open('Amount must be greater than 0.50', '', snackBarConfigWarn);
+            this._snackBar.open('Amount must be greater than 0.50', '', snackBarConfigwarning);
           }
           this.selectedAmount = undefined;
           this.container.clear();
@@ -169,7 +169,7 @@ export class MakeSaleComponent implements OnInit, AfterViewInit, OnDestroy {
             }
             this.getTransactionByID(obj, res.Response.TransactionId);
           } else {
-            this._snackBar.open('Please select another location', '', snackBarConfigWarn);
+            this._snackBar.open('Please select another location', '', snackBarConfigwarning);
           }
         } else {
           this._snackBar.open(res.StatusMessage, '', snackBarConfigWarn);
