@@ -10,7 +10,7 @@ import { PartnerTableComponent } from '../partner-table/partner-table.component'
 import { PartnerService } from '../partner.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as globalConfig from '../../../../../constants/globalFunctions';
-
+import { AdvancedSearchComponent } from '@fuse/components/advanced-search/advanced-search.component';
 
 @Component({
   selector: 'app-partner-list',
@@ -19,12 +19,15 @@ import * as globalConfig from '../../../../../constants/globalFunctions';
 })
 export class PartnerListComponent implements OnInit, OnDestroy {
   @ViewChild('renderingContainer', { read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild('renderingSearch', { read: ViewContainerRef }) searchContainer: ViewContainerRef;
   private componentRef: ComponentRef<any>;
   public partners: any[] = [];
   private _unsubscribeAll: Subject<any>;
   public partnerSearchForm: FormGroup;
   public globalConfig = globalConfig;
-  
+  @ViewChild(AdvancedSearchComponent) childComponentMenu: AdvancedSearchComponent;
+  public message:any;
+  public PartnerSearchField = [];
       /**
       * Constructor
       *
@@ -44,8 +47,13 @@ export class PartnerListComponent implements OnInit, OnDestroy {
    ) { 
              // Set the private defaults
              this._unsubscribeAll = new Subject();
+             
+     this.PartnerSearchField = [
+      { label: "Partner Name ", ControlName: "PartnerName" },
+      { label: "Dba Name ", ControlName: "DBAName" },
+      { label: "Email ", ControlName: "Email" }
+    ];
    }
-  
     ngOnInit(): void {
       this._userConfigService.userModeChange
       .pipe(takeUntil(this._unsubscribeAll))
@@ -58,13 +66,7 @@ export class PartnerListComponent implements OnInit, OnDestroy {
         // panelChangesSubscriber && panelChangesSubscriber.unsubscribe();
       }
       })
-      this.partnerSearchForm = this._formBuilder.group({
-         PartnerName: [''],
-         DBAName: [''],
-         Email: [''],
-        });
       }
-
     ngOnDestroy(): void {
       // Unsubscribe from all subscriptions
       this._unsubscribeAll.next();
@@ -72,71 +74,29 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       this.componentRef && this.componentRef.destroy();
 
     }
-    renderingComponent(type, data?) {
+    renderingComponent(type, data?, containerValue?) {
+      if(containerValue){
+        const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
+        // this.container.clear();
+        this.componentRef = this.container.createComponent(factory);
+        this.componentRef.instance.data = data.data;
+      }
+       else{
+        
         const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
         this.container.clear();
         this.componentRef = this.container.createComponent(factory);
         this.componentRef.instance.data = data;
-    }
+        // this.getPartners();
+       }
 
-    getPartners(): void{
+    }
+    getPartners(value?): void{
       const obj = {
         ...this._userConfigService.getUserMode(),
-        RecordLimit: 100,
-        PageNo: 1,
-    }
+        ...value
+      }
       this._partnerService.partnerList(obj)
-      .then((res: any) => {
-        if(res && !res.StatusCode){
-          if(res.Response && res.Response.length){
-            this.partners = res.Response;
-            this.renderingComponent(PartnerTableComponent,{
-              partners: this.partners,
-            })
-          }else{
-            this.renderingComponent(NoFoundComponent, {
-              icon: 'no-pricing-plan',
-              text: 'No partner found',
-              subText: "You Haven't made any Partner yet"
-            });
-          }
-        }
-      }).catch((err: HttpErrorResponse)=>(console.log))
-    }
-
-    openSlidePanel(): void{ 
-        this._slidingPanelService.getSidebar('slidePanel', 'PartnerCreateComponent').toggleOpen();
-    }
-
-    search(){
-
-      var searchParam = {'PartnerName':'','DBAName':'','Email':''};
-      if(this.partnerSearchForm.value.PartnerName!='')
-      {
-        searchParam.PartnerName =this.partnerSearchForm.value.PartnerName; 
-      }
-      else
-      {
-        delete searchParam.PartnerName;
-      }
-      if(this.partnerSearchForm.value.DBAName!='')
-      {
-        searchParam.DBAName =this.partnerSearchForm.value.DBAName; 
-      }
-      else
-      {
-        delete searchParam.DBAName;
-      }
-      if(this.partnerSearchForm.value.Email!='')
-      {
-        searchParam.Email =this.partnerSearchForm.value.Email; 
-      }
-      else
-      {
-        delete searchParam.Email;
-      }
-      
-      this._partnerService.partnerList(searchParam)
       .then((res: any) => {
         if(res && !res.StatusCode){
           if(res.Response && res.Response.length){
@@ -155,11 +115,37 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       }).catch((err: HttpErrorResponse)=>(console.log))
     }
 
-    stopPropagation($event){
-      if($event.toElement.textContent !== " Search "){
-        $event.stopPropagation();
-      }
-      
+    openSlidePanel(): void{
+     
+        this._slidingPanelService.getSidebar('slidePanel', 'PartnerCreateComponent').toggleOpen();
+    }
+    searchpartner(value){
+      this._partnerService.partnerList(value)
+      .then((res: any) => {
+        if(res && !res.StatusCode){
+          if(res.Response && res.Response.length){
+            this.partners = res.Response;
+            this.renderingComponent(PartnerTableComponent,{
+              partners: this.partners,
+            })
+          }else{
+            this.renderingComponent(NoFoundComponent, {
+              icon: 'no-pricing-plan',
+              text: 'No partner found',
+              subText: "You Haven't made any Partner yet"
+            });
+          }
+        }
+      }).catch((err: HttpErrorResponse)=>(console.log))
+
+    }
+
+    openmenu(){
+      this.renderingComponent(AdvancedSearchComponent,{
+       data : this.PartnerSearchField
+      },
+      'searchContainer'
+      )
     }
 
 }

@@ -24,6 +24,7 @@ export class ResellerFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() resellerDetail: any = null;
   private _unsubscribeAll: Subject<any>;
   public userType: any;
+  public btnclick:boolean;
 
     /**
      * Constructor
@@ -104,8 +105,8 @@ getPartners(): void{
       if(res && !res.StatusCode){
           this.partners = res.Response;
           if(this.userType == 3){
-            this.resellerForm.get('PartnerId').patchValue(res.Response[0].PartnerId); 
-            this.resellerForm.controls.PartnerId.disable();
+            this.resellerForm.get('PartnerId').patchValue(res.Response[0].PartnerId)
+            
         } 
       }
   }).catch((err: HttpErrorResponse)=>(console.log))
@@ -136,6 +137,10 @@ getPartners(): void{
  submit(){
   
    if(this.resellerForm.valid){
+    this.btnclick = true
+    setTimeout(() => {
+      this.btnclick = false;
+          }, 3000);
      this.submitForm.emit({...this.resellerDetail, ...this.resellerForm.value});
    }else{
     globalConfig.validateAllFormFields(this.resellerForm)

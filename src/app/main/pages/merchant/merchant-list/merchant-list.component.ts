@@ -8,6 +8,7 @@ import { MerchantTableComponent } from '../merchant-table/merchant-table.compone
 import { MerchantService } from '../merchant.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as globalConfig from '../../../../../constants/globalFunctions';
+import { AdvancedSearchComponent } from '@fuse/components/advanced-search/advanced-search.component';
 
 @Component({
   selector: 'app-merchant-list',
@@ -22,6 +23,8 @@ export class MerchantListComponent implements OnInit, OnDestroy {
   public merchantSearchForm: FormGroup;
   private _unsubscribeAll: Subject<any>;
   public globalConfig = globalConfig;
+  public MerchantSearchField = [];
+  @ViewChild(AdvancedSearchComponent) childComponentMenu: AdvancedSearchComponent;
     /**
     * Constructor
     *
@@ -38,6 +41,12 @@ export class MerchantListComponent implements OnInit, OnDestroy {
  ) { 
            // Set the private defaults
            this._unsubscribeAll = new Subject();
+           this.MerchantSearchField = [
+            { label: "Company Name ", ControlName: "MerchantUserName" },
+            { label: "Reseller Name ", ControlName: "ResellerName" },
+            { label: "Email ", ControlName: "Email" },
+            { label: "Pricing Title ", ControlName: "PricingTitle" }
+          ];
  }
 
   ngOnInit(): void {
@@ -59,11 +68,21 @@ export class MerchantListComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.complete();
     this.componentRef && this.componentRef.destroy();
   }
-  renderingComponent(type, data?) {
+  renderingComponent(type, data?, containerValue?) {
+    if(containerValue){
+      const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
+      // this.container.clear();
+      this.componentRef = this.container.createComponent(factory);
+      this.componentRef.instance.data = data.data;
+    }
+     else{
       const factory: ComponentFactory<any> = this._resolver.resolveComponentFactory(type);
       this.container.clear();
       this.componentRef = this.container.createComponent(factory);
       this.componentRef.instance.data = data;
+      // this.getPartners();
+     }
+
   }
 
   getMerchants(){
@@ -84,7 +103,7 @@ export class MerchantListComponent implements OnInit, OnDestroy {
           this.renderingComponent(NoFoundComponent, {
             icon: 'no-pricing-plan',
             text: 'No merchant found',
-            subText: "You Haven't made any Merchant yet"
+            subText: "You haven't made any Merchant yet"
           });
         }
       }
@@ -92,43 +111,9 @@ export class MerchantListComponent implements OnInit, OnDestroy {
     }).catch((err: HttpErrorResponse)=>(console.log))
   }
 
-  search(){
-
-    var searchParam = {'MerchantUserName':'','ResellerName':'','Email':'','PricingTitle':''};
-    if(this.merchantSearchForm.value.MerchantUserName!='')
-    {
-      searchParam.MerchantUserName =this.merchantSearchForm.value.MerchantUserName; 
-    }
-    else
-    {
-      delete searchParam.MerchantUserName;
-    }
-    if(this.merchantSearchForm.value.ResellerName!='')
-    {
-      searchParam.ResellerName =this.merchantSearchForm.value.ResellerName; 
-    }
-    else
-    {
-      delete searchParam.ResellerName;
-    }
-    if(this.merchantSearchForm.value.Email!='')
-    {
-      searchParam.Email =this.merchantSearchForm.value.Email; 
-    }
-    else
-    {
-      delete searchParam.Email;
-    }
-    if(this.merchantSearchForm.value.PricingTitle!='')
-    {
-      searchParam.PricingTitle =this.merchantSearchForm.value.PricingTitle; 
-    }
-    else
-    {
-      delete searchParam.PricingTitle;
-    }
- 
-    this._merchantService.merchantList(searchParam)
+  searchmerchant(value){
+   
+    this._merchantService.merchantList(value)
     .then((res: any) => {
       if(res && !res.StatusCode){
         if(res.Response && res.Response.length){
@@ -140,21 +125,20 @@ export class MerchantListComponent implements OnInit, OnDestroy {
           this.renderingComponent(NoFoundComponent, {
             icon: 'no-pricing-plan',
             text: 'No merchant found',
-            subText: "You haven't made any Merchant"
+            subText: "You haven't made any Merchant yet"
           });
         }
-        
       }
-       
     }).catch((err: HttpErrorResponse)=>(console.log))
-  }
-  
 
-  stopPropagation($event){
-    if($event.toElement.textContent !== " Search "){
-      $event.stopPropagation();
-    }
-    
+  }
+
+  openmenu(){
+    this.renderingComponent(AdvancedSearchComponent,{
+     data : this.merchantSearchForm
+    },
+    'searchContainer'
+    )
   }
 
 

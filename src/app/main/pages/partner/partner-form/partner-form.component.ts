@@ -15,6 +15,7 @@ export class PartnerFormComponent implements OnInit, OnChanges {
   @Output() submitForm = new EventEmitter<any>();
   @Input() partnerDetail: any = null;
   public globalConfig = globalConfig;
+  public btnclick:boolean;
 
       /**
      * Constructor
@@ -97,8 +98,11 @@ else{
 submit(){
   
    if(this.partnerForm.valid){
-     
-     this.submitForm.emit({...this.partnerDetail, ...this.partnerForm.value});
+   this.btnclick = true
+    setTimeout(() => {
+      this.btnclick = false;
+          }, 3000);
+     this.submitForm.emit({...this.partnerDetail, ...this.partnerForm.value, isformclick:true});
    }else{
     globalConfig.validateAllFormFields(this.partnerForm)
    }

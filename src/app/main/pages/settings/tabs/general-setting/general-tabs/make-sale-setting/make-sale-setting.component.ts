@@ -60,7 +60,7 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
       LocationId: [{value: '', disabled: true} , Validators.required],
       SaleSetting: this._formBuilder.array([])
     });
-    this.userType =   this._userConfigService.loggedInUser.UserRoleId
+    this.userType =   this._userConfigService.loggedInUser.UserRoleId;
   }
 
   ngOnDestroy(): void {
@@ -77,7 +77,15 @@ export class MakeSaleSettingComponent implements OnInit, OnDestroy {
             this.makeSaleSettingForm.controls.SaleSetting['controls'] = [];
             this.merchants = res.Response;
             if(this.userType == 2){
-              this.makeSaleSettingForm.get('MerchantId').patchValue(res.Response[0].MerchantId); 
+              this.makeSaleSettingForm.get('MerchantId').patchValue(res.Response[0].MerchantId);
+              const obj = {MerchantId: this.makeSaleSettingForm.controls.MerchantId.value}; 
+              this._saleService.locationList(obj).then((res: any)=>{
+                if(res && !res.StatusCode){
+                  this.locations = res.Response;
+                  this.makeSaleSettingForm.controls.LocationId.enable();
+                }
+              })
+
           } 
 
         }

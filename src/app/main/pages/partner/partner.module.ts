@@ -24,6 +24,7 @@ import {NgxMaskModule} from 'ngx-mask';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { AdvancedSearchModule } from '@fuse/components/advanced-search/advanced-search.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     NgxCurrencyModule,
     MatMenuModule,
     MatToolbarModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    AdvancedSearchModule
   ]
 })
 export class PartnerModule { }

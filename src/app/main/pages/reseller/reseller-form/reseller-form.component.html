@@ -4,9 +4,9 @@
          name="form" [formGroup]="resellerForm">
     
             <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
-                <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
+                <mat-form-field  appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'" >
                     <mat-label>Partner</mat-label>
-                    <mat-select formControlName="PartnerId" required >
+                    <mat-select [disabled]= "userType==3" formControlName="PartnerId" required >
                         <mat-option [value]="item.PartnerId" *ngFor="let item of partners">{{item.PartnerName}}</mat-option>
                     </mat-select>
                      <mat-error> Partner is required!</mat-error>
@@ -144,7 +144,7 @@
                 Cancel
                 </button>
                 <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
-                    aria-label="Submit" [disabled]="resellerForm.invalid" (click)="submit()">
+                    aria-label="Submit" [disabled]="resellerForm.invalid || btnclick" (click)="submit()">
                 Submit
                 </button>
             </div>

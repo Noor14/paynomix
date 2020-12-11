@@ -23,6 +23,7 @@ import {NgxMaskModule} from 'ngx-mask';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { AdvancedSearchModule } from '@fuse/components/advanced-search/advanced-search.module';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     FuseConfirmDialogModule,
     NgxMaskModule.forRoot(),
     MatMenuModule,
-    MatToolbarModule
+    MatToolbarModule,
+    AdvancedSearchModule
   ]
 })
 export class ResellerModule { }

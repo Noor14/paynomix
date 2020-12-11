@@ -7,51 +7,16 @@
         <div  fxFlex= "30"  fxLayoutAlign="end center">
      
             <mat-toolbar>
-              <div [matMenuTriggerFor]="myMenu">
+              <div [matMenuTriggerFor]="childComponentMenu?.menu">
                 <button mat-icon-button 
                        >
                         <mat-icon>search</mat-icon>
                 </button>
                 <span>Search Merchant</span>
               </div>
+              <app-advanced-search  [data]="MerchantSearchField" (submitForm)="searchmerchant($event)" #childComponentMenu="menuInOtherComponent" ></app-advanced-search>
               </mat-toolbar>
            
-          <mat-menu class="mat-menu-class" #myMenu="matMenu"  >
-                  <form   fxLayout="column" class = "p-20" fxLayoutAlign="start" name="form" [formGroup]="merchantSearchForm" (click)= "stopPropagation($event)">
-                  
-                      <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                          <mat-label>Company Name</mat-label>
-                          <input matInput formControlName="MerchantUserName"  [maxlength]="globalConfig?.validator?.maxFieldLength">
-                      </mat-form-field>
-          
-                  
-                      <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                          <mat-label>Reseller Name</mat-label>
-                          <input matInput formControlName="ResellerName"  [maxlength]="globalConfig?.validator?.maxFieldLength">
-                      </mat-form-field>
-  
-                      <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                          <mat-label>Email</mat-label>
-                          <input matInput formControlName="Email"  [maxlength]="globalConfig?.validator?.maxFieldLength">
-                      </mat-form-field>
-  
-                      <mat-form-field appearance="outline" fxFlex.gt-sm="50" fxFlex.sm="50" [ngClass.sm]="'pl-4'" [ngClass.gt-sm]="'pl-4'">
-                          <mat-label>Pricing Title</mat-label>
-                          <input matInput formControlName="PricingTitle"  [maxlength]="globalConfig?.validator?.maxFieldLength">
-                      </mat-form-field>
-  
-                  <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
-                   aria-label="Submit" (click)="search();" >
-                  Search
-                  </button>
-                  <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
-                  aria-label="Clear" (click) = "merchantSearchForm.reset();">
-              Clear
-              </button>
-                </form>
-   
-          </mat-menu>
-    
         </div>
       </div>
     </section>

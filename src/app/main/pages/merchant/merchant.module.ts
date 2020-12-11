@@ -33,6 +33,8 @@ import {NgxMaskModule} from 'ngx-mask';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { AdvancedSearchModule } from '@fuse/components/advanced-search/advanced-search.module';
+
 @NgModule({
   declarations: [MerchantListComponent, MerchantCreateComponent, MerchantEditComponent, MerchantInfoComponent, BusinessDetailComponent, OwnerDetailComponent, BankAccountComponent, AllGetherInfoComponent, MerchantFormComponent, MerchantTableComponent],
   entryComponents: [MerchantTableComponent],
@@ -60,7 +62,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
     NgxMaskModule.forRoot(),
     MatToolbarModule,
     FlexLayoutModule,
-    OverlayModule
+    OverlayModule,
+    AdvancedSearchModule
 
   ]
 })
