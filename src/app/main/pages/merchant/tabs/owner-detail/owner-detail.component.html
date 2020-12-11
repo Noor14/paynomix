@@ -6,14 +6,14 @@
     <div fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
         <mat-form-field appearance="outline" fxFlex.gt-sm="33" fxFlex.sm="33" [ngClass.sm]="'pr-4'" [ngClass.gt-sm]="'pr-4'">
             <mat-label>First name</mat-label>
-            <input matInput formControlName="FirstName" required [maxlength]="globalConfig.validator.maxName" >
+            <input class="text-capitalize"  matInput formControlName="FirstName" required [maxlength]="globalConfig.validator.maxName" >
             <mat-error *ngIf="ownerDetailForm.get('FirstName').hasError('required')">First name is required!</mat-error>
             <mat-error *ngIf="!ownerDetailForm.get('FirstName').hasError('required') && ownerDetailForm.get('FirstName').hasError('maxlength')" > First Name should have maximun length of 
                 {{globalConfig?.validator?.maxName}} </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex.gt-sm="34" fxFlex.sm="34" [ngClass.sm]="['pr-4', 'pl-4']" [ngClass.gt-sm]="['pr-4', 'pl-4']">
             <mat-label>Last Name</mat-label>
-            <input matInput formControlName="LastName" required [maxlength]="globalConfig.validator.maxName">
+            <input class="text-capitalize" matInput formControlName="LastName" required [maxlength]="globalConfig.validator.maxName">
             <mat-error *ngIf="ownerDetailForm.get('LastName').hasError('required')">Last name is required!</mat-error>
             <mat-error *ngIf="!ownerDetailForm.get('LastName').hasError('required') && ownerDetailForm.get('LastName').hasError('maxlength')" > Last name should have maximun length of 
                 {{globalConfig?.validator?.maxName}} </mat-error>

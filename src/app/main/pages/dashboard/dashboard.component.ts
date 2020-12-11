@@ -190,14 +190,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
             position: "nearest",
             tooltips: {
                 callbacks: {
-                      label: function(tooltipItem, data) {
-                          var value = data.datasets[0].data[tooltipItem.index];
-                          if (parseInt(value) >= 1000) {
-                            return "Transactions: " + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        } else {
-                            return "Transactions: " + value;
-                        }
-                      }
+                    label: function(tooltipItem, data) {
+                        var value = data.datasets[0].data[tooltipItem.index];
+                          return "Amount: " + value.toLocaleString("en-US",{style:"currency", currency:"USD"});
+                      
+                    }
                 } // end callbacks:
               },
               spanGaps           : false,
