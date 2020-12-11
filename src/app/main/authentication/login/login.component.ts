@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { validator, snackBarConfig, snackBarConfigWarn, validateAllFormFields } from '../../../../constants/globalFunctions';
+import { validator, snackBarConfiglogin, snackBarConfigWarn, validateAllFormFields } from '../../../../constants/globalFunctions';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit
     login(): void{
         this.loggedIn = true;
         if(this.loginForm.valid){
-            this._snackBar.open('Signing in', '', snackBarConfig);
+            this._snackBar.open('Signing in', '', snackBarConfiglogin);
             this._authenticationService.signIn(this.loginForm.value).then((res: any)=>{
                 if(res && !res.StatusCode){
                     if(res.Response.IsActive){

@@ -8,7 +8,7 @@ export class NumberDirective {
 
  // Allow key codes for special events. Reflect :
  // Backspace, tab, end, home
- private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight'];
+ private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'control'];
 
 constructor(private el: ElementRef) {
  }
