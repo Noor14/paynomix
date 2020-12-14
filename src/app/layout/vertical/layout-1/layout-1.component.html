@@ -79,6 +79,9 @@
 <fuse-sidebar name="quickPanel" position="right" class="quick-panel">
     <quick-panel></quick-panel>
 </fuse-sidebar>
+<app-sliding-panel name="slidePanel" position="right" class="fuse-navy-50" (componentName)="renderComponent($event)">
+    <ng-template #renderingComponent ></ng-template>
+</app-sliding-panel>
 <!-- / QUICK PANEL -->
 
 <!-- ----------------------------------------------------------------------------------------------------- -->

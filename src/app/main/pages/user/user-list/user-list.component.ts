@@ -63,8 +63,8 @@ export class UserListComponent implements OnInit, OnDestroy {
     this._userService.userList(this._userConfigService.getUserMode())
     .then((res: any) => {
       if(res && !res.StatusCode){
-        if(res.Response && res.Response.length){
-          this.users = res.Response;
+        if(res.Response && res.Response.Users.length){
+          this.users = res.Response.Users;
           this.renderingComponent(UserTableComponent,{
             users: this.users,
           })
