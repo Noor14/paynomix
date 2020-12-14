@@ -50,6 +50,7 @@ export class PartnerTableComponent implements OnInit {
     }
   }
   ngAfterViewInit(): void{
+    //console.log(this.data);
     setTimeout(() =>  this.recordCount = 100, 0);
   }
 
