@@ -79,6 +79,9 @@
 <fuse-sidebar name="quickPanel" position="right" class="quick-panel">
     <quick-panel></quick-panel>
 </fuse-sidebar>
+<app-sliding-panel name="slidePanel" position="right" class="fuse-navy-50" (componentName)="renderComponent($event)">
+    <ng-template #renderingComponent ></ng-template>
+</app-sliding-panel>
 <!-- / QUICK PANEL -->
 
 <!-- ----------------------------------------------------------------------------------------------------- -->
@@ -107,7 +110,7 @@
                   [folded]="fuseConfig.layout.navbar.folded"
                   lockedOpen="gt-md"
                   *ngIf="!fuseConfig.layout.navbar.hidden">
-        <navbar resizable [resizableMinWidth]=280 [variant]="fuseConfig.layout.navbar.variant" class="left-navbar"></navbar>
+        <navbar  [variant]="fuseConfig.layout.navbar.variant" class="left-navbar"></navbar>
     </fuse-sidebar>
 </ng-template>
 <!-- / LEFT NAVBAR -->

@@ -100,11 +100,12 @@ export class ResellerListComponent implements OnInit, OnDestroy {
     this._resellerService.resellerList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
-          if(res.Response && res.Response.length){
+          if(res.Response && res.Response.Resellers.length){
            
-            this.resellers = res.Response;
+            this.resellers = res.Response.Resellers;
             this.renderingComponent(ResellerTableComponent,{
               resellers: this.resellers,
+              resellerCount: res.Response.TotalCount
             })
           }else{
             this.renderingComponent(NoFoundComponent, {

@@ -81,8 +81,8 @@ export class MerchantFormComponent implements OnInit, OnDestroy {
   getResellers(): void{
     this._resellerService.resellerList(this._userConfigService.getUserMode())
     .then((res: any) => {
-          if(res && !res.StatusCode && res.Response && res.Response.length){
-          this.resellers = res.Response.map((item: any) => {
+          if(res && !res.StatusCode && res.Response && res.Response.Resellers.length){
+          this.resellers = res.Response.Resellers.map((item: any) => {
             return {
               id: item.ResellerId, 
               name: item.ResellerName

@@ -50,8 +50,7 @@ export class PartnerTableComponent implements OnInit {
     }
   }
   ngAfterViewInit(): void{
-    //console.log(this.data);
-    setTimeout(() =>  this.recordCount = 100, 0);
+    setTimeout(() =>  this.recordCount = this.data.partnerCount, 0);
   }
 
 
@@ -87,7 +86,7 @@ changePage(event){
   .then((res: any) => {
     if (res && !res.StatusCode) {
       if (res.Response ) {
-        this.dataSource.data = res.Response;
+        this.dataSource.data = res.Response.Partners;
       }
     }
   }).catch(() => (console.log))

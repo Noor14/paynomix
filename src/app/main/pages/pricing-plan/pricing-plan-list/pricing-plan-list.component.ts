@@ -102,8 +102,8 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
     this._pricingPlanService.pricingPlanList(this.getPricingPlanBy)
     .then((res: any) => {
         if(res && !res.StatusCode){
-          if(res.Response && res.Response.length){
-            this.pricingPlans = res.Response;
+          if(res.Response && res.Response.PricingPlans.length){
+            this.pricingPlans = res.Response.PricingPlans;
             this.assignPricingPlan = this.assignPlan(this.getPricingPlanBy);
             this.renderingComponent(PricingPlanTableComponent, {
               pricingPlans: this.pricingPlans,
@@ -127,7 +127,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
    return this._partnerService.partnerList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
-            return res.Response.sort((a,b)=> a.PartnerName.localeCompare(b.PartnerName)).map((item: any) => {
+            return res.Response.Partners.sort((a,b)=> a.PartnerName.localeCompare(b.PartnerName)).map((item: any) => {
               return {
                 id: item.PartnerId, 
                 name: item.PartnerName,
@@ -142,7 +142,7 @@ export class PricingPlanListComponent implements OnInit, OnDestroy, OnChanges {
    return this._resellerService.resellerList(obj)
     .then((res: any) => {
         if(res && !res.StatusCode){
-            return res.Response.sort((a,b)=> a.ResellerName.localeCompare(b.ResellerName)).map((item: any) => {
+            return res.Response.Resellers.sort((a,b)=> a.ResellerName.localeCompare(b.ResellerName)).map((item: any) => {
               return {
                 id: item.ResellerId, 
                 name: item.ResellerName,
