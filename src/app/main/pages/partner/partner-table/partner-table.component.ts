@@ -58,8 +58,8 @@ export class PartnerTableComponent implements OnInit {
   openDialog(id): void { 
     const dialogRef = this._dialog.open(FuseConfirmDialogComponent, {width: '550px'});
     dialogRef.componentInstance.data={
-      title: "Send Credentials",
-      message:"Are you sure, You want to send the credentials?"
+      title: "Resend Welcome Email",
+      message:"Are you sure you want to resend welcome email?"
     }
     dialogRef.afterClosed().subscribe((result)=>{
       if (result){
