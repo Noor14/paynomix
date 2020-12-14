@@ -50,6 +50,7 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
       Email: [''],
+      PhoneNo : [''],
       City: ['', Validators.required],
       Address1: ['', Validators.required],
       State: ['', Validators.required],
@@ -57,6 +58,8 @@ export class BasicInfoComponent implements OnInit, OnDestroy {
       Country: ['', Validators.required]
     });
     this.CurrentUser = this._userConfigService.loggedInUser.UserRoleId
+
+
     this._userConfigService.userModeChange
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe(() => this.getBasicDetail());
