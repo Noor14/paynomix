@@ -127,14 +127,14 @@ export class MerchantInfoComponent implements OnInit, AfterViewInit, OnChanges, 
             if(this.merchantInfo.resetPricingPlan){
               control.reset();
             }
-            if(res.Response.length){
+            if(res.Response.PricingPlans.length){
               control.enable();
             }else{
               this._snackBar.open('This reseller has no pricing plan yet', '', globalConfig.snackBarConfigWarn);
               control.disable();
               this.merchantInfoForm.controls.PricingTitle.reset();
             }  
-            this.pricingPlans = res.Response;
+            this.pricingPlans = res.Response.PricingPlans;
         }
     }).catch((err: HttpErrorResponse)=>(console.log))
   }

@@ -52,6 +52,7 @@ export class ResellerTableComponent implements OnInit  {
   
   }
 
+
   openDialog(id): void { 
     const dialogRef = this._dialog.open(FuseConfirmDialogComponent, {width: '550px'});
     dialogRef.componentInstance.data={
