@@ -17,8 +17,8 @@
      aria-label="Submit" (click)="submit()" >
     Search
     </button>
-        <button mat-raised-button class="my-4" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" color="accent" 
-        aria-label="Clear" (click)= "SearchForm.reset()" >
+        <button mat-raised-button class="my-4 accent-alpha-bg" [ngClass.sm]="'ml-4'" [ngClass.gt-sm]="'ml-4'" 
+        aria-label="Clear" (click)= "SearchForm.reset(); submit()"  >
     Clear
     </button>
   </form>
