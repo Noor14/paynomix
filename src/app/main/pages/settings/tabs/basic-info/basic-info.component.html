@@ -33,7 +33,7 @@
               fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" 
              fxFlex="100" >
-                    <mat-label>Partner</mat-label>
+                    <mat-label>Partner Name</mat-label>
                     <input matInput value="{{settingDetail.PartnerName}}" [disabled]="true">
                 </mat-form-field>           
             </div>
@@ -43,7 +43,7 @@
             fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" 
              fxFlex="100" >
-                    <mat-label>Reseller</mat-label>
+                    <mat-label>Reseller Name</mat-label>
                     <input matInput value="{{settingDetail.ResellerName}}" [disabled]="true">
                 </mat-form-field>           
             </div>
@@ -52,7 +52,7 @@
             fxLayout.sm="row" fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.sm="space-between center" fxLayoutAlign.gt-sm="space-between center" fxFlex="1 0 auto">
                 <mat-form-field appearance="outline" 
              fxFlex="100" >
-                    <mat-label>Merchant</mat-label>
+                    <mat-label>Merchant Name</mat-label>
                     <input matInput value="{{settingDetail.MerchantName}}" [disabled]="true">
                 </mat-form-field>           
             </div>
@@ -88,9 +88,8 @@
                     <mat-form-field appearance="outline" 
                  fxFlex="100" >
                         <mat-label>Phone No</mat-label>
-                        <input matInput formControlName="PhoneNo" 
-                        [readonly]="true"
-                        [disabled]="true">
+                        <input mask="(000) 000-0000" matInput formControlName="PhoneNo" 
+                       >
                     </mat-form-field>               
                 </div>
     
