@@ -51,7 +51,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   public recordCount: number = 0;
   @Input() data: any;
   @Input() dateRange: any
-  toppingList = ['AuthCode', 'Bin', 'AVSDetail', 'EntryType', 'Type', 'DocNo'];
+  toppingList = ['CardholderName','CardType','MerchantName','AuthCode', 'Bin', 'AVSDetail', 'EntryType', 'Type', 'DocNo'];
   statusList = [
     {
       Key: 'Approved',
@@ -66,6 +66,9 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
       Value: 2
     }
   ];
+  public CardholderName = false;
+  public CardType = false;
+  public MerchantName = false;
   public AuthCode = false;
   public Bin = false;
   public AVSDetail = false;
@@ -181,7 +184,7 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   createRefundForm() {
     this.refundForm = this._formBuilder.group({
       TransactionId: [this.selectedToRefund.TransactionId, Validators.required],
-      TransactionAmount: [{ value: this.selectedToRefund.Amount, disabled: this.selectedToRefund.Amount }, Validators.required],
+      TransactionAmount: [{ value: this.selectedToRefund.RemainingAmount, disabled: this.selectedToRefund.RemainingAmount }, Validators.required],
       Amount: ['', Validators.required],
       Reason: ['requested_by_customer', Validators.required],
     });
@@ -222,6 +225,15 @@ export class TransactionTableComponent implements OnInit, AfterViewInit {
   }
   change(val) {
     switch (val.value) {
+      case 'CardholderName':
+        this.CardholderName = val._selected;
+        break; 
+      case 'CardType':
+        this.CardType = val._selected;
+        break;  
+      case 'MerchantName':
+          this.MerchantName = val._selected;
+          break;   
       case 'AuthCode':
         this.AuthCode = val._selected;
         break;

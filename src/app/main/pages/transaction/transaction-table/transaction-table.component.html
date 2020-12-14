@@ -26,8 +26,11 @@
       <ng-container matColumnDef="expandedRowDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
           <div [@detailExpand]="element == expandedRowDetail ? 'expanded' : 'collapsed'"
-            *ngIf="expandedRowDetail && (AuthCode || Bin || AVSDetail || EntryType || Type|| DocNo)">
+            *ngIf="expandedRowDetail && (CardholderName || AuthCode || Bin || AVSDetail || EntryType || Type|| DocNo)">
             <div class="ml-51" fxLayout="row wrap p-4" fxLayoutAlign="start center">
+                <div class="p-5" fxFlex="33%" *ngIf="CardholderName" [style.display]="CardholderName ? 'block': 'none'"><b>CardHolder Name:</b> {{element.CardholderName ? element.CardholderName:' ---'}}</div>
+                <div class="p-5" fxFlex="33%" *ngIf="CardType" [style.display]="CardType ? 'block': 'none'"><b>Card Type:</b> {{element.CardType ? element.CardType:' ---'}}</div>
+                <div class="p-5" fxFlex="33%" *ngIf="MerchantName" [style.display]="MerchantName ? 'block': 'none'"><b>Merchant Name:</b> {{element.MerchantName ? element.MerchantName:' ---'}}</div>
                 <div class="p-5" fxFlex="33%" *ngIf="AuthCode" [style.display]="AuthCode ? 'block': 'none'"><b>AuthCode:</b> {{element.AuthCode ? element.AuthCode:' ---'}}</div>
                 <div class="p-5" fxFlex="33%" *ngIf="Bin" [style.display]="Bin ? 'block': 'none'"><b>Bin: </b> {{element.Bin ? element.Bin:' ---'}}</div>
                 <div class="p-5" fxFlex="33%" *ngIf="AVSDetail" [style.display]="AVSDetail ? 'block': 'none'"><b>AVSDetail:</b> {{element.AVSDetail ? element.AVSDetail:' ---'}}</div>
