@@ -103,7 +103,7 @@ getPartners(): void{
   this._partnerService.partnerList(this._userConfigService.getUserMode())
   .then((res: any) => {
       if(res && !res.StatusCode){
-          this.partners = res.Response;
+          this.partners = res.Response.Partners;
           if(this.userType == 3){
             this.resellerForm.get('PartnerId').patchValue(res.Response[0].PartnerId)
             

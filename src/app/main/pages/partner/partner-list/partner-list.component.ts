@@ -94,15 +94,18 @@ export class PartnerListComponent implements OnInit, OnDestroy {
     getPartners(value?): void{
       const obj = {
         ...this._userConfigService.getUserMode(),
+        RecordLimit: 100,
+        PageNo: 1,
         ...value
       }
       this._partnerService.partnerList(obj)
       .then((res: any) => {
         if(res && !res.StatusCode){
-          if(res.Response && res.Response.length){
-            this.partners = res.Response;
+          if(res.Response && res.Response.Partners.length){
+            this.partners = res.Response.Partners 
             this.renderingComponent(PartnerTableComponent,{
-              partners: this.partners,
+              partners: res.Response.Partners,
+              partnerCount: res.Response.TotalCount
             })
           }else{
             this.renderingComponent(NoFoundComponent, {
@@ -123,10 +126,10 @@ export class PartnerListComponent implements OnInit, OnDestroy {
       this._partnerService.partnerList(value)
       .then((res: any) => {
         if(res && !res.StatusCode){
-          if(res.Response && res.Response.length){
-            this.partners = res.Response;
+          if(res.Response && res.Response.Partners.length){
             this.renderingComponent(PartnerTableComponent,{
-              partners: this.partners,
+              partners: res.Response.Partners,
+              partnerCount: res.Response.TotalCount
             })
           }else{
             this.renderingComponent(NoFoundComponent, {
