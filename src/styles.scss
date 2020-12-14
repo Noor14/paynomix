@@ -101,3 +101,7 @@ tr.mat-row, tr.mat-footer-row {
 }
 .mat-menu-panel.mat-menu-class { 
   width: 320px; }
+  .cdk-overlay-dark-backdrop {
+    /* background: rgba(0, 0, 0, 0.32); old over lay color */
+    background: rgba(9, 30, 66, 0.54) !important;
+}
