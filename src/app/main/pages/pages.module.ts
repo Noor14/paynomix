@@ -4,6 +4,8 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { HierarchicalTreeService } from '@fuse/components/hierarchical-tree/hierarchical-tree.service';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -14,6 +16,8 @@ import { HierarchicalTreeService } from '@fuse/components/hierarchical-tree/hier
     CommonModule,
     PagesRoutingModule,
     LayoutModule,
+    NgIdleKeepaliveModule.forRoot(),
+    MatButtonModule
   ],
   providers: [
     HierarchicalTreeService

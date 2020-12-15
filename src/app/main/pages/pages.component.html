@@ -1,1 +1,13 @@
+<section class="idle" *ngIf="idleState" [@fadeInOut]>
+    <div>
+        <h1> Your Session is about to end.</h1>
+        <p>
+           You've been inactive for a while. For your security, we'll automatically sign you out
+           in approximately {{idleCounter}} seconds, you may choose "Stay signed in" to continue or sign out if you're done.
+        </p>
+        <button mat-raised-button class="accent-alpha-bg m-4" (click)="logout()">Sign out</button>
+        <button mat-raised-button color="accent" class="m-4" (click)="startIdleOrResume()"> Stay Signed in</button>
+    </div>
+</section>
+
 <vertical-layout-1></vertical-layout-1>
